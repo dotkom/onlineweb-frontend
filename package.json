@@ -1,0 +1,9 @@
+{
+  "name": "onlineweb-frontend",
+  "version": "0.0.1",
+  "main": "src/index.js",
+  "repository": "git@github.com:oleast/onlineweb-frontend.git",
+  "author": "dotkom@online.ntnu.no",
+  "license": "MIT",
+  "private": true
+}
