@@ -2,6 +2,29 @@
 
 ## What is this :question:
 
+<details><summary>Holy shit! What is this?!</summary>
+<p>
+  
+Forged in God very flames,\
+Do mine eyes, tell me lies?\
+A new Dotkom project!\
+\
+Time is nigh! I must fly!\
+Venture forth on mye quest,\
+Goodbye Splash, goodbye Grades*,\
+And goodbye S-D-F!\
+\
+I'll be off, Notiwall!\
+Catch you later AMaCS!\
+I'll be gone, Nibble2!\
+I'm no longer your fool!\
+\
+Monoliths filled the gap while I waited to commit,\
+The adventure of our lifes, now the frontend has split!
+
+</p>
+</details>
+
 All projects need a start, this is ment as a way to start the though process of making the new front-end of 'Onlineweb'.
 
 ## Why is this :question:
