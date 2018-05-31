@@ -1,6 +1,6 @@
 # Onlineweb Frontend
 
-## What is this :question:
+## Hva er dette for noe :question:
 
 <details><summary>Holy shit! What is this?!</summary>
 <p>
@@ -25,97 +25,75 @@ The adventure of our lifes, now the frontend has split!
 </p>
 </details>
 
-All projects need a start, this is ment as a way to start the though process of making the new front-end of 'Onlineweb'.
+Nei, men egentlig er dette for forsøk / tankeprosjekt for hva Onlinwebben kan være i fremtiden.
 
-## Why is this :question:
+## Hvorfor :question:
+- Jeg ville.
+- Eksamenprokrastinering.
+- Alle ting må starte et sted, nå er vi kanskje et steg nærmere.
+- Noen :tm: måtte gjøre noe.
 
-- ~~I wanted to~~
-- ~~I had an exam today, and needed something to do~~
-- I had thoughs on how to do this, and needed a way to write them down, and share them
-- By doing it this way, it is one step closer to actually happening
-- Someone :tm: needed to kickstart the 'project'
+## Hvordan :question:
 
-### Why is it a GitHub repositry :question:
+Det er et veldig godt spørsmål.
 
-It does not need to be, but the thought was to start from a more 'clean' slate (not really).
-Large code bases can be scary, and it may let developers feel more of an ownership tot he code they develop.
+Hva skal vi bygge, og hvordan skal vi bygge det?
 
-## How are we going to do this :question:
+### Det som må gjøres
 
-That is a really good question!
+- [x] Lag GitHub repo
+- [x] Finn hovedteknologi
+- [ ] Overfør nåværede front-end løsning til den nye applikasjonen. Hovedsaklig HTML og CSS. Repliker funksjonaliteten i React.
+- [ ] Utvid API-et til Onlineweb4 slik at vi hente ut informasjonen som ikke ennå er tilgjengelig.
 
-First it would need to be decided what we are going to build, and how we should build build it.
-
-### What needs to be done
-
-- [x] Create a GitHub repository
-- [x] Find main technology
-- [ ] Port current Onlineweb4 front-end to React*
-
-### Decisions
-
-- [ ] Types
-- [ ] State
-- [ ] Fetching data
-- [ ] API architecture
-- [ ] CSS
-
-### Architectural Decisions
+### Arkitektur
 
 *I would believe it is already decided that this project is going to use `React`. This can of course be protested, but I will continue with React in mind from now on.*
 
-#### Types
+#### Typer
 
-How should this be implemented with regards to typing?
+Typer er nice, en mening jeg har fått forsterket ved å jobbe med dette.
+Akkurat nå bruker vi PropTypes i noen prosjekter, som sjekker typer ved runtime.
 
-The current solution in `Onlineweb4` is to use `prop-types` for the React parts.
+I dette prosjektet har jeg started med TypeScript i tankene.
 
-Possible solutions:
+Hva med Flow?
+Flow er et alternativ til TypeScript.
+Grunne til at jeg valgte TypeScript fremfor Flow var at TS har større community support, flere biblioteker har typedefinisjoner for TS, TS skal være raskere, og utviklingen av selve TS språket er mer åpen enn Flow.
 
-- Continue using Props Types
-- Implement TypeScript
-- Implement Flow
-- Stop using types
-- Other alternatives?
+Hva betyr det for oss å bruke TypeScript?
+TypeScript lar/tvinger oss til å definere typer på all data som ikke er implisitt i prosjeket.
+Det betyr as vi definerer for eksempel data som kommer fra API-et som et interface e.g. 
+``` TypeScript
+export interface IUser {
+  firstname: string;
+  lastname: string;
+  attended_events: IEvent[];
+};
+```
+Dette lar oss holde styr på hvilken data vi har, og hvordan den endrer seg gjennom applikasjonen.
+Det gjør det også mye lettere å sette seg inn i hvordan applikasjonen funker.
 
-#### State
+Problemet som kan oppstå er at det kan være litt vanskelig å beskrive objektstrukturer hvor du behandler nøklene til objektet på avanserte måter.
 
-How should state be implemented?
+#### Behandling av data
 
-A project like this would benefit from handling state in a other ways than 'basic' React.
-One thought is to implement `Redux`, which has already been used in other Dotkom projects, like `Super Duper Fiesta`
-
-#### Fetching Data
-
-Would be nice to have a structure on how data is fetched from the API(s).
-They way this is done in the current React parts of `Onlineweb4` is a without any real structure.
-An example of other ways to handle this is through how Angular (2+) 'Services' work. Separating the async data fetching from the view components.
-
-*If I understand correctly this is done with Redux Sagas in `Super Duper Fiesta`?*
-
-*I must admit that this is something I do not have a lot of experience with, but it is something I would really like to learn*
-
-#### API Architecture
-
-Possible solutions:
-
-- Continue using Django Rest Framwork
-- Implement Graphne Django (GraphQL)
-- Hybridize? (Re-use Django Rest Framwork serializers in Graphene Django)
+Jeg har prøvd å standardisere hvordan vi henter data i applikassjonen.
+Dette gjøres med:
+- en standardisert sett metoder for GET, POST, PUT, DELETE, UPDATE...
+- egen mappe/fil som definerer metoder som henter fra API for hver applikasjon i systemet. (e.g. events har en egen)
+- fokus på å holde behandling av data til størt mulig grad utenfor React komponentene, slik at alt som er i de omhandler viewet.
+- Redux for deler av applikasjonen, for eksempel innlogget bruker
 
 #### CSS
 
 Sass, Less, Postcss, scopes, styled components, CSS in JS, inline. All the things.
 
-### How does to affect Onlineweb4?
+## Hva skjer fremover
 
-To make this happen, `Onlineweb4` would need to implement a more complete API.
-All data would need to be fetchable for the entirely separate front-end.
+For å starte dette prosjektet må koden fra OW4 overføres til dette hit.
+Den burde så 'reactifiseres' del for del, dette er allerede startet til en viss grad.
+Når funksjonaliten er lik akn det puttes opp som `beta.online.ntnu.no`, og vi kan starte på å implementere redesignet.
 
-## Going forward
+*Høres ut som en skikkelig drittjobb, men jeg kan ikke se så mange andre måter dette faktisk kan gjøres på, med tanke på at det faktisk skal kunne fullføres*
 
-To kick of the project, the current code from the `Onlineweb4` front-end shoud be ported to this repositry.
-It should then be 'Reactified' :tm:, piece by piece.
-When 'Feature Parity' :tm: is reached, it can be put up as `beta.online.ntnu.no`, and the actual redesign can begin.
-
-*Sounds like a tedious job, but I can see no other way to actually go through with this*
