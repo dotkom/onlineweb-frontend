@@ -1,5 +1,18 @@
 # Onlineweb Frontend
 
+## How to run
+
+```
+
+git clone <repo>
+
+yarn
+
+export OW4_ADDRESS='https://online.ntnu.no'
+
+yarn dev
+```
+
 ## Hva er dette for noe :question:
 
 <details><summary>Holy shit! What is this?!</summary>
