@@ -28,10 +28,10 @@ The adventure of our lifes, now the frontend has split!
 Nei, men egentlig er dette for forsøk / tankeprosjekt for hva Onlinwebben kan være i fremtiden.
 
 ## Hvorfor :question:
-- Jeg ville.
-- Eksamenprokrastinering.
-- Alle ting må starte et sted, nå er vi kanskje et steg nærmere.
-- Noen :tm: måtte gjøre noe.
+
+Jeg ville (Eksamensprokrastinering). Noen :tm: måtte gjøre noe.
+Neida, joda... Det er fra min side tenkt på som en måte å få litt fart i utviklingen/fornyingen av Onlinewebben.
+Tanken er at det skal gjøre det lettere å fokusere på det nye vi skal lage.
 
 ## Hvordan :question:
 
