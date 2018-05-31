@@ -54,8 +54,8 @@ Hva skal vi bygge, og hvordan skal vi bygge det?
 
 Typer er nice, en mening jeg har fått forsterket ved å jobbe med dette.
 Akkurat nå bruker vi PropTypes i noen prosjekter, som sjekker typer ved runtime.
-
 I dette prosjektet har jeg started med TypeScript i tankene.
+TypeScript er her implementert med Babel fremfor TS sin egen kompilator.
 
 Hva med Flow?
 Flow er et alternativ til TypeScript.
