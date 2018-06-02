@@ -1,6 +1,11 @@
 import React from 'react';
 
-class Info extends React.Component {
+export interface Props {
+  type: string;
+  content: string;
+}
+
+class Info extends React.Component<Props> {
   render() {
     const { type, content } = this.props;
     return (

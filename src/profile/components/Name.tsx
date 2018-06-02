@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Name extends React.Component {
+class Name extends React.Component<{name: string}> {
   render() {
     const { name } = this.props;
     return (
