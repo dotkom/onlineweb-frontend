@@ -1,6 +1,30 @@
 import React from 'react';
 
-export const Circle = ({ x, radius, lineWidth, color = "#333333" }) => (
+export interface ISvgProps {
+  x: number;
+  radius: number;
+}
+
+export interface ICircleProps extends ISvgProps {
+  lineWidth: number;
+  color?: string;
+}
+
+export interface ICircleCheckProps extends ISvgProps {
+  color?: string;
+}
+
+export interface IDividerBarProps {
+  radius: number;
+  lineWidth: number;
+  color?: string;
+  offset?: number;
+  scale?: number;
+  a?: number;
+  b?: number;
+}
+
+export const Circle = ({ x, radius, lineWidth, color="#333333" }: ICircleProps) => (
   <circle
     cx={x}
     cy="10"
@@ -11,7 +35,7 @@ export const Circle = ({ x, radius, lineWidth, color = "#333333" }) => (
   />
 )
 
-export const CircleCheck = ({ x, radius, color = "#0060a3" }) => (
+export const CircleCheck = ({ x, radius, color="#0060a3" }: ICircleCheckProps ) => (
   <circle
     cx={x}
     cy="10"
@@ -21,7 +45,7 @@ export const CircleCheck = ({ x, radius, color = "#0060a3" }) => (
   />
 )
 
-export const CheckMark = ({ x, radius }) => (
+export const CheckMark = ({ x, radius }: ISvgProps) => (
   <g>
     <line
       x1={x - radius * .4}
@@ -43,7 +67,7 @@ export const CheckMark = ({ x, radius }) => (
   </g>
 )
 
-export const DividerBar = ({ offset, radius, scale, lineWidth, a, b }) => (
+export const DividerBar = ({ offset = 0, radius, scale = 1, lineWidth, a = 0, b = 0 }: IDividerBarProps) => (
   <rect
     x={offset + radius * a * 2 + b * scale - lineWidth / 2}
     y={10 - radius}

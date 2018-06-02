@@ -1,6 +1,4 @@
 import React from 'react';
-import { Grid, Col, Row } from 'react-bootstrap';
-
 import Header from './Header';
 import Name from './Name';
 import MedalsView from './MedalsView';
@@ -9,10 +7,16 @@ import Info from './Info';
 import Progress from './Progress';
 import IconInfo from './IconInfo';
 import InfoGroup from './InfoGroup';
+import { IFullProfileUser } from '../models/User';
+import { getProfile } from '../api';
 
-class Profile extends React.Component {
-  constructor() {
-    super();
+export interface State {
+  user: IFullProfileUser;
+}
+
+class Profile extends React.Component<{}, State> {
+  constructor(props: {}) {
+    super(props);
 
     this.state = {
         user: {
@@ -40,47 +44,46 @@ class Profile extends React.Component {
 
         }
     };
-
-    this.API_URL = '/api/v1/users?format=json';
   }
 
-  componentDidMount() {
-    fetch(this.API_URL, { credentials: 'same-origin' })
-        .then(response => response.json())
-        .then(data => this.setState({user: data.results[1]}));
-  }
+  /*async componentDidMount() {
+    const user = await getProfile();
+    this.setState({ user });
+  }*/
 
   render() {
     const { user } = this.state;
     return (
-      <Grid>
+      <div>
         <Header />
         <Name name={`${user.first_name} ${user.last_name}`} />
-        <div>
-          <InfoGroup name="Navn" icon="names">
-            <Info type="NTNU Brukernavn" content={user.ntnu_username}/>
-            <Info type="Kallenavn" content={user.kallenavn}/>
-            <Info type="Brukernavn" content={user.username}/>
-          </InfoGroup>
-          <InfoGroup name="Studieprogresjon" icon="progress">
-            <Progress ongoingYear={user.grade} completedYear={user.grade - 1} />
-          </InfoGroup>
-          <InfoGroup name="Kontakt" icon="contact">
-            <Info type="Primær e-post" content={user.primary_email}/>
-            <Info type="Online e-post" content={`${user.gsuite_username}@online.ntnu.no`}/>
-            <Info type="Telefonnummer" content={user.phone_number}/>
-            <Info type="Adresse" content={user.address}/>
-          </InfoGroup>
-          <InfoGroup name="Komitéverv" icon="medal">
-            <MedalsView medals={user.committees} />
-          </InfoGroup>
-          <InfoGroup name="Eksterne Lenker" icon="external">
-            <IconInfo type="Github" content={user.external.github} />
-            <IconInfo type="Linkedin" content={user.external.linkedin} />
-            <IconInfo type="Hjemmeside" content={user.external.homepage} />
-          </InfoGroup>
+        <div className="center">
+          <div className="inner-container">
+            <InfoGroup name="Navn" icon="names">
+              <Info type="NTNU Brukernavn" content={user.ntnu_username}/>
+              <Info type="Kallenavn" content={user.kallenavn}/>
+              <Info type="Brukernavn" content={user.username}/>
+            </InfoGroup>
+            <InfoGroup name="Studieprogresjon" icon="progress">
+              <Progress ongoingYear={user.grade} completedYear={user.grade - 1} />
+            </InfoGroup>
+            <InfoGroup name="Kontakt" icon="contact">
+              <Info type="Primær e-post" content={user.primary_email}/>
+              <Info type="Online e-post" content={`${user.gsuite_username}@online.ntnu.no`}/>
+              <Info type="Telefonnummer" content={user.phone_number}/>
+              <Info type="Adresse" content={user.address}/>
+            </InfoGroup>
+            <InfoGroup name="Komitéverv" icon="medal">
+              <MedalsView medals={user.committees} />
+            </InfoGroup>
+            <InfoGroup name="Eksterne Lenker" icon="external">
+              <IconInfo type="Github" content={user.external.github} />
+              <IconInfo type="Linkedin" content={user.external.linkedin} />
+              <IconInfo type="Hjemmeside" content={user.external.homepage} />
+            </InfoGroup>
+          </div>
         </div>
-      </Grid>
+      </div>
     );
   }
 }
