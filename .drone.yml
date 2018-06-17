@@ -23,7 +23,7 @@ pipeline:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - npm run build:prod
+      - yarn build:prod
   
   rebuild-cache:
     image: drillster/drone-volume-cache
