@@ -1,0 +1,54 @@
+pipeline:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    pull: true
+    when:
+      event: [push, pull_request, tag, deployment]
+    restore: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+
+  setup:
+    image: node:boron
+    when:
+      event: [push, pull_request, tag, deployment]
+    commands:
+      - yarn
+  
+  build:
+    image: node:boron
+    group: testing
+    when:
+      event: [push, pull_request, tag, deployment]
+    commands:
+      - npm run build:prod
+  
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    pull: true
+    when:
+      event: [push, pull_request, tag, deployment]
+    rebuild: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+
+  deploy:
+    image: appleboy/drone-ssh
+    pull: true
+    secrets: [ssh_key]
+    host: nansen.online.ntnu.no
+    port: 22
+    username: root
+    key: ${SSH_KEY}
+    command_timeout: 600
+    when:
+      event: push
+      branch: master
+      status: success
+    script:
+      - /srv/www/owf-staging/deploy.sh
+
