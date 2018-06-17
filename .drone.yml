@@ -11,14 +11,14 @@ pipeline:
       - /tmp/cache:/cache
 
   setup:
-    image: node:boron
+    image: node:carbon
     when:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn
   
   build:
-    image: node:boron
+    image: node:carbon
     group: testing
     when:
       event: [push, pull_request, tag, deployment]
