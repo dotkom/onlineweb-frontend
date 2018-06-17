@@ -1,19 +1,11 @@
 import React from 'react';
+import { STATIC_URL } from 'common/constants/endpoints';
+import { MedalUrl } from '../models/ImageTypes';
+import { IMedal } from '../models/Medal';
 
-const MEDAL_BASE_URL = '/static/img/profile/'
+const MEDAL_BASE_URL = STATIC_URL + 'img/profile/';
 
-const COMMITTEES = {
-  'arrkom': 'arrkom',
-  'bedkom': '',
-  'dotkom': '',
-  'fagkom': '',
-  'hovedstyret': '',
-  'prokom': '',
-  'seniorkom': '',
-  'trikom': '',
-}
-
-const CROWNS = {
+const CROWNS: MedalUrl = {
   leder: 'king-crown',
   nestleder: 'prince-crown',
   redaktør: 'offline-hat',
@@ -21,14 +13,14 @@ const CROWNS = {
   økonomiansvarlig: 'bankom-hat-gold'
 }
 
-class Medal extends React.Component {
+class Medal extends React.Component<IMedal> {
   render() {
     const { committee, position, range } = this.props;
     return (
       <div className="medal-container">
         <div className="committee-crown-container">
           { position === 'medlem' ?
-            undefined :
+            null :
             <img
               className="committee-crown"
               src={`${MEDAL_BASE_URL + CROWNS[position]}.svg`}

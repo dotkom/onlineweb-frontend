@@ -1,9 +1,14 @@
 import React from 'react';
-import { Grid, Col, Row } from 'react-bootstrap';
+import { STATIC_URL } from 'common/constants/endpoints';
 
-const STATIC_URL = '/static/img/profile/';
+const PROFILE_STATIC = STATIC_URL + 'img/profile/';
 
-class InfoGroup extends React.Component {
+export interface Props {
+  name: string;
+  icon: string;
+}
+
+class InfoGroup extends React.Component<Props> {
   render() {
     const { children, name, icon } = this.props;
     return (

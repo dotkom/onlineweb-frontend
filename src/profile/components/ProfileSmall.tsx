@@ -1,6 +1,7 @@
 import React from 'react';
+import { ISearchUser } from '../models/User';
 
-class ProfileSmall extends React.Component {
+class ProfileSmall extends React.Component<{ user: ISearchUser }> {
   render() {
     const { image, name, phone, mail } = this.props.user;
     return (
