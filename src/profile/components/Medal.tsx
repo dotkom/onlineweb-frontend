@@ -20,7 +20,7 @@ class Medal extends React.Component<IMedal> {
       <div className="medal-container">
         <div className="committee-crown-container">
           { position === 'medlem' ?
-            undefined :
+            null :
             <img
               className="committee-crown"
               src={`${MEDAL_BASE_URL + CROWNS[position]}.svg`}
