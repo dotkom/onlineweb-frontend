@@ -2,34 +2,21 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { STATIC_URL } from 'common/constants/endpoints';
 import { routes } from 'App';
+import MainSponsor from './MainSponsor';
+import HeaderLogo from './HeaderLogo';
+import Authenticate from 'authentication/components/Authenticate';
 
 export const Header = () => (
   <nav id="mainnav">
     <div className="container">
-      <ul className="mn-collapse">
-        <li>
-          <button id="mainnav-button">
-            <svg x="0px" y="0px" width="100%" viewBox="0 0 96 96" className="mn-svg" enableBackground="new 0 0 96 96">
-              <rect width="32" height="4" x="32" y="46" className="mn-svg-rect-top"></rect>
-            </svg>
-            <svg x="0px" y="0px" width="100%" viewBox="0 0 96 96" className="mn-svg" enableBackground="new 0 0 96 96">
-              <rect width="32" height="4" x="32" y="46" className="mn-svg-rect-bottom"></rect>
-            </svg>
-          </button>
-        </li>
-        <li>
-          <Link to={routes.home}>
-            <img src={`${STATIC_URL}img/online_logo.svg`} alt="Online" className="online-logo" />
-          </Link>
-        </li>
-      </ul>
+      <HeaderLogo />
       <ul className="mn-nav">
         <li><div className="online-logo-link"><Link to="/"><img src={`${STATIC_URL}img/online_logo.svg`} alt="Online" /></Link></div></li>
         <li><Link to={routes.events}>Arkiv</Link></li>
         <li><Link to={routes.career}>Karriere</Link></li>
         <li><Link to={routes.resources}>Ressurser</Link></li>
         <li><Link to={routes.hobbygroups} className="hidden-sm">Interessegrupper</Link></li>
-        <li><Link to={routes.wiki}>Wiki</Link></li>
+        <Authenticate authentication={"view_wiki"}><li><Link to={routes.wiki}>Wiki</Link></li></Authenticate>
         <li><Link to={routes.webshop}>Webshop</Link></li>
       </ul>
       <ul className="mn-user-nav">
@@ -90,12 +77,7 @@ export const Header = () => (
           </li>
       {% endif %*/}
       </ul>
-      <div id="main-sponsor">
-        <a href="http://www.knowit.no/" id="ms-ref">
-          <img className="ms-img" src={`${STATIC_URL}img/knowit.svg`} alt="Hovedsamarbeidspartner - Knowit" />
-        </a>
-        <span className="ms-span">Hovedsamarbeidspartner</span>
-      </div>
+      <MainSponsor />
     </div>
   </nav>
 );

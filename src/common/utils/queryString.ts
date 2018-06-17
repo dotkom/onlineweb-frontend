@@ -15,18 +15,33 @@ export const toQueryString = (queryObject: any): string => {
   return string;
 };
 
+export interface IQueryObject {
+  [index: string]: string; 
+}
+
 /**
  * TODO: Add validation
  * @param {string} queryString e.g. ?foo=bar&hello=world
  * @return {object} e.g. {foo: 'bar', hello: 'world'}
  */
-export const toQueryObject = (queryString: string): any => {
+export const toQueryObject = (queryString: string): IQueryObject => {
   if (queryString.startsWith('?')) {
     queryString = queryString.substring(1);
   }
-  let queryObject = queryString.split('&').map((query: string) => {
+  /*let queryObject: IQueryObject = {}
+  for (const query of queryString.split('&')) {
     const pair = query.split('=');
-    return {[pair[0]]: pair[1]};
-  });
-  return {...queryObject};
+    queryObject[pair[0]] = pair[1];
+  }*/
+  let queryObject = queryString.split('&')
+    .map((query: string) => {
+      const pair = query.split('=');
+      return {[pair[0]]: pair[1]};
+    })
+    .reduce((accumulator, query) => {
+      accumulator[query.key] = query[query.key]
+      return accumulator;
+    }, );
+  
+  return queryObject;
 };

@@ -1,4 +1,6 @@
+import { Permission } from "./Permission";
 
-export type Group = {
-  
+export interface IGroup {
+  name: string;
+  permissions: Permission[];
 }
