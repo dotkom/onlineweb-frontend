@@ -1,0 +1,152 @@
+.center {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.inner-container {
+  width: 96rem;
+}
+
+.profile-image {
+  border-radius: 50%;
+  width: 14rem;
+  margin: 6px;
+  border: 6px solid #333333;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  color: #333333;
+}
+
+.profile-name {
+  margin: 2rem;
+  font-size: 4rem;
+}
+
+.committee-medal {
+  width: 10rem;
+}
+
+.committee-crown-container {
+  position: relative;
+  min-height: 8rem;
+}
+
+.committee-crown {
+  padding: 0.3rem 0.8rem;
+  width: 10rem;
+  vertical-align: bottom;
+  position: absolute;
+  bottom: 0;
+}
+
+.committee-range {
+  font-weight: bold;
+  text-align: center;
+}
+
+.medal-container {
+  display: grid;
+  grid-template-columns: auto;
+  margin: 0rem 3rem;
+}
+
+.side-scroll {
+  overflow-x: scroll;
+}
+
+.profile-info-group {
+  padding: 2rem;
+}
+
+.profile-group-wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-group-name {
+  font-size: 2.5rem;
+}
+
+.profile-info-wrapper {
+  display: flex;
+}
+
+.profile-info-type, .profile-info-content {
+  margin: 0;
+  padding: 0;
+}
+
+.profile-info-content, .profile-info-link {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profile-group-name {
+  display: inline;
+  font-weight: bold;
+}
+
+.profile-info-icon {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 2rem;
+}
+
+.profile-info-wrapper {
+  display: block;
+  margin: 2rem;
+  max-width: 40rem;
+  min-width: 40rem;
+}
+
+.profile-info-icon-wrapper {
+  display: flex;
+  margin: 2rem;
+}
+
+.profile-info-icon-content {
+  display: block;
+}
+
+.medal-description {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(29, 106, 154, 0.72);
+  color: #fff;
+  visibility: hidden;
+  opacity: 0;
+
+  /* transition effect. not necessary */
+  transition: opacity .2s, visibility .2s;
+}
+
+.medal-wrapper:hover .medal-description {
+  visibility: visible;
+  opacity: 1;
+}
+
+.medal-wrapper {
+  position: relative;
+}
+
+.profile-small-container {
+  display: grid;
+}
+
+.profile-small-content {
+  display: inline-block;
+}
