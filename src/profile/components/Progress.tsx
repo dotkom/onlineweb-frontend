@@ -1,8 +1,12 @@
 import React from 'react';
+import { CheckMark, Circle, CircleCheck, DividerBar } from './ClassProgress';
 
-import { CheckMark, Circle, CircleCheck, DividerBar } from './ClassProgress'
+export interface Props {
+  ongoingYear: number;
+  completedYear: number;
+}
 
-class Progress extends React.Component {
+class Progress extends React.Component<Props> {
   render() {
     const { ongoingYear, completedYear } = this.props;
 
@@ -49,21 +53,5 @@ class Progress extends React.Component {
     );
   }
 }
-
-/*const Wrapper = ({ children }) => {
-  let years = 1
-  children = React.Children.toArray(children)
-  return (
-    <g>
-      { children.map(child => {
-        console.log(child.props)
-        if (child.props.year) {
-          child.props.year = ++years;
-        }
-        return child
-      })}
-    </g>
-  )
-}*/
 
 export default Progress;

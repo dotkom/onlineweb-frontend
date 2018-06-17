@@ -12,7 +12,6 @@ const render = (Component: any) => {
   );
 };
 
-
 render(App);
 
 if (module.hot) {

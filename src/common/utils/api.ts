@@ -4,11 +4,10 @@ import { toQueryString } from './queryString';
 import { RequestOptions } from 'http';
 
 /**
- * Simple fetch-API wrapper for HTTP GET
+ * @summary Simple fetch-API wrapper for HTTP GET
  * @param {string} query API endpoint URL
  * @returns {Promise<any>} API data
  */
-
 export const get = async (query: string, parameters: object = {}, options?: RequestInit): Promise<any> => {
   const queryString = toQueryString(parameters);
   try {
@@ -22,7 +21,7 @@ export const get = async (query: string, parameters: object = {}, options?: Requ
 };
 
 /**
- * Simple fetch-API wrapper for HTTP POST
+ * @summary Simple fetch-API wrapper for HTTP POST
  * TODO: implement Request options, Done with Object.assign, not tested yet
  * @param {string} query 
  * @param {any} data 

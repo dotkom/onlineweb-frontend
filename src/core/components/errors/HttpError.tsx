@@ -1,13 +1,26 @@
 import React from 'react';
 import { DOMAIN } from 'common/constants/endpoints';
 
-const NotFound = () => (
+export type ErrorCode = 401 | 403 | 404
+
+export interface Props {
+  code: ErrorCode
+}
+
+const errorString = (code: ErrorCode): string => {
+  switch(code) {
+    case(404): return 'Page not found';
+    default: return ''
+  }
+}
+
+const NotFound = ({ code }: Props) => (
   <section id="error">
     <div className="container-fluid">
       <div className="row-fluid">
         <div className="col-md-12">
           <div className="page-header">
-            <h2 id="error-heading">404 Error: Page not found</h2>
+            <h2 id="error-heading">{`${code} Error: ${errorString(code)}`}</h2>
           </div>
         </div>
       </div>
