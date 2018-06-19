@@ -1,12 +1,27 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, ReactChild, ReactChildren } from 'react';
 import './less/core.less'
 import { Link } from 'react-router-dom';
 import { routes } from 'App';
 import Header from './components/Header/index';
 import Footer from './components/Footer/index';
+import UserProvider from 'authentication/providers/UserProvider';
 
-const Core = ({ children }: any) => (
-  <div>
+/*
+const Providers: ReactNode[] = [
+  UserProvider
+]
+
+const Provide = (nodes: ReactNode[]): ReactNode => {
+  return(
+    <>
+      { nodes.reduce((Accumulator, Node) => <Accumulator><Node /></Accumulator>) }
+    </>
+  )
+}
+*/
+
+const Core = ({ children }: { children: ReactChildren }) => (
+  <UserProvider>
     <Header />
     {/*% block submenu %}{% endblock %*/}
     {/*% if messages %*/}
@@ -14,7 +29,7 @@ const Core = ({ children }: any) => (
     { children }
     <div className="container" id="isloading-component"></div>
     <Footer />
-  </div>
+  </UserProvider>
 );
 
 export default Core;
