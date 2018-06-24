@@ -5,6 +5,7 @@ import Rules from './Rules';
 import Suspension from './Suspension';
 import Placeholder from './Placeholder';
 import { getMarks, getSuspensions } from '../../api/penalties';
+import './penalties.less';
 
 export interface IState {
   marks: IMark[];
@@ -39,14 +40,17 @@ class Marks extends Component<{}, IState> {
     return(
       <div>
         <div>
-          <div>
+          <p>Prikker</p>
+          <div className="grid">
           { /** If not loaded from API; show placeholder. If list of marks is empty; show empty-text */ }
             { !loaded ? <Placeholder /> : marks.length
               ? marks.map((mark) => <Mark penalty={mark} key={mark.title}/>)
               : <p>Du har ingen prikker</p>
             }
           </div>
-          <div>
+          <div className="divider"/>
+          <p>Suspensjoner</p>
+          <div className="grid">
             { /** If not loaded from API; show placeholder. If list of suspensions is empty; show empty-text */ }
             { !loaded ? <Placeholder /> : suspensions.length
               ? suspensions.map((suspension) => <Suspension penalty={suspension} key={suspension.title} />)
