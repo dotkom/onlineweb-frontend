@@ -1,6 +1,6 @@
 import React from 'react';
 import { STATIC_URL } from 'common/constants/endpoints';
-import { Type, TypeIndex } from '../models/ImageTypes';
+import { Type, TypeIndex } from '../../models/ImageTypes';
 
 const SOCIAL_STATIC = STATIC_URL + 'img/social/';
 
