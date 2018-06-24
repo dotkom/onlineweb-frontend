@@ -9,12 +9,14 @@ class Mark extends Penalty<IMark> {
     const { collapsed } = this.state;
     const expiration = DateTime.fromISO(penalty.expiration_date)
     const added = DateTime.fromISO(penalty.added_date)
+    const completion = this.getPenaltyCompletion(penalty);
+    const completionColor = this.getCompletionColor(completion);
     return (
       <div className="grid-row">
         <div className="col-md-12" onClick={() => this.toggleCollapse()}>
           <h4>
             { penalty.title }
-            <span className="pull-right">{ penalty.added_date }</span>
+            <span className="pull-right">{ added.toFormat('d MMMM y') }</span>
           </h4>
           { collapsed ? null :
             <>
@@ -25,7 +27,7 @@ class Mark extends Penalty<IMark> {
             </>
           }
         </div>
-        <div className="progress-bar" style={{ width: this.getPenaltyCompletion(penalty) + '%' }} />
+        <div className="progress-bar" style={{ width: completion + '%', backgroundColor: completionColor }} />
       </div>
     )
   }

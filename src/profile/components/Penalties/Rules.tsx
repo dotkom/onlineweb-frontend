@@ -5,7 +5,10 @@ class Info extends Collapsble<{}> {
   render() {
     const { collapsed } = this.state;
     return (
-      <div onClick={() => this.toggleCollapse()}>{ collapsed ? <p>'Vis regler'</p> : <Content /> }</div>
+      <>
+        <h3>Regler</h3>
+        <div onClick={() => this.toggleCollapse()}>{ collapsed ? <p>Vis regler</p> : <Content /> }</div>
+      </>
     )
   }
 }

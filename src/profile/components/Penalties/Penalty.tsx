@@ -38,9 +38,21 @@ abstract class Penalty<T> extends Collapsible<IProps<T>> {
       const total = end.diff(start).as('seconds')
       return Math.round((progress / total) * 100)
     } else if (now > end) {
-      return 100.0
+      return 100
     }
-    return 0.0;
+    return 0;
+  }
+
+  getCompletionColor(percentage: number): 'red' | 'white' | 'gray' {
+    switch(percentage) {
+      case 100: return 'gray';
+      case 0: return 'white';
+      default: return 'red';
+    }
+  }
+
+  static sortByExpiration(a: IPenalty, b: IPenalty): number {
+    return new Date(b.expiration_date).getTime() - new Date(a.expiration_date).getTime();
   }
 
   abstract render(): JSX.Element
