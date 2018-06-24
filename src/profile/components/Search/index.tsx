@@ -1,6 +1,6 @@
 import React from 'react';
 import ProfileSmall from './ProfileSmall';
-import { ISearchUser } from '../models/User';
+import { ISearchUser } from '../../models/User';
 import { IQueryObject } from 'common/utils/queryString';
 
 export interface Props {

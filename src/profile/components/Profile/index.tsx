@@ -7,8 +7,8 @@ import Info from './Info';
 import Progress from './Progress';
 import IconInfo from './IconInfo';
 import InfoGroup from './InfoGroup';
-import { IFullProfileUser } from '../models/User';
-import { getProfile } from '../api';
+import { IFullProfileUser } from '../../models/User';
+import { getProfile } from '../../api';
 
 export interface State {
   user: IFullProfileUser;
