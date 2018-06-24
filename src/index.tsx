@@ -2,6 +2,9 @@ import '@babel/polyfill';
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { Settings } from 'luxon';
+
+Settings.defaultLocale = 'no';
 
 import App from 'App';
 
