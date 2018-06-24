@@ -23,7 +23,7 @@ class App extends React.Component<{}> {
             />
             <Route
               exact
-              path="/profile/search/username"
+              path="/profile/search/:username"
               render={props => <Search {...props} query={toQueryObject(props.location.search)}/>}
             />
             <Route
