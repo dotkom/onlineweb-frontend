@@ -7,8 +7,10 @@ class Suspension extends Penalty<ISuspension> {
   render() {
     const { penalty } = this.props;
     const { collapsed } = this.state;
-    const expiration = DateTime.fromISO(penalty.expiration_date)
-    const added = DateTime.fromISO(penalty.added_date)
+    const expiration = DateTime.fromISO(penalty.expiration_date);
+    const added = DateTime.fromISO(penalty.added_date);
+    const completion = this.getPenaltyCompletion(penalty);
+    const completionColor = this.getCompletionColor(completion);
     return (
       <div className="grid-row">
         <div className="col-md-12" onClick={() => super.toggleCollapse()}>
@@ -27,7 +29,7 @@ class Suspension extends Penalty<ISuspension> {
               </>
           }
           </div>
-        <div className="progress-bar" style={{ width: this.getPenaltyCompletion(penalty) + '%' }}/>
+        <div className="progress-bar" style={{ width: completion + '%', backgroundColor: completionColor }} />
       </div>
     )
   }

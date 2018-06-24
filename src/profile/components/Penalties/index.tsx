@@ -40,24 +40,25 @@ class Marks extends Component<{}, IState> {
     return(
       <div>
         <div>
-          <p>Prikker</p>
+          <h3>Prikker</h3>
           <div className="grid">
           { /** If not loaded from API; show placeholder. If list of marks is empty; show empty-text */ }
             { !loaded ? <Placeholder /> : marks.length
-              ? marks.map((mark) => <Mark penalty={mark} key={mark.title}/>)
+              ? marks.sort(Mark.sortByExpiration).map((mark) => <Mark penalty={mark} key={mark.added_date}/>)
               : <p>Du har ingen prikker</p>
             }
           </div>
           <div className="divider"/>
-          <p>Suspensjoner</p>
+          <h3>Suspensjoner</h3>
           <div className="grid">
             { /** If not loaded from API; show placeholder. If list of suspensions is empty; show empty-text */ }
             { !loaded ? <Placeholder /> : suspensions.length
-              ? suspensions.map((suspension) => <Suspension penalty={suspension} key={suspension.title} />)
+              ? suspensions.sort(Suspension.sortByExpiration).map((suspension) => <Suspension penalty={suspension} key={suspension.added_date} />)
               : <p>Du har ingen suspensjoner</p>
             }
           </div>
         </div>
+        <div className="divider" />
         <Rules />
       </div>
     )
