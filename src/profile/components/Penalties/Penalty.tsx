@@ -34,9 +34,9 @@ abstract class Penalty<T> extends Collapsible<IProps<T>> {
 
     // Check if penalty is ongoing
     if (Interval.fromDateTimes(start, end).contains(now)) {
-      const diff = now.diff(start).as('seconds')
-      console.log(diff)
-      return (diff / (penaltyLength * 60 * 60)) * 100
+      const progress = now.diff(start).as('seconds')
+      const total = end.diff(start).as('seconds')
+      return Math.round((progress / total) * 100)
     } else if (now > end) {
       return 100.0
     }
