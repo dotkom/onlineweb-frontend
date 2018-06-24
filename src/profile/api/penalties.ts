@@ -26,6 +26,15 @@ const suspensionsMock: ISuspension[] = [
     payment_id: 1,
     title: 'Suspensjon?',
     user: initialState.user
+  },
+  {
+    active: true,
+    added_date: '2018-06-11T19:00:00+01:00',
+    description: 'Du har fått en suspensjon fordi ... ?',
+    expiration_date: '2018-07-11T19:00:00+01:00',
+    payment_id: 1,
+    title: 'Suspensjon?',
+    user: initialState.user
   }
 ]
 
