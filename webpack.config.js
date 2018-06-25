@@ -32,7 +32,7 @@ module.exports = env => {
         },
         {
           test: /\.less$/,
-          use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
+          use:  [ 'css-hot-loader', 'style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
         },
         {
           // webpack can import images from both javascript and css
