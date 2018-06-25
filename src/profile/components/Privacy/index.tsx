@@ -43,7 +43,7 @@ class Privacy extends Component<{}, PrivacyOptions> {
   render() {
     const { state } = this;
     return(
-      <div>
+      <div className="grid">
         { getKeys<IPrivacy>(state).map((key) => (
           <Option
             key={key}
