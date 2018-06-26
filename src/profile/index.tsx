@@ -8,6 +8,7 @@ import Search from './components/Search';
 import Penalties from './components/Penalties';
 import Privacy from './components/Privacy';
 import Mails from './components/Mails';
+import MainMenu from './components/MainMenu';
 
 const history = createBrowserHistory();
 
@@ -19,21 +20,20 @@ class App extends React.Component<{}> {
           <Switch>
             <Route
               exact
-              path="/profile"
-              render={props => <Profile {...props}/>}
+              path="/profile/me"
+              render={props => <MainMenu match={props.match}><Profile {...props}/></MainMenu>}
             />
             <Route
-              exact
-              path="/profile/search/:username"
-              render={props => <Search {...props} query={toQueryObject(props.location.search)}/>}
+              path="/profile/search"
+              render={props => <MainMenu match={props.match}><Search {...props} query={toQueryObject(props.location.search)}/></MainMenu>}
             />
             <Route
               path="/profile/public/:id"
-              render={props => <Profile {...props} />}
+              render={props => <MainMenu match={props.match}><Profile {...props} /></MainMenu>}
             />
             <Route
               path="/profile/settings"
-              render={props => <Settings {...props} />}
+              render={props => <MainMenu match={props.match}><Settings {...props} /></MainMenu>}
             />
           </Switch>
         </Router>
