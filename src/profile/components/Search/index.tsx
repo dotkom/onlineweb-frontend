@@ -2,13 +2,19 @@ import React from 'react';
 import ProfileSmall from './ProfileSmall';
 import { ISearchUser } from '../../models/User';
 import { IQueryObject } from 'common/utils/queryString';
+import { searchUsers } from '../../api/search';
+import { SearchFilter } from '../../models/Search';
+import { IGroup } from 'core/models/Group';
+import Searchbar from './Searchbar';
+import './search.less'
 
 export interface Props {
-  query: IQueryObject;
+  readonly query: IQueryObject;
 }
 
 export interface State extends Props {
-  users: ISearchUser[]
+  readonly users: ISearchUser[]
+  readonly filter: SearchFilter;
 }
 
 class Search extends React.Component<Props, State> {
@@ -18,27 +24,54 @@ class Search extends React.Component<Props, State> {
 
     this.state = {
       query: props.query,
-      users: [
-        { name: 'Ole Anders Stokker', phone: '47684466', mail: 'oleast@stud.ntnu.no', image: 'https://folk.ntnu.no/oleast/me.jpg' },
-        { name: 'Ole Anders Stokker', phone: '47684466', mail: 'oleast@stud.ntnu.no', image: 'https://folk.ntnu.no/oleast/me.jpg' },
-        { name: 'Ole Anders Stokker', phone: '47684466', mail: 'oleast@stud.ntnu.no', image: 'https://folk.ntnu.no/oleast/me.jpg' },
-        { name: 'Ole Anders Stokker', phone: '47684466', mail: 'oleast@stud.ntnu.no', image: 'https://folk.ntnu.no/oleast/me.jpg' },
-      ]
+      users: [],
+      filter: new SearchFilter()
     };
   }
 
-  componentWillMount() {
-    
+  public async componentWillMount() {
+    const { filter } = this.state;
+    const users = await searchUsers(filter);
+    this.setState({ users })
+  }
+
+  setName(name: string): boolean {
+    let { filter } = this.state;
+    const validation = filter.setName(name)
+    this.setState({ filter })
+    return validation;
+  }
+
+  setGroup(group: IGroup): boolean {
+    let { filter } = this.state;
+    const validation = filter.setGroup(group);
+    this.setState({ filter })
+    return validation;
+  }
+
+  setYear(range: [number, number]): boolean {
+    let { filter } = this.state;
+    const validation = filter.setYear(range)
+    this.setState({ filter })
+    return validation;
   }
 
   render() {
-    const { users } = this.state;
+    const { users, filter } = this.state;
     return (
+      <> 
+        <Searchbar
+          setName={(s) => this.setName(s)}
+          setGroup={this.setGroup}
+          setYear={this.setYear}
+          { ...filter.format }
+        />
         <div className="profile-search grid">
           { users.map(user => 
             <ProfileSmall user={user} />)
           }
         </div>
+      </>
     );
   }
 }
