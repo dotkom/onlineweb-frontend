@@ -5,7 +5,7 @@ class ProfileSmall extends React.Component<{ user: ISearchUser }> {
   render() {
     const { image, name, phone, mail } = this.props.user;
     return (
-      <div className="profile-small-container">
+      <div className="profile-small-container grid-row">
         <img className="profile-image" src={ image } title={ name }></img>
         <div className="profile-small-content">
           <p className="profile-small-name">{ name }</p>

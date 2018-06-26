@@ -34,7 +34,7 @@ class Search extends React.Component<Props, State> {
   render() {
     const { users } = this.state;
     return (
-        <div className="profile-search">
+        <div className="profile-search grid">
           { users.map(user => 
             <ProfileSmall user={user} />)
           }
