@@ -20,16 +20,16 @@ class Profile extends React.Component<{}, State> {
 
     this.state = {
         user: {
-          first_name: 'Ole Anders',
-          last_name: 'Stokker',
-          username: 'frozenlight',
-          ntnu_username: 'oleast',
-          kallenavn: 'oleast',
+          first_name: 'Kari',
+          last_name: 'Nordmann',
+          username: 'dragonslayer',
+          ntnu_username: 'karinor',
+          kallenavn: 'javaGuru',
           grade: 3,
-          primary_email: 'oleast@stud.ntnu.no',
-          gsuite_username: 'ole.anders.stokker',
-          phone_number: '47684466',
-          address: 'Odd Brochmanns Veg 57',
+          primary_email: 'karinor@stud.ntnu.no',
+          gsuite_username: 'kari.nordmann',
+          phone_number: '98765432',
+          address: 'Høgskoleringen 3 (R.I.P)',
           committees: [
             { committee: 'dotkom', position: 'medlem', range: '2015-2018' },
             { committee: 'dotkom', position: 'nestleder', range: '2018-2019' },
@@ -37,9 +37,9 @@ class Profile extends React.Component<{}, State> {
             { committee: 'prokom', position: 'redaktør', range: '2015-2018' },
           ],
           external: {
-            github: 'https://github.com/oleast',
-            linkedin: 'https://linkedin.com/in/oleast',
-            homepage: 'https://stokkers.no'
+            github: 'https://github.com/karinor',
+            linkedin: 'https://linkedin.com/in/karinor',
+            homepage: 'https://kari.nordmann.no'
           }
 
         }
@@ -64,18 +64,14 @@ class Profile extends React.Component<{}, State> {
               <Info type="Kallenavn" content={user.kallenavn}/>
               <Info type="Brukernavn" content={user.username}/>
             </InfoGroup>
-            <InfoGroup name="Studieprogresjon" icon="progress">
-              <Progress ongoingYear={user.grade} completedYear={user.grade - 1} />
-            </InfoGroup>
+            <Progress ongoingYear={user.grade} completedYear={user.grade - 1} name="Studieprogresjon" />
             <InfoGroup name="Kontakt" icon="contact">
               <Info type="Primær e-post" content={user.primary_email}/>
               <Info type="Online e-post" content={`${user.gsuite_username}@online.ntnu.no`}/>
               <Info type="Telefonnummer" content={user.phone_number}/>
               <Info type="Adresse" content={user.address}/>
             </InfoGroup>
-            <InfoGroup name="Komitéverv" icon="medal">
-              <MedalsView medals={user.committees} />
-            </InfoGroup>
+            <MedalsView medals={user.committees} name="Komitéverv" />
             <InfoGroup name="Eksterne Lenker" icon="external">
               <IconInfo type="Github" content={user.external.github} />
               <IconInfo type="Linkedin" content={user.external.linkedin} />
