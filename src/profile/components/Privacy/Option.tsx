@@ -1,18 +1,17 @@
 import React from 'react';
 import { IPrivacy, translations } from '../../models/Privacy';
+import ToggleSwitch from 'common/components/ToggleSwitch'
 
 export interface IProps {
   option: keyof IPrivacy;
   value: boolean;
-  toggle: Function;
+  toggle: () => void;
 }
 
 const Option = ({ option, value, toggle }: IProps) => (
-  <div>
-    <p>{ translations[option] }</p>
-    <div onClick={() => toggle()}>
-      { value ? 'Y' : 'N' }
-    </div>
+  <div className="grid-row">
+    <h4>{ translations[option] }</h4>
+    <ToggleSwitch checked={value} onChange={toggle} />
   </div>
 );
 

@@ -7,21 +7,29 @@ class Suspension extends Penalty<ISuspension> {
   render() {
     const { penalty } = this.props;
     const { collapsed } = this.state;
+    const expiration = DateTime.fromISO(penalty.expiration_date);
+    const added = DateTime.fromISO(penalty.added_date);
+    const completion = this.getPenaltyCompletion(penalty);
+    const completionColor = this.getCompletionColor(completion);
     return (
-      <div className="row row-space">
+      <div className="grid-row">
         <div className="col-md-12" onClick={() => super.toggleCollapse()}>
           <h4>
             { penalty.title }
-            <span className="pull-right">{ penalty.added_date }</span>
+            <span className="pull-right">{ added.toFormat('d MMMM y') }</span>
           </h4>
-          <p>{ penalty.description }</p>
-          { penalty.expiration_date.length ? 
-            <p>
-              <b>Utløpsdato: </b>
-              { penalty.expiration_date }
-            </p> : null
+          { collapsed
+            ? null
+            : <>
+               <p>{ penalty.description }</p>
+                { penalty.expiration_date.length
+                  ? <p><b>Utløpsdato: </b>{ expiration.toFormat('d MMMM y') }</p>
+                  : null
+                }
+              </>
           }
-        </div>
+          </div>
+        <div className="progress-bar" style={{ width: completion + '%', backgroundColor: completionColor }} />
       </div>
     )
   }
