@@ -1,0 +1,53 @@
+.toggle-container {
+  display: inline-flex;
+    
+  background-color: #ffffff;
+  border: 2px solid #636363;
+  border-radius: 16px;
+  justify-content: center;
+  user-select: none;
+  cursor: default;
+}
+
+.toggle-container:focus {
+  outline: none;
+}
+
+.toggle-container:disabled {
+  background: #f0f0f0;
+  border-color: #b8b8b8;
+}
+
+.toggle-slider {
+  margin: 0.07rem -0.17rem;
+  margin-right: 1.5rem;
+  align-self: left;
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: .4s;
+  border-radius: 100%;
+  background: #D06969;
+}
+
+.toggle-container:hover .toggle-slider {
+  background: #a55555;
+}
+
+.toggle-checked {
+  margin-left: 15rem;
+  margin-right: -0.17rem;
+  background: #0060a3;
+}
+
+.toggle-container:hover .toggle-checked {
+  background: #004b80;
+}
+
+.toggle-container:disabled .toggle-slider {
+  background: #ababab;
+}
+
+.toggle-icon {
+  stroke: white;
+  stroke-width: 3;
+}

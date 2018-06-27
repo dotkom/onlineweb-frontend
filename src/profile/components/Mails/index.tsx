@@ -1,0 +1,40 @@
+import React, { Component } from 'react';
+import { IMail } from '../../models/Mail';
+import Mail from './Mail';
+import { getMails } from '../../api/mail';
+import './mail.less';
+
+export interface IState {
+  addresses: IMail[]
+}
+
+class Mails extends Component<{}, IState> {
+  state: IState = { addresses: [] };
+
+  async componentDidMount() {
+    let addresses = await getMails();
+    // Opinion: Primary address should be shown on top when the site first loads.
+    // But the list should not be sorted all over again when an option is clicked.
+    // Therefore the addresses are sorted on component mount.
+    addresses = addresses.sort((a, b) => Number(a.primary) - Number(b.primary)).reverse()
+    this.setState({ addresses });
+  }
+
+  togglePrimary(index: number) {
+    const { addresses } = this.state;
+    let reset: IMail[] = addresses.map((addr) => ({...addr, primary: false}))
+    reset[index].primary = true
+    this.setState({ addresses: reset })
+  }
+
+  render() {
+    const { addresses } = this.state;
+    return(
+      <div className="grid mail-form">
+        { addresses.map((addr, index) => <Mail {...addr} toggle={() => this.togglePrimary(index)} key={addr.email}/>) }
+      </div>
+    )
+  }
+}
+
+export default Mails;

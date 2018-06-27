@@ -1,6 +1,19 @@
 import React from 'react';
+import Collapsble from 'common/components/Collapsible';
 
-const Info = () => (
+class Info extends Collapsble<{}> {
+  render() {
+    const { collapsed } = this.state;
+    return (
+      <>
+        <h3>Regler</h3>
+        <div onClick={() => this.toggleCollapse()}>{ collapsed ? <p>Vis regler</p> : <Content /> }</div>
+      </>
+    )
+  }
+}
+
+const Content = () => (
   <div className="row">
     <div className="col-md-12">
 
@@ -83,6 +96,6 @@ const Info = () => (
       </strong></p>
     </div>
   </div>
-);
+)
 
 export default Info;

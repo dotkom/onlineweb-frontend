@@ -3,6 +3,8 @@
   align-content: center;
   justify-content: center;
   flex-wrap: wrap;
+  background: white;
+  padding-top: 4rem;
 }
 
 .inner-container {
@@ -64,14 +66,23 @@ p {
 }
 
 .profile-info-group {
-  padding: 2rem;
+  padding: 0 2rem;
 }
 
 .profile-group-wrapper {
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  grid-gap: 2rem;
+  margin: 4rem 0;
+}
+
+.profile-medal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
 }
 
 .profile-group-name {
@@ -79,7 +90,8 @@ p {
 }
 
 .profile-info-wrapper {
-  display: flex;
+  display: block;
+  width: 20rem;
 }
 
 .profile-info-type, .profile-info-content {
@@ -103,16 +115,9 @@ p {
   margin-right: 2rem;
 }
 
-.profile-info-wrapper {
-  display: block;
-  margin: 2rem;
-  max-width: 40rem;
-  min-width: 40rem;
-}
-
 .profile-info-icon-wrapper {
   display: flex;
-  margin: 2rem;
+  min-width: 30rem;
 }
 
 .profile-info-icon-content {
@@ -145,8 +150,18 @@ p {
 
 .profile-small-container {
   display: grid;
+  grid-template-columns: 1fr 4fr;
 }
 
 .profile-small-content {
   display: inline-block;
+}
+
+.profile-progress-wrapper {
+  max-width: 48rem;
+  margin: 0 20rem;
+}
+
+.profile-picture-padding {
+  margin: 2rem;
 }

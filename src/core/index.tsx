@@ -6,7 +6,7 @@ import Header from './components/Header/index';
 import Footer from './components/Footer/index';
 
 const Core = ({ children }: any) => (
-  <div>
+  <div style={{ backgroundColor: '#f3f3f3' }}>
     <Header />
     {/*% block submenu %}{% endblock %*/}
     {/*% if messages %*/}

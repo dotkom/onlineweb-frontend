@@ -4,6 +4,7 @@ import { CheckMark, Circle, CircleCheck, DividerBar } from './ClassProgress';
 export interface Props {
   ongoingYear: number;
   completedYear: number;
+  name: string;
 }
 
 class Progress extends React.Component<Props> {
@@ -37,18 +38,24 @@ class Progress extends React.Component<Props> {
     }
 
     return (
-      <div className="profile-progress-wrapper">
-        <svg width="100%" height="100%" viewBox="0 0 120 20">
-          <rect x="10" y={10 - lineWidth / 2} width="90" height={lineWidth} />
-          <Year year={1} />
-          <Year year={2} />
-          <Year year={3} />
-          <DividerBar offset={offset} radius={radius} scale={scale} lineWidth={lineWidth} a={4.5} b={30}/>
-          <Year year={4} />
-          <Year year={5} />
-          <DividerBar offset={offset} radius={radius} scale={scale} lineWidth={lineWidth} a={7.5} b={90}/>
-          <Year year={6} />
-        </svg>
+      <div  className="profile-info-group">
+        { /*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/ }
+        <p className="profile-group-name">{ this.props.name }</p>
+        <div className="profile-progress-wrapper">
+          <div>
+            <svg width="100%" height="100%" viewBox="0 0 120 20">
+              <rect x="10" y={10 - lineWidth / 2} width="90" height={lineWidth} />
+              <Year year={1} />
+              <Year year={2} />
+              <Year year={3} />
+              <DividerBar offset={offset} radius={radius} scale={scale} lineWidth={lineWidth} a={4.5} b={30}/>
+              <Year year={4} />
+              <Year year={5} />
+              <DividerBar offset={offset} radius={radius} scale={scale} lineWidth={lineWidth} a={7.5} b={90}/>
+              <Year year={6} />
+            </svg>
+          </div>
+        </div>
       </div>
     );
   }
