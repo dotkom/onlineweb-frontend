@@ -64,7 +64,7 @@ export class SearchFilter {
   }
 
   public setYear(range: [number, number]): boolean {
-    const sorted = range.sort();
+    const sorted = range;
     if (sorted[0] >= 1 && sorted[1] <= 6) {
       this.year = sorted;
       return true;

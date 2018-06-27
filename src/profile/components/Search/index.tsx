@@ -62,8 +62,8 @@ class Search extends React.Component<Props, State> {
       <> 
         <Searchbar
           setName={(s) => this.setName(s)}
-          setGroup={this.setGroup}
-          setYear={this.setYear}
+          setGroup={(s) => this.setGroup(s)}
+          setYear={(s) => this.setYear(s)}
           { ...filter.format }
         />
         <div className="profile-search grid">

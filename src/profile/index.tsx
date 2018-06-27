@@ -9,6 +9,7 @@ import Penalties from './components/Penalties';
 import Privacy from './components/Privacy';
 import Mails from './components/Mails';
 import MainMenu from './components/MainMenu';
+import 'multirange';
 
 const history = createBrowserHistory();
 

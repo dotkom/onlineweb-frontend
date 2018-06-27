@@ -10,3 +10,26 @@
   height: 5rem;
   border: 3px solid gray;
 }
+
+.profile-dropdown-container {
+  display: grid;
+  grid-template-rows: repeat(1fr);
+  z-index: 100;
+  position: relative;
+}
+
+.profile-dropdown-item {
+  height: 4.4rem;
+  width: 100%;
+  text-align: center;
+  > h4 {
+    padding-left: 1rem;
+    padding-top: 0.4rem;
+  }
+  background-color: white;
+  outline: 3px solid gray;
+}
+
+.profile-dropdown-selected {
+  background: #e3e3e3;
+}
