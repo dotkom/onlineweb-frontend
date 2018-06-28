@@ -1,7 +1,7 @@
 import React from 'react';
 import { STATIC_URL } from 'common/constants/endpoints';
 
-const PROFILE_STATIC = STATIC_URL + 'img/profile/';
+const PROFILE_STATIC = STATIC_URL + 'common/img/profile/';
 
 export interface Props {
   name: string;
