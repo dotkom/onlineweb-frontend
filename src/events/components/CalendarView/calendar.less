@@ -1,0 +1,35 @@
+.calendar-event-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 3px;
+}
+
+.calendar-event-tile {
+  padding: 0.8rem;
+  background: white;
+  height: 14rem;
+  p:first-child {
+    color: gray;
+  }
+}
+
+.calendar-event-title {
+  padding: 0.5rem;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  word-break: break-all;
+}
+
+.calendar-event-tile-inactive {
+  background: #fafafa;
+  > p {
+    color: lightgray !important;
+  }
+}
+
+.calendar-event-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  margin-bottom: 2rem;
+}
