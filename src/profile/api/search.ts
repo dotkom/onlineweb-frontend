@@ -1,7 +1,7 @@
 import { get } from 'common/utils/api';
 import { ISearchUser } from '../models/User';
 import { SearchFilter } from '../models/Search';
-import user from 'img/profile/user.png';
+import user from 'common/img/profile/user.png';
 
 const API_URL = '/v1/users'
 
