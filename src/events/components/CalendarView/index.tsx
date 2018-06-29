@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getEvents, IEventAPIArguemnts } from '../../api/events';
-import { INewEvent, getEventColor, getEventType } from '../../models/Event';
+import { INewEvent, getEventColor, getEventType, EventViewProps } from '../../models/Event';
 import { DateTime } from 'luxon';
 import { getMonthLength, getPreviousMonthLength, getFirstWeekdayOfMonth } from '../../utils/calendarUtils';
 import CalendarTile, { createDayList, CalendarFillerTiles } from './CalendarTile';
@@ -32,7 +32,7 @@ export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEve
   return map
 }
 
-class CalendarView extends Component<{}, IState> {
+class CalendarView extends Component<EventViewProps, IState> {
   state: IState = {
     eventMonth: [],
     month: DateTime.local()
@@ -79,7 +79,7 @@ class CalendarView extends Component<{}, IState> {
     const next = createDayList(7 - ((month.daysInMonth + firstWeekDay) % 7), 0);
 
     return (
-      <div style={{ marginTop: '14rem' }}>
+      <div>
         <div className="calendar-event-menu-grid">
           <h3 onClick={() => this.changeMonth(-1)}>{'<'}</h3>
           <h3>{ month.toFormat('MMMM yyyy') }</h3>
