@@ -7,6 +7,10 @@ import { Extra } from 'events/models/Extras'
 import { Attendee } from './Attendee';
 import IImage from 'common/models/Image'
 
+export interface EventViewProps {
+  accessible: boolean;
+}
+
 export type EventType = 
   | 'Sosialt'
   | 'Kurs'
@@ -34,7 +38,11 @@ export const getEventColor = (n: number): string => {
     case 7: return '#B36BCD';
     default: return 'gray';
   }
-} 
+}
+
+export enum EventView {
+  IMAGE, LIST, CALENDAR
+}
 
 export interface IFrontpageEvent {
   eventUrl: string
@@ -111,7 +119,7 @@ export interface INewEvent {
   event_start: string;
   event_type: number;
   id: number;
-  image: string | null;
+  image: IImage | null;
   ingress: string;
   ingress_short: string;
   location: string;
