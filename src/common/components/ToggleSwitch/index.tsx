@@ -15,9 +15,7 @@ const ToggleSwitch = ({ checked = false, disabled = false , onChange }: IProps) 
   return(
     <button disabled={disabled} onClick={onChange} className='toggle-container'>
       <div className={'toggle-slider' + (checked ? ' toggle-checked': '')}>
-        <span className='toggle-icon'>
-          <img src={checked ? Check : Cross} />
-        </span>
+        <img className='toggle-icon' src={checked ? Check : Cross} />
       </div>
     </button>
   )
