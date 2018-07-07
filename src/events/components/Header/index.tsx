@@ -1,6 +1,11 @@
 import React from 'react';
+import classNames from 'classnames';
 import { EventView } from '../../models/Event';
 import ToggleSwitch from 'common/components/ToggleSwitch';
+
+import ImageViewIcon from './ImageViewIcon';
+import ListViewIcon from './ListViewIcon';
+import CalendarViewIcon from './CalendarViewIcon';
 import './header.less'
 
 export interface IProps {
@@ -13,12 +18,46 @@ export interface IProps {
 const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
   <div className="event-header-grid">
     <h3>ARRANGEMENTER</h3>
+
     <div className="event-header-choice-grid">
-      <div className={view === EventView.IMAGE ? 'event-header-choice-active' : ''} onClick={() => changeView(EventView.IMAGE)}></div>
-      <div className={view === EventView.LIST ? 'event-header-choice-active' : ''} onClick={() => changeView(EventView.LIST)}></div>
-      <div className={view === EventView.CALENDAR ? 'event-header-choice-active' : ''} onClick={() => changeView(EventView.CALENDAR)}></div>
+      <div
+        className={classNames({
+          'event-header-choice-active': view === EventView.IMAGE,
+        })}
+        
+        onClick={() => changeView(EventView.IMAGE)}
+      >
+         <ImageViewIcon />
+      </div>
+
+      <div
+        className={classNames({
+          'event-header-choice-active': view === EventView.LIST,
+        })}
+        
+        onClick={() => changeView(EventView.LIST)}
+      >
+         <ListViewIcon />
+      </div>
+
+      <div
+        className={classNames({
+          'event-header-choice-active': view === EventView.CALENDAR,
+        })}
+        
+        onClick={() => changeView(EventView.CALENDAR)}
+      >
+         <CalendarViewIcon />
+      </div>
     </div>
-    <span><ToggleSwitch checked={accessible} onChange={toggleAccessible}>"Toggle Switch"</ToggleSwitch></span>  
+
+    <span className='event-header-toggle-accessible'>
+      <span className='event-header-toggle-accessible-description'>
+        Vis kun tilgjengelige arrangementer
+      </span>
+      
+      <ToggleSwitch checked={accessible} onChange={toggleAccessible}></ToggleSwitch>
+    </span>
   </div>
 )
 
