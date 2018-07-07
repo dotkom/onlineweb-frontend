@@ -1,10 +1,10 @@
 .event-header-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 10rem;
   margin: 1rem 0 3rem 0;
+  grid-template-areas: "title" "choice" "toggle";
 
   > h3 {
+    grid-area: title;
     display: flex;
     align-items: center;
     margin: 0;
@@ -16,9 +16,11 @@
 
 .event-header-choice-grid {
   display: grid;
+  grid-area: choice;
   grid-template-columns: repeat(3, @header-icon-height * @header-icon-aspect-ratio);
   grid-template-rows: @header-icon-height;
-  justify-content: space-between;
+  justify-content: center;
+  margin: 2rem 0;
 
   > div {
     cursor: pointer;
@@ -35,11 +37,47 @@
 }
 
 .event-header-toggle-accessible {
+  grid-area: toggle;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .event-header-toggle-accessible-description {
   margin-right: 1rem;
+}
+
+@media (min-width: 600px) {
+  .event-header-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "title title" "choice toggle";
+
+    h3 {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .event-header-choice-grid {
+    justify-content: flex-start;
+    margin: 0;
+  }
+ 
+  .event-header-toggle-accessible {
+    justify-content: flex-end;
+  }
+}
+
+@media (min-width: 900px) {
+  .event-header-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "title choice toggle";
+
+    h3 {
+      margin: 0;
+    }
+
+    .event-header-choice-grid {
+      justify-content: center;
+    }
+  }
 }
