@@ -52,6 +52,10 @@ const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
     </div>
 
     <span className='event-header-toggle-accessible'>
+      <span className='event-header-toggle-accessible-description'>
+        Vis kun tilgjengelige arrangementer
+      </span>
+      
       <ToggleSwitch checked={accessible} onChange={toggleAccessible}></ToggleSwitch>
     </span>
   </div>
