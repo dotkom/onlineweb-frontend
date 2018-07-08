@@ -15,7 +15,10 @@ class ImageView extends Component<EventViewProps, IState> {
   }
 
   public async componentDidMount() {
-    const events = await getEvents();
+    const events = await getEvents({
+      event_end__gte: DateTime.local().toISODate(),
+    });
+
     this.setState({ events });
   }
 
