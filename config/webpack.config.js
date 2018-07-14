@@ -52,7 +52,7 @@ module.exports = env => {
       ]
     },
     resolve: {
-      modules: [path.resolve(__dirname, "src"), "node_modules"],
+      modules: [path.resolve(__dirname, "../src"), "node_modules"],
       extensions: [".ts", ".tsx", ".js", ".jsx"]
     },
     plugins: [
@@ -60,7 +60,7 @@ module.exports = env => {
         filename: 'style.[contenthash].css',
       }),
       new HtmlWebpackPlugin({
-        template: './index.html',
+        template: './public/index.html',
         filename: 'index.html'
       }),
       new webpack.DefinePlugin({
