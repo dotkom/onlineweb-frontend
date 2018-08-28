@@ -1,5 +1,5 @@
 import React from 'react';
-import user from 'img/profile/user.png';
+import user from 'common/img/profile/user.png';
 class Header extends React.Component {
   render() {
     return (
