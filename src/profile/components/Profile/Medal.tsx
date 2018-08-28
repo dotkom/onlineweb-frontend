@@ -2,8 +2,8 @@ import React from 'react';
 import { STATIC_URL } from 'common/constants/endpoints';
 import { MedalUrl } from '../../models/ImageTypes';
 import { IMedal } from '../../models/Medal';
-import medals from 'img/profile/medals';
-import crowns from 'img/profile/crowns'
+import medals from 'common/img/profile/medals';
+import crowns from 'common/img/profile/crowns'
 class Medal extends React.Component<IMedal> {
   render() {
     const { committee, position, range } = this.props;
