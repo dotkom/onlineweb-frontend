@@ -29,6 +29,7 @@ export const getEventType = (n: number): EventType => {
 
 export const getEventColor = (n: number): string => {
   switch (n) {
+    case 0: return '#828282';
     case 1: return '#EB536E';
     case 2: return '#43B171';
     case 3: return '#127DBD';
@@ -36,8 +37,33 @@ export const getEventColor = (n: number): string => {
     case 5: return '#2AC6F9';
     case 6: return '#E75E3B';
     case 7: return '#B36BCD';
-    default: return 'gray';
+    default: return '#828282';
   }
+}
+
+export const mockEvent: INewEvent = {
+  absolute_url: '',
+  attendance_event: null,
+  company_event: [],
+  description: '',
+  event_end: '',
+  event_start: '',
+  event_type: 0,
+  id: 0,
+  image: {
+    lg: '',
+    md: '/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png',
+    original: '',
+    sm: '',
+    thumb: '',
+    wide: '',
+    xs: ''
+  },
+  ingress: '',
+  ingress_short: '',
+  location: '',
+  slug: '',
+  title: ''
 }
 
 export enum EventView {
