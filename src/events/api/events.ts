@@ -15,6 +15,12 @@ export const getEvents = async (args?: IEventAPIArguemnts): Promise<INewEvent[]>
   return results;
 }
 
+export const getEvent = async (id: number): Promise<INewEvent> => {
+  const event: INewEvent = await get(API_URL + id + '/', { format: 'json' });
+  console.log(event);
+  return event;
+}
+
 const normalize = (event: any): any => {
   return {
     event_type: getEventType(1),
