@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getEvents, IEventAPIArguemnts } from '../../api/events';
+import { getAllEvents, IEventAPIArguemnts } from '../../api/events';
 import { INewEvent, getEventColor, getEventType, EventViewProps } from '../../models/Event';
 import { DateTime } from 'luxon';
 import { getMonthLength, getPreviousMonthLength, getFirstWeekdayOfMonth } from '../../utils/calendarUtils';
@@ -42,30 +42,31 @@ class CalendarView extends Component<EventViewProps, IState> {
     this.fetchEvents();
   }
 
-  public async fetchEvents() {
-    const { month } = this.state;
+  public async fetchEvents(month: DateTime = this.state.month) {
+    //const { month } = this.state;
 
     const firstDayOfMonth = month.minus({ days: month.day - 1 });
     const lastDayOfMonth = firstDayOfMonth.plus({ months: 1 }).minus({ days: 1 });
 
     const args: IEventAPIArguemnts = {
-      event_start__gte: firstDayOfMonth.toISODate(),
-      event_end__gte: lastDayOfMonth.toISODate()
+      event_period_start: firstDayOfMonth.toISODate(),
+      event_period_end: lastDayOfMonth.toISODate()
     }
 
-    const events = await getEvents(args);
+    const events = await getAllEvents(args);
     const eventMonth = constructMonthMap(month, events);
     this.setState({ eventMonth });
   }
 
-  public changeMonth(number: number) {
+  public async changeMonth(number: number) {
     let { month } = this.state;
 
     month = (number >= 0)
       ? month.plus({ months: number })
       : month.minus({ months: Math.abs(number) })
 
-    this.setState({ month }, this.componentDidMount);
+    await this.fetchEvents(month);
+    this.setState({ month });
   }
 
   public render() {
