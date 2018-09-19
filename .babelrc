@@ -1,8 +1,14 @@
 {
   "presets": [
-    "@babel/env",
     "@babel/typescript",
-    "@babel/react"
+    "@babel/react",
+    ["@babel/env", {
+      "targets": {
+        "chrome": "64"
+      },
+      "useBuiltIns": "usage",
+      "debug": true
+    }]
   ],
   "plugins": [
     "@babel/proposal-class-properties",
