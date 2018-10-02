@@ -1,9 +1,10 @@
 import { ICompanyImage } from "career/models/CompanyImage";
+import IImage from "common/models/Image";
 
 export interface ICompany {
   name: string;
   website: string;
-  image: string;
+  image: IImage;
 }
 
 /*export default class Company implements ICompany {

@@ -11,6 +11,7 @@ import Resources from './resources';
 import HttpError from './core/components/errors/HttpError';
 import Core from './core';
 import Profile from './profile';
+import EventsRouter from 'events/components/EventsRouter';
 
 import store from './authentication';
 
@@ -35,6 +36,7 @@ export const App = () => {
         <Core>
           <Switch>
             <Route exact path={routes.home} component={Frontpage} />
+            <Route path={routes.events} component={EventsRouter} />
             <Route path={routes.career} component={Career} />
             <Route path={routes.hobbygroups} component={Hobbys} />
             <Route path={routes.resources} component={Resources} />

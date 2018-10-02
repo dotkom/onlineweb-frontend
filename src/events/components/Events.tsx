@@ -3,6 +3,7 @@ import Event from './Event';
 import SmallEvent from './SmallEvent';
 import EventsHeading from './EventsHeading';
 import { IFrontpageEvent, EventType } from '../models/Event'
+import ListView from './ListView';
 
 export interface IEventsProps {
   mainEvents: IFrontpageEvent[]
@@ -23,15 +24,7 @@ const Events = ({ mainEvents, smallEvents, setEventVisibility, eventTypes }: IEv
         : <div className="col-lg-12">Ingen arrangementer funnet.</div>
       }
     </div>
-    <div className="row clearfix hero">
-      <ul className="event-list clearfix">
-        {
-          smallEvents.map((event: IFrontpageEvent, index: number) => (
-            <SmallEvent key={index} {...event} />
-          ))
-        }
-      </ul>
-    </div>
+    <ListView events={smallEvents} />
   </div>
 );
 

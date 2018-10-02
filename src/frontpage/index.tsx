@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import ReactDom from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import ArticlesContainer from 'articles/containers/ArticlesContainer';
-import EventsContainer from 'events/containers/EventsContainer';
+import EventsContainer from 'events/components/EventsContainer';
 import Offline from './components/Offline';
 import Business from './components/Business';
 import Subnav from './components/Subnav';
