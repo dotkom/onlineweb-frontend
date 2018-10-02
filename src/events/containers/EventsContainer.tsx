@@ -3,6 +3,8 @@ import { DateTime, Interval } from 'luxon';
 import Events from '../components/Events';
 import { setEventsForEventTypeId, toggleEventTypeDisplay } from '../utils';
 import { get } from 'common/utils/api';
+import { getEvents } from '../api/events';
+import CalendarView from '../components/CalendarView';
 
 const mergeEventImages = (eventImage: string, companyEvent: any) => {
   const eventImages = [];
@@ -108,7 +110,7 @@ class EventsContainer extends Component<IEventsContainerProps> {
     };
     this.setEventVisibility = this.setEventVisibility.bind(this);
     this.getVisibleEvents = this.getVisibleEvents.bind(this);
-
+    getEvents({ event_end__gte: DateTime.local().toISODate()});
     this.fetchEvents();
     // Loop over event types
     Object.keys(this.state.eventTypes).forEach((eventTypeId) => {
@@ -178,11 +180,14 @@ class EventsContainer extends Component<IEventsContainerProps> {
 
   render() {
     return (
-      <Events
-        mainEvents={this.mainEvents()} smallEvents={this.smallEvents()}
-        setEventVisibility={this.setEventVisibility}
-        eventTypes={this.getEventTypes()}
-      />
+      <>
+      <CalendarView />
+        <Events
+          mainEvents={this.mainEvents()} smallEvents={this.smallEvents()}
+          setEventVisibility={this.setEventVisibility}
+          eventTypes={this.getEventTypes()}
+        />
+      </>
     );
   }
 }

@@ -1,0 +1,70 @@
+.calendar-event-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-event-tile {
+  background: white;
+  overflow: hidden;
+  height: 10rem;
+  p:first-child {
+    color: gray;
+  }
+}
+
+.calendar-event-tile-content {
+  width: 100%;
+  padding: 0.2rem;
+  > p:first-child {
+    color: gray;
+  }
+}
+
+.calendar-event-title {
+  padding: 0.2rem;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.calendar-event-tile-inactive {
+  background: #fafafa;
+  > p {
+    color: lightgray !important;
+  }
+}
+
+.calendar-event-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  margin-bottom: 2rem;
+
+  > h3 {
+    user-select: none;
+    cursor: pointer;
+  }
+}
+
+@media (min-width: 800px) {
+  .calendar-event-grid {
+    grid-gap: 3px;
+  }
+
+  .calendar-event-tile {
+    position: relative;
+    padding-bottom: 100%;
+  }
+
+  .calendar-event-tile-content {
+    position: absolute;
+    padding: 0.8rem;
+  }
+
+  .calendar-event-title {
+    padding: 0.5rem;
+  }
+}
