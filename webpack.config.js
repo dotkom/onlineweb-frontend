@@ -6,6 +6,7 @@ const webpack = require('webpack');
 module.exports = env => {
   return {
     mode: 'development',
+    devtool: "source-map",
     entry: {
       app: './src/index.tsx',
     },
