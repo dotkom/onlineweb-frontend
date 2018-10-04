@@ -27,7 +27,7 @@ class ImageView extends Component<EventViewProps, IState> {
     const large = events.slice(0, 3);
     const small = events.slice(3, 12);
     return (
-      <div className={style.Grid}>
+      <div className={style.grid}>
         { large.map((event) => <LargeEvent key={event.id} {...event} />) }
         { small.map((event) => <SmallEvent key={event.id} {...event} />) }
       </div>
