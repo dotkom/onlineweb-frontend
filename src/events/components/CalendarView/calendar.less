@@ -1,9 +1,9 @@
-.calendar-event-grid {
+.grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
 
-.calendar-event-tile {
+.tile {
   background: white;
   overflow: hidden;
   height: 10rem;
@@ -12,7 +12,7 @@
   }
 }
 
-.calendar-event-tile-content {
+.tileContent {
   width: 100%;
   padding: 0.2rem;
   > p:first-child {
@@ -20,7 +20,7 @@
   }
 }
 
-.calendar-event-title {
+.title {
   padding: 0.2rem;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
@@ -30,14 +30,14 @@
   cursor: pointer;
 }
 
-.calendar-event-tile-inactive {
+.tileInactive {
   background: #fafafa;
   > p {
     color: lightgray !important;
   }
 }
 
-.calendar-event-menu-grid {
+.menuGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
@@ -50,21 +50,21 @@
 }
 
 @media (min-width: 800px) {
-  .calendar-event-grid {
+  .grid {
     grid-gap: 3px;
   }
 
-  .calendar-event-tile {
+  .tile {
     position: relative;
     padding-bottom: 100%;
   }
 
-  .calendar-event-tile-content {
+  .tileContent {
     position: absolute;
     padding: 0.8rem;
   }
 
-  .calendar-event-title {
+  .title {
     padding: 0.5rem;
   }
 }
