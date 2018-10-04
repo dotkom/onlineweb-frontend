@@ -38,11 +38,13 @@ module.exports = env => {
               loader: "style-loader"
             },
             {
-              loader: "css-loader",
+              loader: "typings-for-css-modules-loader",
               options: {
                 sourceMap: true,
                 modules: true,
-                localIdentName: "[local]___[hash:base64:5]"
+                localIdentName: "[local]___[hash:base64:5]",
+                namedExport: true,
+                camelCase: true
               }
             },
             {
