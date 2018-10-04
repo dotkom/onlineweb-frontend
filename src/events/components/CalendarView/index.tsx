@@ -4,7 +4,7 @@ import { INewEvent, getEventColor, getEventType, EventViewProps } from '../../mo
 import { DateTime } from 'luxon';
 import { getMonthLength, getPreviousMonthLength, getFirstWeekdayOfMonth } from '../../utils/calendarUtils';
 import CalendarTile, { createDayList, CalendarFillerTiles } from './CalendarTile';
-import './calendar.less';
+import style from './calendar.less';
 
 export interface IState {
   eventMonth: INewEvent[][];
@@ -81,12 +81,12 @@ class CalendarView extends Component<EventViewProps, IState> {
 
     return (
       <div>
-        <div className="calendar-event-menu-grid">
+        <div className={style.menuGrid}>
           <h3 onClick={() => this.changeMonth(-1)}>{'<'}</h3>
           <h3>{ month.toFormat('MMMM yyyy') }</h3>
           <h3 onClick={() => this.changeMonth(1)}>{'>'}</h3>
         </div>
-        <div className="calendar-event-grid">
+        <div className={style.grid}>
           <CalendarFillerTiles days={previous} />
           { eventMonth.map((events, index) => (
             <CalendarTile

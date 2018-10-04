@@ -1,6 +1,8 @@
 import React from 'react';
 import { INewEvent, getEventColor } from '../../models/Event';
 import classNames from 'classnames';
+import style from './calendar.less';
+import { stripLeadingSlash } from 'history/PathUtils';
 
 export interface ITileProps {
   events: INewEvent[];
@@ -19,12 +21,12 @@ export const createDayList = (amount: number, start: number): number[] => {
 export const CalendarEventTile = ({ events, active = true, day}: ITileProps) => {
   return (
     <div
-      className={classNames('calendar-event-tile', {
-        'calendar-event-tile-inactive': !active,
+      className={classNames(style.tile, {
+        [style.tileInactive]: !active,
       })}
     >
-      <div className="calendar-event-tile-content">
-        <p className="calendar-event-tile-date">{ day }</p>
+      <div className={style.tileContent}>
+        <p>{ day }</p>
         { events.map((event) => <CalendarEvent key={event.id} {...event} />) }
       </div>
     </div>
@@ -34,9 +36,9 @@ export const CalendarEventTile = ({ events, active = true, day}: ITileProps) => 
 export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
   <>
     { days.map((day) => (
-      <div className="calendar-event-tile calendar-event-tile-inactive" key={`filler-${day}`}>
-        <div className="calendar-event-tile-content">
-          <p className="calendar-event-tile-date">{ day }</p>
+      <div className={style.tile + style.tileInactive} key={`filler-${day}`}>
+        <div className={style.tileContent}>
+          <p>{ day }</p>
         </div>
       </div>
     )) }
@@ -45,7 +47,7 @@ export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
 
 export const CalendarEvent = ({ event_type, title }: INewEvent) => (
   <p
-    className="calendar-event-title"
+    className={style.title}
     style={{ background: getEventColor(event_type) }}
     title={title}
   >
