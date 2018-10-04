@@ -2,6 +2,7 @@ import React from 'react';
 import { DateTime } from 'luxon';
 import { INewEvent } from '../../models/Event';
 import { DOMAIN } from 'common/constants/endpoints';
+import style from './detail.less';
 
 const PictureCard = ({ image, event_start, event_end, location, company_event }: INewEvent) => {
   const eventImage = company_event[0] ? company_event[0].company.image : image;
@@ -12,7 +13,7 @@ const PictureCard = ({ image, event_start, event_end, location, company_event }:
   const endDate = DateTime.fromISO(event_end).toFormat('d MMM');
   const endTime = DateTime.fromISO(event_end).toFormat('hh:mm');
   return (
-    <div style={{ display: 'grid', background: 'white', gridTemplateColumns: '50fr 33fr' }}>
+    <div className={style.pictureCard}>
       <img src={DOMAIN + imageUrl} style={{ width: '100%' }} />
       <div>
         <p>Oppmøte</p>

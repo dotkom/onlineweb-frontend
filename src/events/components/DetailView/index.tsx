@@ -3,6 +3,7 @@ import { INewEvent, mockEvent } from '../../models/Event';
 import { getEvent } from '../../api/events';
 import ListEvent from '../ListView/ListEvent';
 import PictureCard from './PictureCard';
+import style from './detail.less';
 
 export interface IProps {
   
@@ -33,7 +34,7 @@ class DetailView extends Component<IProps, IState> {
         <div>
           <ListEvent key={eventId} {...e} />
         </div>
-        <div style={{ marginTop: '4rem', display: 'grid', gridTemplateColumns: '83fr 33fr', gridGap: '4rem' }}>
+        <div className={style.pictureCardContainer}>
           <PictureCard key={eventId} {...e} />
         </div>
       </div>
