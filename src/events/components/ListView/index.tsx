@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { INewEvent, EventViewProps } from '../../models/Event';
 import { DateTime } from 'luxon';
-import './list.less';
+import style from './list.less';
 import { getEvents } from '../../api/events';
 import ListEvent from './ListEvent';
 import HostPolygon from './HostPolygon';
@@ -28,7 +28,7 @@ class ListView extends Component<EventViewProps, IState> {
     const { events } = this.state;
     return (
       <>
-      <div className="event-list-grid">
+      <div className={style.grid}>
         { events.map((event) => <ListEvent key={event.id} {...event} />) }
       </div>
       </>

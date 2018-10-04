@@ -3,22 +3,23 @@ import { DateTime } from 'luxon';
 import { INewEvent, getEventColor, getEventType } from '../../models/Event';
 import HostPolygon from './HostPolygon';
 import StatusPolygon from './StatusPolygon';
+import style from './list.less';
 
 const ListEvent = ({ title, event_start, attendance_event, event_type }: INewEvent) => {
   const eventColor = getEventColor(event_type);
   const eventType = getEventType(event_type);
   const eventDate = DateTime.fromISO(event_start).toFormat('d.MM')
   return (
-    <div className="event-list-element-grid event-list-grid-row">
-      <div className="event-list-element-grid-row" style={{ left: 0 }}>
+    <div className={style.gridRow}>
+      <div className={style.elementGridRow} style={{ left: 0 }}>
         <HostPolygon color={ eventColor } />
         <p>{ eventType }</p>
       </div>
 
-      <div className="event-list-element-grid-row">
+      <div className={style.elementGridRow}>
         <p style={{ verticalAlign: 'center' }}>{ title }</p>
       </div>
-      <div className="event-list-element-grid-row">
+      <div className={style.elementGridRow}>
         <p>
           { (attendance_event && attendance_event.attendees)
             ? `${attendance_event.attendees.length}/${attendance_event.max_capacity}`
@@ -26,10 +27,10 @@ const ListEvent = ({ title, event_start, attendance_event, event_type }: INewEve
           }
         </p>
       </div>
-      <div className="event-list-element-grid-row">
+      <div className={style.elementGridRow}>
         <p>{ eventDate }</p>
       </div>
-      <div className="event-list-element-grid-row">
+      <div className={style.elementGridRow}>
         <StatusPolygon color="#828282" />
         <p>{ attendance_event ? 'Y' : 'N' }</p>
       </div>
