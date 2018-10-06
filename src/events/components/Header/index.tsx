@@ -16,7 +16,7 @@ export interface IProps {
 }
 
 const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
-  <div className={style.header}>
+  <div className={style.grid}>
     <h3>ARRANGEMENTER</h3>
 
     <div className={style.choiceGrid}>
