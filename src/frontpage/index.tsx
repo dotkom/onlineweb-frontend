@@ -14,7 +14,6 @@ import { IArticle } from 'articles/models/Article';
 
 const Frontpage = () => (
   <Fragment>
-    <Subnav />
     <AppContainer>
       <div className="container">
         <section id="events">

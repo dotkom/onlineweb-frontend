@@ -41,7 +41,7 @@ class Container extends Component<IProps, IState> {
     const { view, accessible } = this.state;
     const View = getView(view);
     return (
-      <div style={{ marginTop: '14rem' }}>
+      <div>
         <Header
           changeView={(view: EventView) => this.changeView(view)}
           toggleAccessible={this.toggleAccessible}
