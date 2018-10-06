@@ -1,11 +1,17 @@
-.grid {
+.large-event-grid, .small-event-grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 @media (min-width: 1024px) {
-  .grid {
+  .large-event-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .small-event-grid {
+    grid-auto-flow: column;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
