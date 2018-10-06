@@ -3,6 +3,13 @@ import { DOMAIN } from '../constants/endpoints';
 import { toQueryString } from './queryString';
 import { RequestOptions } from 'http';
 
+export interface IAPIData<T> {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: T[];
+}
+
 /**
  * @summary Simple fetch-API wrapper for HTTP GET
  * @param {string} query API endpoint URL
