@@ -11,6 +11,17 @@ export interface EventViewProps {
   accessible: boolean;
 }
 
+export enum EventTypeEnum {
+  NONE,
+  SOSIALT,
+  BEDPRES,
+  KURS,
+  UTFLUKT,
+  EKSKURSJON,
+  INTERNT,
+  ANNET
+}
+
 export type EventType = 
   | 'Sosialt'
   | 'Kurs'
