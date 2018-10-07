@@ -1,11 +1,11 @@
 @import '~common/less/colors.less';
 
-#opportunity-company-name h3 {
+.opportunity-header {
   text-align: center;
   margin-top: -10px;
 }
 
-#career {
+.career {
   img {
     width: 100%;
   }
@@ -37,56 +37,56 @@
   input {
     margin-bottom: 10px;
   }
+}
 
-  .filters {
-    background: @baby-blue-medium;
-    padding: 15px;
-    margin-bottom: 20px;
+.filters {
+  background: @baby-blue-medium;
+  padding: 15px;
+  margin-bottom: 20px;
 
-    button {
-      background-color: @baby-blue;
-      color: #fff;
-      border: none;
-      display: inline-block;
-      text-align: center;
-      width: 100%;
-      font-size: 13px;
-      padding-bottom: 10px;
-      padding-top: 10px;
-    }
+  button {
+    background-color: @baby-blue;
+    color: #fff;
+    border: none;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    font-size: 13px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
 
-    .TagContainer {
-      padding: 0;
-      margin: 0;
-      display: block;
-      margin-top: 10px;
-      margin-bottom: 15px;
-
-      button {
-        display: inline-flex;
-        padding: 10px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        color: white;
-        width: auto;
-        background: @baby-blue;
-        cursor: pointer;
-      }
-
-      button.selected {
-        background: darken(@baby-blue, 10%);
-      }
-    }
-
-    h3 {
-      margin-top: 0;
-      font-size: 20px;
-      color: white;
-    }
+  h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: white;
   }
 }
 
-section#careeropportunities {
+.tag-container {
+  padding: 0;
+  margin: 0;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 15px;
+
+  button {
+    display: inline-flex;
+    padding: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: white;
+    width: auto;
+    background: @baby-blue;
+    cursor: pointer;
+  }
+
+  button.selected {
+    background: darken(@baby-blue, 10%);
+  }
+}
+
+.careeropportunities {
   .career-ingress {
     font-weight: 300;
   }
@@ -96,7 +96,7 @@ section#careeropportunities {
   }
 }
 
-section#careeropportunity {
+.careeropportunity {
   .careerdescription {
     margin-bottom: 40px;
   }

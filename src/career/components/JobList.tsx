@@ -6,6 +6,8 @@ import Job from './Job';
 import { ITag } from '../models/Tag';
 import { IJob } from '../models/Job';
 
+import globalStyle from 'core/less/core.less';
+
 // Checks tags where the only involved factor is whether the button is on or not.
 const defaultCheck = (job: IJob, id: number, tag: ITag) => {
   // Job might have multiple tags, such as multiple locations.
@@ -123,7 +125,7 @@ const JobList = ({ jobs, tags, filterText }: IJobListProps) => {
   const jobElems = sortedJobs.map((job, i) => <Job {...job} key={i} />);
 
   return (
-    <Col xs={12} sm={12} md={9} className="pull-left">
+    <Col xs={12} sm={12} md={9} className={globalStyle.pullLeft}>
       {jobElems}
     </Col>
   );

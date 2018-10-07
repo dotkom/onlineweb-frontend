@@ -4,6 +4,9 @@ import TagList from './TagList';
 import SearchBox from '../components/SearchBox';
 import { ITag, Tags } from '../models/Tag';
 
+import globalStyle from 'core/less/core.less';
+import style from '../less/career.less';
+
 export interface IFilterListProps {
   handleTagChange: Function;
   tags: Tags;
@@ -13,8 +16,8 @@ export interface IFilterListProps {
 }
 
 const FilterList = ({ tags, filterText, handleTagChange, handleReset, handleFilterChange }: IFilterListProps) => (
-  <Col xs={12} sm={12} md={3} className="pull-right">
-    <div className="filters">
+  <Col xs={12} sm={12} md={3} className={globalStyle.pullRight}>
+    <div className={style.filters}>
       <SearchBox text={filterText} onChange={(e: FormEvent<HTMLFormElement>) => handleFilterChange(e)} />
 
       <TagList
