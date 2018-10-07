@@ -1,6 +1,7 @@
 import React from 'react';
 import Tag from './Tag';
 import { ITag, Tags, TagWrapper } from '../models/Tag'
+import style from '../less/career.less';
 
 export interface ITagListProps {
   handleChange: Function
@@ -11,7 +12,7 @@ export interface ITagListProps {
 const TagList = ({ tags, handleChange, heading }: ITagListProps) => (
   <div>
     <h3>{heading}</h3>
-    <div className="TagContainer">
+    <div className={style.tagContainer}>
       {Object.keys(tags).map((id: string) => (
         <Tag
           key={id}

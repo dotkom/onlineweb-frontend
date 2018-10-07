@@ -1,7 +1,8 @@
 import React from 'react';
 import Markdown from 'react-markdown';
 import { formatLocations } from './Job';
-//import companyImageProps from '../propTypes/companyImage';
+import style from '../less/career.less';
+import globalStyle from 'core/less/core.less';
 
 export interface IInfoBox {
   title: string;
@@ -16,18 +17,18 @@ export interface IInfoBox {
 };
 
 const InfoBox = (props: IInfoBox) => (
-  <section id="careeropportunity">
+  <section className={style.careeropportunities}>
     <div className="container">
       <div className="row">
         <div className="col-md-12">
-          <div className="page-header">
+          <div className={globalStyle.pageHeader}>
             <h2>{props.title}</h2>
           </div>
         </div>
       </div>
 
       <div className="row">
-        <div className="col-md-8 col-sm-7 careerdescription">
+        <div className={`col-md-8 col-sm-7 ${style.careerdescription}`}>
           <Markdown
             source={props.description}
             escapeHtml
@@ -46,7 +47,7 @@ const InfoBox = (props: IInfoBox) => (
             </div>
           </div>
 
-          <div className="company">
+          <div className={style.company}>
             <a href={`/company/${props.companyId}`}>
               <div className="row">
                 <div className="col-md-12">
@@ -56,20 +57,20 @@ const InfoBox = (props: IInfoBox) => (
 
               <div className="row">
                 <div className="col-md-12">
-                  <div className="company-ingress">
+                  <div className={style.companyIngress}>
                     <Markdown
                       source={props.companyDescription}
                       escapeHtml
                     />
                   </div>
 
-                  <p className="pull-right company-image-caption">Trykk for mer info</p>
+                  <p className={`${globalStyle.pullRight} ${style.companyImageCaption}`}>Trykk for mer info</p>
                 </div>
               </div>
             </a>
           </div>
 
-          <div className="company">
+          <div className={style.company}>
             <div className="row">
               <div className="col-md-12">
                 <h3>Nøkkelinformasjon</h3>

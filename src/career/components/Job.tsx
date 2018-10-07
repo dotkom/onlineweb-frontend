@@ -2,6 +2,7 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { IJob } from '../models/Job'
+import style from 'core/less/core.less';
 
 // Accepts a list of locations and returns a comma-separated list of locations
 // with 'og' inserted before the last element, and 'Ikke spesifisert' if no
@@ -35,7 +36,7 @@ const Job = ({ locations, deadline, companyImage, companyName, title, ingress, t
         <Link to={`/career/${id}`}>{companyName} - {title}</Link>
       </h1>
 
-      <div className="ingress">{ingress}</div>
+      <div className={style.ingress}>{ingress}</div>
 
       <div className="meta">
         <Col md={4}>
