@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import Cross from './cross.svg';
 import Check from './check.svg';
-import './switch.less';
+import style from './switch.less';
 
 export interface IProps {
   checked?: boolean;
@@ -13,9 +13,9 @@ export interface IProps {
 
 const ToggleSwitch = ({ checked = false, disabled = false , onChange }: IProps) => {
   return(
-    <button disabled={disabled} onClick={onChange} className='toggle-container'>
-      <div className={'toggle-slider' + (checked ? ' toggle-checked': '')}>
-        <img className='toggle-icon' src={checked ? Check : Cross} />
+    <button disabled={disabled} onClick={onChange} className={style.container}>
+      <div className={style.slider + ' ' +(checked ? style.checked : '')}>
+        <img className={style.icon} src={checked ? Check : Cross} />
       </div>
     </button>
   )
