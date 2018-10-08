@@ -2,7 +2,6 @@ import React from 'react';
 import { INewEvent, getEventColor } from '../../models/Event';
 import classNames from 'classnames';
 import style from './calendar.less';
-import { stripLeadingSlash } from 'history/PathUtils';
 
 export interface ITileProps {
   events: INewEvent[];
@@ -36,7 +35,7 @@ export const CalendarEventTile = ({ events, active = true, day}: ITileProps) => 
 export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
   <>
     { days.map((day) => (
-      <div className={style.tile + style.tileInactive} key={`filler-${day}`}>
+      <div className={style.tile + " " + style.tileInactive} key={`filler-${day}`}>
         <div className={style.tileContent}>
           <p>{ day }</p>
         </div>
