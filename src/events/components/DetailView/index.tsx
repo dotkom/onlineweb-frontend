@@ -4,9 +4,12 @@ import { getEvent } from '../../api/events';
 import ListEvent from '../ListView/ListEvent';
 import PictureCard from './PictureCard';
 import style from './detail.less';
+import InfoBox from './InfoBox';
+import Registration from './Registation';
+import Contact from './Contact';
 
 export interface IProps {
-  
+  eventId: string;
 }
 
 export interface IState {
@@ -34,12 +37,15 @@ class DetailView extends Component<IProps, IState> {
     const { event, eventId } = this.state;
     const e = event || mockEvent;
     return (
-      <div style={{ marginTop: '8rem' }}>
-        <div>
+      <div className={style.container}>
+        <div className={style.leftContainer}>
           <ListEvent key={eventId} {...e} />
-        </div>
-        <div className={style.pictureCardContainer}>
           <PictureCard key={eventId} {...e} />
+          <InfoBox {...e}/>
+        </div>
+        <div className={style.rightContainer}>
+          <Registration {...e} />
+          <Contact {...e} />
         </div>
       </div>
     )
