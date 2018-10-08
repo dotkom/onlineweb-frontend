@@ -73,7 +73,7 @@ const SmallEventColumn = ({ events }: { events: INewEvent[] }) => (
 const LargeEvent = ({ image, event_type, title, event_start, attendance_event }: INewEvent) => (
   <div className={style.large}>
     <p className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>{ getEventType(event_type) }</p>
-    <img className={style.largeImage} src={image ? (DOMAIN + image.md) : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png'} />
+    <img className={style.largeImage} src={image ? (DOMAIN + image.wide) : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png'} />
     <div className={style.largeContent}>
       <p> { title } </p>
       <p> { attendance_event ? `${attendance_event.attendees ? attendance_event.attendees.length : '?'}/${attendance_event.max_capacity}` : 'ALLE' } </p>
