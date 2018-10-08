@@ -15,10 +15,14 @@ export interface IState {
 }
 
 class DetailView extends Component<IProps, IState> {
-  state: IState = {
-    eventId: 500,
-    event: null
-  };
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = {
+      eventId: parseInt(props.eventId, 10),
+      event: null
+    };
+  }
 
   public async componentDidMount() {
     const { eventId } = this.state;

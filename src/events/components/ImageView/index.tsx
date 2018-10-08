@@ -4,6 +4,8 @@ import { DateTime } from 'luxon';
 import style from './image.less';
 import { getEvents } from '../../api/events';
 import { DOMAIN } from 'common/constants/endpoints';
+import { routes } from '../EventsRouter';
+import { Link } from 'react-router-dom';
 
 export interface IState {
   events_left: INewEvent[];
@@ -70,28 +72,32 @@ const SmallEventColumn = ({ events }: { events: INewEvent[] }) => (
   <>{ events.map((event) => <SmallEvent key={event.id} {...event} />) }</>
 )
 
-const LargeEvent = ({ image, event_type, title, event_start, attendance_event }: INewEvent) => (
-  <div className={style.large}>
-    <p className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>{ getEventType(event_type) }</p>
-    <img className={style.largeImage} src={image ? (DOMAIN + image.wide) : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png'} />
-    <div className={style.largeContent}>
+const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id }: INewEvent) => (
+  <Link to={`/events/${id}`}>
+    <div className={style.large}>
+      <p className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>{ getEventType(event_type) }</p>
+      <img className={style.largeImage} src={image ? (DOMAIN + image.wide) : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png'} />
+      <div className={style.largeContent}>
+        <p> { title } </p>
+        <p> { attendance_event ? `${attendance_event.attendees ? attendance_event.attendees.length : '?'}/${attendance_event.max_capacity}` : 'ALLE' } </p>
+        <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
+      </div>
+    </div>
+  </Link>
+)
+
+const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: INewEvent) => (
+  <Link to={`/events/${id}`}>
+    <div className={style.small}>
+      <span
+        className={style.smallType}
+        style={{ color: getEventColor(event_type) }}
+      />
       <p> { title } </p>
       <p> { attendance_event ? `${attendance_event.attendees ? attendance_event.attendees.length : '?'}/${attendance_event.max_capacity}` : 'ALLE' } </p>
       <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
     </div>
-  </div>
-)
-
-const SmallEvent = ({ title, event_type, event_start, attendance_event }: INewEvent) => (
-  <div className={style.small}>
-    <span
-      className={style.smallType}
-      style={{ color: getEventColor(event_type) }}
-    />
-    <p> { title } </p>
-    <p> { attendance_event ? `${attendance_event.attendees ? attendance_event.attendees.length : '?'}/${attendance_event.max_capacity}` : 'ALLE' } </p>
-    <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
-  </div>
+  </Link>
 )
 
 export default ImageView;
