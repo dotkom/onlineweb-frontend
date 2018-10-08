@@ -1,12 +1,14 @@
 import React from 'react';
 import { DateTime } from 'luxon';
-import { INewEvent } from '../../models/Event';
+import { INewEvent, getEventColor } from '../../models/Event';
 import { DOMAIN } from 'common/constants/endpoints';
 import style from './detail.less';
+import CardHeader from './Card/CardHeader';
 
-const PictureCard = ({ image, event_start, event_end, location, company_event }: INewEvent) => {
+const PictureCard = ({ image, event_start, event_end, location, company_event, event_type }: INewEvent) => {
   const eventImage = company_event[0] ? company_event[0].company.image : image;
   const imageUrl = eventImage ? eventImage.wide : '';
+  const color = getEventColor(event_type);
 
   const startDate = DateTime.fromISO(event_start).toFormat('d MMM');
   const startTime = DateTime.fromISO(event_start).toFormat('hh:mm');
@@ -16,7 +18,7 @@ const PictureCard = ({ image, event_start, event_end, location, company_event }:
     <div className={style.pictureCard}>
       <img src={DOMAIN + imageUrl} style={{ width: '100%' }} />
       <div>
-        <p>Oppmøte</p>
+        <CardHeader color={color}>Oppmøte</CardHeader>
         <div>
           <p>Starttid</p>
           <p>{ startDate }</p>
