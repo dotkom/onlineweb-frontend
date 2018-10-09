@@ -3,6 +3,13 @@
   grid-template-columns: 1fr;
   grid-gap: 2rem;
   margin-bottom: 2rem;
+
+  & > a {
+    color: initial;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 @media (min-width: 1024px) {
@@ -18,6 +25,7 @@
 
 .large {
   background: white;
+  height: 100%;
 }
 
 .imageLargeType {
@@ -41,6 +49,7 @@
   display: grid;
   grid-template-columns: 8fr 2fr 2fr;
   position: relative;
+  height: 100%;
 }
 
 .largeContent, .small {
