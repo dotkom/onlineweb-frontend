@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import style from '../less/career.less';
 
 export interface ITagProps {
   title: string;
@@ -10,7 +11,7 @@ export interface ITagProps {
 
 const Tag = ({ selected, title, changeKey, handleChange }: ITagProps) => (
   <button
-    className={classNames({ selected })}
+    className={classNames({ [style.selected]: selected })}
     onClick={() => handleChange(changeKey)}
   >
     {title}
