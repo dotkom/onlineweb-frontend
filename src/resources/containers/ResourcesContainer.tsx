@@ -1,14 +1,11 @@
 import React from 'react';
 import ResourceList from '../components/ResourceList';
+import Header from 'frontpage/components/Header';
 
 const ResourcesContainer = () => (
   <section id="resourcecenter">
     <div className="container">
-      <div className="col-md-12">
-        <div className="page-header">
-          <h1 id="resourcecenter-heading">Ressurssenter</h1>
-        </div>
-      </div>
+      <Header>Ressurssenter</Header>
       <ResourceList />
     </div>
   </section>

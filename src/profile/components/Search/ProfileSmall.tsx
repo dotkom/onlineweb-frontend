@@ -1,18 +1,20 @@
 import React from 'react';
 import { ISearchUser } from '../../models/User';
+import style from '../../less/profile.less';
+import classnames from 'classnames';
 
 class ProfileSmall extends React.Component<{ user: ISearchUser }> {
   render() {
     const { image, name, phone, mail } = this.props.user;
     return (
-      <div className="profile-small-container grid-row">
-        <img className="profile-image profile-picture-padding" src={ image } title={ name }></img>
-        <div className="profile-small-content">
-          <h3 className="profile-small-name">{ name }</h3>
-          <p className="profile-info-type">E-post</p>
-          <p className="profile-info-content">{ mail }</p>
-          <p className="profile-info-type">Telefonnummer</p>
-          <p className="profile-info-content">{ phone }</p>
+      <div className={classnames(style.smallContainer, style.gridRow)}>
+        <img className={classnames(style.profileImage, style.picturePadding)} src={ image } title={ name }></img>
+        <div className={style.smallContent}>
+          <h3 className={style.name}>{ name }</h3>
+          <p className={style.infoType}>E-post</p>
+          <p className={style.infoContent}>{ mail }</p>
+          <p className={style.infoType}>Telefonnummer</p>
+          <p className={style.infoContent}>{ phone }</p>
         </div>
       </div>
     );

@@ -4,7 +4,7 @@ import { ISearchFilter } from '../../models/Search';
 import Dropdown from './Dropdown';
 import DoubleSlider from './DoubleSlider';
 import { getGroups } from '../../api/groups';
-
+import style from './search.less';
 
 export interface IProps extends ISearchFilter {
   setName: (s: string) => boolean;
@@ -30,8 +30,8 @@ class Searchbar extends Component<IProps, IState> {
     const { name, group, year, setName, setGroup, setYear } = this.props;
     const { groups } = this.state;
     return (
-      <form className="profile-search-grid">
-        <input className="profile-search-field" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+      <form className={style.grid}>
+        <input className={style.searchField} type="text" value={name} onChange={(e) => setName(e.target.value)} />
         <Dropdown selected={group} onClick={(group) => setGroup(group)} groups={groups} />
         <DoubleSlider range={year || [1, 6]} onChange={(range) => setYear(range)}/>
       </form>

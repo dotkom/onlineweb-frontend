@@ -1,6 +1,6 @@
-.event-header-grid {
+.grid {
   display: grid;
-  margin: 1rem 0 3rem 0;
+  margin: 3rem 0;
   grid-template-areas: "title" "choice" "toggle";
 
   > h3 {
@@ -14,7 +14,7 @@
 @header-icon-height: 3rem;
 @header-icon-aspect-ratio: 65 / 30;
 
-.event-header-choice-grid {
+.choiceGrid {
   display: grid;
   grid-area: choice;
   grid-template-columns: repeat(3, @header-icon-height * @header-icon-aspect-ratio);
@@ -32,23 +32,23 @@
   }
 }
 
-.event-header-choice-active > svg rect {
+.choiceActive > svg rect {
   fill: #636363;
 }
 
-.event-header-toggle-accessible {
+.toggleAccessible {
   grid-area: toggle;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.event-header-toggle-accessible-description {
+.toggleAccessibleDescription {
   margin-right: 1rem;
 }
 
 @media (min-width: 600px) {
-  .event-header-grid {
+  .grid {
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "title title" "choice toggle";
 
@@ -57,18 +57,18 @@
     }
   }
 
-  .event-header-choice-grid {
+  .choiceGrid {
     justify-content: flex-start;
     margin: 0;
   }
  
-  .event-header-toggle-accessible {
+  .toggleAccessible {
     justify-content: flex-end;
   }
 }
 
 @media (min-width: 900px) {
-  .event-header-grid {
+  .grid {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: "title choice toggle";
 
@@ -76,7 +76,7 @@
       margin: 0;
     }
 
-    .event-header-choice-grid {
+    .choiceGrid {
       justify-content: center;
     }
   }

@@ -5,7 +5,8 @@ import { getPackedSettings } from 'http2';
 export interface IEventAPIArguemnts {
   event_period_start?: string;
   event_period_end?: string;
-  event_type?: string[] | string
+  event_end__gte?: string;
+  event_type?: number[] | number;
   page?: number;
 }
 
@@ -18,7 +19,7 @@ export interface IAPIData<T> {
 
 const API_URL = '/api/v1/events/';
 
-export const getEvents = async (args?: IEventAPIArguemnts, disablePagination = false): Promise<INewEvent[]> => {
+export const getEvents = async (args?: IEventAPIArguemnts): Promise<INewEvent[]> => {
   const data: IAPIData<INewEvent> = await get(API_URL, { format: 'json', ...args });
   return data.results;
 }

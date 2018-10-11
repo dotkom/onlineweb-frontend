@@ -1,4 +1,4 @@
-.toggle-container {
+.container {
   display: inline-flex;
   background-color: #ffffff;
   border: 2px solid #636363;
@@ -7,18 +7,31 @@
   user-select: none;
   cursor: pointer;
   height: auto;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    .slider {
+      background: #a55555;
+    }
+    .checked {
+      background: #004b80;
+    }
+  }
+
+  &:disabled {
+    background: #f0f0f0;
+    border-color: #b8b8b8;
+
+    .slider {
+      background: #ababab;
+    }
+  }
 }
 
-.toggle-container:focus {
-  outline: none;
-}
-
-.toggle-container:disabled {
-  background: #f0f0f0;
-  border-color: #b8b8b8;
-}
-
-.toggle-slider {
+.slider {
   margin: 0.07rem -0.17rem;
   margin-right: 1.5rem;
   align-self: left;
@@ -29,25 +42,13 @@
   background: #D06969;
 }
 
-.toggle-container:hover .toggle-slider {
-  background: #a55555;
-}
-
-.toggle-checked {
+.checked {
   margin-left: 1.5rem;
   margin-right: -0.17rem;
   background: #0060a3;
 }
 
-.toggle-container:hover .toggle-checked {
-  background: #004b80;
-}
-
-.toggle-container:disabled .toggle-slider {
-  background: #ababab;
-}
-
-.toggle-icon {
+.icon {
   width: 0.8rem;
   height: 0.8rem;
 }

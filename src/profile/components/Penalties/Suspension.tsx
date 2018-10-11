@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { DateTime, Interval } from 'luxon';
 import Penalty from './Penalty';
 import { ISuspension } from '../../models/Penalty';
+import style from './penalties.less';
 
 class Suspension extends Penalty<ISuspension> {
   render() {
@@ -12,11 +13,11 @@ class Suspension extends Penalty<ISuspension> {
     const completion = this.getPenaltyCompletion(penalty);
     const completionColor = this.getCompletionColor(completion);
     return (
-      <div className="grid-row">
-        <div className="col-md-12" onClick={() => super.toggleCollapse()}>
+      <div className={style.gridRow}>
+        <div onClick={() => super.toggleCollapse()} className={style.margin}>
           <h4>
             { penalty.title }
-            <span className="pull-right">{ added.toFormat('d MMMM y') }</span>
+            <span>{ added.toFormat('d MMMM y') }</span>
           </h4>
           { collapsed
             ? null
@@ -29,7 +30,7 @@ class Suspension extends Penalty<ISuspension> {
               </>
           }
           </div>
-        <div className="progress-bar" style={{ width: completion + '%', backgroundColor: completionColor }} />
+        <div className={style.progressBar} style={{ width: completion + '%', backgroundColor: completionColor }} />
       </div>
     )
   }

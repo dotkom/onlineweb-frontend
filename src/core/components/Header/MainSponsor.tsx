@@ -1,12 +1,13 @@
 import React from 'react';
 import { STATIC_URL } from 'common/constants/endpoints';
+import style from './header.less';
 
 const MainSponsor = () => (
-  <div id="main-sponsor">
-    <a href="http://www.knowit.no/" id="ms-ref">
-      <img className="ms-img" src={`${STATIC_URL}img/knowit.svg`} alt="Hovedsamarbeidspartner - Knowit" />
+  <div className={style.sponsor}>
+    <a href="http://www.knowit.no/">
+      <img className={style.sponsorLogo} src={`${STATIC_URL}img/knowit.svg`} alt="Hovedsamarbeidspartner - Knowit" />
     </a>
-    <span className="ms-span">Hovedsamarbeidspartner</span>
+    <span className={style.sponsorText}>Hovedsamarbeidspartner</span>
   </div>
 );
 
