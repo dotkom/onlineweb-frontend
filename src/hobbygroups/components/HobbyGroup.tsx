@@ -1,28 +1,16 @@
 import React from 'react';
 import { IHobbyGroup } from '../models/HobbyGroup';
+import style from '../less/hobbygroups.less';
+import ReactMarkdown from 'react-markdown';
 
-const getImage = (group: IHobbyGroup) => {
-  return group.image ? { src: group.image.url } : { alt: group.title }
-}
-
-const HobbyGroup = (group: IHobbyGroup) => {
-  const imageProps = getImage(group);
+const HobbyGroup = ({ title, description, image, read_more_link }: IHobbyGroup) => {
   return (
-    <div className="col-xs-12 col-sm-6 col-md-6">
-      <div className="col-md-5">
-        <img {...imageProps} />
-      </div>
-      <div className="col-md-7 hobbydescription">
-        <h3>{ group.title }</h3>
-        <span>
-          <p>
-          { group.description }
-          </p>
-          <ul>
-            <li><a href={ group.read_more_link }>Les mer om oss her!</a></li>
-          </ul>
-        </span>
-      </div>
+    <div className={style.hobby}>
+      <img src={image} alt={title} />
+      <span>
+        <h3>{title}</h3>
+        <ReactMarkdown source={description} />
+      </span>
     </div>
   );
 };
