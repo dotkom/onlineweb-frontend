@@ -4,23 +4,25 @@ import { MedalUrl } from '../../models/ImageTypes';
 import { IMedal } from '../../models/Medal';
 import medals from 'common/img/profile/medals';
 import crowns from 'common/img/profile/crowns'
+import style from '../../less/profile.less';
+
 class Medal extends React.Component<IMedal> {
   render() {
     const { committee, position, range } = this.props;
     return (
-      <div className="medal-container">
-        <div className="committee-crown-container">
+      <div className={style.medalContainer}>
+        <div className={style.committeeCrownContainer}>
           { position === 'medlem'
             ? null
-            : <img className="committee-crown" src={crowns[position]} title={position} />
+            : <img className={style.committeeCrown} src={crowns[position]} title={position} />
           }
         </div>
         <img
-          className="committee-medal"
+          className={style.committeeMedal}
           src={medals[committee]}
           title={committee}
         />
-        <p className="committee-range">{ range }</p>
+        <p className={style.committeeRange}>{ range }</p>
       </div>
     );
   }
