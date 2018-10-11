@@ -24,7 +24,7 @@ const CONTACT: IContactInfo[] = [{
 const ContactInfo = () => (
   <div className={style.contactInfo}>
     { CONTACT.map(({ className, value }) => (
-      <div className={style.contactItem}>
+      <div key={value} className={style.contactItem}>
         <span className={ className }></span>{ value }
       </div>
     )) }
