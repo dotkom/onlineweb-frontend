@@ -137,3 +137,43 @@
     background: darken(@baby-blue, 10%);
   }
 }
+
+.detail {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  gap: 2rem;
+}
+
+.job-description {
+  background-color: white;
+  div {
+    margin: 3rem;
+  }
+  > p {
+    font-weight: 300;
+    color: #454545;
+  }
+}
+
+.company {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  a {
+    text-decoration: none;
+  }
+  img {
+    width: 100%;
+  }
+  > div {
+    background-color: @baby-blue-medium;
+    > div {
+      margin: 2rem;
+      p, h3 {
+        color: white;
+        font-weight: 300;
+      }
+    }
+  }
+}
