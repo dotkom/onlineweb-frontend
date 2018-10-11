@@ -4,6 +4,7 @@ import { getPrivacyOptions, postPrivacyOptions } from '../../api/privacy';
 import Option from './Option';
 import { getKeys } from 'common/utils/tsHacks';
 import Info from './Info';
+import style from '../Penalties/penalties.less';
 
 export type PrivacyOptions = { [key in keyof IPrivacy]: boolean }
 
@@ -43,7 +44,7 @@ class Privacy extends Component<{}, PrivacyOptions> {
   render() {
     const { state } = this;
     return(
-      <div className="grid">
+      <div className={style.grid}>
         { getKeys<IPrivacy>(state).map((key) => (
           <Option
             key={key}

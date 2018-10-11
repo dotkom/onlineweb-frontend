@@ -1,6 +1,7 @@
 import React from 'react';
 import { IPrivacy, translations } from '../../models/Privacy';
 import ToggleSwitch from 'common/components/ToggleSwitch'
+import style from '../Penalties/penalties.less';
 
 export interface IProps {
   option: keyof IPrivacy;
@@ -9,7 +10,7 @@ export interface IProps {
 }
 
 const Option = ({ option, value, toggle }: IProps) => (
-  <div className="grid-row">
+  <div className={style.gridRow}>
     <h4>{ translations[option] }</h4>
     <ToggleSwitch checked={value} onChange={toggle} />
   </div>
