@@ -33,12 +33,12 @@ class DoubleSlider extends Component<IProps, IState> {
 
   public render() {
     const { onChange } = this.props;
-    const { range } = this.state;
+    const { range: [ start, end ] } = this.state;
     return (
       <div>
         <input
           //value={range.toString()}
-          defaultValue={range[0]}
+          defaultValue={start.toString()}
           min="1"
           max="6"
           step="1"
@@ -47,7 +47,7 @@ class DoubleSlider extends Component<IProps, IState> {
         />
         <input
           //value={range.toString()}
-          defaultValue={range[1]}
+          defaultValue={end.toString()}
           min="1"
           max="6"
           step="1"
