@@ -6,7 +6,7 @@ import { searchUsers } from '../../api/search';
 import { SearchFilter } from '../../models/Search';
 import { IGroup } from 'core/models/Group';
 import Searchbar from './Searchbar';
-import './search.less'
+import style from './search.less'
 
 export interface Props {
   readonly query: IQueryObject;
@@ -66,7 +66,7 @@ class Search extends React.Component<Props, State> {
           setYear={(s) => this.setYear(s)}
           { ...filter.format }
         />
-        <div className="profile-search grid">
+        <div className={style.smallProfileGrid}>
           { users.map(user => 
             <ProfileSmall user={user} />)
           }
