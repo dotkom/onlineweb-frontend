@@ -6,7 +6,8 @@ import style from './error.less';
 export type ErrorCode = 401 | 403 | 404
 
 export interface Props {
-  code: ErrorCode
+  code: ErrorCode;
+  text?: string;
 }
 
 const errorString = (code: ErrorCode): string => {
@@ -16,12 +17,12 @@ const errorString = (code: ErrorCode): string => {
   }
 }
 
-const NotFound = ({ code }: Props) => (
+const NotFound = ({ code, text }: Props) => (
   <section id="error">
     <div className="container">
       <div className={style.header}>
         <h1>{code}</h1>
-        <p>Siden du har bedt om finnes ikke.</p>
+        <p> { text || 'Siden du har bedt om finnes ikke.' }</p>
         <Img src='/static/img/404Balloon.gif' />
       </div>
     </div>
