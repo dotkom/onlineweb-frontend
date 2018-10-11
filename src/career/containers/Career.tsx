@@ -139,13 +139,13 @@ class Career extends React.Component<{}, ICareerState> {
 
   render() {
     return (
-      <section id="career">
+      <section id="">
         <Router history={history}>
           <Switch>
             <Route
               //exact //this broke routing tot he career view when output.publicPath = '/' was added to webpack.config.js.
               //pubicPath is needed to be able to serve static correctly with with HTML webpack plugin. 
-              path="/"
+              path="/career"
               render={props => <FilterableJobList
                 tags={this.state.tags}
                 filterText={this.state.filterText}
@@ -159,7 +159,7 @@ class Career extends React.Component<{}, ICareerState> {
             />
 
             <Route
-              path="/:id"
+              path="/career/:id"
               render={props => <DetailView {...props} jobs={this.state.jobs} />}
             />
           </Switch>
