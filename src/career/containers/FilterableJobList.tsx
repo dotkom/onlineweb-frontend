@@ -1,9 +1,11 @@
 import React, { FormEvent } from 'react';
-import { Grid, Col, Row } from 'react-bootstrap';
 import FilterList from '../components/FilterList';
 import JobList from '../components/JobList';
 import { IJob } from '../models/Job';
 import { ITags, Tags, ITag } from '../models/Tag';
+import Header from 'frontpage/components/Header';
+import style from '../less/career.less';
+import { containerFluid } from 'core/less/core.less';
 
 export interface IFilterableJobListProps {
   jobs: IJob[];
@@ -15,16 +17,11 @@ export interface IFilterableJobListProps {
 }
 
 const FilterableJobList = (props: IFilterableJobListProps) => (
-  <Grid>
-    <Row>
-      <Col md={4}>
-        <div className="page-header">
-          <h2>KARRIEREMULIGHETER</h2>
-        </div>
-      </Col>
-    </Row>
-
-    <Row>
+  <div className={containerFluid}>
+    <Header>
+      KARRIEREMULIGHETER
+    </Header>
+    <div className={style.topGrid}>
       <FilterList
         tags={props.tags}
         handleTagChange={(type: string, changedTag: ITag, switchMode: boolean) =>
@@ -39,8 +36,8 @@ const FilterableJobList = (props: IFilterableJobListProps) => (
         tags={props.tags}
         filterText={props.filterText}
       />
-    </Row>
-  </Grid>
+    </div>
+  </div>
 );
 
 export default FilterableJobList;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl } from 'react-bootstrap';
+import style from '../less/career.less';
 
 export interface ISearchBoxProps {
   onChange: Function
@@ -8,8 +8,8 @@ export interface ISearchBoxProps {
 
 const SearchBox = ({ onChange, text }: ISearchBoxProps) => (
   <div>
-    <h3>Filtrer</h3>
-    <FormControl
+    <h3>Søk</h3>
+    <input className={style.searchBox}
       type="search"
       value={text}
       onChange={e => onChange(e)}
