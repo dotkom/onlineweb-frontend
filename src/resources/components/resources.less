@@ -1,18 +1,24 @@
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2rem;
+  gap: 3rem;
 }
 
 .resource {
   background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   & img {
     width: 100%;
   }
-  margin: 2rem;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  & >  span {
+  & > span {
     margin: 0 2rem;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 }
