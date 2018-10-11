@@ -1,11 +1,12 @@
 import React from 'react';
+import style from '../../less/profile.less';
 
 class Name extends React.Component<{name: string}> {
   render() {
     const { name } = this.props;
     return (
-      <div className="profile-container">
-        <p className="profile-name">{ name }</p>
+      <div className={style.container}>
+        <p className={style.name}>{ name }</p>
       </div>
     );
   }

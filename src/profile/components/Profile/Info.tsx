@@ -1,4 +1,5 @@
 import React from 'react';
+import style from '../../less/profile.less';
 
 export interface Props {
   type: string;
@@ -9,9 +10,9 @@ class Info extends React.Component<Props> {
   render() {
     const { type, content } = this.props;
     return (
-      <div className="profile-info-wrapper">
-        <p className="profile-info-type">{ type }</p>
-        <p className="profile-info-content">{ content }</p>
+      <div className={style.infoWrapper}>
+        <p className={style.infoType}>{ type }</p>
+        <p className={style.infoContent}>{ content }</p>
       </div>
     );
   }

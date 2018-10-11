@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckMark, Circle, CircleCheck, DividerBar } from './ClassProgress';
+import style from '../../less/profile.less';
 
 export interface Props {
   ongoingYear: number;
@@ -38,10 +39,10 @@ class Progress extends React.Component<Props> {
     }
 
     return (
-      <div  className="profile-info-group">
+      <div  className={style.infoGroup}>
         { /*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/ }
-        <p className="profile-group-name">{ this.props.name }</p>
-        <div className="profile-progress-wrapper">
+        <p className={style.groupName}>{ this.props.name }</p>
+        <div className={style.progressWrapper}>
           <div>
             <svg width="100%" height="100%" viewBox="0 0 120 20">
               <rect x="10" y={10 - lineWidth / 2} width="90" height={lineWidth} />
