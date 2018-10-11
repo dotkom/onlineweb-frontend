@@ -1,6 +1,7 @@
 import React from 'react';
 import InfoBox from '../components/InfoOnOpportunity';
 import { IJob } from '../models/Job';
+import HttpError from 'core/components/errors/HttpError';
 
 export interface IDetailViewProps {
   match: { params: { id: string } };
@@ -26,11 +27,7 @@ class DetailView extends React.Component<IDetailViewProps, IDetailViewProps> {
   }
 
   render() {
-    return this.job ? ( // return 404 maybe?
-      <InfoBox {...this.job} />
-    ) : (
-      <div>Denne karrieremuligheten eksisterer ikke.</div>
-    );
+    return this.job ? <InfoBox {...this.job} /> : <HttpError code={404} text="Denne karrieremuligheten eksisterer ikke." />;
   }
 };
 

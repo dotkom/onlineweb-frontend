@@ -1,6 +1,8 @@
 import React, { ReactChild } from 'react';
 import Collapsible from 'common/components/Collapsible';
 import { IGroup } from "core/models/Group";
+import classnames from 'classnames';
+import style from './search.less';
 
 export interface IProps {
   selected: string | undefined;
@@ -13,7 +15,7 @@ class Dropdown extends Collapsible<IProps> {
     const { groups, selected, onClick } = this.props;
     const { collapsed } = this.state;
     return (
-      <div className="profile-dropdown-container profile-search-field">
+      <div className={classnames(style.dropdownContainer, style.searchField)}>
         { collapsed
           ? <Item selected={!selected || true} onClick={() => this.toggleCollapse()} >{ selected || 'Velg en gruppe' }</Item>
           : groups.map((group) => (
@@ -41,7 +43,7 @@ export interface IItemProps {
 
 const Item = ({ children, selected = false, onClick }: IItemProps) => (
   <div
-    className={'profile-dropdown-item' + (selected ? ' profile-dropdown-selected' : '')}
+    className={classnames(style.dropdownItem, {[style.dropdownSelected]: selected})}
     onClick={() => onClick()}  
   >
     <h4>{ children }</h4>

@@ -1,6 +1,7 @@
 import React, { Component, ReactChildren } from 'react';
 import { Link } from 'react-router-dom';
-import './menu.less';
+import style from './menu.less';
+import classnames from 'classnames';
 
 export interface IProps {
   match: any;
@@ -19,9 +20,9 @@ class MainMenu extends Component<IProps, {}> {
     console.log(current)
     return(
       <div>
-        <div className="profile-menu-grid">
+        <div className={style.menuGrid}>
           { pages.map((page) => (
-            <Link to={page.link} key={page.link} className="remove-underline">
+            <Link to={page.link} key={page.link} className={style.removeUnderline}>
               <MenuElement
                 text={page.view}
                 clicked={current === page.link}
@@ -43,8 +44,8 @@ export interface IElementProps {
 }
 
 const MenuElement = ({ text, clicked }: IElementProps) => (
-  <div className={'profile-menu-grid-row' + (clicked ? ' profile-menu-clicked' : '')}>
-    <h4 className="profile-menu-text">{ text }</h4>
+  <div className={classnames(style.menuGridRow, { [style.menuClicked]: clicked })}>
+    <h4 className={style.menuText}>{ text }</h4>
   </div>
 )
 

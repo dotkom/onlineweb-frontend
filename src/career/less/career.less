@@ -1,137 +1,179 @@
 @import '~common/less/colors.less';
 
-#opportunity-company-name h3 {
-  text-align: center;
-  margin-top: -10px;
+.top-grid {
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-areas: "jobs filter";
+  grid-template-columns: 3fr 1fr;
 }
 
-#career {
+@media only screen and (max-width: 1024px) {
+  .top-grid {
+    grid-template-columns: auto;
+    grid-template-areas: "filter" "jobs";
+  }
+}
+
+.jobs-area {
+  grid-area: jobs;
+}
+
+.search-box {
+  border: 3px solid darken(@baby-blue-medium, 10%);
+  padding: 1rem;
+  margin: 7px 0;
+  width: 100%;
+}
+
+.job-info {
+  width: 100%;
+  text-decoration: none;
+  & > h1, p {
+    font-weight: 400;
+  }
+  & > h1 {
+    font-size: 2rem;
+    margin-top: 0;
+  }
+}
+
+.job-meta {
+  border-top: 1px dotted #ccc;
+  margin-top: 1rem;
+  display: grid;
+  padding: 1rem;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  & > p {
+    color: #aaa;
+  }
+  font-size: 11px;
+}
+
+.job {
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: 1fr 2fr;
+  padding: 2rem;
+  background-color: white;
+  & > a {
+    width: 100%;
+    text-decoration: none;
+    & > img {
+      width: 100%;
+    }
+  }
+}
+
+.job-list {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-gap: 2rem;
+  grid-area: jobs;
+}
+
+.ingress {
+  margin-bottom: 10px;
+  line-height: 1.625em;
+}
+
+.career {
+  p, h1, h2, h3, h4 {
+    font-weight: 400;
+  }
+
   img {
     width: 100%;
   }
-
-  .meta {
-    padding: 5px 0 0 0;
-    border-top: 1px dotted #ccc;
-    font-size: 11px;
-    color: #aaa;
-  }
-
-  article {
-    margin-bottom: 40px;
-    padding-bottom: 30px;
-
-    h1 {
-      font-size: 20px;
-      font-weight: 400;
-      color: #ee7810;
-      margin-top: 0;
-    }
-
-    .ingress {
-      margin-bottom: 10px;
-      line-height: 1.625em;
-    }
-  }
-
-  input {
-    margin-bottom: 10px;
-  }
-
-  .filters {
-    background: @baby-blue-medium;
-    padding: 15px;
-    margin-bottom: 20px;
-
-    button {
-      background-color: @baby-blue;
-      color: #fff;
-      border: none;
-      display: inline-block;
-      text-align: center;
-      width: 100%;
-      font-size: 13px;
-      padding-bottom: 10px;
-      padding-top: 10px;
-    }
-
-    .TagContainer {
-      padding: 0;
-      margin: 0;
-      display: block;
-      margin-top: 10px;
-      margin-bottom: 15px;
-
-      button {
-        display: inline-flex;
-        padding: 10px;
-        margin-right: 5px;
-        margin-bottom: 5px;
-        color: white;
-        width: auto;
-        background: @baby-blue;
-        cursor: pointer;
-      }
-
-      button.selected {
-        background: darken(@baby-blue, 10%);
-      }
-    }
-
-    h3 {
-      margin-top: 0;
-      font-size: 20px;
-      color: white;
-    }
-  }
 }
 
-section#careeropportunities {
-  .career-ingress {
-    font-weight: 300;
-  }
+.filters {
+  background: @baby-blue-medium;
+  padding: 15px;
+  margin-bottom: 20px;
+  grid-area: filter;
 
-  .career-title {
-    font-size: 20px;
-  }
-}
-
-section#careeropportunity {
-  .careerdescription {
-    margin-bottom: 40px;
-  }
-
-  .company {
-    margin-top: 15px;
-    padding-left: 15px;
-    padding-right: 15px;
+  button {
+    background-color: @baby-blue;
+    color: #fff;
+    border: none;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    font-size: 13px;
     padding-bottom: 10px;
-    box-sizing: border-box;
-    background: @baby-blue-medium;
-
-    h3, p {
-      color: white;
+    padding-top: 10px;
+    &:focus {
+      outline: 0;
     }
+  }
 
-    h3 {
-      font-size: 19px;
-    }
+  h3 {
+    margin-top: 0;
+    font-size: 20px;
+    color: white;
+  }
+}
 
-    .company-ingress p {
-      color: white;
-      font-weight: 300;
-      font-size: 14px;
-    }
+.tag-container {
+  padding: 0;
+  margin: 0;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 15px;
 
-    .company-image-caption {
-      font-weight: 300;
-      font-size: 11px;
-      color: white;
-      text-transform: uppercase;
-    }
+  button {
+    display: inline-flex;
+    padding: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: white;
+    width: auto;
+    background: @baby-blue;
+    cursor: pointer;
+  }
 
-    a:hover {
-      text-decoration: none;
+  .selected {
+    background: darken(@baby-blue, 10%);
+  }
+}
+
+.detail {
+  display: grid;
+  grid-template-columns: 5fr 2fr;
+  gap: 2rem;
+}
+
+.job-description {
+  background-color: white;
+  div {
+    margin: 3rem;
+  }
+  > p {
+    font-weight: 300;
+    color: #454545;
+  }
+}
+
+.company {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  a {
+    text-decoration: none;
+  }
+  img {
+    width: 100%;
+  }
+  > div {
+    background-color: @baby-blue-medium;
+    > div {
+      margin: 2rem;
+      p, h3 {
+        color: white;
+        font-weight: 300;
+      }
     }
   }
 }

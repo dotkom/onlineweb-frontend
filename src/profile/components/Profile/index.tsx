@@ -9,6 +9,7 @@ import IconInfo from './IconInfo';
 import InfoGroup from './InfoGroup';
 import { IFullProfileUser } from '../../models/User';
 import { getProfile } from '../../api';
+import style from '../../less/profile.less';
 
 export interface State {
   user: IFullProfileUser;
@@ -57,8 +58,8 @@ class Profile extends React.Component<{}, State> {
       <div>
         <Header />
         <Name name={`${user.first_name} ${user.last_name}`} />
-        <div className="center">
-          <div className="inner-container">
+        <div className={style.center}>
+          <div className={style.innerContainer}>
             <InfoGroup name="Navn" icon="names">
               <Info type="NTNU Brukernavn" content={user.ntnu_username}/>
               <Info type="Kallenavn" content={user.kallenavn}/>

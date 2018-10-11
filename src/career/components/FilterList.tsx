@@ -1,8 +1,9 @@
 import React, { FormEvent } from 'react';
-import { Col } from 'react-bootstrap';
 import TagList from './TagList';
 import SearchBox from '../components/SearchBox';
 import { ITag, Tags } from '../models/Tag';
+
+import style from '../less/career.less';
 
 export interface IFilterListProps {
   handleTagChange: Function;
@@ -13,8 +14,8 @@ export interface IFilterListProps {
 }
 
 const FilterList = ({ tags, filterText, handleTagChange, handleReset, handleFilterChange }: IFilterListProps) => (
-  <Col xs={12} sm={12} md={3} className="pull-right">
-    <div className="filters">
+  <div>
+    <div className={style.filters}>
       <SearchBox text={filterText} onChange={(e: FormEvent<HTMLFormElement>) => handleFilterChange(e)} />
 
       <TagList
@@ -51,7 +52,7 @@ const FilterList = ({ tags, filterText, handleTagChange, handleReset, handleFilt
 
       <button onClick={() => handleReset()}>Reset</button>
     </div>
-  </Col>
+  </div>
 );
 
 export default FilterList;

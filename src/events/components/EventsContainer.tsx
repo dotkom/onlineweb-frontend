@@ -3,7 +3,9 @@ import CalendarView from './CalendarView';
 import ListView from './ListView';
 import ImageView from './ImageView';
 import Header from './Header';
-import { EventView, EventViewProps } from '../models/Event';
+import { getEventSettings, saveEventSettings, IEventSettings } from '../api/eventSettings';
+import { EventView } from '../models/Event';
+
 
 const getView = (view: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
   switch (view) {
@@ -18,30 +20,43 @@ export interface IProps {
 
 }
 
-export interface IState {
-  view: EventView;
-  accessible: boolean
+export interface IState extends IEventSettings {
+
 }
 
 class Container extends Component<IProps, IState> {
+
   state: IState = {
     view: EventView.IMAGE,
     accessible: false
   }
 
+  public async componentDidMount() {
+    this.getSettings();
+  }
+
+  public getSettings = async () => {
+    const settings = await getEventSettings();
+    this.setState({ ...settings });
+  }
+
+  public saveSettings = async () => {
+    saveEventSettings(this.state);
+  }
+
   public changeView = (view: EventView) => {
-    this.setState({ view });
+    this.setState({ view }, () => this.saveSettings());
   }
 
   public toggleAccessible = () => {
-    this.setState({ accessible: !this.state.accessible })
+    this.setState({ accessible: !this.state.accessible }, () => this.saveSettings())
   }
 
   public render() {
     const { view, accessible } = this.state;
     const View = getView(view);
     return (
-      <div style={{ marginTop: '14rem' }}>
+      <div>
         <Header
           changeView={(view: EventView) => this.changeView(view)}
           toggleAccessible={this.toggleAccessible}

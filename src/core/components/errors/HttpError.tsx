@@ -1,10 +1,13 @@
 import React from 'react';
-import { DOMAIN } from 'common/constants/endpoints';
+import Img from 'common/components/Img';
+import Header from 'frontpage/components/Header';
+import style from './error.less';
 
 export type ErrorCode = 401 | 403 | 404
 
 export interface Props {
-  code: ErrorCode
+  code: ErrorCode;
+  text?: string;
 }
 
 const errorString = (code: ErrorCode): string => {
@@ -14,19 +17,13 @@ const errorString = (code: ErrorCode): string => {
   }
 }
 
-const NotFound = ({ code }: Props) => (
+const NotFound = ({ code, text }: Props) => (
   <section id="error">
-    <div className="container-fluid">
-      <div className="row-fluid">
-        <div className="col-md-12">
-          <div className="page-header">
-            <h2 id="error-heading">{`${code} Error: ${errorString(code)}`}</h2>
-          </div>
-        </div>
-      </div>
-      <div className="error-items centered">
-        <img className="panel-body" src={`${DOMAIN}/static/img/404Balloon.gif`} />
-        <p>Siden du har bedt om finnes ikke.</p>
+    <div className="container">
+      <div className={style.header}>
+        <h1>{code}</h1>
+        <p> { text || 'Siden du har bedt om finnes ikke.' }</p>
+        <Img src='/static/img/404Balloon.gif' />
       </div>
     </div>
   </section>

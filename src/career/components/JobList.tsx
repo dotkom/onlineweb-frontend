@@ -1,10 +1,12 @@
 import React from 'react';
-import { Col } from 'react-bootstrap';
 import moment from 'moment';
 import Fuse from 'fuse.js';
 import Job from './Job';
 import { ITag } from '../models/Tag';
 import { IJob } from '../models/Job';
+
+import globalStyle from 'core/less/core.less';
+import style from '../less/career.less';
 
 // Checks tags where the only involved factor is whether the button is on or not.
 const defaultCheck = (job: IJob, id: number, tag: ITag) => {
@@ -123,9 +125,9 @@ const JobList = ({ jobs, tags, filterText }: IJobListProps) => {
   const jobElems = sortedJobs.map((job, i) => <Job {...job} key={i} />);
 
   return (
-    <Col xs={12} sm={12} md={9} className="pull-left">
+    <div className={style.jobList}>
       {jobElems}
-    </Col>
+    </div>
   );
 };
 

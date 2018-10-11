@@ -6,7 +6,7 @@ import ToggleSwitch from 'common/components/ToggleSwitch';
 import ImageViewIcon from './ImageViewIcon';
 import ListViewIcon from './ListViewIcon';
 import CalendarViewIcon from './CalendarViewIcon';
-import './header.less'
+import style from './header.less'
 
 export interface IProps {
   toggleAccessible: () => void;
@@ -16,13 +16,13 @@ export interface IProps {
 }
 
 const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
-  <div className="event-header-grid">
+  <div className={style.grid}>
     <h3>ARRANGEMENTER</h3>
 
-    <div className="event-header-choice-grid">
+    <div className={style.choiceGrid}>
       <div
         className={classNames({
-          'event-header-choice-active': view === EventView.IMAGE,
+          [style.choiceActive]: view === EventView.IMAGE,
         })}
         
         onClick={() => changeView(EventView.IMAGE)}
@@ -32,7 +32,7 @@ const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
 
       <div
         className={classNames({
-          'event-header-choice-active': view === EventView.LIST,
+          [style.choiceActive]: view === EventView.LIST,
         })}
         
         onClick={() => changeView(EventView.LIST)}
@@ -42,7 +42,7 @@ const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
 
       <div
         className={classNames({
-          'event-header-choice-active': view === EventView.CALENDAR,
+          [style.choiceActive]: view === EventView.CALENDAR,
         })}
         
         onClick={() => changeView(EventView.CALENDAR)}
@@ -51,8 +51,8 @@ const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
       </div>
     </div>
 
-    <span className='event-header-toggle-accessible'>
-      <span className='event-header-toggle-accessible-description'>
+    <span className={style.toggleAccessible}>
+      <span className={style.toggleAccessibleDescription}>
         Vis kun tilgjengelige arrangementer
       </span>
       
