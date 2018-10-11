@@ -14,8 +14,8 @@ class Info extends Collapsble<{}> {
 }
 
 const Content = () => (
-  <div className="row">
-    <div className="col-md-12">
+  <div>
+    <div>
 
       <h3>Prikk?</h3>
       <p>
