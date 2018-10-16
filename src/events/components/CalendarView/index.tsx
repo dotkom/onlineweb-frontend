@@ -49,8 +49,8 @@ class CalendarView extends Component<EventViewProps, IState> {
     const lastDayOfMonth = firstDayOfMonth.plus({ months: 1 }).minus({ days: 1 });
 
     const args: IEventAPIArguemnts = {
-      event_period_start: firstDayOfMonth.toISODate(),
-      event_period_end: lastDayOfMonth.toISODate()
+      event_start__gte: firstDayOfMonth.toISODate(),
+      event_start__lte: lastDayOfMonth.toISODate()
     }
 
     const events = await getAllEvents(args);
