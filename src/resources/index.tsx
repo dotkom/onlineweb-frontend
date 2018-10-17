@@ -1,3 +1,3 @@
-import Resources from './containers/ResourcesContainer'
+import Resources from './containers/ResourcesContainer';
 
 export default Resources;
