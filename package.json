@@ -11,7 +11,9 @@
     "dev:proxy": "node proxy.js & OW4_ADDRESS='http://localhost:8000' webpack-dev-server",
     "build:dev": "webpack --mode=development --watch",
     "build:prod": "webpack --mode=production --optimize-minimize",
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "lint:fix": "tslint --fix -c tslint.json 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -64,6 +66,7 @@
     "redux": "^4.0.0",
     "request": "^2.87.0",
     "style-loader": "^0.21.0",
+    "tslint": "^5.11.0",
     "typescript": "^2.8.3",
     "typings-for-css-modules-loader": "^1.7.0",
     "underscore": "^1.9.1",
