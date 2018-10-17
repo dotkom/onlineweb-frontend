@@ -3,7 +3,7 @@ import user from 'common/img/profile/user.png';
 import style from '../../less/profile.less';
 
 class Header extends React.Component {
-  render() {
+  public render() {
     return (
       <div className={style.container}>
         <img

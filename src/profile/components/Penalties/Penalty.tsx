@@ -4,7 +4,7 @@ import Collapsible from 'common/components/Collapsible';
 import { DateTime, Interval } from 'luxon';
 
 export interface IProps<T> {
-  penalty: T
+  penalty: T;
 }
 
 /**
@@ -15,6 +15,10 @@ export interface IProps<T> {
  * @param {IPenalty} penalty Component needs to be supplied a penalty to display.
  */
 abstract class Penalty<T> extends Collapsible<IProps<T>> {
+
+  public static sortByExpiration(a: IPenalty, b: IPenalty): number {
+    return new Date(b.expiration_date).getTime() - new Date(a.expiration_date).getTime();
+  }
   constructor(props: IProps<T>) {
     super(props);
   }
@@ -24,7 +28,7 @@ abstract class Penalty<T> extends Collapsible<IProps<T>> {
    * @param {IPenalty} penalty Given penalty, (Prikk | Suspensjon)
    * @returns {number} Percentage of completion
    */
-  getPenaltyCompletion(penalty: IPenalty): number {
+  public getPenaltyCompletion(penalty: IPenalty): number {
     // Set number of days a Penalty lasts, number between 0.0 and 100.0
     const penaltyLength = 30;
 
@@ -34,28 +38,24 @@ abstract class Penalty<T> extends Collapsible<IProps<T>> {
 
     // Check if penalty is ongoing
     if (Interval.fromDateTimes(start, end).contains(now)) {
-      const progress = now.diff(start).as('seconds')
-      const total = end.diff(start).as('seconds')
-      return Math.round((progress / total) * 100)
+      const progress = now.diff(start).as('seconds');
+      const total = end.diff(start).as('seconds');
+      return Math.round((progress / total) * 100);
     } else if (now > end) {
-      return 100
+      return 100;
     }
     return 0;
   }
 
-  getCompletionColor(percentage: number): 'red' | 'white' | 'gray' {
-    switch(percentage) {
+  public getCompletionColor(percentage: number): 'red' | 'white' | 'gray' {
+    switch (percentage) {
       case 100: return 'gray';
       case 0: return 'white';
       default: return 'red';
     }
   }
 
-  static sortByExpiration(a: IPenalty, b: IPenalty): number {
-    return new Date(b.expiration_date).getTime() - new Date(a.expiration_date).getTime();
-  }
-
-  abstract render(): JSX.Element
+  public abstract render(): JSX.Element;
 }
 
 export default Penalty;

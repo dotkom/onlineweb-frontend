@@ -10,25 +10,25 @@ export interface IState {
 }
 
 class DoubleSlider extends Component<IProps, IState> {
-  state: IState = {
-    range: [1, 6]
-  }
+  public state: IState = {
+    range: [1, 6],
+  };
 
-  submit() {
-    console.log(this.state.range)
+  public submit() {
+    console.log(this.state.range);
     this.props.onChange(this.state.range);
   }
 
-  setRange1(n: number) {
-    let { range } = this.state;
+  public setRange1(n: number) {
+    const { range } = this.state;
     range[0] = n;
-    this.setState({ range }, this.submit)
+    this.setState({ range }, this.submit);
   }
 
-  setRange2(n: number) {
-    let { range } = this.state;
+  public setRange2(n: number) {
+    const { range } = this.state;
     range[1] = n;
-    this.setState({ range }, this.submit)
+    this.setState({ range }, this.submit);
   }
 
   public render() {
@@ -37,7 +37,7 @@ class DoubleSlider extends Component<IProps, IState> {
     return (
       <div>
         <input
-          //value={range.toString()}
+          // value={range.toString()}
           defaultValue={start.toString()}
           min="1"
           max="6"
@@ -46,7 +46,7 @@ class DoubleSlider extends Component<IProps, IState> {
           onChange={(e) => this.setRange1(parseInt(e.target.value))}
         />
         <input
-          //value={range.toString()}
+          // value={range.toString()}
           defaultValue={end.toString()}
           min="1"
           max="6"
@@ -55,7 +55,7 @@ class DoubleSlider extends Component<IProps, IState> {
           onChange={(e) => this.setRange2(parseInt(e.target.value))}
         />
       </div>
-    )
+    );
   }
 }
 

@@ -13,9 +13,9 @@ const marksMock: IMark[] = [
     last_changed_by: initialState.user,
     last_changed_date: '2018-05-11T19:00:00+01:00',
     expiration_date: '2018-06-11T19:00:00+01:00',
-    title: 'Prikk?'
-  }
-]
+    title: 'Prikk?',
+  },
+];
 
 const suspensionsMock: ISuspension[] = [
   {
@@ -25,7 +25,7 @@ const suspensionsMock: ISuspension[] = [
     expiration_date: '2018-08-11T19:00:00+01:00',
     payment_id: 1,
     title: 'Suspensjon?',
-    user: initialState.user
+    user: initialState.user,
   },
   {
     active: true,
@@ -34,7 +34,7 @@ const suspensionsMock: ISuspension[] = [
     expiration_date: '2018-07-11T19:00:00+01:00',
     payment_id: 1,
     title: 'Suspensjon?',
-    user: initialState.user
+    user: initialState.user,
   },
   {
     active: true,
@@ -43,24 +43,24 @@ const suspensionsMock: ISuspension[] = [
     expiration_date: '2018-06-11T19:00:00+01:00',
     payment_id: 1,
     title: 'Suspensjon?',
-    user: initialState.user
+    user: initialState.user,
   },
-]
+];
 
 /**
  * @summary Fetch Marks from API.
  */
 export const getMarks = async (): Promise<IMark[]> => {
-  //const { marks } = await get(API_URL + '/marks', { format: 'json' })
+  // const { marks } = await get(API_URL + '/marks', { format: 'json' })
   const marks = marksMock;
-  return marks
-}
+  return marks;
+};
 
 /**
  * @summary Fetch Suspensions from API.
  */
 export const getSuspensions = async (): Promise<ISuspension[]> => {
-  //const { suspensions } = await get(API_URL + '/suspensions', { format: 'json' })
+  // const { suspensions } = await get(API_URL + '/suspensions', { format: 'json' })
   const suspensions = suspensionsMock;
-  return suspensions
-}
+  return suspensions;
+};

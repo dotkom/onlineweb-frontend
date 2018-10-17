@@ -2,14 +2,14 @@ import React from 'react';
 import { CheckMark, Circle, CircleCheck, DividerBar } from './ClassProgress';
 import style from '../../less/profile.less';
 
-export interface Props {
+export interface IProps {
   ongoingYear: number;
   completedYear: number;
   name: string;
 }
 
-class Progress extends React.Component<Props> {
-  render() {
+class Progress extends React.Component<IProps> {
+  public render() {
     const { ongoingYear, completedYear } = this.props;
 
     const scale = 100 / 480;
@@ -23,10 +23,10 @@ class Progress extends React.Component<Props> {
       let x = offset + radius * 4 * (year - 1);
 
       if (year > 3) {
-        x += sectionSpace
+        x += sectionSpace;
       }
       if (year > 5) {
-        x += sectionSpace
+        x += sectionSpace;
       }
 
       return (
@@ -35,8 +35,8 @@ class Progress extends React.Component<Props> {
           {year <= ongoingYear && <CircleCheck x={x} radius={checkRadius} />}
           {year <= completedYear && <CheckMark x={x} radius={checkRadius} />}
         </g>
-      )
-    }
+      );
+    };
 
     return (
       <div  className={style.infoGroup}>

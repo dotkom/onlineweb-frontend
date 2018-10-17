@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IGroup } from "core/models/Group";
+import { IGroup } from 'core/models/Group';
 import { ISearchFilter } from '../../models/Search';
 import Dropdown from './Dropdown';
 import DoubleSlider from './DoubleSlider';
@@ -17,11 +17,11 @@ export interface IState {
 }
 
 class Searchbar extends Component<IProps, IState> {
-  state: IState = {
-    groups: []
-  }
+  public state: IState = {
+    groups: [],
+  };
 
-  async componentDidMount() {
+  public async componentDidMount() {
     const groups = await getGroups();
     this.setState({ groups });
   }
@@ -35,7 +35,7 @@ class Searchbar extends Component<IProps, IState> {
         <Dropdown selected={group} onClick={(group) => setGroup(group)} groups={groups} />
         <DoubleSlider range={year || [1, 6]} onChange={(range) => setYear(range)}/>
       </form>
-    )
+    );
   }
 }
 
