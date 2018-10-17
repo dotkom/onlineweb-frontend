@@ -11,14 +11,14 @@ export interface ITags {
   locations: TagWrapper | {};
   jobTypes: TagWrapper | {};
   deadlines?: any;
-};
+}
 
-export type TagWrapper = {
+export interface TagWrapper {
   [index: string]: ITag;
-};
+}
 
-export type Tags = {
+export interface Tags {
   [index: string]: TagWrapper;
 }
 
-export type TagType = 'companies' | 'locations' | 'jobTypes'
+export type TagType = 'companies' | 'locations' | 'jobTypes';
