@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getOfflines } from '../../api/offline'
+import { getOfflines } from '../../api/offline';
 import { IOfflineIssue } from '../../models/Offline';
 import CarouselArrow from './CarouselArrow';
 import OfflineCarousel from './OfflineCarousel';
@@ -24,11 +24,11 @@ class Offline extends Component<IProps, IState> {
     offlines: [],
     index: 0,
     page: 1,
-    loadAll: true
-  }
+    loadAll: true,
+  };
 
   public async componentDidMount() {
-    let { page } = this.state;
+    const { page } = this.state;
     const offlines = await getOfflines(page);
     this.setState({ offlines });
   }
@@ -41,7 +41,7 @@ class Offline extends Component<IProps, IState> {
     let { index, offlines, loadAll } = this.state;
     if (loadAll) {
       this.fetchAll();
-      this.setState({ loadAll: false })
+      this.setState({ loadAll: false });
     }
     index += amount;
     if (index >= 0 && index <= offlines.length) {
@@ -58,20 +58,20 @@ class Offline extends Component<IProps, IState> {
         { offlines.length ?
           <>
             <CarouselArrow
-              direction='left'
+              direction="left"
               onClick={() => this.clickNext(-1)}
               disabled={index === 0}
             />
             <OfflineCarousel offlines={ offlines.slice(index, index + DISPLAY_NUMBER) } />
             <CarouselArrow
-              direction='right'
+              direction="right"
               onClick={() => this.clickNext(1)}
               disabled={end === offlines.length}
             />
           </>
           : null }
       </div>
-    )
+    );
   }
 }
 
