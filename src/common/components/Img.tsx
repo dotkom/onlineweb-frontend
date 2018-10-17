@@ -8,6 +8,6 @@ import { DOMAIN } from '../constants/endpoints';
  */
 const Img = ({ src, ...props }: ImgHTMLAttributes<HTMLImageElement>) => (
   <img src={DOMAIN + src} {...props} />
-)
+);
 
 export default Img;

@@ -11,12 +11,12 @@ export const toQueryString = (queryObject: any): string => {
   }
   const queries = keys.map((key: string) => `${key}=${queryObject[key]}`);
   const string = `?${queries.join('&')}`;
-  //console.log(`[queryString] object: ${JSON.stringify(queryObject)}, string: ${string}`)
+  // console.log(`[queryString] object: ${JSON.stringify(queryObject)}, string: ${string}`)
   return string;
 };
 
 export interface IQueryObject {
-  [index: string]: string; 
+  [index: string]: string;
 }
 
 /**
@@ -33,15 +33,15 @@ export const toQueryObject = (queryString: string): IQueryObject => {
     const pair = query.split('=');
     queryObject[pair[0]] = pair[1];
   }*/
-  let queryObject = queryString.split('&')
+  const queryObject = queryString.split('&')
     .map((query: string) => {
       const pair = query.split('=');
       return {[pair[0]]: pair[1]};
     })
     .reduce((accumulator, query) => {
-      accumulator[query.key] = query[query.key]
+      accumulator[query.key] = query[query.key];
       return accumulator;
-    }, );
-  
+    } );
+
   return queryObject;
 };
