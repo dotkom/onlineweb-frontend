@@ -2,14 +2,14 @@ import React from 'react';
 import Event from './Event';
 import SmallEvent from './SmallEvent';
 import EventsHeading from './EventsHeading';
-import { IFrontpageEvent, EventType } from '../models/Event'
+import { IFrontpageEvent, EventType } from '../models/Event';
 import ListView from './ListView';
 
 export interface IEventsProps {
-  mainEvents: IFrontpageEvent[]
-  smallEvents: IFrontpageEvent[]
-  setEventVisibility: Function
-  eventTypes: EventType[]
+  mainEvents: IFrontpageEvent[];
+  smallEvents: IFrontpageEvent[];
+  setEventVisibility: Function;
+  eventTypes: EventType[];
 }
 
 const Events = ({ mainEvents, smallEvents, setEventVisibility, eventTypes }: IEventsProps) => (

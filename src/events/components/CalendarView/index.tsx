@@ -24,18 +24,18 @@ export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEve
    * @summary Create an empty EventMonth.
    * @description Create an array of length `daysInMonth`, containing empty arrays.
    */
-  const map = [...Array(month.daysInMonth)].map((a) => Array(0).fill([]))
+  const map = [...Array(month.daysInMonth)].map((a) => Array(0).fill([]));
   events.forEach((event) => {
     const day = DateTime.fromISO(event.event_start).day - 1;
     map[day].push(event);
-  })
-  return map
-}
+  });
+  return map;
+};
 
 class CalendarView extends Component<EventViewProps, IState> {
-  state: IState = {
+  public state: IState = {
     eventMonth: [],
-    month: DateTime.local()
+    month: DateTime.local(),
   };
 
   public async componentDidMount() {
@@ -43,15 +43,15 @@ class CalendarView extends Component<EventViewProps, IState> {
   }
 
   public async fetchEvents(month: DateTime = this.state.month) {
-    //const { month } = this.state;
+    // const { month } = this.state;
 
     const firstDayOfMonth = month.minus({ days: month.day - 1 });
     const lastDayOfMonth = firstDayOfMonth.plus({ months: 1 }).minus({ days: 1 });
 
     const args: IEventAPIArguemnts = {
       event_period_start: firstDayOfMonth.toISODate(),
-      event_period_end: lastDayOfMonth.toISODate()
-    }
+      event_period_end: lastDayOfMonth.toISODate(),
+    };
 
     const events = await getAllEvents(args);
     const eventMonth = constructMonthMap(month, events);
@@ -63,7 +63,7 @@ class CalendarView extends Component<EventViewProps, IState> {
 
     month = (number >= 0)
       ? month.plus({ months: number })
-      : month.minus({ months: Math.abs(number) })
+      : month.minus({ months: Math.abs(number) });
 
     await this.fetchEvents(month);
     this.setState({ month });
@@ -99,7 +99,7 @@ class CalendarView extends Component<EventViewProps, IState> {
           <CalendarFillerTiles days={next} />
         </div>
       </div>
-    )
+    );
   }
 }
 

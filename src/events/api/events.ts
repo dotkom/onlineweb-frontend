@@ -22,25 +22,25 @@ const API_URL = '/api/v1/events/';
 export const getEvents = async (args?: IEventAPIArguemnts): Promise<INewEvent[]> => {
   const data: IAPIData<INewEvent> = await get(API_URL, { format: 'json', ...args });
   return data.results;
-}
+};
 
 export const getAllEvents = async (args?: IEventAPIArguemnts): Promise<INewEvent[]> => {
   const data: IAPIData<INewEvent> = await get(API_URL, { format: 'json', ...args });
   let { results } = data;
   let nextPage = data.next;
   if (nextPage) {
-    let next: IAPIData<INewEvent>
+    let next: IAPIData<INewEvent>;
     for await(next of getPages(nextPage)) {
       results = [...results, ...next.results];
-      if (!next.next) { break };
-      nextPage = next.next
+      if (!next.next) { break; }
+      nextPage = next.next;
     }
   }
   return results;
-}
+};
 
 async function* getPages(page: string) {
-  while(true) {
+  while (true) {
     const response = await fetch(page);
     const data = await response.json();
     yield data;
@@ -51,11 +51,11 @@ export const getEvent = async (id: number): Promise<INewEvent> => {
   const event: INewEvent = await get(API_URL + id + '/', { format: 'json' });
   console.log(event);
   return event;
-}
+};
 
 const normalize = (event: any): any => {
   return {
     event_type: getEventType(1),
-    ...event
-  }
-}
+    ...event,
+  };
+};

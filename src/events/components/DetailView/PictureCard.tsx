@@ -35,7 +35,7 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default PictureCard;
