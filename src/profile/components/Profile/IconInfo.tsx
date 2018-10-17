@@ -11,16 +11,16 @@ const SOCIAL_STATIC = STATIC_URL + 'common/img/social/';
 const TYPES: Type = {
   Github: github,
   Linkedin: linkedin,
-  Hjemmeside: home
-}
+  Hjemmeside: home,
+};
 
-export interface Props {
+export interface IProps {
   type: TypeIndex;
   content: string;
 }
 
-class ExternalInfo extends React.Component<Props> {
-  render() {
+class ExternalInfo extends React.Component<IProps> {
+  public render() {
     const { type, content } = this.props;
     return (
       <div className={style.infoIconWrapper}>

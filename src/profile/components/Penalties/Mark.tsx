@@ -5,11 +5,11 @@ import { DateTime } from 'luxon';
 import style from './penalties.less';
 
 class Mark extends Penalty<IMark> {
-  render() {
+  public render() {
     const { penalty } = this.props;
     const { collapsed } = this.state;
-    const expiration = DateTime.fromISO(penalty.expiration_date)
-    const added = DateTime.fromISO(penalty.added_date)
+    const expiration = DateTime.fromISO(penalty.expiration_date);
+    const added = DateTime.fromISO(penalty.added_date);
     const completion = this.getPenaltyCompletion(penalty);
     const completionColor = this.getCompletionColor(completion);
     return (
@@ -30,7 +30,7 @@ class Mark extends Penalty<IMark> {
         </div>
         <div className={style.progressBar} style={{ width: completion + '%', backgroundColor: completionColor }} />
       </div>
-    )
+    );
   }
 }
 

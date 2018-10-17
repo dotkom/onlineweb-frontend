@@ -6,35 +6,35 @@ import style from './mail.less';
 import classnames from 'classnames';
 
 export interface IState {
-  addresses: IMail[]
+  addresses: IMail[];
 }
 
 class Mails extends Component<{}, IState> {
-  state: IState = { addresses: [] };
+  public state: IState = { addresses: [] };
 
-  async componentDidMount() {
+  public async componentDidMount() {
     let addresses = await getMails();
     // Opinion: Primary address should be shown on top when the site first loads.
     // But the list should not be sorted all over again when an option is clicked.
     // Therefore the addresses are sorted on component mount.
-    addresses = addresses.sort((a, b) => Number(a.primary) - Number(b.primary)).reverse()
+    addresses = addresses.sort((a, b) => Number(a.primary) - Number(b.primary)).reverse();
     this.setState({ addresses });
   }
 
-  togglePrimary(index: number) {
+  public togglePrimary(index: number) {
     const { addresses } = this.state;
-    let reset: IMail[] = addresses.map((addr) => ({...addr, primary: false}))
-    reset[index].primary = true
-    this.setState({ addresses: reset })
+    const reset: IMail[] = addresses.map((addr) => ({...addr, primary: false}));
+    reset[index].primary = true;
+    this.setState({ addresses: reset });
   }
 
-  render() {
+  public render() {
     const { addresses } = this.state;
     return(
       <div className={classnames(style.mailForm, style.grid)}>
         { addresses.map((addr, index) => <Mail {...addr} toggle={() => this.togglePrimary(index)} key={addr.email}/>) }
       </div>
-    )
+    );
   }
 }
 

@@ -9,8 +9,8 @@ import style from './penalties.less';
 
 export interface IState {
   marks: IMark[];
-  suspensions: ISuspension[]
-  loaded: boolean
+  suspensions: ISuspension[];
+  loaded: boolean;
 }
 
 /**
@@ -29,13 +29,13 @@ class Marks extends Component<{}, IState> {
     } as IState;
   }
 
-  async componentDidMount() {
+  public async componentDidMount() {
     const marks = await getMarks();
     const suspensions = await getSuspensions();
-    this.setState({ marks, suspensions, loaded: true })
+    this.setState({ marks, suspensions, loaded: true });
   }
 
-  render() {
+  public render() {
     const { marks, suspensions, loaded } = this.state;
     return(
       <div>
@@ -61,7 +61,7 @@ class Marks extends Component<{}, IState> {
         <div className={style.divider} />
         <Rules />
       </div>
-    )
+    );
   }
 }
 
