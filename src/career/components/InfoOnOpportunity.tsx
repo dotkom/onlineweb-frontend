@@ -16,8 +16,8 @@ export interface IInfoBox {
   companyName: string;
   companyDescription: string;
   companyImage: any;
-  companyId: number
-};
+  companyId: number;
+}
 
 const InfoBox = (props: IInfoBox) => (
   <section>

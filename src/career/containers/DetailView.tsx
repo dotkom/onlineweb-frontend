@@ -14,21 +14,21 @@ class DetailView extends React.Component<IDetailViewProps, IDetailViewProps> {
   constructor(props: IDetailViewProps) {
     super(props);
     this.id = parseInt(props.match.params.id, 10);
-    this.job = props.jobs.find(j => j.id === this.id);
+    this.job = props.jobs.find((j) => j.id === this.id);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     window.scrollTo(0, 0);
   }
 
-  componentWillReceiveProps(nextProps: IDetailViewProps) {
+  public componentWillReceiveProps(nextProps: IDetailViewProps) {
     this.id = parseInt(nextProps.match.params.id, 10);
-    this.job = nextProps.jobs.find(j => j.id === this.id);
+    this.job = nextProps.jobs.find((j) => j.id === this.id);
   }
 
-  render() {
+  public render() {
     return this.job ? <InfoBox {...this.job} /> : <HttpError code={404} text="Denne karrieremuligheten eksisterer ikke." />;
   }
-};
+}
 
 export default DetailView;

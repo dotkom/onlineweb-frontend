@@ -7,7 +7,7 @@ export interface ITagProps {
   selected: boolean;
   handleChange: Function;
   changeKey: string;
-};
+}
 
 const Tag = ({ selected, title, changeKey, handleChange }: ITagProps) => (
   <button
