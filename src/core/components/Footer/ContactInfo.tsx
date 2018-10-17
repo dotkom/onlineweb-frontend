@@ -8,18 +8,18 @@ export interface IContactInfo {
 
 const CONTACT: IContactInfo[] = [{
     className: 'glyphicon glyphicon-briefcase',
-    value: '992 548 045 (OrgNr)'
+    value: '992 548 045 (OrgNr)',
   }, {
     className: 'glyphicon glyphicon-envelope',
-    value: 'kontakt@online.ntnu.no'
+    value: 'kontakt@online.ntnu.no',
   }, {
     className: 'glyphicon glyphicon-file',
-    value: 'okonomi@online.ntnu.no'
+    value: 'okonomi@online.ntnu.no',
   }, {
     className: 'glyphicon glyphicon-phone',
-    value: '73 59 64 89'
-  }
-]
+    value: '73 59 64 89',
+  },
+];
 
 const ContactInfo = () => (
   <div className={style.contactInfo}>
@@ -29,6 +29,6 @@ const ContactInfo = () => (
       </div>
     )) }
   </div>
-)
+);
 
 export default ContactInfo;
