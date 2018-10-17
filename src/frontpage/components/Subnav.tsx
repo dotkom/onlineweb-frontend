@@ -22,6 +22,6 @@ const Subnav = () => (
       </ul>
     </div>
   </nav>
-)
+);
 
 export default Subnav;

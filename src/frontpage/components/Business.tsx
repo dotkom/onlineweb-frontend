@@ -68,6 +68,6 @@ const Business = () => (
       </div>
     </div>
   </section>
-)
+);
 
 export default Business;
