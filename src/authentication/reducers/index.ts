@@ -1,8 +1,8 @@
-import { IAuthUser } from "../models/User";
+import { IAuthUser } from '../models/User';
 
 export enum ActionType {
   LOG_IN,
-  LOG_OUT
+  LOG_OUT,
 }
 
 export interface IAction<T> {
@@ -21,15 +21,15 @@ export const initialState: IState = {
     username: 'anonymoususer',
     email: 'anon@online.ntnu.no',
     groups: [
-      { name: 'None', permissions: []}
+      { name: 'None', permissions: []},
     ],
     permissions: ['view_wiki'],
-    field_of_study: 0
-  }
-}
+    field_of_study: 0,
+  },
+};
 
 const rootReducer = (state: IState = initialState, action: IAction<IState>) => {
-  switch(action.type) {
+  switch (action.type) {
     case ActionType.LOG_IN:
       return { ...state, ...action.payload };
     case ActionType.LOG_OUT:
