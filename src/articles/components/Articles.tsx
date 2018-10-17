@@ -2,11 +2,11 @@ import React from 'react';
 import ArticlesHeading from './ArticlesHeading';
 import MainArticle from './MainArticle';
 import SmallArticle from './SmallArticle';
-import { IArticle } from '../models/Article'
+import { IArticle } from '../models/Article';
 
 export interface IArticlesProps {
-  mainArticles: IArticle[]
-  smallArticles: IArticle[]
+  mainArticles: IArticle[];
+  smallArticles: IArticle[];
 }
 
 const Articles = ({ mainArticles, smallArticles }: IArticlesProps) => (
