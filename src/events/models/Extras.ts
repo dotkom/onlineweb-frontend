@@ -1,5 +1,5 @@
 
-export type Extra = {
-  choice: String
-  note: String
+export interface Extra {
+  choice: String;
+  note: String;
 }

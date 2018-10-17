@@ -1,11 +1,11 @@
 import React from 'react';
-//import moment from 'moment';
+// import moment from 'moment';
 import luxon, { DateTime } from 'luxon';
 
 export interface ISmallEventProps {
-  eventUrl: string
-  startDate: string
-  title: string
+  eventUrl: string;
+  startDate: string;
+  title: string;
 }
 
 const SmallEvent = ({ eventUrl, startDate, title }: ISmallEventProps) => (

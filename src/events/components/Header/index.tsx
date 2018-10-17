@@ -6,7 +6,7 @@ import ToggleSwitch from 'common/components/ToggleSwitch';
 import ImageViewIcon from './ImageViewIcon';
 import ListViewIcon from './ListViewIcon';
 import CalendarViewIcon from './CalendarViewIcon';
-import style from './header.less'
+import style from './header.less';
 
 export interface IProps {
   toggleAccessible: () => void;
@@ -24,7 +24,7 @@ const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
         className={classNames({
           [style.choiceActive]: view === EventView.IMAGE,
         })}
-        
+
         onClick={() => changeView(EventView.IMAGE)}
       >
          <ImageViewIcon />
@@ -34,7 +34,7 @@ const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
         className={classNames({
           [style.choiceActive]: view === EventView.LIST,
         })}
-        
+
         onClick={() => changeView(EventView.LIST)}
       >
          <ListViewIcon />
@@ -44,7 +44,7 @@ const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
         className={classNames({
           [style.choiceActive]: view === EventView.CALENDAR,
         })}
-        
+
         onClick={() => changeView(EventView.CALENDAR)}
       >
          <CalendarViewIcon />
@@ -55,10 +55,10 @@ const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
       <span className={style.toggleAccessibleDescription}>
         Vis kun tilgjengelige arrangementer
       </span>
-      
+
       <ToggleSwitch checked={accessible} onChange={toggleAccessible}></ToggleSwitch>
     </span>
   </div>
-)
+);
 
 export default Header;

@@ -12,7 +12,7 @@ const Contact = ({ event_type }: INewEvent) => {
         <p></p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Contact;
