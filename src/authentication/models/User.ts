@@ -8,19 +8,19 @@ export interface IAuthUser extends IUser {
 }
 
 export class AuthUser implements IAuthUser {
-  public first_name: string
-  public last_name: string
-  public username: string
-  public email: Email
-  public groups: IGroup[]
-  public field_of_study: FieldOfStudy
-  public permissions: Permission[]
-  
+  public first_name: string;
+  public last_name: string;
+  public username: string;
+  public email: Email;
+  public groups: IGroup[];
+  public field_of_study: FieldOfStudy;
+  public permissions: Permission[];
+
   constructor(u: IAuthUser) {
     this.first_name = u.first_name;
     this.last_name = u.last_name;
     this.username = u.username;
-    this.email = u.email
+    this.email = u.email;
     this.groups = u.groups;
     this.field_of_study = u.field_of_study;
     this.permissions = u.permissions;
@@ -39,7 +39,7 @@ export class AuthUser implements IAuthUser {
       /** Add the other, non-group related permissions on the user */
       .concat(this.permissions)
       /** Remove duplicates by filtering */
-      .filter((permission, index, array) => array.indexOf(permission) === index)
+      .filter((permission, index, array) => array.indexOf(permission) === index);
   }
 
   /**
@@ -52,7 +52,7 @@ export class AuthUser implements IAuthUser {
     if (typeof authentication === 'string') {
       return this.getAllPermissions()
         /** Check if the given Permission[] includes the required authentication */
-        .includes(authentication)
+        .includes(authentication);
 
     /** If authentication is not a string */
     } else if (authentication.name) {
@@ -60,7 +60,7 @@ export class AuthUser implements IAuthUser {
         /** Map to an array of group names */
         .map((group) => group.name)
         /** Check if the given groups name is in the group names for the user */
-        .includes(authentication.name)
+        .includes(authentication.name);
     } else {
       /** If wrong argument is given, return false */
       return false;
