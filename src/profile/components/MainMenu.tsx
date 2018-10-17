@@ -9,15 +9,15 @@ export interface IProps {
 }
 
 class MainMenu extends Component<IProps, {}> {
-  render() {
+  public render() {
     const pages = [
       { link: 'me', view: 'Min Profil' },
       { link: 'search', view: 'Brukersøk' },
-      { link: 'settings', view: 'Innstillinger' }
-    ]
+      { link: 'settings', view: 'Innstillinger' },
+    ];
     // Yeah, I know...
     const current = this.props.match.path.split('/').reverse()[0];
-    console.log(current)
+    console.log(current);
     return(
       <div>
         <div className={style.menuGrid}>
@@ -34,7 +34,7 @@ class MainMenu extends Component<IProps, {}> {
           { this.props.children }
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -47,6 +47,6 @@ const MenuElement = ({ text, clicked }: IElementProps) => (
   <div className={classnames(style.menuGridRow, { [style.menuClicked]: clicked })}>
     <h4 className={style.menuText}>{ text }</h4>
   </div>
-)
+);
 
 export default MainMenu;

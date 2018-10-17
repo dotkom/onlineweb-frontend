@@ -3,13 +3,13 @@ import { IsoDateTime } from 'common/models/Date';
 export type PaymentChoice =
   | 'Umiddelbar'
   | 'Frist'
-  | 'Utsettelse'
+  | 'Utsettelse';
 
 export type StripeKeyChoice =
   | 'arrkom'
   | 'prokom'
   | 'trikom'
-  | 'fagkom'
+  | 'fagkom';
 
 export interface IPayment {
   object_id: number;
@@ -23,7 +23,7 @@ export interface IPayment {
 
 export interface IPaymentPrice {
   /** Price in NOK */
-  price: number
+  price: number;
   /** Max length of 128 characters */
   description: string;
 }

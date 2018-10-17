@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { toQueryObject } from 'common/utils/queryString';
-import './less/profile.less'
+import './less/profile.less';
 import Profile from './components/Profile';
 import Search from './components/Search';
 import Penalties from './components/Penalties';
@@ -14,7 +14,7 @@ import 'multirange';
 const history = createBrowserHistory();
 
 class App extends React.Component<{}> {
-  render() {
+  public render() {
     return (
       <section className="container">
         <Router history={history}>
@@ -22,19 +22,19 @@ class App extends React.Component<{}> {
             <Route
               exact
               path="/profile/me"
-              render={props => <MainMenu match={props.match}><Profile {...props}/></MainMenu>}
+              render={(props) => <MainMenu match={props.match}><Profile {...props}/></MainMenu>}
             />
             <Route
               path="/profile/search"
-              render={props => <MainMenu match={props.match}><Search {...props} query={toQueryObject(props.location.search)}/></MainMenu>}
+              render={(props) => <MainMenu match={props.match}><Search {...props} query={toQueryObject(props.location.search)}/></MainMenu>}
             />
             <Route
               path="/profile/public/:id"
-              render={props => <MainMenu match={props.match}><Profile {...props} /></MainMenu>}
+              render={(props) => <MainMenu match={props.match}><Profile {...props} /></MainMenu>}
             />
             <Route
               path="/profile/settings"
-              render={props => <MainMenu match={props.match}><Settings {...props} /></MainMenu>}
+              render={(props) => <MainMenu match={props.match}><Settings {...props} /></MainMenu>}
             />
           </Switch>
         </Router>
@@ -44,27 +44,27 @@ class App extends React.Component<{}> {
 }
 
 export const Settings = (props: any) => {
-  console.log(props)
+  console.log(props);
   return(
     <Switch>
       <Route
         path={props.match.path + '/penalties'}
-        render={props => <Penalties {...props} />}
+        render={(props) => <Penalties {...props} />}
       />
       <Route
         path={props.match.path + '/privacy'}
-        render={props => <Privacy {...props} />}
+        render={(props) => <Privacy {...props} />}
       />
       <Route
         path={props.match.path + '/mail'}
-        render={props => <Mails {...props} />}
+        render={(props) => <Mails {...props} />}
       />
       <Route
         path={props.match.path + '/password'}
-        render={props => <Privacy {...props} />}
+        render={(props) => <Privacy {...props} />}
       />
     </Switch>
-  )
-}
+  );
+};
 
 export default App;

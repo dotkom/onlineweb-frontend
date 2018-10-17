@@ -6,14 +6,14 @@ import { searchUsers } from '../../api/search';
 import { SearchFilter } from '../../models/Search';
 import { IGroup } from 'core/models/Group';
 import Searchbar from './Searchbar';
-import style from './search.less'
+import style from './search.less';
 
 export interface Props {
   readonly query: IQueryObject;
 }
 
 export interface State extends Props {
-  readonly users: ISearchUser[]
+  readonly users: ISearchUser[];
   readonly filter: SearchFilter;
 }
 
@@ -25,41 +25,41 @@ class Search extends React.Component<Props, State> {
     this.state = {
       query: props.query,
       users: [],
-      filter: new SearchFilter()
+      filter: new SearchFilter(),
     };
   }
 
   public async componentWillMount() {
     const { filter } = this.state;
     const users = await searchUsers(filter);
-    this.setState({ users })
+    this.setState({ users });
   }
 
-  setName(name: string): boolean {
-    let { filter } = this.state;
-    const validation = filter.setName(name)
-    this.setState({ filter })
+  public setName(name: string): boolean {
+    const { filter } = this.state;
+    const validation = filter.setName(name);
+    this.setState({ filter });
     return validation;
   }
 
-  setGroup(group: IGroup): boolean {
-    let { filter } = this.state;
+  public setGroup(group: IGroup): boolean {
+    const { filter } = this.state;
     const validation = filter.setGroup(group);
-    this.setState({ filter })
+    this.setState({ filter });
     return validation;
   }
 
-  setYear(range: [number, number]): boolean {
-    let { filter } = this.state;
-    const validation = filter.setYear(range)
-    this.setState({ filter })
+  public setYear(range: [number, number]): boolean {
+    const { filter } = this.state;
+    const validation = filter.setYear(range);
+    this.setState({ filter });
     return validation;
   }
 
-  render() {
+  public render() {
     const { users, filter } = this.state;
     return (
-      <> 
+      <>
         <Searchbar
           setName={(s) => this.setName(s)}
           setGroup={(s) => this.setGroup(s)}
@@ -67,7 +67,7 @@ class Search extends React.Component<Props, State> {
           { ...filter.format }
         />
         <div className={style.smallProfileGrid}>
-          { users.map(user => 
+          { users.map((user) =>
             <ProfileSmall user={user} />)
           }
         </div>
@@ -75,6 +75,6 @@ class Search extends React.Component<Props, State> {
     );
   }
 }
-  
+
 export default Search;
-  
+

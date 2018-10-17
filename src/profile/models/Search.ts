@@ -1,4 +1,4 @@
-import { IGroup } from "core/models/Group";
+import { IGroup } from 'core/models/Group';
 
 /** Because Object Oriented Programming is (the) shit, right? */
 
@@ -12,7 +12,7 @@ export interface ISearchFilter {
 }
 
 export class SearchFilter {
-  private static NAME_VALIDATOR = /[A-Za-z0-9]{3,32}/g
+  private static NAME_VALIDATOR = /[A-Za-z0-9]{3,32}/g;
 
   /** Search for username, ntnu-name and nickname */
   private name: string | null;
@@ -53,7 +53,7 @@ export class SearchFilter {
   public setName(name: string): boolean {
     this.name = name;
     if (SearchFilter.NAME_VALIDATOR.test(name)) {
-      return true
+      return true;
     }
     return false;
   }
@@ -83,7 +83,7 @@ export class SearchFilter {
     return {
       name: (this.name !== null) ? this.name : undefined,
       group: this.group !== null ? this.group.name : undefined,
-      year: (this.year !== [1, 6]) ? this.year : undefined
-    }
+      year: (this.year !== [1, 6]) ? this.year : undefined,
+    };
   }
 }

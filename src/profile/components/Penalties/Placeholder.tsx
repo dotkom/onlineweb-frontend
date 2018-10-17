@@ -7,6 +7,6 @@ import React from 'react';
  */
 const Placeholder = () => (
   <div> Placeholder for Marks and Suspensions </div>
-)
+);
 
 export default Placeholder;

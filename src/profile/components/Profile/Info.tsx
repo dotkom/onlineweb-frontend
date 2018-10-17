@@ -1,13 +1,13 @@
 import React from 'react';
 import style from '../../less/profile.less';
 
-export interface Props {
+export interface IProps {
   type: string;
   content: string;
 }
 
-class Info extends React.Component<Props> {
-  render() {
+class Info extends React.Component<IProps> {
+  public render() {
     const { type, content } = this.props;
     return (
       <div className={style.infoWrapper}>
