@@ -22,7 +22,7 @@ export const Header = () => (
         <div className={style.item}>
           <Link to={routes.hobbygroups}>Interessegrupper</Link>
         </div>
-        <Authenticate authentication={"view_wiki"}>
+        <Authenticate authentication={'view_wiki'}>
           <div className={style.item}>
             <Link to={routes.wiki}>Wiki</Link>
           </div>

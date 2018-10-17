@@ -57,4 +57,4 @@ export default () => (
           </ul>
       </li>
   {% endif %*/}
-)
+);
