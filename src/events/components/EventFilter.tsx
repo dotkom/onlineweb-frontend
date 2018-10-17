@@ -1,11 +1,11 @@
 import React from 'react';
 import { ButtonGroup, Button } from 'react-bootstrap';
 import classNames from 'classnames';
-import { EventType } from '../models/Event'
+import { EventType } from '../models/Event';
 
 export interface IEventFilter {
-  eventTypes: EventType[]
-  setEventVisibility: Function
+  eventTypes: EventType[];
+  setEventVisibility: Function;
 }
 
 const EventFilter = ({ eventTypes, setEventVisibility }: IEventFilter) => (

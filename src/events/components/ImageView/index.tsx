@@ -15,12 +15,12 @@ export interface IState {
 }
 
 class ImageView extends Component<EventViewProps, IState> {
-  state: IState = {
+  public state: IState = {
     events_left: [],
     events_middle: [],
     events_right: [],
     fetched: false,
-  }
+  };
 
   public async componentDidMount() {
     const events_left = await this.getTypeEvents([EventTypeEnum.BEDPRES]);
@@ -29,7 +29,7 @@ class ImageView extends Component<EventViewProps, IState> {
       EventTypeEnum.SOSIALT,
       EventTypeEnum.UTFLUKT,
       EventTypeEnum.EKSKURSJON,
-      EventTypeEnum.ANNET
+      EventTypeEnum.ANNET,
     ]);
 
     this.setState({ events_left, events_middle, events_right, fetched: true });
@@ -49,7 +49,7 @@ class ImageView extends Component<EventViewProps, IState> {
   public render() {
     const { events_left, events_middle, events_right, fetched } = this.state;
 
-    if (!fetched) { return null }
+    if (!fetched) { return null; }
 
     return (
       <>
@@ -59,18 +59,18 @@ class ImageView extends Component<EventViewProps, IState> {
           <LargeEvent {...events_right[0]} />
         </div>
         <div className={style.smallEventGrid}>
-          <SmallEventColumn events={ events_left.slice(1,4) }/>
-          <SmallEventColumn events={ events_middle.slice(1,4) }/>
-          <SmallEventColumn events={ events_right.slice(1,4) }/>
+          <SmallEventColumn events={ events_left.slice(1, 4) }/>
+          <SmallEventColumn events={ events_middle.slice(1, 4) }/>
+          <SmallEventColumn events={ events_right.slice(1, 4) }/>
         </div>
       </>
-    )
+    );
   }
 }
 
 const SmallEventColumn = ({ events }: { events: INewEvent[] }) => (
   <>{ events.map((event) => <SmallEvent key={event.id} {...event} />) }</>
-)
+);
 
 const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
@@ -84,7 +84,7 @@ const LargeEvent = ({ image, event_type, title, event_start, attendance_event, i
       </div>
     </div>
   </Link>
-)
+);
 
 const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
@@ -98,6 +98,6 @@ const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: IN
       <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
     </div>
   </Link>
-)
+);
 
 export default ImageView;

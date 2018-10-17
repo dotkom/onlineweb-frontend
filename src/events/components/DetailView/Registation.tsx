@@ -4,7 +4,7 @@ import style from './detail.less';
 import CardHeader from './Card/CardHeader';
 
 const Registration = ({ event_type }: INewEvent) => {
-  const color = getEventColor(event_type)
+  const color = getEventColor(event_type);
   return (
     <div className={style.registration}>
       <div className={style.cardMargin}>
@@ -12,7 +12,7 @@ const Registration = ({ event_type }: INewEvent) => {
         <p></p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Registration;

@@ -12,9 +12,9 @@ export interface IState {
 }
 
 class ListView extends Component<EventViewProps, IState> {
-  state: IState = {
-    events: []
-  }
+  public state: IState = {
+    events: [],
+  };
 
   public async componentDidMount() {
     const events = await getEvents({
@@ -32,7 +32,7 @@ class ListView extends Component<EventViewProps, IState> {
         { events.map((event) => <ListEvent key={event.id} {...event} />) }
       </div>
       </>
-    )
+    );
   }
 }
 

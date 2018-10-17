@@ -9,15 +9,15 @@ import { Link } from 'react-router-dom';
 const ListEvent = ({ title, event_start, attendance_event, event_type, company_event, id }: INewEvent) => {
   const eventColor = getEventColor(event_type);
   const eventType = getEventType(event_type);
-  const eventDate = DateTime.fromISO(event_start).toFormat('d.MM')
-  console.log(company_event ? company_event : null)
+  const eventDate = DateTime.fromISO(event_start).toFormat('d.MM');
+  console.log(company_event ? company_event : null);
   return (
     <Link to={`/events/${id}`}>
       <div className={style.gridRow}>
         <div className={style.elementGridRow} style={{ left: 0 }}>
           <HostPolygon color={ eventColor } />
           { /* Optional chainging, tc39 stage 1 proposal. Not supported by Typescript  */ }
-          <p>{ company_event[0]?.company.name || eventType }</p>
+          <p>{ company_event[0] ? .company.name || eventType  }</p>
         </div>
 
         <div className={style.elementGridRow}>
@@ -27,7 +27,7 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
           <p>
             { /* Optional chainging, tc39 stage 1 proposal. Not supported by Typescript  */ }
             { attendance_event
-              ? `${attendance_event?.attendees?.length || 0}/${attendance_event.max_capacity}`
+              ? `${attendance_event ? .attendees ? .length || 0 }/${attendance_event.max_capacity}`
               : 'ALLE'
             }
           </p>
@@ -41,7 +41,7 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};
 
 export default ListEvent;
