@@ -1,5 +1,5 @@
-import { IsoDateTime } from "common/models/Date";
-import { MediaUrl } from "common/models/Url";
+import { IsoDateTime } from 'common/models/Date';
+import { MediaUrl } from 'common/models/Url';
 
 export interface ICompanyImage {
   id: number;
@@ -12,5 +12,5 @@ export interface ICompanyImage {
   original: MediaUrl;
   wide: MediaUrl;
   tags: any[];
-  photographer: string; //Userprofile?
+  photographer: string; // Userprofile?
 }

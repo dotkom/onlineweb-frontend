@@ -17,7 +17,7 @@ export interface IJob {
   id: number;
   featured: boolean;
   tags?: Tags;
-};
+}
 
 export interface IApiJob {
   location: [{ slug: string, name: string }];
@@ -31,7 +31,7 @@ export interface IApiJob {
   title: string;
   id: number;
   company: IApiCompany;
-};
+}
 
-export type JobType = 'Fastjobb' | 'Deltidsjobb' | 'Sommerjobb/internship' | 'Start-up' | 'Annet'
-  
+export type JobType = 'Fastjobb' | 'Deltidsjobb' | 'Sommerjobb/internship' | 'Start-up' | 'Annet';
+
