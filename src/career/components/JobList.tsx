@@ -1,5 +1,5 @@
 import React from 'react';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import Fuse from 'fuse.js';
 import Job from './Job';
 import { ITag } from '../models/Tag';
@@ -43,7 +43,7 @@ const arrangeJobs = (jobs: any, check: any) => {
 // Check for the deadline tags. If the difference between the deadline, and
 // the current date is less than the deadline specified by the tag, return true.
 const deadlineCheck = (job: IJob, id: number, tag: ITag) => {
-  if (moment(job.deadline).isValid()) {
+  if (DateTime.fromISO(job.deadline).isValid) {
     return new Date(job.deadline).getTime() - Date.now() <= tag.deadline;
   } else {
     return false;
