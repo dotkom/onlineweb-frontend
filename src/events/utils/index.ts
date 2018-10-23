@@ -62,4 +62,3 @@ export const setEventsForEventTypeId = (state, eventTypeId, events) => (
       }),
     })
   );
-

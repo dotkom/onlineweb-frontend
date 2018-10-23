@@ -5,7 +5,7 @@ import { EventType } from '../models/Event';
 
 export interface IEventsHeadingProps {
   eventTypes: EventType[];
-  setEventVisibility: Function;
+  setEventVisibility: Function; // tslint:disable-line
 }
 
 const EventsHeading = ({ eventTypes, setEventVisibility }: IEventsHeadingProps) => (
