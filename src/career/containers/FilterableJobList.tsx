@@ -5,7 +5,6 @@ import { IJob } from '../models/Job';
 import { ITags, ITag } from '../models/Tag';
 import Header from 'frontpage/components/Header';
 import style from '../less/career.less';
-import { containerFluid } from 'core/less/core.less';
 
 export interface IFilterableJobListProps {
   jobs: IJob[];
@@ -17,7 +16,7 @@ export interface IFilterableJobListProps {
 }
 
 const FilterableJobList = (props: IFilterableJobListProps) => (
-  <div className={containerFluid}>
+  <div className="container">
     <Header>
       KARRIEREMULIGHETER
     </Header>

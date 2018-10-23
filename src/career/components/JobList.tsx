@@ -5,7 +5,6 @@ import Job from './Job';
 import { ITag } from '../models/Tag';
 import { IJob } from '../models/Job';
 
-import globalStyle from 'core/less/core.less';
 import style from '../less/career.less';
 
 // Checks tags where the only involved factor is whether the button is on or not.
