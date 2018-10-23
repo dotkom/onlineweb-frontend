@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { INewEvent, EventViewProps } from '../../models/Event';
+import { INewEvent, IEventViewProps } from '../../models/Event';
 import { DateTime } from 'luxon';
 import style from './list.less';
 import { getEvents } from '../../api/events';
@@ -11,7 +11,7 @@ export interface IState {
   events: INewEvent[];
 }
 
-class ListView extends Component<EventViewProps, IState> {
+class ListView extends Component<IEventViewProps, IState> {
   public state: IState = {
     events: [],
   };
