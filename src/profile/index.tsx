@@ -47,24 +47,23 @@ class App extends React.Component<{}> {
   }
 }
 
-export const Settings = (props: any) => {
-  console.log(props);
+export const Settings = ({ match }: any) => {
   return(
     <Switch>
       <Route
-        path={props.match.path + '/penalties'}
+        path={match.path + '/penalties'}
         render={(props) => <Penalties {...props} />}
       />
       <Route
-        path={props.match.path + '/privacy'}
+        path={match.path + '/privacy'}
         render={(props) => <Privacy {...props} />}
       />
       <Route
-        path={props.match.path + '/mail'}
+        path={match.path + '/mail'}
         render={(props) => <Mails {...props} />}
       />
       <Route
-        path={props.match.path + '/password'}
+        path={match.path + '/password'}
         render={(props) => <Privacy {...props} />}
       />
     </Switch>
