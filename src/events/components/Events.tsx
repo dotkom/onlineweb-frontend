@@ -8,7 +8,7 @@ import ListView from './ListView';
 export interface IEventsProps {
   mainEvents: IFrontpageEvent[];
   smallEvents: IFrontpageEvent[];
-  setEventVisibility: Function;
+  setEventVisibility: Function; // tslint:disable-line
   eventTypes: EventType[];
 }
 
