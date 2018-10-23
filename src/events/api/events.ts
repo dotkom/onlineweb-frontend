@@ -1,7 +1,5 @@
 import { get } from 'common/utils/api';
-import { EventType, getEventType, INewEvent } from '../models/Event';
-import { getPackedSettings } from 'http2';
-import { next } from 'core/less/core.less';
+import { getEventType, INewEvent } from '../models/Event';
 
 export interface IEventAPIArguemnts {
   event_start__gte?: string;
