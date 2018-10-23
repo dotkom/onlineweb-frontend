@@ -57,7 +57,7 @@ class Container extends Component<IProps, IState> {
     return (
       <div>
         <Header
-          changeView={(view: EventView) => this.changeView(view)}
+          changeView={(v: EventView) => this.changeView(v)}
           toggleAccessible={this.toggleAccessible}
           {...this.state} />
         <View accessible={accessible} />
