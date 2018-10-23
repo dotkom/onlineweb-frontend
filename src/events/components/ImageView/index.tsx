@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   INewEvent,
-  EventViewProps,
+  IEventViewProps,
   getEventColor,
   getEventType,
   EventTypeEnum,
@@ -36,7 +36,7 @@ const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
     : 'ALLE';
 };
 
-class ImageView extends Component<EventViewProps, IState> {
+class ImageView extends Component<IEventViewProps, IState> {
   public state: IState = {
     events_left: [],
     events_middle: [],
