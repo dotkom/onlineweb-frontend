@@ -5,7 +5,7 @@ import style from '../less/career.less';
 export interface ITagProps {
   title: string;
   selected: boolean;
-  handleChange: Function;
+  handleChange: (s: string) => void;
   changeKey: string;
 }
 
