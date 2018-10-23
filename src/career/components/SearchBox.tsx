@@ -2,7 +2,7 @@ import React from 'react';
 import style from '../less/career.less';
 
 export interface ISearchBoxProps {
-  onChange: Function;
+  onChange: (e: React.FormEvent<any>) => void;
   text: string;
 }
 

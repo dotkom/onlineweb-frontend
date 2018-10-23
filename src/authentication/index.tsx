@@ -8,7 +8,7 @@ import rootReducer from './reducers';
 declare global {
   interface Window { // tslint:disable-line interface-name
     store: any;
-    apiLogIn: Function;
+    apiLogIn: Function; // tslint:disable-line
   }
 }
 
