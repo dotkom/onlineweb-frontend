@@ -16,6 +16,7 @@ export const mapStateToProps = (state: IState): IState => {
   return { user: new AuthUser(state.user) };
 };
 
+// tslint:disable-next-line
 export const mapDispatchToProps = (dispatch: Function) => ({/** Not going to change the state for user */});
 
 const GroupAccess = ({ children, authentication, user, alt = null }: Props) => (

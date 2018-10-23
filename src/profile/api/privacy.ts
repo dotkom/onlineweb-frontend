@@ -17,7 +17,7 @@ const setMockPrivacy = async (privacy: IPrivacy): Promise<IPrivacy> => {
 };
 
 const getMockPrivacy = async (): Promise<IPrivacy> => {
-  await setTimeout(() => {}, 1000);
+  await setTimeout(() => {}, 1000); // tslint:disable-line no-empty
   const data = localStorage.getItem('privacy');
   return JSON.parse(data || '');
 };
