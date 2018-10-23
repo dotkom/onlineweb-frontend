@@ -27,7 +27,9 @@ class DetailView extends React.Component<IDetailViewProps, IDetailViewProps> {
   }
 
   public render() {
-    return this.job ? <InfoBox {...this.job} /> : <HttpError code={404} text="Denne karrieremuligheten eksisterer ikke." />;
+    return this.job
+      ? <InfoBox {...this.job} />
+      : <HttpError code={404} text="Denne karrieremuligheten eksisterer ikke." />;
   }
 }
 

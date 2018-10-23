@@ -75,7 +75,9 @@ const loadData = (data: any) => {
 // Normalizes data from the server, most notably converting to camelCase.
 const normalizeData = (job: IApiJob): IJob => ({
   locations: job.location.map((location) => location.name), // Locations contains name and slug
-  deadline: job.deadline ? moment(job.deadline).format('Do MMMM YYYY') : 'Ikke spesifisert', // Format and give default value
+  deadline: job.deadline
+    ? moment(job.deadline).format('Do MMMM YYYY')
+    : 'Ikke spesifisert', // Format and give default value
   companyImage: job.company.image,
   companyName: job.company.name,
   companyDescription: job.company.short_description,

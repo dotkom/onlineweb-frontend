@@ -53,7 +53,11 @@ class Marks extends Component<{}, IState> {
           <div className={style.grid}>
             { /** If not loaded from API; show placeholder. If list of suspensions is empty; show empty-text */ }
             { !loaded ? <Placeholder /> : suspensions.length
-              ? suspensions.sort(Suspension.sortByExpiration).map((suspension) => <Suspension penalty={suspension} key={suspension.added_date} />)
+              ? suspensions
+                  .sort(Suspension.sortByExpiration)
+                  .map((suspension) => (
+                    <Suspension penalty={suspension} key={suspension.added_date} />
+                  ))
               : <p>Du har ingen suspensjoner</p>
             }
           </div>

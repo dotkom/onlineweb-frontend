@@ -13,8 +13,10 @@ export interface IState {
 
 /**
  * @summary Create the correct representation of the current month.
- * @description To easily display the events of the given month, the month is represented as an Array of Arrays of Events.
- * The outer Array represents the ((day of the month) - 1) the event is on, while the inner Array represents the events on that day.
+ * @description To easily display the events of the given month,
+ * the month is represented as an Array of Arrays of Events.
+ * The outer Array represents the ((day of the month) - 1) the event is on,
+ * while the inner Array represents the events on that day.
  * @param {DateTime} month Current month.
  * @param {INewEvent[]} events Events to inject into the month model.
  * @returns {INewEvent[][]} Events represented in a month model.
