@@ -2,12 +2,12 @@
 import { ICompany } from 'core/models/Company';
 import { IUser } from 'core/models/User';
 import { IGroup } from 'core/models/Group';
-import { RuleBundle } from 'events/models/RuleBundles';
-import { Extra } from 'events/models/Extras';
-import { Attendee } from './Attendee';
+import { IRuleBundle } from 'events/models/RuleBundles';
+import { IExtra } from 'events/models/Extras';
+import { IAttendee } from './Attendee';
 import IImage from 'common/models/Image';
 
-export interface EventViewProps {
+export interface IEventViewProps {
   accessible: boolean;
 }
 
@@ -135,11 +135,11 @@ export interface IAttendanceEvent {
   automatically_set_marks: boolean;
   marks_has_been_set: boolean;
 
-  rule_bundles: [RuleBundle]; // ManyToMany
-  extras: [Extra]; // ManyToMany
+  rule_bundles: IRuleBundle[]; // ManyToMany
+  extras: IExtra[]; // ManyToMany
   // payments: [Payment] // GenericRelation
 
-  attendees: Attendee[];
+  attendees: IAttendee[];
 }
 
 export interface INewAttendanceEvent {

@@ -5,7 +5,7 @@ import { IState } from '../reducers';
 import { Permission } from 'core/models/Permission';
 import { AuthUser } from '../models/User';
 
-export interface Props extends IState {
+export interface IProps extends IState {
   user: AuthUser;
   children: JSX.Element;
   alt?: JSX.Element;

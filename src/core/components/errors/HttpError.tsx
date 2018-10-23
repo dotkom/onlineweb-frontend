@@ -5,7 +5,7 @@ import style from './error.less';
 
 export type ErrorCode = 401 | 403 | 404;
 
-export interface Props {
+export interface IProps {
   code: ErrorCode;
   text?: string;
 }
@@ -17,7 +17,7 @@ const errorString = (code: ErrorCode): string => {
   }
 };
 
-const NotFound = ({ code, text }: Props) => (
+const NotFound = ({ code, text }: IProps) => (
   <section id="error">
     <div className="container">
       <div className={style.header}>

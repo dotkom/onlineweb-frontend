@@ -8,18 +8,18 @@ import { IGroup } from 'core/models/Group';
 import Searchbar from './Searchbar';
 import style from './search.less';
 
-export interface Props {
+export interface IProps {
   readonly query: IQueryObject;
 }
 
-export interface State extends Props {
+export interface IState extends IProps {
   readonly users: ISearchUser[];
   readonly filter: SearchFilter;
 }
 
-class Search extends React.Component<Props, State> {
+class Search extends React.Component<IProps, IState> {
 
-  constructor(props: Props) {
+  constructor(props: IProps) {
     super(props);
 
     this.state = {
