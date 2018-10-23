@@ -6,13 +6,6 @@ export interface ITag {
   deadline?: number;
 }
 
-export interface ITags {
-  companies: TagWrapper | {};
-  locations: TagWrapper | {};
-  jobTypes: TagWrapper | {};
-  deadlines?: any;
-}
-
 export interface ITagWrapper {
   [index: string]: ITag;
 }

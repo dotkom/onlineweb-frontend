@@ -1,5 +1,5 @@
 
 export interface IExtra {
-  choice: String;
-  note: String;
+  choice: string;
+  note: string;
 }
