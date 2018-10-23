@@ -1,5 +1,5 @@
 import { ICompanyImage } from './CompanyImage';
-import { ITags, Tags } from './Tag';
+import { ITags } from './Tag';
 import { IsoDateTime } from 'common/models/Date';
 import { IApiCompany } from 'core/models/Company';
 
@@ -16,7 +16,7 @@ export interface IJob {
   type: JobType;
   id: number;
   featured: boolean;
-  tags?: Tags;
+  tags?: ITags;
 }
 
 export interface IApiJob {
@@ -34,4 +34,3 @@ export interface IApiJob {
 }
 
 export type JobType = 'Fastjobb' | 'Deltidsjobb' | 'Sommerjobb/internship' | 'Start-up' | 'Annet';
-

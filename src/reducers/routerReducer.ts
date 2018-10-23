@@ -1,7 +1,7 @@
-import rootReducer from "core/reducers";
+import rootReducer from 'core/reducers';
 
 export enum ActionType {
-  LOCATION_CHANGE
+  LOCATION_CHANGE,
 }
 
 export interface IAction<T> {
@@ -15,15 +15,15 @@ export interface IState {
 
 export const initialState: IState = {
   location: {},
-}
+};
 
 const routerReducer = (state: IState = initialState, action: IAction<IState>) => {
-  switch(action.type) {
-    case(ActionType.LOCATION_CHANGE): 
+  switch (action.type) {
+    case(ActionType.LOCATION_CHANGE):
       return { ...state, ...action.payload };
     default:
       return state;
   }
-}
+};
 
 export default rootReducer;

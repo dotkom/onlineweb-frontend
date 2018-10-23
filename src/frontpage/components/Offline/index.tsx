@@ -38,14 +38,14 @@ class Offline extends Component<IProps, IState> {
   }
 
   public async clickNext(amount: number) {
-    let { index, offlines, loadAll } = this.state;
+    const { index, offlines, loadAll } = this.state;
     if (loadAll) {
       this.fetchAll();
       this.setState({ loadAll: false });
     }
-    index += amount;
-    if (index >= 0 && index <= offlines.length) {
-      this.setState({ index });
+    const i = index + amount;
+    if (i >= 0 && i <= offlines.length) {
+      this.setState({ index: i });
     }
   }
 
