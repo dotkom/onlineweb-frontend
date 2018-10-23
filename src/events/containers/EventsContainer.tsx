@@ -163,7 +163,11 @@ class EventsContainer extends Component<IEventsContainerProps> {
 
   public async fetchEventsByType(eventType) {
     const extra = eventType === 'other' ? '4,5,6,7' : eventType;
-    const { results } = await get(this.API_URL, { event_end__gte: DateTime.local().toISODate(), format: 'json', event_type: extra });
+    const { results } = await get(this.API_URL, {
+      event_end__gte: DateTime.local().toISODate(),
+      format: 'json',
+      event_type: extra,
+    });
     const events = results.map(apiEventsToEvents);
     this.setState({
       eventTypes: setEventsForEventTypeId(this.state, eventType, events),

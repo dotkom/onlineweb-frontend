@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
-import { INewEvent, EventViewProps, getEventColor, getEventType, EventTypeEnum } from '../../models/Event';
+import {
+  INewEvent,
+  EventViewProps,
+  getEventColor,
+  getEventType,
+  EventTypeEnum,
+  IAttendanceEvent,
+} from '../../models/Event';
 import { DateTime } from 'luxon';
 import style from './image.less';
 import { getEvents } from '../../api/events';
 import { DOMAIN } from 'common/constants/endpoints';
 import { routes } from '../EventsRouter';
 import { Link } from 'react-router-dom';
+import IImage from 'common/models/Image';
 
 export interface IState {
   events_left: INewEvent[];
@@ -13,6 +21,20 @@ export interface IState {
   events_right: INewEvent[];
   fetched: boolean;
 }
+
+const getEventImage = (image: IImage | null): string => {
+  return image
+  ? (DOMAIN + image.wide)
+  : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png';
+};
+
+const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
+  return attendance
+    ? `${attendance.attendees
+      ? attendance.attendees.length
+      : '0'}/${attendance.max_capacity}`
+    : 'ALLE';
+};
 
 class ImageView extends Component<EventViewProps, IState> {
   public state: IState = {
@@ -75,11 +97,13 @@ const SmallEventColumn = ({ events }: { events: INewEvent[] }) => (
 const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
     <div className={style.large}>
-      <p className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>{ getEventType(event_type) }</p>
-      <img className={style.largeImage} src={image ? (DOMAIN + image.wide) : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png'} />
+      <p className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>
+        { getEventType(event_type) }
+      </p>
+      <img className={style.largeImage} src={getEventImage(image)} />
       <div className={style.largeContent}>
         <p> { title } </p>
-        <p> { attendance_event ? `${attendance_event.attendees ? attendance_event.attendees.length : '?'}/${attendance_event.max_capacity}` : 'ALLE' } </p>
+        <p> { getEventAttendees(attendance_event) } </p>
         <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
       </div>
     </div>
@@ -94,7 +118,7 @@ const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: IN
         style={{ color: getEventColor(event_type) }}
       />
       <p> { title } </p>
-      <p> { attendance_event ? `${attendance_event.attendees ? attendance_event.attendees.length : '?'}/${attendance_event.max_capacity}` : 'ALLE' } </p>
+      <p> { getEventAttendees(attendance_event) } </p>
       <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
     </div>
   </Link>
