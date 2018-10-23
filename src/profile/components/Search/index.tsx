@@ -77,4 +77,3 @@ class Search extends React.Component<IProps, IState> {
 }
 
 export default Search;
-
