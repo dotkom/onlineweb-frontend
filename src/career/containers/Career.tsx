@@ -143,8 +143,6 @@ class Career extends React.Component<{}, ICareerState> {
           <Switch>
             <Route
               exact
-              // exact //this broke routing tot he career view when output.publicPath = '/' was added to webpack.config.js.
-              // pubicPath is needed to be able to serve static correctly with with HTML webpack plugin.
               path="/career"
               render={(props) => <FilterableJobList
                 handleReset={() => this.handleReset()}

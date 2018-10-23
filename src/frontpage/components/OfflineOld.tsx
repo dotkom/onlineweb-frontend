@@ -21,8 +21,12 @@ const Offine = () => (
       <div className="col-md-6">
         <div id="offlineCarousel" className="carousel slide">
           <div className="carousel-inner"></div>
-          <a className="carousel-control left" href="#offlineCarousel" data-slide="prev"><span className="glyphicon glyphicon-chevron-left"></span></a>
-          <a className="carousel-control right" href="#offlineCarousel" data-slide="next"><span className="glyphicon glyphicon-chevron-right"></span></a>
+          <a className="carousel-control left" href="#offlineCarousel" data-slide="prev">
+            <span className="glyphicon glyphicon-chevron-left"></span>
+          </a>
+          <a className="carousel-control right" href="#offlineCarousel" data-slide="next">
+            <span className="glyphicon glyphicon-chevron-right"></span>
+          </a>
         </div>
       </div>
     </div>

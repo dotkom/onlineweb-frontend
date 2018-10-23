@@ -26,7 +26,11 @@ class App extends React.Component<{}> {
             />
             <Route
               path="/profile/search"
-              render={(props) => <MainMenu match={props.match}><Search {...props} query={toQueryObject(props.location.search)}/></MainMenu>}
+              render={(props) => (
+                <MainMenu match={props.match}>
+                  <Search {...props} query={toQueryObject(props.location.search)}/>
+                </MainMenu>
+              )}
             />
             <Route
               path="/profile/public/:id"
