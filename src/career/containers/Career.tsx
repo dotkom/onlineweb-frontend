@@ -5,7 +5,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import FilterableJobList from './FilterableJobList';
 import DetailView from './DetailView';
 import { IJob, IApiJob } from '../models/Job';
-import { ITag, TagWrapper, TagType, Tags } from '../models/Tag';
+import { ITag, ITagWrapper, TagType, ITags } from '../models/Tag';
 import { IsoDateTime } from 'common/models/Date';
 import { IApiCompany } from 'core/models/Company';
 import { get } from 'common/utils/api';
@@ -43,7 +43,7 @@ const getDeadlines = (deadlines: IDeadlines[]) => (
 
 export interface ICareerState {
   jobs: IJob[];
-  tags: Tags;
+  tags: ITags;
   filterText: string;
 }
 
@@ -86,7 +86,7 @@ class Career extends React.Component<{}, ICareerState> {
   // time makes little sense.
   public handleTagChange(type: TagType, changedTag: string, switchMode: boolean) {
     this.setState((prevState: ICareerState) => {
-      const tags = {} as Tags;
+      const tags = {} as ITags;
 
       Object.keys(prevState.tags).forEach((key) => {
         // If switchMode is on, all the other tags will be disabled - only one
