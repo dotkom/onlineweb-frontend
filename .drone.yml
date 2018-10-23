@@ -25,7 +25,7 @@ pipeline:
     commands:
       - yarn build:prod
   
-  build:
+  lint:
     image: node:carbon
     group: testing
     when:
