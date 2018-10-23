@@ -1,5 +1,5 @@
 export interface IRuleBundle {
-  description: String;
+  description: string;
   field_of_study_rules: IFieldOfStudyRule[];
   grade_rules: IGradeRule[];
   user_group_rules: IUserGroupRule[];

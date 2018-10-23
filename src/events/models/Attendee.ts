@@ -1,6 +1,6 @@
 import { IUser } from 'core/models/User';
 import { IAttendanceEvent } from './Event';
-import { Extra } from './Extras';
+import { IExtra } from './Extras';
 
 export interface IAttendee {
   event: IAttendanceEvent;
@@ -8,7 +8,7 @@ export interface IAttendee {
   timestamp: Date;
   attended: boolean;
   paid: boolean;
-  note: String;
-  extras: Extra;
+  note: string;
+  extras: IExtra;
   show_as_attending_event: boolean;
 }

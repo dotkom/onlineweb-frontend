@@ -7,18 +7,6 @@ export interface ICompany {
   image: IImage;
 }
 
-/*export default class Company implements ICompany {
-  public name: String
-  public website: String
-  public image: String
-
-  public constructor(c: any) {
-    this.name = c.name
-    this.website = c.website
-    this.image = c.image
-  }
-}*/
-
 export interface IApiCompany {
   readonly id: number;
   readonly name: string;
