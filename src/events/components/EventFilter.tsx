@@ -5,7 +5,7 @@ import { EventType } from '../models/Event';
 
 export interface IEventFilter {
   eventTypes: EventType[];
-  setEventVisibility: Function;
+  setEventVisibility: Function; // tslint:disable-line
 }
 
 const EventFilter = ({ eventTypes, setEventVisibility }: IEventFilter) => (
