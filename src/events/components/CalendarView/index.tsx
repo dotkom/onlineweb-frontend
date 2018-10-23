@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getAllEvents, IEventAPIArguemnts } from '../../api/events';
-import { INewEvent, getEventColor, getEventType, EventViewProps } from '../../models/Event';
+import { INewEvent, getEventColor, getEventType, IEventViewProps } from '../../models/Event';
 import { DateTime } from 'luxon';
 import { getMonthLength, getPreviousMonthLength, getFirstWeekdayOfMonth } from '../../utils/calendarUtils';
 import CalendarTile, { createDayList, CalendarFillerTiles } from './CalendarTile';
@@ -34,7 +34,7 @@ export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEve
   return map;
 };
 
-class CalendarView extends Component<EventViewProps, IState> {
+class CalendarView extends Component<IEventViewProps, IState> {
   public state: IState = {
     eventMonth: [],
     month: DateTime.local(),
