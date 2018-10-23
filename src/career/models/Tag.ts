@@ -13,12 +13,12 @@ export interface ITags {
   deadlines?: any;
 }
 
-export interface TagWrapper {
+export interface ITagWrapper {
   [index: string]: ITag;
 }
 
-export interface Tags {
-  [index: string]: TagWrapper;
+export interface ITags {
+  [index: string]: ITagWrapper;
 }
 
 export type TagType = 'companies' | 'locations' | 'jobTypes';

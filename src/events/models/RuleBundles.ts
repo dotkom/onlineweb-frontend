@@ -1,14 +1,14 @@
-export interface RuleBundle {
+export interface IRuleBundle {
   description: String;
-  field_of_study_rules: [FieldOfStudyRule];
-  grade_rules: [GradeRule];
-  user_group_rules: [UserGroupRule];
+  field_of_study_rules: IFieldOfStudyRule[];
+  grade_rules: IGradeRule[];
+  user_group_rules: IUserGroupRule[];
 }
 
-export interface GradeRule {}
+export interface IGradeRule {}
 
-export interface UserGroupRule {}
+export interface IUserGroupRule {}
 
-export interface FieldOfStudyRule {
+export interface IFieldOfStudyRule {
   field_of_study: number; // Positive Integer
 }

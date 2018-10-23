@@ -1,7 +1,7 @@
 import { get } from 'common/utils/api';
 import { IApiCompany } from 'core/models/Company';
 import { IApiJob, IJob } from '../models/Job';
-import { Tags, ITag } from '../models/Tag';
+import { ITags, ITag } from '../models/Tag';
 import moment from 'moment';
 
 const API_URL = '/api/v1/career/';
@@ -49,7 +49,7 @@ const loadData = (data: any) => {
 
   // Update the tags with new information from the server.
   // Deadlines are not updated here as they're specified in the initial state.
-  const tags: Tags = {
+  const tags: ITags = {
     companies: {},
     locations: {},
     jobTypes: {},

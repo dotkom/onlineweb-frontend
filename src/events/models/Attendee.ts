@@ -2,7 +2,7 @@ import { IUser } from 'core/models/User';
 import { IAttendanceEvent } from './Event';
 import { Extra } from './Extras';
 
-export interface Attendee {
+export interface IAttendee {
   event: IAttendanceEvent;
   user: IUser;
   timestamp: Date;
