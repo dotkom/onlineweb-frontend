@@ -1,12 +1,12 @@
 import React from 'react';
 import Tag from './Tag';
-import { ITag, Tags, TagWrapper } from '../models/Tag';
+import { ITag, ITags, ITagWrapper } from '../models/Tag';
 import style from '../less/career.less';
 
 export interface ITagListProps {
-  handleChange: Function;
+  handleChange: (s: string) => void;
   heading: string;
-  tags: TagWrapper;
+  tags: ITagWrapper;
 }
 
 const TagList = ({ tags, handleChange, heading }: ITagListProps) => (
