@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router';
 import createBrowserHistory from 'history/createBrowserHistory';
 import { toQueryObject } from 'common/utils/queryString';
-import './less/profile.less';
 import Profile from './components/Profile';
 import Search from './components/Search';
 import Penalties from './components/Penalties';

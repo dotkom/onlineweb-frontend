@@ -2,7 +2,7 @@ import { get } from 'common/utils/api';
 import { IApiCompany } from 'core/models/Company';
 import { IApiJob, IJob } from '../models/Job';
 import { ITags, ITag } from '../models/Tag';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 
 const API_URL = '/api/v1/career/';
 
@@ -76,7 +76,7 @@ const loadData = (data: any) => {
 const normalizeData = (job: IApiJob): IJob => ({
   locations: job.location.map((location) => location.name), // Locations contains name and slug
   deadline: job.deadline
-    ? moment(job.deadline).format('Do MMMM YYYY')
+    ? DateTime.fromISO(job.deadline).toFormat('dd LLL YYYY')
     : 'Ikke spesifisert', // Format and give default value
   companyImage: job.company.image,
   companyName: job.company.name,
