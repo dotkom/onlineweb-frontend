@@ -1,6 +1,6 @@
 import React from 'react';
 import { IPrivacy, translations } from '../../models/Privacy';
-import ToggleSwitch from 'common/components/ToggleSwitch'
+import ToggleSwitch from 'common/components/ToggleSwitch';
 import style from '../Penalties/penalties.less';
 
 export interface IProps {

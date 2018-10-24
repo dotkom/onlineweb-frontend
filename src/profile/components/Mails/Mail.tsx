@@ -13,6 +13,6 @@ const Mail = ({ email, primary, toggle }: IProps) => (
       <label>{ email }</label>
     </div>
   </span>
-)
+);
 
 export default Mail;

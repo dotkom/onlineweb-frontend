@@ -24,7 +24,7 @@ export interface IDividerBarProps {
   b?: number;
 }
 
-export const Circle = ({ x, radius, lineWidth, color="#333333" }: ICircleProps) => (
+export const Circle = ({ x, radius, lineWidth, color= '#333333' }: ICircleProps) => (
   <circle
     cx={x}
     cy="10"
@@ -33,9 +33,9 @@ export const Circle = ({ x, radius, lineWidth, color="#333333" }: ICircleProps) 
     stroke={color}
     fill="#ffffff"
   />
-)
+);
 
-export const CircleCheck = ({ x, radius, color="#0060a3" }: ICircleCheckProps ) => (
+export const CircleCheck = ({ x, radius, color= '#0060a3' }: ICircleCheckProps ) => (
   <circle
     cx={x}
     cy="10"
@@ -43,7 +43,7 @@ export const CircleCheck = ({ x, radius, color="#0060a3" }: ICircleCheckProps ) 
     stroke="none"
     fill={color}
   />
-)
+);
 
 export const CheckMark = ({ x, radius }: ISvgProps) => (
   <g>
@@ -65,7 +65,7 @@ export const CheckMark = ({ x, radius }: ISvgProps) => (
       strokeWidth="0.5"
     />
   </g>
-)
+);
 
 export const DividerBar = ({ offset = 0, radius, scale = 1, lineWidth, a = 0, b = 0 }: IDividerBarProps) => (
   <rect
@@ -74,4 +74,4 @@ export const DividerBar = ({ offset = 0, radius, scale = 1, lineWidth, a = 0, b 
     width={lineWidth}
     height={radius * 2}
   />
-)
+);

@@ -6,17 +6,17 @@ import style from './resources.less';
 
 export interface IResourceListState {
   resources: IResource[];
-};
+}
 
 export default class ResourceList extends Component<{}, IResourceListState> {
-  readonly state = { resources: [] } as IResourceListState;
+  public readonly state = { resources: [] } as IResourceListState;
 
-  async componentDidMount() {
+  public async componentDidMount() {
     const { results } = await getResources();
     this.setState({ resources: results });
-  };
+  }
 
-  render() {
+  public render() {
     const { resources } = this.state;
     return(
       <div className={style.container}>
@@ -25,5 +25,5 @@ export default class ResourceList extends Component<{}, IResourceListState> {
         )) }
       </div>
     );
-  };
-};
+  }
+}

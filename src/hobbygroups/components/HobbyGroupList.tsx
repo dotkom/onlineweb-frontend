@@ -6,19 +6,19 @@ import style from '../less/hobbygroups.less';
 
 export interface IHobbyGroupListState {
   groups: IHobbyGroup[];
-};
+}
 
 const sortHobbys = (a: IHobbyGroup, b: IHobbyGroup) => (a.priority || 0) - (b.priority || 0);
 
 export default class HobbyGroupList extends Component<{}, IHobbyGroupListState> {
-  readonly state = { groups: [] } as IHobbyGroupListState;
+  public readonly state = { groups: [] } as IHobbyGroupListState;
 
-  async componentDidMount() {
+  public async componentDidMount() {
     const { results } = await getHobbyGroups();
     this.setState({ groups: results });
-  };
+  }
 
-  render() {
+  public render() {
     const { groups } = this.state;
     return(
       <div className={style.container}>
@@ -27,5 +27,5 @@ export default class HobbyGroupList extends Component<{}, IHobbyGroupListState> 
         )) }
       </div>
     );
-  };
-};
+  }
+}

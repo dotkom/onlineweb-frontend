@@ -10,15 +10,15 @@ import prokom from 'common/img/profile/medals/prokom-medal.svg';
 import trikom from 'common/img/profile/medals/trikom-medal.svg';
 
 const medal: {[K in Committee]: string} = {
-  arrkom: arrkom,
-  bankom: bankom,
-  bedkom: bedkom,
-  dotkom: dotkom,
-  fagkom: fagkom,
+  arrkom,
+  bankom,
+  bedkom,
+  dotkom,
+  fagkom,
   hovedstyret: hs,
-  prokom: prokom,
-  trikom: trikom,
-  seniorkom: hs
-}
+  prokom,
+  trikom,
+  seniorkom: hs,
+};
 
-export default medal
+export default medal;

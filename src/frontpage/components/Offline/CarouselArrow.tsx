@@ -11,6 +11,6 @@ const CarouselArrow = ({ direction, onClick, disabled = false }: IProps) => (
     { direction === 'left' ? '<' : null }
     { direction === 'right' ? '>' : null }
   </button>
-)
+);
 
 export default CarouselArrow;

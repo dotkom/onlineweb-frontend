@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { IJob } from '../models/Job'
+import { IJob } from '../models/Job';
 import style from '../less/career.less';
-import Img from 'common/components/Img'
+import Img from 'common/components/Img';
 
 // Accepts a list of locations and returns a comma-separated list of locations
 // with 'og' inserted before the last element, and 'Ikke spesifisert' if no
@@ -18,7 +18,7 @@ export const formatLocations = (locations: any) => {
   return 'Ikke spesifisert';
 };
 
-const STATIC_URL = process.env.OW4_ADDRESS
+const STATIC_URL = process.env.OW4_ADDRESS;
 
 const Job = ({ locations, deadline, companyImage, companyName, title, ingress, type, id }: IJob) => (
   <div className={style.job}>

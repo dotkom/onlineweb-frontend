@@ -3,7 +3,7 @@ import { getArticles } from 'articles/api';
 import { IArticle } from 'articles/models/Article';
 import MainArticle from './MainArticle';
 import SmallArticle from './SmallArticle';
-import style from './articles.less'
+import style from './articles.less';
 
 export interface IProps {
 
@@ -14,17 +14,17 @@ export interface IState {
   index: number;
 }
 
-const DISPLAY_NUMBER = 3
+const DISPLAY_NUMBER = 3;
 
 class Articles extends Component<IProps, IState> {
-  state: IState = {
+  public state: IState = {
     articles: [],
-    index: 0
-  }
+    index: 0,
+  };
 
   public async componentDidMount() {
     const articles = await getArticles();
-    this.setState({ articles })
+    this.setState({ articles });
   }
 
   public render() {
@@ -40,7 +40,7 @@ class Articles extends Component<IProps, IState> {
           </div>
         </> : null }
       </div>
-    )
+    );
   }
 }
 

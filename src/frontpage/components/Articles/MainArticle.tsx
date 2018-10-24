@@ -16,7 +16,7 @@ const MainArticle = ({ absolute_url, heading, image, ingress_short }: IArticle) 
         </div>
       </a>
     </div>
-  )
-}
+  );
+};
 
 export default MainArticle;

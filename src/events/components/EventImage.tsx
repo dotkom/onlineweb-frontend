@@ -4,10 +4,10 @@ import { Carousel } from 'react-bootstrap';
 import IImage from 'common/models/Image';
 
 export interface IEventImageProps {
-  date: string
-  eventUrl: string
-  images: IImage[]
-} 
+  date: string;
+  eventUrl: string;
+  images: IImage[];
+}
 
 const EventImage = ({ date, eventUrl, images }: IEventImageProps) => (
   <div className="col-sm-4 col-md-2">

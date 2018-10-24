@@ -1,14 +1,14 @@
-import { IsoDateTime } from "common/models/Date";
-import { IUser } from "core/models/User";
+import { IsoDateTime } from 'common/models/Date';
+import { IUser } from 'core/models/User';
 
 export type MarkCategory =
-  | 'Ingen' 
+  | 'Ingen'
   | 'Sosialt'
   | 'Bedriftspresentasjon'
   | 'Kurs'
   | 'Tilbakemelding'
   | 'Kontoret'
-  | 'Betaling'
+  | 'Betaling';
 
 export interface IPenalty {
   added_date: IsoDateTime;

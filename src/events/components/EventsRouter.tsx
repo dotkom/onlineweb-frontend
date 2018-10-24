@@ -6,8 +6,8 @@ import HttpError from 'core/components/errors/HttpError';
 
 export const routes = {
   root: '/events',
-  detail: '/events/:id'
-}
+  detail: '/events/:id',
+};
 
 const EventsRouter = ({  }) => (
   <div className="container">
@@ -19,6 +19,6 @@ const EventsRouter = ({  }) => (
       </Switch>
     </section>
   </div>
-)
+);
 
 export default EventsRouter;

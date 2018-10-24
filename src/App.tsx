@@ -23,11 +23,10 @@ export const routes = {
   resources: '/resources',
   wiki: '/wiki',
   webshop: '/webshop',
-  profile: '/profile'
-}
+  profile: '/profile',
+};
 
 const history = createBrowserHistory();
-
 
 export const App = () => {
   return (
@@ -47,6 +46,6 @@ export const App = () => {
       </Router>
     </Provider>
   );
-}
+};
 
 export default App;
