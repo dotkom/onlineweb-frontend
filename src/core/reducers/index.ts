@@ -1,15 +1,15 @@
 
-import { IUser } from '../models/User'
-import { IAction } from '../actions/action'
-import { ActionTypes } from '../actions/actionTypes'
+import { IUser } from '../models/User';
+import { IAction } from '../actions/action';
+import { ActionTypes } from '../actions/actionTypes';
 
 export interface IInitialState {
-  readonly user: IUser | {}
+  readonly user: IUser | {};
 }
 
 const initialState: IInitialState = {
-  user: {}
-}
+  user: {},
+};
 
 const rootReducer = (state = initialState, action: IAction<any>) => {
   switch (action.type) {
@@ -19,7 +19,7 @@ const rootReducer = (state = initialState, action: IAction<any>) => {
       // Should probably have placeholder user or something
       return {  ...state, user: {} };
     default:
-      return state
+      return state;
   }
 };
 

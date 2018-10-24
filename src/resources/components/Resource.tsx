@@ -12,7 +12,7 @@ const Resource = ({ title, description, image }: IResource) => {
         <ReactMarkdown source={description} />
       </span>
     </div>
-  )
-}
+  );
+};
 
 export default Resource;

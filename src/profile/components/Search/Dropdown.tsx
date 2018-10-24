@@ -1,6 +1,6 @@
 import React, { ReactChild } from 'react';
 import Collapsible from 'common/components/Collapsible';
-import { IGroup } from "core/models/Group";
+import { IGroup } from 'core/models/Group';
 import classnames from 'classnames';
 import style from './search.less';
 
@@ -11,13 +11,15 @@ export interface IProps {
 }
 
 class Dropdown extends Collapsible<IProps> {
-  render() {
+  public render() {
     const { groups, selected, onClick } = this.props;
     const { collapsed } = this.state;
     return (
       <div className={classnames(style.dropdownContainer, style.searchField)}>
         { collapsed
-          ? <Item selected={!selected || true} onClick={() => this.toggleCollapse()} >{ selected || 'Velg en gruppe' }</Item>
+          ? <Item selected={!selected || true} onClick={() => this.toggleCollapse()} >
+              { selected || 'Velg en gruppe' }
+            </Item>
           : groups.map((group) => (
             <Item
               key={group.name}
@@ -31,23 +33,23 @@ class Dropdown extends Collapsible<IProps> {
             </Item>))
         }
       </div>
-    )
+    );
   }
 }
 
 export interface IItemProps {
   children: ReactChild;
   selected: boolean;
-  onClick: () => void; 
+  onClick: () => void;
 }
 
 const Item = ({ children, selected = false, onClick }: IItemProps) => (
   <div
     className={classnames(style.dropdownItem, {[style.dropdownSelected]: selected})}
-    onClick={() => onClick()}  
+    onClick={() => onClick()}
   >
     <h4>{ children }</h4>
   </div>
-)
+);
 
 export default Dropdown;

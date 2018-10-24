@@ -2,17 +2,17 @@ import React, { FormEvent } from 'react';
 import FilterList from '../components/FilterList';
 import JobList from '../components/JobList';
 import { IJob } from '../models/Job';
-import { ITags, Tags, ITag } from '../models/Tag';
+import { ITags, ITag } from '../models/Tag';
 import Header from 'frontpage/components/Header';
 import style from '../less/career.less';
 import { containerFluid } from 'core/less/core.less';
 
 export interface IFilterableJobListProps {
   jobs: IJob[];
-  tags: Tags;
-  handleTagChange: Function;
-  handleReset: Function;
-  handleFilterChange: Function;
+  tags: ITags;
+  handleTagChange: (t: string, c: ITag, s: boolean) => void;
+  handleReset: () => void;
+  handleFilterChange: (e: React.FormEvent<any>) => void;
   filterText: string;
 }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getAllEvents, IEventAPIArguemnts } from '../../api/events';
-import { INewEvent, getEventColor, getEventType, EventViewProps } from '../../models/Event';
+import { INewEvent, getEventColor, getEventType, IEventViewProps } from '../../models/Event';
 import { DateTime } from 'luxon';
 import { getMonthLength, getPreviousMonthLength, getFirstWeekdayOfMonth } from '../../utils/calendarUtils';
 import CalendarTile, { createDayList, CalendarFillerTiles } from './CalendarTile';
@@ -13,8 +13,10 @@ export interface IState {
 
 /**
  * @summary Create the correct representation of the current month.
- * @description To easily display the events of the given month, the month is represented as an Array of Arrays of Events.
- * The outer Array represents the ((day of the month) - 1) the event is on, while the inner Array represents the events on that day.
+ * @description To easily display the events of the given month,
+ * the month is represented as an Array of Arrays of Events.
+ * The outer Array represents the ((day of the month) - 1) the event is on,
+ * while the inner Array represents the events on that day.
  * @param {DateTime} month Current month.
  * @param {INewEvent[]} events Events to inject into the month model.
  * @returns {INewEvent[][]} Events represented in a month model.
@@ -24,18 +26,18 @@ export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEve
    * @summary Create an empty EventMonth.
    * @description Create an array of length `daysInMonth`, containing empty arrays.
    */
-  const map = [...Array(month.daysInMonth)].map((a) => Array(0).fill([]))
+  const map = [...Array(month.daysInMonth)].map((a) => Array(0).fill([]));
   events.forEach((event) => {
     const day = DateTime.fromISO(event.event_start).day - 1;
     map[day].push(event);
-  })
-  return map
-}
+  });
+  return map;
+};
 
-class CalendarView extends Component<EventViewProps, IState> {
-  state: IState = {
+class CalendarView extends Component<IEventViewProps, IState> {
+  public state: IState = {
     eventMonth: [],
-    month: DateTime.local()
+    month: DateTime.local(),
   };
 
   public async componentDidMount() {
@@ -43,15 +45,15 @@ class CalendarView extends Component<EventViewProps, IState> {
   }
 
   public async fetchEvents(month: DateTime = this.state.month) {
-    //const { month } = this.state;
+    // const { month } = this.state;
 
     const firstDayOfMonth = month.minus({ days: month.day - 1 });
     const lastDayOfMonth = firstDayOfMonth.plus({ months: 1 }).minus({ days: 1 });
 
     const args: IEventAPIArguemnts = {
       event_start__gte: firstDayOfMonth.toISODate(),
-      event_start__lte: lastDayOfMonth.toISODate()
-    }
+      event_start__lte: lastDayOfMonth.toISODate(),
+    };
 
     const events = await getAllEvents(args);
     const eventMonth = constructMonthMap(month, events);
@@ -63,7 +65,7 @@ class CalendarView extends Component<EventViewProps, IState> {
 
     month = (number >= 0)
       ? month.plus({ months: number })
-      : month.minus({ months: Math.abs(number) })
+      : month.minus({ months: Math.abs(number) });
 
     await this.fetchEvents(month);
     this.setState({ month });
@@ -99,7 +101,7 @@ class CalendarView extends Component<EventViewProps, IState> {
           <CalendarFillerTiles days={next} />
         </div>
       </div>
-    )
+    );
   }
 }
 

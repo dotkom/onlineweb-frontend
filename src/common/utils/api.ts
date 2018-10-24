@@ -24,14 +24,14 @@ export const get = async (query: string, parameters: object = {}, options?: Requ
   } catch (error) {
     console.error(error);
     // Add handle error for some reason?
-  };
+  }
 };
 
 /**
  * @summary Simple fetch-API wrapper for HTTP POST
  * TODO: implement Request options, Done with Object.assign, not tested yet
- * @param {string} query 
- * @param {any} data 
+ * @param {string} query
+ * @param {any} data
  * @param {object} parameters
  * @returns {Promise<any>}
  */
@@ -40,11 +40,11 @@ export const post = async (query: string, data: any, parameters: object = {}, op
   try {
     const response = await fetch(
       DOMAIN + query + queryString,
-      Object.assign(options || {}, { method: 'POST', body: JSON.stringify(data) })
+      Object.assign(options || {}, { method: 'POST', body: JSON.stringify(data) }),
     );
     const json = await response.json();
     return json;
   } catch (error) {
     console.error(error);
-  };
+  }
 };

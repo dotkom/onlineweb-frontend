@@ -6,19 +6,12 @@ export interface ITag {
   deadline?: number;
 }
 
-export interface ITags {
-  companies: TagWrapper | {};
-  locations: TagWrapper | {};
-  jobTypes: TagWrapper | {};
-  deadlines?: any;
-};
-
-export type TagWrapper = {
+export interface ITagWrapper {
   [index: string]: ITag;
-};
-
-export type Tags = {
-  [index: string]: TagWrapper;
 }
 
-export type TagType = 'companies' | 'locations' | 'jobTypes'
+export interface ITags {
+  [index: string]: ITagWrapper;
+}
+
+export type TagType = 'companies' | 'locations' | 'jobTypes';

@@ -45,9 +45,9 @@ const arrangeJobs = (jobs: any, check: any) => {
 // the current date is less than the deadline specified by the tag, return true.
 const deadlineCheck = (job: IJob, id: number, tag: ITag) => {
   if (moment(job.deadline).isValid()) {
-    return new Date(job.deadline).getTime() - Date.now() <= tag.deadline
+    return new Date(job.deadline).getTime() - Date.now() <= tag.deadline;
   } else {
-    return false
+    return false;
   }
 };
 

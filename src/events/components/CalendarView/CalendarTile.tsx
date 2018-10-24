@@ -11,12 +11,12 @@ export interface ITileProps {
 }
 
 export const createDayList = (amount: number, start: number): number[] => {
-  let l = [];
+  const l = [];
   for (let i = 0; i < amount; i++) {
-    l.push(i + start + 1)
+    l.push(i + start + 1);
   }
   return l;
-}
+};
 
 export const CalendarEventTile = ({ events, active = true, day}: ITileProps) => {
   return (
@@ -30,20 +30,20 @@ export const CalendarEventTile = ({ events, active = true, day}: ITileProps) => 
         { events.map((event) => <CalendarEvent key={event.id} {...event} />) }
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
   <>
     { days.map((day) => (
-      <div className={style.tile + " " + style.tileInactive} key={`filler-${day}`}>
+      <div className={style.tile + ' ' + style.tileInactive} key={`filler-${day}`}>
         <div className={style.tileContent}>
           <p>{ day }</p>
         </div>
       </div>
     )) }
   </>
-)
+);
 
 export const CalendarEvent = ({ event_type, title, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
@@ -55,6 +55,6 @@ export const CalendarEvent = ({ event_type, title, id }: INewEvent) => (
       { title }
     </p>
   </Link>
-)
+);
 
 export default CalendarEventTile;

@@ -14,11 +14,11 @@ export interface IArticlesContainerProps {
 }
 
 export interface IArticlesContainerState {
-  articles: IArticle[]
-} 
+  articles: IArticle[];
+}
 
 class ArticlesContainer extends Component<IArticlesContainerProps, IArticlesContainerState> {
-  API_URL: string
+  public API_URL: string;
   constructor(props: IArticlesContainerProps) {
     super(props);
     this.API_URL = '/api/v1/articles';
@@ -28,21 +28,21 @@ class ArticlesContainer extends Component<IArticlesContainerProps, IArticlesCont
     this.fetchArticles();
   }
 
-  async fetchArticles() {
+  public async fetchArticles() {
     const { results } = await getArticles();
     const articles = results.map(apiArticlesToArticles);
     this.setState({ articles });
   }
 
-  mainArticles() {
+  public mainArticles() {
     return this.state.articles.slice(0, 2);
   }
 
-  smallArticles() {
+  public smallArticles() {
     return this.state.articles.slice(2, 8);
   }
 
-  render() {
+  public render() {
     return (
       <Articles
         mainArticles={this.mainArticles()} smallArticles={this.smallArticles()}

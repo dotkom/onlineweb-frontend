@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-//import './less/core.less'
+// import './less/core.less'
 import { Link } from 'react-router-dom';
 import { routes } from 'App';
 import Header from './components/Header/index';
