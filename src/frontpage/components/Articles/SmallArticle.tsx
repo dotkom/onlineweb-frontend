@@ -16,7 +16,7 @@ const SmallArticle = ({ absolute_url, heading, image }: IArticle) => {
         </div>
       </a>
     </div>
-  )
-}
+  );
+};
 
 export default SmallArticle;

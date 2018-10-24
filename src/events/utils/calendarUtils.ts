@@ -61,5 +61,5 @@ export function getMonthAndYear(date: Date) {
 }
 
 /*export function constructMonthMap(date: Date): INewEvent[][] {
-  
+
 }*/

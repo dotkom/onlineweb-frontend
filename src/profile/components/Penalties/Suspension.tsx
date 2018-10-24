@@ -5,7 +5,7 @@ import { ISuspension } from '../../models/Penalty';
 import style from './penalties.less';
 
 class Suspension extends Penalty<ISuspension> {
-  render() {
+  public render() {
     const { penalty } = this.props;
     const { collapsed } = this.state;
     const expiration = DateTime.fromISO(penalty.expiration_date);
@@ -32,7 +32,7 @@ class Suspension extends Penalty<ISuspension> {
           </div>
         <div className={style.progressBar} style={{ width: completion + '%', backgroundColor: completionColor }} />
       </div>
-    )
+    );
   }
 }
 

@@ -8,5 +8,5 @@ export const getHobbyGroups = async () => {
     return data;
   } catch (err) {
     console.error(err);
-  };
+  }
 };

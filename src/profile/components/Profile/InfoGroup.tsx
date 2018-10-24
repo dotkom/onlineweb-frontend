@@ -4,13 +4,13 @@ import style from '../../less/profile.less';
 
 const PROFILE_STATIC = STATIC_URL + 'common/img/profile/';
 
-export interface Props {
+export interface IProps {
   name: string;
   icon: string;
 }
 
-class InfoGroup extends React.Component<Props> {
-  render() {
+class InfoGroup extends React.Component<IProps> {
+  public render() {
     const { children, name, icon } = this.props;
     return (
       <div className={style.infoGroup}>

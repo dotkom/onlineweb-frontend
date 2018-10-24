@@ -11,11 +11,11 @@ import { IFullProfileUser } from '../../models/User';
 import { getProfile } from '../../api';
 import style from '../../less/profile.less';
 
-export interface State {
+export interface IState {
   user: IFullProfileUser;
 }
 
-class Profile extends React.Component<{}, State> {
+class Profile extends React.Component<{}, IState> {
   constructor(props: {}) {
     super(props);
 
@@ -40,10 +40,10 @@ class Profile extends React.Component<{}, State> {
           external: {
             github: 'https://github.com/karinor',
             linkedin: 'https://linkedin.com/in/karinor',
-            homepage: 'https://kari.nordmann.no'
-          }
+            homepage: 'https://kari.nordmann.no',
+          },
 
-        }
+        },
     };
   }
 
@@ -52,7 +52,7 @@ class Profile extends React.Component<{}, State> {
     this.setState({ user });
   }*/
 
-  render() {
+  public render() {
     const { user } = this.state;
     return (
       <div>

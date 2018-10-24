@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { INewEvent, EventViewProps } from '../../models/Event';
+import { INewEvent, IEventViewProps } from '../../models/Event';
 import { DateTime } from 'luxon';
 import style from './list.less';
 import { getEvents } from '../../api/events';
@@ -11,10 +11,10 @@ export interface IState {
   events: INewEvent[];
 }
 
-class ListView extends Component<EventViewProps, IState> {
-  state: IState = {
-    events: []
-  }
+class ListView extends Component<IEventViewProps, IState> {
+  public state: IState = {
+    events: [],
+  };
 
   public async componentDidMount() {
     const events = await getEvents({
@@ -32,7 +32,7 @@ class ListView extends Component<EventViewProps, IState> {
         { events.map((event) => <ListEvent key={event.id} {...event} />) }
       </div>
       </>
-    )
+    );
   }
 }
 

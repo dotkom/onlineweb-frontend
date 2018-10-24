@@ -6,13 +6,13 @@ export interface IProps {
   offlines: IOfflineIssue[];
 }
 
-const IMAGE_SUFFIX = '.thumb.png'
+const IMAGE_SUFFIX = '.thumb.png';
 
 const OfflineCarousel = ({ offlines }: IProps) => (
   <div className={style.container}>
     { offlines.map((offline) => <CarouselItem key={offline.id} {...offline}/>) }
   </div>
-)
+);
 
 const CarouselItem = ({ description, id, issue, release_date, title }: IOfflineIssue) => {
   const thumbnail = issue + IMAGE_SUFFIX;
@@ -23,7 +23,7 @@ const CarouselItem = ({ description, id, issue, release_date, title }: IOfflineI
         <p>{ title }</p>
       </a>
     </div>
-  )
-}
+  );
+};
 
 export default OfflineCarousel;

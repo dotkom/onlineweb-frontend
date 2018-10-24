@@ -25,6 +25,14 @@ pipeline:
     commands:
       - yarn build:prod
   
+  lint:
+    image: node:carbon
+    group: testing
+    when:
+      event: [push, pull_request, tag, deployment]
+    commands:
+      - yarn lint
+
   rebuild-cache:
     image: drillster/drone-volume-cache
     pull: true

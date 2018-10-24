@@ -3,32 +3,32 @@ import Medal from './Medal';
 import { IMedal } from '../../models/Medal';
 import style from '../../less/profile.less';
 
-export interface Props {
+export interface IProps {
   medals: IMedal[];
   name: string;
 }
 
-export interface State {
+export interface IState {
   slice: number;
   showAmount: number;
 }
 
-class Name extends React.Component<Props, State> {
-  state: State = { slice: 3, showAmount: 3 }
+class Name extends React.Component<IProps, IState> {
+  public state: IState = { slice: 3, showAmount: 3 };
 
-  slide(number: number) {
+  public slide(num: number) {
     const { medals } = this.props;
     const { slice, showAmount } = this.state;
-    let adjusted = slice + number;
+    let adjusted = slice + num;
     if (adjusted > medals.length) {
       adjusted = slice;
     } else if (adjusted - showAmount < 0) {
       adjusted = showAmount;
     }
-    this.setState({ slice: adjusted })
+    this.setState({ slice: adjusted });
   }
 
-  render() {
+  public render() {
     const { slice, showAmount } = this.state;
     const { medals, name } = this.props;
     return (
@@ -36,11 +36,11 @@ class Name extends React.Component<Props, State> {
         { /*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/ }
         <p className={style.groupName}>{ name }</p>
         <div className={style.medalGrid}>
-          { medals.slice(slice - showAmount, slice).map(medal => 
+          { medals.slice(slice - showAmount, slice).map((medal) =>
             <Medal
               key={medal.committee + medal.position + medal.range}
               {...medal}
-            />
+            />,
           )}
         </div>
       </div>

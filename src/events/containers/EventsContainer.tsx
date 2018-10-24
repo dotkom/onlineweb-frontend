@@ -20,17 +20,17 @@ const mergeEventImages = (eventImage: string, companyEvent: any) => {
 };
 
 export interface IEvent {
-    readonly id: number
-    readonly slug: string
-    readonly ingress_short: string
-    readonly ingress_long: string
-    readonly event_start: string
-    readonly event_end: string
-    readonly title: string
-    readonly image: string
-    readonly company_event: any
-    readonly startDate: string
-    readonly endDate: string
+    readonly id: number;
+    readonly slug: string;
+    readonly ingress_short: string;
+    readonly ingress_long: string;
+    readonly event_start: string;
+    readonly event_end: string;
+    readonly title: string;
+    readonly image: string;
+    readonly company_event: any;
+    readonly startDate: string;
+    readonly endDate: string;
 
 }
 
@@ -45,10 +45,10 @@ const apiEventsToEvents = (event: IEvent) => ({
 
 const sortEvents = (a: IEvent, b: IEvent) => {
   // checks if the event is starting today or is ongoing
-  const dt1 = DateTime.fromISO(a.startDate)
-  const dt2 = DateTime.fromISO(a.endDate)
-  const dt3 = DateTime.fromISO(b.startDate)
-  const dt4 = DateTime.fromISO(b.endDate)
+  const dt1 = DateTime.fromISO(a.startDate);
+  const dt2 = DateTime.fromISO(a.endDate);
+  const dt3 = DateTime.fromISO(b.startDate);
+  const dt4 = DateTime.fromISO(b.endDate);
 
   if (Interval.fromDateTimes(dt1, dt2).contains(DateTime.local())) {
     if (Interval.fromDateTimes(dt3, dt4).contains(DateTime.local())) {
@@ -119,9 +119,9 @@ class EventsContainer extends Component<IEventsContainerProps> {
     });
   }
 
-  getVisibleEvents(): IEvent[] {
+  public getVisibleEvents(): IEvent[] {
     const { eventTypes } = this.state;
-    const allEventTypesLoaded = Object.keys(eventTypes).every(eventTypeId => (
+    const allEventTypesLoaded = Object.keys(eventTypes).every((eventTypeId) => (
       eventTypes[eventTypeId].loaded
     ));
     if (!allEventTypesLoaded) {
@@ -141,44 +141,48 @@ class EventsContainer extends Component<IEventsContainerProps> {
     return visibleEvents;
   }
 
-  setEventVisibility(e) {
+  public setEventVisibility(e) {
     this.setState({
       eventTypes: toggleEventTypeDisplay(this.state, e.eventType),
     });
   }
 
-  getEventTypes() {
+  public getEventTypes() {
     const { eventTypes } = this.state;
     // Turn object into array
-    return Object.keys(eventTypes).map(eventTypeId => (
+    return Object.keys(eventTypes).map((eventTypeId) => (
       eventTypes[eventTypeId]
     ));
   }
 
-  async fetchEvents() {
+  public async fetchEvents() {
     const { results } = await get(this.API_URL, { event_end__gte: DateTime.local().toISODate(), format: 'json' });
     const events = results.map(apiEventsToEvents);
     this.setState({ events });
   }
 
-  async fetchEventsByType(eventType) {
-    let extra = eventType === 'other' ? '4,5,6,7' : eventType;
-    const { results } = await get(this.API_URL, { event_end__gte: DateTime.local().toISODate(), format: 'json', event_type: extra });
+  public async fetchEventsByType(eventType) {
+    const extra = eventType === 'other' ? '4,5,6,7' : eventType;
+    const { results } = await get(this.API_URL, {
+      event_end__gte: DateTime.local().toISODate(),
+      format: 'json',
+      event_type: extra,
+    });
     const events = results.map(apiEventsToEvents);
     this.setState({
-      eventTypes: setEventsForEventTypeId(this.state, eventType, events)
+      eventTypes: setEventsForEventTypeId(this.state, eventType, events),
     });
   }
 
-  mainEvents(): IEvent[] {
+  public mainEvents(): IEvent[] {
     return this.getVisibleEvents().slice(0, 2);
   }
 
-  smallEvents(): IEvent[] {
+  public smallEvents(): IEvent[] {
     return this.getVisibleEvents().slice(2, 10);
   }
 
-  render() {
+  public render() {
     return (
       <>
       <CalendarView />

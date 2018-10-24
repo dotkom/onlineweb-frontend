@@ -1,11 +1,11 @@
 import React from 'react';
-//import Urls from 'urls';
+// import Urls from 'urls';
 import EventFilter from './EventFilter';
-import { EventType } from '../models/Event'
+import { EventType } from '../models/Event';
 
 export interface IEventsHeadingProps {
-  eventTypes: EventType[]
-  setEventVisibility: Function
+  eventTypes: EventType[];
+  setEventVisibility: Function; // tslint:disable-line
 }
 
 const EventsHeading = ({ eventTypes, setEventVisibility }: IEventsHeadingProps) => (

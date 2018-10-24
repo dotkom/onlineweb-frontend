@@ -18,6 +18,6 @@ const Intro = () => (
       <a href="https://online.ntnu.no/wiki/online/info/innsikt-og-interface/interessegrupper/">her</a>.
     </p>
   </div>
-)
+);
 
 export default Intro;

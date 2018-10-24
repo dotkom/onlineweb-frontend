@@ -23,7 +23,7 @@ class DetailView extends Component<IProps, IState> {
 
     this.state = {
       eventId: parseInt(props.eventId, 10),
-      event: null
+      event: null,
     };
   }
 
@@ -48,7 +48,7 @@ class DetailView extends Component<IProps, IState> {
           <Contact {...e} />
         </div>
       </div>
-    )
+    );
   }
 }
 

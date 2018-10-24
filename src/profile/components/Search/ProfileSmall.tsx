@@ -4,7 +4,7 @@ import style from '../../less/profile.less';
 import classnames from 'classnames';
 
 class ProfileSmall extends React.Component<{ user: ISearchUser }> {
-  render() {
+  public render() {
     const { image, name, phone, mail } = this.props.user;
     return (
       <div className={classnames(style.smallContainer, style.gridRow)}>
