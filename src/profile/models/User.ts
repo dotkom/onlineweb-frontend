@@ -1,4 +1,4 @@
-import { IMedal } from "./Medal";
+import { IMedal } from './Medal';
 
 export interface IFullProfileUser {
   first_name: string;
@@ -15,8 +15,8 @@ export interface IFullProfileUser {
   external: {
     github: string,
     linkedin: string,
-    homepage: string
-  }
+    homepage: string,
+  };
 }
 
 export interface ISearchUser {

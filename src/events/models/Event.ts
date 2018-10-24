@@ -1,13 +1,13 @@
 
-import { ICompany } from 'core/models/Company'
-import { IUser } from 'core/models/User'
-import { IGroup } from 'core/models/Group'
-import { RuleBundle } from 'events/models/RuleBundles'
-import { Extra } from 'events/models/Extras'
-import { Attendee } from './Attendee';
-import IImage from 'common/models/Image'
+import { ICompany } from 'core/models/Company';
+import { IUser } from 'core/models/User';
+import { IGroup } from 'core/models/Group';
+import { IRuleBundle } from 'events/models/RuleBundles';
+import { IExtra } from 'events/models/Extras';
+import { IAttendee } from './Attendee';
+import IImage from 'common/models/Image';
 
-export interface EventViewProps {
+export interface IEventViewProps {
   accessible: boolean;
 }
 
@@ -19,17 +19,17 @@ export enum EventTypeEnum {
   UTFLUKT,
   EKSKURSJON,
   INTERNT,
-  ANNET
+  ANNET,
 }
 
-export type EventType = 
+export type EventType =
   | 'Sosialt'
   | 'Kurs'
   | 'Annet'
   | 'Bedriftspresentasjon'
   | 'Utflukt'
   | 'Ekskursjon'
-  | 'Internt'
+  | 'Internt';
 
 export const getEventType = (n: number): EventType => {
   switch (n) {
@@ -42,7 +42,7 @@ export const getEventType = (n: number): EventType => {
     case 7: return 'Annet';
     default: return 'Annet';
   }
-}
+};
 
 export const getEventColor = (n: number): string => {
   switch (n) {
@@ -56,7 +56,7 @@ export const getEventColor = (n: number): string => {
     case 7: return '#B36BCD';
     default: return '#828282';
   }
-}
+};
 
 export const mockEvent: INewEvent = {
   absolute_url: '',
@@ -74,72 +74,72 @@ export const mockEvent: INewEvent = {
     sm: '',
     thumb: '',
     wide: '',
-    xs: ''
+    xs: '',
   },
   ingress: '',
   ingress_short: '',
   location: '',
   slug: '',
-  title: ''
-}
+  title: '',
+};
 
 export enum EventView {
-  IMAGE, LIST, CALENDAR
+  IMAGE, LIST, CALENDAR,
 }
 
 export interface IFrontpageEvent {
-  eventUrl: string
-  startDate: string
-  author: IUser
-  title: string
-  event_start: Date
-  event_end: Date
-  ingress: string // TextField type?
-  description: string // TextField type?
-  images: IImage[] // StaticContent URL?
-  event_type: EventType
+  eventUrl: string;
+  startDate: string;
+  author: IUser;
+  title: string;
+  event_start: Date;
+  event_end: Date;
+  ingress: string; // TextField type?
+  description: string; // TextField type?
+  images: IImage[]; // StaticContent URL?
+  event_type: EventType;
 }
 
 export interface IEvent {
-  author: IUser
-  title: string
-  event_start: Date
-  event_end: Date
-  location: string // Location type?
-  ingress_short: string // TextField type?
-  ingress: string // TextField type?
-  description: string // TextField type?
-  image: string // StaticContent URL?
-  event_type: EventType
-  organizer: IGroup
+  author: IUser;
+  title: string;
+  event_start: Date;
+  event_end: Date;
+  location: string; // Location type?
+  ingress_short: string; // TextField type?
+  ingress: string; // TextField type?
+  description: string; // TextField type?
+  image: string; // StaticContent URL?
+  event_type: EventType;
+  organizer: IGroup;
 
-  //feedback: Feedback
+  // feedback: Feedback
 }
 
 export interface ICompenyEvent extends IEvent {
-  company: ICompany
+  company: ICompany;
 }
 
 export enum EEventType {
-  COMPANYPRESENTATION, COMPANYCOURSE, SOCIAL, OTHER
+  COMPANYPRESENTATION, COMPANYCOURSE, SOCIAL, OTHER,
 }
 
 export interface IAttendanceEvent {
-  max_capacity: number // Positive Integer
-  waitlist: boolean
-  guest_attendance: boolean
-  registration_start: Date
-  unattend_deadline: Date
-  registration_end: Date
+  max_capacity: number; // Positive Integer
+  waitlist: boolean;
+  guest_attendance: boolean;
+  registration_start: Date;
+  unattend_deadline: Date;
+  registration_end: Date;
 
-  automatically_set_marks: boolean
-  marks_has_been_set: boolean
+  automatically_set_marks: boolean;
+  marks_has_been_set: boolean;
 
-  rule_bundles: [RuleBundle] // ManyToMany
-  extras: [Extra] // ManyToMany
-  //payments: [Payment] // GenericRelation
+  rule_bundles: IRuleBundle[]; // ManyToMany
+  extras: IExtra[]; // ManyToMany
+  // payments: [Payment] // GenericRelation
 
-  attendees: Attendee[]
+  attendees: IAttendee[];
 }
 
 export interface INewAttendanceEvent {

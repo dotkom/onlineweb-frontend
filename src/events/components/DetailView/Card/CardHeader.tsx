@@ -10,6 +10,6 @@ const CardHeader = ({ text, children, color = '#454545', ...props }: IProps) => 
   <p {...props} className={style.cardHeader} style={{ color }}>
     { children || text }
   </p>
-)
+);
 
 export default CardHeader;

@@ -9,6 +9,6 @@ const InfoBox = ({ description, ingress }: INewEvent) => (
       <p className={style.infoBoxContent}>{ description }</p>
     </div>
   </div>
-)
+);
 
 export default InfoBox;

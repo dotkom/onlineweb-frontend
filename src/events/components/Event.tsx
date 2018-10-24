@@ -1,13 +1,13 @@
 import React from 'react';
 import EventImage from '../components/EventImage';
-import IImage from 'common/models/Image'
+import IImage from 'common/models/Image';
 
 export interface IEventProps {
-  eventUrl: string
-  images: IImage[]
-  ingress: string
-  startDate: string
-  title: string
+  eventUrl: string;
+  images: IImage[];
+  ingress: string;
+  startDate: string;
+  title: string;
 }
 
 const Event = ({ eventUrl, images, ingress, startDate, title }: IEventProps) => (

@@ -5,7 +5,7 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import FilterableJobList from './FilterableJobList';
 import DetailView from './DetailView';
 import { IJob, IApiJob } from '../models/Job';
-import { ITag, TagWrapper, TagType, Tags } from '../models/Tag';
+import { ITag, ITagWrapper, TagType, ITags } from '../models/Tag';
 import { IsoDateTime } from 'common/models/Date';
 import { IApiCompany } from 'core/models/Company';
 import { get } from 'common/utils/api';
@@ -16,7 +16,7 @@ const history = createBrowserHistory();
 export interface IDeadlines {
   name: string;
   deadline: number;
-};
+}
 
 const DEADLINES: IDeadlines[] = [
   {
@@ -43,12 +43,12 @@ const getDeadlines = (deadlines: IDeadlines[]) => (
 
 export interface ICareerState {
   jobs: IJob[];
-  tags: Tags;
+  tags: ITags;
   filterText: string;
-};
+}
 
 class Career extends React.Component<{}, ICareerState> {
-  defaultTags: string = '';
+  public defaultTags: string = '';
   constructor(props: any) {
     super(props);
 
@@ -70,23 +70,23 @@ class Career extends React.Component<{}, ICareerState> {
 
       filterText: '',
     };
-  };
+  }
 
-  async componentDidMount() {
-    const { tags, jobs } = await getCareerOpportunities()
+  public async componentDidMount() {
+    const { tags, jobs } = await getCareerOpportunities();
     this.setState({ tags, jobs }, () => {
-      this.defaultTags = JSON.stringify(tags)
+      this.defaultTags = JSON.stringify(tags);
     });
-  };
+  }
 
   // Handles a tag button being clicked by updating the state of the tag with id
   // changedTag of the specified type. If switchMode is true, all the tags in the TagContainer
   // will behave like a kind select menu - selecting one tag will blur all the other buttons.
   // This is used with the deadline tags, as selecting both 1 week and 1 month at the same
   // time makes little sense.
-  handleTagChange(type: TagType, changedTag: string, switchMode: boolean) {
+  public handleTagChange(type: TagType, changedTag: string, switchMode: boolean) {
     this.setState((prevState: ICareerState) => {
-      const tags = {} as Tags;
+      const tags = {} as ITags;
 
       Object.keys(prevState.tags).forEach((key) => {
         // If switchMode is on, all the other tags will be disabled - only one
@@ -116,12 +116,12 @@ class Career extends React.Component<{}, ICareerState> {
       }
 
       return {
-        tags: tags,
+        tags,
       };
     });
   }
 
-  handleFilterChange(event: React.FormEvent<HTMLInputElement>) {
+  public handleFilterChange(event: React.FormEvent<HTMLInputElement>) {
     if (event.target) {
       this.setState({
         filterText: event.currentTarget.value,
@@ -130,23 +130,21 @@ class Career extends React.Component<{}, ICareerState> {
   }
 
   // Reset all buttons to their initial state.
-  handleReset() {
+  public handleReset() {
     this.setState({
       // Not creating a clone here will cause the reset button to only work once.
       tags: JSON.parse(this.defaultTags),
     });
   }
 
-  render() {
+  public render() {
     return (
-      <section id='career'>
+      <section id="career">
           <Switch>
             <Route
               exact
-              //exact //this broke routing tot he career view when output.publicPath = '/' was added to webpack.config.js.
-              //pubicPath is needed to be able to serve static correctly with with HTML webpack plugin. 
               path="/career"
-              render={props => <FilterableJobList
+              render={(props) => <FilterableJobList
                 handleReset={() => this.handleReset()}
                 handleTagChange={(type: TagType, changedTag: string, switchMode: boolean) =>
                   this.handleTagChange(type, changedTag, switchMode)}
@@ -159,7 +157,7 @@ class Career extends React.Component<{}, ICareerState> {
             <Route
 
               path="/career/:id"
-              render={props => <DetailView {...props} jobs={this.state.jobs} />}
+              render={(props) => <DetailView {...props} jobs={this.state.jobs} />}
             />
           </Switch>
       </section>

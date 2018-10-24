@@ -1,5 +1,5 @@
 import React from 'react';
-import { IArticle } from '../models/Article'
+import { IArticle } from '../models/Article';
 import { DOMAIN } from 'common/constants/endpoints';
 
 const SmallArticle = ({ articleUrl, heading, image }: IArticle) => (

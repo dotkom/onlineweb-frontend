@@ -11,5 +11,5 @@ export const translations: { [Key in keyof IPrivacy]: string } = {
   expose_nickname: 'Vis brukernavn',
   expose_email: 'Vis epostadresse',
   expose_phone_number: 'Vis telefonnummer',
-  expose_address: 'Vis adresse'
-}
+  expose_address: 'Vis adresse',
+};

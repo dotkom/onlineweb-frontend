@@ -2,8 +2,8 @@ import React from 'react';
 import style from '../less/career.less';
 
 export interface ISearchBoxProps {
-  onChange: Function
-  text: string
+  onChange: (e: React.FormEvent<any>) => void;
+  text: string;
 }
 
 const SearchBox = ({ onChange, text }: ISearchBoxProps) => (
@@ -12,7 +12,7 @@ const SearchBox = ({ onChange, text }: ISearchBoxProps) => (
     <input className={style.searchBox}
       type="search"
       value={text}
-      onChange={e => onChange(e)}
+      onChange={(e) => onChange(e)}
     />
   </div>
 );

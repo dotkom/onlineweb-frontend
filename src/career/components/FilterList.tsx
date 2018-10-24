@@ -1,15 +1,15 @@
 import React, { FormEvent } from 'react';
 import TagList from './TagList';
 import SearchBox from '../components/SearchBox';
-import { ITag, Tags } from '../models/Tag';
+import { ITag, ITags } from '../models/Tag';
 
 import style from '../less/career.less';
 
 export interface IFilterListProps {
-  handleTagChange: Function;
-  tags: Tags;
-  handleReset: Function;
-  handleFilterChange: Function;
+  handleTagChange: (s: string, t: ITag, a?: boolean) => void;
+  tags: ITags;
+  handleReset: () => void;
+  handleFilterChange: (e: React.FormEvent<any>) => void;
   filterText: string;
 }
 

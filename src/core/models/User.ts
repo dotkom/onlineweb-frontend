@@ -1,6 +1,6 @@
-import { IGroup } from "./Group";
-import { IsoDateTime } from "common/models/Date";
-import { Url } from "common/models/Url";
+import { IGroup } from './Group';
+import { IsoDateTime } from 'common/models/Date';
+import { Url } from 'common/models/Url';
 
 /**
  * string formatted as:
@@ -17,13 +17,13 @@ export type OnlineMail = Email;
 /**
  * Number as a string, formatted as:
  * "^/((\+|00)47\ ?)?(\d{8}|(\d{2}\ \d{2}\ \d{2}\ \d{2})|(\d{3}\ \d{2}\ \d{3}))/g"
- * 
+ *
  * This is probably way too comlicated and needs to be narrowed down to something else?
  */
 export type PhoneNumber = string;
 
 /**
- * 
+ *
  */
 export type Gender = 'male' | 'female' | null;
 
@@ -40,7 +40,7 @@ export type ZipCode = string;
 export type RFID = string;
 
 /**
- * Defined as a number between 0 and 6? 
+ * Defined as a number between 0 and 6?
  */
 export type FieldOfStudy = number;
 
@@ -88,7 +88,7 @@ export interface IPrivateUser extends IPublicUser {
 
   public constructor(u: IOnlineUser) {
     Object.assign(this, u)
-  } 
+  }
 
   public get fullName(): string {
     return `${this.firstName} ${this.lastName}`
