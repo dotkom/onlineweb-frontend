@@ -4,6 +4,8 @@ import { getEventType, INewEvent } from '../models/Event';
 export interface IEventAPIArguemnts {
   event_start__gte?: string;
   event_start__lte?: string;
+  event_end__gte?: string;
+  event_end_lte?: string;
   event_type?: number[] | number;
   page?: number;
 }
