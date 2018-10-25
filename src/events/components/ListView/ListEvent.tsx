@@ -18,7 +18,7 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
   const eventColor = getEventColor(event_type);
   const eventType = getEventType(event_type);
   const eventDate = DateTime.fromISO(event_start).toFormat('d.MM');
-  console.log(company_event ? company_event : null);
+
   return (
     <Link to={`/events/${id}`}>
       <div className={style.gridRow}>
