@@ -8,7 +8,7 @@ const settings = {
   response_type: 'id_token token',
   scope: 'openid profile',
   filterProtocolClaims: true,
-  loadUserInfo: true
+  loadUserInfo: true,
 };
 
-export default settings; 
+export default settings;

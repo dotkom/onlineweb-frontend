@@ -8,36 +8,37 @@ export interface IUserContext {
 }
 
 const initialState: IUserContext = {
-  setAuth: (user: IAuthUser) => console.error('setAuth called before UserProvider is initialized')
-}
+  setAuth: (user: IAuthUser) => console.error('setAuth called before UserProvider is initialized'),
+};
 
 export const UserContext = createContext(initialState);
 
 class UserProvider extends Component<{}, IUserContext> {
-  completeLogin = (user: IAuthUser) => {
-    this.setState({ user });
-  }
-  
-  state: IUserContext = {
+
+  public state: IUserContext = {
     ...initialState,
-    setAuth: this.completeLogin
+    setAuth: this.completeLogin,
   };
 
-  render() {
+  public completeLogin = (user: IAuthUser) => {
+    this.setState({ user });
+  }
+
+  public render() {
     const setAuth = (auth: User) => this.completeLogin(auth);
     return(
       <UserContext.Provider value={{...this.state, setAuth }}>
         { this.props.children }
       </UserContext.Provider>
-    )
+    );
   }
 }
 
-export function injectUserContext<C extends React.ComponentClass<any>>(Component: C): C {
-  return ((props: any) => 
+export function injectUserContext<C extends React.ComponentClass<any>>(Comp: C): C {
+  return ((props: any) =>
     <UserContext.Consumer>
-      {(context) => <Component {...props} auth={context} />}
-    </UserContext.Consumer>) as any as C
+      {(context) => <Comp {...props} auth={context} />}
+    </UserContext.Consumer>) as any as C;
 }
 
 export default UserProvider;

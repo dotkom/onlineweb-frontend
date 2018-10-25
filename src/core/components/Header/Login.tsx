@@ -14,11 +14,11 @@ class Login extends Component<{}> {
   public render = () => (
     <UserContext.Consumer>
       {({ user }) => (
-        <div>{ (user) ? <HeaderUser {...user} />: <LoginView /> }</div>
+        <div>{ (user) ? <HeaderUser {...user} /> : <LoginView /> }</div>
       )}
     </UserContext.Consumer>
-  );
-};
+  )
+}
 
 const HeaderUser = (user: IAuthUser) => (
   <div>
