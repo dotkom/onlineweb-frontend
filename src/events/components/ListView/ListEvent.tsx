@@ -4,7 +4,6 @@ import { INewEvent, getEventColor, getEventType, IAttendanceEvent } from '../../
 import HostPolygon from './HostPolygon';
 import StatusPolygon from './StatusPolygon';
 import style from './list.less';
-import { Link } from 'react-router-dom';
 
 const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
   return attendance
@@ -20,28 +19,26 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
   const eventDate = DateTime.fromISO(event_start).toFormat('d.MM');
 
   return (
-    <Link to={`/events/${id}`}>
-      <div className={style.gridRow}>
-        <div className={style.elementGridRow} style={{ left: 0 }}>
-          <HostPolygon color={ eventColor } />
-          <p>{ (company_event[0] && company_event[0].company.name) || eventType }</p>
-        </div>
-
-        <div className={style.elementGridRow}>
-          <p style={{ verticalAlign: 'center' }}>{ title }</p>
-        </div>
-        <div className={style.elementGridRow}>
-          <p> { getEventAttendees(attendance_event) } </p>
-        </div>
-        <div className={style.elementGridRow}>
-          <p>{ eventDate }</p>
-        </div>
-        <div className={style.elementGridRow}>
-          <StatusPolygon color="#828282" />
-          <p>{ attendance_event ? 'Y' : 'N' }</p>
-        </div>
+    <div className={style.gridRow}>
+      <div className={style.elementGridRow} style={{ left: 0 }}>
+        <HostPolygon color={ eventColor } />
+        <p>{ (company_event[0] && company_event[0].company.name) || eventType }</p>
       </div>
-    </Link>
+
+      <div className={style.elementGridRow}>
+        <p style={{ verticalAlign: 'center' }}>{ title }</p>
+      </div>
+      <div className={style.elementGridRow}>
+        <p> { getEventAttendees(attendance_event) } </p>
+      </div>
+      <div className={style.elementGridRow}>
+        <p>{ eventDate }</p>
+      </div>
+      <div className={style.elementGridRow}>
+        <StatusPolygon color="#828282" />
+        <p>{ attendance_event ? 'Y' : 'N' }</p>
+      </div>
+    </div>
   );
 };
 

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { INewEvent, IEventViewProps } from '../../models/Event';
 import { DateTime } from 'luxon';
 import style from './list.less';
 import { getEvents } from '../../api/events';
 import ListEvent from './ListEvent';
-import HostPolygon from './HostPolygon';
-import StatusPolygon from './StatusPolygon';
 
 export interface IState {
   events: INewEvent[];
@@ -29,7 +28,11 @@ class ListView extends Component<IEventViewProps, IState> {
     return (
       <>
       <div className={style.grid}>
-        { events.map((event) => <ListEvent key={event.id} {...event} />) }
+        {events.map((event) => (
+          <Link to={`/events/${event.id}`} key={event.id}>
+            <ListEvent {...event} />
+          </Link>
+        ))}
       </div>
       </>
     );
