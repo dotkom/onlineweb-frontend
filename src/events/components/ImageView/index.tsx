@@ -45,13 +45,15 @@ class ImageView extends Component<IEventViewProps, IState> {
   };
 
   public async componentDidMount() {
-    const events_left = await this.getTypeEvents([EventTypeEnum.BEDPRES]);
-    const events_middle = await this.getTypeEvents([EventTypeEnum.KURS]);
-    const events_right = await this.getTypeEvents([
-      EventTypeEnum.SOSIALT,
-      EventTypeEnum.UTFLUKT,
-      EventTypeEnum.EKSKURSJON,
-      EventTypeEnum.ANNET,
+    const [ events_left, events_middle, events_right ] = await Promise.all([
+      this.getTypeEvents([EventTypeEnum.BEDPRES]),
+      this.getTypeEvents([EventTypeEnum.KURS]),
+      this.getTypeEvents([
+        EventTypeEnum.SOSIALT,
+        EventTypeEnum.UTFLUKT,
+        EventTypeEnum.EKSKURSJON,
+        EventTypeEnum.ANNET,
+      ]),
     ]);
 
     this.setState({ events_left, events_middle, events_right, fetched: true });
