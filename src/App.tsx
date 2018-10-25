@@ -29,8 +29,8 @@ export const routes = {
   wiki: '/wiki',
   webshop: '/webshop',
   profile: '/profile',
-  authCallback: '/auth/callback'
-}
+  authCallback: '/auth/callback',
+};
 
 const LoadableProfile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ './profile'),

@@ -8,18 +8,20 @@ export interface IProps {
 
 @injectUserContext
 class AuthCallback extends Component<IProps> {
-  async componentDidMount() {
+  public async componentDidMount() {
     const { auth } = this.props;
     const user = await authCallback();
-    auth && auth.setAuth(user);
+    if (auth) {
+      auth.setAuth(user);
+    }
   }
 
-  render() {
+  public render() {
     return (
       <div>
         AuthCallback
       </div>
-    )
+    );
   }
 }
 

@@ -5,6 +5,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './header.less';
 import HeaderLogo from './HeaderLogo';
+import HeaderLogin from './Login';
 import MainSponsor from './MainSponsor';
 
 export const Header = () => (

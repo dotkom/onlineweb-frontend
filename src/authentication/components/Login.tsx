@@ -6,6 +6,6 @@ const LoginView = () => (
   <div className={style.login}>
     <button onClick={() => logIn('', '')}>Logg inn</button>
   </div>
-)
+);
 
 export default LoginView;
