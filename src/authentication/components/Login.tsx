@@ -4,7 +4,7 @@ import style from './login.less';
 
 const LoginView = () => (
   <div className={style.login}>
-    <button onClick={() => logIn('', '')}>Logg inn</button>
+    <button onClick={() => logIn()}>Logg inn</button>
   </div>
 );
 
