@@ -35,7 +35,7 @@ class DetailView extends Component<IProps, IState> {
 
   public render() {
     const event  = this.state.event || mockEvent;
-    
+
     return (
       <div className={style.container}>
         <div className={style.leftContainer}>

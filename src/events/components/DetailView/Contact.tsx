@@ -5,10 +5,12 @@ import CardHeader from './Card/CardHeader';
 
 const Contact = ({ event_type }: INewEvent) => {
   const color = getEventColor(event_type);
+
   return (
     <div className={style.contact}>
       <div className={style.cardMargin}>
         <CardHeader color={color}>Kontakt</CardHeader>
+
         <p></p>
       </div>
     </div>
