@@ -14,24 +14,33 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
   const startTime = DateTime.fromISO(event_start).toFormat('hh:mm');
   const endDate = DateTime.fromISO(event_end).toFormat('d MMM');
   const endTime = DateTime.fromISO(event_end).toFormat('hh:mm');
+
   return (
     <div className={style.pictureCard}>
-      <img src={DOMAIN + imageUrl} style={{ width: '100%' }} />
-      <div>
+      <div className={style.imageContainer}>
+        <img src={DOMAIN + imageUrl} />
+      </div>
+
+      <div className={style.attendance}>
         <CardHeader color={color}>Oppmøte</CardHeader>
-        <div>
-          <p>Starttid</p>
-          <p>{ startDate }</p>
-          <p>{ startTime }</p>
-        </div>
-        <div>
-          <p>Sluttid</p>
-          <p>{ endDate }</p>
-          <p>{ endTime }</p>
-        </div>
-        <div>
-          <p>Sted</p>
-          <p>{ location }</p>
+
+        <div className={style.blocks}>
+          <div className={style.block}>
+            <h3>Starttid</h3>
+            <p>{startDate}</p>
+            <p>{startTime}</p>
+          </div>
+
+          <div className={style.block}>
+            <h3>Sluttid</h3>
+            <p>{endDate}</p>
+            <p>{endTime}</p>
+          </div>
+
+          <div className={style.block}>
+            <h3>Sted</h3>
+            <p>{location}</p>
+          </div>
         </div>
       </div>
     </div>
