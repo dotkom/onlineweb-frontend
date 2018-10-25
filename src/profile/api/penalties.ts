@@ -1,16 +1,24 @@
-import { initialState } from 'authentication/reducers/';
 import { get } from 'common/utils/api';
+import { IUser } from 'core/models/User';
 import { IMark, ISuspension } from '../models/Penalty';
 
 const API_URL = '/api/v1/profile';
+
+const userMock: IUser = {
+  email: 'ola.nordmann@online.ntnu.no',
+  first_name: 'Ola',
+  last_name: 'Nordmann',
+  groups: [],
+  username: 'olanor',
+};
 
 const marksMock: IMark[] = [
   {
     added_date: '2018-05-11T19:00:00+01:00',
     category: 'Betaling',
     description: 'Du har fått en prikk fordi du ikke har betalt for et arrangement...',
-    given_by: initialState.user,
-    last_changed_by: initialState.user,
+    given_by: userMock,
+    last_changed_by: userMock,
     last_changed_date: '2018-05-11T19:00:00+01:00',
     expiration_date: '2018-06-11T19:00:00+01:00',
     title: 'Prikk?',
@@ -25,7 +33,7 @@ const suspensionsMock: ISuspension[] = [
     expiration_date: '2018-08-11T19:00:00+01:00',
     payment_id: 1,
     title: 'Suspensjon?',
-    user: initialState.user,
+    user: userMock,
   },
   {
     active: true,
@@ -34,7 +42,7 @@ const suspensionsMock: ISuspension[] = [
     expiration_date: '2018-07-11T19:00:00+01:00',
     payment_id: 1,
     title: 'Suspensjon?',
-    user: initialState.user,
+    user: userMock,
   },
   {
     active: true,
@@ -43,7 +51,7 @@ const suspensionsMock: ISuspension[] = [
     expiration_date: '2018-06-11T19:00:00+01:00',
     payment_id: 1,
     title: 'Suspensjon?',
-    user: initialState.user,
+    user: userMock,
   },
 ];
 
