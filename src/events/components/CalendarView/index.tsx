@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { getAllEvents, IEventAPIArguemnts } from '../../api/events';
+import { getEvents, IEventAPIParameters } from '../../api/events';
 import { INewEvent, getEventColor, getEventType, IEventViewProps } from '../../models/Event';
 import { DateTime } from 'luxon';
 import { getMonthLength, getPreviousMonthLength, getFirstWeekdayOfMonth } from '../../utils/calendarUtils';
 import CalendarTile, { createDayList, CalendarFillerTiles } from './CalendarTile';
 import style from './calendar.less';
+import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
 
 export interface IState {
   eventMonth: INewEvent[][];
@@ -36,26 +37,36 @@ export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEve
 
 class CalendarView extends Component<IEventViewProps, IState> {
   public state: IState = {
-    eventMonth: [],
+    eventMonth: constructMonthMap(DateTime.local(), []),
     month: DateTime.local(),
   };
 
   public async componentDidMount() {
+    await this.getSession();
     this.fetchEvents();
   }
 
-  public async fetchEvents(month: DateTime = this.state.month) {
-    // const { month } = this.state;
+  public async getSession() {
+    const { month } = await getCalendarSession();
+    this.setState({ month });
+  }
 
+  public async setSession() {
+    const { month } = this.state;
+    await saveCalendarSession({ month });
+  }
+
+  public async fetchEvents(month: DateTime = this.state.month) {
     const firstDayOfMonth = month.minus({ days: month.day - 1 });
     const lastDayOfMonth = firstDayOfMonth.plus({ months: 1 }).minus({ days: 1 });
 
-    const args: IEventAPIArguemnts = {
+    const args: IEventAPIParameters = {
       event_start__gte: firstDayOfMonth.toISODate(),
       event_start__lte: lastDayOfMonth.toISODate(),
+      page_size: 60,
     };
 
-    const events = await getAllEvents(args);
+    const events = await getEvents(args);
     const eventMonth = constructMonthMap(month, events);
     this.setState({ eventMonth });
   }
@@ -68,7 +79,7 @@ class CalendarView extends Component<IEventViewProps, IState> {
       : month.minus({ months: Math.abs(number) });
 
     await this.fetchEvents(month);
-    this.setState({ month });
+    this.setState({ month }, () => this.setSession());
   }
 
   public render() {
