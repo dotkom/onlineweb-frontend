@@ -10,6 +10,11 @@ export interface IAPIData<T> {
   results: T[];
 }
 
+export interface IBaseAPIParameters {
+  page_size?: number;
+  page?: number;
+}
+
 /**
  * @summary Simple fetch-API wrapper for HTTP GET
  * @param {string} query API endpoint URL
