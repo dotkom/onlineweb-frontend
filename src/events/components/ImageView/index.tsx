@@ -90,9 +90,17 @@ class ImageView extends Component<IEventViewProps, IState> {
   }
 }
 
-const SmallEventColumn = ({ events }: { events: INewEvent[] }) => (
-  <>{ events.map((event) => <SmallEvent key={event.id} {...event} />) }</>
-);
+const SmallEventColumn = ({ events }: { events: INewEvent[] }) => {
+  let column = events.map((event) => <SmallEvent key={event.id} {...event} />);
+
+  column = column.concat(Array.apply(null, {
+    length: 3 - column.length,
+  }).map(() => <a />));
+
+  return(
+    <>{ column }</>
+  );
+};
 
 const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
