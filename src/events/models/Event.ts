@@ -116,7 +116,7 @@ export interface IEvent {
   // feedback: Feedback
 }
 
-export interface ICompenyEvent extends IEvent {
+export interface ICompanyEvent extends IEvent {
   company: ICompany;
 }
 
@@ -156,7 +156,7 @@ export interface INewAttendanceEvent {
 export interface INewEvent {
   absolute_url: string;
   attendance_event: IAttendanceEvent | null;
-  company_event: ICompenyEvent[];
+  company_event: ICompanyEvent[];
   description: string;
   event_end: string;
   event_start: string;

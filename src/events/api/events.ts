@@ -1,11 +1,10 @@
-import { get } from 'common/utils/api';
+import { get, IBaseAPIParameters } from 'common/utils/api';
 import { getEventType, INewEvent } from '../models/Event';
 
-export interface IEventAPIArguemnts {
+export interface IEventAPIParameters extends IBaseAPIParameters {
   event_start__gte?: string;
   event_start__lte?: string;
   event_type?: number[] | number;
-  page?: number;
 }
 
 export interface IAPIData<T> {
@@ -17,12 +16,12 @@ export interface IAPIData<T> {
 
 const API_URL = '/api/v1/events/';
 
-export const getEvents = async (args?: IEventAPIArguemnts): Promise<INewEvent[]> => {
+export const getEvents = async (args?: IEventAPIParameters): Promise<INewEvent[]> => {
   const data: IAPIData<INewEvent> = await get(API_URL, { format: 'json', ...args });
   return data.results;
 };
 
-export const getAllEvents = async (args?: IEventAPIArguemnts): Promise<INewEvent[]> => {
+export const getAllEvents = async (args?: IEventAPIParameters): Promise<INewEvent[]> => {
   const data: IAPIData<INewEvent> = await get(API_URL, { format: 'json', ...args });
   let { results } = data;
   if (data.next) {
