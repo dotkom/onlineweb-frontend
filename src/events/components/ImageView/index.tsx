@@ -17,9 +17,9 @@ import { Link } from 'react-router-dom';
 import IImage from 'common/models/Image';
 
 export interface IState {
-  events_left: INewEvent[];
-  events_middle: INewEvent[];
-  events_right: INewEvent[];
+  eventsLeft: INewEvent[];
+  eventsMiddle: INewEvent[];
+  eventsRight: INewEvent[];
   fetched: boolean;
 }
 
@@ -41,27 +41,33 @@ const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
 
 class ImageView extends Component<IEventViewProps, IState> {
   public state: IState = {
-    events_left: [],
-    events_middle: [],
-    events_right: [],
+    eventsLeft: [],
+    eventsMiddle: [],
+    eventsRight: [],
     fetched: false,
   };
 
-  public async componentDidMount() {
-    const events_left = await this.getTypeEvents([EventTypeEnum.BEDPRES]);
-    const events_middle = await this.getTypeEvents([EventTypeEnum.KURS]);
-    const events_right = await this.getTypeEvents([
+  public componentDidMount() {
+    this.getEventsParallelle();
+  }
+
+  public componentWillUnmount() {
+    this.setState({ fetched: false });
+  }
+
+  public async getEventsParallelle() {
+    const left = this.getTypeEvents([EventTypeEnum.BEDPRES]);
+    const middle = this.getTypeEvents([EventTypeEnum.KURS]);
+    const right = this.getTypeEvents([
       EventTypeEnum.SOSIALT,
       EventTypeEnum.UTFLUKT,
       EventTypeEnum.EKSKURSJON,
       EventTypeEnum.ANNET,
     ]);
 
-    this.setState({ events_left, events_middle, events_right, fetched: true });
-  }
+    const [eventsLeft, eventsMiddle, eventsRight] = await Promise.all([left, middle, right]);
 
-  public componentWillUnmount() {
-    this.setState({ fetched: false });
+    this.setState({ eventsLeft, eventsMiddle, eventsRight, fetched: true });
   }
 
   public async getTypeEvents(types: EventTypeEnum[]) {
@@ -72,21 +78,21 @@ class ImageView extends Component<IEventViewProps, IState> {
   }
 
   public render() {
-    const { events_left, events_middle, events_right, fetched } = this.state;
+    const { eventsLeft, eventsMiddle, eventsRight, fetched } = this.state;
 
     if (!fetched) { return null; }
 
     return (
       <>
         <div className={style.largeEventGrid}>
-          <LargeEvent {...events_left[0]} />
-          <LargeEvent {...events_middle[0]} />
-          <LargeEvent {...events_right[0]} />
+          <LargeEvent {...eventsLeft[0]} />
+          <LargeEvent {...eventsMiddle[0]} />
+          <LargeEvent {...eventsRight[0]} />
         </div>
         <div className={style.smallEventGrid}>
-          <SmallEventColumn events={ events_left.slice(1, 4) }/>
-          <SmallEventColumn events={ events_middle.slice(1, 4) }/>
-          <SmallEventColumn events={ events_right.slice(1, 4) }/>
+          <SmallEventColumn events={ eventsLeft.slice(1, 4) }/>
+          <SmallEventColumn events={ eventsMiddle.slice(1, 4) }/>
+          <SmallEventColumn events={ eventsRight.slice(1, 4) }/>
         </div>
       </>
     );
