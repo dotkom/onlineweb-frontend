@@ -2,7 +2,7 @@
 
 .top-grid {
   display: grid;
-  grid-gap: 2rem;
+  grid-gap: 20px;
   grid-template-areas: "jobs filter";
   grid-template-columns: 3fr 1fr;
 }
@@ -20,7 +20,7 @@
 
 .search-box {
   border: 3px solid darken(@baby-blue-medium, 10%);
-  padding: 1rem;
+  padding: 10px;
   margin: 7px 0;
   width: 100%;
 }
@@ -32,17 +32,17 @@
     font-weight: 400;
   }
   & > h1 {
-    font-size: 2rem;
+    font-size: 20px;
     margin-top: 0;
   }
 }
 
 .job-meta {
   border-top: 1px dotted #ccc;
-  margin-top: 1rem;
+  margin-top: 10px;
   display: grid;
-  padding: 1rem;
-  grid-gap: 1rem;
+  padding: 10px;
+  grid-gap: 10px;
   grid-template-columns: repeat(3, 1fr);
   & > p {
     color: #aaa;
@@ -52,9 +52,9 @@
 
 .job {
   display: grid;
-  grid-gap: 2rem;
+  grid-gap: 20px;
   grid-template-columns: 1fr 2fr;
-  padding: 2rem;
+  padding: 20px;
   background-color: white;
   & > a {
     width: 100%;
@@ -68,7 +68,7 @@
 .job-list {
   display: grid;
   grid-template-rows: 1fr;
-  grid-gap: 2rem;
+  grid-gap: 20px;
   grid-area: jobs;
 }
 
@@ -141,13 +141,13 @@
 .detail {
   display: grid;
   grid-template-columns: 5fr 2fr;
-  gap: 2rem;
+  gap: 20px;
 }
 
 .job-description {
   background-color: white;
   div {
-    margin: 3rem;
+    margin: 30px;
   }
   > p {
     font-weight: 300;
@@ -157,7 +157,7 @@
 
 .company {
   display: grid;
-  gap: 2rem;
+  gap: 20px;
   grid-template-columns: auto;
   grid-template-rows: auto;
   a {
@@ -169,7 +169,7 @@
   > div {
     background-color: @baby-blue-medium;
     > div {
-      margin: 2rem;
+      margin: 20px;
       p, h3 {
         color: white;
         font-weight: 300;
