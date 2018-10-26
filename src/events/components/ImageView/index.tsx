@@ -112,7 +112,7 @@ const LargeEvent = ({ image, event_type, title, event_start, attendance_event, i
       <div className={style.largeContent}>
         <p> { title } </p>
         <p> { getEventAttendees(attendance_event) } </p>
-        <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
+        <p> { DateTime.fromISO(event_start).toFormat('dd.MM') } </p>
       </div>
     </div>
   </Link>
@@ -123,7 +123,7 @@ const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: IN
     <div className={style.small} style={{ color: getEventColor(event_type) }}>
       <p> { title } </p>
       <p> { getEventAttendees(attendance_event) } </p>
-      <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
+      <p> { DateTime.fromISO(event_start).toFormat('dd.MM') } </p>
     </div>
   </Link>
 );
