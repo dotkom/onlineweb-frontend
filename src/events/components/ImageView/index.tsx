@@ -120,11 +120,7 @@ const LargeEvent = ({ image, event_type, title, event_start, attendance_event, i
 
 const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
-    <div className={style.small}>
-      <span
-        className={style.smallType}
-        style={{ color: getEventColor(event_type) }}
-      />
+    <div className={style.small} style={{ color: getEventColor(event_type) }}>
       <p> { title } </p>
       <p> { getEventAttendees(attendance_event) } </p>
       <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>

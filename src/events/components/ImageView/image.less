@@ -1,3 +1,5 @@
+@edge-height: 20px;
+
 .large-event-grid, .small-event-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -31,10 +33,23 @@
 }
 
 .imageLargeType {
-  text-align: center;
-  color: white;
-  padding: 0.8rem;
+  position: relative;
   margin: 0;
+  padding: 0.5rem;
+  color: white;
+  font-size: 125%;
+  text-align: center;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    height: @edge-height;
+    bottom: -@edge-height + 1px;
+    width: 100%;
+    left: 0;
+    clip-path: polygon(0 0, 0 5%, 75% 100%, 100% 5%, 100% 0);
+  }
 }
 
 .largeImage {
@@ -42,35 +57,50 @@
 }
 
 .largeContent {
+  position: relative;
   display: grid;
   grid-template-columns: 8fr 2fr 2fr;
   flex: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: white;
+    height: @edge-height;
+    top: -@edge-height + 1px;
+    width: 100%;
+    left: 0;
+    clip-path: polygon(0 100%, 0 95%, 25% 0, 100% 95%, 100% 100%);
+  }
 }
 
 .small {
-  background: white;
   display: grid;
   grid-template-columns: 8fr 2fr 2fr;
   position: relative;
   height: 100%;
+  background: white;
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: currentColor;
+    width: 1.5rem;
+    top: 0;
+    height: 100%;
+    clip-path: polygon(0 0, 0 50%, 100% 0);
+  }
 }
 
 .largeContent, .small {
   > p {
     margin: 0;
-    padding: 1.2rem;
+    padding: 1rem;
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 110%;
     &:last-child {
       text-align: right;
     }
     align-self: center;
   }
-}
-.smallType {
-  width: 0;
-  height: 0;
-  border-top: 1.8rem solid;
-  border-right: 1.8rem solid transparent;
-  padding: 0;
-  position: absolute;
 }
