@@ -5,11 +5,9 @@ import { routes } from 'App';
 import style from './header.less';
 
 const HeaderLogo = () => (
-  <div className="mn-collapse">
-      <Link to={routes.home}>
-        <img className={style.logo} src={`${STATIC_URL}img/online_logo.svg`} alt="Online" />
-      </Link>
-  </div>
+  <Link to={routes.home}>
+    <img className={style.logo} src={`${STATIC_URL}img/online_logo.svg`} alt="Online" />
+  </Link>
 );
 
 export default HeaderLogo;
