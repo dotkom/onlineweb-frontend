@@ -5,6 +5,7 @@ import { DateTime } from 'luxon';
 import { getMonthLength, getPreviousMonthLength, getFirstWeekdayOfMonth } from '../../utils/calendarUtils';
 import CalendarTile, { createDayList, CalendarFillerTiles } from './CalendarTile';
 import style from './calendar.less';
+import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
 
 export interface IState {
   eventMonth: INewEvent[][];
@@ -41,7 +42,18 @@ class CalendarView extends Component<IEventViewProps, IState> {
   };
 
   public async componentDidMount() {
+    await this.getSession();
     this.fetchEvents();
+  }
+
+  public async getSession() {
+    const { month } = await getCalendarSession();
+    this.setState({ month });
+  }
+
+  public async setSession() {
+    const { month } = this.state;
+    await saveCalendarSession({ month });
   }
 
   public async fetchEvents(month: DateTime = this.state.month) {
@@ -67,7 +79,7 @@ class CalendarView extends Component<IEventViewProps, IState> {
       : month.minus({ months: Math.abs(number) });
 
     await this.fetchEvents(month);
-    this.setState({ month });
+    this.setState({ month }, () => this.setSession());
   }
 
   public render() {
