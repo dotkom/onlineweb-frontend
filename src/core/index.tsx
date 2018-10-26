@@ -1,9 +1,10 @@
 import React from 'react';
 import Header from './components/Header/index';
 import Footer from './components/Footer/index';
+import './core.less';
 
 const Core = ({ children }: any) => (
-  <div style={{ backgroundColor: '#f3f3f3' }}>
+  <div>
     <Header />
     { children }
     <Footer />
