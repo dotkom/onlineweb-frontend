@@ -95,7 +95,7 @@ const SmallEventColumn = ({ events }: { events: INewEvent[] }) => {
 
   column = column.concat(Array.apply(null, {
     length: 3 - column.length,
-  }).map(() => <a />));
+  }).map((x: null, i: number) => <a key={i} />));
 
   return(
     <>{ column }</>
