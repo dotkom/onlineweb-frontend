@@ -24,6 +24,8 @@
 }
 
 .large {
+  display: flex;
+  flex-direction: column;
   background: white;
   height: 100%;
 }
@@ -42,6 +44,7 @@
 .largeContent {
   display: grid;
   grid-template-columns: 8fr 2fr 2fr;
+  flex: 1;
 }
 
 .small {
@@ -60,6 +63,7 @@
     &:last-child {
       text-align: right;
     }
+    align-self: center;
   }
 }
 .smallType {
