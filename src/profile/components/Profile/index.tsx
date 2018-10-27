@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './Header';
 import Name from './Name';
 import MedalsView from './MedalsView';
-import Infogroup from './InfoGroup';
 import Info from './Info';
 import Progress from './Progress';
 import IconInfo from './IconInfo';
@@ -11,12 +10,16 @@ import { IFullProfileUser } from '../../models/User';
 import { getProfile } from '../../api';
 import style from '../../less/profile.less';
 
+export interface IProps {
+  id: number;
+}
+
 export interface IState {
   user: IFullProfileUser;
 }
 
-class Profile extends React.Component<{}, IState> {
-  constructor(props: {}) {
+class Profile extends React.Component<IProps, IState> {
+  constructor(props: IProps) {
     super(props);
 
     this.state = {
