@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import { DateTime, Interval } from 'luxon';
 import Penalty from './Penalty';
-import { ISuspension } from '../../models/Penalty';
+import { IMark } from '../../../models/Penalty';
+import { DateTime } from 'luxon';
 import style from './penalties.less';
 
-class Suspension extends Penalty<ISuspension> {
+class Mark extends Penalty<IMark> {
   public render() {
     const { penalty } = this.props;
     const { collapsed } = this.state;
@@ -14,26 +14,24 @@ class Suspension extends Penalty<ISuspension> {
     const completionColor = this.getCompletionColor(completion);
     return (
       <div className={style.gridRow}>
-        <div onClick={() => super.toggleCollapse()} className={style.margin}>
-          <h4>
-            { penalty.title }
+        <div onClick={() => this.toggleCollapse()}>
+          <h4 className={style.title}>
+            <p>{ penalty.title }</p>
             <span>{ added.toFormat('d MMMM y') }</span>
           </h4>
-          { collapsed
-            ? null
-            : <>
-               <p>{ penalty.description }</p>
-                { penalty.expiration_date.length
-                  ? <p><b>Utløpsdato: </b>{ expiration.toFormat('d MMMM y') }</p>
-                  : null
-                }
-              </>
+          { collapsed ? null :
+            <>
+            { /** TIL: (<></>) === (<Fragment></Fragment>) */ }
+              <p>{ penalty.description }</p>
+              <p><b>Katogori: </b>{ penalty.category }</p>
+              <p><b>Utløpsdato: </b>{ expiration.toFormat('d MMMM y') }</p>
+            </>
           }
-          </div>
+        </div>
         <div className={style.progressBar} style={{ width: completion + '%', backgroundColor: completionColor }} />
       </div>
     );
   }
 }
 
-export default Suspension;
+export default Mark;
