@@ -48,14 +48,14 @@ class ImageView extends Component<IEventViewProps, IState> {
   };
 
   public componentDidMount() {
-    this.getEventsParallelle();
+    this.getEventsParallell();
   }
 
   public componentWillUnmount() {
     this.setState({ fetched: false });
   }
 
-  public async getEventsParallelle() {
+  public async getEventsParallell() {
     const left = this.getTypeEvents([EventTypeEnum.BEDPRES]);
     const middle = this.getTypeEvents([EventTypeEnum.KURS]);
     const right = this.getTypeEvents([
@@ -74,6 +74,7 @@ class ImageView extends Component<IEventViewProps, IState> {
     return await getEvents({
       event_end__gte: DateTime.local().toISODate(),
       event_type: types,
+      page_size: 4,
     });
   }
 
