@@ -1,3 +1,9 @@
+<<<<<<< HEAD:src/profile/components/Settings/Penalties/Mark.tsx
+=======
+import React, { Fragment } from 'react';
+import Penalty from './Penalty';
+import { IMark } from '../../../models/Penalty';
+>>>>>>> Move profile/penalties to profile/settings/penalties and upgrade design:src/profile/components/Settings/Penalties/Mark.tsx
 import { DateTime } from 'luxon';
 import React from 'react';
 
