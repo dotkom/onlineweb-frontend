@@ -1,20 +1,26 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router';
-import createBrowserHistory from 'history/createBrowserHistory';
+import { Route, Switch } from 'react-router-dom';
 import { toQueryObject } from 'common/utils/queryString';
-import Profile from './components/Profile';
+import MyProfile from './components/Profile';
 import Search from './components/Search';
-import Penalties from './components/Penalties';
-import Privacy from './components/Privacy';
-import Mails from './components/Mails';
+import Settings from './components/Settings';
 import MainMenu from './components/MainMenu';
+import HttpError from 'core/components/errors/HttpError';
 import 'multirange';
 
-const history = createBrowserHistory();
+const BASE_ROUTE = '/profile';
 
-class App extends React.Component<{}> {
+export const routes = {
+  personal: BASE_ROUTE + '/me',
+  search: BASE_ROUTE + '/search',
+  public: BASE_ROUTE + '/public/:id',
+  settings: BASE_ROUTE + '/settings',
+};
+
+class Profile extends React.Component<{}> {
   public render() {
     return (
+<<<<<<< HEAD
       <section>
         <Router history={history}>
           <Switch>
@@ -56,11 +62,38 @@ class App extends React.Component<{}> {
             />
           </Switch>
         </Router>
+=======
+      <section className="container">
+        <Switch>
+          <Route
+            path={routes.personal}
+            render={({ match }) => <MainMenu match={match}><MyProfile id={match.params.id}/></MainMenu>}
+          />
+          <Route
+            path={routes.search}
+            render={(props) => (
+              <MainMenu match={props.match}>
+                <Search {...props} query={toQueryObject(props.location.search)}/>
+              </MainMenu>
+            )}
+          />
+          <Route
+            path={routes.public}
+            render={({ match }) => <MainMenu match={match}><MyProfile id={match.params.id}  /></MainMenu>}
+          />
+          <Route
+            path={routes.settings}
+            render={(props) => <MainMenu match={props.match}><Settings /></MainMenu>}
+          />
+          <Route path="*" render={() => <HttpError code={404} />} />
+        </Switch>
+>>>>>>> Rework profile router
       </section>
     );
   }
 }
 
+<<<<<<< HEAD
 export const Settings = ({ match }: any) => {
   return (
     <Switch>
@@ -85,3 +118,6 @@ export const Settings = ({ match }: any) => {
 };
 
 export default App;
+=======
+export default Profile;
+>>>>>>> Rework profile router
