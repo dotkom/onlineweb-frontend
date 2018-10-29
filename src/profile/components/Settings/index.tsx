@@ -1,6 +1,7 @@
-import React, { Props } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch, RouteProps } from 'react-router-dom';
 
+import HttpError from 'core/components/errors/HttpError';
 import Mails from './Mails';
 import Penalties from './Penalties';
 import Privacy from './Privacy';
@@ -18,42 +19,39 @@ export const routes = {
 };
 
 const Settings = () => {
-  return(
+  return (
     <Switch>
-      <Route
-        exact
-        path={routes.main}
-        render={(props) => <Wrapper path={props.match.path}></Wrapper>}
-      />
-      <Route
-        path={routes.penalties}
-        render={(props) => <Wrapper path={props.match.path}><Penalties {...props} /></Wrapper>}
-      />
-      <Route
-        path={routes.privacy}
-        render={(props) => <Wrapper path={props.match.path}><Privacy {...props} /></Wrapper>}
-      />
-      <Route
-        path={routes.mail}
-        render={(props) => <Wrapper path={props.match.path}><Mails {...props} /></Wrapper>}
-      />
-      <Route
-        path={routes.password}
-        render={(props) => <Wrapper path={props.match.path}><Privacy {...props} /></Wrapper>}
-      />
+      <SettingsRoute exact path={routes.main} view={Penalties} />
+      <SettingsRoute path={routes.penalties} view={Penalties} />
+      <SettingsRoute path={routes.privacy} view={Privacy} />
+      <SettingsRoute path={routes.mail} view={Mails} />
+      <SettingsRoute path={routes.password} view={Privacy} />
+      <Route path="*" render={() => <HttpError code={404} text="Undersiden du leter etter finnes ikke" />} />
     </Switch>
   );
 };
 
-const Wrapper = ({ path, children }: { path: string } & Props<undefined>) => (
-  <div className={style.container}>
-    <Menu path={path} />
-    <div className={style.content}>
-      <div>
-        { children }
-      </div>
-    </div>
-  </div>
-);
+interface ISettingsRouteProps extends RouteProps {
+  view: React.ComponentClass<any> | React.StatelessComponent<any>;
+}
+
+const SettingsRoute = ({ view, ...props }: ISettingsRouteProps) => {
+  const View = view;
+  return (
+    <Route
+      {...props}
+      render={({ match, ...routeProps }) => (
+        <div className={style.container}>
+          <Menu path={match.path} />
+          <div className={style.content}>
+            <div>
+              <View {...routeProps} />
+            </div>
+          </div>
+        </div>
+      )}
+    />
+  );
+};
 
 export default Settings;
