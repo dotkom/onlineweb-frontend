@@ -8,10 +8,21 @@ const Contact = ({ event_type }: INewEvent) => {
 
   return (
     <div className={style.contact}>
-      <div className={style.cardMargin}>
-        <CardHeader color={color}>Kontakt</CardHeader>
+      <CardHeader color={color}>Kontakt</CardHeader>
 
-        <p></p>
+      <div className={style.block}>
+        <h3>Arrangør</h3>
+        <p>Komitenavn</p>
+      </div>
+
+      <div className={style.block}>
+        <h3>Ansvarlig</h3>
+        <p>Navn Navnesen</p>
+      </div>
+
+      <div className={style.block}>
+        <h3>Medarrangør</h3>
+        <p>Bedriftnavn</p>
       </div>
     </div>
   );
