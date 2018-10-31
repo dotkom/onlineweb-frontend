@@ -3,4 +3,5 @@ export interface IRepository {
     name: string;
     description: string;
     url: string;
+    updated_at: string;
 }
