@@ -2,7 +2,7 @@ import React from 'react';
 import { IRepository } from '../models/Repository';
 import ReactMarkdown from 'react-markdown';
 
-const Repository = ({ name, description, url }: IRepository) => {
+const Repository = ({ name, description }: IRepository) => {
     return (
         <div>
           <span>
