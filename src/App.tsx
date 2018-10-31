@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 
 import Frontpage from './frontpage';
 import Career from './career/';
+import Contribution from './contribution';
 import Hobbys from './hobbygroups';
 import Resources from './resources';
 import HttpError from './core/components/errors/HttpError';
@@ -19,6 +20,7 @@ export const routes = {
   events: '/events',
   home: '/',
   career: '/career',
+  contribution: '/contribution',
   hobbygroups: '/hobbygroups',
   resources: '/resources',
   wiki: '/wiki',
@@ -37,6 +39,7 @@ export const App = () => {
             <Route exact path={routes.home} component={Frontpage} />
             <Route path={routes.events} component={EventsRouter} />
             <Route path={routes.career} component={Career} />
+            <Route path={routes.contribution} component={Contribution} />
             <Route path={routes.hobbygroups} component={Hobbys} />
             <Route path={routes.resources} component={Resources} />
             <Route path={routes.profile} component={Profile} />
