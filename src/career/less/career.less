@@ -3,14 +3,14 @@
 .top-grid {
   display: grid;
   grid-gap: 20px;
-  grid-template-areas: "jobs filter";
+  grid-template-areas: 'jobs filter';
   grid-template-columns: 3fr 1fr;
 }
 
 @media only screen and (max-width: 1024px) {
   .top-grid {
     grid-template-columns: auto;
-    grid-template-areas: "filter" "jobs";
+    grid-template-areas: 'filter' 'jobs';
   }
 }
 
@@ -28,9 +28,12 @@
 .job-info {
   width: 100%;
   text-decoration: none;
-  & > h1, p {
+
+  & > h1,
+  p {
     font-weight: 400;
   }
+
   & > h1 {
     font-size: 20px;
     margin-top: 0;
@@ -44,9 +47,11 @@
   padding: 10px;
   grid-gap: 10px;
   grid-template-columns: repeat(3, 1fr);
+
   & > p {
     color: #aaa;
   }
+
   font-size: 11px;
 }
 
@@ -56,9 +61,11 @@
   grid-template-columns: 1fr 2fr;
   padding: 20px;
   background-color: white;
+
   & > a {
     width: 100%;
     text-decoration: none;
+
     & > img {
       width: 100%;
     }
@@ -78,7 +85,11 @@
 }
 
 .career {
-  p, h1, h2, h3, h4 {
+  p,
+  h1,
+  h2,
+  h3,
+  h4 {
     font-weight: 400;
   }
 
@@ -103,6 +114,7 @@
     font-size: 13px;
     padding-bottom: 10px;
     padding-top: 10px;
+
     &:focus {
       outline: 0;
     }
@@ -146,9 +158,11 @@
 
 .job-description {
   background-color: white;
+
   div {
     margin: 30px;
   }
+
   > p {
     font-weight: 300;
     color: #454545;
@@ -160,17 +174,23 @@
   gap: 20px;
   grid-template-columns: auto;
   grid-template-rows: auto;
+
   a {
     text-decoration: none;
   }
+
   img {
     width: 100%;
   }
+
   > div {
     background-color: @baby-blue-medium;
+
     > div {
       margin: 20px;
-      p, h3 {
+
+      p,
+      h3 {
         color: white;
         font-weight: 300;
       }

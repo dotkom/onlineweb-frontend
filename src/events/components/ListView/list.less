@@ -5,6 +5,7 @@
 
   & > a {
     color: initial;
+
     &:hover {
       text-decoration: none;
     }
@@ -33,15 +34,18 @@
     color: black;
   }
 
-  &:last-child, &:first-child {
+  &:last-child,
+  &:first-child {
     height: 100%;
+
     > p {
       position: absolute;
       color: white;
     }
   }
 
-  &:first-child, &:nth-child(2) {
+  &:first-child,
+  &:nth-child(2) {
     > p {
       padding-left: 15px;
     }
