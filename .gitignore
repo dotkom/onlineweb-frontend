@@ -3,3 +3,5 @@ package-lock.json
 lib
 dist
 *.less.d.ts
+.envrc
+.idea/
