@@ -5,11 +5,23 @@
     font-size: 1.4rem;
     color: #666;
     line-height: 1.625em;
-    word-break: break-all;
   }
   h1 {
     font-size: 1.8rem;
     font-weight: 300;
     color: #454545;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
   }
 }
