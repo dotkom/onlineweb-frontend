@@ -49,6 +49,7 @@
     "mini-css-extract-plugin": "^0.4.0",
     "multirange": "^1.0.0",
     "postcss-loader": "^2.1.5",
+    "prettier-stylelint": "^0.4.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-hot-loader": "^4.2.0",
@@ -58,6 +59,7 @@
     "redux": "^4.0.0",
     "request": "^2.87.0",
     "style-loader": "^0.21.0",
+    "stylelint-config-standard": "^18.2.0",
     "tslint": "^5.11.0",
     "typescript": "^2.8.3",
     "typings-for-css-modules-loader": "^1.7.0",
@@ -71,5 +73,13 @@
     "classnames": "^2.2.5",
     "connected-react-router": "^4.3.0",
     "redux-async-await": "^1.0.1"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "string-quotes": "single",
+      "at-rule-no-unknown": null,
+      "at-rule-empty-line-before": null
+    }
   }
 }
