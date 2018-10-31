@@ -93,9 +93,8 @@ class CalendarView extends Component<IEventViewProps, IState> {
     const next = createDayList((
         ((month.daysInMonth + firstWeekDay) % 7) === 0
           ? 0
-          : 7- (month.daysInMonth + firstWeekDay) % 7)
-        , 0);
-
+          : 7 - (month.daysInMonth + firstWeekDay) % 7),
+        0);
 
     return (
       <div>
