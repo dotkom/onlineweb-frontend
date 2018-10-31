@@ -95,7 +95,6 @@ class CalendarView extends Component<IEventViewProps, IState> {
           ? 0
           : 7- (month.daysInMonth + firstWeekDay) % 7)
         , 0);
-    console.log(next)
 
 
     return (
