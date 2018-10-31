@@ -6,6 +6,7 @@ import {
   getEventType,
   EventTypeEnum,
   IAttendanceEvent,
+  ICompanyEvent,
 } from '../../models/Event';
 import { DateTime } from 'luxon';
 import style from './image.less';
@@ -16,15 +17,17 @@ import { Link } from 'react-router-dom';
 import IImage from 'common/models/Image';
 
 export interface IState {
-  events_left: INewEvent[];
-  events_middle: INewEvent[];
-  events_right: INewEvent[];
+  eventsLeft: INewEvent[];
+  eventsMiddle: INewEvent[];
+  eventsRight: INewEvent[];
   fetched: boolean;
 }
 
-const getEventImage = (image: IImage | null): string => {
+const getEventImage = (image: IImage | null, company_event: ICompanyEvent[]) => {
   return image
-  ? (DOMAIN + image.wide)
+  ? DOMAIN + image.wide
+  : company_event[0]
+  ? DOMAIN + company_event[0].company.image.wide
   : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png';
 };
 
@@ -38,75 +41,88 @@ const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
 
 class ImageView extends Component<IEventViewProps, IState> {
   public state: IState = {
-    events_left: [],
-    events_middle: [],
-    events_right: [],
+    eventsLeft: [],
+    eventsMiddle: [],
+    eventsRight: [],
     fetched: false,
   };
 
-  public async componentDidMount() {
-    const [ events_left, events_middle, events_right ] = await Promise.all([
-      this.getTypeEvents([EventTypeEnum.BEDPRES]),
-      this.getTypeEvents([EventTypeEnum.KURS]),
-      this.getTypeEvents([
-        EventTypeEnum.SOSIALT,
-        EventTypeEnum.UTFLUKT,
-        EventTypeEnum.EKSKURSJON,
-        EventTypeEnum.ANNET,
-      ]),
-    ]);
-
-    this.setState({ events_left, events_middle, events_right, fetched: true });
+  public componentDidMount() {
+    this.getEventsParallell();
   }
 
   public componentWillUnmount() {
     this.setState({ fetched: false });
   }
 
+  public async getEventsParallell() {
+    const left = this.getTypeEvents([EventTypeEnum.BEDPRES]);
+    const middle = this.getTypeEvents([EventTypeEnum.KURS]);
+    const right = this.getTypeEvents([
+      EventTypeEnum.SOSIALT,
+      EventTypeEnum.UTFLUKT,
+      EventTypeEnum.EKSKURSJON,
+      EventTypeEnum.ANNET,
+    ]);
+
+    const [eventsLeft, eventsMiddle, eventsRight] = await Promise.all([left, middle, right]);
+
+    this.setState({ eventsLeft, eventsMiddle, eventsRight, fetched: true });
+  }
+
   public async getTypeEvents(types: EventTypeEnum[]) {
     return await getEvents({
       event_end__gte: DateTime.local().toISODate(),
       event_type: types,
+      page_size: 4,
     });
   }
 
   public render() {
-    const { events_left, events_middle, events_right, fetched } = this.state;
+    const { eventsLeft, eventsMiddle, eventsRight, fetched } = this.state;
 
     if (!fetched) { return null; }
 
     return (
       <>
         <div className={style.largeEventGrid}>
-          <LargeEvent {...events_left[0]} />
-          <LargeEvent {...events_middle[0]} />
-          <LargeEvent {...events_right[0]} />
+          <LargeEvent {...eventsLeft[0]} />
+          <LargeEvent {...eventsMiddle[0]} />
+          <LargeEvent {...eventsRight[0]} />
         </div>
         <div className={style.smallEventGrid}>
-          <SmallEventColumn events={ events_left.slice(1, 4) }/>
-          <SmallEventColumn events={ events_middle.slice(1, 4) }/>
-          <SmallEventColumn events={ events_right.slice(1, 4) }/>
+          <SmallEventColumn events={ eventsLeft.slice(1, 4) }/>
+          <SmallEventColumn events={ eventsMiddle.slice(1, 4) }/>
+          <SmallEventColumn events={ eventsRight.slice(1, 4) }/>
         </div>
       </>
     );
   }
 }
 
-const SmallEventColumn = ({ events }: { events: INewEvent[] }) => (
-  <>{ events.map((event) => <SmallEvent key={event.id} {...event} />) }</>
-);
+const SmallEventColumn = ({ events }: { events: INewEvent[] }) => {
+  let column = events.map((event) => <SmallEvent key={event.id} {...event} />);
 
-const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id }: INewEvent) => (
+  column = column.concat(Array.apply(null, {
+    length: 3 - column.length,
+  }).map((x: null, i: number) => <a key={i} />));
+
+  return(
+    <>{ column }</>
+  );
+};
+
+const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id, company_event }: INewEvent) => (
   <Link to={`/events/${id}`}>
     <div className={style.large}>
       <p className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>
         { getEventType(event_type) }
       </p>
-      <img className={style.largeImage} src={getEventImage(image)} />
+      <img className={style.largeImage} src={getEventImage(image, company_event)} />
       <div className={style.largeContent}>
         <p> { title } </p>
         <p> { getEventAttendees(attendance_event) } </p>
-        <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
+        <p> { DateTime.fromISO(event_start).toFormat('dd.MM') } </p>
       </div>
     </div>
   </Link>
@@ -114,14 +130,10 @@ const LargeEvent = ({ image, event_type, title, event_start, attendance_event, i
 
 const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
-    <div className={style.small}>
-      <span
-        className={style.smallType}
-        style={{ color: getEventColor(event_type) }}
-      />
+    <div className={style.small} style={{ color: getEventColor(event_type) }}>
       <p> { title } </p>
       <p> { getEventAttendees(attendance_event) } </p>
-      <p> { DateTime.fromISO(event_start).toFormat('d.MM') } </p>
+      <p> { DateTime.fromISO(event_start).toFormat('dd.MM') } </p>
     </div>
   </Link>
 );
