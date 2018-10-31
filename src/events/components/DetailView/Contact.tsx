@@ -3,7 +3,7 @@ import { INewEvent, getEventColor } from '../../models/Event';
 import style from './detail.less';
 import CardHeader from './Card/CardHeader';
 
-const Contact = ({ event_type }: INewEvent) => {
+const Contact = ({ event_type, company_event }: INewEvent) => {
   const color = getEventColor(event_type);
 
   return (
@@ -20,10 +20,15 @@ const Contact = ({ event_type }: INewEvent) => {
         <p>Navn Navnesen</p>
       </div>
 
-      <div className={style.block}>
-        <h3>Medarrangør</h3>
-        <p>Bedriftnavn</p>
-      </div>
+      {company_event && company_event.length > 0 && (
+        <div className={style.block}>
+          <h3>Medarrangører</h3>
+
+          {company_event.map(({ company }) => (
+            <p key={company.id}>{company.name}</p>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
