@@ -89,8 +89,12 @@ class CalendarView extends Component<IEventViewProps, IState> {
     const lastDayPrevMonth = getPreviousMonthLength(month.toJSDate());
 
     const previous = createDayList(firstWeekDay, lastDayPrevMonth - firstWeekDay);
-    // 7 - 'number of days last week of the month'
-    const next = createDayList(7 - ((month.daysInMonth + firstWeekDay) % 7), 0);
+    // 7 - 'number of days last week of the month' if 'number of days in last week' is not 0
+    const next = createDayList((
+        ((month.daysInMonth + firstWeekDay) % 7) === 0
+          ? 0
+          : 7 - (month.daysInMonth + firstWeekDay) % 7),
+        0);
 
     return (
       <div>
