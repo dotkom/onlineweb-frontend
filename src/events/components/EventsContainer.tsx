@@ -9,6 +9,7 @@ import {
   IEventSettings,
 } from '../api/eventSettings';
 import { EventView } from '../models/Event';
+import EventContextWrapper from 'events/providers/EventContextWrapper';
 
 const getView = (
   view: EventView
@@ -62,14 +63,14 @@ class Container extends Component<IProps, IState> {
     const { view, accessible } = this.state;
     const View = getView(view);
     return (
-      <section>
+      <EventContextWrapper accessible={accessible}>
         <EventsHeader
           changeView={(v: EventView) => this.changeView(v)}
           toggleAccessible={this.toggleAccessible}
           {...this.state}
         />
         <View accessible={accessible} />
-      </section>
+      </EventContextWrapper>
     );
   }
 }
