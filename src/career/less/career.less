@@ -60,9 +60,28 @@
     width: 100%;
     text-decoration: none;
     & > img {
-      width: 100%;
+      width: 300px;
+      align-self: center;
+      justify-self: center;
+      vertical-align: middle;
+      margin: calc(50% - 150px);;
+
     }
   }
+}
+
+@media only screen and (max-width: 800px) {
+  .job {
+    grid-template: none;
+    align-items: center;
+
+    & > a > img{
+      align-self: center;
+      justify-self: center;
+      margin: 0 calc(50% - 150px);;
+    }
+  }
+
 }
 
 .job-list {
