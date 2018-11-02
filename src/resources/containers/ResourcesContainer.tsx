@@ -1,13 +1,11 @@
 import React from 'react';
 import ResourceList from '../components/ResourceList';
-import Header from 'frontpage/components/Header';
+import Heading from 'frontpage/components/Heading';
 
 const ResourcesContainer = () => (
-  <section id="resourcecenter">
-    <div className="container">
-      <Header>Ressurssenter</Header>
-      <ResourceList />
-    </div>
+  <section>
+    <Heading>Ressurssenter</Heading>
+    <ResourceList />
   </section>
 );
 

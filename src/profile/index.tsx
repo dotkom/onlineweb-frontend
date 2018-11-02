@@ -15,29 +15,44 @@ const history = createBrowserHistory();
 class App extends React.Component<{}> {
   public render() {
     return (
-      <section className="container">
+      <section>
         <Router history={history}>
           <Switch>
             <Route
               exact
               path="/profile/me"
-              render={(props) => <MainMenu match={props.match}><Profile {...props}/></MainMenu>}
+              render={props => (
+                <MainMenu match={props.match}>
+                  <Profile {...props} />
+                </MainMenu>
+              )}
             />
             <Route
               path="/profile/search"
-              render={(props) => (
+              render={props => (
                 <MainMenu match={props.match}>
-                  <Search {...props} query={toQueryObject(props.location.search)}/>
+                  <Search
+                    {...props}
+                    query={toQueryObject(props.location.search)}
+                  />
                 </MainMenu>
               )}
             />
             <Route
               path="/profile/public/:id"
-              render={(props) => <MainMenu match={props.match}><Profile {...props} /></MainMenu>}
+              render={props => (
+                <MainMenu match={props.match}>
+                  <Profile {...props} />
+                </MainMenu>
+              )}
             />
             <Route
               path="/profile/settings"
-              render={(props) => <MainMenu match={props.match}><Settings {...props} /></MainMenu>}
+              render={props => (
+                <MainMenu match={props.match}>
+                  <Settings {...props} />
+                </MainMenu>
+              )}
             />
           </Switch>
         </Router>
@@ -47,23 +62,23 @@ class App extends React.Component<{}> {
 }
 
 export const Settings = ({ match }: any) => {
-  return(
+  return (
     <Switch>
       <Route
         path={match.path + '/penalties'}
-        render={(props) => <Penalties {...props} />}
+        render={props => <Penalties {...props} />}
       />
       <Route
         path={match.path + '/privacy'}
-        render={(props) => <Privacy {...props} />}
+        render={props => <Privacy {...props} />}
       />
       <Route
         path={match.path + '/mail'}
-        render={(props) => <Mails {...props} />}
+        render={props => <Mails {...props} />}
       />
       <Route
         path={match.path + '/password'}
-        render={(props) => <Privacy {...props} />}
+        render={props => <Privacy {...props} />}
       />
     </Switch>
   );

@@ -8,14 +8,16 @@ import Authenticate from 'authentication/components/Authenticate';
 import style from './header.less';
 
 export const Header = () => (
-  <nav id="mainnav">
-    <div className={style.header}>
-      <div className={style.grid}>
-        <HeaderLogo />
-        <div className={style.links}>
-        <div className={style.item}><Link to={routes.events}>Arkiv</Link></div>
+  <header className={style.header}>
+    <div className={style.grid}>
+      <HeaderLogo />
+      <div className={style.links}>
         <div className={style.item}>
-          <Link to={routes.career}>Karriere</Link></div>
+          <Link to={routes.events}>Arkiv</Link>
+        </div>
+        <div className={style.item}>
+          <Link to={routes.career}>Karriere</Link>
+        </div>
         <div className={style.item}>
           <Link to={routes.resources}>Ressurser</Link>
         </div>
@@ -30,11 +32,10 @@ export const Header = () => (
         <div className={style.item}>
           <Link to={routes.webshop}>Webshop</Link>
         </div>
-        </div>
-        <MainSponsor />
       </div>
+      <MainSponsor />
     </div>
-  </nav>
+  </header>
 );
 
 export default Header;
