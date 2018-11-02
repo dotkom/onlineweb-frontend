@@ -1,15 +1,26 @@
 @import './reset.less';
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   background: #f3f3f3;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
 :global {
-  .container {
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+  #root {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
   }
 }

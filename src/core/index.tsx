@@ -4,11 +4,11 @@ import Footer from './components/Footer/index';
 import './less/core.less';
 
 const Core = ({ children }: any) => (
-  <div>
+  <>
     <Header />
-    { children }
+    <main>{children}</main>
     <Footer />
-  </div>
+  </>
 );
 
 export default Core;

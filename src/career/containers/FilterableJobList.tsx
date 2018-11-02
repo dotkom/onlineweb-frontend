@@ -3,7 +3,7 @@ import FilterList from '../components/FilterList';
 import JobList from '../components/JobList';
 import { IJob } from '../models/Job';
 import { ITags, ITag } from '../models/Tag';
-import Header from 'frontpage/components/Header';
+import Heading from 'frontpage/components/Heading';
 import style from '../less/career.less';
 
 export interface IFilterableJobListProps {
@@ -16,17 +16,20 @@ export interface IFilterableJobListProps {
 }
 
 const FilterableJobList = (props: IFilterableJobListProps) => (
-  <div className="container">
-    <Header>
-      KARRIEREMULIGHETER
-    </Header>
+  <div>
+    <Heading>KARRIEREMULIGHETER</Heading>
     <div className={style.topGrid}>
       <FilterList
         tags={props.tags}
-        handleTagChange={(type: string, changedTag: ITag, switchMode: boolean) =>
-          props.handleTagChange(type, changedTag, switchMode)}
+        handleTagChange={(
+          type: string,
+          changedTag: ITag,
+          switchMode: boolean
+        ) => props.handleTagChange(type, changedTag, switchMode)}
         handleReset={() => props.handleReset()}
-        handleFilterChange={(e: FormEvent<HTMLFormElement>) => props.handleFilterChange(e)}
+        handleFilterChange={(e: FormEvent<HTMLFormElement>) =>
+          props.handleFilterChange(e)
+        }
         filterText={props.filterText}
       />
 

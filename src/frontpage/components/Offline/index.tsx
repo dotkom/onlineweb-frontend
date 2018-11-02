@@ -3,11 +3,10 @@ import { getOfflines } from '../../api/offline';
 import { IOfflineIssue } from '../../models/Offline';
 import CarouselArrow from './CarouselArrow';
 import OfflineCarousel from './OfflineCarousel';
+import Heading from '../Heading';
 import style from './carousel.less';
 
-export interface IProps {
-
-}
+export interface IProps {}
 
 export interface IState {
   offlines: IOfflineIssue[];
@@ -19,7 +18,6 @@ export interface IState {
 const DISPLAY_NUMBER = 5;
 
 class Offline extends Component<IProps, IState> {
-
   public state: IState = {
     offlines: [],
     index: 0,
@@ -54,23 +52,26 @@ class Offline extends Component<IProps, IState> {
     const start = index;
     const end = start + DISPLAY_NUMBER;
     return (
-      <div className={''}>
-        { offlines.length ?
+      <section>
+        <Heading title="offline" />
+        {offlines.length ? (
           <>
             <CarouselArrow
               direction="left"
               onClick={() => this.clickNext(-1)}
               disabled={index === 0}
             />
-            <OfflineCarousel offlines={ offlines.slice(index, index + DISPLAY_NUMBER) } />
+            <OfflineCarousel
+              offlines={offlines.slice(index, index + DISPLAY_NUMBER)}
+            />
             <CarouselArrow
               direction="right"
               onClick={() => this.clickNext(1)}
               disabled={end === offlines.length}
             />
           </>
-          : null }
-      </div>
+        ) : null}
+      </section>
     );
   }
 }
