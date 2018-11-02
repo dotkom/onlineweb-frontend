@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CalendarView from './CalendarView';
 import ListView from './ListView';
 import ImageView from './ImageView';
-import Header from './Header';
+import EventsHeader from './EventsHeader';
 import {
   getEventSettings,
   saveEventSettings,
@@ -63,7 +63,7 @@ class Container extends Component<IProps, IState> {
     const View = getView(view);
     return (
       <section>
-        <Header
+        <EventsHeader
           changeView={(v: EventView) => this.changeView(v)}
           toggleAccessible={this.toggleAccessible}
           {...this.state}
