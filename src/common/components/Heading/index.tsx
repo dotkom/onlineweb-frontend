@@ -1,14 +1,14 @@
 import React, { Props } from 'react';
-import style from './header.less';
+import style from './heading.less';
 
 export interface IProps extends React.HtmlHTMLAttributes<IProps> {
   title?: string;
 }
 
-const Header = ({ title, children }: IProps) => (
+const Heading = ({ title, children }: IProps) => (
   <div className={style.grid}>
-    <h3>{ title || children }</h3>
+    <h1>{title || children}</h1>
   </div>
 );
 
-export default Header;
+export default Heading;

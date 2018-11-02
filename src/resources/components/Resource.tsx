@@ -7,10 +7,10 @@ const Resource = ({ title, description, image }: IResource) => {
   return (
     <div className={style.resource}>
       <img src={image} alt={title} />
-      <span>
-        <h3>{title}</h3>
+      <div>
+        <h3 className={style.resourceTitle}>{title}</h3>
         <ReactMarkdown source={description} />
-      </span>
+      </div>
     </div>
   );
 };

@@ -29,16 +29,19 @@ const DEADLINES: IDeadlines[] = [
   },
 ];
 
-const getDeadlines = (deadlines: IDeadlines[]) => (
-  deadlines.reduce((accumulator, deadline, index) => Object.assign(accumulator, {
-    [index]: {
-      id: index,
-      name: deadline.name,
-      deadline: deadline.deadline,
-      display: false,
-    },
-  }), {})
-);
+const getDeadlines = (deadlines: IDeadlines[]) =>
+  deadlines.reduce(
+    (accumulator, deadline, index) =>
+      Object.assign(accumulator, {
+        [index]: {
+          id: index,
+          name: deadline.name,
+          deadline: deadline.deadline,
+          display: false,
+        },
+      }),
+    {}
+  );
 
 export interface ICareerState {
   jobs: IJob[];
@@ -83,11 +86,15 @@ class Career extends React.Component<{}, ICareerState> {
   // will behave like a kind select menu - selecting one tag will blur all the other buttons.
   // This is used with the deadline tags, as selecting both 1 week and 1 month at the same
   // time makes little sense.
-  public handleTagChange(type: TagType, changedTag: string, switchMode: boolean) {
+  public handleTagChange(
+    type: TagType,
+    changedTag: string,
+    switchMode: boolean
+  ) {
     this.setState((prevState: ICareerState) => {
       const tags = {} as ITags;
 
-      Object.keys(prevState.tags).forEach((key) => {
+      Object.keys(prevState.tags).forEach(key => {
         // If switchMode is on, all the other tags will be disabled - only one
         // tag may be enabled at once
         if (switchMode && key === type) {
@@ -138,27 +145,33 @@ class Career extends React.Component<{}, ICareerState> {
 
   public render() {
     return (
-      <section id="career">
-          <Switch>
-            <Route
-              exact
-              path="/career"
-              render={(props) => <FilterableJobList
+      <section>
+        <Switch>
+          <Route
+            exact
+            path="/career"
+            render={props => (
+              <FilterableJobList
                 handleReset={() => this.handleReset()}
-                handleTagChange={(type: TagType, changedTag: string, switchMode: boolean) =>
-                  this.handleTagChange(type, changedTag, switchMode)}
-                handleFilterChange={(e: React.FormEvent<HTMLInputElement>) => this.handleFilterChange(e)}
+                handleTagChange={(
+                  type: TagType,
+                  changedTag: string,
+                  switchMode: boolean
+                ) => this.handleTagChange(type, changedTag, switchMode)}
+                handleFilterChange={(e: React.FormEvent<HTMLInputElement>) =>
+                  this.handleFilterChange(e)
+                }
                 {...this.state}
                 {...props}
-              />}
-            />
+              />
+            )}
+          />
 
-            <Route
-
-              path="/career/:id"
-              render={(props) => <DetailView {...props} jobs={this.state.jobs} />}
-            />
-          </Switch>
+          <Route
+            path="/career/:id"
+            render={props => <DetailView {...props} jobs={this.state.jobs} />}
+          />
+        </Switch>
       </section>
     );
   }
