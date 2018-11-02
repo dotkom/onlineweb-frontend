@@ -8,6 +8,7 @@ import Privacy from './Privacy';
 import Menu from './Menu';
 import style from './settings.less';
 import { IProfileProps } from 'profile';
+import SettingsInfo from './SettingsInfo';
 
 const BASE_ROUTE = '/profile/settings';
 
@@ -22,7 +23,7 @@ export const routes = {
 const Settings = (props: IProfileProps) => {
   return (
     <Switch>
-      <SettingsRoute exact path={routes.main} view={Penalties} />
+      <SettingsRoute exact path={routes.main} view={SettingsInfo} />
       <SettingsRoute path={routes.penalties} view={Penalties} />
       <SettingsRoute path={routes.privacy} view={Privacy} />
       <SettingsRoute path={routes.mail} view={Mails} />
