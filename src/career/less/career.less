@@ -7,13 +7,6 @@
   grid-template-columns: 3fr 1fr;
 }
 
-@media only screen and (max-width: 1024px) {
-  .top-grid {
-    grid-template-columns: auto;
-    grid-template-areas: 'filter' 'jobs';
-  }
-}
-
 .jobs-area {
   grid-area: jobs;
 }
@@ -28,11 +21,6 @@
 .job-info {
   width: 100%;
   text-decoration: none;
-
-  & > h1,
-  p {
-    font-weight: 400;
-  }
 
   & > h1 {
     font-size: 20px;
@@ -53,6 +41,11 @@
   }
 
   font-size: 11px;
+}
+
+.career img,
+.company img {
+  width: 100%;
 }
 
 .job {
@@ -76,19 +69,6 @@
   }
 }
 
-@media only screen and (max-width: 800px) {
-  .job {
-    grid-template: none;
-    align-items: center;
-
-    & > a > img {
-      align-self: center;
-      justify-self: center;
-      margin: 0 calc(50% - 150px);
-    }
-  }
-}
-
 .job-list {
   display: grid;
   grid-template-rows: 1fr;
@@ -99,20 +79,6 @@
 .ingress {
   margin: 10px 0;
   line-height: 1.625em;
-}
-
-.career {
-  p,
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-weight: 400;
-  }
-
-  img {
-    width: 100%;
-  }
 }
 
 .filters {
@@ -131,10 +97,6 @@
     font-size: 13px;
     padding-bottom: 10px;
     padding-top: 10px;
-
-    &:focus {
-      outline: 0;
-    }
   }
 
   h3 {
@@ -173,12 +135,6 @@
   gap: 20px;
 }
 
-@media only screen and (max-width: 1024px) {
-  .detail {
-    grid-template-columns: 1fr;
-  }
-}
-
 .job-description {
   background-color: white;
 
@@ -202,10 +158,6 @@
     text-decoration: none;
   }
 
-  img {
-    width: 100%;
-  }
-
   > div {
     background-color: @baby-blue-medium;
 
@@ -217,6 +169,28 @@
         color: white;
         font-weight: 300;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .top-grid {
+    grid-template-columns: auto;
+    grid-template-areas: 'filter' 'jobs';
+  }
+
+  .detail {
+    grid-template-columns: 1fr;
+  }
+
+  .job {
+    grid-template: none;
+    align-items: center;
+
+    & > a > img {
+      align-self: center;
+      justify-self: center;
+      margin: 0 calc(50% - 150px);
     }
   }
 }

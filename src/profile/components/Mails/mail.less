@@ -18,7 +18,7 @@
   overflow: hidden;
 }
 
-.mail-input-group label:before {
+.mail-input-group label::before {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -32,7 +32,7 @@
   z-index: -1;
 }
 
-.mail-input-group label:after {
+.mail-input-group label::after {
   width: 32px;
   height: 32px;
   content: '';
@@ -51,12 +51,12 @@
   transition: all 200ms ease-in;
 }
 
-.mail-input-group input:checked ~ label:before {
+.mail-input-group input:checked ~ label::before {
   transform: translate(-50%, -50%) scale3d(56, 56, 1);
   opacity: 1;
 }
 
-.mail-input-group input:checked ~ label:after {
+.mail-input-group input:checked ~ label::after {
   background-color: #0060a3;
   border-color: #0060a3;
 }
