@@ -43,16 +43,11 @@ class Privacy extends Component<{}, IState> {
 
   public render() {
     const { state } = this;
-    return(
+    return (
       <div className={style.container}>
         <Info />
-        { getKeys<IPrivacy>(state).map((key) => (
-          <Option
-            key={key}
-            option={key}
-            value={state[key]}
-            toggle={() => this.togglePrivacyOption(key)}
-          />
+        {getKeys<IPrivacy>(state).map(key => (
+          <Option key={key} option={key} value={state[key]} toggle={() => this.togglePrivacyOption(key)} />
         ))}
       </div>
     );

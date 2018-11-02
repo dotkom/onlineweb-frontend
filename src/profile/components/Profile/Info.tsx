@@ -11,8 +11,8 @@ class Info extends React.Component<IProps> {
     const { type, content } = this.props;
     return (
       <div className={style.infoWrapper}>
-        <p className={style.infoType}>{ type }</p>
-        <p className={style.infoContent}>{ content }</p>
+        <p className={style.infoType}>{type}</p>
+        <p className={style.infoContent}>{content}</p>
       </div>
     );
   }

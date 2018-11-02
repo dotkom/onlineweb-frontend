@@ -24,14 +24,14 @@ class Payments extends Component<{}, IState> {
     const { payments, loaded } = this.state;
     return (
       <div>
-        {
-          !loaded
-          ? <Placeholder />
-          : !payments.length
-            ? <div> Du har ingen betalinger </div>
-            : payments.map((payment) => <Payment {...payment} />)
-        }
-      </div >
+        {!loaded ? (
+          <Placeholder />
+        ) : !payments.length ? (
+          <div> Du har ingen betalinger </div>
+        ) : (
+          payments.map(payment => <Payment {...payment} />)
+        )}
+      </div>
     );
   }
 }

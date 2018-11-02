@@ -14,13 +14,7 @@ const TagList = ({ tags, handleChange, heading }: ITagListProps) => (
     <h3>{heading}</h3>
     <div className={style.tagContainer}>
       {Object.keys(tags).map((id: string) => (
-        <Tag
-          key={id}
-          changeKey={id}
-          selected={tags[id].display}
-          handleChange={handleChange}
-          title={tags[id].name}
-        />
+        <Tag key={id} changeKey={id} selected={tags[id].display} handleChange={handleChange} title={tags[id].name} />
       ))}
     </div>
   </div>

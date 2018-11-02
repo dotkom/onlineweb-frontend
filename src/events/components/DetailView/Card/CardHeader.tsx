@@ -8,7 +8,7 @@ export interface IProps extends React.HTMLAttributes<HTMLHeadingElement> {
 
 const CardHeader = ({ text, children, color = '#454545', ...props }: IProps) => (
   <p {...props} className={style.cardHeader} style={{ color }}>
-    { children || text }
+    {children || text}
   </p>
 );
 

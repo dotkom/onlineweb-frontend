@@ -10,27 +10,11 @@ export interface IProps {
 const Menu = ({ path }: IProps) => (
   <div>
     <div className={style.menu}>
-      <Tab
-        path={routes.main}
-        active={path === routes.main}
-        text="Informasjon"
-      />
+      <Tab path={routes.main} active={path === routes.main} text="Informasjon" />
       <Tab path={routes.mail} active={path === routes.mail} text="E-Post" />
-      <Tab
-        path={routes.password}
-        active={path === routes.password}
-        text="Passord"
-      />
-      <Tab
-        path={routes.penalties}
-        active={path === routes.penalties}
-        text="Prikker og suspensjoner"
-      />
-      <Tab
-        path={routes.privacy}
-        active={path === routes.privacy}
-        text="Personvern"
-      />
+      <Tab path={routes.password} active={path === routes.password} text="Passord" />
+      <Tab path={routes.penalties} active={path === routes.penalties} text="Prikker og suspensjoner" />
+      <Tab path={routes.privacy} active={path === routes.privacy} text="Personvern" />
     </div>
   </div>
 );

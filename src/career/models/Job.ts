@@ -20,8 +20,8 @@ export interface IJob {
 }
 
 export interface IApiJob {
-  location: [{ slug: string, name: string }];
-  employment: { id: number, name: JobType };
+  location: [{ slug: string; name: string }];
+  employment: { id: number; name: JobType };
   deadline: IsoDateTime;
   featured: boolean;
   end: IsoDateTime;

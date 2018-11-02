@@ -7,19 +7,15 @@ import IImage from 'common/models/Image';
 import { DOMAIN } from 'common/constants/endpoints';
 
 const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
-  return attendance
-    ? `${attendance.attendees
-      ? attendance.attendees.length
-      : '0'}/${attendance.max_capacity}`
-    : 'ALLE';
+  return attendance ? `${attendance.attendees ? attendance.attendees.length : '0'}/${attendance.max_capacity}` : 'ALLE';
 };
 
 const getEventImage = (image: IImage | null, company_event: ICompanyEvent[]) => {
   return image
-  ? DOMAIN + image.wide
-  : company_event[0]
-  ? DOMAIN + company_event[0].company.image.wide
-  : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png';
+    ? DOMAIN + image.wide
+    : company_event[0]
+      ? DOMAIN + company_event[0].company.image.wide
+      : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png';
 };
 
 const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id, company_event }: INewEvent) => (

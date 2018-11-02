@@ -1,4 +1,3 @@
-
 /**
  * TODO: Add validation
  * @param {object} queryObject e.g. {foo: 'bar', hello: 'world'}
@@ -33,15 +32,16 @@ export const toQueryObject = (queryString: string): IQueryObject => {
     const pair = query.split('=');
     queryObject[pair[0]] = pair[1];
   }*/
-  const queryObject = queryString.split('&')
+  const queryObject = queryString
+    .split('&')
     .map((query: string) => {
       const pair = query.split('=');
-      return {[pair[0]]: pair[1]};
+      return { [pair[0]]: pair[1] };
     })
     .reduce((accumulator, query) => {
       accumulator[query.key] = query[query.key];
       return accumulator;
-    } );
+    });
 
   return queryObject;
 };

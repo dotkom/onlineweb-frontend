@@ -86,11 +86,7 @@ class Career extends React.Component<{}, ICareerState> {
   // will behave like a kind select menu - selecting one tag will blur all the other buttons.
   // This is used with the deadline tags, as selecting both 1 week and 1 month at the same
   // time makes little sense.
-  public handleTagChange(
-    type: TagType,
-    changedTag: string,
-    switchMode: boolean
-  ) {
+  public handleTagChange(type: TagType, changedTag: string, switchMode: boolean) {
     this.setState((prevState: ICareerState) => {
       const tags = {} as ITags;
 
@@ -153,24 +149,17 @@ class Career extends React.Component<{}, ICareerState> {
             render={props => (
               <FilterableJobList
                 handleReset={() => this.handleReset()}
-                handleTagChange={(
-                  type: TagType,
-                  changedTag: string,
-                  switchMode: boolean
-                ) => this.handleTagChange(type, changedTag, switchMode)}
-                handleFilterChange={(e: React.FormEvent<HTMLInputElement>) =>
-                  this.handleFilterChange(e)
+                handleTagChange={(type: TagType, changedTag: string, switchMode: boolean) =>
+                  this.handleTagChange(type, changedTag, switchMode)
                 }
+                handleFilterChange={(e: React.FormEvent<HTMLInputElement>) => this.handleFilterChange(e)}
                 {...this.state}
                 {...props}
               />
             )}
           />
 
-          <Route
-            path="/career/:id"
-            render={props => <DetailView {...props} jobs={this.state.jobs} />}
-          />
+          <Route path="/career/:id" render={props => <DetailView {...props} jobs={this.state.jobs} />} />
         </Switch>
       </section>
     );

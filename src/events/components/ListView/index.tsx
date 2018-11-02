@@ -7,7 +7,6 @@ import { ListEventsContext, IListEventsState } from 'events/providers/ListEvents
 export type IProps = IEventViewProps & IListEventsState;
 
 class ListView extends Component<IProps> {
-
   public async componentDidMount() {
     const { init } = this.props;
     await init();
@@ -17,18 +16,18 @@ class ListView extends Component<IProps> {
     const { events } = this.props;
     return (
       <>
-      <div className={style.grid}>
-        { events.map((event) => <ListEvent key={event.id} {...event} />) }
-      </div>
+        <div className={style.grid}>
+          {events.map(event => (
+            <ListEvent key={event.id} {...event} />
+          ))}
+        </div>
       </>
     );
   }
 }
 
 const Provider = (props: IEventViewProps) => (
-  <ListEventsContext.Consumer>
-    { (state) => <ListView {...props} {...state} /> }
-  </ListEventsContext.Consumer>
+  <ListEventsContext.Consumer>{state => <ListView {...props} {...state} />}</ListEventsContext.Consumer>
 );
 
 export default Provider;

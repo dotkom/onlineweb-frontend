@@ -15,14 +15,17 @@ export interface ICalendarEventsState {
 const INITIAL_STATE: ICalendarEventsState = {
   eventMonth: constructMonthMap(DateTime.local(), []),
   month: DateTime.local(),
-  changeMonth: (n: number) => { throw new Error('Month was changed before component was initialized'); },
-  init: async () => { throw new Error('Init state was called before component was initialized'); },
+  changeMonth: (n: number) => {
+    throw new Error('Month was changed before component was initialized');
+  },
+  init: async () => {
+    throw new Error('Init state was called before component was initialized');
+  },
 };
 
 export const CalendarEventsContext = createContext(INITIAL_STATE);
 
 class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
-
   public state: ICalendarEventsState = { ...INITIAL_STATE };
 
   public async componentDidMount() {
@@ -54,27 +57,21 @@ class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
     const events = await getEvents(args);
     const eventMonth = constructMonthMap(month, events);
     this.setState({ eventMonth });
-  }
+  };
 
   public changeMonth = async (number: number) => {
     let { month } = this.state;
 
-    month = (number >= 0)
-      ? month.plus({ months: number })
-      : month.minus({ months: Math.abs(number) });
+    month = number >= 0 ? month.plus({ months: number }) : month.minus({ months: Math.abs(number) });
 
     await this.fetchEvents(month);
     this.setState({ month }, () => this.setSession());
-  }
+  };
 
   public render() {
     const { changeMonth, init } = this;
     const value = { ...this.state, changeMonth, init };
-    return (
-      <CalendarEventsContext.Provider value={value}>
-        { this.props.children }
-      </CalendarEventsContext.Provider>
-    );
+    return <CalendarEventsContext.Provider value={value}>{this.props.children}</CalendarEventsContext.Provider>;
   }
 }
 

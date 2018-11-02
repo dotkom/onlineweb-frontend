@@ -12,10 +12,7 @@ export const routes = {
 const EventsRouter = ({}) => (
   <Switch>
     <Route exact path={routes.root} component={EventsContainer} />
-    <Route
-      path={routes.detail}
-      render={({ match }) => <DetailView eventId={match.params.id} />}
-    />
+    <Route path={routes.detail} render={({ match }) => <DetailView eventId={match.params.id} />} />
     <Route path="*" render={() => <HttpError code={404} />} />
   </Switch>
 );
