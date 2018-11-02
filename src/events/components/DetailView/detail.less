@@ -27,28 +27,18 @@
   padding: 2rem 2rem 2rem 0;
 }
 
-.picture-blocks {
+.block-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.block {
-  text-align: center;
-}
-
-.picture-blocks .block {
+.block-grid > div {
   width: 50%;
 }
 
-.block p {
-  margin: 0;
-  font-size: 2rem;
-}
-
-.block h3 {
-  font-size: 1.3rem;
-  margin: 2rem 0 0 0;
+.block-grid > .full-block {
+  width: 100%;
 }
 
 .container {
@@ -92,6 +82,21 @@
   .info-box-content {
     font-size: 1.6rem;
   }
+}
+
+.attendance-message {
+  margin-top: 1rem;
+}
+
+.ruleBoxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ruleBox {
+  background: #EEE;
+  padding: 0.3rem 0.5rem;
+  margin: 0.5rem;
 }
 
 @media (min-width: 900px) {
