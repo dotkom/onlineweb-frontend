@@ -15,7 +15,8 @@
     "lint:fix": "tslint --fix -c tslint.json 'src/**/*.{ts,tsx}'",
     "lint-less": "stylelint src/**/*.less",
     "lint-less:fix": "yarn lint-less --fix",
-    "test": "jest --env=jsdom"
+    "test": "jest --env=jsdom",
+    "prettier": "prettier"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -60,6 +61,7 @@
     "multirange": "^1.0.0",
     "postcss-loader": "^2.1.5",
     "query-string": "^6.2.0",
+    "prettier": "^1.14.3",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-hot-loader": "^4.2.0",
@@ -92,7 +94,8 @@
   },
   "prettier": {
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "printWidth": 120
   },
   "stylelint": {
     "extends": [
@@ -103,9 +106,14 @@
       "string-quotes": "single",
       "at-rule-no-unknown": null,
       "at-rule-empty-line-before": null,
-      "selector-pseudo-class-no-unknown": [true, {
-        "ignorePseudoClasses": ["global"]
-      }]
+      "selector-pseudo-class-no-unknown": [
+        true,
+        {
+          "ignorePseudoClasses": [
+            "global"
+          ]
+        }
+      ]
     }
   }
 }
