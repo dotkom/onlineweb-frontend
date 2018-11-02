@@ -1,30 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { INewEvent, IEventViewProps } from '../../models/Event';
-import { DateTime } from 'luxon';
+import { IEventViewProps } from '../../models/Event';
 import style from './list.less';
-import { getEvents } from '../../api/events';
 import ListEvent from './ListEvent';
+import { ListEventsContext, IListEventsState } from 'events/providers/ListEvents';
 
-export interface IState {
-  events: INewEvent[];
-}
+export type IProps = IEventViewProps & IListEventsState;
 
-class ListView extends Component<IEventViewProps, IState> {
-  public state: IState = {
-    events: [],
-  };
+class ListView extends Component<IProps> {
 
   public async componentDidMount() {
-    const events = await getEvents({
-      event_end__gte: DateTime.local().toISODate(),
-    });
-
-    this.setState({ events });
+    const { init } = this.props;
+    await init();
   }
 
   public render() {
-    const { events } = this.state;
+    const { events } = this.props;
     return (
       <>
       <div className={style.grid}>
@@ -39,4 +30,10 @@ class ListView extends Component<IEventViewProps, IState> {
   }
 }
 
-export default ListView;
+const Provider = (props: IEventViewProps) => (
+  <ListEventsContext.Consumer>
+    { (state) => <ListView {...props} {...state} /> }
+  </ListEventsContext.Consumer>
+);
+
+export default Provider;

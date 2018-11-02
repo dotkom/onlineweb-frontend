@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from './components/Header/index';
 import Footer from './components/Footer/index';
-import './core.less';
+import './less/core.less';
 
 const Core = ({ children }: any) => (
-  <div>
+  <>
     <Header />
-    { children }
+    <main>{children}</main>
     <Footer />
-  </div>
+  </>
 );
 
 export default Core;

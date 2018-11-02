@@ -1,19 +1,25 @@
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
+  gap: 30px;
 }
 
 .hobby {
   background-color: white;
   display: grid;
   grid-template-columns: 1fr 2fr;
+
   & img {
     width: 100%;
   }
-  & > span {
-    margin: 0 2rem;
+
+  & > div {
+    margin: 20px;
   }
+}
+
+.hobbyTitle {
+  margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -24,17 +30,14 @@
 }
 
 .intro {
-  margin: 2rem;
+  margin: 20px 0;
+
   p {
-    font-weight: 300;
-    font-size: 1.4rem;
-    color: #666;
-    line-height: 1.625em;
-    word-break: break-all;
+    word-break: break-word;
+    margin-bottom: 20px;
   }
-  h1 {
-    font-size: 1.8rem;
-    font-weight: 300;
-    color: #454545;
+
+  h2 {
+    margin-bottom: 10px;
   }
 }

@@ -9,16 +9,15 @@ export const routes = {
   detail: '/events/:id',
 };
 
-const EventsRouter = ({  }) => (
-  <div className="container">
-    <section id="events">
-      <Switch>
-        <Route exact path={routes.root} component={EventsContainer} />
-        <Route path={routes.detail} render={({ match }) => <DetailView eventId={ match.params.id } />} />
-        <Route path="*" render={() => <HttpError code={404}/>} />
-      </Switch>
-    </section>
-  </div>
+const EventsRouter = ({}) => (
+  <Switch>
+    <Route exact path={routes.root} component={EventsContainer} />
+    <Route
+      path={routes.detail}
+      render={({ match }) => <DetailView eventId={match.params.id} />}
+    />
+    <Route path="*" render={() => <HttpError code={404} />} />
+  </Switch>
 );
 
 export default EventsRouter;

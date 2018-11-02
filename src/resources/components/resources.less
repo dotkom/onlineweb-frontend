@@ -1,19 +1,25 @@
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
+  gap: 30px;
 }
 
 .resource {
   background-color: white;
   display: grid;
   grid-template-columns: 1fr 2fr;
+
   & img {
     width: 100%;
   }
-  & > span {
-    margin: 0 2rem;
+
+  & > div {
+    margin: 20px;
   }
+}
+
+.resourceTitle {
+  margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 1024px) {
