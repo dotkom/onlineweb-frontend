@@ -13,8 +13,8 @@
     "dev": "webpack-dev-server",
     "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "lint:fix": "tslint --fix -c tslint.json 'src/**/*.{ts,tsx}'",
-    "lint-less": "prettier-stylelint",
-    "lint-less:fix": "prettier-stylelint --write"
+    "lint-less": "stylelint src/**/*.less",
+    "lint-less:fix": "yarn lint-less --fix"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
@@ -51,7 +51,6 @@
     "mini-css-extract-plugin": "^0.4.0",
     "multirange": "^1.0.0",
     "postcss-loader": "^2.1.5",
-    "prettier-stylelint": "^0.4.2",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-hot-loader": "^4.2.0",
@@ -61,6 +60,7 @@
     "redux": "^4.0.0",
     "request": "^2.87.0",
     "style-loader": "^0.21.0",
+    "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.2.0",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
@@ -82,7 +82,10 @@
     "trailingComma": "es5"
   },
   "stylelint": {
-    "extends": "stylelint-config-standard",
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-prettier"
+    ],
     "rules": {
       "string-quotes": "single",
       "at-rule-no-unknown": null,
