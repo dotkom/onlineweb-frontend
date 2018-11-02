@@ -32,6 +32,7 @@ pipeline:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn lint
+      - yarn lint-less
 
   rebuild-cache:
     image: drillster/drone-volume-cache
