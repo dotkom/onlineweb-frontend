@@ -7,6 +7,7 @@ import Penalties from './Penalties';
 import Privacy from './Privacy';
 import Menu from './Menu';
 import style from './settings.less';
+import { IProfileProps } from 'profile';
 
 const BASE_ROUTE = '/profile/settings';
 
@@ -18,7 +19,7 @@ export const routes = {
   password: BASE_ROUTE + '/password',
 };
 
-const Settings = () => {
+const Settings = (props: IProfileProps) => {
   return (
     <Switch>
       <SettingsRoute exact path={routes.main} view={Penalties} />
