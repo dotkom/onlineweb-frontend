@@ -1,35 +1,39 @@
 .footer {
-  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
   background: #333;
-  padding: 30px;
-  margin-top: 100px;
-}
+  padding: 30px 20px;
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
   & > div {
-    width: 30rem;
+    width: 300px;
   }
 }
 
 .address-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1rem;
+  grid-gap: 10px;
 }
 
 .social {
   display: flex;
-  max-width: 30rem;
+  max-width: 300px;
+
   & > a {
-    margin-right: 2rem;
+    margin-right: 20px;
+
+    img {
+      width: 32px;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }
 
 .contact-developers {
-  margin-top:2rem;
+  margin-top: 20px;
   color: #666;
 }
 
@@ -56,18 +60,6 @@
 
   .address-heading {
     color: #666;
-  }
-}
-
-.socialIcon-link {
-  margin-right: 18px;
-
-  img {
-    width: 32px;
-  }
-
-  &:hover {
-    opacity: 0.7;
   }
 }
 

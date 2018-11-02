@@ -6,7 +6,7 @@ import ToggleSwitch from 'common/components/ToggleSwitch';
 import ImageViewIcon from './ImageViewIcon';
 import ListViewIcon from './ListViewIcon';
 import CalendarViewIcon from './CalendarViewIcon';
-import style from './header.less';
+import style from './eventsHeader.less';
 
 export interface IProps {
   toggleAccessible: () => void;
@@ -15,39 +15,40 @@ export interface IProps {
   view: EventView;
 }
 
-const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
+const EventsHeader = ({
+  toggleAccessible,
+  changeView,
+  accessible,
+  view,
+}: IProps) => (
   <div className={style.grid}>
-    <h3>ARRANGEMENTER</h3>
-
+    <h1>ARRANGEMENTER</h1>
     <div className={style.choiceGrid}>
       <div
         className={classNames({
           [style.choiceActive]: view === EventView.IMAGE,
         })}
-
         onClick={() => changeView(EventView.IMAGE)}
       >
-         <ImageViewIcon />
+        <ImageViewIcon />
       </div>
 
       <div
         className={classNames({
           [style.choiceActive]: view === EventView.LIST,
         })}
-
         onClick={() => changeView(EventView.LIST)}
       >
-         <ListViewIcon />
+        <ListViewIcon />
       </div>
 
       <div
         className={classNames({
           [style.choiceActive]: view === EventView.CALENDAR,
         })}
-
         onClick={() => changeView(EventView.CALENDAR)}
       >
-         <CalendarViewIcon />
+        <CalendarViewIcon />
       </div>
     </div>
 
@@ -56,9 +57,9 @@ const Header = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
         Vis kun tilgjengelige arrangementer
       </span>
 
-      <ToggleSwitch checked={accessible} onChange={toggleAccessible}></ToggleSwitch>
+      <ToggleSwitch checked={accessible} onChange={toggleAccessible} />
     </span>
   </div>
 );
 
-export default Header;
+export default EventsHeader;
