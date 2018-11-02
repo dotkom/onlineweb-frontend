@@ -4,6 +4,7 @@ import { INewEvent, getEventColor } from '../../models/Event';
 import { DOMAIN } from 'common/constants/endpoints';
 import style from './detail.less';
 import CardHeader from './Card/CardHeader';
+import Block from './Block';
 
 const PictureCard = ({ image, event_start, event_end, location, company_event, event_type }: INewEvent) => {
   const eventImage = company_event[0] ? company_event[0].company.image : image;
@@ -24,23 +25,20 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
       <div className={style.attendance}>
         <CardHeader color={color}>Oppmøte</CardHeader>
 
-        <div className={style.pictureBlocks}>
-          <div className={style.block}>
-            <h3>Starttid</h3>
+        <div className={style.blockGrid}>
+          <Block title="Starttid">
             <p>{startDate}</p>
             <p>{startTime}</p>
-          </div>
-
-          <div className={style.block}>
-            <h3>Sluttid</h3>
+          </Block>
+          
+          <Block title="Sluttid">
             <p>{endDate}</p>
             <p>{endTime}</p>
-          </div>
+          </Block>
 
-          <div className={style.block}>
-            <h3>Sted</h3>
+          <Block title="Sted">
             <p>{location}</p>
-          </div>
+          </Block>
         </div>
       </div>
     </div>

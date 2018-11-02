@@ -128,13 +128,13 @@ export interface IAttendanceEvent {
   max_capacity: number; // Positive Integer
   waitlist: boolean;
   guest_attendance: boolean;
-  registration_start: Date;
-  unattend_deadline: Date;
-  registration_end: Date;
-
+  registration_start: string;
+  unattend_deadline: string;
+  registration_end: string;
+  number_of_seats_taken: number;
   automatically_set_marks: boolean;
   marks_has_been_set: boolean;
-
+  number_on_waitlist: number;
   rule_bundles: IRuleBundle[]; // ManyToMany
   extras: IExtra[]; // ManyToMany
   // payments: [Payment] // GenericRelation
