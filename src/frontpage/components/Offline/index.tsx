@@ -4,7 +4,7 @@ import { IOfflineIssue } from '../../models/Offline';
 import CarouselArrow from './CarouselArrow';
 import OfflineCarousel from './OfflineCarousel';
 import Heading from 'common/components/Heading';
-import style from './carousel.less';
+import style from './offline.less';
 
 export interface IProps {}
 
@@ -52,7 +52,7 @@ class Offline extends Component<IProps, IState> {
     const start = index;
     const end = start + DISPLAY_NUMBER;
     return (
-      <section>
+      <section className={style.container}>
         <Heading title="offline" />
         {offlines.length ? (
           <>
