@@ -34,7 +34,7 @@ const Job = ({ locations, deadline, companyImage, companyName, title, ingress, t
         </h2>
       </Link>
 
-      <div className={style.ingress}>{ingress}</div>
+      <p className={style.ingress}>{ingress}</p>
 
       <div className={style.jobMeta}>
         <p>Type: {type}</p>
