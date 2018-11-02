@@ -61,6 +61,7 @@ export const getEventColor = (n: number): string => {
 export const mockEvent: INewEvent = {
   absolute_url: '',
   attendance_event: null,
+  organizer_name: '',
   company_event: [],
   description: '',
   event_end: '',
@@ -158,6 +159,7 @@ export interface INewEvent {
   attendance_event: IAttendanceEvent | null;
   company_event: ICompanyEvent[];
   description: string;
+  organizer_name: string;
   event_end: string;
   event_start: string;
   event_type: number;
