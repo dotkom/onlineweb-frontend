@@ -1,5 +1,5 @@
 import React from 'react';
-import { IPenalty } from '../../models/Penalty';
+import { IPenalty } from '../../../models/Penalty';
 import Collapsible from 'common/components/Collapsible';
 import { DateTime, Interval } from 'luxon';
 

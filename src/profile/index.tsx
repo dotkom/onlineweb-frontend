@@ -1,87 +1,60 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router';
-import createBrowserHistory from 'history/createBrowserHistory';
-import { toQueryObject } from 'common/utils/queryString';
-import Profile from './components/Profile';
+import { Route, Switch, RouteProps } from 'react-router-dom';
+import MyProfile from './components/Profile';
 import Search from './components/Search';
-import Penalties from './components/Penalties';
-import Privacy from './components/Privacy';
-import Mails from './components/Mails';
+import Settings from './components/Settings';
 import MainMenu from './components/MainMenu';
+import HttpError from 'core/components/errors/HttpError';
 import 'multirange';
+import qs from 'query-string';
+import { History } from 'history';
 
-const history = createBrowserHistory();
+const BASE_ROUTE = '/profile';
 
-class App extends React.Component<{}> {
+export const routes = {
+  personal: BASE_ROUTE + '/',
+  search: BASE_ROUTE + '/search',
+  public: BASE_ROUTE + '/public/:id',
+  settings: BASE_ROUTE + '/settings',
+};
+
+class Profile extends React.Component<{}> {
   public render() {
     return (
       <section>
-        <Router history={history}>
-          <Switch>
-            <Route
-              exact
-              path="/profile/me"
-              render={props => (
-                <MainMenu match={props.match}>
-                  <Profile {...props} />
-                </MainMenu>
-              )}
-            />
-            <Route
-              path="/profile/search"
-              render={props => (
-                <MainMenu match={props.match}>
-                  <Search
-                    {...props}
-                    query={toQueryObject(props.location.search)}
-                  />
-                </MainMenu>
-              )}
-            />
-            <Route
-              path="/profile/public/:id"
-              render={props => (
-                <MainMenu match={props.match}>
-                  <Profile {...props} />
-                </MainMenu>
-              )}
-            />
-            <Route
-              path="/profile/settings"
-              render={props => (
-                <MainMenu match={props.match}>
-                  <Settings {...props} />
-                </MainMenu>
-              )}
-            />
-          </Switch>
-        </Router>
+        <Switch>
+          <ProfileRoute exact path={routes.personal} view={MyProfile} />
+          <ProfileRoute path={routes.search} view={Search} />
+          <ProfileRoute path={routes.public} view={MyProfile} />
+          <ProfileRoute path={routes.settings} view={Settings} />
+          <Route path="*" render={() => <HttpError code={404} />} />
+        </Switch>
       </section>
     );
   }
 }
 
-export const Settings = ({ match }: any) => {
+export interface IProfileProps {
+  params: qs.OutputParams;
+  history: History;
+}
+
+interface IProfileRouteProps extends RouteProps {
+  view: React.ComponentClass<any> | React.StatelessComponent<any>;
+}
+
+const ProfileRoute = ({ view, ...props }: IProfileRouteProps) => {
+  const View = view;
   return (
-    <Switch>
-      <Route
-        path={match.path + '/penalties'}
-        render={props => <Penalties {...props} />}
-      />
-      <Route
-        path={match.path + '/privacy'}
-        render={props => <Privacy {...props} />}
-      />
-      <Route
-        path={match.path + '/mail'}
-        render={props => <Mails {...props} />}
-      />
-      <Route
-        path={match.path + '/password'}
-        render={props => <Privacy {...props} />}
-      />
-    </Switch>
+    <Route
+      {...props}
+      render={({ match, location, history, ...routeProps }) => (
+        <MainMenu match={match}>
+          <View params={qs.parse(location.search)} history={history}  />
+        </MainMenu>
+      )}
+    />
   );
 };
 
-export default App;
+export default Profile;
