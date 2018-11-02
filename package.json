@@ -31,7 +31,6 @@
     "@dotkomonline/react-components": "^2.0.0",
     "@types/enzyme": "^3.1.11",
     "@types/jest": "^23.1.6",
-    "@types/jquery": "^3.3.2",
     "@types/luxon": "^0.5.2",
     "@types/query-string": "^6.1.1",
     "@types/react": "^16.3.14",
@@ -72,9 +71,9 @@
     "stylelint": "^9.7.1",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.2.0",
+    "ts-jest": "^23.0.0",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
-    "ts-jest": "^23.0.0",
     "typescript": "^2.8.3",
     "typings-for-css-modules-loader": "^1.7.0",
     "url-loader": "^1.0.1",
@@ -103,9 +102,14 @@
       "string-quotes": "single",
       "at-rule-no-unknown": null,
       "at-rule-empty-line-before": null,
-      "selector-pseudo-class-no-unknown": [true, {
-        "ignorePseudoClasses": ["global"]
-      }]
+      "selector-pseudo-class-no-unknown": [
+        true,
+        {
+          "ignorePseudoClasses": [
+            "global"
+          ]
+        }
+      ]
     }
   }
 }
