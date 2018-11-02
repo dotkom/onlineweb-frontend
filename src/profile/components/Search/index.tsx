@@ -1,18 +1,17 @@
 import React from 'react';
 import ProfileSmall from './ProfileSmall';
 import { ISearchUser } from '../../models/User';
-import { IQueryObject } from 'common/utils/queryString';
 import { searchUsers } from '../../api/search';
 import { SearchFilter } from '../../models/Search';
 import { IGroup } from 'core/models/Group';
 import Searchbar from './Searchbar';
 import style from './search.less';
+import { IProfileProps } from 'profile';
 
-export interface IProps {
-  readonly query: IQueryObject;
+export interface IProps extends IProfileProps {
 }
 
-export interface IState extends IProps {
+export interface IState {
   readonly users: ISearchUser[];
   readonly filter: SearchFilter;
 }
@@ -23,7 +22,6 @@ class Search extends React.Component<IProps, IState> {
     super(props);
 
     this.state = {
-      query: props.query,
       users: [],
       filter: new SearchFilter(),
     };

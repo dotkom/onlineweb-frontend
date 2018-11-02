@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { IMark, ISuspension } from '../../models/Penalty';
+import { IMark, ISuspension } from '../../../models/Penalty';
 import Mark from './Mark';
 import Rules from './Rules';
 import Suspension from './Suspension';
 import Placeholder from './Placeholder';
-import { getMarks, getSuspensions } from '../../api/penalties';
+import { getMarks, getSuspensions } from '../../../api/penalties';
 import style from './penalties.less';
 
 export interface IState {

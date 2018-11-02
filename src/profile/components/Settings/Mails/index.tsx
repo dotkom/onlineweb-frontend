@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { IMail } from '../../models/Mail';
+import { IMail } from '../../../models/Mail';
 import Mail from './Mail';
-import { getMails } from '../../api/mail';
+import { getMails } from '../../../api/mail';
 import style from './mail.less';
 import classnames from 'classnames';
 

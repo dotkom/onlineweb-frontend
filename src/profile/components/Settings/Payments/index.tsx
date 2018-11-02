@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { IPayment } from '../../models/Payment';
-import { getPayments } from '../../api/payment';
+import { IPayment } from '../../../models/Payment';
+import { getPayments } from '../../../api/payment';
 import Placeholder from './Placeholder';
 import Payment from './Payment';
 

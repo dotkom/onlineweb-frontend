@@ -1,5 +1,5 @@
 import React from 'react';
-import { IPayment } from '../../models/Payment';
+import { IPayment } from '../../../models/Payment';
 
 /**
  * @summary Display a single IPayment for a user in the profile.
