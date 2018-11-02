@@ -67,9 +67,28 @@
     text-decoration: none;
 
     & > img {
-      width: 100%;
+      width: 300px;
+      align-self: center;
+      justify-self: center;
+      vertical-align: middle;
+      margin: calc(50% - 150px);;
+
     }
   }
+}
+
+@media only screen and (max-width: 800px) {
+  .job {
+    grid-template: none;
+    align-items: center;
+
+    & > a > img{
+      align-self: center;
+      justify-self: center;
+      margin: 0 calc(50% - 150px);;
+    }
+  }
+
 }
 
 .job-list {
@@ -154,6 +173,12 @@
   display: grid;
   grid-template-columns: 5fr 2fr;
   gap: 20px;
+}
+
+@media only screen and (max-width: 1024px) {
+  .detail {
+    grid-template-columns: 1fr;
+  }
 }
 
 .job-description {
