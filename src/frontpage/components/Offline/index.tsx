@@ -3,7 +3,7 @@ import { getOfflines } from '../../api/offline';
 import { IOfflineIssue } from '../../models/Offline';
 import CarouselArrow from './CarouselArrow';
 import OfflineCarousel from './OfflineCarousel';
-import Heading from '../Heading';
+import Heading from 'common/components/Heading';
 import style from './carousel.less';
 
 export interface IProps {}

@@ -5,8 +5,8 @@ import { routes } from 'App';
 import style from './header.less';
 
 const HeaderLogo = () => (
-  <Link to={routes.home}>
-    <img className={style.logo} src={`${STATIC_URL}img/online_logo.svg`} alt="Online" />
+  <Link to={routes.home} className={style.logo}>
+    <img src={`${STATIC_URL}img/online_logo.svg`} alt="Online" />
   </Link>
 );
 

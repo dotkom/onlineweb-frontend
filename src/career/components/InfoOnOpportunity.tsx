@@ -2,7 +2,7 @@ import React from 'react';
 import Markdown from 'react-markdown';
 import { formatLocations } from './Job';
 import style from '../less/career.less';
-import Heading from 'frontpage/components/Heading';
+import Heading from 'common/components/Heading';
 import { Link } from 'react-router-dom';
 import Img from 'common/components/Img';
 
