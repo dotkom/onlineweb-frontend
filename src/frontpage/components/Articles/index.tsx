@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getArticles } from 'articles/api';
 import { IArticle } from 'articles/models/Article';
-import Heading from '../Heading';
+import Heading from 'common/components/Heading';
 import MainArticle from './MainArticle';
 import SmallArticle from './SmallArticle';
 import style from './articles.less';

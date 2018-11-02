@@ -3,7 +3,7 @@ import FilterList from '../components/FilterList';
 import JobList from '../components/JobList';
 import { IJob } from '../models/Job';
 import { ITags, ITag } from '../models/Tag';
-import Heading from 'frontpage/components/Heading';
+import Heading from 'common/components/Heading';
 import style from '../less/career.less';
 
 export interface IFilterableJobListProps {
