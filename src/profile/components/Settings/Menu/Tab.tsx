@@ -10,12 +10,13 @@ export interface IProps {
 }
 
 const Tab = ({ path, active, text }: IProps) => (
-    <div className={classnames(style.tab, {
+  <div
+    className={classnames(style.tab, {
       [style.active]: active,
-      [style.inactive]: !active,
-    })}>
+    })}
+  >
     <Link to={path}>
-      <p className={style.text}>{ text }</p>
+      <p className={style.text}>{text}</p>
     </Link>
   </div>
 );
