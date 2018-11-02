@@ -5,7 +5,7 @@ export interface IEventAPIParameters extends IBaseAPIParameters {
   event_start__gte?: string;
   event_start__lte?: string;
   event_end__gte?: string;
-  event_end_lte?: string;
+  event_end__lte?: string;
   event_type?: number[] | number;
 }
 
