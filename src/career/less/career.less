@@ -15,18 +15,13 @@
 .search-box {
   border: 3px solid darken(@baby-blue-medium, 10%);
   padding: 10px;
-  margin: 7px 0;
+  margin: 10px 0;
   width: 100%;
 }
 
 .job-info {
   width: 100%;
   text-decoration: none;
-
-  & > h1 {
-    font-size: 20px;
-    margin-top: 0;
-  }
 }
 
 .job-meta {
@@ -41,7 +36,7 @@
     color: #aaa;
   }
 
-  font-size: 11px;
+  font-size: @owFontSmall;
 }
 
 .career img,
@@ -79,7 +74,6 @@
 
 .ingress {
   margin: 10px 0;
-  line-height: 1.625em;
 }
 
 .filters {
@@ -87,6 +81,7 @@
   padding: 15px;
   margin-bottom: 20px;
   grid-area: filter;
+  color: white;
 
   button {
     background: @baby-blue;
@@ -95,24 +90,18 @@
     display: inline-block;
     text-align: center;
     width: 100%;
-    font-size: 13px;
     padding-bottom: 10px;
     padding-top: 10px;
-  }
-
-  h3 {
-    margin-top: 0;
-    font-size: 20px;
-    color: white;
   }
 }
 
 .tag-container {
-  padding: 0;
-  margin: 0;
   display: block;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  margin: 10px 0;
+
+  h2 {
+    margin-bottom: 10px;
+  }
 
   button {
     display: inline-flex;

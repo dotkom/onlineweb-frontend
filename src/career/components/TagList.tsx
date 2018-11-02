@@ -10,13 +10,11 @@ export interface ITagListProps {
 }
 
 const TagList = ({ tags, handleChange, heading }: ITagListProps) => (
-  <div>
-    <h3>{heading}</h3>
-    <div className={style.tagContainer}>
-      {Object.keys(tags).map((id: string) => (
-        <Tag key={id} changeKey={id} selected={tags[id].display} handleChange={handleChange} title={tags[id].name} />
-      ))}
-    </div>
+  <div className={style.tagContainer}>
+    <h2>{heading}</h2>
+    {Object.keys(tags).map((id: string) => (
+      <Tag key={id} changeKey={id} selected={tags[id].display} handleChange={handleChange} title={tags[id].name} />
+    ))}
   </div>
 );
 
