@@ -32,7 +32,7 @@ const SOCIAL: ISocialLink[] = [{
 ];
 
 const SocialLink = ({ name, link, icon }: ISocialLink) => (
-  <a href={ link } className="socialIcon-link">
+  <a href={ link }>
     <Img src={ icon } alt={ name } />
   </a>
 );

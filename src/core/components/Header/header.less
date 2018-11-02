@@ -1,8 +1,15 @@
+@headerHeight: 60px;
+@headerPaddingVertical: 10px;
+@contentHeight: @headerHeight - @headerPaddingVertical * 2;
+@sponsorTextHeight: 8px;
+
 .grid {
   display: flex;
-  width: 116rem;
+  width: 1200px;
+  padding: 10px 20px;
   margin: auto;
   justify-content: space-between;
+  align-items: center;
 }
 
 .links {
@@ -11,40 +18,42 @@
 
 .header {
   display: flex;
-  height: 6rem;
-  background-color: #07244C;
+  background-color: #07244c;
 }
 
 .item {
   text-transform: uppercase;
   color: white;
-  margin: 2.4rem 1rem;
+  margin: 0 10px;
 
   & a {
     color: white;
-    font-size: 1.3rem;
+    font-size: 13px;
   }
 }
 
 .logo {
-  height: 3.5rem;
-  margin: 1.25rem;
-  margin-right: 2rem;
+  height: @contentHeight;
+  margin-right: 20px;
+
+  img {
+    height: 100%;
+  }
 }
 
 .sponsor {
-  height: 3.5rem;
-  margin: 0.75rem;
+  height: @contentHeight;
 }
 
 .sponsor-logo {
-  height: 2.75rem;
+  margin-bottom: 4px;
+  height: @contentHeight - @sponsorTextHeight - $margin-bottom;
 }
 
 .sponsor-text {
   text-transform: uppercase;
   color: #fff;
-  margin-top: 0.6rem;
-  font-size: 0.8rem;
-  display: block;
+  font-size: @sponsorTextHeight;
+  text-align: center;
+  user-select: none;
 }
