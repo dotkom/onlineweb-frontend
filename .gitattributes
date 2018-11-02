@@ -1,1 +1,1 @@
-yarn.lock binary
+*.lock binary -diff
