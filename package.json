@@ -60,6 +60,7 @@
     "redux": "^4.0.0",
     "request": "^2.87.0",
     "style-loader": "^0.21.0",
+    "stylelint": "^9.7.1",
     "stylelint-config-prettier": "^4.0.0",
     "stylelint-config-standard": "^18.2.0",
     "tslint": "^5.11.0",
