@@ -9,9 +9,9 @@ import InfoGroup from './InfoGroup';
 import { IFullProfileUser } from '../../models/User';
 import { getProfile } from '../../api';
 import style from '../../less/profile.less';
+import { IProfileProps } from 'profile';
 
-export interface IProps {
-  id: number;
+export interface IProps extends IProfileProps {
 }
 
 export interface IState {

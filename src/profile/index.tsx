@@ -7,6 +7,7 @@ import MainMenu from './components/MainMenu';
 import HttpError from 'core/components/errors/HttpError';
 import 'multirange';
 import qs from 'query-string';
+import { History } from 'history';
 
 const BASE_ROUTE = '/profile';
 
@@ -33,6 +34,11 @@ class Profile extends React.Component<{}> {
   }
 }
 
+export interface IProfileProps {
+  params: qs.OutputParams;
+  history: History;
+}
+
 interface IProfileRouteProps extends RouteProps {
   view: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
@@ -42,9 +48,9 @@ const ProfileRoute = ({ view, ...props }: IProfileRouteProps) => {
   return (
     <Route
       {...props}
-      render={({ match, location, ...routeProps }) => (
+      render={({ match, location, history, ...routeProps }) => (
         <MainMenu match={match}>
-          <View params={qs.parse(location.search)} {...routeProps}  />
+          <View params={qs.parse(location.search)} history={history}  />
         </MainMenu>
       )}
     />
