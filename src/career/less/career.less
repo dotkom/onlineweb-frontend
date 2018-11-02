@@ -1,4 +1,5 @@
 @import '~common/less/colors.less';
+@import '~common/less/constants.less';
 
 .top-grid {
   display: grid;
@@ -53,7 +54,7 @@
   grid-gap: 20px;
   grid-template-columns: 1fr 2fr;
   padding: 20px;
-  background-color: white;
+  .owCard();
 
   & > a {
     width: 100%;
@@ -88,7 +89,7 @@
   grid-area: filter;
 
   button {
-    background-color: @baby-blue;
+    background: @baby-blue;
     color: #fff;
     border: none;
     display: inline-block;
@@ -136,7 +137,7 @@
 }
 
 .job-description {
-  background-color: white;
+  .owCard();
 
   div {
     margin: 30px;
@@ -159,7 +160,7 @@
   }
 
   > div {
-    background-color: @baby-blue-medium;
+    background: @baby-blue-medium;
 
     > div {
       margin: 20px;

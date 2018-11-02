@@ -1,3 +1,5 @@
+@import '~common/less/constants.less';
+
 .grid {
   display: grid;
   grid-template-rows: repeat(1fr);
@@ -17,14 +19,13 @@
   grid-template-columns: 23fr 54fr 14fr 14fr 9fr;
   justify-items: center;
   min-height: 50px;
+  .owCard();
 }
 
 .elementGridRow {
   width: 100%;
-  background-color: white;
   position: relative;
   display: flex;
-  //justify-content: center;
   align-items: center;
   font-size: 11px;
   height: 50px;
