@@ -4,7 +4,7 @@ import style from './detail.less';
 import CardHeader from './Card/CardHeader';
 import Block from './Block';
 
-const Contact = ({ event_type, company_event }: INewEvent) => {
+const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
   const color = getEventColor(event_type);
 
   return (
@@ -12,11 +12,8 @@ const Contact = ({ event_type, company_event }: INewEvent) => {
       <CardHeader color={color}>Kontakt</CardHeader>
 
       <Block title="Arrangør">
-        <p>Komitenavn</p>
-      </Block>
-
-      <Block title="Ansvarlig">
-        <p>Navn Navnesen</p>
+        <p>{organizer_name}</p>
+        <p>komite@online.ntnu.no</p>
       </Block>
 
       {company_event && company_event.length > 0 && (
