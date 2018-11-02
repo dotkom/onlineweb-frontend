@@ -10,17 +10,12 @@ class Medal extends React.Component<IMedal> {
     return (
       <div className={style.medalContainer}>
         <div className={style.committeeCrownContainer}>
-          { position === 'medlem'
-            ? null
-            : <img className={style.committeeCrown} src={crowns[position]} title={position} />
-          }
+          {position === 'medlem' ? null : (
+            <img className={style.committeeCrown} src={crowns[position]} title={position} />
+          )}
         </div>
-        <img
-          className={style.committeeMedal}
-          src={medals[committee]}
-          title={committee}
-        />
-        <p className={style.committeeRange}>{ range }</p>
+        <img className={style.committeeMedal} src={medals[committee]} title={committee} />
+        <p className={style.committeeRange}>{range}</p>
       </div>
     );
   }

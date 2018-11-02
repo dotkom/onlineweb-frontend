@@ -5,11 +5,7 @@ import { INewEvent, getEventColor, IAttendanceEvent } from 'events/models/Event'
 import { DateTime } from 'luxon';
 
 const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
-  return attendance
-    ? `${attendance.attendees
-      ? attendance.attendees.length
-      : '0'}/${attendance.max_capacity}`
-    : 'ALLE';
+  return attendance ? `${attendance.attendees ? attendance.attendees.length : '0'}/${attendance.max_capacity}` : 'ALLE';
 };
 
 const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: INewEvent) => (
@@ -23,15 +19,15 @@ const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: IN
 );
 
 const SmallEventColumn = ({ events }: { events: INewEvent[] }) => {
-  let column = events.map((event) => <SmallEvent key={event.id} {...event} />);
+  let column = events.map(event => <SmallEvent key={event.id} {...event} />);
 
-  column = column.concat(Array.apply(null, {
-    length: 3 - column.length,
-  }).map((x: null, i: number) => <a key={i} />));
-
-  return(
-    <>{ column }</>
+  column = column.concat(
+    Array.apply(null, {
+      length: 3 - column.length,
+    }).map((x: null, i: number) => <a key={i} />)
   );
+
+  return <>{column}</>;
 };
 
 export default SmallEventColumn;

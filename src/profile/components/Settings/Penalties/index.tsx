@@ -37,29 +37,33 @@ class Marks extends Component<{}, IState> {
 
   public render() {
     const { marks, suspensions, loaded } = this.state;
-    return(
+    return (
       <div>
         <div>
           <h3>Prikker</h3>
           <div className={style.grid}>
-          { /** If not loaded from API; show placeholder. If list of marks is empty; show empty-text */ }
-            { !loaded ? <Placeholder /> : marks.length
-              ? marks.sort(Mark.sortByExpiration).map((mark) => <Mark penalty={mark} key={mark.added_date}/>)
-              : <p>Du har ingen prikker</p>
-            }
+            {/** If not loaded from API; show placeholder. If list of marks is empty; show empty-text */}
+            {!loaded ? (
+              <Placeholder />
+            ) : marks.length ? (
+              marks.sort(Mark.sortByExpiration).map(mark => <Mark penalty={mark} key={mark.added_date} />)
+            ) : (
+              <p>Du har ingen prikker</p>
+            )}
           </div>
           <div className={style.divider} />
           <h3>Suspensjoner</h3>
           <div className={style.grid}>
-            { /** If not loaded from API; show placeholder. If list of suspensions is empty; show empty-text */ }
-            { !loaded ? <Placeholder /> : suspensions.length
-              ? suspensions
-                  .sort(Suspension.sortByExpiration)
-                  .map((suspension) => (
-                    <Suspension penalty={suspension} key={suspension.added_date} />
-                  ))
-              : <p>Du har ingen suspensjoner</p>
-            }
+            {/** If not loaded from API; show placeholder. If list of suspensions is empty; show empty-text */}
+            {!loaded ? (
+              <Placeholder />
+            ) : suspensions.length ? (
+              suspensions
+                .sort(Suspension.sortByExpiration)
+                .map(suspension => <Suspension penalty={suspension} key={suspension.added_date} />)
+            ) : (
+              <p>Du har ingen suspensjoner</p>
+            )}
           </div>
         </div>
         <div className={style.divider} />

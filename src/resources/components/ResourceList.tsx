@@ -1,4 +1,4 @@
-import React,  { Component, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { getResources } from '../api';
 import { IResource } from '../models/Resource';
 import Resource from './Resource';
@@ -18,11 +18,11 @@ export default class ResourceList extends Component<{}, IResourceListState> {
 
   public render() {
     const { resources } = this.state;
-    return(
+    return (
       <div className={style.container}>
-        { resources.map((resource) => (
+        {resources.map(resource => (
           <Resource key={resource.title} {...resource} />
-        )) }
+        ))}
       </div>
     );
   }

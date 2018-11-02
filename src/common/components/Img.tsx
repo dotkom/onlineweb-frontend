@@ -6,8 +6,6 @@ import { DOMAIN } from '../constants/endpoints';
  * @param src Source relative to api server root of OW4.
  * @param props Remaining img element props.
  */
-const Img = ({ src, ...props }: ImgHTMLAttributes<HTMLImageElement>) => (
-  <img src={DOMAIN + src} {...props} />
-);
+const Img = ({ src, ...props }: ImgHTMLAttributes<HTMLImageElement>) => <img src={DOMAIN + src} {...props} />;
 
 export default Img;

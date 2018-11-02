@@ -10,7 +10,7 @@ const Mail = ({ email, primary, toggle }: IProps) => (
   <span className={style.gridRow} onClick={toggle}>
     <div className={style.mailInputGroup}>
       <input name="radio" type="radio" checked={primary} />
-      <label>{ email }</label>
+      <label>{email}</label>
     </div>
   </span>
 );

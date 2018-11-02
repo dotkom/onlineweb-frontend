@@ -31,15 +31,17 @@ export class AuthUser implements IAuthUser {
    * @returns {Permission[]}
    */
   public getAllPermissions(): Permission[] {
-    return this.groups
-      /** Create an Permission[][] */
-      .map((group: IGroup): Permission[] => group.permissions)
-      /** Join the given arrays to one array: Permission[] */
-      .reduce((accumulator, current) => accumulator.concat(current))
-      /** Add the other, non-group related permissions on the user */
-      .concat(this.permissions)
-      /** Remove duplicates by filtering */
-      .filter((permission, index, array) => array.indexOf(permission) === index);
+    return (
+      this.groups
+        /** Create an Permission[][] */
+        .map((group: IGroup): Permission[] => group.permissions)
+        /** Join the given arrays to one array: Permission[] */
+        .reduce((accumulator, current) => accumulator.concat(current))
+        /** Add the other, non-group related permissions on the user */
+        .concat(this.permissions)
+        /** Remove duplicates by filtering */
+        .filter((permission, index, array) => array.indexOf(permission) === index)
+    );
   }
 
   /**
@@ -50,17 +52,21 @@ export class AuthUser implements IAuthUser {
   public hasPermission(authentication: IGroup | Permission): boolean {
     /** Check if authetication is a string, it is then a single permission */
     if (typeof authentication === 'string') {
-      return this.getAllPermissions()
-        /** Check if the given Permission[] includes the required authentication */
-        .includes(authentication);
+      return (
+        this.getAllPermissions()
+          /** Check if the given Permission[] includes the required authentication */
+          .includes(authentication)
+      );
 
-    /** If authentication is not a string */
+      /** If authentication is not a string */
     } else if (authentication.name) {
-      return this.groups
-        /** Map to an array of group names */
-        .map((group) => group.name)
-        /** Check if the given groups name is in the group names for the user */
-        .includes(authentication.name);
+      return (
+        this.groups
+          /** Map to an array of group names */
+          .map(group => group.name)
+          /** Check if the given groups name is in the group names for the user */
+          .includes(authentication.name)
+      );
     } else {
       /** If wrong argument is given, return false */
       return false;

@@ -1,4 +1,3 @@
-
 import { ICompany } from 'core/models/Company';
 import { IUser } from 'core/models/User';
 import { IGroup } from 'core/models/Group';
@@ -22,39 +21,49 @@ export enum EventTypeEnum {
   ANNET,
 }
 
-export type EventType =
-  | 'Sosialt'
-  | 'Kurs'
-  | 'Annet'
-  | 'Bedriftspresentasjon'
-  | 'Utflukt'
-  | 'Ekskursjon'
-  | 'Internt';
+export type EventType = 'Sosialt' | 'Kurs' | 'Annet' | 'Bedriftspresentasjon' | 'Utflukt' | 'Ekskursjon' | 'Internt';
 
 export const getEventType = (n: number): EventType => {
   switch (n) {
-    case 1: return 'Sosialt';
-    case 2: return 'Bedriftspresentasjon';
-    case 3: return 'Kurs';
-    case 4: return 'Utflukt';
-    case 5: return 'Ekskursjon';
-    case 6: return 'Internt';
-    case 7: return 'Annet';
-    default: return 'Annet';
+    case 1:
+      return 'Sosialt';
+    case 2:
+      return 'Bedriftspresentasjon';
+    case 3:
+      return 'Kurs';
+    case 4:
+      return 'Utflukt';
+    case 5:
+      return 'Ekskursjon';
+    case 6:
+      return 'Internt';
+    case 7:
+      return 'Annet';
+    default:
+      return 'Annet';
   }
 };
 
 export const getEventColor = (n: number): string => {
   switch (n) {
-    case 0: return '#828282';
-    case 1: return '#43B171';
-    case 2: return '#EB536E';
-    case 3: return '#127DBD';
-    case 4: return '#FDBD47';
-    case 5: return '#2AC6F9';
-    case 6: return '#E75E3B';
-    case 7: return '#B36BCD';
-    default: return '#828282';
+    case 0:
+      return '#828282';
+    case 1:
+      return '#43B171';
+    case 2:
+      return '#EB536E';
+    case 3:
+      return '#127DBD';
+    case 4:
+      return '#FDBD47';
+    case 5:
+      return '#2AC6F9';
+    case 6:
+      return '#E75E3B';
+    case 7:
+      return '#B36BCD';
+    default:
+      return '#828282';
   }
 };
 
@@ -84,7 +93,9 @@ export const mockEvent: INewEvent = {
 };
 
 export enum EventView {
-  IMAGE, LIST, CALENDAR,
+  IMAGE,
+  LIST,
+  CALENDAR,
 }
 
 export interface IFrontpageEvent {
@@ -121,7 +132,10 @@ export interface ICompanyEvent extends IEvent {
 }
 
 export enum EEventType {
-  COMPANYPRESENTATION, COMPANYCOURSE, SOCIAL, OTHER,
+  COMPANYPRESENTATION,
+  COMPANYCOURSE,
+  SOCIAL,
+  OTHER,
 }
 
 export interface IAttendanceEvent {

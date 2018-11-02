@@ -14,11 +14,9 @@ class InfoGroup extends React.Component<IProps> {
     const { children, name, icon } = this.props;
     return (
       <div className={style.infoGroup}>
-        { /*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/ }
-        <p className={style.name}>{ name }</p>
-        <div className={style.groupWrapper}>
-          { children }
-        </div>
+        {/*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/}
+        <p className={style.name}>{name}</p>
+        <div className={style.groupWrapper}>{children}</div>
       </div>
     );
   }

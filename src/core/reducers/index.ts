@@ -1,4 +1,3 @@
-
 import { IUser } from '../models/User';
 import { IAction } from '../actions/action';
 import { ActionTypes } from '../actions/actionTypes';
@@ -17,7 +16,7 @@ const rootReducer = (state = initialState, action: IAction<any>) => {
       return { ...state, user: action.payload };
     case ActionTypes.SIGN_OUT:
       // Should probably have placeholder user or something
-      return {  ...state, user: {} };
+      return { ...state, user: {} };
     default:
       return state;
   }

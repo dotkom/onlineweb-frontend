@@ -8,7 +8,6 @@ import style from './calendar.less';
 export type IProps = IEventViewProps & ICalendarEventsState;
 
 class CalendarView extends Component<IProps> {
-
   public async componentDidMount() {
     const { init } = this.props;
     await init();
@@ -22,28 +21,22 @@ class CalendarView extends Component<IProps> {
 
     const previous = createDayList(firstWeekDay, lastDayPrevMonth - firstWeekDay);
     // 7 - 'number of days last week of the month' if 'number of days in last week' is not 0
-    const next = createDayList((
-        ((month.daysInMonth + firstWeekDay) % 7) === 0
-          ? 0
-          : 7 - (month.daysInMonth + firstWeekDay) % 7),
-        0);
+    const next = createDayList(
+      (month.daysInMonth + firstWeekDay) % 7 === 0 ? 0 : 7 - ((month.daysInMonth + firstWeekDay) % 7),
+      0
+    );
 
     return (
       <div>
         <div className={style.menuGrid}>
           <h3 onClick={() => changeMonth(-1)}>{'<'}</h3>
-          <h3>{ month.toFormat('MMMM yyyy') }</h3>
+          <h3>{month.toFormat('MMMM yyyy')}</h3>
           <h3 onClick={() => changeMonth(1)}>{'>'}</h3>
         </div>
         <div className={style.grid}>
           <CalendarFillerTiles days={previous} />
-          { eventMonth.map((events, index) => (
-            <CalendarTile
-              key={`${month.toFormat('yyyy-MM')}-${index + 1}`}
-              events={events}
-              day={index + 1}
-              active
-            />
+          {eventMonth.map((events, index) => (
+            <CalendarTile key={`${month.toFormat('yyyy-MM')}-${index + 1}`} events={events} day={index + 1} active />
           ))}
           <CalendarFillerTiles days={next} />
         </div>
@@ -53,9 +46,7 @@ class CalendarView extends Component<IProps> {
 }
 
 const Provider = (props: IEventViewProps) => (
-  <CalendarEventsContext.Consumer>
-    { (state) => <CalendarView {...props} {...state} /> }
-  </CalendarEventsContext.Consumer>
+  <CalendarEventsContext.Consumer>{state => <CalendarView {...props} {...state} />}</CalendarEventsContext.Consumer>
 );
 
 export default Provider;

@@ -3,18 +3,12 @@ import CalendarView from './CalendarView';
 import ListView from './ListView';
 import ImageView from './ImageView';
 import EventsHeader from './EventsHeader';
-import {
-  getEventSettings,
-  saveEventSettings,
-  IEventSettings,
-} from '../api/eventSettings';
+import { getEventSettings, saveEventSettings, IEventSettings } from '../api/eventSettings';
 import { EventView } from '../models/Event';
 import EventContextWrapper from 'events/providers/EventContextWrapper';
 import style from './less/eventsContainer.less';
 
-const getView = (
-  view: EventView
-): typeof ListView | typeof CalendarView | typeof ImageView => {
+const getView = (view: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
   switch (view) {
     case EventView.IMAGE:
       return ImageView;
@@ -55,9 +49,7 @@ class Container extends Component<IProps, IState> {
   };
 
   public toggleAccessible = () => {
-    this.setState({ accessible: !this.state.accessible }, () =>
-      this.saveSettings()
-    );
+    this.setState({ accessible: !this.state.accessible }, () => this.saveSettings());
   };
 
   public render() {

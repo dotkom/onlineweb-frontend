@@ -7,11 +7,11 @@ import { DOMAIN } from 'common/constants/endpoints';
 const MainArticle = ({ absolute_url, heading, image, ingress_short }: IArticle) => {
   return (
     <div className={style.mainArticle}>
-      <a href={ DOMAIN + absolute_url }>
+      <a href={DOMAIN + absolute_url}>
         <div className={style.imageContainer}>
-          <Img src={ image.lg } />
+          <Img src={image.lg} />
           <div>
-            <p>{ heading }</p>
+            <p>{heading}</p>
           </div>
         </div>
       </a>

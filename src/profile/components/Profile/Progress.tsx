@@ -14,8 +14,8 @@ class Progress extends React.Component<IProps> {
 
     const scale = 100 / 480;
     const lineWidth = 4 * scale;
-    const radius = 40 / 2 * scale;
-    const checkRadius = 24 / 2 * scale;
+    const radius = (40 / 2) * scale;
+    const checkRadius = (24 / 2) * scale;
     const offset = 10;
     const sectionSpace = 60 * scale - radius * 2;
 
@@ -39,9 +39,9 @@ class Progress extends React.Component<IProps> {
     };
 
     return (
-      <div  className={style.infoGroup}>
-        { /*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/ }
-        <p className={style.groupName}>{ this.props.name }</p>
+      <div className={style.infoGroup}>
+        {/*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/}
+        <p className={style.groupName}>{this.props.name}</p>
         <div className={style.progressWrapper}>
           <div>
             <svg width="100%" height="100%" viewBox="0 0 120 20">
@@ -49,10 +49,10 @@ class Progress extends React.Component<IProps> {
               <Year year={1} />
               <Year year={2} />
               <Year year={3} />
-              <DividerBar offset={offset} radius={radius} scale={scale} lineWidth={lineWidth} a={4.5} b={30}/>
+              <DividerBar offset={offset} radius={radius} scale={scale} lineWidth={lineWidth} a={4.5} b={30} />
               <Year year={4} />
               <Year year={5} />
-              <DividerBar offset={offset} radius={radius} scale={scale} lineWidth={lineWidth} a={7.5} b={90}/>
+              <DividerBar offset={offset} radius={radius} scale={scale} lineWidth={lineWidth} a={7.5} b={90} />
               <Year year={6} />
             </svg>
           </div>

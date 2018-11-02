@@ -9,7 +9,7 @@ const Registration = ({ event_type }: INewEvent) => {
     <div className={style.registration}>
       <div className={style.cardMargin}>
         <CardHeader color={color}>Påmelding</CardHeader>
-        <p></p>
+        <p />
       </div>
     </div>
   );
