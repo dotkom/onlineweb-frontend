@@ -76,7 +76,9 @@
     "connected-react-router": "^4.3.0",
     "redux-async-await": "^1.0.1"
   },
-  "prettier": {},
+  "prettier": {
+    "singleQuote": true
+  },
   "stylelint": {
     "extends": "stylelint-config-standard",
     "rules": {
