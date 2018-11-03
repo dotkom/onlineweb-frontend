@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { ReactChild } from 'react';
+import style from './list.less';
 
-export const StatusPolygon = ({ color = '#828282' }: { color: string }) => (
-  <svg viewBox="0 0 80 60" height="50" width="105">
-    <path d="M20 0H105V60H20L0 30L20 0Z" fill={color} />
-  </svg>
+export const StatusPolygon = ({ children }: { children: ReactChild | null }) => (
+  <div className={style.statusPolygon}>{children}</div>
 );
 
 export const PersonSVG = ({ color = '#fff' }: { color: string }) => (
-  <svg viewBox="0 0 10 10" height="35" width="30">
+  <svg className={style.personSvg} viewBox="0 0 10 10" height="35" width="30">
     <g id="person">
       {/* Head */}
       <ellipse ry="2.5637553" rx="2.5637553" fill={color} cy="3.1303504" cx="3.9358196" id="path3713" />

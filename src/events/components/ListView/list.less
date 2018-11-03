@@ -16,9 +16,8 @@
 
 .gridRow {
   display: grid;
-  grid-template-columns: 23fr 54fr 14fr 14fr 9fr;
-  justify-items: center;
-  min-height: 50px;
+  grid-template-columns: 200px auto 50px 50px 85px;
+  grid-column-gap: 10px;
   .owCard();
 }
 
@@ -33,16 +32,6 @@
     color: black;
   }
 
-  &:last-child,
-  &:first-child {
-    height: 100%;
-
-    > p {
-      position: absolute;
-      color: white;
-    }
-  }
-
   &:first-child,
   &:nth-child(2) {
     > p {
@@ -51,49 +40,32 @@
   }
 }
 
-.personSvg {
-  margin-left: -50px; // Half of the width of the StatusPolygon width
-}
-
-/* .event-type {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hostPolygon {
+  background: currentColor;
   height: 100%;
-  width: 100%;
-
-  > p {
-    color: white;
-    visibility: hidden;
-    margin: 0;
-  }
+  width: 200px;
+  clip-path: polygon(90% 0, 0 0, 0 100%, 90% 100%, 100% 65%);
 }
-@media (min-width: 750px) {
-  .event-list-grid-row {
-    grid-template-columns: 23fr 54fr 14fr 14fr 9fr;
-    grid-row-gap: 25px;
-  }
 
-  .event-list-element-grid-row {
-    font-size: 17px;
-  }
+.host {
+  color: white;
+  display: inline;
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+}
 
-  .event-type {
-    margin-right: 25px;
+.statusPolygon {
+  background: #828282;
+  height: 100%;
+  width: 85px;
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 35%);
+}
 
-    > p {
-      visibility: visible;
-    }
-
-    &:after {
-      content: '';
-      position: absolute;
-      top: 0px;
-      width: 0;
-      height: 0;
-      right: -25px;
-      border: 25px solid transparent;
-      border-left: 25px solid;
-    }
-  }
-} */
+.personSvg {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-30%, -50%);
+}
