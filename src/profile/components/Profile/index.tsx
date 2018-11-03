@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './Header';
-import Name from './Name';
 import MedalsView from './MedalsView';
 import Info from './Info';
 import Progress from './Progress';
@@ -56,32 +55,29 @@ class Profile extends React.Component<IProps, IState> {
   public render() {
     const { user } = this.state;
     return (
-      <div>
-        <Header />
-        <Name name={`${user.first_name} ${user.last_name}`} />
-        <div className={style.center}>
-          <div className={style.innerContainer}>
-            <InfoGroup name="Navn" icon="names">
-              <Info type="NTNU Brukernavn" content={user.ntnu_username} />
-              <Info type="Kallenavn" content={user.kallenavn} />
-              <Info type="Brukernavn" content={user.username} />
-            </InfoGroup>
-            <Progress ongoingYear={user.grade} completedYear={user.grade - 1} name="Studieprogresjon" />
-            <InfoGroup name="Kontakt" icon="contact">
-              <Info type="Primær e-post" content={user.primary_email} />
-              <Info type="Online e-post" content={`${user.gsuite_username}@online.ntnu.no`} />
-              <Info type="Telefonnummer" content={user.phone_number} />
-              <Info type="Adresse" content={user.address} />
-            </InfoGroup>
-            <MedalsView medals={user.committees} name="Komitéverv" />
-            <InfoGroup name="Eksterne Lenker" icon="external">
-              <IconInfo type="Github" content={user.external.github} />
-              <IconInfo type="Linkedin" content={user.external.linkedin} />
-              <IconInfo type="Hjemmeside" content={user.external.homepage} />
-            </InfoGroup>
-          </div>
+      <>
+        <Header name={`${user.first_name} ${user.last_name}`} />
+        <div className={style.profile}>
+          <InfoGroup name="Navn" icon="names">
+            <Info type="NTNU Brukernavn" content={user.ntnu_username} />
+            <Info type="Kallenavn" content={user.kallenavn} />
+            <Info type="Brukernavn" content={user.username} />
+          </InfoGroup>
+          <Progress ongoingYear={user.grade} completedYear={user.grade - 1} name="Studieprogresjon" />
+          <InfoGroup name="Kontakt" icon="contact">
+            <Info type="Primær e-post" content={user.primary_email} />
+            <Info type="Online e-post" content={`${user.gsuite_username}@online.ntnu.no`} />
+            <Info type="Telefonnummer" content={user.phone_number} />
+            <Info type="Adresse" content={user.address} />
+          </InfoGroup>
+          <MedalsView medals={user.committees} name="Komitéverv" />
+          <InfoGroup name="Eksterne Lenker" icon="external">
+            <IconInfo type="Github" content={user.external.github} />
+            <IconInfo type="Linkedin" content={user.external.linkedin} />
+            <IconInfo type="Hjemmeside" content={user.external.homepage} />
+          </InfoGroup>
         </div>
-      </div>
+      </>
     );
   }
 }
