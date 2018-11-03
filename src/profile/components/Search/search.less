@@ -19,13 +19,14 @@
 }
 
 .dropdown-item {
-  height: 44px;
+  display: table; // Is used to vertical-center h4
+  height: inherit;
   width: 100%;
   text-align: center;
 
   > h4 {
-    padding-left: 10px;
-    padding-top: 4px;
+    display: table-cell;
+    vertical-align: middle;
   }
 
   background: white;
