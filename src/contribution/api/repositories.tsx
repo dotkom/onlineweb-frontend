@@ -2,10 +2,8 @@ import { get } from '../../common/utils/api';
 
 export const getRepositories = async () => {
   try {
-    const data = await get('/api/v1/repositories', { format: 'json' });
+    // const data = await get('/api/v1/repositories', { format: 'json' });
 
-    // DUMMY DATA for testing without using the api
-    /*
     const data = [
       {
         id: '1',
@@ -63,7 +61,6 @@ export const getRepositories = async () => {
           ]
       }
     ];
-    */
 
     return data;
   } catch (err) {
