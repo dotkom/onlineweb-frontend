@@ -26,9 +26,11 @@ export const getAllEvents = async (args?: IEventAPIParameters): Promise<INewEven
   let { results } = data;
   if (data.next) {
     let next: IAPIData<INewEvent>; // tslint:disable-line no-shadowed-variable
-    for await(next of getPages(data.next)) {
+    for await (next of getPages(data.next)) {
       results = [...results, ...next.results];
-      if (!next.next) { break; }
+      if (!next.next) {
+        break;
+      }
     }
   }
   return results;

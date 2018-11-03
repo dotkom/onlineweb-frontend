@@ -1,8 +1,11 @@
+@import '~common/less/constants.less';
+
 .mail-input-group {
-  background-color: #fff;
+  .owCard();
+
   display: block;
-  margin: 10px 0;
   position: relative;
+  padding: 10px;
 }
 
 .mail-input-group label {
@@ -37,7 +40,8 @@
   height: 32px;
   content: '';
   border: 2px solid #d1d7dc;
-  background-color: #fff;
+  .owCard();
+
   background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
   background-repeat: no-repeat;
   background-position: 2px 3px;
@@ -57,7 +61,7 @@
 }
 
 .mail-input-group input:checked ~ label::after {
-  background-color: #0060a3;
+  background: #0060a3;
   border-color: #0060a3;
 }
 
@@ -78,16 +82,9 @@
   padding: 0 16px;
   max-width: 550px;
   margin: 50px auto;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 36px;
 }
 
 .grid {
   display: grid;
-  grid-gap: 10px;
-}
-
-.grid-row {
-  background-color: #fff;
+  grid-gap: 20px;
 }

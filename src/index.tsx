@@ -9,10 +9,7 @@ Settings.defaultLocale = 'no';
 import App from 'App';
 
 const render = (Component: any) => {
-  ReactDOM.render(
-    <Component />,
-    document.getElementById('root'),
-  );
+  ReactDOM.render(<Component />, document.getElementById('root'));
 };
 
 render(App);

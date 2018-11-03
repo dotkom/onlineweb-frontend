@@ -1,4 +1,3 @@
-
 /**
  * @summary Dirty hack.
  * @description We need the key to be typed as a (keyof T).

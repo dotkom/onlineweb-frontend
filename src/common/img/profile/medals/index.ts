@@ -9,7 +9,7 @@ import hs from 'common/img/profile/medals/hs-medal.svg';
 import prokom from 'common/img/profile/medals/prokom-medal.svg';
 import trikom from 'common/img/profile/medals/trikom-medal.svg';
 
-const medal: {[K in Committee]: string} = {
+const medal: { [K in Committee]: string } = {
   arrkom,
   bankom,
   bedkom,

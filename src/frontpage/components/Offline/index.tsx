@@ -56,19 +56,9 @@ class Offline extends Component<IProps, IState> {
         <Heading title="offline" />
         {offlines.length ? (
           <>
-            <CarouselArrow
-              direction="left"
-              onClick={() => this.clickNext(-1)}
-              disabled={index === 0}
-            />
-            <OfflineCarousel
-              offlines={offlines.slice(index, index + DISPLAY_NUMBER)}
-            />
-            <CarouselArrow
-              direction="right"
-              onClick={() => this.clickNext(1)}
-              disabled={end === offlines.length}
-            />
+            <CarouselArrow direction="left" onClick={() => this.clickNext(-1)} disabled={index === 0} />
+            <OfflineCarousel offlines={offlines.slice(index, index + DISPLAY_NUMBER)} />
+            <CarouselArrow direction="right" onClick={() => this.clickNext(1)} disabled={end === offlines.length} />
           </>
         ) : null}
       </section>
