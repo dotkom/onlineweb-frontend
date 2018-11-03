@@ -1,5 +1,9 @@
 @import '~common/less/constants.less';
 
+.gridWrapper{
+  max-width: 90vw;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -55,7 +59,7 @@
   }
 }
 
-@media (min-width: 800px) {
+@media (min-width: @owTabletBreakpoint) {
   .grid {
     grid-gap: 3px;
   }

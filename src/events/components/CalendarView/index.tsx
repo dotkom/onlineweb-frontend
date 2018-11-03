@@ -27,7 +27,7 @@ class CalendarView extends Component<IProps> {
     );
 
     return (
-      <div>
+      <div className={style.gridWrapper}>
         <div className={style.menuGrid}>
           <h3 onClick={() => changeMonth(-1)}>{'<'}</h3>
           <h3>{month.toFormat('MMMM yyyy')}</h3>
