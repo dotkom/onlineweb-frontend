@@ -17,9 +17,7 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
   return (
     <div className={style.gridRow}>
       <div className={style.elementGridRow}>
-        <HostPolygon color={eventColor}>
-          {(company_event[0] && company_event[0].company.name) || eventType}
-        </HostPolygon>
+        <HostPolygon color={eventColor}>{(company_event[0] && company_event[0].company.name) || eventType}</HostPolygon>
       </div>
       <div className={style.elementGridRow}>
         <p>{title}</p>

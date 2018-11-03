@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react';
+import React, { ReactChild } from 'react';
 import classNames from 'classnames';
 import styles from './block.less';
 
@@ -6,7 +6,7 @@ export interface IBlockProps {
   title: string;
   className?: string;
   children: ReactChild | ReactChild[];
-};
+}
 
 const Block = ({ title, children, className }: IBlockProps) => (
   <div className={classNames(className, styles.block)}>

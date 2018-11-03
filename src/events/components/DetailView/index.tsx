@@ -34,14 +34,14 @@ class DetailView extends Component<IProps, IState> {
   }
 
   public render() {
-    const event  = this.state.event || mockEvent;
+    const event = this.state.event || mockEvent;
 
     return (
       <div className={style.container}>
         <div className={style.leftContainer}>
           <ListEvent {...event} />
           <PictureCard {...event} />
-          <InfoBox {...event}/>
+          <InfoBox {...event} />
         </div>
 
         <div className={style.rightContainer}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
@@ -17,13 +17,13 @@ class ListView extends Component<IProps> {
     const { events } = this.props;
     return (
       <>
-      <div className={style.grid}>
-        {events.map((event) => (
-          <Link to={`/events/${event.id}`} key={event.id}>
-            <ListEvent {...event} />
-          </Link>
-        ))}
-      </div>
+        <div className={style.grid}>
+          {events.map((event) => (
+            <Link to={`/events/${event.id}`} key={event.id}>
+              <ListEvent {...event} />
+            </Link>
+          ))}
+        </div>
       </>
     );
   }
