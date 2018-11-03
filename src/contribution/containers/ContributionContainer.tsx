@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from 'frontpage/components/Header';
+import Heading from 'common/components/Heading';
 import Intro from '../components/Intro';
 import RepositoryList from '../components/RepositoryList';
 
 const ContributionContainer = () => (
     <section id="contributions">
         <div className="container">
-            <Header>Bidra til Onlinernes digital hverdag!</Header>
+            <Heading>Bidra til Onlinernes digital hverdag!</Heading>
             <Intro/>
             <RepositoryList/>
         </div>
