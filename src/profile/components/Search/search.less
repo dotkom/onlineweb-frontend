@@ -16,15 +16,24 @@
   background: none;
   height: 53px;
   color: #636363;
+  caret-color: #636363;
   font-weight: 500;
   font-size: 2em;
   padding-left: 6px;
   transition: background 0.2s ease;
 }
 
-.search-input:hover{
-  transition: background 0.2s ease;
-  background: rgba(#223254,.03)
+.search-input:focus, .search-input:hover{
+  background: rgba(0, 0, 0, 0);
+  animation: inuse 2.2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes inuse {
+    0% { background: rgba(0, 0, 0, 0); }
+    50%   { background: rgba(#223254,.05); }
+    100% { background: rgba(0, 0, 0, 0); }
 }
 
 .dropdown-container {
