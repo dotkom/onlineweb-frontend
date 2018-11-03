@@ -23,7 +23,7 @@ class Mails extends Component<{}, IState> {
 
   public togglePrimary(index: number) {
     const { addresses } = this.state;
-    const reset: IMail[] = addresses.map(addr => ({ ...addr, primary: false }));
+    const reset: IMail[] = addresses.map((addr) => ({ ...addr, primary: false }));
     reset[index].primary = true;
     this.setState({ addresses: reset });
   }

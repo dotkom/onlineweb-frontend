@@ -27,7 +27,7 @@ export const CalendarEventTile = ({ events, active = true, day }: ITileProps) =>
     >
       <div className={style.tileContent}>
         <p>{day}</p>
-        {events.map(event => (
+        {events.map((event) => (
           <CalendarEvent key={event.id} {...event} />
         ))}
       </div>
@@ -37,7 +37,7 @@ export const CalendarEventTile = ({ events, active = true, day }: ITileProps) =>
 
 export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
   <>
-    {days.map(day => (
+    {days.map((day) => (
       <div className={style.tile + ' ' + style.tileInactive} key={`filler-${day}`}>
         <div className={style.tileContent}>
           <p>{day}</p>

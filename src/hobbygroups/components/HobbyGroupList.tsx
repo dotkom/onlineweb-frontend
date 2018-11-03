@@ -22,7 +22,7 @@ export default class HobbyGroupList extends Component<{}, IHobbyGroupListState> 
     const { groups } = this.state;
     return (
       <div className={style.container}>
-        {groups.sort(sortHobbys).map(group => (
+        {groups.sort(sortHobbys).map((group) => (
           <HobbyGroup key={group.title} {...group} />
         ))}
       </div>

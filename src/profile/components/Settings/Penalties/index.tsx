@@ -46,7 +46,7 @@ class Marks extends Component<{}, IState> {
             {!loaded ? (
               <Placeholder />
             ) : marks.length ? (
-              marks.sort(Mark.sortByExpiration).map(mark => <Mark penalty={mark} key={mark.added_date} />)
+              marks.sort(Mark.sortByExpiration).map((mark) => <Mark penalty={mark} key={mark.added_date} />)
             ) : (
               <p>Du har ingen prikker</p>
             )}
@@ -60,7 +60,7 @@ class Marks extends Component<{}, IState> {
             ) : suspensions.length ? (
               suspensions
                 .sort(Suspension.sortByExpiration)
-                .map(suspension => <Suspension penalty={suspension} key={suspension.added_date} />)
+                .map((suspension) => <Suspension penalty={suspension} key={suspension.added_date} />)
             ) : (
               <p>Du har ingen suspensjoner</p>
             )}

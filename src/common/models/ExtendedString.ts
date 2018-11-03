@@ -12,7 +12,7 @@ class ExtendedString extends String {
   public replaceAll = (search: string | string[], replacement: string): string => {
     if (search instanceof Array) {
       return this.split('')
-        .map(s => (search.includes(s) ? replacement : s))
+        .map((s) => (search.includes(s) ? replacement : s))
         .join('');
     }
     return this.split(search).join(replacement);

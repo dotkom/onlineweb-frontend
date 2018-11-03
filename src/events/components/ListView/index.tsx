@@ -17,7 +17,7 @@ class ListView extends Component<IProps> {
     return (
       <>
         <div className={style.grid}>
-          {events.map(event => (
+          {events.map((event) => (
             <ListEvent key={event.id} {...event} />
           ))}
         </div>
@@ -27,7 +27,7 @@ class ListView extends Component<IProps> {
 }
 
 const Provider = (props: IEventViewProps) => (
-  <ListEventsContext.Consumer>{state => <ListView {...props} {...state} />}</ListEventsContext.Consumer>
+  <ListEventsContext.Consumer>{(state) => <ListView {...props} {...state} />}</ListEventsContext.Consumer>
 );
 
 export default Provider;
