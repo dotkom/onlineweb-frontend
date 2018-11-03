@@ -1,11 +1,21 @@
 .footer {
   display: flex;
-  justify-content: center;
   background: #333;
+  justify-content: center;
   padding: 30px 20px;
+  line-height: 1.65;
 
   & > div {
     width: 300px;
+  }
+
+  & p,
+  & div {
+    color: #bbb;
+  }
+
+  & a {
+    color: #589dd8;
   }
 }
 
@@ -17,35 +27,30 @@
 
 .social {
   display: flex;
-  max-width: 300px;
 
   & > a {
     margin-right: 20px;
+    opacity: 0.7;
 
     img {
-      width: 32px;
+      height: 32px;
     }
 
     &:hover {
-      opacity: 0.7;
+      opacity: 1;
     }
   }
 }
 
 .contact-developers {
   margin-top: 20px;
-  color: #666;
 }
 
-.contact-info {
-  .contact-item {
-    margin-bottom: 5px;
-    color: #bbb;
+.contact-info .contact-item {
+  margin-bottom: 5px;
 
-    span {
-      color: #666;
-      margin-right: 10px;
-    }
+  svg {
+    margin-right: 10px;
   }
 }
 
@@ -55,7 +60,7 @@
   margin-bottom: 30px;
 
   .address-heading {
-    color: #666;
+    font-weight: bold;
   }
 }
 
