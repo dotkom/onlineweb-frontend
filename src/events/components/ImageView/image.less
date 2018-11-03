@@ -1,13 +1,15 @@
 @edge-height: 20px;
 
-.large-event-grid, .small-event-grid {
+.large-event-grid,
+.small-event-grid {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 2rem;
-  margin-bottom: 2rem;
+  grid-gap: 20px;
+  margin-bottom: 20px;
 
   & > a {
     color: initial;
+
     &:hover {
       text-decoration: none;
     }
@@ -18,6 +20,7 @@
   .large-event-grid {
     grid-template-columns: 1fr 1fr 1fr;
   }
+
   .small-event-grid {
     grid-auto-flow: column;
     grid-template-rows: 1fr 1fr 1fr;
@@ -35,7 +38,7 @@
 .imageLargeType {
   position: relative;
   margin: 0;
-  padding: 0.5rem;
+  padding: 5px;
   color: white;
   font-size: 125%;
   text-align: center;
@@ -85,28 +88,29 @@
     content: '';
     position: absolute;
     background: currentColor;
-    width: 1.5rem;
+    width: 15px;
     top: 0;
     height: 100%;
     clip-path: polygon(0 0, 0 50%, 100% 0);
   }
 }
 
-.largeContent, .small {
+.largeContent,
+.small {
   > p {
     margin: 0;
-    padding: 1rem 0.5rem;
+    padding: 10px 5px;
     font-size: 110%;
     align-self: center;
     text-align: right;
 
     &:first-child {
       text-align: left;
-      padding-left: 1.5rem;
+      padding-left: 15px;
     }
 
     &:last-child {
-      padding-right: 1.5rem;
+      padding-right: 15px;
     }
   }
 }

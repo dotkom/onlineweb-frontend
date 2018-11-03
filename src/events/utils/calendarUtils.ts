@@ -60,6 +60,25 @@ export function getMonthAndYear(date: Date) {
   return dt.toFormat('MMMM yyyy');
 }
 
-/*export function constructMonthMap(date: Date): INewEvent[][] {
-
-}*/
+/**
+ * @summary Create the correct representation of the current month.
+ * @description To easily display the events of the given month,
+ * the month is represented as an Array of Arrays of Events.
+ * The outer Array represents the ((day of the month) - 1) the event is on,
+ * while the inner Array represents the events on that day.
+ * @param {DateTime} month Current month.
+ * @param {INewEvent[]} events Events to inject into the month model.
+ * @returns {INewEvent[][]} Events represented in a month model.
+ */
+export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEvent[][]  => {
+  /**
+   * @summary Create an empty EventMonth.
+   * @description Create an array of length `daysInMonth`, containing empty arrays.
+   */
+  const map = [...Array(month.daysInMonth)].map((a) => Array(0).fill([]));
+  events.forEach((event) => {
+    const day = DateTime.fromISO(event.event_start).day - 1;
+    map[day].push(event);
+  });
+  return map;
+};
