@@ -1,3 +1,5 @@
+@import '~common/less/constants.less';
+
 @headerHeight: 60px;
 @headerPaddingVertical: 10px;
 @contentHeight: @headerHeight - @headerPaddingVertical * 2;
@@ -14,22 +16,24 @@
 
 .links {
   display: flex;
+  text-transform: uppercase;
+
+  & > a {
+    font-size: @owFontSmall;
+    color: white;
+    padding: 10px;
+    margin: 0 5px;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
 }
 
 .header {
   display: flex;
   background: #07244c;
-}
-
-.item {
-  text-transform: uppercase;
-  color: white;
-  margin: 0 10px;
-
-  & a {
-    color: white;
-    font-size: 13px;
-  }
 }
 
 .logo {
