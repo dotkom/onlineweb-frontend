@@ -41,7 +41,7 @@ const Registration = ({ event_type, attendance_event }: INewEvent) => {
             <div className={styles.ruleBoxes}>
               {attendance_event.guest_attendance ? (
                 <RuleBundleBox>Alle</RuleBundleBox>
-              ) : attendance_event.rule_bundles ? attendance_event.rule_bundles.map(bundle => (
+              ) : attendance_event?.rule_bundles?.length ? attendance_event.rule_bundles.map(bundle => (
                 <RuleBundleBox key={bundle.id}>{bundle.description || bundle.rule_strings}</RuleBundleBox>
               )) : (
                 <RuleBundleBox>Alle medlemmer</RuleBundleBox>
