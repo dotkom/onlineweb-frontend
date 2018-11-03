@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import style from './search.less';
 
 export interface IProps {
   range: [number, number];
@@ -37,7 +38,7 @@ class DoubleSlider extends Component<IProps, IState> {
       range: [start, end],
     } = this.state;
     return (
-      <div>
+      <div className={style.slider}>
         <input
           // value={range.toString()}
           defaultValue={start.toString()}
