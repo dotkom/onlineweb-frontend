@@ -34,7 +34,7 @@ const loadData = (data: any) => {
     }
 
     // Create tags for all non-existing locations in the job.
-    job.location.forEach(location => {
+    job.location.forEach((location) => {
       if (locations.indexOf(location.name) < 0) {
         locations.push(location.name);
       }
@@ -48,7 +48,7 @@ const loadData = (data: any) => {
           tags: {
             companies: job.company.id,
             jobTypes: job.employment.id,
-            locations: job.location.map(location => location.name),
+            locations: job.location.map((location) => location.name),
           },
         },
         normalizeData(job)
@@ -64,11 +64,11 @@ const loadData = (data: any) => {
     jobTypes: {},
   };
 
-  companies.forEach(company => {
+  companies.forEach((company) => {
     tags.companies[company.id] = { id: company.id, display: false, name: company.name };
   });
 
-  jobTypes.forEach(jobType => {
+  jobTypes.forEach((jobType) => {
     tags.jobTypes[jobType.id] = { id: jobType.id, display: false, name: jobType.name };
   });
 
@@ -83,7 +83,7 @@ const loadData = (data: any) => {
 
 // Normalizes data from the server, most notably converting to camelCase.
 const normalizeData = (job: IApiJob): IJob => ({
-  locations: job.location.map(location => location.name), // Locations contains name and slug
+  locations: job.location.map((location) => location.name), // Locations contains name and slug
   deadline: job.deadline ? DateTime.fromISO(job.deadline).toFormat('dd LLL YYYY') : 'Ikke spesifisert', // Format and give default value
   companyImage: job.company.image,
   companyName: job.company.name,

@@ -57,13 +57,13 @@ class Search extends React.Component<IProps, IState> {
     return (
       <>
         <Searchbar
-          setName={s => this.setName(s)}
-          setGroup={s => this.setGroup(s)}
-          setYear={s => this.setYear(s)}
+          setName={(s) => this.setName(s)}
+          setGroup={(s) => this.setGroup(s)}
+          setYear={(s) => this.setYear(s)}
           {...filter.format}
         />
         <div className={style.smallProfileGrid}>
-          {users.map(user => (
+          {users.map((user) => (
             <ProfileSmall user={user} />
           ))}
         </div>

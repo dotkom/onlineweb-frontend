@@ -90,7 +90,7 @@ class Career extends React.Component<{}, ICareerState> {
     this.setState((prevState: ICareerState) => {
       const tags = {} as ITags;
 
-      Object.keys(prevState.tags).forEach(key => {
+      Object.keys(prevState.tags).forEach((key) => {
         // If switchMode is on, all the other tags will be disabled - only one
         // tag may be enabled at once
         if (switchMode && key === type) {
@@ -146,7 +146,7 @@ class Career extends React.Component<{}, ICareerState> {
           <Route
             exact
             path="/career"
-            render={props => (
+            render={(props) => (
               <FilterableJobList
                 handleReset={() => this.handleReset()}
                 handleTagChange={(type: TagType, changedTag: string, switchMode: boolean) =>
@@ -159,7 +159,7 @@ class Career extends React.Component<{}, ICareerState> {
             )}
           />
 
-          <Route path="/career/:id" render={props => <DetailView {...props} jobs={this.state.jobs} />} />
+          <Route path="/career/:id" render={(props) => <DetailView {...props} jobs={this.state.jobs} />} />
         </Switch>
       </section>
     );

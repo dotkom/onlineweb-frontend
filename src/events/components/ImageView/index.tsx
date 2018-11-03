@@ -38,7 +38,7 @@ class ImageView extends Component<IProps> {
 }
 
 const Provider = (props: IEventViewProps) => (
-  <ImageEventsContext.Consumer>{state => <ImageView {...props} {...state} />}</ImageEventsContext.Consumer>
+  <ImageEventsContext.Consumer>{(state) => <ImageView {...props} {...state} />}</ImageEventsContext.Consumer>
 );
 
 export default Provider;

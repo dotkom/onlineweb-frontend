@@ -10,7 +10,7 @@ const IMAGE_SUFFIX = '.thumb.png';
 
 const OfflineCarousel = ({ offlines }: IProps) => (
   <div className={style.carousel}>
-    {offlines.map(offline => (
+    {offlines.map((offline) => (
       <CarouselItem key={offline.id} {...offline} />
     ))}
   </div>

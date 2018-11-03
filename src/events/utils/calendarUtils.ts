@@ -75,8 +75,8 @@ export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEve
    * @summary Create an empty EventMonth.
    * @description Create an array of length `daysInMonth`, containing empty arrays.
    */
-  const map = [...Array(month.daysInMonth)].map(a => Array(0).fill([]));
-  events.forEach(event => {
+  const map = [...Array(month.daysInMonth)].map((a) => Array(0).fill([]));
+  events.forEach((event) => {
     const day = DateTime.fromISO(event.event_start).day - 1;
     map[day].push(event);
   });

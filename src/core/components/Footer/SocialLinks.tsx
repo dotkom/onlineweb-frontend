@@ -44,7 +44,7 @@ const SocialLink = ({ name, link, icon }: ISocialLink) => (
 
 const SocialLinks = () => (
   <div className={style.social}>
-    {SOCIAL.map(platform => (
+    {SOCIAL.map((platform) => (
       <SocialLink key={platform.name} {...platform} />
     ))}
   </div>

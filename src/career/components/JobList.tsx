@@ -83,7 +83,7 @@ const JobList = ({ jobs, tags, filterText }: IJobListProps) => {
       // True if no tags in the current tag type are selected.
       let typeAllDisabled = true;
 
-      Object.keys(tags[type]).forEach(tag => {
+      Object.keys(tags[type]).forEach((tag) => {
         if (tags[type][tag].display) {
           typeAllDisabled = false;
 

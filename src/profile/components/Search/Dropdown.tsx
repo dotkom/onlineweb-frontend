@@ -21,7 +21,7 @@ class Dropdown extends Collapsible<IProps> {
             {selected || 'Velg en gruppe'}
           </Item>
         ) : (
-          groups.map(group => (
+          groups.map((group) => (
             <Item
               key={group.name}
               selected={group.name === selected}

@@ -14,7 +14,7 @@ class DetailView extends React.Component<IDetailViewProps, IDetailViewProps> {
   constructor(props: IDetailViewProps) {
     super(props);
     this.id = parseInt(props.match.params.id, 10);
-    this.job = props.jobs.find(j => j.id === this.id);
+    this.job = props.jobs.find((j) => j.id === this.id);
   }
 
   public componentDidMount() {
@@ -23,7 +23,7 @@ class DetailView extends React.Component<IDetailViewProps, IDetailViewProps> {
 
   public componentWillReceiveProps(nextProps: IDetailViewProps) {
     this.id = parseInt(nextProps.match.params.id, 10);
-    this.job = nextProps.jobs.find(j => j.id === this.id);
+    this.job = nextProps.jobs.find((j) => j.id === this.id);
   }
 
   public render() {

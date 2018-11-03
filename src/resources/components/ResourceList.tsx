@@ -20,7 +20,7 @@ export default class ResourceList extends Component<{}, IResourceListState> {
     const { resources } = this.state;
     return (
       <div className={style.container}>
-        {resources.map(resource => (
+        {resources.map((resource) => (
           <Resource key={resource.title} {...resource} />
         ))}
       </div>

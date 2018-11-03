@@ -36,7 +36,7 @@ class Name extends React.Component<IProps, IState> {
         {/*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/}
         <h1>{name}</h1>
         <div className={style.medalGrid}>
-          {medals.slice(slice - showAmount, slice).map(medal => (
+          {medals.slice(slice - showAmount, slice).map((medal) => (
             <Medal key={medal.committee + medal.position + medal.range} {...medal} />
           ))}
         </div>

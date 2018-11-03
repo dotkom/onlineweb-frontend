@@ -29,7 +29,7 @@ class Payments extends Component<{}, IState> {
         ) : !payments.length ? (
           <div> Du har ingen betalinger </div>
         ) : (
-          payments.map(payment => <Payment {...payment} />)
+          payments.map((payment) => <Payment {...payment} />)
         )}
       </div>
     );

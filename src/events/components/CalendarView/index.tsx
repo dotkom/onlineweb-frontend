@@ -46,7 +46,7 @@ class CalendarView extends Component<IProps> {
 }
 
 const Provider = (props: IEventViewProps) => (
-  <CalendarEventsContext.Consumer>{state => <CalendarView {...props} {...state} />}</CalendarEventsContext.Consumer>
+  <CalendarEventsContext.Consumer>{(state) => <CalendarView {...props} {...state} />}</CalendarEventsContext.Consumer>
 );
 
 export default Provider;

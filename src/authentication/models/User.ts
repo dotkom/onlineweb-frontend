@@ -63,7 +63,7 @@ export class AuthUser implements IAuthUser {
       return (
         this.groups
           /** Map to an array of group names */
-          .map(group => group.name)
+          .map((group) => group.name)
           /** Check if the given groups name is in the group names for the user */
           .includes(authentication.name)
       );

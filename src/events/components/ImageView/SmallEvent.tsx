@@ -19,7 +19,7 @@ const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: IN
 );
 
 const SmallEventColumn = ({ events }: { events: INewEvent[] }) => {
-  let column = events.map(event => <SmallEvent key={event.id} {...event} />);
+  let column = events.map((event) => <SmallEvent key={event.id} {...event} />);
 
   column = column.concat(
     Array.apply(null, {
