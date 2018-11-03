@@ -4,7 +4,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Settings } from 'luxon';
 
-Settings.defaultLocale = 'no';
+Settings.defaultLocale = 'nb';
 
 import App from 'App';
 
