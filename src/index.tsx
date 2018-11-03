@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo } from 'react';
+import React, { Component, ErrorInfo } from 'react';
 import * as ReactDOM from 'react-dom';
 import * as Sentry from '@sentry/browser';
 import { Settings } from 'luxon';
@@ -13,26 +13,26 @@ Sentry.init({
 
 interface IErrorInfo extends ErrorInfo {
   [key: string]: string;
-};
+}
 
 class Root extends Component {
-  componentDidCatch(error: Error, errorInfo: IErrorInfo) {
-    Sentry.withScope(scope => {
-      Object.keys(errorInfo).forEach(key => {
+  public componentDidCatch(error: Error, errorInfo: IErrorInfo) {
+    Sentry.withScope((scope) => {
+      Object.keys(errorInfo).forEach((key) => {
         scope.setExtra(key, errorInfo[key]);
       });
-      
+
       Sentry.captureException(error);
     });
   }
 
-  render() {
+  public render() {
     return <App />;
   }
 }
 
-const render = (Component: any) => {
-  ReactDOM.render(<Component />, document.getElementById('root'));
+const render = (RootComponent: any) => {
+  ReactDOM.render(<RootComponent />, document.getElementById('root'));
 };
 
 render(App);
