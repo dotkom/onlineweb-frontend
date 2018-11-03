@@ -16,7 +16,7 @@ pipeline:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn
-  
+
   build:
     image: node:carbon
     group: testing
@@ -24,7 +24,7 @@ pipeline:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn build:prod
-  
+
   test:
     image: node:carbon
     group: testing
@@ -32,14 +32,30 @@ pipeline:
       event: [push, pull_request, tag, deployment]
     commands:
       yarn test
-  lint:
+
+  lint-typescript:
     image: node:carbon
     group: testing
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn lint
+      - yarn lint-ts
+
+  lint-less:
+    image: node:carbon
+    group: testing
+    when:
+      event: [push, pull_request, tag, deployment]
+    commands:
       - yarn lint-less
+
+  lint-prettier:
+    image: node:carbon
+    group: testing
+    when:
+      event: [push, pull_request, tag, deployment]
+    commands:
+      - yarn lint-prettier
 
   rebuild-cache:
     image: drillster/drone-volume-cache

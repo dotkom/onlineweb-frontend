@@ -1,4 +1,3 @@
-
 import { ActionTypes } from './actionTypes';
 import { IUser } from '../models/User';
 

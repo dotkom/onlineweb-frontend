@@ -6,16 +6,12 @@ import { DOMAIN } from 'common/constants/endpoints';
 
 const SmallArticle = ({ absolute_url, heading, image }: IArticle) => {
   return (
-    <div className={''}>
-      <a href={ DOMAIN + absolute_url }>
-        <div className={style.imageContainer}>
-          <Img src={ image.xs } />
-          <div>
-            <p>{ heading }</p>
-          </div>
-        </div>
-      </a>
-    </div>
+    <a href={DOMAIN + absolute_url}>
+      <div className={style.imageContainer}>
+        <Img src={image.xs} />
+        <p className={style.title}>{heading}</p>
+      </div>
+    </a>
   );
 };
 

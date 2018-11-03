@@ -16,17 +16,23 @@ class Mark extends Penalty<IMark> {
       <div className={style.gridRow}>
         <div onClick={() => this.toggleCollapse()}>
           <h4 className={style.title}>
-            <p>{ penalty.title }</p>
-            <span>{ added.toFormat('d MMMM y') }</span>
+            <p>{penalty.title}</p>
+            <span>{added.toFormat('d MMMM y')}</span>
           </h4>
-          { collapsed ? null :
+          {collapsed ? null : (
             <>
-            { /** TIL: (<></>) === (<Fragment></Fragment>) */ }
-              <p>{ penalty.description }</p>
-              <p><b>Katogori: </b>{ penalty.category }</p>
-              <p><b>Utløpsdato: </b>{ expiration.toFormat('d MMMM y') }</p>
+              {/** TIL: (<></>) === (<Fragment></Fragment>) */}
+              <p>{penalty.description}</p>
+              <p>
+                <b>Katogori: </b>
+                {penalty.category}
+              </p>
+              <p>
+                <b>Utløpsdato: </b>
+                {expiration.toFormat('d MMMM y')}
+              </p>
             </>
-          }
+          )}
         </div>
         <div className={style.progressBar} style={{ width: completion + '%', backgroundColor: completionColor }} />
       </div>

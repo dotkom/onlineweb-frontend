@@ -8,8 +8,8 @@ export interface IProps {
 
 const CarouselArrow = ({ direction, onClick, disabled = false }: IProps) => (
   <button onClick={onClick} disabled={disabled}>
-    { direction === 'left' ? '<' : null }
-    { direction === 'right' ? '>' : null }
+    {direction === 'left' ? '<' : null}
+    {direction === 'right' ? '>' : null}
   </button>
 );
 

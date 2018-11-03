@@ -9,9 +9,4 @@ export type Committee =
   | 'seniorkom'
   | 'trikom';
 
-export type CommitteePosition =
-  | 'leder'
-  | 'nestleder'
-  | 'økonomiansvarlig'
-  | 'redaktør'
-  | 'medlem';
+export type CommitteePosition = 'leder' | 'nestleder' | 'økonomiansvarlig' | 'redaktør' | 'medlem';

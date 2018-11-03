@@ -15,12 +15,7 @@ export interface IProps {
   view: EventView;
 }
 
-const EventsHeader = ({
-  toggleAccessible,
-  changeView,
-  accessible,
-  view,
-}: IProps) => (
+const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
   <div className={style.grid}>
     <h1>ARRANGEMENTER</h1>
     <div className={style.choiceGrid}>
@@ -53,9 +48,7 @@ const EventsHeader = ({
     </div>
 
     <span className={style.toggleAccessible}>
-      <span className={style.toggleAccessibleDescription}>
-        Vis kun tilgjengelige arrangementer
-      </span>
+      <span className={style.toggleAccessibleDescription}>Vis kun tilgjengelige arrangementer</span>
 
       <ToggleSwitch checked={accessible} onChange={toggleAccessible} />
     </span>

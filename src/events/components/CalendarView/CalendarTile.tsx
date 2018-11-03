@@ -18,7 +18,7 @@ export const createDayList = (amount: number, start: number): number[] => {
   return l;
 };
 
-export const CalendarEventTile = ({ events, active = true, day}: ITileProps) => {
+export const CalendarEventTile = ({ events, active = true, day }: ITileProps) => {
   return (
     <div
       className={classNames(style.tile, {
@@ -26,8 +26,10 @@ export const CalendarEventTile = ({ events, active = true, day}: ITileProps) => 
       })}
     >
       <div className={style.tileContent}>
-        <p>{ day }</p>
-        { events.map((event) => <CalendarEvent key={event.id} {...event} />) }
+        <p>{day}</p>
+        {events.map((event) => (
+          <CalendarEvent key={event.id} {...event} />
+        ))}
       </div>
     </div>
   );
@@ -35,24 +37,20 @@ export const CalendarEventTile = ({ events, active = true, day}: ITileProps) => 
 
 export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
   <>
-    { days.map((day) => (
+    {days.map((day) => (
       <div className={style.tile + ' ' + style.tileInactive} key={`filler-${day}`}>
         <div className={style.tileContent}>
-          <p>{ day }</p>
+          <p>{day}</p>
         </div>
       </div>
-    )) }
+    ))}
   </>
 );
 
 export const CalendarEvent = ({ event_type, title, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
-    <p
-      className={style.title}
-      style={{ background: getEventColor(event_type) }}
-      title={title}
-    >
-      { title }
+    <p className={style.title} style={{ background: getEventColor(event_type) }} title={title}>
+      {title}
     </p>
   </Link>
 );

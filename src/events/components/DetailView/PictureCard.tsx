@@ -21,17 +21,17 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
         <CardHeader color={color}>Oppmøte</CardHeader>
         <div>
           <p>Starttid</p>
-          <p>{ startDate }</p>
-          <p>{ startTime }</p>
+          <p>{startDate}</p>
+          <p>{startTime}</p>
         </div>
         <div>
           <p>Sluttid</p>
-          <p>{ endDate }</p>
-          <p>{ endTime }</p>
+          <p>{endDate}</p>
+          <p>{endTime}</p>
         </div>
         <div>
           <p>Sted</p>
-          <p>{ location }</p>
+          <p>{location}</p>
         </div>
       </div>
     </div>

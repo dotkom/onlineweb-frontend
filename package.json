@@ -11,10 +11,14 @@
     "build:dev": "webpack --mode=development --watch",
     "build:prod": "webpack --config config/webpack.config.js --mode=production --optimize-minimize",
     "dev": "webpack-dev-server --config config/webpack.config.js",
-    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
-    "lint:fix": "tslint --fix -c tslint.json 'src/**/*.{ts,tsx}'",
+    "lint": "yarn lint-ts ; yarn lint-less ; yarn lint-prettier",
+    "lint-ts": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "lint-less": "stylelint src/**/*.less",
+    "lint-prettier": "prettier-check src/**/*.{ts,tsx,less}",
+    "lint:fix": "yarn lint-ts:fix && yarn lint-less:fix && yarn lint-prettier:fix",
+    "lint-ts:fix": "tslint --fix -c tslint.json 'src/**/*.{ts,tsx}'",
     "lint-less:fix": "yarn lint-less --fix",
+    "lint-prettier:fix": "prettier-check --write src/**/*.{ts,tsx,less}",
     "test": "jest --env=jsdom"
   },
   "devDependencies": {
@@ -58,6 +62,8 @@
     "mini-css-extract-plugin": "^0.4.0",
     "multirange": "^1.0.0",
     "postcss-loader": "^2.1.5",
+    "prettier": "^1.14.3",
+    "prettier-check": "^2.0.0",
     "query-string": "^6.2.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -91,7 +97,9 @@
   },
   "prettier": {
     "singleQuote": true,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "printWidth": 120,
+    "arrowParens": "always"
   },
   "stylelint": {
     "extends": [

@@ -3,17 +3,12 @@ import CalendarView from './CalendarView';
 import ListView from './ListView';
 import ImageView from './ImageView';
 import EventsHeader from './EventsHeader';
-import {
-  getEventSettings,
-  saveEventSettings,
-  IEventSettings,
-} from '../api/eventSettings';
+import { getEventSettings, saveEventSettings, IEventSettings } from '../api/eventSettings';
 import { EventView } from '../models/Event';
 import EventContextWrapper from 'events/providers/EventContextWrapper';
+import style from './less/eventsContainer.less';
 
-const getView = (
-  view: EventView
-): typeof ListView | typeof CalendarView | typeof ImageView => {
+const getView = (view: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
   switch (view) {
     case EventView.IMAGE:
       return ImageView;
@@ -54,23 +49,23 @@ class Container extends Component<IProps, IState> {
   };
 
   public toggleAccessible = () => {
-    this.setState({ accessible: !this.state.accessible }, () =>
-      this.saveSettings()
-    );
+    this.setState({ accessible: !this.state.accessible }, () => this.saveSettings());
   };
 
   public render() {
     const { view, accessible } = this.state;
     const View = getView(view);
     return (
-      <EventContextWrapper accessible={accessible}>
-        <EventsHeader
-          changeView={(v: EventView) => this.changeView(v)}
-          toggleAccessible={this.toggleAccessible}
-          {...this.state}
-        />
-        <View accessible={accessible} />
-      </EventContextWrapper>
+      <section className={style.section}>
+        <EventContextWrapper accessible={accessible}>
+          <EventsHeader
+            changeView={(v: EventView) => this.changeView(v)}
+            toggleAccessible={this.toggleAccessible}
+            {...this.state}
+          />
+          <View accessible={accessible} />
+        </EventContextWrapper>
+      </section>
     );
   }
 }

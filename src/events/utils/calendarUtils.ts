@@ -70,7 +70,7 @@ export function getMonthAndYear(date: Date) {
  * @param {INewEvent[]} events Events to inject into the month model.
  * @returns {INewEvent[][]} Events represented in a month model.
  */
-export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEvent[][]  => {
+export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEvent[][] => {
   /**
    * @summary Create an empty EventMonth.
    * @description Create an array of length `daysInMonth`, containing empty arrays.
