@@ -1,5 +1,5 @@
 import React from 'react';
-import { INewEvent, getEventColor, getEventType} from '../../models/Event';
+import { INewEvent, getEventColor, getEventType } from '../../models/Event';
 import classNames from 'classnames';
 import style from './calendar.less';
 import { Link } from 'react-router-dom';
@@ -47,10 +47,10 @@ export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
   </>
 );
 
-export const CalendarEvent = ({ event_type, title,id, company_event }: INewEvent) => (
+export const CalendarEvent = ({ event_type, title, id, company_event }: INewEvent) => (
   <Link to={`/events/${id}`}>
     <p className={style.title} style={{ background: getEventColor(event_type) }} title={title}>
-      {company_event.length ? company_event[0].company.name : title }
+      {company_event.length ? company_event[0].company.name : title}
     </p>
   </Link>
 );
