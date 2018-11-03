@@ -670,6 +670,47 @@
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
 
+"@sentry/browser@^4.2.4":
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-4.2.4.tgz#d20c24b8d62e8a03baa062ae2c4318cbee5ac570"
+  dependencies:
+    "@sentry/core" "4.2.4"
+    "@sentry/types" "4.2.4"
+    "@sentry/utils" "4.2.4"
+
+"@sentry/core@4.2.4":
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.2.4.tgz#e4a331512a4db149f14a2976b75a5b3c8ef47f87"
+  dependencies:
+    "@sentry/hub" "4.2.4"
+    "@sentry/minimal" "4.2.4"
+    "@sentry/types" "4.2.4"
+    "@sentry/utils" "4.2.4"
+
+"@sentry/hub@4.2.4":
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-4.2.4.tgz#0248ad50e3a3e248a2086612a19914838694314c"
+  dependencies:
+    "@sentry/types" "4.2.4"
+    "@sentry/utils" "4.2.4"
+
+"@sentry/minimal@4.2.4":
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-4.2.4.tgz#6d7fc8a06395176be53d0941244b8e4a3d74a802"
+  dependencies:
+    "@sentry/hub" "4.2.4"
+    "@sentry/types" "4.2.4"
+
+"@sentry/types@4.2.4":
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-4.2.4.tgz#c77f5ecdbe38cc826451b11746cde9faf50cb40f"
+
+"@sentry/utils@4.2.4":
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-4.2.4.tgz#6e5f49d8a67b109c48fbe9762e793c8f453513b2"
+  dependencies:
+    "@sentry/types" "4.2.4"
+
 "@types/cheerio@*":
   version "0.22.9"
   resolved "https://registry.yarnpkg.com/@types/cheerio/-/cheerio-0.22.9.tgz#b5990152604c2ada749b7f88cab3476f21f39d7b"
