@@ -11,7 +11,8 @@ const Repository = ({ id, name, description, url, languages }: IRepository) => {
         'CSS':        '#563d7c',
         'HTML':       '#e34c26',
         'Python':     '#3572A5',
-        'Makefile':   '#427819'
+        'Makefile':   '#427819',
+        'Shell':      '#89e051'
     };
 
     // Determine total size of languages
