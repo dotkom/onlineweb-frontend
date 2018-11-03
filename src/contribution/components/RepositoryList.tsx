@@ -5,25 +5,25 @@ import style from '../less/contribution.less';
 import Repository from '../components/Repository';
 
 export interface IRepositoryListState {
-    repositories: IRepository[];
+  repositories: IRepository[];
 }
 
 export default class RepositoryList extends Component<{}, IRepositoryListState> {
-    public readonly state = { repositories: [] } as IRepositoryListState;
+  public readonly state = { repositories: [] } as IRepositoryListState;
 
-    public async componentDidMount() {
-        const results: any = await getRepositories();
-        this.setState({ repositories: results });
-    }
+  public async componentDidMount() {
+    const results: any = await getRepositories();
+    this.setState({ repositories: results });
+  }
 
-    public render() {
-        const { repositories } = this.state;
-        return(
-            <div className={style.container}>
-                { repositories.map((repo) => (
-                    <Repository key={repo.id} {...repo} />
-                )) }
-            </div>
-        );
-    }
+  public render() {
+    const { repositories } = this.state;
+    return (
+      <div className={style.container}>
+        {repositories.map((repo) => (
+          <Repository key={repo.id} {...repo} />
+        ))}
+      </div>
+    );
+  }
 }
