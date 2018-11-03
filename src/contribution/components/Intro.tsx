@@ -19,8 +19,8 @@ const Intro = () => (
     <br/>
     <p>
       For å komme i gang med kodingen, er du først nødt til å velge deg ut et prosjekt som høres
-      spennende ut! Det er også lurt å plukke et prosjekt som passer dine tidligere erfaring med
-      programmering for å komme enklere i gang.
+      spennende ut! Det er også lurt å plukke et prosjekt som passer dine tidligere erfaringer med
+      programmering.
       Happy Hacking!
     </p>
     <hr/>

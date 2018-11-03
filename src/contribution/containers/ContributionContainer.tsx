@@ -6,7 +6,7 @@ import RepositoryList from '../components/RepositoryList';
 const ContributionContainer = () => (
     <section id="contributions">
         <div className="container">
-            <Heading>Bidra til Onlinernes digital hverdag!</Heading>
+            <Heading>Bidra til Onlinernes digitale hverdag!</Heading>
             <Intro/>
             <RepositoryList/>
         </div>
