@@ -3,12 +3,15 @@ import * as ReactDOM from 'react-dom';
 import * as Sentry from '@sentry/browser';
 import { Settings } from 'luxon';
 
+import { OWF_SENTRY_DSN } from 'common/constants/sentry';
+
+
 Settings.defaultLocale = 'no';
 
 import App from 'App';
 
 Sentry.init({
-  dsn: process.env.OWF_SENTRY_DSN,
+  dsn: OWF_SENTRY_DSN,
 });
 
 interface IErrorInfo extends ErrorInfo {

@@ -81,11 +81,11 @@ module.exports = env => {
         template: './public/index.html',
         filename: 'index.html'
       }),
-      new webpack.DefinePlugin({
-        'process.env': {
-          OW4_ADDRESS: JSON.stringify(process.env.OW4_ADDRESS),
-        },
-      }),
+      new webpack.EnvironmentPlugin({
+        OW4_ADDRESS: 'https://online.ntnu.no',
+        OWF_SENTRY_DSN: '',
+        NODE_ENV: 'development',
+      })
     ]
   }
 }
