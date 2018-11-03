@@ -16,6 +16,7 @@ const Intro = () => (
       Kanskje det tilogmed kommer godt med på cv'en?
     </p>
     <h1>Hvordan komme i gang?</h1>
+    <br/>
     <p>
       For å komme i gang med kodingen, er du først nødt til å velge deg ut et prosjekt som høres
       spennende ut! Det er også lurt å plukke et prosjekt som passer dine tidligere erfaring med
