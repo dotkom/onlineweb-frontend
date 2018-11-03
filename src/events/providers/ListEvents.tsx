@@ -25,6 +25,7 @@ class ListEvents extends Component<IEventViewProps, IListEventsState> {
   public async fetchEvents() {
     const events = await getEvents({
       event_end__gte: DateTime.local().toISODate(),
+      page_size: 7,
     });
 
     this.setState({ events });
