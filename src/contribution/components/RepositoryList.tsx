@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getRepositories } from '../api/github';
+import { getRepositories } from '../api/repositories';
 import { IRepository } from '../models/Repository';
 import style from '../less/contribution.less';
 import Repository from '../components/Repository';
