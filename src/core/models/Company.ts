@@ -2,6 +2,7 @@ import { ICompanyImage } from 'career/models/CompanyImage';
 import IImage from 'common/models/Image';
 
 export interface ICompany {
+  id: number;
   name: string;
   website: string;
   image: IImage;
