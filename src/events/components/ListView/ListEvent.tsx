@@ -22,7 +22,7 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
         </HostPolygon>
       </div>
       <div className={style.elementGridRow}>
-        <p style={{ verticalAlign: 'center' }}>{title}</p>
+        <p>{title}</p>
       </div>
       <div className={style.elementGridRow}>
         <p> {getEventAttendees(attendance_event)} </p>
