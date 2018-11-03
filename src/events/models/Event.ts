@@ -70,6 +70,7 @@ export const getEventColor = (n: number): string => {
 export const mockEvent: INewEvent = {
   absolute_url: '',
   attendance_event: null,
+  organizer_name: '',
   company_event: [],
   description: '',
   event_end: '',
@@ -142,13 +143,13 @@ export interface IAttendanceEvent {
   max_capacity: number; // Positive Integer
   waitlist: boolean;
   guest_attendance: boolean;
-  registration_start: Date;
-  unattend_deadline: Date;
-  registration_end: Date;
-
+  registration_start: string;
+  unattend_deadline: string;
+  registration_end: string;
+  number_of_seats_taken: number;
   automatically_set_marks: boolean;
   marks_has_been_set: boolean;
-
+  number_on_waitlist: number;
   rule_bundles: IRuleBundle[]; // ManyToMany
   extras: IExtra[]; // ManyToMany
   // payments: [Payment] // GenericRelation
@@ -172,6 +173,7 @@ export interface INewEvent {
   attendance_event: IAttendanceEvent | null;
   company_event: ICompanyEvent[];
   description: string;
+  organizer_name: string;
   event_end: string;
   event_start: string;
   event_type: number;
