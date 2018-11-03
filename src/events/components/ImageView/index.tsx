@@ -1,134 +1,45 @@
 import React, { Component } from 'react';
-import {
-  INewEvent,
-  IEventViewProps,
-  getEventColor,
-  getEventType,
-  EventTypeEnum,
-  IAttendanceEvent,
-  ICompanyEvent,
-} from '../../models/Event';
-import { DateTime } from 'luxon';
+import { IEventViewProps } from '../../models/Event';
+import LargeEvent from './LargeEvent';
+import SmallEventColumn from './SmallEvent';
 import style from './image.less';
-import { getEvents } from '../../api/events';
-import { DOMAIN } from 'common/constants/endpoints';
-import { routes } from '../EventsRouter';
-import { Link } from 'react-router-dom';
-import IImage from 'common/models/Image';
+import { ImageEventsContext, IImageEventsState } from 'events/providers/ImageEvents';
 
-export interface IState {
-  events_left: INewEvent[];
-  events_middle: INewEvent[];
-  events_right: INewEvent[];
-  fetched: boolean;
-}
+export type IProps = IEventViewProps & IImageEventsState;
 
-const getEventImage = (image: IImage | null, company_event: ICompanyEvent[]) => {
-  return image
-  ? DOMAIN + image.wide
-  : company_event[0]
-  ? DOMAIN + company_event[0].company.image.wide
-  : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png';
-};
-
-const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
-  return attendance
-    ? `${attendance.attendees
-      ? attendance.attendees.length
-      : '0'}/${attendance.max_capacity}`
-    : 'ALLE';
-};
-
-class ImageView extends Component<IEventViewProps, IState> {
-  public state: IState = {
-    events_left: [],
-    events_middle: [],
-    events_right: [],
-    fetched: false,
-  };
+class ImageView extends Component<IProps> {
 
   public async componentDidMount() {
-    const events_left = await this.getTypeEvents([EventTypeEnum.BEDPRES]);
-    const events_middle = await this.getTypeEvents([EventTypeEnum.KURS]);
-    const events_right = await this.getTypeEvents([
-      EventTypeEnum.SOSIALT,
-      EventTypeEnum.UTFLUKT,
-      EventTypeEnum.EKSKURSJON,
-      EventTypeEnum.ANNET,
-    ]);
-
-    this.setState({ events_left, events_middle, events_right, fetched: true });
-  }
-
-  public componentWillUnmount() {
-    this.setState({ fetched: false });
-  }
-
-  public async getTypeEvents(types: EventTypeEnum[]) {
-    return await getEvents({
-      event_end__gte: DateTime.local().toISODate(),
-      event_type: types,
-    });
+    const { init } = this.props;
+    await init();
   }
 
   public render() {
-    const { events_left, events_middle, events_right, fetched } = this.state;
+    const { eventsLeft, eventsMiddle, eventsRight, fetched } = this.props;
 
     if (!fetched) { return null; }
 
     return (
       <>
         <div className={style.largeEventGrid}>
-          <LargeEvent {...events_left[0]} />
-          <LargeEvent {...events_middle[0]} />
-          <LargeEvent {...events_right[0]} />
+          <LargeEvent {...eventsLeft[0]} />
+          <LargeEvent {...eventsMiddle[0]} />
+          <LargeEvent {...eventsRight[0]} />
         </div>
         <div className={style.smallEventGrid}>
-          <SmallEventColumn events={ events_left.slice(1, 4) }/>
-          <SmallEventColumn events={ events_middle.slice(1, 4) }/>
-          <SmallEventColumn events={ events_right.slice(1, 4) }/>
+          <SmallEventColumn events={ eventsLeft.slice(1, 4) }/>
+          <SmallEventColumn events={ eventsMiddle.slice(1, 4) }/>
+          <SmallEventColumn events={ eventsRight.slice(1, 4) }/>
         </div>
       </>
     );
   }
 }
 
-const SmallEventColumn = ({ events }: { events: INewEvent[] }) => {
-  let column = events.map((event) => <SmallEvent key={event.id} {...event} />);
-
-  column = column.concat(Array.apply(null, {
-    length: 3 - column.length,
-  }).map((x: null, i: number) => <a key={i} />));
-
-  return(
-    <>{ column }</>
-  );
-};
-
-const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id, company_event }: INewEvent) => (
-  <Link to={`/events/${id}`}>
-    <div className={style.large}>
-      <p className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>
-        { getEventType(event_type) }
-      </p>
-      <img className={style.largeImage} src={getEventImage(image, company_event)} />
-      <div className={style.largeContent}>
-        <p> { title } </p>
-        <p> { getEventAttendees(attendance_event) } </p>
-        <p> { DateTime.fromISO(event_start).toFormat('dd.MM') } </p>
-      </div>
-    </div>
-  </Link>
+const Provider = (props: IEventViewProps) => (
+  <ImageEventsContext.Consumer>
+    { (state) => <ImageView {...props} {...state} /> }
+  </ImageEventsContext.Consumer>
 );
 
-const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: INewEvent) => (
-  <Link to={`/events/${id}`}>
-    <div className={style.small} style={{ color: getEventColor(event_type) }}>
-      <p> { title } </p>
-      <p> { getEventAttendees(attendance_event) } </p>
-      <p> { DateTime.fromISO(event_start).toFormat('dd.MM') } </p>
-    </div>
-  </Link>
-);
-
-export default ImageView;
+export default Provider;

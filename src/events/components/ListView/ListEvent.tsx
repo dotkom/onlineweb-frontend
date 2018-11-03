@@ -2,7 +2,7 @@ import React from 'react';
 import { DateTime } from 'luxon';
 import { INewEvent, getEventColor, getEventType, IAttendanceEvent } from '../../models/Event';
 import HostPolygon from './HostPolygon';
-import StatusPolygon from './StatusPolygon';
+import { StatusPolygon, PersonSVG } from './StatusPolygon';
 import style from './list.less';
 import { Link } from 'react-router-dom';
 
@@ -18,7 +18,6 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
   const eventColor = getEventColor(event_type);
   const eventType = getEventType(event_type);
   const eventDate = DateTime.fromISO(event_start).toFormat('d.MM');
-  console.log(company_event ? company_event : null);
   return (
     <Link to={`/events/${id}`}>
       <div className={style.gridRow}>
@@ -38,7 +37,9 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
         </div>
         <div className={style.elementGridRow}>
           <StatusPolygon color="#828282" />
-          <p>{ attendance_event ? 'Y' : 'N' }</p>
+          <div className={style.personSvg}>
+            {attendance_event ? <PersonSVG color="#fff" /> : <p></p> }
+          </div>
         </div>
       </div>
     </Link>

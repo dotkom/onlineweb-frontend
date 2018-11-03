@@ -1,0 +1,41 @@
+@import './reset.less';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #f3f3f3;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+:global {
+  #root {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+  }
+}
