@@ -26,12 +26,12 @@
 
 .repositoryContainer {
   display: flex;
+  flex-direction: column;
   border: grey solid 0.5px;
   padding: 5px 10px 5px 10px;
   border-radius: 3.5px;
   background-color: #e8e8e8;
   color: black;
-  justify-content: space-between;
 
   h3 {
     font-weight: bolder;
@@ -41,6 +41,11 @@
 .repositoryContainer:hover {
   background-color: #dcdcdc;
   cursor: pointer;
+}
+
+.repositoryContent {
+  display: flex;
+  justify-content: space-between;
 }
 
 .issues {
@@ -63,4 +68,18 @@
 
 .header {
   width: 80%;
+}
+
+.languageBar {
+  height: 20px;
+  margin: 5px 0 5px 0;
+
+  div {
+    height: 100%;
+  }
+
+  span {
+    display: flex;
+    height: 100%;
+  }
 }
