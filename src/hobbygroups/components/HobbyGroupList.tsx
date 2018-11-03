@@ -1,4 +1,4 @@
-import React,  { Component, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { getHobbyGroups } from '../api';
 import { IHobbyGroup } from '../models/HobbyGroup';
 import HobbyGroup from './HobbyGroup';
@@ -20,11 +20,11 @@ export default class HobbyGroupList extends Component<{}, IHobbyGroupListState> 
 
   public render() {
     const { groups } = this.state;
-    return(
+    return (
       <div className={style.container}>
-        { groups.sort(sortHobbys).map((group) => (
+        {groups.sort(sortHobbys).map((group) => (
           <HobbyGroup key={group.title} {...group} />
-        )) }
+        ))}
       </div>
     );
   }

@@ -8,12 +8,8 @@ export interface ISearchBoxProps {
 
 const SearchBox = ({ onChange, text }: ISearchBoxProps) => (
   <div>
-    <h3>Søk</h3>
-    <input className={style.searchBox}
-      type="search"
-      value={text}
-      onChange={(e) => onChange(e)}
-    />
+    <h2>Søk</h2>
+    <input className={style.searchBox} type="search" value={text} onChange={(e) => onChange(e)} />
   </div>
 );
 

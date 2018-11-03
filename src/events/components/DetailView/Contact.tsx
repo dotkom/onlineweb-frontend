@@ -9,7 +9,7 @@ const Contact = ({ event_type }: INewEvent) => {
     <div className={style.contact}>
       <div className={style.cardMargin}>
         <CardHeader color={color}>Kontakt</CardHeader>
-        <p></p>
+        <p />
       </div>
     </div>
   );

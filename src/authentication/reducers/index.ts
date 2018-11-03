@@ -20,9 +20,7 @@ export const initialState: IState = {
     last_name: 'user',
     username: 'anonymoususer',
     email: 'anon@online.ntnu.no',
-    groups: [
-      { name: 'None', permissions: []},
-    ],
+    groups: [{ name: 'None', permissions: [] }],
     permissions: ['view_wiki'],
     field_of_study: 0,
   },

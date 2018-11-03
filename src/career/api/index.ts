@@ -23,7 +23,8 @@ const loadData = (data: any) => {
   const jobs: any[] = [];
   data.results.forEach((job: IApiJob) => {
     // Create a new company tag if it does not already exist.
-    if (companies.indexOf(job.company.name) < 0) { // TODO: this kind of needs a rewrite
+    if (companies.indexOf(job.company.name) < 0) {
+      // TODO: this kind of needs a rewrite
       companies.push(job.company);
     }
 
@@ -40,11 +41,19 @@ const loadData = (data: any) => {
     });
 
     // Add information to the job that is used to filter using tags.
-    jobs.push(Object.assign({}, { tags: {
-      companies: job.company.id,
-      jobTypes: job.employment.id,
-      locations: job.location.map((location) => location.name),
-    } }, normalizeData(job)));
+    jobs.push(
+      Object.assign(
+        {},
+        {
+          tags: {
+            companies: job.company.id,
+            jobTypes: job.employment.id,
+            locations: job.location.map((location) => location.name),
+          },
+        },
+        normalizeData(job)
+      )
+    );
   });
 
   // Update the tags with new information from the server.
@@ -75,9 +84,7 @@ const loadData = (data: any) => {
 // Normalizes data from the server, most notably converting to camelCase.
 const normalizeData = (job: IApiJob): IJob => ({
   locations: job.location.map((location) => location.name), // Locations contains name and slug
-  deadline: job.deadline
-    ? DateTime.fromISO(job.deadline).toFormat('dd LLL YYYY')
-    : 'Ikke spesifisert', // Format and give default value
+  deadline: job.deadline ? DateTime.fromISO(job.deadline).toFormat('dd LLL YYYY') : 'Ikke spesifisert', // Format and give default value
   companyImage: job.company.image,
   companyName: job.company.name,
   companyDescription: job.company.short_description,

@@ -41,7 +41,7 @@ class DetailView extends Component<IProps, IState> {
         <div className={style.leftContainer}>
           <ListEvent key={eventId} {...e} />
           <PictureCard key={eventId} {...e} />
-          <InfoBox {...e}/>
+          <InfoBox {...e} />
         </div>
         <div className={style.rightContainer}>
           <Registration {...e} />

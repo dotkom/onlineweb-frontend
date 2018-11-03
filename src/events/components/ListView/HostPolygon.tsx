@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { ReactChild } from 'react';
+import style from './list.less';
 
-const HostPolygon = ({ color }: { color: string }) => (
-  <svg viewBox="0 0 220 60" height="50">
-    <path d="M200 60L220 30L200.5 0H0V60H200Z" fill={ color }/>
-  </svg>
+const HostPolygon = ({ children, color }: { children: string; color: string }) => (
+  <div className={style.hostPolygon} style={{ color }}>
+    <p className={style.host}>{children}</p>
+  </div>
 );
 
 export default HostPolygon;

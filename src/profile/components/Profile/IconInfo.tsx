@@ -24,10 +24,12 @@ class ExternalInfo extends React.Component<IProps> {
     const { type, content } = this.props;
     return (
       <div className={style.infoIconWrapper}>
-        <img className={style.infoIcon} src={TYPES[type]} alt="social-link"/>
+        <img className={style.infoIcon} src={TYPES[type]} alt="social-link" />
         <div className={style.infoIconContent}>
-          <p className={''}>{ type }</p>
-          <a className={''} href={content}>{ content }</a>
+          <p className={''}>{type}</p>
+          <a className={''} href={content}>
+            {content}
+          </a>
         </div>
       </div>
     );

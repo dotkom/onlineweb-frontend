@@ -1,36 +1,35 @@
-.center {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  background: white;
-  padding-top: 40px;
-}
+@import '~common/less/constants.less';
 
-.inner-container {
-  width: 960px;
-}
-
-.profile-image {
-  border-radius: 50%;
-  width: 140px;
-  margin: 6px;
-  border: 6px solid #333;
-}
-
-.container {
+.header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  padding: 20px 0;
+
+  .profile-image {
+    border-radius: 50%;
+    width: 140px;
+    border: 6px solid #333;
+  }
+
+  h1 {
+    margin-top: 20px;
+    font-size: 40px;
+  }
 }
 
-p {
-  color: #333;
+.profile {
+  .owCard();
+
+  padding: 30px 20px;
 }
 
-.name {
-  margin: 20px;
-  font-size: 40px;
+.info-group:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.info-group h1 {
+  margin-bottom: 20px;
 }
 
 .committee-medal {
@@ -65,16 +64,10 @@ p {
   overflow-x: scroll;
 }
 
-.info-group {
-  padding: 0 20px;
-}
-
 .group-wrapper {
-  margin: 40px 0;
-  padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  justify-items: center;
+  grid-template-columns: repeat(2, 275px);
+  justify-content: center;
   grid-gap: 20px;
 }
 
@@ -84,26 +77,8 @@ p {
   justify-items: center;
 }
 
-.group-name {
-  font-size: 25px;
-  display: inline;
-  font-weight: bold;
-}
-
-.info-wrapper {
-  display: block;
-  width: 200px;
-}
-
-.info-type,
-.info-content {
-  margin: 0;
-  padding: 0;
-}
-
 .info-content,
 .info-link {
-  font-size: 15px;
   font-weight: bold;
 }
 
@@ -165,5 +140,5 @@ p {
 }
 
 .grid-row {
-  background-color: #fff;
+  .owCard();
 }

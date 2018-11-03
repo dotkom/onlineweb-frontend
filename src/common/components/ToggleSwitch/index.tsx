@@ -11,8 +11,8 @@ export interface IProps {
   onChange: () => void;
 }
 
-const ToggleSwitch = ({ checked = false, disabled = false , onChange }: IProps) => {
-  return(
+const ToggleSwitch = ({ checked = false, disabled = false, onChange }: IProps) => {
+  return (
     <button disabled={disabled} onClick={onChange} className={style.container}>
       <div className={style.slider + ' ' + (checked ? style.checked : '')}>
         <img className={style.icon} src={checked ? Check : Cross} />

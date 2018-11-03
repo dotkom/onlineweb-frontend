@@ -12,26 +12,14 @@ export const Header = () => (
     <div className={style.grid}>
       <HeaderLogo />
       <div className={style.links}>
-        <div className={style.item}>
-          <Link to={routes.events}>Arkiv</Link>
-        </div>
-        <div className={style.item}>
-          <Link to={routes.career}>Karriere</Link>
-        </div>
-        <div className={style.item}>
-          <Link to={routes.resources}>Ressurser</Link>
-        </div>
-        <div className={style.item}>
-          <Link to={routes.hobbygroups}>Interessegrupper</Link>
-        </div>
+        <Link to={routes.events}>Arkiv</Link>
+        <Link to={routes.career}>Karriere</Link>
+        <Link to={routes.resources}>Ressurser</Link>
+        <Link to={routes.hobbygroups}>Interessegrupper</Link>
         <Authenticate authentication={'view_wiki'}>
-          <div className={style.item}>
-            <Link to={routes.wiki}>Wiki</Link>
-          </div>
+          <Link to={routes.wiki}>Wiki</Link>
         </Authenticate>
-        <div className={style.item}>
-          <Link to={routes.webshop}>Webshop</Link>
-        </div>
+        <Link to={routes.webshop}>Webshop</Link>
       </div>
       <MainSponsor />
     </div>

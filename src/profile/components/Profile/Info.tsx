@@ -10,9 +10,9 @@ class Info extends React.Component<IProps> {
   public render() {
     const { type, content } = this.props;
     return (
-      <div className={style.infoWrapper}>
-        <p className={style.infoType}>{ type }</p>
-        <p className={style.infoContent}>{ content }</p>
+      <div>
+        <p>{type}</p>
+        <p className={style.infoContent}>{content}</p>
       </div>
     );
   }

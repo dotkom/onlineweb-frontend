@@ -3,7 +3,7 @@ import { EventTypeEnum, INewEvent, IEventViewProps } from 'events/models/Event';
 import { DateTime } from 'luxon';
 import { getEvents } from 'events/api/events';
 
-export interface IImageEventsState  {
+export interface IImageEventsState {
   eventsLeft: INewEvent[];
   eventsMiddle: INewEvent[];
   eventsRight: INewEvent[];
@@ -16,13 +16,14 @@ const INITIAL_STATE: IImageEventsState = {
   eventsMiddle: [],
   eventsRight: [],
   fetched: false,
-  init: () => { throw new Error('Init state was called before component was initialized'); },
+  init: () => {
+    throw new Error('Init state was called before component was initialized');
+  },
 };
 
 export const ImageEventsContext = createContext(INITIAL_STATE);
 
 class ImageEvents extends Component<IEventViewProps, IImageEventsState> {
-
   public state: IImageEventsState = { ...INITIAL_STATE };
 
   public init = async () => await this.getEventsParallell();
@@ -53,11 +54,7 @@ class ImageEvents extends Component<IEventViewProps, IImageEventsState> {
   public render() {
     const { init } = this;
     const value = { ...this.state, init };
-    return (
-      <ImageEventsContext.Provider value={value}>
-        { this.props.children }
-      </ImageEventsContext.Provider>
-    );
+    return <ImageEventsContext.Provider value={value}>{this.props.children}</ImageEventsContext.Provider>;
   }
 }
 
