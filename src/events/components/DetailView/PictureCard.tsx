@@ -23,7 +23,7 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
       </div>
 
       <div className={style.attendance}>
-        <CardHeader color={color}>Oppmøte</CardHeader>
+        <CardHeader className={style.detailHeader} color={color}>Oppmøte</CardHeader>
 
         <div className={style.blockGrid}>
           <Block title="Starttid">

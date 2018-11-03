@@ -9,7 +9,7 @@ const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
 
   return (
     <div className={style.contact}>
-      <CardHeader color={color}>Kontakt</CardHeader>
+      <CardHeader className={style.detailHeader} color={color}>Kontakt</CardHeader>
 
       <Block title="Arrangør">
         <p>{organizer_name}</p>

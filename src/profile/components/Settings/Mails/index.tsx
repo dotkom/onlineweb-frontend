@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { IMail } from '../../models/Mail';
+import { IMail } from '../../../models/Mail';
 import Mail from './Mail';
-import { getMails } from '../../api/mail';
+import { getMails } from '../../../api/mail';
 import style from './mail.less';
 import classnames from 'classnames';
 
@@ -23,16 +23,18 @@ class Mails extends Component<{}, IState> {
 
   public togglePrimary(index: number) {
     const { addresses } = this.state;
-    const reset: IMail[] = addresses.map((addr) => ({...addr, primary: false}));
+    const reset: IMail[] = addresses.map((addr) => ({ ...addr, primary: false }));
     reset[index].primary = true;
     this.setState({ addresses: reset });
   }
 
   public render() {
     const { addresses } = this.state;
-    return(
+    return (
       <div className={classnames(style.mailForm, style.grid)}>
-        { addresses.map((addr, index) => <Mail {...addr} toggle={() => this.togglePrimary(index)} key={addr.email}/>) }
+        {addresses.map((addr, index) => (
+          <Mail {...addr} toggle={() => this.togglePrimary(index)} key={addr.email} />
+        ))}
       </div>
     );
   }

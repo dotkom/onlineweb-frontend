@@ -33,7 +33,7 @@ class Searchbar extends Component<IProps, IState> {
       <form className={style.grid}>
         <input className={style.searchField} type="text" value={name} onChange={(e) => setName(e.target.value)} />
         <Dropdown selected={group} onClick={(g: IGroup) => setGroup(g)} groups={groups} />
-        <DoubleSlider range={year || [1, 6]} onChange={(range) => setYear(range)}/>
+        <DoubleSlider range={year || [1, 6]} onChange={(range) => setYear(range)} />
       </form>
     );
   }

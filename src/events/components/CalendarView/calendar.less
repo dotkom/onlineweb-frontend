@@ -1,20 +1,20 @@
+@import '~common/less/constants.less';
+
 .grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 }
 
 .tile {
-  background: white;
+  .owCard();
+
   overflow: hidden;
   height: 100px;
 }
 
 .tileInactive {
-  background: #fafafa;
-
-  > p {
-    color: lightgray !important;
-  }
+  background: #eee;
+  box-shadow: none;
 }
 
 .tileContent {

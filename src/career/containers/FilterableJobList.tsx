@@ -21,23 +21,15 @@ const FilterableJobList = (props: IFilterableJobListProps) => (
     <div className={style.topGrid}>
       <FilterList
         tags={props.tags}
-        handleTagChange={(
-          type: string,
-          changedTag: ITag,
-          switchMode: boolean
-        ) => props.handleTagChange(type, changedTag, switchMode)}
-        handleReset={() => props.handleReset()}
-        handleFilterChange={(e: FormEvent<HTMLFormElement>) =>
-          props.handleFilterChange(e)
+        handleTagChange={(type: string, changedTag: ITag, switchMode: boolean) =>
+          props.handleTagChange(type, changedTag, switchMode)
         }
+        handleReset={() => props.handleReset()}
+        handleFilterChange={(e: FormEvent<HTMLFormElement>) => props.handleFilterChange(e)}
         filterText={props.filterText}
       />
 
-      <JobList
-        jobs={props.jobs}
-        tags={props.tags}
-        filterText={props.filterText}
-      />
+      <JobList jobs={props.jobs} tags={props.tags} filterText={props.filterText} />
     </div>
   </div>
 );

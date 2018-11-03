@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { IPrivacy } from '../../models/Privacy';
-import { getPrivacyOptions, postPrivacyOptions } from '../../api/privacy';
+import { IPrivacy } from '../../../models/Privacy';
+import { getPrivacyOptions, postPrivacyOptions } from '../../../api/privacy';
 import Option from './Option';
 import { getKeys } from 'common/utils/tsHacks';
 import Info from './Info';
-import style from '../Penalties/penalties.less';
+import style from './privacy.less';
 
 export type IState = { [key in keyof IPrivacy]: boolean };
 
@@ -43,17 +43,12 @@ class Privacy extends Component<{}, IState> {
 
   public render() {
     const { state } = this;
-    return(
-      <div className={style.grid}>
-        { getKeys<IPrivacy>(state).map((key) => (
-          <Option
-            key={key}
-            option={key}
-            value={state[key]}
-            toggle={() => this.togglePrivacyOption(key)}
-          />
-        ))}
+    return (
+      <div className={style.container}>
         <Info />
+        {getKeys<IPrivacy>(state).map((key) => (
+          <Option key={key} option={key} value={state[key]} toggle={() => this.togglePrivacyOption(key)} />
+        ))}
       </div>
     );
   }

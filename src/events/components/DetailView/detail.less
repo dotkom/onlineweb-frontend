@@ -1,3 +1,5 @@
+@import '~common/less/constants.less';
+
 .card-margin {
   margin: 30px;
 }
@@ -7,7 +9,7 @@
   display: grid;
   grid-template-columns: 83fr 33fr;
   grid-gap: 40px;
-  background-color: white;
+  .owCard();
 }
 
 .pictureCard {
@@ -59,21 +61,17 @@
 }
 
 .registration {
-  background-color: white;
+  .owCard();
 }
 
 .contact {
   background-color: white;
   padding: 3rem 0;
+  .owCard();
 }
 
 .info-box {
-  background-color: white;
-
-  .info-box-header,
-  .info-box-content {
-    color: #454545;
-  }
+  .owCard();
 
   .info-box-header {
     font-size: 24px;
@@ -84,6 +82,10 @@
     line-height: 1.65rem;
     font-size: 16px;
     margin-top: 1rem;
+
+    p {
+      margin-top: 1rem;
+    }
   }
 }
 
@@ -104,6 +106,10 @@
   margin: 0.2rem;
 }
 
+.detailHeader {
+  text-align: center;
+}
+
 @media (min-width: 900px) {
   .pictureCard {
     grid-template-columns: 3fr 2fr;
@@ -113,5 +119,6 @@
 @media (min-width: 1024px) {
   .container {
     grid-template-columns: 83fr 33fr;
+    margin-bottom: 10px;
   }
 }

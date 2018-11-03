@@ -1,15 +1,8 @@
 import { IsoDateTime } from 'common/models/Date';
 
-export type PaymentChoice =
-  | 'Umiddelbar'
-  | 'Frist'
-  | 'Utsettelse';
+export type PaymentChoice = 'Umiddelbar' | 'Frist' | 'Utsettelse';
 
-export type StripeKeyChoice =
-  | 'arrkom'
-  | 'prokom'
-  | 'trikom'
-  | 'fagkom';
+export type StripeKeyChoice = 'arrkom' | 'prokom' | 'trikom' | 'fagkom';
 
 export interface IPayment {
   object_id: number;

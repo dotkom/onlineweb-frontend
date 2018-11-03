@@ -10,19 +10,13 @@ const IMAGE_SUFFIX = '.thumb.png';
 
 const OfflineCarousel = ({ offlines }: IProps) => (
   <div className={style.carousel}>
-    {offlines.map(offline => (
+    {offlines.map((offline) => (
       <CarouselItem key={offline.id} {...offline} />
     ))}
   </div>
 );
 
-const CarouselItem = ({
-  description,
-  id,
-  issue,
-  release_date,
-  title,
-}: IOfflineIssue) => {
+const CarouselItem = ({ description, id, issue, release_date, title }: IOfflineIssue) => {
   const thumbnail = issue + IMAGE_SUFFIX;
   return (
     <div>

@@ -33,15 +33,12 @@ class Name extends React.Component<IProps, IState> {
     const { medals, name } = this.props;
     return (
       <div className={style.infoGroup}>
-        { /*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/ }
-        <p className={style.groupName}>{ name }</p>
+        {/*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/}
+        <h1>{name}</h1>
         <div className={style.medalGrid}>
-          { medals.slice(slice - showAmount, slice).map((medal) =>
-            <Medal
-              key={medal.committee + medal.position + medal.range}
-              {...medal}
-            />,
-          )}
+          {medals.slice(slice - showAmount, slice).map((medal) => (
+            <Medal key={medal.committee + medal.position + medal.range} {...medal} />
+          ))}
         </div>
       </div>
     );

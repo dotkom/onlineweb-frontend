@@ -10,8 +10,7 @@ export const Footer = () => (
       <p className={style.contactDevelopers}>
         Har du funnet en feil på nettsiden?
         <br />
-        Ta kontakt med{' '}
-        <a href="mailto:dotkom@online.ntnu.no">Utviklingsteamet</a>
+        Ta kontakt med <a href="mailto:dotkom@online.ntnu.no">Utviklingsteamet</a>
       </p>
     </div>
     <div>
