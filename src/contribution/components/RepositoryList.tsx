@@ -12,7 +12,7 @@ export default class RepositoryList extends Component<{}, IRepositoryListState> 
     public readonly state = { repositories: [] } as IRepositoryListState;
 
     public async componentDidMount() {
-        const results = await getRepositories();
+        const results: any = await getRepositories();
         this.setState({ repositories: results });
     }
 

@@ -23,3 +23,44 @@
     grid-template-rows: auto;
   }
 }
+
+.repositoryContainer {
+  display: flex;
+  border: grey solid 0.5px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 3.5px;
+  background-color: #e8e8e8;
+  color: black;
+  justify-content: space-between;
+
+  h3 {
+    font-weight: bolder;
+  }
+}
+
+.repositoryContainer:hover {
+  background-color: #dcdcdc;
+  cursor: pointer;
+}
+
+.issues {
+  display: flex;
+  justify-content: flex-end;
+  width: 20%;
+
+  span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    margin-left: 10px;
+    border: grey solid 1px;
+    border-radius: 100px;
+  }
+}
+
+.header {
+  width: 80%;
+}
