@@ -1,3 +1,5 @@
+@import '~common/less/constants.less';
+
 .card-margin {
   margin: 30px;
 }
@@ -7,12 +9,13 @@
   display: grid;
   grid-template-columns: 83fr 33fr;
   grid-gap: 40px;
-  background-color: white;
+  .owCard();
 }
 
 .pictureCard {
   display: grid;
-  background-color: white;
+  .owCard();
+
   grid-template-columns: 83fr 33fr;
 }
 
@@ -34,27 +37,18 @@
 }
 
 .registration {
-  background-color: white;
+  .owCard();
 }
 
 .contact {
-  background-color: white;
+  .owCard();
 }
 
 .info-box {
-  background-color: white;
-
-  .info-box-header,
-  .info-box-content {
-    color: #454545;
-  }
+  .owCard();
 
   .info-box-header {
-    font-size: 24px;
-    margin-bottom: 0;
-  }
-
-  .info-box-content {
-    font-size: 16px;
+    margin-bottom: 10px;
+    font-style: italic;
   }
 }

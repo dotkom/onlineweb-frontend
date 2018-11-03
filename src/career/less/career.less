@@ -1,4 +1,5 @@
 @import '~common/less/colors.less';
+@import '~common/less/constants.less';
 
 .top-grid {
   display: grid;
@@ -14,18 +15,13 @@
 .search-box {
   border: 3px solid darken(@baby-blue-medium, 10%);
   padding: 10px;
-  margin: 7px 0;
+  margin: 10px 0;
   width: 100%;
 }
 
 .job-info {
   width: 100%;
   text-decoration: none;
-
-  & > h1 {
-    font-size: 20px;
-    margin-top: 0;
-  }
 }
 
 .job-meta {
@@ -40,7 +36,7 @@
     color: #aaa;
   }
 
-  font-size: 11px;
+  font-size: @owFontSmall;
 }
 
 .career img,
@@ -53,7 +49,7 @@
   grid-gap: 20px;
   grid-template-columns: 1fr 2fr;
   padding: 20px;
-  background-color: white;
+  .owCard();
 
   & > a {
     width: 100%;
@@ -78,7 +74,6 @@
 
 .ingress {
   margin: 10px 0;
-  line-height: 1.625em;
 }
 
 .filters {
@@ -86,32 +81,27 @@
   padding: 15px;
   margin-bottom: 20px;
   grid-area: filter;
+  color: white;
 
   button {
-    background-color: @baby-blue;
+    background: @baby-blue;
     color: #fff;
     border: none;
     display: inline-block;
     text-align: center;
     width: 100%;
-    font-size: 13px;
     padding-bottom: 10px;
     padding-top: 10px;
-  }
-
-  h3 {
-    margin-top: 0;
-    font-size: 20px;
-    color: white;
   }
 }
 
 .tag-container {
-  padding: 0;
-  margin: 0;
   display: block;
-  margin-top: 10px;
-  margin-bottom: 15px;
+  margin: 10px 0;
+
+  h2 {
+    margin-bottom: 10px;
+  }
 
   button {
     display: inline-flex;
@@ -136,14 +126,13 @@
 }
 
 .job-description {
-  background-color: white;
+  .owCard();
 
   div {
     margin: 30px;
   }
 
   > p {
-    font-weight: 300;
     color: #454545;
   }
 }
@@ -159,7 +148,7 @@
   }
 
   > div {
-    background-color: @baby-blue-medium;
+    background: @baby-blue-medium;
 
     > div {
       margin: 20px;
@@ -167,7 +156,6 @@
       p,
       h3 {
         color: white;
-        font-weight: 300;
       }
     }
   }

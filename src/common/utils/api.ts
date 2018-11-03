@@ -1,4 +1,3 @@
-
 import { DOMAIN } from '../constants/endpoints';
 import { toQueryString } from './queryString';
 import { RequestOptions } from 'http';
@@ -45,7 +44,7 @@ export const post = async (query: string, data: any, parameters: object = {}, op
   try {
     const response = await fetch(
       DOMAIN + query + queryString,
-      Object.assign(options || {}, { method: 'POST', body: JSON.stringify(data) }),
+      Object.assign(options || {}, { method: 'POST', body: JSON.stringify(data) })
     );
     const json = await response.json();
     return json;

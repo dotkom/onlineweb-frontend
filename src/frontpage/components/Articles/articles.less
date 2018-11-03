@@ -4,16 +4,6 @@
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-gap: @grid-gap;
-
-  & img {
-    width: 100%;
-  }
-}
-
-.main-article {
-  & p {
-    font-size: 20px;
-  }
 }
 
 .small-container {
@@ -30,19 +20,17 @@
 
   & img {
     height: 100%;
-  }
-
-  & div {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-
-    & p {
-      margin: 5px;
-      color: white;
-      font-weight: bold;
-    }
   }
+}
+
+.title {
+  box-sizing: border-box;
+  padding: 10px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
 }

@@ -8,8 +8,7 @@ import Searchbar from './Searchbar';
 import style from './search.less';
 import { IProfileProps } from 'profile';
 
-export interface IProps extends IProfileProps {
-}
+export interface IProps extends IProfileProps {}
 
 export interface IState {
   readonly users: ISearchUser[];
@@ -17,7 +16,6 @@ export interface IState {
 }
 
 class Search extends React.Component<IProps, IState> {
-
   constructor(props: IProps) {
     super(props);
 
@@ -62,12 +60,12 @@ class Search extends React.Component<IProps, IState> {
           setName={(s) => this.setName(s)}
           setGroup={(s) => this.setGroup(s)}
           setYear={(s) => this.setYear(s)}
-          { ...filter.format }
+          {...filter.format}
         />
         <div className={style.smallProfileGrid}>
-          { users.map((user) =>
-            <ProfileSmall user={user} />)
-          }
+          {users.map((user) => (
+            <ProfileSmall user={user} />
+          ))}
         </div>
       </>
     );

@@ -22,7 +22,7 @@ const NotFound = ({ code, text }: IProps) => (
   <section>
     <div className={style.header}>
       <h1>{code}</h1>
-      <p> {text || 'Siden du har bedt om finnes ikke.'}</p>
+      <h2> {text || 'Siden du har bedt om finnes ikke.'}</h2>
       <Img src="/static/img/404Balloon.gif" />
     </div>
   </section>

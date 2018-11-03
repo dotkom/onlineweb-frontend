@@ -40,7 +40,7 @@ export const App = () => {
             <Route path={routes.hobbygroups} component={Hobbys} />
             <Route path={routes.resources} component={Resources} />
             <Route path={routes.profile} component={Profile} />
-            <Route path="*" render={() => <HttpError code={404}/>} />
+            <Route path="*" render={() => <HttpError code={404} />} />
           </Switch>
         </Core>
       </Router>

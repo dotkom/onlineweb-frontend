@@ -64,9 +64,7 @@ const JobList = ({ jobs, tags, filterText }: IJobListProps) => {
     distance: 100,
     maxPatternLength: 32,
     minMatchCharLength: 1,
-    keys: [
-      'locations', 'companyName', 'companyName', 'title', 'ingress', 'type',
-    ],
+    keys: ['locations', 'companyName', 'companyName', 'title', 'ingress', 'type'],
   });
 
   const search = fuse.search(filterText);
@@ -118,16 +116,13 @@ const JobList = ({ jobs, tags, filterText }: IJobListProps) => {
   // First move full-time jobs to the top, then move the sponsored
   // jobs to the top, while retaining the full-time-job sorting.
   const sortedJobs = arrangeJobs(
-    arrangeJobs(jobObjects, (job: IJob) => job.type === 'Fastjobb'), (job: IJob) => job.featured,
+    arrangeJobs(jobObjects, (job: IJob) => job.type === 'Fastjobb'),
+    (job: IJob) => job.featured
   );
 
   const jobElems = sortedJobs.map((job, i) => <Job {...job} key={i} />);
 
-  return (
-    <div className={style.jobList}>
-      {jobElems}
-    </div>
-  );
+  return <div className={style.jobList}>{jobElems}</div>;
 };
 
 export default JobList;

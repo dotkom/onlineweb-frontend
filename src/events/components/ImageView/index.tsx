@@ -8,7 +8,6 @@ import { ImageEventsContext, IImageEventsState } from 'events/providers/ImageEve
 export type IProps = IEventViewProps & IImageEventsState;
 
 class ImageView extends Component<IProps> {
-
   public async componentDidMount() {
     const { init } = this.props;
     await init();
@@ -17,7 +16,9 @@ class ImageView extends Component<IProps> {
   public render() {
     const { eventsLeft, eventsMiddle, eventsRight, fetched } = this.props;
 
-    if (!fetched) { return null; }
+    if (!fetched) {
+      return null;
+    }
 
     return (
       <>
@@ -27,9 +28,9 @@ class ImageView extends Component<IProps> {
           <LargeEvent {...eventsRight[0]} />
         </div>
         <div className={style.smallEventGrid}>
-          <SmallEventColumn events={ eventsLeft.slice(1, 4) }/>
-          <SmallEventColumn events={ eventsMiddle.slice(1, 4) }/>
-          <SmallEventColumn events={ eventsRight.slice(1, 4) }/>
+          <SmallEventColumn events={eventsLeft.slice(1, 4)} />
+          <SmallEventColumn events={eventsMiddle.slice(1, 4)} />
+          <SmallEventColumn events={eventsRight.slice(1, 4)} />
         </div>
       </>
     );
@@ -37,9 +38,7 @@ class ImageView extends Component<IProps> {
 }
 
 const Provider = (props: IEventViewProps) => (
-  <ImageEventsContext.Consumer>
-    { (state) => <ImageView {...props} {...state} /> }
-  </ImageEventsContext.Consumer>
+  <ImageEventsContext.Consumer>{(state) => <ImageView {...props} {...state} />}</ImageEventsContext.Consumer>
 );
 
 export default Provider;

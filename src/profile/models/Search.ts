@@ -81,9 +81,9 @@ export class SearchFilter {
    */
   public get format(): ISearchFilter {
     return {
-      name: (this.name !== null) ? this.name : undefined,
+      name: this.name !== null ? this.name : undefined,
       group: this.group !== null ? this.group.name : undefined,
-      year: (this.year !== [1, 6]) ? this.year : undefined,
+      year: this.year !== [1, 6] ? this.year : undefined,
     };
   }
 }
