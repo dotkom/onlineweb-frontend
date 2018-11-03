@@ -11,9 +11,9 @@ class ProfileSmall extends React.Component<{ user: ISearchUser }> {
         <img className={classnames(style.profileImage, style.picturePadding)} src={image} title={name} />
         <div className={style.smallContent}>
           <h3 className={style.name}>{name}</h3>
-          <p className={style.infoType}>E-post</p>
+          <p className={style.infoType}>E-post: </p>
           <p className={style.infoContent}>{mail}</p>
-          <p className={style.infoType}>Telefonnummer</p>
+          <p className={style.infoType}>Telefonnummer: </p>
           <p className={style.infoContent}>{phone}</p>
         </div>
       </div>
