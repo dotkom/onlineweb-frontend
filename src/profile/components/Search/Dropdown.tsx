@@ -3,6 +3,9 @@ import Collapsible from 'common/components/Collapsible';
 import { IGroup } from 'core/models/Group';
 import classnames from 'classnames';
 import style from './search.less';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons/faArrowDown';
+
 
 export interface IProps {
   selected: string | undefined;
@@ -19,6 +22,7 @@ class Dropdown extends Collapsible<IProps> {
         {collapsed ? (
           <Item selected={!selected || true} onClick={() => this.toggleCollapse()}>
             {selected || 'Velg en gruppe'}
+            <FontAwesomeIcon icon={faArrowDown} />
           </Item>
         ) : (
           groups.map((group) => (
