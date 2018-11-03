@@ -21,9 +21,9 @@ const getEventImage = (image: IImage | null, company_event: ICompanyEvent[]) => 
 const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id, company_event }: INewEvent) => (
   <Link to={`/events/${id}`}>
     <div className={style.large}>
-      <p className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>
+      <h2 className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>
         {getEventType(event_type)}
-      </p>
+      </h2>
       <img className={style.largeImage} src={getEventImage(image, company_event)} />
       <div className={style.largeContent}>
         <p> {title} </p>
