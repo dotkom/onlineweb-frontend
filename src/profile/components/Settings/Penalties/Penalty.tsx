@@ -1,5 +1,5 @@
 import React from 'react';
-import { IPenalty } from '../../models/Penalty';
+import { IPenalty } from '../../../models/Penalty';
 import Collapsible from 'common/components/Collapsible';
 import { DateTime, Interval } from 'luxon';
 
@@ -15,7 +15,6 @@ export interface IProps<T> {
  * @param {IPenalty} penalty Component needs to be supplied a penalty to display.
  */
 abstract class Penalty<T> extends Collapsible<IProps<T>> {
-
   public static sortByExpiration(a: IPenalty, b: IPenalty): number {
     return new Date(b.expiration_date).getTime() - new Date(a.expiration_date).getTime();
   }
@@ -49,9 +48,12 @@ abstract class Penalty<T> extends Collapsible<IProps<T>> {
 
   public getCompletionColor(percentage: number): 'red' | 'white' | 'gray' {
     switch (percentage) {
-      case 100: return 'gray';
-      case 0: return 'white';
-      default: return 'red';
+      case 100:
+        return 'gray';
+      case 0:
+        return 'white';
+      default:
+        return 'red';
     }
   }
 

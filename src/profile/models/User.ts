@@ -13,9 +13,9 @@ export interface IFullProfileUser {
   address: string;
   committees: IMedal[];
   external: {
-    github: string,
-    linkedin: string,
-    homepage: string,
+    github: string;
+    linkedin: string;
+    homepage: string;
   };
 }
 

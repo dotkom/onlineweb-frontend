@@ -1,0 +1,16 @@
+@import '~common/less/constants.less';
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+}
+
+.content {
+  .owCard();
+
+  width: 100%;
+  > div {
+    padding: 30px;
+  }
+}

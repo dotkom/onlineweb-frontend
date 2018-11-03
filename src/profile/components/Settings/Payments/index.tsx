@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { IPayment } from '../../models/Payment';
-import { getPayments } from '../../api/payment';
+import { IPayment } from '../../../models/Payment';
+import { getPayments } from '../../../api/payment';
 import Placeholder from './Placeholder';
 import Payment from './Payment';
 
@@ -24,14 +24,14 @@ class Payments extends Component<{}, IState> {
     const { payments, loaded } = this.state;
     return (
       <div>
-        {
-          !loaded
-          ? <Placeholder />
-          : !payments.length
-            ? <div> Du har ingen betalinger </div>
-            : payments.map((payment) => <Payment {...payment} />)
-        }
-      </div >
+        {!loaded ? (
+          <Placeholder />
+        ) : !payments.length ? (
+          <div> Du har ingen betalinger </div>
+        ) : (
+          payments.map((payment) => <Payment {...payment} />)
+        )}
+      </div>
     );
   }
 }

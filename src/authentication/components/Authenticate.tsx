@@ -17,12 +17,15 @@ export const mapStateToProps = (state: IState): IState => {
 };
 
 // tslint:disable-next-line
-export const mapDispatchToProps = (dispatch: Function) => ({/** Not going to change the state for user */});
+export const mapDispatchToProps = (dispatch: Function) => ({
+  /** Not going to change the state for user */
+});
 
 const GroupAccess = ({ children, authentication, user, alt = null }: Props) => (
-  <Fragment>
-    { user.hasPermission(authentication) ? children : alt }
-  </Fragment>
+  <Fragment>{user.hasPermission(authentication) ? children : alt}</Fragment>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupAccess);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GroupAccess);

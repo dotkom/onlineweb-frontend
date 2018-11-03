@@ -1,38 +1,25 @@
 import React, { Component, ReactChildren } from 'react';
-import { Link } from 'react-router-dom';
+import Router, { Link } from 'react-router-dom';
 import style from './menu.less';
 import classnames from 'classnames';
+import { routes } from '../index';
 
 export interface IProps {
-  match: any;
+  match: Router.match<any>;
   children: JSX.Element;
 }
 
 class MainMenu extends Component<IProps, {}> {
   public render() {
-    const pages = [
-      { link: 'me', view: 'Min Profil' },
-      { link: 'search', view: 'Brukersøk' },
-      { link: 'settings', view: 'Innstillinger' },
-    ];
-    // Yeah, I know...
-    const current = this.props.match.path.split('/').reverse()[0];
-    console.log(current);
-    return(
+    const { path } = this.props.match;
+    return (
       <div>
         <div className={style.menuGrid}>
-          { pages.map((page) => (
-            <Link to={page.link} key={page.link} className={style.removeUnderline}>
-              <MenuElement
-                text={page.view}
-                clicked={current === page.link}
-              />
-            </Link>
-          )) }
+          <MenuElement text="Min Profil" link={routes.personal} active={path === routes.personal} />
+          <MenuElement text="Brukersøk" link={routes.search} active={path === routes.search} />
+          <MenuElement text="Innstillinger" link={routes.settings} active={path === routes.settings} />
         </div>
-        <div>
-          { this.props.children }
-        </div>
+        <div>{this.props.children}</div>
       </div>
     );
   }
@@ -40,13 +27,16 @@ class MainMenu extends Component<IProps, {}> {
 
 export interface IElementProps {
   text: string;
-  clicked: boolean;
+  active: boolean;
+  link: string;
 }
 
-const MenuElement = ({ text, clicked }: IElementProps) => (
-  <div className={classnames(style.menuGridRow, { [style.menuClicked]: clicked })}>
-    <h4 className={style.menuText}>{ text }</h4>
-  </div>
+const MenuElement = ({ text, active, link }: IElementProps) => (
+  <Link to={link}>
+    <div className={classnames(style.menuGridRow, { [style.menuClicked]: active })}>
+      <h4 className={style.menuText}>{text}</h4>
+    </div>
+  </Link>
 );
 
 export default MainMenu;

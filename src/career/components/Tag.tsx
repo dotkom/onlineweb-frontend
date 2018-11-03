@@ -10,10 +10,7 @@ export interface ITagProps {
 }
 
 const Tag = ({ selected, title, changeKey, handleChange }: ITagProps) => (
-  <button
-    className={classNames({ [style.selected]: selected })}
-    onClick={() => handleChange(changeKey)}
-  >
+  <button className={classNames({ [style.selected]: selected })} onClick={() => handleChange(changeKey)}>
     {title}
   </button>
 );

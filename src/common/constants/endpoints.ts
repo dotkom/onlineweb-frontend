@@ -1,4 +1,3 @@
-
 export const DOMAIN = process.env.OW4_ADDRESS || 'https://online.ntnu.no';
 export const STATIC_URL = DOMAIN + '/static/';
 

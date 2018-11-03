@@ -6,11 +6,7 @@ import { StatusPolygon, PersonSVG } from './StatusPolygon';
 import style from './list.less';
 
 const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
-  return attendance
-    ? `${attendance.attendees
-      ? attendance.attendees.length
-      : '0'}/${attendance.max_capacity}`
-    : 'ALLE';
+  return attendance ? `${attendance.attendees ? attendance.attendees.length : '0'}/${attendance.max_capacity}` : 'ALLE';
 };
 
 const ListEvent = ({ title, event_start, attendance_event, event_type, company_event, id }: INewEvent) => {
@@ -20,25 +16,22 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
 
   return (
     <div className={style.gridRow}>
-      <div className={style.elementGridRow} style={{ left: 0 }}>
-        <HostPolygon color={ eventColor } />
-        <p>{ (company_event[0] && company_event[0].company.name) || eventType }</p>
-      </div>
-
       <div className={style.elementGridRow}>
-        <p style={{ verticalAlign: 'center' }}>{ title }</p>
+        <HostPolygon color={eventColor}>
+          {(company_event[0] && company_event[0].company.name) || eventType}
+        </HostPolygon>
       </div>
       <div className={style.elementGridRow}>
-        <p> { getEventAttendees(attendance_event) } </p>
+        <p style={{ verticalAlign: 'center' }}>{title}</p>
       </div>
       <div className={style.elementGridRow}>
-        <p>{ eventDate }</p>
+        <p> {getEventAttendees(attendance_event)} </p>
       </div>
       <div className={style.elementGridRow}>
-        <StatusPolygon color="#828282" />
-        <div className={style.personSvg}>
-          {attendance_event ? <PersonSVG color="#fff" /> : <p></p> }
-        </div>
+        <p>{eventDate}</p>
+      </div>
+      <div className={style.elementGridRow}>
+        <StatusPolygon>{attendance_event ? <PersonSVG color="#fff" /> : null}</StatusPolygon>
       </div>
     </div>
   );

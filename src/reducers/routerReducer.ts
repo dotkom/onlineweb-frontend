@@ -19,7 +19,7 @@ export const initialState: IState = {
 
 const routerReducer = (state: IState = initialState, action: IAction<IState>) => {
   switch (action.type) {
-    case(ActionType.LOCATION_CHANGE):
+    case ActionType.LOCATION_CHANGE:
       return { ...state, ...action.payload };
     default:
       return state;

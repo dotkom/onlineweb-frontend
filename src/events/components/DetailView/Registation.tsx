@@ -68,7 +68,7 @@ const Registration = ({ event_type, attendance_event }: INewEvent) => {
   return (
     <div className={styles.registration}>
       <div className={styles.cardMargin}>
-        <CardHeader color={color}>Påmelding</CardHeader>
+        <CardHeader className={styles.detailHeader} color={color}>Påmelding</CardHeader>
         {content}
       </div>
     </div>

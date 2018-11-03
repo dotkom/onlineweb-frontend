@@ -1,4 +1,3 @@
-
 export interface IOfflineIssue {
   description: string;
   id: number;
