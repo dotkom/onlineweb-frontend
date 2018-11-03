@@ -15,7 +15,7 @@ class InfoGroup extends React.Component<IProps> {
     return (
       <div className={style.infoGroup}>
         {/*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/}
-        <p className={style.name}>{name}</p>
+        <h1>{name}</h1>
         <div className={style.groupWrapper}>{children}</div>
       </div>
     );

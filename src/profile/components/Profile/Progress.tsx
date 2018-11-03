@@ -41,7 +41,7 @@ class Progress extends React.Component<IProps> {
     return (
       <div className={style.infoGroup}>
         {/*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/}
-        <p className={style.groupName}>{this.props.name}</p>
+        <h1>{this.props.name}</h1>
         <div className={style.progressWrapper}>
           <div>
             <svg width="100%" height="100%" viewBox="0 0 120 20">

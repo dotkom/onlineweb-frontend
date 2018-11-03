@@ -21,15 +21,13 @@ export const routes = {
 class Profile extends React.Component<{}> {
   public render() {
     return (
-      <section>
-        <Switch>
-          <ProfileRoute exact path={routes.personal} view={MyProfile} />
-          <ProfileRoute path={routes.search} view={Search} />
-          <ProfileRoute path={routes.public} view={MyProfile} />
-          <ProfileRoute path={routes.settings} view={Settings} />
-          <Route path="*" render={() => <HttpError code={404} />} />
-        </Switch>
-      </section>
+      <Switch>
+        <ProfileRoute exact path={routes.personal} view={MyProfile} />
+        <ProfileRoute path={routes.search} view={Search} />
+        <ProfileRoute path={routes.public} view={MyProfile} />
+        <ProfileRoute path={routes.settings} view={Settings} />
+        <Route path="*" render={() => <HttpError code={404} />} />
+      </Switch>
     );
   }
 }

@@ -32,7 +32,7 @@ export interface IElementProps {
 }
 
 const MenuElement = ({ text, active, link }: IElementProps) => (
-  <Link to={link} className={style.removeUnderline}>
+  <Link to={link}>
     <div className={classnames(style.menuGridRow, { [style.menuClicked]: active })}>
       <h4 className={style.menuText}>{text}</h4>
     </div>
