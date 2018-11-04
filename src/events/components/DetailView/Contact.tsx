@@ -20,7 +20,7 @@ const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
 
       {company_event &&
         company_event.length > 0 && (
-          <Block title="Medarrangører">
+          <Block title="Medarrangør">
             {company_event.map(({ company }) => (
               <p key={company.id}>{company.name}</p>
             ))}
