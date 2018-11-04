@@ -18,7 +18,7 @@ ReactGA.initialize(GA_KEY);
 ReactGA.pageview(window.location.pathname);
 
 const render = (RootComponent: any) => {
-  ReactDOM.render(<RootComponent />, document.getElementById('root'));
+  ReactDOM.hydrate(<RootComponent />, document.getElementById('root'));
 };
 
 render(App);
