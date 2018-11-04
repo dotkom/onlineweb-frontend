@@ -3,10 +3,7 @@ import { Link } from 'react-router-dom';
 import style from './image.less';
 import { INewEvent, getEventColor, IAttendanceEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
-
-const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
-  return attendance ? `${attendance.attendees ? attendance.attendees.length : '0'}/${attendance.max_capacity}` : 'ALLE';
-};
+import { getEventAttendees } from 'events/utils/attendee';
 
 const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
