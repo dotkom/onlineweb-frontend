@@ -1,3 +1,5 @@
+@import '../../less/profile.less';
+
 .grid {
   display: grid;
   grid-template-columns: 5fr 2fr 3fr;
@@ -7,8 +9,7 @@
 }
 
 .search-field {
-  height: 50px;
-  border: 2px solid gray;
+  height: 53px
 }
 
 .search-input {
@@ -36,13 +37,6 @@
     100% { background: rgba(0, 0, 0, 0); }
 }
 
-.dropdown-container {
-  display: grid;
-  grid-template-rows: repeat(1fr);
-  z-index: 100;
-  position: relative;
-}
-
 .slider {
   input[type=range] {
     -webkit-appearance: none;
@@ -53,21 +47,41 @@
   }
 }
 
+.dropdown-container {
+  z-index: 100;
+}
+
+.dropdown-item:first-child {
+  border-top: 2px solid gray;
+  background: white;
+}
+
+.dropdown-item:last-child {
+  border-bottom: 2px solid gray;
+}
+
 .dropdown-item {
   display: table; // Is used to vertical-center h4
   height: inherit;
   width: 100%;
   text-align: center;
-  animation: fadein .25s;
+  animation: fadein .2s;
   animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  border-left: 2px solid gray;
+  border-right: 2px solid gray;
 
   > h4 {
     display: table-cell;
     vertical-align: middle;
+    text-align: left;
+    padding-left: 1em;
   }
 
+  > svg {
+    margin-top: 0.9em;
+    margin-right: 0.5em;
+  }
   background: white;
-  outline: 3px solid gray;
 }
 
 @keyframes fadein {
