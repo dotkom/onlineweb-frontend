@@ -13,7 +13,21 @@ module.exports = env => {
     output: {
       path: path.resolve('./dist/'),
       filename: '[name].[hash].js',
+      chunkFilename: '[name].bundle.[hash].js',
       publicPath: '/',
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /node_modules/,
+            chunks: 'initial',
+            name: 'vendor',
+            enforce: true,
+          },
+        },
+      }
     },
     devServer: {
       contentBase: './dist',
