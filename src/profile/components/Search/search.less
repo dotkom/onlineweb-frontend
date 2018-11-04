@@ -38,12 +38,42 @@
 }
 
 .slider {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+
   input[type=range] {
     -webkit-appearance: none;
     width: 100%;
   }
-  input[type=range]:focus {
-    outline: none;
+  h4 {
+    display: table;
+    text-align: center;
+    margin: 0 auto;
+    background: #07244c;
+    color: white;
+    position: relative;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px 5px 2px 5px;
+    bottom: 10px;
+  }
+  h4:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-right: 20px solid #07244c;
+    border-bottom: 15px solid transparent;
+    transform: skewX(-33deg);
+    left: 14%;
+    top: 18px;
+    z-index: -1;
   }
 }
 
