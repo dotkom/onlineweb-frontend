@@ -19,7 +19,7 @@
   color: #636363;
   caret-color: #636363;
   font-weight: 500;
-  font-size: 2em;
+  font-size: 32px;
   padding-left: 6px;
   transition: background 0.2s ease;
 }
@@ -94,7 +94,7 @@
 }
 
 .dropdown-item {
-  display: table; // Is used to vertical-center h4
+  position: relative;
   height: inherit;
   width: 100%;
   text-align: center;
@@ -103,16 +103,18 @@
   border-left: 2px solid gray;
   border-right: 2px solid gray;
 
+
+  // The percentages in the h4 and svg will stay 'constant' because the height they inherit from is constant
   > h4 {
-    display: table-cell;
-    vertical-align: middle;
-    text-align: left;
-    padding-left: 1em;
+    position: absolute;
+    top: 33%;
+    left: 7%;
   }
 
   > svg {
-    margin-top: 0.8em;
-    margin-right: 0.5em;
+    position: absolute;
+    right: 7%;
+    top: 26%; //This is 26 and not 33 because the Font-awesome svg has an 'empty' first few pixels on the top
   }
 
   background: white;
