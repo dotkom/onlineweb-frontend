@@ -1,8 +1,8 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import { Provider } from 'react-redux';
+import Loadable from 'react-loadable';
 
 import Frontpage from './frontpage';
 import Career from './career/';
@@ -10,10 +10,10 @@ import Hobbys from './hobbygroups';
 import Resources from './resources';
 import HttpError from './core/components/errors/HttpError';
 import Core from './core';
-import Profile from './profile';
 import EventsRouter from 'events/components/EventsRouter';
 
 import store from './authentication';
+import Spinner from 'common/components/Spinner';
 
 export const routes = {
   events: '/events',
@@ -25,6 +25,11 @@ export const routes = {
   webshop: '/webshop',
   profile: '/profile',
 };
+
+const LoadableProfile = Loadable({
+  loader: () => import(/* webpackChunkName: "profile" */ './profile'),
+  loading: () => <Spinner />,
+});
 
 const history = createBrowserHistory();
 
@@ -39,7 +44,7 @@ export const App = () => {
             <Route path={routes.career} component={Career} />
             <Route path={routes.hobbygroups} component={Hobbys} />
             <Route path={routes.resources} component={Resources} />
-            <Route path={routes.profile} component={Profile} />
+            <Route path={routes.profile} component={LoadableProfile} />
             <Route path="*" render={() => <HttpError code={404} />} />
           </Switch>
         </Core>
