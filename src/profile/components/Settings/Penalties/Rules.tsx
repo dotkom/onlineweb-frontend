@@ -8,7 +8,7 @@ class Info extends Collapsble<{}> {
     return (
       <>
         <h2>Regler</h2>
-        <button className={style.toggleRules} onClick={() => this.toggleCollapse()} tabIndex={0}>
+        <button className={style.toggleRules} onClick={() => this.toggleCollapse()}>
           {collapsed ? 'Vis regler' : 'Skjul regler'}
         </button>
         {collapsed && <Content />}

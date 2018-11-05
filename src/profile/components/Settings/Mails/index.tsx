@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { IMail } from '../../../models/Mail';
 import Mail from './Mail';
 import { getMails } from '../../../api/mail';
-import style from './mail.less';
-import classnames from 'classnames';
 
 export interface IState {
   addresses: IMail[];
@@ -31,11 +29,11 @@ class Mails extends Component<{}, IState> {
   public render() {
     const { addresses } = this.state;
     return (
-      <div className={classnames(style.mailForm, style.grid)}>
+      <>
         {addresses.map((addr, index) => (
           <Mail {...addr} toggle={() => this.togglePrimary(index)} key={addr.email} />
         ))}
-      </div>
+      </>
     );
   }
 }
