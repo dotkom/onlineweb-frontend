@@ -24,7 +24,8 @@
   transition: background 0.2s ease;
 }
 
-.search-input:focus, .search-input:hover{
+.search-input:focus,
+.search-input:hover {
   outline: none;
   background: rgba(0, 0, 0, 0);
   animation: inuse 2.2s;
@@ -33,9 +34,15 @@
 }
 
 @keyframes inuse {
-    0% { background: rgba(0, 0, 0, 0); }
-    50%   { background: rgba(#223254,.05); }
-    100% { background: rgba(0, 0, 0, 0); }
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+  50% {
+    background: rgba(#223254, 0.05);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
 }
 
 .slider {
@@ -91,7 +98,7 @@
   height: inherit;
   width: 100%;
   text-align: center;
-  animation: fadein .2s;
+  animation: fadein 0.2s;
   animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
   border-left: 2px solid gray;
   border-right: 2px solid gray;
@@ -121,8 +128,12 @@
 }
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .dropdown-selected {
