@@ -1,7 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+<<<<<<< HEAD
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+=======
+>>>>>>> Update CSS loading config to output to file instead of inline
 const webpack = require('webpack');
+//const CSSLoaders = require('./css.config');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 module.exports = (env) => {
   return {
@@ -9,6 +15,7 @@ module.exports = (env) => {
     devtool: 'source-map',
     entry: {
       app: './src/index.tsx',
+      server: './src/server/index.tsx',
     },
     output: {
       path: path.resolve('./dist/'),
@@ -48,9 +55,7 @@ module.exports = (env) => {
         {
           test: /\.less$/,
           use: [
-            {
-              loader: 'style-loader',
-            },
+            MiniCssExtractPlugin.loader,
             {
               loader: 'typings-for-css-modules-loader',
               options: {
@@ -64,10 +69,8 @@ module.exports = (env) => {
             {
               loader: 'postcss-loader',
             },
-            {
-              loader: 'less-loader',
-            },
-          ],
+            'less-loader'
+          ]
         },
         {
           // webpack can import images from both javascript and css
@@ -92,7 +95,8 @@ module.exports = (env) => {
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: 'style.[contenthash].css',
+        filename: "[name].[hash].css",
+        chunkFilename: "[id].css"
       }),
       new HtmlWebpackPlugin({
         template: './public/index.html',

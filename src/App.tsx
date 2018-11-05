@@ -46,23 +46,27 @@ export const App = () => {
   return (
     <AuthProvider>
       <Router history={history}>
-        <Core>
-          <Switch>
-            <Route exact path={routes.home} component={Frontpage} />
-            <Route path={routes.events} component={EventsRouter} />
-            <Route path={routes.career} component={Career} />
-            <Route path={routes.contribution} component={Contribution} />
-            <Route path={routes.hobbygroups} component={Hobbys} />
-            <Route path={routes.resources} component={Resources} />
-            <Route path={routes.profile} component={LoadableProfile} requireLogin />
-            <Route path={routes.authCallback} component={AuthCallback} />
-            <Route path={routes.spinner} component={Spinner} />
-            <Route path="*" render={() => <HttpError code={404} />} />
-          </Switch>
-        </Core>
+        <Client />
       </Router>
     </AuthProvider>
   );
 };
+
+export const Client = () => (
+  <Core>
+    <Switch>
+      <Route exact path={routes.home} component={Frontpage} />
+      <Route path={routes.events} component={EventsRouter} />
+      <Route path={routes.career} component={Career} />
+      <Route path={routes.contribution} component={Contribution} />
+      <Route path={routes.hobbygroups} component={Hobbys} />
+      <Route path={routes.resources} component={Resources} />
+      <Route path={routes.profile} component={LoadableProfile} requireLogin />
+      <Route path={routes.authCallback} component={AuthCallback} />
+      <Route path={routes.spinner} component={Spinner} />
+      <Route path="*" render={() => <HttpError code={404} />} />
+    </Switch>
+  </Core>
+)
 
 export default App;
