@@ -29,7 +29,7 @@ class DoubleSlider extends Component<IProps, IState> {
 
   public setRange2(n: number) {
     const { range } = this.state;
-    if (range[0] <= n){
+    if (range[0] <= n) {
       range[1] = n;
     }
     this.setState({ range }, this.submit);
@@ -42,7 +42,9 @@ class DoubleSlider extends Component<IProps, IState> {
     } = this.state;
     return (
       <div className={style.slider}>
-        <h4>{this.state.range[0]} - {this.state.range[1]}</h4>
+        <h4>
+          {this.state.range[0]} - {this.state.range[1]}
+        </h4>
         <input
           // value={range.toString()}
           defaultValue={start.toString()}

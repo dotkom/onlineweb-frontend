@@ -6,7 +6,6 @@ import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSortDown } from '@fortawesome/free-solid-svg-icons/faSortDown';
 
-
 export interface IProps {
   selected: string | undefined;
   groups: IGroup[];
