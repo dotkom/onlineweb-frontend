@@ -1,8 +1,15 @@
-import { createBrowserHistory } from 'history';
 import React from 'react';
 import ReactGA from 'react-ga';
 import Loadable from 'react-loadable';
+<<<<<<< HEAD
 import { Router, Switch } from 'react-router-dom';
+=======
+<<<<<<< HEAD
+import { Route, Router, Switch } from 'react-router-dom';
+=======
+import { Route, Switch } from 'react-router-dom';
+>>>>>>> Make separate routing config for client and server
+>>>>>>> Make separate routing config for client and server
 
 import AuthCallback from 'authentication/components/AuthCallback';
 import AuthProvider from 'authentication/providers/UserProvider';
@@ -38,16 +45,10 @@ const LoadableProfile = Loadable({
   loading: () => <Spinner />,
 });
 
-const history = createBrowserHistory();
-
-history.listen((location) => ReactGA.pageview(location.pathname));
-
 export const App = () => {
   return (
     <AuthProvider>
-      <Router history={history}>
-        <Client />
-      </Router>
+      <Client />
     </AuthProvider>
   );
 };
@@ -67,6 +68,6 @@ export const Client = () => (
       <Route path="*" render={() => <HttpError code={404} />} />
     </Switch>
   </Core>
-)
+);
 
 export default App;
