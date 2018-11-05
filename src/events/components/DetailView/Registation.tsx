@@ -11,12 +11,10 @@ const Registration = ({ event_type, attendance_event }: INewEvent) => {
 
   return (
     <div className={styles.registration}>
-      <div className={styles.cardMargin}>
-        <CardHeader className={styles.detailHeader} color={color}>
-          Påmelding
-        </CardHeader>
-        {attendance_event ? <AttendanceEvent event={attendance_event} /> : message}
-      </div>
+      <CardHeader className={styles.detailHeader} color={color}>
+        Påmelding
+      </CardHeader>
+      {attendance_event ? <AttendanceEvent event={attendance_event} /> : message}
     </div>
   );
 };
