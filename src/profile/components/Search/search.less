@@ -47,12 +47,12 @@
   -o-user-select: none;
   user-select: none;
 
-  input[type=range] {
+  input[type='range'] {
     width: 100%;
     background-color: transparent;
   }
-  input[type=range]:focus,
-  input[type=range]:active {
+  input[type='range']:focus,
+  input[type='range']:active {
     outline: none;
   }
   h4 {
@@ -86,15 +86,6 @@
   z-index: 100;
 }
 
-.dropdown-item:first-child {
-  border-top: 2px solid gray;
-  background: white;
-}
-
-.dropdown-item:last-child {
-  border-bottom: 2px solid gray;
-}
-
 .dropdown-item {
   display: table; // Is used to vertical-center h4
   height: inherit;
@@ -118,6 +109,16 @@
   }
   background: white;
 }
+
+.dropdown-item:first-child {
+  border-top: 2px solid gray;
+  background: white;
+}
+
+.dropdown-item:last-child {
+  border-bottom: 2px solid gray;
+}
+
 
 @keyframes fadein {
     from { opacity: 0; }
