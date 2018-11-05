@@ -1,5 +1,5 @@
 @import './reset.less';
-@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
 
 :global {
   #root {
@@ -57,7 +57,5 @@ em {
 a,
 button,
 input {
-  &:focus {
-    .owOutline();
-  }
+  .owOutline();
 }

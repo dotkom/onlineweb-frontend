@@ -1,17 +1,14 @@
-@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
 
 .penalty {
   &:hover {
     cursor: pointer;
   }
 
-  &:focus {
-    .owOutline();
-  }
-
   &:not(:first-child) {
     margin-top: 20px;
   }
+  .owOutline();
 }
 
 .penaltyTitle {
