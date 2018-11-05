@@ -1,7 +1,6 @@
 import HttpError from 'core/components/errors/HttpError';
 import { IRouteProps, Route } from 'core/components/Router';
 import { History } from 'history';
-import 'multirange';
 import qs from 'query-string';
 import React from 'react';
 import { Switch } from 'react-router-dom';
