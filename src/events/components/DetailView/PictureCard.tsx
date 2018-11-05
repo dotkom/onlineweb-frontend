@@ -18,9 +18,7 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
 
   return (
     <div className={style.pictureCard}>
-      <div className={style.imageContainer}>
-        <img src={DOMAIN + imageUrl} />
-      </div>
+      <img src={DOMAIN + imageUrl} />
 
       <div className={style.attendance}>
         <CardHeader className={style.detailHeader} color={color}>
