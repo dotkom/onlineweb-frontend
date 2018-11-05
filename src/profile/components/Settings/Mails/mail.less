@@ -1,4 +1,4 @@
-@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
 
 .mail {
   display: block;
@@ -9,9 +9,7 @@
     margin-top: 20px;
   }
 
-  &:focus {
-    .owOutline();
-  }
+  .owOutline();
 }
 
 .mail input {
