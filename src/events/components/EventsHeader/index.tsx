@@ -21,27 +21,33 @@ const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps
     <div className={style.choiceGrid}>
       <div
         className={classNames({
+          [style.choice]: true,
           [style.choiceActive]: view === EventView.IMAGE,
         })}
         onClick={() => changeView(EventView.IMAGE)}
+        tabIndex={0}
       >
         <ImageViewIcon />
       </div>
 
       <div
         className={classNames({
+          [style.choice]: true,
           [style.choiceActive]: view === EventView.LIST,
         })}
         onClick={() => changeView(EventView.LIST)}
+        tabIndex={0}
       >
         <ListViewIcon />
       </div>
 
       <div
         className={classNames({
+          [style.choice]: true,
           [style.choiceActive]: view === EventView.CALENDAR,
         })}
         onClick={() => changeView(EventView.CALENDAR)}
+        tabIndex={0}
       >
         <CalendarViewIcon />
       </div>
