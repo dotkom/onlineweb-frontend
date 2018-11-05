@@ -2,19 +2,11 @@
 
 .container {
   display: grid;
+  grid-template-columns: 5fr 2fr;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
   grid-gap: 40px;
   margin-top: 40px;
-}
-
-.left-container {
-  display: grid;
-  grid-gap: 40px;
-}
-
-.right-container {
-  display: grid;
-  grid-gap: 40px;
-  margin-bottom: auto;
 }
 
 .pictureCardContainer {
@@ -29,7 +21,7 @@
   .owCard();
 
   display: grid;
-  background-color: white;
+  grid-template-columns: 2fr 1fr;
 }
 
 .pictureCard img {
@@ -69,6 +61,15 @@
   padding: 30px;
 }
 
+.registration {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.contact {
+  margin-bottom: auto;
+}
+
 .info-box-header {
   font-size: 18px;
   margin-bottom: 0;
@@ -104,17 +105,4 @@
 
 .detailHeader {
   text-align: center;
-}
-
-@media (min-width: 900px) {
-  .pictureCard {
-    grid-template-columns: 53fr 33fr;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    grid-template-columns: 83fr 33fr;
-    margin-bottom: 10px;
-  }
 }

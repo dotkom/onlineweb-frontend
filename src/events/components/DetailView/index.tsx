@@ -38,16 +38,11 @@ class DetailView extends Component<IProps, IState> {
 
     return (
       <div className={style.container}>
-        <div className={style.leftContainer}>
-          <ListEvent {...event} />
-          <PictureCard {...event} />
-          <InfoBox {...event} />
-        </div>
-
-        <div className={style.rightContainer}>
-          <Registration {...event} />
-          <Contact {...event} />
-        </div>
+        <ListEvent {...event} />
+        <PictureCard {...event} />
+        <InfoBox {...event} />
+        <Registration {...event} />
+        <Contact {...event} />
       </div>
     );
   }
