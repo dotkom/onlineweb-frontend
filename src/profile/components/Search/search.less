@@ -9,13 +9,13 @@
 }
 
 .search-field {
-  height: 53px
+  height: 45px;
 }
 
 .search-input {
   border-bottom: solid gray 2px;
   background: none;
-  height: 53px;
+  height: 47px;
   color: #636363;
   caret-color: #636363;
   font-weight: 500;
@@ -25,6 +25,7 @@
 }
 
 .search-input:focus, .search-input:hover{
+  outline: none;
   background: rgba(0, 0, 0, 0);
   animation: inuse 2.2s;
   animation-timing-function: ease-in-out;
@@ -47,8 +48,12 @@
   user-select: none;
 
   input[type=range] {
-    -webkit-appearance: none;
     width: 100%;
+    background-color: transparent;
+  }
+  input[type=range]:focus,
+  input[type=range]:active {
+    outline: none;
   }
   h4 {
     display: table;
@@ -108,7 +113,7 @@
   }
 
   > svg {
-    margin-top: 0.9em;
+    margin-top: 0.8em;
     margin-right: 0.5em;
   }
   background: white;
