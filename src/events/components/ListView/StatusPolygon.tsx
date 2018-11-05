@@ -5,7 +5,7 @@ export const StatusPolygon = ({ children }: { children: ReactChild | null }) => 
   <div className={style.statusPolygon}>{children}</div>
 );
 
-export const PersonSVG = ({ color = '#fff' }: { color: string }) => (
+export const PersonSVG = ({ color = '#fff' }: { color?: string }) => (
   <svg className={style.personSvg} viewBox="0 0 10 10" height="35" width="30">
     <g id="person">
       {/* Head */}
