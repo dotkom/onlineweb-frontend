@@ -1,4 +1,5 @@
 @import './reset.less';
+@import '~common/less/constants.less';
 
 :global {
   #root {
@@ -51,4 +52,12 @@ strong {
 
 em {
   font-style: italic;
+}
+
+a,
+button,
+input {
+  &:focus {
+    .owOutline();
+  }
 }
