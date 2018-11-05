@@ -1,25 +1,65 @@
-.grid {
-  display: grid;
-  grid-gap: 10px;
-}
+@import '~common/less/constants.less';
 
-.grid-row {
+.penalty {
   &:hover {
     cursor: pointer;
   }
+
+  &:focus {
+    .owOutline();
+  }
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
 }
 
-.divider {
-  height: 20px;
-}
-
-.title {
+.penaltyTitle {
   display: flex;
   justify-content: space-between;
-  margin: 4px 0;
+  margin-bottom: 10px;
+}
+
+.penaltyContent {
+  padding: 15px;
+  border-top: 1px solid gray;
 }
 
 .progress-bar {
-  height: 3px;
+  height: 4px;
   background: red;
+}
+
+.toggleRules {
+  border: 1px solid black;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.rules {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid gray;
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+  }
+
+  p,
+  ul,
+  li {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 16px;
+  }
 }

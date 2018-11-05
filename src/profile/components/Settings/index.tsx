@@ -45,10 +45,8 @@ const SettingsRoute = ({ view, ...props }: ISettingsRouteProps) => {
       render={({ match, ...routeProps }) => (
         <div className={style.container}>
           <Menu path={match.path} />
-          <div className={style.content}>
-            <div>
-              <View {...routeProps} />
-            </div>
+          <div className={style.settings}>
+            <View {...routeProps} />
           </div>
         </div>
       )}
