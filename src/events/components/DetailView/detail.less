@@ -1,13 +1,26 @@
 @import '~common/less/constants.less';
 
-.card-margin {
-  margin: 30px;
+.container {
+  display: grid;
+  grid-gap: 40px;
+  margin-top: 40px;
+}
+
+.left-container {
+  display: grid;
+  grid-gap: 40px;
+}
+
+.right-container {
+  display: grid;
+  grid-gap: 40px;
+  margin-bottom: auto;
 }
 
 .pictureCardContainer {
   margin-top: 40px;
   display: grid;
-  grid-template-columns: 83fr 33fr;
+  grid-template-columns: 5fr 2fr;
   grid-gap: 40px;
   .owCard();
 }
@@ -31,7 +44,7 @@
 }
 
 .attendance {
-  padding: 30px 30px 0 30px;
+  padding: 30px;
 }
 
 .block-grid {
@@ -48,50 +61,27 @@
   width: 100%;
 }
 
-.container {
-  display: grid;
-  grid-gap: 40px;
-  margin-top: 40px;
-}
-
-.left-container {
-  display: grid;
-  grid-gap: 40px;
-}
-
-.right-container {
-  display: grid;
-  grid-gap: 40px;
-  margin-bottom: auto;
-}
-
-.registration {
-  .owCard();
-}
-
-.contact {
-  background-color: white;
-  padding: 2rem 0;
-  .owCard();
-}
-
+.registration,
+.contact,
 .info-box {
   .owCard();
 
-  .info-box-header {
-    font-size: 18px;
-    margin-bottom: 0;
-    font-style: italic;
-  }
+  padding: 30px;
+}
 
-  .info-box-content {
-    line-height: 1.65rem;
-    font-size: 16px;
+.info-box-header {
+  font-size: 18px;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+.info-box-content {
+  line-height: 1.65rem;
+  font-size: 16px;
+  margin-top: 1rem;
+
+  p {
     margin-top: 1rem;
-
-    p {
-      margin-top: 1rem;
-    }
   }
 }
 
