@@ -6,7 +6,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 
-import Client from '../index';
+import { Client } from '../App';
 import { OWF_SENTRY_DSN } from 'common/constants/sentry';
 import { HOST, PORT } from 'common/constants/backend';
 
@@ -20,7 +20,7 @@ app.use(express.static(path.resolve(__dirname, '../dist')));
 
 app.get('/*', (req, res) => {
   const jsx = (
-    <StaticRouter location={req.url}>
+    <StaticRouter location={req.path} context={{}}>
       <Client />
     </StaticRouter>
   );
