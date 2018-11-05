@@ -11,16 +11,14 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
   const imageUrl = eventImage ? eventImage.wide : '';
   const color = getEventColor(event_type);
 
-  const startDate = DateTime.fromISO(event_start).toFormat('d MMM yyyy');
+  const startDate = DateTime.fromISO(event_start).toFormat('d MMM');
   const startTime = DateTime.fromISO(event_start).toFormat('hh:mm');
-  const endDate = DateTime.fromISO(event_end).toFormat('d MMM yyyy');
+  const endDate = DateTime.fromISO(event_end).toFormat('d MMM');
   const endTime = DateTime.fromISO(event_end).toFormat('hh:mm');
 
   return (
     <div className={style.pictureCard}>
-      <div className={style.imageContainer}>
-        <img src={DOMAIN + imageUrl} />
-      </div>
+      <img src={DOMAIN + imageUrl} />
 
       <div className={style.attendance}>
         <CardHeader className={style.detailHeader} color={color}>

@@ -1,13 +1,10 @@
 import React from 'react';
 import { DateTime } from 'luxon';
-import { INewEvent, getEventColor, getEventType, IAttendanceEvent } from '../../models/Event';
+import { INewEvent, getEventColor, getEventType } from '../../models/Event';
 import HostPolygon from './HostPolygon';
 import { StatusPolygon, PersonSVG } from './StatusPolygon';
 import style from './list.less';
-
-const getEventAttendees = (attendance: IAttendanceEvent | null): string => {
-  return attendance ? `${attendance.attendees ? attendance.attendees.length : '0'}/${attendance.max_capacity}` : 'ALLE';
-};
+import { getEventAttendees } from 'events/utils/attendee';
 
 const ListEvent = ({ title, event_start, attendance_event, event_type, company_event, id }: INewEvent) => {
   const eventColor = getEventColor(event_type);
