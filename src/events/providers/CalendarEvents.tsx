@@ -5,7 +5,6 @@ import { constructMonthMap } from '../utils/calendarUtils';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
 import { IEventAPIParameters, controlledGetEvents } from 'events/api/events';
 
-
 export interface ICalendarEventsState {
   eventMonth: INewEvent[][];
   month: DateTime;
@@ -70,7 +69,8 @@ class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
     const { month } = await getCalendarSession();
     this.setState({ month });
   }
-   /** Set the current settings to the browser session */
+
+  /** Set the current settings to the browser session */
   public async setSession() {
     const { month } = this.state;
     await saveCalendarSession({ month });
