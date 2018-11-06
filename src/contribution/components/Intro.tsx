@@ -11,10 +11,10 @@ const Intro = () => (
     </p>
     <p>
       Dette er en gyllen anledning til å få hands-on erfaring med programmering, benytte teorien man har lært ved
-      undervisning og opparbeide gode vaner innen bruk av git, clean code og andre metodikker og verktøy.
-      Ikke bare oppnår du heder og ære ved å bidra til og forbedre studenters hverdag, men du får også en kul sticker
-      som bemerkelse på at du har tatt del i det spesifikke prosjektet! Kanskje det tilogmed kommer godt med på cv'en,
-      eller i et eventuelt intervju med dotkom om du senere skulle ønske et verv i en kommite?
+      undervisning og opparbeide gode vaner innen bruk av git, clean code og andre metodikker og verktøy. Ikke bare
+      oppnår du heder og ære ved å bidra til og forbedre studenters hverdag, men du får også en kul sticker som
+      bemerkelse på at du har tatt del i det spesifikke prosjektet! Kanskje det tilogmed kommer godt med på cv'en, eller
+      i et eventuelt intervju med dotkom om du senere skulle ønske et verv i en kommite?
     </p>
     <h1>Hvordan komme i gang?</h1>
     <br />
