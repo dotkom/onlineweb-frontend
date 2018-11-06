@@ -3,11 +3,12 @@ import { INewEvent, IEventViewProps } from 'events/models/Event';
 import { DateTime } from 'luxon';
 import { constructMonthMap } from '../utils/calendarUtils';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
-import { IEventAPIParameters, getEvents } from 'events/api/events';
+import { IEventAPIParameters, getEvents, controlledGetEvents } from 'events/api/events';
 
 export interface ICalendarEventsState {
   eventMonth: INewEvent[][];
   month: DateTime;
+  controller?: AbortController;
   changeMonth: (n: number) => void;
   init: () => void;
 }
@@ -46,6 +47,13 @@ class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
     await saveCalendarSession({ month });
   }
 
+  public cancelFetch() {
+    const { controller } = this.state;
+    if (controller) {
+      controller.abort();
+    }
+  }
+
   public fetchEvents = async (month: DateTime = this.state.month) => {
     const firstDayOfMonth = month.minus({ days: month.day - 1 });
     const lastDayOfMonth = firstDayOfMonth.plus({ months: 1 }).minus({ days: 1 });
@@ -56,13 +64,17 @@ class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
       page_size: 60,
     };
 
-    const events = await getEvents(args);
-    const eventMonth = constructMonthMap(month, events);
+    const { data, controller } = controlledGetEvents(args);
+    this.setState({ controller });
+
+    const { results } = await data;
+    const eventMonth = constructMonthMap(month, results);
     this.setState({ eventMonth });
   };
 
   public changeMonth = async (number: number) => {
     let { month } = this.state;
+    this.cancelFetch();
 
     month = number >= 0 ? month.plus({ months: number }) : month.minus({ months: Math.abs(number) });
     this.setState({ month, eventMonth: EMPTY_EVENT_MONTH }, () => this.setSession());
