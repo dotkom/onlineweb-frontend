@@ -13,7 +13,7 @@ class MainMenu extends Component<IProps, {}> {
   public render() {
     const { path } = this.props.match;
     return (
-      <div>
+      <div className={style.profileContainer}>
         <div className={style.menuGrid}>
           <MenuElement text="Min Profil" link={routes.personal} active={path === routes.personal} />
           <MenuElement text="Brukersøk" link={routes.search} active={path === routes.search} />
