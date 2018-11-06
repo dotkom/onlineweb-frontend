@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import style from './search.less';
 
 export interface IProps {
   range: [number, number];
@@ -15,19 +16,22 @@ class DoubleSlider extends Component<IProps, IState> {
   };
 
   public submit() {
-    console.log(this.state.range);
     this.props.onChange(this.state.range);
   }
 
   public setRange1(n: number) {
     const { range } = this.state;
-    range[0] = n;
+    if (range[1] >= n) {
+      range[0] = n;
+    }
     this.setState({ range }, this.submit);
   }
 
   public setRange2(n: number) {
     const { range } = this.state;
-    range[1] = n;
+    if (range[0] <= n) {
+      range[1] = n;
+    }
     this.setState({ range }, this.submit);
   }
 
@@ -37,7 +41,10 @@ class DoubleSlider extends Component<IProps, IState> {
       range: [start, end],
     } = this.state;
     return (
-      <div>
+      <div className={style.slider}>
+        <h4>
+          {this.state.range[0]} - {this.state.range[1]}
+        </h4>
         <input
           // value={range.toString()}
           defaultValue={start.toString()}
