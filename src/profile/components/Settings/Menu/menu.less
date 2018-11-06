@@ -4,16 +4,25 @@
   .owCard();
 
   margin-bottom: auto;
+}
 
-  a {
-    display: block;
-    padding: 20px;
+.tab {
+  display: block;
+  padding: 20px;
+
+  &:hover {
+    background: darken(white, 10%);
   }
 }
 
 .active {
   background: #0069b3;
+
   p {
     color: #fff;
+  }
+
+  &:hover {
+    background: lighten(#0069b3, 10%);
   }
 }
