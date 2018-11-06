@@ -17,25 +17,6 @@
   border-radius: @size + @spacing;
   box-sizing: inherit;
   cursor: pointer;
-
-  &:hover {
-    .slider {
-      background: #a55555;
-    }
-
-    .sliderChecked {
-      background: #004b80;
-    }
-  }
-
-  &:disabled {
-    background: #f0f0f0;
-    border-color: #b8b8b8;
-
-    .slider {
-      background: #ababab;
-    }
-  }
 }
 
 .slider {
@@ -56,4 +37,23 @@
 .icon {
   width: @size / 2;
   height: @size / 2;
+}
+
+.container:hover {
+  .slider {
+    background: #a55555;
+  }
+
+  .sliderChecked {
+    background: #004b80;
+  }
+}
+
+.container:disabled {
+  background: #f0f0f0;
+  border-color: #b8b8b8;
+
+  .slider {
+    background: #ababab;
+  }
 }
