@@ -40,11 +40,19 @@ export default class LanguageSubBar extends Component<IProps, {}> {
     const sub_style: any = {
       backgroundColor: color ? color : 'brown',
       width: (this.props.language.size / this.props.totalLanguageSize) * 100 + '%',
+      display: 'flex',
+      justifyContent: 'center',
     };
 
     const borderRadius = 'borderRadius';
-    if (this.props.index === 0) {
+
+    // If there is only 1 language, apply borderRadius to both sides
+    if (this.props.index === 0 && this.props.numLanguages === 1) {
+      sub_style[borderRadius] = '20px 20px 20px 20px';
+      // If language is first, apply borderRadius to left side
+    } else if (this.props.index === 0) {
       sub_style[borderRadius] = '20px 0 0 20px';
+      // If language is last, apply borderRadius to right side
     } else if (this.props.index === this.props.numLanguages - 1) {
       sub_style[borderRadius] = '0 20px 20px 0';
     }
