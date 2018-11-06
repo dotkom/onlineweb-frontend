@@ -2,7 +2,7 @@
 @import '~common/less/constants.less';
 @import '~common/less/mixins.less';
 
-.top-grid {
+.topGrid {
   display: grid;
   grid-gap: 20px;
   grid-template-areas: 'jobs filter';
@@ -10,22 +10,22 @@
   max-width: 100vw;
 }
 
-.jobs-area {
+.jobsArea {
   grid-area: jobs;
 }
 
-.search-box {
+.searchBox {
   border: 3px solid darken(@baby-blue-medium, 10%);
   padding: 10px;
   margin: 10px 0;
   width: 100%;
 }
 
-.job-info {
+.jobInfo {
   width: 100%;
 }
 
-.job-meta {
+.jobMeta {
   border-top: 1px dotted #ccc;
   margin-top: 10px;
   display: grid;
@@ -65,7 +65,7 @@
   }
 }
 
-.job-list {
+.jobList {
   display: grid;
   grid-template-rows: 1fr;
   grid-gap: 20px;
@@ -95,7 +95,7 @@
   }
 }
 
-.tag-container {
+.tagContainer {
   display: block;
   margin: 10px 0;
 
@@ -167,7 +167,7 @@
 }
 
 @media only screen and (max-width: 1024px) {
-  .top-grid {
+  .topGrid {
     grid-template-columns: auto;
     grid-template-areas: 'filter' 'jobs';
   }
