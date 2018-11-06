@@ -12,8 +12,10 @@ export interface ICalendarEventsState {
   init: () => void;
 }
 
+const EMPTY_EVENT_MONTH = constructMonthMap(DateTime.local(), []);
+
 const INITIAL_STATE: ICalendarEventsState = {
-  eventMonth: constructMonthMap(DateTime.local(), []),
+  eventMonth: EMPTY_EVENT_MONTH,
   month: DateTime.local(),
   changeMonth: (n: number) => {
     throw new Error('Month was changed before component was initialized');
@@ -63,9 +65,9 @@ class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
     let { month } = this.state;
 
     month = number >= 0 ? month.plus({ months: number }) : month.minus({ months: Math.abs(number) });
+    this.setState({ month, eventMonth: EMPTY_EVENT_MONTH }, () => this.setSession());
 
     await this.fetchEvents(month);
-    this.setState({ month }, () => this.setSession());
   };
 
   public render() {
