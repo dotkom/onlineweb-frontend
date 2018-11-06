@@ -8,11 +8,15 @@ export interface IProps {
   languages: IRepositoryLanguage[];
 }
 
-export default class LanguageBar extends Component<IProps, {}> {
-  public readonly state = { languages: [], hover: false };
-
+export default class LanguageBar extends Component<IProps, {languages: IRepositoryLanguage[], hover: boolean}> {
   constructor(props: IProps) {
     super(props);
+    this.state = {
+      languages: this.props.languages.sort((a, b) => {
+        return b.size - a.size;
+      }),
+      hover: false
+    };
   }
 
   public render() {
@@ -20,13 +24,13 @@ export default class LanguageBar extends Component<IProps, {}> {
 
     // Determine total size of languages
     let totalLanguageSize: number = 0;
-    for (const language of this.props.languages) {
+    for (const language of this.state.languages) {
       totalLanguageSize += language.size;
     }
-    const numLanguages: number = this.props.languages.length;
+    const numLanguages: number = this.state.languages.length;
 
     // Generate horizontal bar
-    for (const [index, language] of this.props.languages.entries()) {
+    for (const [index, language] of this.state.languages.entries()) {
       languageBar.push(
         <LanguageSubBar
           tooltip={language.type}
