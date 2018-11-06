@@ -5,16 +5,18 @@ import SmallEventColumn from './SmallEvent';
 import style from './image.less';
 import { ImageEventsContext, IImageEventsState } from 'events/providers/ImageEvents';
 
-export type IProps = IEventViewProps & IImageEventsState;
+export type IProps = IEventViewProps;
 
 class ImageView extends Component<IProps> {
+  public static contextType = ImageEventsContext;
+
   public async componentDidMount() {
-    const { init } = this.props;
+    const { init }: IImageEventsState = this.context;
     await init();
   }
 
   public render() {
-    const { eventsLeft, eventsMiddle, eventsRight, fetched } = this.props;
+    const { eventsLeft, eventsMiddle, eventsRight, fetched }: IImageEventsState = this.context;
 
     if (!fetched) {
       return null;
@@ -37,8 +39,4 @@ class ImageView extends Component<IProps> {
   }
 }
 
-const Provider = (props: IEventViewProps) => (
-  <ImageEventsContext.Consumer>{(state) => <ImageView {...props} {...state} />}</ImageEventsContext.Consumer>
-);
-
-export default Provider;
+export default ImageView;
