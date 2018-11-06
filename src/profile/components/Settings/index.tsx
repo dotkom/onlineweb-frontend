@@ -9,6 +9,7 @@ import Penalties from './Penalties';
 import Privacy from './Privacy';
 import style from './settings.less';
 import SettingsInfo from './SettingsInfo';
+import AccessCard from './AccessCard';
 
 const BASE_ROUTE = '/profile/settings';
 
@@ -18,6 +19,7 @@ export const routes = {
   privacy: BASE_ROUTE + '/privacy',
   mail: BASE_ROUTE + '/mail',
   password: BASE_ROUTE + '/password',
+  accessCard: BASE_ROUTE + '/access-card',
 };
 
 const Settings = (_: IProfileProps) => {
@@ -28,6 +30,7 @@ const Settings = (_: IProfileProps) => {
       <SettingsRoute path={routes.privacy} view={Privacy} />
       <SettingsRoute path={routes.mail} view={Mails} />
       <SettingsRoute path={routes.password} view={Privacy} />
+      <SettingsRoute path={routes.accessCard} view={AccessCard} />
       <Route path="*" render={() => <HttpError code={404} text="Undersiden du leter etter finnes ikke" />} />
     </Switch>
   );
