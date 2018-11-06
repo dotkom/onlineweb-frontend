@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import React from 'react';
 import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
-import classNames from 'classnames';
 import style from './markdown.less';
 
 const Markdown = ({ ...props }: ReactMarkdownProps) => {

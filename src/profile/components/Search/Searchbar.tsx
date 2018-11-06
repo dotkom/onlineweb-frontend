@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
 import { IGroup } from 'core/models/Group';
-import { ISearchFilter } from '../../models/Search';
-import Dropdown from './Dropdown';
-import DoubleSlider from './DoubleSlider';
+import React, { Component } from 'react';
 import { getGroups } from '../../api/groups';
+import { ISearchFilter } from '../../models/Search';
+import DoubleSlider from './DoubleSlider';
+import Dropdown from './Dropdown';
 import style from './search.less';
 
 export interface IProps extends ISearchFilter {

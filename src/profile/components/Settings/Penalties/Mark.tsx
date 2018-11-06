@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
-import Penalty from './Penalty';
-import { IMark } from '../../../models/Penalty';
 import { DateTime } from 'luxon';
+import React, { Fragment } from 'react';
+import { IMark } from '../../../models/Penalty';
 import style from './penalties.less';
+import Penalty from './Penalty';
 
 class Mark extends Penalty<IMark> {
   public render() {

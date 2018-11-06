@@ -1,5 +1,5 @@
-import React from 'react';
 import Markdown from 'common/components/Markdown';
+import React from 'react';
 
 const MAIN_INFO_TEXT = `
   # Innstillinger

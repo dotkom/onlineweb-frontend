@@ -1,7 +1,7 @@
 import React from 'react';
-import Tag from './Tag';
-import { ITag, ITags, ITagWrapper } from '../models/Tag';
 import style from '../less/career.less';
+import { ITag, ITags, ITagWrapper } from '../models/Tag';
+import Tag from './Tag';
 
 export interface ITagListProps {
   handleChange: (s: string) => void;

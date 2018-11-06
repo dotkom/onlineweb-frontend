@@ -1,6 +1,6 @@
+import Markdown from 'common/components/Markdown';
 import React, { Fragment } from 'react';
 import { IResource } from '../models/Resource';
-import Markdown from 'common/components/Markdown';
 import style from './resources.less';
 
 const Resource = ({ title, description, image }: IResource) => {

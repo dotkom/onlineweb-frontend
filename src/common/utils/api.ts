@@ -1,6 +1,6 @@
+import { RequestOptions } from 'http';
 import { DOMAIN } from '../constants/endpoints';
 import { toQueryString } from './queryString';
-import { RequestOptions } from 'http';
 
 export interface IAPIData<T> {
   count: number;

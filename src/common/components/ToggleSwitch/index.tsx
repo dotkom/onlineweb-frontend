@@ -1,8 +1,8 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
-import Cross from './cross.svg';
 import Check from './check.svg';
+import Cross from './cross.svg';
 import style from './switch.less';
 
 export interface IProps {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { IEventViewProps } from '../../models/Event';
-import { getPreviousMonthLength, getFirstWeekdayOfMonth } from '../../utils/calendarUtils';
-import CalendarTile, { createDayList, CalendarFillerTiles } from './CalendarTile';
 import { CalendarEventsContext, ICalendarEventsState } from '../../providers/CalendarEvents';
+import { getFirstWeekdayOfMonth, getPreviousMonthLength } from '../../utils/calendarUtils';
 import style from './calendar.less';
+import CalendarTile, { CalendarFillerTiles, createDayList } from './CalendarTile';
 
 export type IProps = IEventViewProps;
 

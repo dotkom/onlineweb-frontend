@@ -9,7 +9,6 @@
   "rules": {
     "no-empty-interface": false,
     "quotemark": [true, "single", "jsx-double"],
-    "ordered-imports": false,
     "object-literal-sort-keys": false,
     "variable-name": [true, "allow-pascal-case", "allow-snake-case"],
     "jsx-no-lambda": false,

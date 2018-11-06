@@ -1,10 +1,10 @@
+import Heading from 'common/components/Heading';
 import React, { FormEvent } from 'react';
 import FilterList from '../components/FilterList';
 import JobList from '../components/JobList';
-import { IJob } from '../models/Job';
-import { ITags, ITag } from '../models/Tag';
-import Heading from 'common/components/Heading';
 import style from '../less/career.less';
+import { IJob } from '../models/Job';
+import { ITag, ITags } from '../models/Tag';
 
 export interface IFilterableJobListProps {
   jobs: IJob[];

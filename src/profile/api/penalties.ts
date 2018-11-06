@@ -1,6 +1,6 @@
+import { initialState } from 'authentication/reducers/';
 import { get } from 'common/utils/api';
 import { IMark, ISuspension } from '../models/Penalty';
-import { initialState } from 'authentication/reducers/';
 
 const API_URL = '/api/v1/profile';
 

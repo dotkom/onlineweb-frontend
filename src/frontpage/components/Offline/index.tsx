@@ -1,10 +1,10 @@
+import Heading from 'common/components/Heading';
 import React, { Component } from 'react';
 import { getOfflines } from '../../api/offline';
 import { IOfflineIssue } from '../../models/Offline';
 import CarouselArrow from './CarouselArrow';
-import OfflineCarousel from './OfflineCarousel';
-import Heading from 'common/components/Heading';
 import style from './offline.less';
+import OfflineCarousel from './OfflineCarousel';
 
 export interface IProps {}
 

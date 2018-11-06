@@ -1,6 +1,6 @@
+import classnames from 'classnames';
 import React from 'react';
 import style from './spinner.less';
-import classnames from 'classnames';
 
 export interface IProps {
   primaryColor?: string;

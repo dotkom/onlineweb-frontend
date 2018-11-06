@@ -1,11 +1,11 @@
+import { routes } from 'App';
+import Authenticate from 'authentication/components/Authenticate';
+import { STATIC_URL } from 'common/constants/endpoints';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { STATIC_URL } from 'common/constants/endpoints';
-import { routes } from 'App';
-import MainSponsor from './MainSponsor';
-import HeaderLogo from './HeaderLogo';
-import Authenticate from 'authentication/components/Authenticate';
 import style from './header.less';
+import HeaderLogo from './HeaderLogo';
+import MainSponsor from './MainSponsor';
 
 export const Header = () => (
   <header className={style.header}>

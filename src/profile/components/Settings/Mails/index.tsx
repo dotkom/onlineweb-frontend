@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { getMails } from '../../../api/mail';
 import { IMail } from '../../../models/Mail';
 import Mail from './Mail';
-import { getMails } from '../../../api/mail';
 
 export interface IState {
   addresses: IMail[];
