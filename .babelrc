@@ -14,6 +14,7 @@
     "@babel/proposal-class-properties",
     "@babel/proposal-object-rest-spread",
     "@babel/proposal-async-generator-functions",
-    "@babel/proposal-optional-chaining"
+    "@babel/proposal-optional-chaining",
+    "@babel/plugin-syntax-dynamic-import"
   ]
 }

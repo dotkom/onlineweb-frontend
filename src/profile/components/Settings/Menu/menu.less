@@ -1,19 +1,26 @@
 @import '~common/less/constants.less';
+@import '~common/less/colors.less';
 
 .menu {
   .owCard();
 }
 
-.active {
-  background: lighten(#004b80, 10%);
-  p {
-    color: #fff;
-  }
-}
-
 .tab {
   a {
     text-decoration: none;
+  }
+  &:hover {
+    background: #e3e3e3;
+  }
+}
+
+.active {
+  background: lighten(#004b80, 10%);
+  &:hover {
+    background: lighten(#004b80, 10%);
+  }
+  p {
+    color: #fff;
   }
 }
 

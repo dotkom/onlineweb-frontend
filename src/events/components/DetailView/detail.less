@@ -1,54 +1,92 @@
 @import '~common/less/constants.less';
 
-.card-margin {
-  margin: 30px;
-}
-
-.pictureCardContainer {
-  margin-top: 40px;
+.container {
   display: grid;
-  grid-template-columns: 83fr 33fr;
+  grid-template-columns: 5fr 2fr;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-flow: column;
   grid-gap: 40px;
-  .owCard();
 }
 
 .pictureCard {
-  display: grid;
   .owCard();
 
-  grid-template-columns: 83fr 33fr;
-}
-
-.container {
   display: grid;
-  grid-gap: 40px;
-  grid-template-columns: 83fr 33fr;
-  margin-top: 40px;
+  grid-template-columns: 2fr 1fr;
+
+  img {
+    width: 100%;
+  }
 }
 
-.left-container {
-  display: grid;
-  grid-gap: 40px;
+.attendance {
+  padding: 30px;
 }
 
-.right-container {
-  display: grid;
-  grid-gap: 40px;
+.block-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.registration {
-  .owCard();
+.block-grid > div {
+  width: 50%;
 }
 
-.contact {
-  .owCard();
+.block-grid > .full-block {
+  width: 100%;
 }
 
+.registration,
+.contact,
 .info-box {
   .owCard();
 
-  .info-box-header {
-    margin-bottom: 10px;
-    font-style: italic;
+  padding: 30px;
+}
+
+.registration {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.contact {
+  margin-bottom: auto;
+}
+
+.info-box-header {
+  font-size: 18px;
+  margin-bottom: 0;
+  font-style: italic;
+}
+
+.info-box-content {
+  line-height: 1.65rem;
+  font-size: 16px;
+  margin-top: 1rem;
+
+  p {
+    margin-top: 1rem;
   }
+}
+
+.attendance-message {
+  margin-top: 1rem;
+}
+
+.ruleBoxes {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.6rem;
+}
+
+.ruleBox {
+  background: #eee;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.85rem;
+  margin: 0.2rem;
+}
+
+.detailHeader {
+  text-align: center;
 }

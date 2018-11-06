@@ -5,3 +5,4 @@ dist
 *.less.d.ts
 .envrc
 .idea/
+*.log
