@@ -23,7 +23,6 @@
 
 .job-info {
   width: 100%;
-  text-decoration: none;
 }
 
 .job-meta {
@@ -55,7 +54,6 @@
 
   & > a {
     width: 100%;
-    text-decoration: none;
 
     & > img {
       width: 300px;
@@ -128,42 +126,14 @@
   margin-bottom: 40px;
 }
 
-@description-color: #454545;
-
-.job-description {
+.jobDescription {
   .owCard();
+  padding: 30px;
+  color: #454545;
+}
 
-  div {
-    margin: 30px;
-  }
-
-  p,
-  h1,
-  h2,
-  h3,
-  h4 {
-    color: @description-color;
-    margin: 14px 0 14px 0;
-  }
-
-  h1 {
-    font-size: 26px;
-    margin-bottom: 24px;
-  }
-
-  h4 {
-    margin-top: 20px;
-    font-size: 20px;
-  }
-
-  ul {
-    margin: 8px 0 8px 14px;
-    list-style-type: disc;
-    li {
-      margin: 8px 0 14px 0;
-      color: @description-color;
-    }
-  }
+.jobTitle {
+  margin-bottom: 20px;
 }
 
 .company {
@@ -171,30 +141,29 @@
   gap: 20px;
   grid-template-columns: auto;
   grid-template-rows: auto;
+}
 
-  a {
-    .owCard();
+.companyImage {
+  .owCard();
+}
 
-    text-decoration: none;
-  }
+.companyDescriptionBox,
+.keyInfo {
+  background: @baby-blue-medium;
+  padding: 20px;
+}
 
-  h3 {
-    font-size: 24px;
-    margin-bottom: 6px;
-  }
+.companyDescriptionTitle,
+.keyInfo h3 {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 6px;
+  color: white;
+}
 
-  > div {
-    background: @baby-blue-medium;
-
-    > div {
-      margin: 20px;
-
-      p,
-      h3 {
-        color: white;
-      }
-    }
-  }
+.companyDescriptionContent,
+.keyInfo p {
+  color: white;
 }
 
 @media only screen and (max-width: 1024px) {
