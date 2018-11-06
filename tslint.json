@@ -2,6 +2,7 @@
   "defaultSeverity": "error",
   "extends": [
     "tslint:recommended",
+    "tslint-react",
     "tslint-config-prettier"
   ],
   "jsRules": {},
@@ -10,7 +11,9 @@
     "quotemark": [true, "single", "jsx-double"],
     "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "variable-name": [true, "allow-pascal-case", "allow-snake-case"]
+    "variable-name": [true, "allow-pascal-case", "allow-snake-case"],
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false
   },
   "rulesDirectory": []
 }
