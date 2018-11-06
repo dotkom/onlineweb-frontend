@@ -1,35 +1,41 @@
 import React from 'react';
 import style from './footer.less';
+import { faBriefcase } from '@fortawesome/free-solid-svg-icons/faBriefcase';
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
+import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
+import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 export interface IContactInfo {
-  className: string;
+  icon: IconProp;
   value: string;
 }
 
 const CONTACT: IContactInfo[] = [
   {
-    className: 'glyphicon glyphicon-briefcase',
+    icon: faBriefcase,
     value: '992 548 045 (OrgNr)',
   },
   {
-    className: 'glyphicon glyphicon-envelope',
+    icon: faEnvelope,
     value: 'kontakt@online.ntnu.no',
   },
   {
-    className: 'glyphicon glyphicon-file',
+    icon: faFile,
     value: 'okonomi@online.ntnu.no',
   },
   {
-    className: 'glyphicon glyphicon-phone',
+    icon: faPhone,
     value: '73 59 64 89',
   },
 ];
 
 const ContactInfo = () => (
   <div className={style.contactInfo}>
-    {CONTACT.map(({ className, value }) => (
-      <div key={value} className={style.contactItem}>
-        <span className={className} />
+    {CONTACT.map(({ icon, value }) => (
+      <div className={style.contactItem} key={value}>
+        <FontAwesomeIcon icon={icon} fixedWidth />
         {value}
       </div>
     ))}

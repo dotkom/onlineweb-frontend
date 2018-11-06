@@ -13,7 +13,21 @@ module.exports = env => {
     output: {
       path: path.resolve('./dist/'),
       filename: '[name].[hash].js',
+      chunkFilename: '[name].bundle.[hash].js',
       publicPath: '/',
+    },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /node_modules/,
+            chunks: 'initial',
+            name: 'vendor',
+            enforce: true,
+          },
+        },
+      }
     },
     devServer: {
       contentBase: './dist',
@@ -81,11 +95,11 @@ module.exports = env => {
         template: './public/index.html',
         filename: 'index.html'
       }),
-      new webpack.DefinePlugin({
-        'process.env': {
-          OW4_ADDRESS: JSON.stringify(process.env.OW4_ADDRESS),
-        },
-      }),
+      new webpack.EnvironmentPlugin({
+        OW4_ADDRESS: 'https://online.ntnu.no',
+        OWF_SENTRY_DSN: '',
+        NODE_ENV: 'development',
+      })
     ]
   }
 }

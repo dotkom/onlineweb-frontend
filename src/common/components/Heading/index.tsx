@@ -6,7 +6,7 @@ export interface IProps extends React.HtmlHTMLAttributes<IProps> {
 }
 
 const Heading = ({ title, children }: IProps) => (
-  <div className={style.grid}>
+  <div className={style.heading}>
     <h1>{title || children}</h1>
   </div>
 );

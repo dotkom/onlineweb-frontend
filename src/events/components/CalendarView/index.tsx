@@ -5,16 +5,18 @@ import CalendarTile, { createDayList, CalendarFillerTiles } from './CalendarTile
 import { CalendarEventsContext, ICalendarEventsState } from '../../providers/CalendarEvents';
 import style from './calendar.less';
 
-export type IProps = IEventViewProps & ICalendarEventsState;
+export type IProps = IEventViewProps;
 
 class CalendarView extends Component<IProps> {
+  public static contextType = CalendarEventsContext;
+
   public async componentDidMount() {
-    const { init } = this.props;
+    const { init }: ICalendarEventsState = this.context;
     await init();
   }
 
   public render() {
-    const { eventMonth, month, changeMonth } = this.props;
+    const { eventMonth, month, changeMonth }: ICalendarEventsState = this.context;
 
     const firstWeekDay = getFirstWeekdayOfMonth(month.toJSDate());
     const lastDayPrevMonth = getPreviousMonthLength(month.toJSDate());
@@ -27,7 +29,7 @@ class CalendarView extends Component<IProps> {
     );
 
     return (
-      <div>
+      <div className={style.gridWrapper}>
         <div className={style.menuGrid}>
           <h3 onClick={() => changeMonth(-1)}>{'<'}</h3>
           <h3>{month.toFormat('MMMM yyyy')}</h3>
@@ -45,8 +47,4 @@ class CalendarView extends Component<IProps> {
   }
 }
 
-const Provider = (props: IEventViewProps) => (
-  <CalendarEventsContext.Consumer>{(state) => <CalendarView {...props} {...state} />}</CalendarEventsContext.Consumer>
-);
-
-export default Provider;
+export default CalendarView;
