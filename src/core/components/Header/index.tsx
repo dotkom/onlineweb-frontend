@@ -12,6 +12,7 @@ export const Header = () => (
     <div className={style.grid}>
       <HeaderLogo />
       <div className={style.links}>
+        <Link to={routes.profile}>Profil</Link>
         <Link to={routes.events}>Arkiv</Link>
         <Link to={routes.career}>Karriere</Link>
         <Link to={routes.resources}>Ressurser</Link>
