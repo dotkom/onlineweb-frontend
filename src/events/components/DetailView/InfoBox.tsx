@@ -1,5 +1,5 @@
-import React from 'react';
 import Markdown from 'common/components/Markdown';
+import React from 'react';
 import { INewEvent } from '../../models/Event';
 import style from './detail.less';
 

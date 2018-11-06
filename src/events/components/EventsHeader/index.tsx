@@ -1,12 +1,12 @@
-import React from 'react';
 import classNames from 'classnames';
-import { EventView } from '../../models/Event';
 import ToggleSwitch from 'common/components/ToggleSwitch';
+import React from 'react';
+import { EventView } from '../../models/Event';
 
-import ImageViewIcon from './ImageViewIcon';
-import ListViewIcon from './ListViewIcon';
 import CalendarViewIcon from './CalendarViewIcon';
 import style from './eventsHeader.less';
+import ImageViewIcon from './ImageViewIcon';
+import ListViewIcon from './ListViewIcon';
 
 export interface IProps {
   toggleAccessible: () => void;

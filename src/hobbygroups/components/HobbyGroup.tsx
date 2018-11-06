@@ -1,7 +1,7 @@
-import React from 'react';
-import { IHobbyGroup } from '../models/HobbyGroup';
-import style from '../less/hobbygroups.less';
 import Markdown from 'common/components/Markdown';
+import React from 'react';
+import style from '../less/hobbygroups.less';
+import { IHobbyGroup } from '../models/HobbyGroup';
 
 const HobbyGroup = ({ title, description, image, read_more_link }: IHobbyGroup) => {
   return (

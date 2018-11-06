@@ -1,10 +1,10 @@
-import React from 'react';
-import { formatLocations } from './Job';
-import style from '../less/career.less';
 import Heading from 'common/components/Heading';
-import Markdown from 'common/components/Markdown';
-import { Link } from 'react-router-dom';
 import Img from 'common/components/Img';
+import Markdown from 'common/components/Markdown';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import style from '../less/career.less';
+import { formatLocations } from './Job';
 
 export interface IInfoBox {
   title: string;

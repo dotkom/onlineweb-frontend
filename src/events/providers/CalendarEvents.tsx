@@ -1,9 +1,9 @@
-import React, { createContext, Component } from 'react';
-import { INewEvent, IEventViewProps } from 'events/models/Event';
-import { DateTime } from 'luxon';
-import { constructMonthMap } from '../utils/calendarUtils';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
-import { IEventAPIParameters, getEvents } from 'events/api/events';
+import { getEvents, IEventAPIParameters } from 'events/api/events';
+import { IEventViewProps, INewEvent } from 'events/models/Event';
+import { DateTime } from 'luxon';
+import React, { Component, createContext } from 'react';
+import { constructMonthMap } from '../utils/calendarUtils';
 
 export interface ICalendarEventsState {
   eventMonth: INewEvent[][];

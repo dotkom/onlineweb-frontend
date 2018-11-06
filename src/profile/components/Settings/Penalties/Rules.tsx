@@ -1,5 +1,5 @@
-import React from 'react';
 import Collapsble from 'common/components/Collapsible';
+import React from 'react';
 import style from './penalties.less';
 
 class Info extends Collapsble<{}> {

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Router, Route, Switch } from 'react-router';
-import createBrowserHistory from 'history/createBrowserHistory';
-import FilterableJobList from './FilterableJobList';
-import DetailView from './DetailView';
-import { IJob, IApiJob } from '../models/Job';
-import { ITag, ITagWrapper, TagType, ITags } from '../models/Tag';
 import { IsoDateTime } from 'common/models/Date';
-import { IApiCompany } from 'core/models/Company';
 import { get } from 'common/utils/api';
+import { IApiCompany } from 'core/models/Company';
+import createBrowserHistory from 'history/createBrowserHistory';
+import React from 'react';
+import { Route, Router, Switch } from 'react-router';
 import { getCareerOpportunities } from '../api';
+import { IApiJob, IJob } from '../models/Job';
+import { ITag, ITags, ITagWrapper, TagType } from '../models/Tag';
+import DetailView from './DetailView';
+import FilterableJobList from './FilterableJobList';
 
 const history = createBrowserHistory();
 

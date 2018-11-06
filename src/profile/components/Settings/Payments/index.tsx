@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { IPayment } from '../../../models/Payment';
 import { getPayments } from '../../../api/payment';
-import Placeholder from './Placeholder';
+import { IPayment } from '../../../models/Payment';
 import Payment from './Payment';
+import Placeholder from './Placeholder';
 
 export interface IState {
   payments: IPayment[];

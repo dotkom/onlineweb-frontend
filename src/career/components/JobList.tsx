@@ -1,9 +1,9 @@
-import React from 'react';
-import { DateTime } from 'luxon';
 import Fuse from 'fuse.js';
-import Job from './Job';
-import { ITag } from '../models/Tag';
+import { DateTime } from 'luxon';
+import React from 'react';
 import { IJob } from '../models/Job';
+import { ITag } from '../models/Tag';
+import Job from './Job';
 
 import style from '../less/career.less';
 

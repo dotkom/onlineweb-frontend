@@ -1,7 +1,7 @@
+import HttpError from 'core/components/errors/HttpError';
 import React from 'react';
 import InfoBox from '../components/InfoOnOpportunity';
 import { IJob } from '../models/Job';
-import HttpError from 'core/components/errors/HttpError';
 
 export interface IDetailViewProps {
   match: { params: { id: string } };

@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
 import { DateTime, Interval } from 'luxon';
-import Penalty from './Penalty';
+import React, { Fragment } from 'react';
 import { ISuspension } from '../../../models/Penalty';
 import style from './penalties.less';
+import Penalty from './Penalty';
 
 class Suspension extends Penalty<ISuspension> {
   public render() {
