@@ -10,7 +10,6 @@ export const toQueryString = (queryObject: any): string => {
   }
   const queries = keys.map((key: string) => `${key}=${queryObject[key]}`);
   const string = `?${queries.join('&')}`;
-  // console.log(`[queryString] object: ${JSON.stringify(queryObject)}, string: ${string}`)
   return string;
 };
 

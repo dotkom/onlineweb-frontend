@@ -21,14 +21,9 @@ export interface IBaseAPIParameters {
  */
 export const get = async (query: string, parameters: object = {}, options?: RequestInit): Promise<any> => {
   const queryString = toQueryString(parameters);
-  try {
-    const response = await fetch(DOMAIN + query + queryString, options);
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.error(error);
-    // Add handle error for some reason?
-  }
+  const response = await fetch(DOMAIN + query + queryString, options);
+  const json = await response.json();
+  return json;
 };
 
 /**
@@ -41,14 +36,10 @@ export const get = async (query: string, parameters: object = {}, options?: Requ
  */
 export const post = async (query: string, data: any, parameters: object = {}, options?: RequestInit): Promise<any> => {
   const queryString = toQueryString(parameters);
-  try {
-    const response = await fetch(
-      DOMAIN + query + queryString,
-      Object.assign(options || {}, { method: 'POST', body: JSON.stringify(data) })
-    );
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.error(error);
-  }
+  const response = await fetch(
+    DOMAIN + query + queryString,
+    Object.assign(options || {}, { method: 'POST', body: JSON.stringify(data) })
+  );
+  const json = await response.json();
+  return json;
 };

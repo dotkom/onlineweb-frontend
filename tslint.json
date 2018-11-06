@@ -6,7 +6,6 @@
   ],
   "jsRules": {},
   "rules": {
-    "no-console": false,
     "no-empty-interface": false,
     "quotemark": [true, "single", "jsx-double"],
     "ordered-imports": false,
