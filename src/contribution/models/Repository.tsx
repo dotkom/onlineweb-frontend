@@ -3,6 +3,8 @@ export interface IRepository {
   name: string;
   description: string;
   url: string;
+  public_url: string;
+  issues: number;
   updated_at: string;
   languages: IRepositoryLanguage[];
 }

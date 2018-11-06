@@ -4,9 +4,9 @@ import ReactMarkdown from 'react-markdown';
 import style from '../less/contribution.less';
 import LanguageBar from './LanguageBar';
 
-const Repository = ({ id, name, description, url, languages }: IRepository) => {
+const Repository = ({ id, name, description, public_url, languages, issues }: IRepository) => {
   return (
-    <a className={style.repositoryContainer} href={url}>
+    <a className={style.repositoryContainer} href={public_url}>
       <span className={style.repositoryContent}>
         <div className={style.header}>
           <h3>{name}</h3>
@@ -15,7 +15,7 @@ const Repository = ({ id, name, description, url, languages }: IRepository) => {
         </div>
         <div className={style.issues}>
           <span>
-            <h2>{id}</h2>
+            <h2>{issues}</h2>
             <h2>Issues</h2>
           </span>
         </div>
