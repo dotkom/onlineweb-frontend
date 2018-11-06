@@ -12,7 +12,8 @@ export interface IProps {
 const Tab = ({ path, active, text }: IProps) => (
   <Link
     to={path}
-    className={classnames(style.tab, {
+    className={classnames({
+      [style.tab]: true,
       [style.active]: active,
     })}
   >

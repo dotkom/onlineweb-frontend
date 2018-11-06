@@ -77,7 +77,7 @@
   justify-items: center;
 }
 
-.info-content,
+.info-type,
 .info-link {
   font-weight: bold;
 }
@@ -123,11 +123,12 @@
 
 .small-container {
   display: grid;
-  grid-template-columns: 1fr 4fr;
-}
-
-.small-content {
-  display: inline-block;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  .name {
+    font-size: 2em;
+    font-weight: 800;
+  }
 }
 
 .progress-wrapper {

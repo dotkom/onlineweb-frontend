@@ -1,3 +1,5 @@
+@import '../../less/profile.less';
+
 .grid {
   display: grid;
   grid-template-columns: 5fr 2fr 3fr;
@@ -7,29 +9,129 @@
 }
 
 .search-field {
-  height: 50px;
-  border: 3px solid gray;
+  height: 45px;
+}
+
+.search-input {
+  border-bottom: solid gray 2px;
+  background: none;
+  height: 47px;
+  color: #636363;
+  caret-color: #636363;
+  font-weight: 500;
+  font-size: 32px;
+  padding-left: 6px;
+  transition: background 0.2s ease;
+  .owOutline();
+}
+
+.search-input:focus,
+.search-input:hover {
+  background: rgba(0, 0, 0, 0);
+  animation: inuse 2.2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes inuse {
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+  50% {
+    background: rgba(#223254, 0.05);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+.slider {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+
+  input[type='range'] {
+    width: 100%;
+    background-color: transparent;
+    .owOutline();
+  }
+  h4 {
+    display: table;
+    text-align: center;
+    margin: 0 auto;
+    background: #07244c;
+    color: white;
+    position: relative;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px 5px 2px 5px;
+    bottom: 10px;
+  }
+  h4::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-right: 20px solid #07244c;
+    border-bottom: 15px solid transparent;
+    transform: skewX(-33deg);
+    left: 14%;
+    top: 18px;
+    z-index: -1;
+  }
 }
 
 .dropdown-container {
-  display: grid;
-  grid-template-rows: repeat(1fr);
   z-index: 100;
-  position: relative;
 }
 
 .dropdown-item {
-  height: 44px;
+  position: relative;
+  height: inherit;
   width: 100%;
   text-align: center;
+  animation: fadein 0.2s;
+  animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
+  border-left: 2px solid gray;
+  border-right: 2px solid gray;
 
+  // The percentages in the h4 and svg will stay 'constant' because the height they inherit from is constant
   > h4 {
-    padding-left: 10px;
-    padding-top: 4px;
+    position: absolute;
+    top: 33%;
+    left: 7%;
+  }
+
+  > svg {
+    position: absolute;
+    right: 7%;
+    top: 26%; //This is 26 and not 33 because the Font-awesome svg has an 'empty' first few pixels on the top
   }
 
   background: white;
-  outline: 3px solid gray;
+}
+
+.dropdown-item:first-child {
+  border-top: 2px solid gray;
+  background: white;
+}
+
+.dropdown-item:last-child {
+  border-bottom: 2px solid gray;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .dropdown-selected {
@@ -38,6 +140,6 @@
 
 .small-profile-grid {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
