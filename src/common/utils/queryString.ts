@@ -9,8 +9,7 @@ export const toQueryString = (queryObject: any): string => {
     return '';
   }
   const queries = keys.map((key: string) => `${key}=${queryObject[key]}`);
-  const string = `?${queries.join('&')}`;
-  return string;
+  return `?${queries.join('&')}`;
 };
 
 export interface IQueryObject {

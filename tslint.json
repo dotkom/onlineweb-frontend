@@ -10,7 +10,7 @@
     "no-empty-interface": false,
     "quotemark": [true, "single", "jsx-double"],
     "object-literal-sort-keys": false,
-    "variable-name": [true, "allow-pascal-case", "allow-snake-case"],
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case", "allow-snake-case"],
     "jsx-no-lambda": false,
     "jsx-boolean-value": false
   },
