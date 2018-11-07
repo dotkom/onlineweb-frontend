@@ -4,12 +4,7 @@ import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
 import style from './markdown.less';
 
 const Markdown = ({ ...props }: ReactMarkdownProps) => {
-  const markdownStyles = classNames(
-    {
-      [style.markdown]: true,
-    },
-    props.className
-  );
+  const markdownStyles = classNames(style.markdown, props.className);
   return <ReactMarkdown {...props} className={markdownStyles} />;
 };
 

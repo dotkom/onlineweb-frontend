@@ -15,8 +15,7 @@ const ToggleSwitch = ({ checked = false, disabled = false, onChange }: IProps) =
   return (
     <button disabled={disabled} onClick={onChange} className={style.container}>
       <div
-        className={classNames({
-          [style.slider]: true,
+        className={classNames(style.slider, {
           [style.sliderChecked]: checked,
         })}
       >
