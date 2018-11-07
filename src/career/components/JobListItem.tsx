@@ -29,7 +29,7 @@ const JobListItem = ({ locations, deadline, companyImage, companyName, title, in
     </Link>
     <div className={style.jobInfo}>
       <Link to={`/career/${id}`}>
-        <h2>
+        <h2 className={style.jobInfoTitle}>
           {companyName} - {title}
         </h2>
       </Link>
