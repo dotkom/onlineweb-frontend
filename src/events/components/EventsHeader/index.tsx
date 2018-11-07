@@ -20,8 +20,7 @@ const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps
     <h1>ARRANGEMENTER</h1>
     <div className={style.choiceGrid}>
       <div
-        className={classNames({
-          [style.choice]: true,
+        className={classNames(style.choice, {
           [style.choiceActive]: view === EventView.IMAGE,
         })}
         onClick={() => changeView(EventView.IMAGE)}
@@ -31,8 +30,7 @@ const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps
       </div>
 
       <div
-        className={classNames({
-          [style.choice]: true,
+        className={classNames(style.choice, {
           [style.choiceActive]: view === EventView.LIST,
         })}
         onClick={() => changeView(EventView.LIST)}
@@ -42,8 +40,7 @@ const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps
       </div>
 
       <div
-        className={classNames({
-          [style.choice]: true,
+        className={classNames(style.choice, {
           [style.choiceActive]: view === EventView.CALENDAR,
         })}
         onClick={() => changeView(EventView.CALENDAR)}
