@@ -4,9 +4,9 @@ import Markdown from 'common/components/Markdown';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from '../less/career.less';
-import { formatLocations } from './Job';
+import { formatLocations } from './JobListItem';
 
-export interface IInfoBox {
+export interface IJobDetails {
   title: string;
   deadline: string;
   locations: string[];
@@ -18,7 +18,7 @@ export interface IInfoBox {
   companyId: number;
 }
 
-const InfoBox = (props: IInfoBox) => (
+const JobDetails = (props: IJobDetails) => (
   <div>
     <Heading>{props.title}</Heading>
     <div className={style.detail}>
@@ -46,4 +46,4 @@ const InfoBox = (props: IInfoBox) => (
   </div>
 );
 
-export default InfoBox;
+export default JobDetails;

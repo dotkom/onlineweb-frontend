@@ -2,7 +2,7 @@ import Img from 'common/components/Img';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from '../less/career.less';
-import { IJob } from '../models/Job';
+import { IJob } from '../models/JobListItem';
 
 // Accepts a list of locations and returns a comma-separated list of locations
 // with 'og' inserted before the last element, and 'Ikke spesifisert' if no
@@ -22,7 +22,7 @@ export const formatLocations = (locations: any) => {
 
 const STATIC_URL = process.env.OW4_ADDRESS;
 
-const Job = ({ locations, deadline, companyImage, companyName, title, ingress, type, id }: IJob) => (
+const JobListItem = ({ locations, deadline, companyImage, companyName, title, ingress, type, id }: IJob) => (
   <div className={style.job}>
     <Link to={`/career/${id}`}>
       <Img src={companyImage.md} alt="Firmalogo" />
@@ -45,4 +45,4 @@ const Job = ({ locations, deadline, companyImage, companyName, title, ingress, t
   </div>
 );
 
-export default Job;
+export default JobListItem;
