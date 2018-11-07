@@ -1,6 +1,6 @@
+import { RequestOptions } from 'http';
 import { DOMAIN } from '../constants/endpoints';
 import { toQueryString } from './queryString';
-import { RequestOptions } from 'http';
 
 export interface IAPIData<T> {
   count: number;
@@ -26,8 +26,8 @@ export const get = async (query: string, parameters: object = {}, options?: Requ
     const json = await response.json();
     return json;
   } catch (error) {
+    /* tslint:disable-next-line: no-console */
     console.error(error);
-    // Add handle error for some reason?
   }
 };
 
@@ -49,6 +49,7 @@ export const post = async (query: string, data: any, parameters: object = {}, op
     const json = await response.json();
     return json;
   } catch (error) {
+    /* tslint:disable-next-line: no-console */
     console.error(error);
   }
 };

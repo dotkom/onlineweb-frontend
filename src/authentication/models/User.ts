@@ -1,6 +1,6 @@
-import { IUser, Email, FieldOfStudy } from 'core/models/User';
 import { IGroup } from 'core/models/Group';
 import { Permission } from 'core/models/Permission';
+import { Email, FieldOfStudy, IUser } from 'core/models/User';
 
 export interface IAuthUser extends IUser {
   field_of_study: FieldOfStudy;

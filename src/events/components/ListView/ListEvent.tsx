@@ -1,10 +1,10 @@
-import React from 'react';
-import { DateTime } from 'luxon';
-import { INewEvent, getEventColor, getEventType } from '../../models/Event';
-import HostPolygon from './HostPolygon';
-import { StatusPolygon, PersonSVG } from './StatusPolygon';
-import style from './list.less';
 import { getEventAttendees } from 'events/utils/attendee';
+import { DateTime } from 'luxon';
+import React from 'react';
+import { getEventColor, getEventType, INewEvent } from '../../models/Event';
+import HostPolygon from './HostPolygon';
+import style from './list.less';
+import { PersonSVG, StatusPolygon } from './StatusPolygon';
 
 const ListEvent = ({ title, event_start, attendance_event, event_type, company_event, id }: INewEvent) => {
   const eventColor = getEventColor(event_type);

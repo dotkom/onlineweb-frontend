@@ -1,7 +1,8 @@
 @import '~common/less/colors.less';
 @import '~common/less/constants.less';
+@import '~common/less/mixins.less';
 
-.top-grid {
+.topGrid {
   display: grid;
   grid-gap: 20px;
   grid-template-areas: 'jobs filter';
@@ -9,35 +10,42 @@
   max-width: 100vw;
 }
 
-.jobs-area {
+.jobsArea {
   grid-area: jobs;
 }
 
-.search-box {
+.searchBox {
   border: 3px solid darken(@baby-blue-medium, 10%);
   padding: 10px;
   margin: 10px 0;
   width: 100%;
 }
 
-.job-info {
+.jobInfo {
   width: 100%;
-  text-decoration: none;
 }
 
-.job-meta {
+.jobInfoTitle {
+  color: #0069b3;
+
+  &:hover {
+    color: darken(#0069b3, 10%);
+    text-decoration: underline;
+  }
+}
+
+.jobMeta {
   border-top: 1px dotted #ccc;
   margin-top: 10px;
   display: grid;
   padding: 10px;
   grid-gap: 10px;
   grid-template-columns: repeat(3, 1fr);
+  font-size: @owFontSmall;
 
   & > p {
     color: #aaa;
   }
-
-  font-size: @owFontSmall;
 }
 
 .career img,
@@ -54,7 +62,6 @@
 
   & > a {
     width: 100%;
-    text-decoration: none;
 
     & > img {
       width: 300px;
@@ -66,7 +73,7 @@
   }
 }
 
-.job-list {
+.jobList {
   display: grid;
   grid-template-rows: 1fr;
   grid-gap: 20px;
@@ -82,7 +89,7 @@
   padding: 15px;
   margin-bottom: 20px;
   grid-area: filter;
-  color: white;
+  color: #fff;
 
   button {
     background: @baby-blue;
@@ -96,7 +103,7 @@
   }
 }
 
-.tag-container {
+.tagContainer {
   display: block;
   margin: 10px 0;
 
@@ -109,7 +116,7 @@
     padding: 10px;
     margin-right: 5px;
     margin-bottom: 5px;
-    color: white;
+    color: #fff;
     width: auto;
     background: @baby-blue;
     cursor: pointer;
@@ -127,42 +134,14 @@
   margin-bottom: 40px;
 }
 
-@description-color: #454545;
-
-.job-description {
+.jobDescription {
+  padding: 30px;
+  color: #454545;
   .owCard();
+}
 
-  div {
-    margin: 30px;
-  }
-
-  p,
-  h1,
-  h2,
-  h3,
-  h4 {
-    color: @description-color;
-    margin: 14px 0 14px 0;
-  }
-
-  h1 {
-    font-size: 26px;
-    margin-bottom: 24px;
-  }
-
-  h4 {
-    margin-top: 20px;
-    font-size: 20px;
-  }
-
-  ul {
-    margin: 8px 0 8px 14px;
-    list-style-type: disc;
-    li {
-      margin: 8px 0 14px 0;
-      color: @description-color;
-    }
-  }
+.jobTitle {
+  margin-bottom: 20px;
 }
 
 .company {
@@ -170,34 +149,33 @@
   gap: 20px;
   grid-template-columns: auto;
   grid-template-rows: auto;
+}
 
-  a {
-    .owCard();
+.companyImage {
+  .owCard();
+}
 
-    text-decoration: none;
-  }
+.companyDescriptionBox,
+.keyInfo {
+  background: @baby-blue-medium;
+  padding: 20px;
+}
 
-  h3 {
-    font-size: 24px;
-    margin-bottom: 6px;
-  }
+.companyDescriptionTitle,
+.keyInfo h3 {
+  display: block;
+  font-size: 24px;
+  margin-bottom: 6px;
+  color: #fff;
+}
 
-  > div {
-    background: @baby-blue-medium;
-
-    > div {
-      margin: 20px;
-
-      p,
-      h3 {
-        color: white;
-      }
-    }
-  }
+.companyDescriptionContent,
+.keyInfo p {
+  color: #fff;
 }
 
 @media only screen and (max-width: 1024px) {
-  .top-grid {
+  .topGrid {
     grid-template-columns: auto;
     grid-template-areas: 'filter' 'jobs';
   }

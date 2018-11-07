@@ -1,8 +1,8 @@
+import classnames from 'classnames';
 import React, { Component, ReactChildren } from 'react';
 import Router, { Link } from 'react-router-dom';
-import style from './menu.less';
-import classnames from 'classnames';
 import { routes } from '../index';
+import style from './menu.less';
 
 export interface IProps {
   match: Router.match<any>;

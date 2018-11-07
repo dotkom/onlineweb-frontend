@@ -1,7 +1,7 @@
-import { ICompanyImage } from './CompanyImage';
-import { ITags } from './Tag';
 import { IsoDateTime } from 'common/models/Date';
 import { IApiCompany } from 'core/models/Company';
+import { ICompanyImage } from './CompanyImage';
+import { ITags } from './Tag';
 
 export interface IJob {
   locations: string[];

@@ -1,17 +1,14 @@
 {
   "defaultSeverity": "error",
-  "extends": [
-    "tslint:recommended",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
   "jsRules": {},
   "rules": {
-    "no-console": false,
     "no-empty-interface": false,
     "quotemark": [true, "single", "jsx-double"],
-    "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "variable-name": [true, "allow-pascal-case", "allow-snake-case"]
+    "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case", "allow-snake-case"],
+    "jsx-no-lambda": false,
+    "jsx-boolean-value": false
   },
   "rulesDirectory": []
 }

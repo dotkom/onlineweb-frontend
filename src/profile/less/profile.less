@@ -1,4 +1,4 @@
-@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
 
 .header {
   display: flex;
@@ -6,7 +6,7 @@
   flex-direction: column;
   padding: 20px 0;
 
-  .profile-image {
+  .profileImage {
     border-radius: 50%;
     width: 140px;
     border: 6px solid #333;
@@ -20,28 +20,27 @@
 
 .profile {
   .owCard();
-
   padding: 30px 20px;
 }
 
-.info-group:not(:last-child) {
+.infoGroup:not(:last-child) {
   margin-bottom: 30px;
 }
 
-.info-group h1 {
+.infoGroup h1 {
   margin-bottom: 20px;
 }
 
-.committee-medal {
+.committeeMedal {
   width: 100px;
 }
 
-.committee-crown-container {
+.committeeCrownContainer {
   position: relative;
   min-height: 80px;
 }
 
-.committee-crown {
+.committeeCrown {
   padding: 3px 8px;
   width: 100px;
   vertical-align: bottom;
@@ -49,55 +48,55 @@
   bottom: 0;
 }
 
-.committee-range {
+.committeeRange {
   font-weight: bold;
   text-align: center;
 }
 
-.medal-container {
+.medalContainer {
   display: grid;
   grid-template-columns: auto;
   margin: 0 30px;
 }
 
-.side-scroll {
+.sideScroll {
   overflow-x: scroll;
 }
 
-.group-wrapper {
+.groupWrapper {
   display: grid;
   grid-template-columns: repeat(2, 275px);
   justify-content: center;
   grid-gap: 20px;
 }
 
-.medal-grid {
+.medalGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
 }
 
-.info-type,
-.info-link {
+.infoType,
+.infoLink {
   font-weight: bold;
 }
 
-.info-icon {
+.infoIcon {
   width: 40px;
   height: 40px;
   margin-right: 20px;
 }
 
-.info-icon-wrapper {
+.infoIconWrapper {
   display: flex;
   min-width: 300px;
 }
 
-.info-icon-content {
+.infoIconContent {
   display: block;
 }
 
-.medal-description {
+.medalDescription {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -112,16 +111,16 @@
   transition: opacity 0.2s, visibility 0.2s;
 }
 
-.medal-wrapper:hover .medal-description {
+.medalWrapper:hover .medalDescription {
   visibility: visible;
   opacity: 1;
 }
 
-.medal-wrapper {
+.medalWrapper {
   position: relative;
 }
 
-.small-container {
+.smallContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -131,15 +130,15 @@
   }
 }
 
-.progress-wrapper {
+.progressWrapper {
   max-width: 480px;
   margin: 0 200px;
 }
 
-.picture-padding {
+.picturePadding {
   margin: 20px;
 }
 
-.grid-row {
+.gridRow {
   .owCard();
 }
