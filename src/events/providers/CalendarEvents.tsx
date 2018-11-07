@@ -59,10 +59,11 @@ class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
     this.setState({ eventMonth });
   };
 
-  public changeMonth = async (monthNumber: number) => {
+  public changeMonth = async (numberOfMonths: number) => {
     let { month } = this.state;
 
-    month = monthNumber >= 0 ? month.plus({ months: monthNumber }) : month.minus({ months: Math.abs(monthNumber) });
+    month =
+      numberOfMonths >= 0 ? month.plus({ months: numberOfMonths }) : month.minus({ months: Math.abs(numberOfMonths) });
 
     await this.fetchEvents(month);
     this.setState({ month }, () => this.setSession());
