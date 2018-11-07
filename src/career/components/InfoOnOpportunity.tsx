@@ -20,12 +20,9 @@ export interface IInfoBox {
 
 const InfoBox = (props: IInfoBox) => (
   <div>
-    <Heading>Karrieremulighet - {props.companyName}</Heading>
+    <Heading>{props.title}</Heading>
     <div className={style.detail}>
-      <div className={style.jobDescription}>
-        <h1 className={style.jobTitle}>{props.title}</h1>
-        <Markdown source={props.description} escapeHtml />
-      </div>
+      <Markdown className={style.jobDescription} source={props.description} escapeHtml />
       <div>
         <div className={style.company}>
           <Link className={style.companyImage} to={`/company/${props.companyId}`}>
