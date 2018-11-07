@@ -1,10 +1,10 @@
-import { ICompany } from 'core/models/Company';
-import { IUser } from 'core/models/User';
-import { IGroup } from 'core/models/Group';
-import { IRuleBundle } from 'events/models/RuleBundles';
-import { IExtra } from 'events/models/Extras';
-import { IAttendee } from './Attendee';
 import IImage from 'common/models/Image';
+import { ICompany } from 'core/models/Company';
+import { IGroup } from 'core/models/Group';
+import { IUser } from 'core/models/User';
+import { IExtra } from 'events/models/Extras';
+import { IRuleBundle } from 'events/models/RuleBundles';
+import { IAttendee } from './Attendee';
 
 export interface IEventViewProps {
   accessible: boolean;

@@ -1,8 +1,8 @@
-import React from 'react';
-import { INewEvent, getEventColor, getEventType } from '../../models/Event';
 import classNames from 'classnames';
-import style from './calendar.less';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { getEventColor, getEventType, INewEvent } from '../../models/Event';
+import style from './calendar.less';
 
 export interface ITileProps {
   events: INewEvent[];

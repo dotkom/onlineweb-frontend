@@ -1,9 +1,9 @@
-@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
 
 @edge-height: 20px;
 
-.large-event-grid,
-.small-event-grid {
+.largeEventGrid,
+.smallEventGrid {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 20px;
@@ -17,16 +17,16 @@
   }
 }
 
-.small-event-grid {
+.smallEventGrid {
   margin-top: 20px;
 }
 
 @media (min-width: 1024px) {
-  .large-event-grid {
+  .largeEventGrid {
     grid-template-columns: 1fr 1fr 1fr;
   }
 
-  .small-event-grid {
+  .smallEventGrid {
     grid-auto-flow: column;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
@@ -43,7 +43,7 @@
 .imageLargeType {
   position: relative;
   padding: 10px 0 5px;
-  color: white;
+  color: #fff;
   text-align: center;
 
   &::after {
@@ -71,7 +71,7 @@
   &::before {
     content: '';
     position: absolute;
-    background: white;
+    background: #fff;
     height: @edge-height;
     top: -@edge-height + 1px;
     width: 100%;
@@ -104,6 +104,7 @@
     padding: 10px 5px;
     align-self: center;
     text-align: right;
+    color: initial;
 
     &:first-child {
       text-align: left;

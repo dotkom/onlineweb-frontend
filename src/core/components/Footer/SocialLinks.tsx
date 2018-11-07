@@ -1,5 +1,5 @@
-import React from 'react';
 import Img from 'common/components/Img';
+import React from 'react';
 import style from './footer.less';
 
 export interface ISocialLink {

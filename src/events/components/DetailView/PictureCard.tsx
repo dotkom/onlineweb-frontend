@@ -1,10 +1,10 @@
-import React from 'react';
-import { DateTime } from 'luxon';
-import { INewEvent, getEventColor } from '../../models/Event';
 import { DOMAIN } from 'common/constants/endpoints';
-import style from './detail.less';
-import CardHeader from './Card/CardHeader';
+import { DateTime } from 'luxon';
+import React from 'react';
+import { getEventColor, INewEvent } from '../../models/Event';
 import Block from './Block';
+import CardHeader from './Card/CardHeader';
+import style from './detail.less';
 
 const PictureCard = ({ image, event_start, event_end, location, company_event, event_type }: INewEvent) => {
   const eventImage = company_event[0] ? company_event[0].company.image : image;

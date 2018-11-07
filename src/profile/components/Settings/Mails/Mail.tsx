@@ -7,7 +7,7 @@ export interface IProps extends IMail {
 }
 
 const Mail = ({ email, primary, toggle }: IProps) => (
-  <div className={style.mailInputGroup} onClick={toggle}>
+  <div className={style.mail} onClick={toggle} tabIndex={0}>
     <input name="radio" type="radio" checked={primary} />
     <label>{email}</label>
   </div>

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { IPrivacy } from '../../../models/Privacy';
-import { getPrivacyOptions, postPrivacyOptions } from '../../../api/privacy';
-import Option from './Option';
 import { getKeys } from 'common/utils/tsHacks';
+import React, { Component } from 'react';
+import { getPrivacyOptions, postPrivacyOptions } from '../../../api/privacy';
+import { IPrivacy } from '../../../models/Privacy';
 import Info from './Info';
+import Option from './Option';
 import style from './privacy.less';
 
 export type IState = { [key in keyof IPrivacy]: boolean };

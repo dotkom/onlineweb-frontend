@@ -8,12 +8,12 @@
   grid-gap: 20px;
 }
 
-.search-field {
+.searchField {
   height: 45px;
 }
 
-.search-input {
-  border-bottom: solid gray 2px;
+.searchInput {
+  border-bottom: 2px solid #808080;
   background: none;
   height: 47px;
   color: #636363;
@@ -22,11 +22,11 @@
   font-size: 32px;
   padding-left: 6px;
   transition: background 0.2s ease;
+  .owOutline();
 }
 
-.search-input:focus,
-.search-input:hover {
-  outline: none;
+.searchInput:focus,
+.searchInput:hover {
   background: rgba(0, 0, 0, 0);
   animation: inuse 2.2s;
   animation-timing-function: ease-in-out;
@@ -51,20 +51,17 @@
   input[type='range'] {
     width: 100%;
     background-color: transparent;
-  }
-  input[type='range']:focus,
-  input[type='range']:active {
-    outline: none;
+    .owOutline();
   }
   h4 {
     display: table;
     text-align: center;
     margin: 0 auto;
     background: #07244c;
-    color: white;
+    color: #fff;
     position: relative;
     border-radius: 5px;
-    padding: 5px 5px 2px 5px;
+    padding: 5px 5px 2px;
     bottom: 10px;
   }
   h4::after {
@@ -81,19 +78,20 @@
   }
 }
 
-.dropdown-container {
+.dropdownContainer {
   z-index: 100;
 }
 
-.dropdown-item {
+.dropdownItem {
   position: relative;
   height: inherit;
   width: 100%;
   text-align: center;
   animation: fadein 0.2s;
   animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
-  border-left: 2px solid gray;
-  border-right: 2px solid gray;
+  border-left: 2px solid #808080;
+  border-right: 2px solid #808080;
+  background: #fff;
 
   // The percentages in the h4 and svg will stay 'constant' because the height they inherit from is constant
   > h4 {
@@ -107,17 +105,15 @@
     right: 7%;
     top: 26%; //This is 26 and not 33 because the Font-awesome svg has an 'empty' first few pixels on the top
   }
-
-  background: white;
 }
 
-.dropdown-item:first-child {
-  border-top: 2px solid gray;
-  background: white;
+.dropdownItem:first-child {
+  border-top: 2px solid #808080;
+  background: #fff;
 }
 
-.dropdown-item:last-child {
-  border-bottom: 2px solid gray;
+.dropdownItem:last-child {
+  border-bottom: 2px solid #808080;
 }
 
 @keyframes fadein {
@@ -129,11 +125,11 @@
   }
 }
 
-.dropdown-selected {
+.dropdownSelected {
   background: #e3e3e3;
 }
 
-.small-profile-grid {
+.smallProfileGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;

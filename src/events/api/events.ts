@@ -59,3 +59,15 @@ const normalize = (event: any): any => {
     ...event,
   };
 };
+
+export interface IControlledFetch<T> {
+  controller: AbortController;
+  data: Promise<IAPIData<T>>;
+}
+
+export const controlledGetEvents = (args?: IEventAPIParameters): IControlledFetch<INewEvent> => {
+  const controller = new AbortController();
+  const signal = controller.signal;
+  const data: Promise<IAPIData<INewEvent>> = get(API_URL, { format: 'json', ...args }, { signal });
+  return { data, controller };
+};

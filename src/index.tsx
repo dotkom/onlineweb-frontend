@@ -1,8 +1,8 @@
+import * as Sentry from '@sentry/browser';
+import { OWF_SENTRY_DSN } from 'common/constants/sentry';
+import { Settings } from 'luxon';
 import React, { Component, ErrorInfo } from 'react';
 import * as ReactDOM from 'react-dom';
-import * as Sentry from '@sentry/browser';
-import { Settings } from 'luxon';
-import { OWF_SENTRY_DSN } from 'common/constants/sentry';
 
 Settings.defaultLocale = 'nb';
 

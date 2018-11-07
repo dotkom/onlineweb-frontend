@@ -1,37 +1,27 @@
-@import '~common/less/constants.less';
-@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
 
 .menu {
   .owCard();
+  margin-bottom: auto;
 }
 
 .tab {
-  a {
-    text-decoration: none;
-  }
+  display: block;
+  padding: 20px;
+
   &:hover {
-    background: #e3e3e3;
+    background: darken(#fff, 10%);
   }
 }
 
 .active {
-  background: lighten(#004b80, 10%);
-  &:hover {
-    background: lighten(#004b80, 10%);
-  }
+  background: #0069b3;
+
   p {
     color: #fff;
   }
-}
 
-.text {
-  padding: 1em;
-  text-decoration: none;
-
-  &:hover,
-  :visited,
-  :link,
-  :active {
-    text-decoration: initial;
+  &:hover {
+    background: lighten(#0069b3, 10%);
   }
 }
