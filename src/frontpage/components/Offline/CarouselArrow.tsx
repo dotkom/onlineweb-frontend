@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './offline.less';
 
 export interface IProps {
   direction: 'right' | 'left';
@@ -7,7 +8,7 @@ export interface IProps {
 }
 
 const CarouselArrow = ({ direction, onClick, disabled = false }: IProps) => (
-  <button onClick={onClick} disabled={disabled}>
+  <button onClick={onClick} disabled={disabled} className={styles.carouselArrow}>
     {direction === 'left' ? '<' : null}
     {direction === 'right' ? '>' : null}
   </button>
