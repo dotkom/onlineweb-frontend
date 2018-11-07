@@ -32,6 +32,24 @@ export const get = async (query: string, parameters: object = {}, options?: Requ
 };
 
 /**
+ * @summary Returns all pages of results from a standard REST API endpoint.
+ * @param query The API endpoint to fetch results from.
+ * @param page An optional page to start fetching data on.
+ */
+export const getAllPages = async (query: string, page:number = 1): Promise<any> => {
+  let data:IAPIData<any>;
+  let results:any[] = [];
+
+  do {
+    data = await get(query, { format: 'json', page: page });
+    results = [...results, ...data.results];
+    page += 1;
+  } while (data.next);
+
+  return results;
+};
+
+/**
  * @summary Simple fetch-API wrapper for HTTP POST
  * TODO: implement Request options, Done with Object.assign, not tested yet
  * @param {string} query
