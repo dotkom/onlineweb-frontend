@@ -1,36 +1,76 @@
 .markdown {
-  em {
+  & > * + * {
+    margin-top: 15px;
+  }
+
+  p {
+    color: inherit;
+  }
+
+  strong,
+  th {
+    font-weight: bold;
+  }
+
+  em,
+  blockquote {
     font-style: italic;
   }
 
-  h1 {
-    font-size: 26px;
-    margin-bottom: 24px;
+  blockquote,
+  pre > code {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 10px;
+    background: #eee;
   }
 
-  h4 {
-    margin-top: 20px;
-    font-size: 20px;
+  a:hover {
+    text-decoration: underline;
   }
 
-  p,
-  h1,
-  h2,
-  h3,
-  h4 {
-    color: inherit;
-
-    &:not(:first-child) {
-      margin-top: 10px;
-    }
+  td,
+  th {
+    padding: 10px;
+    border: 1px solid;
   }
 
   ul {
-    margin: 8px 0 8px 14px;
     list-style-type: disc;
-    li {
-      margin: 8px 0 14px;
-      color: inherit;
-    }
+    padding-left: 30px;
+  }
+
+  ol {
+    list-style-type: decimal;
+    padding-left: 30px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 21px;
+  }
+
+  h3 {
+    font-size: 19px;
+  }
+
+  h5 {
+    font-size: 13px;
+  }
+
+  h6 {
+    font-size: 10px;
+  }
+
+  code,
+  pre {
+    font-family: monospace;
+  }
+
+  pre {
+    white-space: pre;
   }
 }
