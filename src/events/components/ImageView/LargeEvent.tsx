@@ -1,11 +1,11 @@
-import React from 'react';
+import { DOMAIN } from 'common/constants/endpoints';
+import IImage from 'common/models/Image';
+import { getEventColor, getEventType, IAttendanceEvent, ICompanyEvent, INewEvent } from 'events/models/Event';
+import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
-import { getEventType, INewEvent, ICompanyEvent, getEventColor, IAttendanceEvent } from 'events/models/Event';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './image.less';
-import IImage from 'common/models/Image';
-import { DOMAIN } from 'common/constants/endpoints';
-import { getEventAttendees } from 'events/utils/attendee';
 
 const getEventImage = (image: IImage | null, company_event: ICompanyEvent[]) => {
   return image

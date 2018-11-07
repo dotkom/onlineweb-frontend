@@ -1,13 +1,13 @@
 import React from 'react';
-import { Route, Switch, RouteProps } from 'react-router-dom';
+import { Route, RouteProps, Switch } from 'react-router-dom';
 
 import HttpError from 'core/components/errors/HttpError';
+import { IProfileProps } from 'profile';
 import Mails from './Mails';
+import Menu from './Menu';
 import Penalties from './Penalties';
 import Privacy from './Privacy';
-import Menu from './Menu';
 import style from './settings.less';
-import { IProfileProps } from 'profile';
 import SettingsInfo from './SettingsInfo';
 
 const BASE_ROUTE = '/profile/settings';
@@ -45,10 +45,8 @@ const SettingsRoute = ({ view, ...props }: ISettingsRouteProps) => {
       render={({ match, ...routeProps }) => (
         <div className={style.container}>
           <Menu path={match.path} />
-          <div className={style.content}>
-            <div>
-              <View {...routeProps} />
-            </div>
+          <div className={style.settings}>
+            <View {...routeProps} />
           </div>
         </div>
       )}

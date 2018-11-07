@@ -1,6 +1,6 @@
 import React from 'react';
-import { CheckMark, Circle, CircleCheck, DividerBar } from './ClassProgress';
 import style from '../../less/profile.less';
+import { CheckMark, Circle, CircleCheck, DividerBar } from './ClassProgress';
 
 export interface IProps {
   ongoingYear: number;

@@ -1,8 +1,8 @@
 import React from 'react';
-import { INewEvent, getEventColor } from '../../models/Event';
-import style from './detail.less';
-import CardHeader from './Card/CardHeader';
+import { getEventColor, INewEvent } from '../../models/Event';
 import Block from './Block';
+import CardHeader from './Card/CardHeader';
+import style from './detail.less';
 
 const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
   const color = getEventColor(event_type);

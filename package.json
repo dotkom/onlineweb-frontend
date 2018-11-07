@@ -82,6 +82,7 @@
     "ts-jest": "^23.0.0",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
+    "tslint-react": "^3.6.0",
     "typescript": "^2.8.3",
     "typings-for-css-modules-loader": "^1.7.0",
     "url-loader": "^1.0.1",
@@ -106,32 +107,5 @@
   "browserslist": [
     "last 2 versions",
     "> 5% in NO"
-  ],
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "es5",
-    "printWidth": 120,
-    "arrowParens": "always"
-  },
-  "stylelint": {
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-prettier"
-    ],
-    "rules": {
-      "property-no-vendor-prefix": true,
-      "selector-no-vendor-prefix": true,
-      "string-quotes": "single",
-      "at-rule-no-unknown": null,
-      "at-rule-empty-line-before": null,
-      "selector-pseudo-class-no-unknown": [
-        true,
-        {
-          "ignorePseudoClasses": [
-            "global"
-          ]
-        }
-      ]
-    }
-  }
+  ]
 }

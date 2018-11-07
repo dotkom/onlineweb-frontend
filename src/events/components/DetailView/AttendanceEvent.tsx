@@ -1,7 +1,7 @@
+import { DateTime } from 'luxon';
 import React, { ReactChild } from 'react';
 import { IAttendanceEvent } from '../../models/Event';
 import Block from './Block';
-import { DateTime } from 'luxon';
 import styles from './detail.less';
 
 interface IRuleBundleBox {

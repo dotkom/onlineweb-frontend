@@ -1,8 +1,8 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import EventsContainer from './EventsContainer';
-import DetailView from './DetailView';
 import HttpError from 'core/components/errors/HttpError';
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import DetailView from './DetailView';
+import EventsContainer from './EventsContainer';
 
 export const routes = {
   root: '/events',

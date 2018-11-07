@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { getMarks, getSuspensions } from '../../../api/penalties';
 import { IMark, ISuspension } from '../../../models/Penalty';
 import Mark from './Mark';
+import style from './penalties.less';
+import Placeholder from './Placeholder';
 import Rules from './Rules';
 import Suspension from './Suspension';
-import Placeholder from './Placeholder';
-import { getMarks, getSuspensions } from '../../../api/penalties';
-import style from './penalties.less';
 
 export interface IState {
   marks: IMark[];
@@ -38,37 +38,33 @@ class Marks extends Component<{}, IState> {
   public render() {
     const { marks, suspensions, loaded } = this.state;
     return (
-      <div>
+      <>
+        <h2>Prikker</h2>
         <div>
-          <h3>Prikker</h3>
-          <div className={style.grid}>
-            {/** If not loaded from API; show placeholder. If list of marks is empty; show empty-text */}
-            {!loaded ? (
-              <Placeholder />
-            ) : marks.length ? (
-              marks.sort(Mark.sortByExpiration).map((mark) => <Mark penalty={mark} key={mark.added_date} />)
-            ) : (
-              <p>Du har ingen prikker</p>
-            )}
-          </div>
-          <div className={style.divider} />
-          <h3>Suspensjoner</h3>
-          <div className={style.grid}>
-            {/** If not loaded from API; show placeholder. If list of suspensions is empty; show empty-text */}
-            {!loaded ? (
-              <Placeholder />
-            ) : suspensions.length ? (
-              suspensions
-                .sort(Suspension.sortByExpiration)
-                .map((suspension) => <Suspension penalty={suspension} key={suspension.added_date} />)
-            ) : (
-              <p>Du har ingen suspensjoner</p>
-            )}
-          </div>
+          {/** If not loaded from API; show placeholder. If list of marks is empty; show empty-text */}
+          {!loaded ? (
+            <Placeholder />
+          ) : marks.length ? (
+            marks.sort(Mark.sortByExpiration).map((mark) => <Mark penalty={mark} key={mark.added_date} />)
+          ) : (
+            <p>Du har ingen prikker</p>
+          )}
         </div>
-        <div className={style.divider} />
+        <h2>Suspensjoner</h2>
+        <div>
+          {/** If not loaded from API; show placeholder. If list of suspensions is empty; show empty-text */}
+          {!loaded ? (
+            <Placeholder />
+          ) : suspensions.length ? (
+            suspensions
+              .sort(Suspension.sortByExpiration)
+              .map((suspension) => <Suspension penalty={suspension} key={suspension.added_date} />)
+          ) : (
+            <p>Du har ingen suspensjoner</p>
+          )}
+        </div>
         <Rules />
-      </div>
+      </>
     );
   }
 }

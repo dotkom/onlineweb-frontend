@@ -1,13 +1,13 @@
+import HttpError from 'core/components/errors/HttpError';
+import { History } from 'history';
+import 'multirange';
+import qs from 'query-string';
 import React from 'react';
-import { Route, Switch, RouteProps } from 'react-router-dom';
+import { Route, RouteProps, Switch } from 'react-router-dom';
+import MainMenu from './components/MainMenu';
 import MyProfile from './components/Profile';
 import Search from './components/Search';
 import Settings from './components/Settings';
-import MainMenu from './components/MainMenu';
-import HttpError from 'core/components/errors/HttpError';
-import 'multirange';
-import qs from 'query-string';
-import { History } from 'history';
 
 const BASE_ROUTE = '/profile';
 
