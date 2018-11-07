@@ -1,6 +1,6 @@
 import HttpError from 'core/components/errors/HttpError';
 import React from 'react';
-import InfoBox from '../components/InfoOnOpportunity';
+import InfoBox from '../components/JobDetails';
 import { IJob } from '../models/Job';
 
 export interface IDetailViewProps {
