@@ -1,12 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
-module.exports = env => {
+module.exports = (env) => {
   return {
     mode: 'development',
-    devtool: "source-map",
+    devtool: 'source-map',
     entry: {
       app: './src/index.tsx',
     },
@@ -27,7 +27,7 @@ module.exports = env => {
             enforce: true,
           },
         },
-      }
+      },
     },
     devServer: {
       contentBase: './dist',
@@ -42,29 +42,32 @@ module.exports = env => {
           test: /\.(ts|tsx)$/,
           exclude: /node_modules/,
           use: {
-            loader: 'babel-loader'
-          }
+            loader: 'babel-loader',
+          },
         },
         {
           test: /\.less$/,
           use: [
             {
-              loader: "style-loader"
+              loader: 'style-loader',
             },
             {
-              loader: "typings-for-css-modules-loader",
+              loader: 'typings-for-css-modules-loader',
               options: {
                 sourceMap: true,
                 modules: true,
-                localIdentName: "[local]___[hash:base64:5]",
+                localIdentName: '[local]___[hash:base64:5]',
                 namedExport: true,
-                camelCase: true
-              }
+                camelCase: true,
+              },
             },
             {
-              loader: "less-loader"
-            }
-          ]
+              loader: 'postcss-loader',
+            },
+            {
+              loader: 'less-loader',
+            },
+          ],
         },
         {
           // webpack can import images from both javascript and css
@@ -81,11 +84,11 @@ module.exports = env => {
           test: /\.(eot|svg|ttf|woff|woff2)(\?[a-z0-9=&.]+)?$/,
           loader: 'url-loader?limit=10000',
         },
-      ]
+      ],
     },
     resolve: {
-      modules: [path.resolve(__dirname, "../src"), "node_modules"],
-      extensions: [".ts", ".tsx", ".js", ".jsx"]
+      modules: [path.resolve(__dirname, '../src'), 'node_modules'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
     plugins: [
       new MiniCssExtractPlugin({
@@ -93,13 +96,13 @@ module.exports = env => {
       }),
       new HtmlWebpackPlugin({
         template: './public/index.html',
-        filename: 'index.html'
+        filename: 'index.html',
       }),
       new webpack.EnvironmentPlugin({
         OW4_ADDRESS: 'https://online.ntnu.no',
         OWF_SENTRY_DSN: '',
         NODE_ENV: 'development',
-      })
-    ]
-  }
-}
+      }),
+    ],
+  };
+};

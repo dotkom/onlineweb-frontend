@@ -1,10 +1,12 @@
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
   rules: {
+    'color-named': 'never',
     'string-quotes': 'single',
     'at-rule-no-unknown': null,
     'at-rule-empty-line-before': null,
-    'color-named': 'never',
+    'property-no-vendor-prefix': true,
+    'selector-no-vendor-prefix': true,
     'declaration-empty-line-before': 'never',
     'shorthand-property-no-redundant-values': true,
     'selector-class-pattern': '^[a-z][a-zA-Z0-9]+$',
