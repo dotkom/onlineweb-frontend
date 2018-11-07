@@ -8,6 +8,7 @@
 .tab {
   display: block;
   padding: 20px;
+  transition: background 0.2s, color 0.2s;
 
   &:hover {
     background: darken(#fff, 10%);
@@ -15,13 +16,13 @@
 }
 
 .active {
-  background: #0069b3;
+  background: @blue;
 
   p {
     color: #fff;
   }
 
   &:hover {
-    background: lighten(#0069b3, 10%);
+    background: lighten(@blue, 10%);
   }
 }
