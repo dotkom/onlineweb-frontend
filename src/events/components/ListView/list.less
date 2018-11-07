@@ -20,6 +20,7 @@
   grid-column-gap: 10px;
   height: 60px;
   .owCard();
+
 }
 
 .elementGridRow {
@@ -42,6 +43,12 @@
   height: 100%;
   width: 200px;
   clip-path: polygon(90% 0, 0 0, 0 100%, 90% 100%, 100% 65%);
+  transition: all 0.25s
+}
+
+.gridRow:hover .hostPolygon {
+  transform-origin: left center;
+  transform: scale(1.05, 1);
 }
 
 .host {
