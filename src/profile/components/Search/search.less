@@ -6,6 +6,7 @@
   align-items: end;
   grid-template-columns: 5fr 2fr 3fr;
   grid-gap: 20px;
+  width: 100%;
 }
 
 .searchInput {
@@ -76,24 +77,18 @@
 }
 
 .dropdownItem {
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
   position: relative;
-  height: 50px;
   animation: fadein 0.2s;
   animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
   background: #fff;
   transition: background 0.2s;
 
-  // The percentages in the h4 and svg will stay 'constant' because the height they inherit from is constant
-  > p {
-    position: absolute;
-    top: 33%;
-    left: 7%;
-  }
-
   > svg {
-    position: absolute;
-    right: 7%;
-    top: 26%; //This is 26 and not 33 because the Font-awesome svg has an 'empty' first few pixels on the top
+    margin-left: 20px;
+    margin-bottom: 8px;
   }
 }
 
@@ -116,6 +111,7 @@
   margin-top: 40px;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  width: 100%;
 }
 
 .smallProfile {
