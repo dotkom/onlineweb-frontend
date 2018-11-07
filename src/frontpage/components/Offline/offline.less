@@ -3,11 +3,23 @@
   width: 100%;
 }
 
+.carouselContainer {
+  display: flex;
+}
+
+.carouselArrow {
+  width: 50px;
+  cursor: pointer;
+}
+
 .carousel {
   display: flex;
+  margin: 0 10px;
+  flex-grow: 1;
   justify-content: space-between;
 
   div {
     transition: 1s ease-in 0.2s;
+    text-align: center;
   }
 }

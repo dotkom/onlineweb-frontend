@@ -64,23 +64,25 @@ class Offline extends Component<IProps, IState> {
       <section className={style.container}>
         <Heading title="offline" />
 
-        {offlines && (
-          <>
-            <CarouselArrow
-              direction="left"
-              onClick={this.handlePrevious}
-              disabled={page === 1}
-            />
-            
-            <OfflineCarousel offlines={visibleOfflines} />
+        <div className={style.carouselContainer}>
+          {offlines && (
+            <>
+              <CarouselArrow
+                direction="left"
+                onClick={this.handlePrevious}
+                disabled={page === 1}
+              />
+              
+              <OfflineCarousel offlines={visibleOfflines} />
 
-            <CarouselArrow
-              direction="right"
-              onClick={this.handleNext}
-              disabled={page === lastPage}
-            />
-          </>
-        )}
+              <CarouselArrow
+                direction="right"
+                onClick={this.handleNext}
+                disabled={page === lastPage}
+              />
+            </>
+          )}
+        </div>
       </section>
     );
   }
