@@ -1,9 +1,9 @@
-import React, { createContext, Component } from 'react';
-import { INewEvent, IEventViewProps } from 'events/models/Event';
-import { DateTime } from 'luxon';
-import { constructMonthMap } from '../utils/calendarUtils';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
-import { IEventAPIParameters, controlledGetEvents } from 'events/api/events';
+import { controlledGetEvents, IEventAPIParameters } from 'events/api/events';
+import { IEventViewProps, INewEvent } from 'events/models/Event';
+import { DateTime } from 'luxon';
+import React, { Component, createContext } from 'react';
+import { constructMonthMap } from '../utils/calendarUtils';
 
 export interface ICalendarEventsState {
   eventMonth: INewEvent[][];
@@ -123,13 +123,14 @@ class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
    * @description Change the month in the state by a number of months.
    * This can be used simply to change the month by one month at a time.
    * Or may for example use number = 6 to change the month by half a year.
-   * @param {number} number The number of months to change the state with.
+   * @param {numberOfMonths} numberOfMonths The number of months to change the state with.
    */
-  public changeMonth = async (number: number) => {
+  public changeMonth = async (numberOfMonths: number) => {
     let { month } = this.state;
     this.cancelFetch();
 
-    month = number >= 0 ? month.plus({ months: number }) : month.minus({ months: Math.abs(number) });
+    month =
+      numberOfMonths >= 0 ? month.plus({ months: numberOfMonths }) : month.minus({ months: Math.abs(numberOfMonths) });
     this.setState({ month, eventMonth: EMPTY_EVENT_MONTH }, () => this.setSession());
 
     await this.fetchEvents(month);

@@ -1,6 +1,6 @@
-import { IUser } from '../models/User';
 import { IAction } from '../actions/action';
 import { ActionTypes } from '../actions/actionTypes';
+import { IUser } from '../models/User';
 
 export interface IInitialState {
   readonly user: IUser | {};

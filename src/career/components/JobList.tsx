@@ -1,9 +1,9 @@
-import React from 'react';
-import { DateTime } from 'luxon';
 import Fuse from 'fuse.js';
-import Job from './Job';
-import { ITag } from '../models/Tag';
+import { DateTime } from 'luxon';
+import React from 'react';
 import { IJob } from '../models/Job';
+import { ITag } from '../models/Tag';
+import JobListItem from './JobListItem';
 
 import style from '../less/career.less';
 
@@ -120,7 +120,7 @@ const JobList = ({ jobs, tags, filterText }: IJobListProps) => {
     (job: IJob) => job.featured
   );
 
-  const jobElems = sortedJobs.map((job, i) => <Job {...job} key={i} />);
+  const jobElems = sortedJobs.map((job, i) => <JobListItem {...job} key={i} />);
 
   return <div className={style.jobList}>{jobElems}</div>;
 };

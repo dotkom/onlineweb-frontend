@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
 import { IGroup } from 'core/models/Group';
-import { connect } from 'react-redux';
-import { IState } from '../reducers';
 import { Permission } from 'core/models/Permission';
+import React, { Fragment } from 'react';
+import { connect } from 'react-redux';
 import { AuthUser } from '../models/User';
+import { IState } from '../reducers';
 
 export interface IProps extends IState {
   user: AuthUser;

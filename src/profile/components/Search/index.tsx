@@ -1,12 +1,12 @@
+import { IGroup } from 'core/models/Group';
+import { IProfileProps } from 'profile';
 import React from 'react';
-import ProfileSmall from './ProfileSmall';
-import { ISearchUser } from '../../models/User';
 import { searchUsers } from '../../api/search';
 import { SearchFilter } from '../../models/Search';
-import { IGroup } from 'core/models/Group';
-import Searchbar from './Searchbar';
+import { ISearchUser } from '../../models/User';
+import ProfileSmall from './ProfileSmall';
 import style from './search.less';
-import { IProfileProps } from 'profile';
+import Searchbar from './Searchbar';
 
 export interface IProps extends IProfileProps {}
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import { INewEvent, getEventColor } from '../../models/Event';
-import styles from './detail.less';
-import CardHeader from './Card/CardHeader';
+import { getEventColor, INewEvent } from '../../models/Event';
 import AttendanceEvent from './AttendanceEvent';
+import CardHeader from './Card/CardHeader';
+import styles from './detail.less';
 
 const Registration = ({ event_type, attendance_event }: INewEvent) => {
   const color = getEventColor(event_type);

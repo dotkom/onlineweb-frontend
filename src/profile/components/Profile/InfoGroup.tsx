@@ -1,5 +1,5 @@
-import React from 'react';
 import { STATIC_URL } from 'common/constants/endpoints';
+import React from 'react';
 import style from '../../less/profile.less';
 
 const PROFILE_STATIC = STATIC_URL + 'common/img/profile/';

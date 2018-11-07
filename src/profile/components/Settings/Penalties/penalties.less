@@ -1,25 +1,62 @@
-.grid {
-  display: grid;
-  grid-gap: 10px;
-}
+@import '~common/less/mixins.less';
 
-.grid-row {
+.penalty {
   &:hover {
     cursor: pointer;
   }
+
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+  .owOutline();
 }
 
-.divider {
-  height: 20px;
-}
-
-.title {
+.penaltyTitle {
   display: flex;
   justify-content: space-between;
-  margin: 4px 0;
+  margin-bottom: 10px;
 }
 
-.progress-bar {
-  height: 3px;
-  background: red;
+.penaltyContent {
+  padding: 15px;
+  border-top: 1px solid #808080;
+}
+
+.progressBar {
+  height: 4px;
+  background: #f00;
+}
+
+.toggleRules {
+  border: 1px solid #000;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.rules {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #808080;
+
+  h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 16px;
+  }
+
+  p,
+  ul,
+  li {
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
 }

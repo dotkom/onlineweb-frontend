@@ -1,10 +1,10 @@
-import React from 'react';
 import { STATIC_URL } from 'common/constants/endpoints';
-import { Type, TypeIndex } from '../../models/ImageTypes';
 import github from 'common/img/profile/github.svg';
 import home from 'common/img/profile/home.svg';
 import linkedin from 'common/img/profile/linkedin.svg';
+import React from 'react';
 import style from '../../less/profile.less';
+import { Type, TypeIndex } from '../../models/ImageTypes';
 
 const SOCIAL_STATIC = STATIC_URL + 'common/img/social/';
 

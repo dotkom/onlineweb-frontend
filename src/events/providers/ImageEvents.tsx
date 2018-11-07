@@ -1,7 +1,7 @@
-import React, { createContext, Component } from 'react';
-import { EventTypeEnum, INewEvent, IEventViewProps } from 'events/models/Event';
-import { DateTime } from 'luxon';
 import { getEvents } from 'events/api/events';
+import { EventTypeEnum, IEventViewProps, INewEvent } from 'events/models/Event';
+import { DateTime } from 'luxon';
+import React, { Component, createContext } from 'react';
 
 export interface IImageEventsState {
   eventsLeft: INewEvent[];

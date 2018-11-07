@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { INewEvent, mockEvent } from '../../models/Event';
 import { getEvent } from '../../api/events';
+import { INewEvent, mockEvent } from '../../models/Event';
 import ListEvent from '../ListView/ListEvent';
-import PictureCard from './PictureCard';
+import Contact from './Contact';
 import style from './detail.less';
 import InfoBox from './InfoBox';
+import PictureCard from './PictureCard';
 import Registration from './Registation';
-import Contact from './Contact';
 
 export interface IProps {
   eventId: string;

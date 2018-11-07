@@ -1,11 +1,11 @@
-import React from 'react';
-import style from './footer.less';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faBriefcase } from '@fortawesome/free-solid-svg-icons/faBriefcase';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons/faEnvelope';
 import { faFile } from '@fortawesome/free-solid-svg-icons/faFile';
 import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import React from 'react';
+import style from './footer.less';
 
 export interface IContactInfo {
   icon: IconProp;

@@ -1,9 +1,9 @@
+import { getEventColor, IAttendanceEvent, INewEvent } from 'events/models/Event';
+import { getEventAttendees } from 'events/utils/attendee';
+import { DateTime } from 'luxon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './image.less';
-import { INewEvent, getEventColor, IAttendanceEvent } from 'events/models/Event';
-import { DateTime } from 'luxon';
-import { getEventAttendees } from 'events/utils/attendee';
 
 const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: INewEvent) => (
   <Link to={`/events/${id}`}>

@@ -1,7 +1,7 @@
 import React from 'react';
-import Medal from './Medal';
-import { IMedal } from '../../models/Medal';
 import style from '../../less/profile.less';
+import { IMedal } from '../../models/Medal';
+import Medal from './Medal';
 
 export interface IProps {
   medals: IMedal[];

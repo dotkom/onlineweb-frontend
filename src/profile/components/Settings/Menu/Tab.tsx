@@ -1,7 +1,7 @@
+import classnames from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './menu.less';
-import classnames from 'classnames';
 
 export interface IProps {
   path: string;
@@ -10,15 +10,14 @@ export interface IProps {
 }
 
 const Tab = ({ path, active, text }: IProps) => (
-  <div
+  <Link
+    to={path}
     className={classnames(style.tab, {
       [style.active]: active,
     })}
   >
-    <Link to={path}>
-      <p className={style.text}>{text}</p>
-    </Link>
-  </div>
+    <p>{text}</p>
+  </Link>
 );
 
 export default Tab;
