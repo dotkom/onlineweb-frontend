@@ -18,14 +18,13 @@ const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
         <p>komite@online.ntnu.no</p>
       </Block>
 
-      {company_event &&
-        company_event.length > 0 && (
-          <Block title="Medarrangør">
-            {company_event.map(({ company }) => (
-              <p key={company.id}>{company.name}</p>
-            ))}
-          </Block>
-        )}
+      {company_event && company_event.length > 0 && (
+        <Block title="Medarrangør">
+          {company_event.map(({ company }) => (
+            <p key={company.id}>{company.name}</p>
+          ))}
+        </Block>
+      )}
     </div>
   );
 };
