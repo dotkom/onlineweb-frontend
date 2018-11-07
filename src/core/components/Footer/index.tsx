@@ -1,3 +1,5 @@
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons/faMapMarkerAlt';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import ContactInfo from './ContactInfo';
 import style from './footer.less';
@@ -22,7 +24,7 @@ export const Footer = () => (
         <div className={style.address}>
           <div className={style.addressHeading}>
             Besøksadresse
-            <span className="glyphicon glyphicon-map-marker" />
+            <FontAwesomeIcon icon={faMapMarkerAlt} fixedWidth />
           </div>
 
           <div>
@@ -36,7 +38,7 @@ export const Footer = () => (
         <div className={style.address}>
           <div className={style.addressHeading}>
             Post og Faktura
-            <span className="glyphicon glyphicon-map-marker" />
+            <FontAwesomeIcon icon={faMapMarkerAlt} fixedWidth />
           </div>
 
           <div>
