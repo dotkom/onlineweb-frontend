@@ -1,3 +1,4 @@
+@import '~common/less/colors.less';
 @import '~common/less/mixins.less';
 
 .header {
@@ -9,7 +10,7 @@
   .profileImage {
     border-radius: 50%;
     width: 140px;
-    border: 6px solid #333;
+    border: 6px solid @darkGray;
   }
 
   h1 {
@@ -94,26 +95,6 @@
 
 .infoIconContent {
   display: block;
-}
-
-.medalDescription {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(29, 106, 154, 0.72);
-  color: #fff;
-  visibility: hidden;
-  opacity: 0;
-
-  /* transition effect. not necessary */
-  transition: opacity 0.2s, visibility 0.2s;
-}
-
-.medalWrapper:hover .medalDescription {
-  visibility: visible;
-  opacity: 1;
 }
 
 .medalWrapper {
