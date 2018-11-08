@@ -5,6 +5,7 @@ export const getRepositories = async () => {
     const data = await get('/api/v1/repositories', { format: 'json' });
     return data;
   } catch (err) {
+    /* tslint:disable-next-line: no-console */
     console.error(err);
   }
 };

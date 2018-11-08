@@ -1,5 +1,5 @@
-import React from 'react';
 import Heading from 'common/components/Heading';
+import React from 'react';
 import Intro from '../components/Intro';
 import RepositoryList from '../components/RepositoryList';
 
