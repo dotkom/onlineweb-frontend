@@ -47,9 +47,10 @@ const ProfileRoute = ({ view, ...props }: IProfileRouteProps) => {
     <Route
       {...props}
       render={({ match, location, history, ...routeProps }) => (
-        <MainMenu match={match}>
+        <>
+          <MainMenu match={match} />
           <View params={qs.parse(location.search)} history={history} />
-        </MainMenu>
+        </>
       )}
     />
   );
