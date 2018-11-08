@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import asyncAwait from 'redux-async-await';
-import store from './store';
 import { apiLogIn } from './actions';
 import rootReducer from './reducers';
+import store from './store';
 
 declare global {
   // tslint:disable-next-line interface-name

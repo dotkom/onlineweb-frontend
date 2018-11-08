@@ -1,9 +1,9 @@
+import { IListEventsState, ListEventsContext } from 'events/providers/ListEvents';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
-import { ListEventsContext, IListEventsState } from 'events/providers/ListEvents';
 
 export type IProps = IEventViewProps;
 

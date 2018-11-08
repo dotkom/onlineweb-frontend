@@ -1,7 +1,7 @@
-import React from 'react';
-import { ISearchUser } from '../../models/User';
-import style from '../../less/profile.less';
 import classnames from 'classnames';
+import React from 'react';
+import style from '../../less/profile.less';
+import { ISearchUser } from '../../models/User';
 
 class ProfileSmall extends React.Component<{ user: ISearchUser }> {
   public render() {

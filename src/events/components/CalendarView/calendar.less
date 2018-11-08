@@ -1,7 +1,12 @@
 @import '~common/less/constants.less';
+@import '~common/less/mixins.less';
 
 .gridWrapper {
   max-width: 90vw;
+}
+
+.monthChanger {
+  .owOutline();
 }
 
 .grid {
@@ -11,7 +16,6 @@
 
 .tile {
   .owCard();
-
   overflow: hidden;
   height: 100px;
 }
@@ -27,6 +31,7 @@
 
   & > a {
     color: initial;
+    display: block;
 
     &:hover {
       text-decoration: none;
@@ -34,14 +39,14 @@
   }
 
   & > p:first-child {
-    color: gray;
+    color: #808080;
   }
 }
 
 .title {
   padding: 5px;
   margin-bottom: 10px;
-  color: white;
+  color: #fff;
   white-space: nowrap;
   overflow: hidden;
   font-size: 10px;

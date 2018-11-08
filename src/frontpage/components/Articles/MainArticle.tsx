@@ -1,8 +1,8 @@
-import React from 'react';
 import { IArticle } from 'articles/models/Article';
-import style from './articles.less';
 import Img from 'common/components/Img';
 import { DOMAIN } from 'common/constants/endpoints';
+import React from 'react';
+import style from './articles.less';
 
 const MainArticle = ({ absolute_url, heading, image, ingress_short }: IArticle) => {
   return (

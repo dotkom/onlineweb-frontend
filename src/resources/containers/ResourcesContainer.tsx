@@ -1,6 +1,6 @@
+import Heading from 'common/components/Heading';
 import React from 'react';
 import ResourceList from '../components/ResourceList';
-import Heading from 'common/components/Heading';
 
 const ResourcesContainer = () => (
   <section>

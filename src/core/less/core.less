@@ -1,4 +1,15 @@
 @import './reset.less';
+@import '~common/less/mixins.less';
+
+/* stylelint-disable selector-max-type */
+
+:global {
+  #root {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+  }
+}
 
 html,
 body {
@@ -20,8 +31,18 @@ main {
   max-width: 1200px;
 }
 
+a,
+button,
+input {
+  .owOutline();
+}
+
 a {
   text-decoration: none;
+
+  &:visited {
+    color: inherit;
+  }
 }
 
 h1 {
@@ -32,15 +53,8 @@ h2 {
   font-size: 20px;
 }
 
-p {
-  color: black;
+p,
+blockquote,
+li {
   line-height: 1.5;
-}
-
-:global {
-  #root {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    height: 100%;
-  }
 }

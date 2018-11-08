@@ -1,20 +1,20 @@
-import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-import { Provider } from 'react-redux';
+import React from 'react';
 import Loadable from 'react-loadable';
+import { Provider } from 'react-redux';
+import { Route, Router, Switch } from 'react-router-dom';
 
-import Frontpage from './frontpage';
+import EventsRouter from 'events/components/EventsRouter';
 import Career from './career/';
 import Contribution from './contribution';
+import Core from './core';
+import HttpError from './core/components/errors/HttpError';
+import Frontpage from './frontpage';
 import Hobbys from './hobbygroups';
 import Resources from './resources';
-import HttpError from './core/components/errors/HttpError';
-import Core from './core';
-import EventsRouter from 'events/components/EventsRouter';
 
-import store from './authentication';
 import Spinner from 'common/components/Spinner';
+import store from './authentication';
 
 export const routes = {
   events: '/events',
