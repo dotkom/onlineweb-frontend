@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { controlledGetEvents, getEvents, IEventAPIParameters, } from './events';
+import { controlledGetEvents, getEvents, IEventAPIParameters } from './events';
 
 /**
  * @summary Fetch the events for an entire month.

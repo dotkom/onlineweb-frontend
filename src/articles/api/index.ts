@@ -13,4 +13,3 @@ export const getServerCacheArticles = (): IArticle[] => {
   const cache = getStateCache();
   return (cache && cache.articles) || [];
 };
-

@@ -11,7 +11,7 @@ export interface ISettingsContextState {
 
 const INITIAL_STATE: ISettingsContextState = {
   eventView: EventView.IMAGE,
-}
+};
 
 export const SettingsContext = createContext(INITIAL_STATE);
 
@@ -25,12 +25,7 @@ class Settings extends Component<IProps, ISettingsContextState> {
   }
 
   public render() {
-    console.log(this.state.eventView)
-    return (
-      <SettingsContext.Provider value={this.state}>
-        { this.props.children }
-      </SettingsContext.Provider>
-    )
+    return <SettingsContext.Provider value={this.state}>{this.props.children}</SettingsContext.Provider>;
   }
 }
 

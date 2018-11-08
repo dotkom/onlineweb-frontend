@@ -8,7 +8,7 @@ import { getOfflines } from 'frontpage/api/offline';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 import { DateTime } from 'luxon';
 
-declare global  {
+declare global {
   namespace NodeJS {
     /* tslint:disable-next-line interface-name */
     interface Global {
@@ -24,10 +24,10 @@ export interface IServerStateCache {
       eventsLeft: INewEvent[];
       eventsMiddle: INewEvent[];
       eventsRight: INewEvent[];
-    },
+    };
     list: INewEvent[];
     calendar: INewEvent[];
-  },
+  };
   articles: IArticle[];
   offline: IOfflineIssue[];
 }
@@ -58,5 +58,5 @@ export const initStateCache = async () => {
     },
     articles,
     offline,
-  }
-}
+  };
+};

@@ -1,20 +1,11 @@
 import React from 'react';
 import ReactGA from 'react-ga';
 import Loadable from 'react-loadable';
-<<<<<<< HEAD
-import { Router, Switch } from 'react-router-dom';
-=======
-<<<<<<< HEAD
-import { Route, Router, Switch } from 'react-router-dom';
-=======
-import { Route, Switch } from 'react-router-dom';
->>>>>>> Make separate routing config for client and server
->>>>>>> Make separate routing config for client and server
-
 import AuthCallback from 'authentication/components/AuthCallback';
 import AuthProvider from 'authentication/providers/UserProvider';
 
 import EventsRouter from 'events/components/EventsRouter';
+import { Switch } from 'react-router-dom';
 import Career from './career/';
 import Contribution from './contribution';
 import Core from './core';

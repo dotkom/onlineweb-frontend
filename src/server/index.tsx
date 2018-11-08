@@ -31,7 +31,7 @@ const app = express();
  * TODO: Replace with something not as hacky. Update when there are changes in the API rather
  * than polling at an interval would be a good start.
  */
-initStateCache()
+initStateCache();
 setInterval(initStateCache, 5000 * 60);
 
 /** Initialize Sentry error forwarding for the back-end */
@@ -48,7 +48,7 @@ LuxonSettings.defaultLocale = 'nb';
  * to give the user a default choice. For the back-end to render the correct view
  * the back-end need that data as well as the front-end.
  */
-app.use(cookieParser())
+app.use(cookieParser());
 
 /** Public folders are currently not set up corectly, TODO: Fix it? */
 app.use('/public', express.static(path.resolve(__dirname, '../dist')));
@@ -87,7 +87,7 @@ app.get('*', (req, res) => {
   const reactDom = renderToString(jsx);
   /** Wrap the DOM in standard HTML markup */
   const HTML = wrapHtml(reactDom);
-  
+
   /** Send the finished response to the client */
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(HTML);

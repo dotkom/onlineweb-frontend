@@ -15,5 +15,5 @@ export const getRemaindingOfflines = (): Promise<IOfflineIssue[]> => {
 
 export const getServerCacheOfflines = (): IOfflineIssue[] => {
   const cache = getStateCache();
-  return cache && cache.offline || [];
+  return (cache && cache.offline) || [];
 };

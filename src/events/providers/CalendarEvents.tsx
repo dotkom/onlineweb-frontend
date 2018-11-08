@@ -51,7 +51,7 @@ export const CalendarEventsContext = createContext(INITIAL_STATE);
 class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
   public state: ICalendarEventsState = {
     ...INITIAL_STATE,
-    eventMonth: constructMonthMap(DateTime.local(), getServerCacheCalendarEvents())
+    eventMonth: constructMonthMap(DateTime.local(), getServerCacheCalendarEvents()),
   };
 
   /** Fetch the stored month from the browser session */
