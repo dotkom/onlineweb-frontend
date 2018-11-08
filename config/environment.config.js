@@ -9,10 +9,10 @@ const BASE_CONFIG = {
   OWF_BACKEND_HOST: '0.0.0.0',
   OWF_BACKEND_PORT: '8080',
   NODE_ENV: 'development',
-  SSR: 'false',
+  OWF_SSR: 'false',
 }
 
 module.exports = {
-  pluginServer: new EnvironmentPlugin({ ...BASE_CONFIG, RENDERER: 'server' }),
-  pluginBrowser: new EnvironmentPlugin({ ...BASE_CONFIG, RENDERER: 'client' }),
+  pluginServer: new EnvironmentPlugin({ ...BASE_CONFIG, OWF_RENDERER: 'server', OWF_SSR: true }),
+  pluginBrowser: new EnvironmentPlugin({ ...BASE_CONFIG, OWF_RENDERER: 'client' }),
 }
