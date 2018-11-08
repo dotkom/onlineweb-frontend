@@ -34,10 +34,6 @@
     height: 100%;
     fill: @lightGray;
     transition: fill 0.2s;
-
-    &:hover {
-      fill: @gray;
-    }
   }
 }
 
@@ -45,7 +41,8 @@
   cursor: inherit;
 }
 
-.choiceActive > svg {
+.choiceActive > svg,
+.choice > svg:hover {
   fill: @gray;
 }
 

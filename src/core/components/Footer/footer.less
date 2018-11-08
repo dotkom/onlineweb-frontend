@@ -7,14 +7,6 @@
   color: @lightGray;
   justify-content: center;
   padding: 30px 20px;
-
-  a {
-    color: @lightBlue;
-
-    &:hover {
-      color: lighten(@lightBlue, 15%);
-    }
-  }
 }
 
 .social {
@@ -27,15 +19,23 @@
     img {
       height: 32px;
     }
-
-    &:hover {
-      opacity: 1;
-    }
   }
 }
 
 .contactDevelopers {
   margin-top: 20px;
+
+  a {
+    color: @lightBlue;
+  }
+}
+
+.social a:hover {
+  opacity: 1;
+}
+
+.contactDevelopers a:hover {
+  color: lighten(@lightBlue, 15%);
 }
 
 .contactInfo,
