@@ -16,6 +16,7 @@ export const Header = () => (
         <Link to={routes.events}>Arkiv</Link>
         <Link to={routes.career}>Karriere</Link>
         <Link to={routes.resources}>Ressurser</Link>
+        <Link to={routes.contribution}>Bidra</Link>
         <Link to={routes.hobbygroups}>Interessegrupper</Link>
         <Authenticate authentication={'view_wiki'}>
           <Link to={routes.wiki}>Wiki</Link>
