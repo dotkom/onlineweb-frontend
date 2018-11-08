@@ -17,37 +17,27 @@ export const Footer = () => (
       </p>
     </div>
 
-    <div>
-      <ContactInfo />
+    <ContactInfo />
 
-      <div className={style.addressContainer}>
-        <div className={style.address}>
-          <div className={style.addressHeading}>
-            Besøksadresse
-            <FontAwesomeIcon icon={faMapMarkerAlt} fixedWidth />
-          </div>
+    <div className={style.addressContainer}>
+      <div className={style.address}>
+        <p className={style.addressHeading}>
+          Besøksadresse
+          <FontAwesomeIcon icon={faMapMarkerAlt} fixedWidth />
+        </p>
+        <p>Rom A4-137</p>
+        <p>Høgskoleringen 5</p>
+        <p>NTNU Gløshaugen</p>
+      </div>
 
-          <div>
-            Rom A4-137
-            <br />
-            Høgskoleringen 5<br />
-            NTNU Gløshaugen
-          </div>
-        </div>
-
-        <div className={style.address}>
-          <div className={style.addressHeading}>
-            Post og Faktura
-            <FontAwesomeIcon icon={faMapMarkerAlt} fixedWidth />
-          </div>
-
-          <div>
-            Online Linjeforening
-            <br />
-            Sem Sælandsv. 9<br />
-            7491 Trondheim
-          </div>
-        </div>
+      <div className={style.address}>
+        <p className={style.addressHeading}>
+          Post og Faktura
+          <FontAwesomeIcon icon={faMapMarkerAlt} fixedWidth />
+        </p>
+        <p>Online Linjeforening</p>
+        <p>Sem Sælandsv. 9</p>
+        <p>7491 Trondheim</p>
       </div>
     </div>
   </footer>
