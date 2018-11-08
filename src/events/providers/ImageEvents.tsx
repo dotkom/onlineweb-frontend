@@ -11,6 +11,14 @@ export interface IImageEventsState {
   init: () => void;
 }
 
+const getInitialEvents = () => {
+  if (typeof window !== 'undefined') {
+    return JSON.parse(window.__INITIAL_PROVIDER_STATE__) as IServerStateCache;
+  } else {
+    return global.STATE_CACHE as IServerStateCache;
+  }
+}
+
 const INITIAL_STATE: IImageEventsState = {
   eventsLeft: [],
   eventsMiddle: [],

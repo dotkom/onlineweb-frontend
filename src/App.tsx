@@ -25,6 +25,7 @@ import Hobbys from './hobbygroups';
 import Resources from './resources';
 
 import Spinner from 'common/components/Spinner';
+import { IServerStateCache } from 'server/stateCache';
 
 export const routes = {
   events: '/events',
@@ -69,5 +70,12 @@ export const Client = () => (
     </Switch>
   </Core>
 );
+
+declare global {
+  // tslint:disable-next-line interface-name
+  interface Window {
+    __INITIAL_PROVIDER_STATE__: IServerStateCache;
+  }
+}
 
 export default App;
