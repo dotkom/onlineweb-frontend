@@ -15,6 +15,8 @@ export default class LanguageSubBar extends Component<IProps, {}> {
 
   constructor(props: IProps) {
     super(props);
+    this.handleMouseIn = this.handleMouseIn.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
   }
 
   public handleMouseIn() {
@@ -62,7 +64,7 @@ export default class LanguageSubBar extends Component<IProps, {}> {
     };
 
     return (
-      <div style={sub_style} onMouseOver={this.handleMouseIn.bind(this)} onMouseOut={this.handleMouseOut.bind(this)}>
+      <div style={sub_style} onMouseOver={this.handleMouseIn} onMouseOut={this.handleMouseOut}>
         <div className={style.toolTip} style={tooltipStyle}>
           {this.props.tooltip}
         </div>
