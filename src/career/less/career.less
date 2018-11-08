@@ -101,10 +101,6 @@
     padding: 10px;
     transition: background 0.1s;
     cursor: pointer;
-
-    &:hover {
-      background: darken(@lightBlue, 15%);
-    }
   }
 }
 
@@ -125,6 +121,10 @@
   .selected {
     background: darken(@lightBlue, 20%);
   }
+}
+
+.filters button:hover {
+  background: darken(@lightBlue, 15%);
 }
 
 .detail {
