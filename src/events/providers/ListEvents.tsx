@@ -1,3 +1,4 @@
+import { getStateCache } from 'common/utils/stateCacheResolver';
 import { getListEvents } from 'events/api/listEvents';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
 import React, { Component, createContext } from 'react';
@@ -17,7 +18,10 @@ const INITIAL_STATE: IListEventsState = {
 export const ListEventsContext = createContext(INITIAL_STATE);
 
 class ListEvents extends Component<IEventViewProps, IListEventsState> {
-  public state: IListEventsState = { ...INITIAL_STATE };
+  public state: IListEventsState = {
+    ...INITIAL_STATE,
+    events: getStateCache().events.list,
+  };
 
   public init = async () => await this.fetchEvents();
 

@@ -1,4 +1,5 @@
 import Heading from 'common/components/Heading';
+import { getStateCache } from 'common/utils/stateCacheResolver';
 import React, { Component } from 'react';
 import { getOfflines, getRemaindingOfflines } from '../../api/offline';
 import { IOfflineIssue } from '../../models/Offline';
