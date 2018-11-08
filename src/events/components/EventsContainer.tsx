@@ -32,7 +32,7 @@ export const getEventView = (viewString: string | undefined) => {
   } else {
     return EventView.IMAGE;
   }
-}
+};
 
 export interface IProps {}
 
@@ -90,9 +90,7 @@ class Container extends Component<IProps & ISettingsContextState, IState> {
 }
 
 const Wrapper = (props: IProps) => (
-  <SettingsContext.Consumer>
-    { (state) => <Container {...props} {...state} /> }
-  </SettingsContext.Consumer>
-)
+  <SettingsContext.Consumer>{(state) => <Container {...props} {...state} />}</SettingsContext.Consumer>
+);
 
 export default Wrapper;

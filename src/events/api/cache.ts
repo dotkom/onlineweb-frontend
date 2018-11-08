@@ -3,12 +3,12 @@ import { INewEvent } from 'events/models/Event';
 
 export const getServerCacheCalendarEvents = (): INewEvent[] => {
   const cache = getStateCache();
-  return cache && cache.events.calendar || [];
+  return (cache && cache.events.calendar) || [];
 };
 
 export const getServerCacheListEvents = (): INewEvent[] => {
   const cache = getStateCache();
-  return cache && cache.events.list || [];
+  return (cache && cache.events.list) || [];
 };
 
 export interface IImageEvents {
@@ -26,7 +26,7 @@ export const getServerCacheImageEvents = (): IImageEvents => {
       eventsMiddle: [],
       eventsRight: [],
       fetched: false,
-    }
+    };
   }
   return cache && { ...cache.events.image, fetched: true };
 };

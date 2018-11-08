@@ -40,7 +40,7 @@ export const withUser = (user: IAuthUser, options: RequestInit = {}): RequestIni
 /** TODO: Why are these not the same type?! */
 export type Fetch = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
 /** Force fetch and node-fetch to have the same typing */
-const universalFetch: Fetch = __CLIENT__ ? fetch : nodeFetch as any as Fetch;
+const universalFetch: Fetch = __CLIENT__ ? fetch : ((nodeFetch as any) as Fetch);
 
 /**
  * @summary Simple fetch-API wrapper for HTTP GET
