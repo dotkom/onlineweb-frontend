@@ -1,4 +1,5 @@
 @import './reset.less';
+@import '~common/less/colors.less';
 @import '~common/less/mixins.less';
 
 /* stylelint-disable selector-max-type */
@@ -17,7 +18,8 @@ body {
 }
 
 body {
-  background: #f3f3f3;
+  background: @pageBackground;
+  color: @darkGray;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
