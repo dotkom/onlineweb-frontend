@@ -1,5 +1,5 @@
+import Markdown from 'common/components/Markdown';
 import React from 'react';
-import Markdown from 'react-markdown';
 import style from '../less/contribution.less';
 
 const ABOUT_CONTRIBUTION_INTRO = `

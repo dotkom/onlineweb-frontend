@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { IRepositoryLanguage } from '../models/Repository';
 import style from '../less/contribution.less';
+import { IRepositoryLanguage } from '../models/Repository';
 
 export interface IProps {
   tooltip: string;

@@ -1,7 +1,7 @@
+import Markdown from 'common/components/Markdown';
 import React from 'react';
-import { IRepository } from '../models/Repository';
-import ReactMarkdown from 'react-markdown';
 import style from '../less/contribution.less';
+import { IRepository } from '../models/Repository';
 import LanguageBar from './LanguageBar';
 
 const Repository = ({ id, name, description, public_url, languages, issues }: IRepository) => {
@@ -11,7 +11,7 @@ const Repository = ({ id, name, description, public_url, languages, issues }: IR
         <div className={style.header}>
           <h3>{name}</h3>
           <hr />
-          <ReactMarkdown source={description} />
+          <Markdown source={description} />
         </div>
         <div className={style.issues}>
           <span>
