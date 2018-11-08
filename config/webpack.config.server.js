@@ -8,7 +8,7 @@ const mainModule = require('./module.config');
 module.exports = env => {
   return {
     mode: 'development',
-    devtool: "source-map",
+    devtool: 'source-map',
     target: 'node',
     entry: {
       server: './src/server/index.tsx',
