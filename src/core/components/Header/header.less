@@ -1,9 +1,15 @@
+@import '~common/less/colors.less';
 @import '~common/less/constants.less';
 
 @headerHeight: 60px;
 @headerPaddingVertical: 10px;
 @contentHeight: @headerHeight - @headerPaddingVertical * 2;
 @sponsorTextHeight: 8px;
+
+.header {
+  display: flex;
+  background: @deepBlue;
+}
 
 .grid {
   display: flex;
@@ -31,11 +37,6 @@
   }
 }
 
-.header {
-  display: flex;
-  background: #07244c;
-}
-
 .logo {
   height: @contentHeight;
   margin-right: 20px;
@@ -60,4 +61,5 @@
   font-size: @sponsorTextHeight;
   text-align: center;
   user-select: none;
+  line-height: 1;
 }

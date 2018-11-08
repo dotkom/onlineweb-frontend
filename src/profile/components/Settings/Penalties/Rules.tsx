@@ -11,7 +11,7 @@ class Info extends Collapsble<{}> {
         <button className={style.toggleRules} onClick={() => this.toggleCollapse()}>
           {collapsed ? 'Vis regler' : 'Skjul regler'}
         </button>
-        {collapsed && <Content />}
+        {!collapsed && <Content />}
       </>
     );
   }
