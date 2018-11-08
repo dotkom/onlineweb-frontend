@@ -1,7 +1,7 @@
+import classNames from 'classnames';
 import React, { Component } from 'react';
 import style from '../less/contribution.less';
 import { IRepositoryLanguage } from '../models/Repository';
-import classNames from 'classnames';
 
 export interface IProps {
   tooltip: string;
