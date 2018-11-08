@@ -16,7 +16,7 @@ module.exports = (env) => {
     output: {
       path: path.resolve('./dist/'),
       filename: '[name].js',
-      chunkFilename: '[name].bundle.[hash].js',
+      chunkFilename: '[name].js',
       publicPath: '/',
     },
     optimization: {
