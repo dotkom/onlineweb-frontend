@@ -1,15 +1,15 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   main: MiniCssExtractPlugin,
   loaders: [
     MiniCssExtractPlugin.loader,
     {
-      loader: "typings-for-css-modules-loader",
+      loader: 'typings-for-css-modules-loader',
       options: {
         sourceMap: true,
         modules: true,
-        localIdentName: "[local]___[hash:base64:5]",
+        localIdentName: '[local]___[hash:base64:5]',
         namedExport: true,
         camelCase: true
       }
@@ -20,7 +20,7 @@ module.exports = {
     'less-loader'
   ],
   plugin: new MiniCssExtractPlugin({
-    filename: "main.css",
-    chunkFilename: "[id].css"
+    filename: 'main.css',
+    chunkFilename: '[id].css'
   })
 }

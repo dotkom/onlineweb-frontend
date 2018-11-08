@@ -7,7 +7,7 @@
         "chrome": "64"
       },
       "useBuiltIns": "usage",
-      "debug": true
+      "debug": false
     }]
   ],
   "plugins": [
