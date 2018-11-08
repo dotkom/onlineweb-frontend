@@ -1,6 +1,5 @@
-import { getEvents } from 'events/api/events';
-import { EventTypeEnum, IEventViewProps, INewEvent } from 'events/models/Event';
-import { DateTime } from 'luxon';
+import { getImageEvents } from 'events/api/imageEvents';
+import { IEventViewProps, INewEvent } from 'events/models/Event';
 import React, { Component, createContext } from 'react';
 
 export interface IImageEventsState {
@@ -32,31 +31,19 @@ const INITIAL_STATE: IImageEventsState = {
 export const ImageEventsContext = createContext(INITIAL_STATE);
 
 class ImageEvents extends Component<IEventViewProps, IImageEventsState> {
-  public state: IImageEventsState = { ...INITIAL_STATE };
+  public state: IImageEventsState = {
+    ...INITIAL_STATE,
+    eventsLeft: getInitialEvents().events.image.left,
+    eventsMiddle: getInitialEvents().events.image.middle,
+    eventsRight: getInitialEvents().events.image.right,
+    fetched: true,
+  };
 
-  public init = async () => await this.getEventsParallell();
+  public init = async () => await this.getEvents();
 
-  public async getEventsParallell() {
-    const left = this.getTypeEvents([EventTypeEnum.BEDPRES]);
-    const middle = this.getTypeEvents([EventTypeEnum.KURS]);
-    const right = this.getTypeEvents([
-      EventTypeEnum.SOSIALT,
-      EventTypeEnum.UTFLUKT,
-      EventTypeEnum.EKSKURSJON,
-      EventTypeEnum.ANNET,
-    ]);
-
-    const [eventsLeft, eventsMiddle, eventsRight] = await Promise.all([left, middle, right]);
-
+  public async getEvents() {
+    const [eventsLeft, eventsMiddle, eventsRight] = await getImageEvents();
     this.setState({ eventsLeft, eventsMiddle, eventsRight, fetched: true });
-  }
-
-  public async getTypeEvents(types: EventTypeEnum[]) {
-    return await getEvents({
-      event_end__gte: DateTime.local().toISODate(),
-      event_type: types,
-      page_size: 4,
-    });
   }
 
   public render() {
