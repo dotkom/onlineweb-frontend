@@ -26,25 +26,25 @@
 }
 
 .jobInfoTitle {
-  color: #0069b3;
+  color: @blue;
+  transition: color 0.2s;
 
   &:hover {
-    color: darken(#0069b3, 10%);
+    color: darken(@blue, 10%);
     text-decoration: underline;
   }
 }
 
 .jobMeta {
-  border-top: 1px dotted #ccc;
-  margin-top: 10px;
+  border-top: 1px dotted @lightGray;
+  padding-top: 10px;
   display: grid;
-  padding: 10px;
   grid-gap: 10px;
   grid-template-columns: repeat(3, 1fr);
   font-size: @owFontSmall;
 
   & > p {
-    color: #aaa;
+    color: @gray;
   }
 }
 
@@ -98,8 +98,13 @@
     display: inline-block;
     text-align: center;
     width: 100%;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding: 10px;
+    transition: background 0.1s;
+    cursor: pointer;
+
+    &:hover {
+      background: darken(@lightBlue, 15%);
+    }
   }
 }
 
@@ -112,14 +117,9 @@
   }
 
   button {
-    display: inline-flex;
-    padding: 10px;
     margin-right: 5px;
     margin-bottom: 5px;
-    color: #fff;
     width: auto;
-    background: darken(@lightBlue, 10%);
-    cursor: pointer;
   }
 
   .selected {
@@ -135,9 +135,8 @@
 }
 
 .jobDescription {
-  padding: 30px;
-  color: #454545;
   .owCard();
+  padding: 30px;
 }
 
 .jobTitle {
