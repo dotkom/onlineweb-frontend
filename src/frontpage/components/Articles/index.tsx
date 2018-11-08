@@ -1,6 +1,7 @@
 import { getArticles } from 'articles/api';
 import { IArticle } from 'articles/models/Article';
 import Heading from 'common/components/Heading';
+import { getStateCache } from 'common/utils/stateCacheResolver';
 import React, { Component } from 'react';
 import style from './articles.less';
 import MainArticle from './MainArticle';
@@ -17,7 +18,7 @@ const DISPLAY_NUMBER = 3;
 
 class Articles extends Component<IProps, IState> {
   public state: IState = {
-    articles: [],
+    articles: getStateCache().articles,
     index: 0,
   };
 

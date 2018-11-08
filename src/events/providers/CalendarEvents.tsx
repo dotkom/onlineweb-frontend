@@ -1,10 +1,10 @@
+import { getStateCache } from 'common/utils/stateCacheResolver';
 import { getCalendarEventsControlled } from 'events/api/calendarEvents';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
 import React, { Component, createContext } from 'react';
 import { constructMonthMap } from '../utils/calendarUtils';
-import { IServerStateCache } from 'server/stateCache';
 
 export interface ICalendarEventsState {
   eventMonth: INewEvent[][];
@@ -12,15 +12,6 @@ export interface ICalendarEventsState {
   controller?: AbortController;
   changeMonth: (n: number) => void;
   init: () => void;
-}
-
-const getInitialEvents = () => {
-  if (typeof window !== 'undefined') {
-    const a = JSON.parse(window.__INITIAL_PROVIDER_STATE__) as IServerStateCache;
-    return a;
-  } else {
-    return global.STATE_CACHE as IServerStateCache;
-  }
 }
 
 /**
@@ -60,7 +51,7 @@ export const CalendarEventsContext = createContext(INITIAL_STATE);
 class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
   public state: ICalendarEventsState = {
     ...INITIAL_STATE,
-    eventMonth: constructMonthMap(DateTime.local(), getInitialEvents().events.calendar)
+    eventMonth: constructMonthMap(DateTime.local(), getStateCache().events.calendar)
   };
 
   /** Fetch the stored month from the browser session */

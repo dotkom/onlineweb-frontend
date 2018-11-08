@@ -8,6 +8,15 @@ import { getOfflines } from 'frontpage/api/offline';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 import { DateTime } from 'luxon';
 
+declare global  {
+  namespace NodeJS {
+    /* tslint:disable-next-line interface-name */
+    interface Global {
+      STATE_CACHE: IServerStateCache;
+    }
+  }
+}
+
 /** Initial state cache used to pre-render pages with doing async calls */
 export interface IServerStateCache {
   events: {
