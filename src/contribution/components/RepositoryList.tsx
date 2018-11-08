@@ -19,7 +19,7 @@ export default class RepositoryList extends Component<{}, IRepositoryListState> 
   public render() {
     const { repositories } = this.state;
     return (
-      <div className={style.container}>
+      <div className={style.repositoryList}>
         {repositories.map((repo) => (
           <Repository key={repo.id} {...repo} />
         ))}

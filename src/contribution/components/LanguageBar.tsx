@@ -53,6 +53,6 @@ export default class LanguageBar extends Component<IProps, { languages: IReposit
       );
     }
 
-    return <div className={style.languageBarContainer}>{languageBar}</div>;
+    return <>{languageBar}</>;
   }
 }

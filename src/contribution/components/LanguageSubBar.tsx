@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import style from '../less/contribution.less';
 import { IRepositoryLanguage } from '../models/Repository';
+import classNames from 'classnames';
 
 export interface IProps {
   tooltip: string;
@@ -59,15 +60,9 @@ export default class LanguageSubBar extends Component<IProps, {}> {
       sub_style[borderRadius] = '0 20px 20px 0';
     }
 
-    const tooltipStyle = {
-      display: this.state.hover ? 'flex' : 'none',
-    };
-
     return (
       <div style={sub_style} onMouseOver={this.handleMouseIn} onMouseOut={this.handleMouseOut}>
-        <div className={style.toolTip} style={tooltipStyle}>
-          {this.props.tooltip}
-        </div>
+        <div className={classNames(style.toolTip, { [style.active]: this.state.hover })}>{this.props.tooltip}</div>
       </div>
     );
   }
