@@ -1,4 +1,4 @@
-import { getStateCache } from 'common/utils/stateCacheResolver';
+import { getServerCacheCalendarEvents } from 'events/api/cache';
 import { getCalendarEventsControlled } from 'events/api/calendarEvents';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
@@ -51,7 +51,7 @@ export const CalendarEventsContext = createContext(INITIAL_STATE);
 class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
   public state: ICalendarEventsState = {
     ...INITIAL_STATE,
-    eventMonth: constructMonthMap(DateTime.local(), getStateCache().events.calendar)
+    eventMonth: constructMonthMap(DateTime.local(), getServerCacheCalendarEvents())
   };
 
   /** Fetch the stored month from the browser session */

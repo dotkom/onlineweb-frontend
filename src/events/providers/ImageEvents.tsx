@@ -1,4 +1,4 @@
-import { getStateCache } from 'common/utils/stateCacheResolver';
+import { getServerCacheImageEvents } from 'events/api/cache';
 import { getImageEvents } from 'events/api/imageEvents';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
 import React, { Component, createContext } from 'react';
@@ -26,10 +26,7 @@ export const ImageEventsContext = createContext(INITIAL_STATE);
 class ImageEvents extends Component<IEventViewProps, IImageEventsState> {
   public state: IImageEventsState = {
     ...INITIAL_STATE,
-    eventsLeft: getStateCache().events.image.left,
-    eventsMiddle: getStateCache().events.image.middle,
-    eventsRight: getStateCache().events.image.right,
-    fetched: true,
+    ...getServerCacheImageEvents(),
   };
 
   public init = async () => await this.getEvents();

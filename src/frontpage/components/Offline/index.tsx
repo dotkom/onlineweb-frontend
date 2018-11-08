@@ -1,7 +1,10 @@
 import Heading from 'common/components/Heading';
-import { getStateCache } from 'common/utils/stateCacheResolver';
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { getOfflines, getRemaindingOfflines } from '../../api/offline';
+=======
+import { getOfflines, getServerCacheOfflines } from '../../api/offline';
+>>>>>>> Implement standardized cache resolver, and implement enironment to make sure it works without SSR
 import { IOfflineIssue } from '../../models/Offline';
 import CarouselArrow from './CarouselArrow';
 import style from './offline.less';
@@ -19,8 +22,13 @@ const DISPLAY_NUMBER = 5;
 
 class Offline extends Component<IProps, IState> {
   public state: IState = {
+<<<<<<< HEAD
     dataRemainding: false,
     offlines: [],
+=======
+    offlines: getServerCacheOfflines(),
+    index: 0,
+>>>>>>> Implement standardized cache resolver, and implement enironment to make sure it works without SSR
     page: 1,
   };
 

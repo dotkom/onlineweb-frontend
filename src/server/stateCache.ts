@@ -21,9 +21,9 @@ declare global  {
 export interface IServerStateCache {
   events: {
     image: {
-      left: INewEvent[];
-      middle: INewEvent[];
-      right: INewEvent[];
+      eventsLeft: INewEvent[];
+      eventsMiddle: INewEvent[];
+      eventsRight: INewEvent[];
     },
     list: INewEvent[];
     calendar: INewEvent[];
@@ -45,14 +45,14 @@ export interface IServerStateCache {
  */
 export const initStateCache = async () => {
   // TODO: Promise.all?
-  const [left, middle, right] = await getImageEvents();
+  const [eventsLeft, eventsMiddle, eventsRight] = await getImageEvents();
   const calendar = await getCalendarEvents(DateTime.local());
   const list = await getListEvents();
   const articles = await getArticles();
   const offline = await getOfflines();
   global.STATE_CACHE = {
     events: {
-      image: { left, middle, right },
+      image: { eventsLeft, eventsMiddle, eventsRight },
       list,
       calendar,
     },
