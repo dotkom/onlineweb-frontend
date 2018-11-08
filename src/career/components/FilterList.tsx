@@ -1,7 +1,7 @@
 import React, { FormEvent } from 'react';
-import TagList from './TagList';
 import SearchBox from '../components/SearchBox';
 import { ITag, ITags } from '../models/Tag';
+import TagList from './TagList';
 
 import style from '../less/career.less';
 

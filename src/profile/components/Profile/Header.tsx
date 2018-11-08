@@ -1,5 +1,5 @@
-import React from 'react';
 import user from 'common/img/profile/user.png';
+import React from 'react';
 import style from '../../less/profile.less';
 
 class Header extends React.Component<{ name: string }> {

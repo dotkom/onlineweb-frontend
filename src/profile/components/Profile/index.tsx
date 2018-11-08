@@ -1,14 +1,14 @@
+import { IProfileProps } from 'profile';
 import React from 'react';
-import Header from './Header';
-import MedalsView from './MedalsView';
-import Info from './Info';
-import Progress from './Progress';
-import IconInfo from './IconInfo';
-import InfoGroup from './InfoGroup';
-import { IFullProfileUser } from '../../models/User';
 import { getProfile } from '../../api';
 import style from '../../less/profile.less';
-import { IProfileProps } from 'profile';
+import { IFullProfileUser } from '../../models/User';
+import Header from './Header';
+import IconInfo from './IconInfo';
+import Info from './Info';
+import InfoGroup from './InfoGroup';
+import MedalsView from './MedalsView';
+import Progress from './Progress';
 
 export interface IProps extends IProfileProps {}
 

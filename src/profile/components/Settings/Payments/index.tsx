@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { IPayment } from '../../../models/Payment';
 import { getPayments } from '../../../api/payment';
-import Placeholder from './Placeholder';
+import { IPayment } from '../../../models/Payment';
 import Payment from './Payment';
+import Placeholder from './Placeholder';
 
 export interface IState {
   payments: IPayment[];
@@ -29,7 +29,7 @@ class Payments extends Component<{}, IState> {
         ) : !payments.length ? (
           <div> Du har ingen betalinger </div>
         ) : (
-          payments.map((payment) => <Payment {...payment} />)
+          payments.map((payment) => <Payment key={payment.object_id} {...payment} />)
         )}
       </div>
     );

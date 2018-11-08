@@ -1,7 +1,7 @@
-import React, { createContext, Component } from 'react';
-import { DateTime } from 'luxon';
-import { INewEvent, IEventViewProps } from 'events/models/Event';
 import { getEvents } from 'events/api/events';
+import { IEventViewProps, INewEvent } from 'events/models/Event';
+import { DateTime } from 'luxon';
+import React, { Component, createContext } from 'react';
 
 export interface IListEventsState {
   events: INewEvent[];

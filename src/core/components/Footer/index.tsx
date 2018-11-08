@@ -1,7 +1,7 @@
 import React from 'react';
-import SocialLinks from './SocialLinks';
-import style from './footer.less';
 import ContactInfo from './ContactInfo';
+import style from './footer.less';
+import SocialLinks from './SocialLinks';
 
 export const Footer = () => (
   <footer className={style.footer}>

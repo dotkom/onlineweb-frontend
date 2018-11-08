@@ -1,8 +1,8 @@
-import React from 'react';
-import { IMedal } from '../../models/Medal';
-import medals from 'common/img/profile/medals';
 import crowns from 'common/img/profile/crowns';
+import medals from 'common/img/profile/medals';
+import React from 'react';
 import style from '../../less/profile.less';
+import { IMedal } from '../../models/Medal';
 
 class Medal extends React.Component<IMedal> {
   public render() {

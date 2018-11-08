@@ -1,6 +1,6 @@
-import { IGroup } from './Group';
 import { IsoDateTime } from 'common/models/Date';
 import { Url } from 'common/models/Url';
+import { IGroup } from './Group';
 
 /**
  * string formatted as:

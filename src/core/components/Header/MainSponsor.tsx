@@ -1,5 +1,5 @@
-import React from 'react';
 import { STATIC_URL } from 'common/constants/endpoints';
+import React from 'react';
 import style from './header.less';
 
 const MainSponsor = () => (

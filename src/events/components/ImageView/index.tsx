@@ -1,9 +1,9 @@
+import { IImageEventsState, ImageEventsContext } from 'events/providers/ImageEvents';
 import React, { Component } from 'react';
 import { IEventViewProps } from '../../models/Event';
+import style from './image.less';
 import LargeEvent from './LargeEvent';
 import SmallEventColumn from './SmallEvent';
-import style from './image.less';
-import { ImageEventsContext, IImageEventsState } from 'events/providers/ImageEvents';
 
 export type IProps = IEventViewProps;
 

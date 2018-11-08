@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { IEventViewProps } from '../../models/Event';
-import { getPreviousMonthLength, getFirstWeekdayOfMonth } from '../../utils/calendarUtils';
-import CalendarTile, { createDayList, CalendarFillerTiles } from './CalendarTile';
 import { CalendarEventsContext, ICalendarEventsState } from '../../providers/CalendarEvents';
+import { getFirstWeekdayOfMonth, getPreviousMonthLength } from '../../utils/calendarUtils';
 import style from './calendar.less';
+import CalendarTile, { CalendarFillerTiles, createDayList } from './CalendarTile';
 
 export type IProps = IEventViewProps;
 
@@ -31,9 +31,13 @@ class CalendarView extends Component<IProps> {
     return (
       <div className={style.gridWrapper}>
         <div className={style.menuGrid}>
-          <h3 onClick={() => changeMonth(-1)}>{'<'}</h3>
+          <h3 className={style.monthChanger} onClick={() => changeMonth(-1)} tabIndex={0}>
+            {'<'}
+          </h3>
           <h3>{month.toFormat('MMMM yyyy')}</h3>
-          <h3 onClick={() => changeMonth(1)}>{'>'}</h3>
+          <h3 className={style.monthChanger} onClick={() => changeMonth(1)} tabIndex={0}>
+            {'>'}
+          </h3>
         </div>
         <div className={style.grid}>
           <CalendarFillerTiles days={previous} />

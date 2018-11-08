@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import CalendarView from './CalendarView';
-import ListView from './ListView';
-import ImageView from './ImageView';
-import EventsHeader from './EventsHeader';
-import { getEventSettings, saveEventSettings, IEventSettings } from '../api/eventSettings';
-import { EventView } from '../models/Event';
 import EventContextWrapper from 'events/providers/EventContextWrapper';
+import React, { Component } from 'react';
+import { getEventSettings, IEventSettings, saveEventSettings } from '../api/eventSettings';
+import { EventView } from '../models/Event';
+import CalendarView from './CalendarView';
+import EventsHeader from './EventsHeader';
+import ImageView from './ImageView';
 import style from './less/eventsContainer.less';
+import ListView from './ListView';
 
 const getView = (view: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
   switch (view) {
