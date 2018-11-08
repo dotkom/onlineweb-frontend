@@ -38,7 +38,7 @@ module.exports = (env) => {
     plugins: [
       CSSPlugin.plugin,
       htmlPlugin.plugin,
-      environment.plugin,
+      environment.pluginBrowser,
     ]
   }
 }

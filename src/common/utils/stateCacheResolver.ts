@@ -1,3 +1,4 @@
+import { __CLIENT__ } from 'common/constants/environment';
 import { IServerStateCache } from 'server/stateCache';
 
 /**
@@ -7,8 +8,8 @@ import { IServerStateCache } from 'server/stateCache';
  * @summary: Get the relevant version of the StateCache for use in the back-end or front-end.
  */
 export const getStateCache = () => {
-  if (typeof window !== 'undefined') {
-    const a = JSON.parse(window.__INITIAL_PROVIDER_STATE__) as IServerStateCache;
+  if (__CLIENT__) {
+    const a = JSON.parse(window.__INITIAL_PROVIDER_STATE__ || '') as IServerStateCache;
     return a;
   } else {
     return global.STATE_CACHE as IServerStateCache;
