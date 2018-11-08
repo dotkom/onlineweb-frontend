@@ -29,10 +29,6 @@
   align-items: center;
   height: 60px;
 
-  > p {
-    color: #000;
-  }
-
   &:first-child,
   &:nth-child(2) {
     > p {
@@ -58,7 +54,7 @@
 }
 
 .statusPolygon {
-  background: #828282;
+  background: @gray;
   height: 100%;
   width: 85px;
   clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 35%);
