@@ -34,10 +34,10 @@ const CONTACT: IContactInfo[] = [
 const ContactInfo = () => (
   <div className={style.contactInfo}>
     {CONTACT.map(({ icon, value }) => (
-      <div className={style.contactItem} key={value}>
+      <p className={style.contactItem} key={value}>
         <FontAwesomeIcon icon={icon} fixedWidth />
         {value}
-      </div>
+      </p>
     ))}
   </div>
 );
