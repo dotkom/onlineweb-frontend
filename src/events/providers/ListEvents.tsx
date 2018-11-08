@@ -1,6 +1,5 @@
-import { getEvents } from 'events/api/events';
+import { getListEvents } from 'events/api/listEvents';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
-import { DateTime } from 'luxon';
 import React, { Component, createContext } from 'react';
 
 export interface IListEventsState {
@@ -23,11 +22,7 @@ class ListEvents extends Component<IEventViewProps, IListEventsState> {
   public init = async () => await this.fetchEvents();
 
   public async fetchEvents() {
-    const events = await getEvents({
-      event_end__gte: DateTime.local().toISODate(),
-      page_size: 7,
-    });
-
+    const events = await getListEvents();
     this.setState({ events });
   }
 
