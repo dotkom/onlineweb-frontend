@@ -1,3 +1,4 @@
+import { ISettingsContextState, SettingsContext } from 'core/providers/Settings';
 import EventContextWrapper from 'events/providers/EventContextWrapper';
 import React, { Component } from 'react';
 import { getEventSettings, IEventSettings, saveEventSettings } from '../api/eventSettings';
@@ -21,15 +22,32 @@ const getView = (view: EventView): typeof ListView | typeof CalendarView | typeo
   }
 };
 
+export const getEventView = (viewString: string | undefined) => {
+  if (!viewString) {
+    return EventView.IMAGE;
+  }
+  const view = Number(viewString);
+  if ([EventView.IMAGE, EventView.LIST, EventView.CALENDAR].indexOf(view) >= 0) {
+    return view;
+  } else {
+    return EventView.IMAGE;
+  }
+}
+
 export interface IProps {}
 
 export interface IState extends IEventSettings {}
 
-class Container extends Component<IProps, IState> {
-  public state: IState = {
-    view: EventView.IMAGE,
-    accessible: false,
-  };
+class Container extends Component<IProps & ISettingsContextState, IState> {
+  public static contextType = SettingsContext;
+
+  constructor(props: IProps & ISettingsContextState) {
+    super(props);
+    this.state = {
+      view: props.eventView,
+      accessible: false,
+    };
+  }
 
   public async componentDidMount() {
     this.getSettings();
@@ -37,7 +55,8 @@ class Container extends Component<IProps, IState> {
 
   public getSettings = async () => {
     const settings = await getEventSettings();
-    this.setState({ ...settings });
+    const { eventView }: ISettingsContextState = this.context;
+    this.setState({ ...settings, view: eventView });
   };
 
   public saveSettings = async () => {
@@ -70,4 +89,10 @@ class Container extends Component<IProps, IState> {
   }
 }
 
-export default Container;
+const Wrapper = (props: IProps) => (
+  <SettingsContext.Consumer>
+    { (state) => <Container {...props} {...state} /> }
+  </SettingsContext.Consumer>
+)
+
+export default Wrapper;
