@@ -6,24 +6,19 @@ import LanguageBar from './LanguageBar';
 
 const Repository = ({ id, name, description, public_url, languages, issues }: IRepository) => {
   return (
-    <a id={style.repositoryContainer} href={public_url}>
-      <span className={style.repositoryContent}>
-        <div className={style.header}>
+    <a className={style.repositoryContainer} href={public_url}>
+      <div className={style.repositoryContent}>
+        <div className={style.repositoryInfo}>
           <h3>{name}</h3>
-          <hr />
-          <Markdown source={description} />
+          <p>{description}</p>
         </div>
         <div className={style.issues}>
-          <span>
-            <h2>{issues}</h2>
-            <h2>Issues</h2>
-          </span>
+          <h2>{issues ? issues : '??'}</h2>
+          <h2>Issues</h2>
         </div>
-      </span>
+      </div>
       <div className={style.languageBar}>
-        <span>
-          <LanguageBar languages={languages} id={id} />
-        </span>
+        <LanguageBar languages={languages} id={id} />
       </div>
     </a>
   );
