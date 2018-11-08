@@ -1,3 +1,4 @@
+import nodeFetch from 'node-fetch';
 import { DOMAIN } from '../constants/endpoints';
 import { toQueryString } from './queryString';
 
@@ -34,6 +35,14 @@ export const withUser = (user: IAuthUser, options: RequestInit = {}): RequestIni
     headers,
   });
 };
+
+const getFetch = () => {
+  if (typeof window !== 'undefined') {
+    return fetch;
+  } else {
+    return nodeFetch;
+  }
+}
 
 /**
  * @summary Simple fetch-API wrapper for HTTP GET
