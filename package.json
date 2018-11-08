@@ -11,7 +11,7 @@
     "build:dev": "webpack --config config/webpack.config.js --watch",
     "build:prod": "NODE_ENV='production' webpack --config config/webpack.config.js --mode=production --optimize-minimize",
     "dev": "webpack-dev-server --config config/webpack.config.js",
-    "ssr:dev": "webpack --config config/webpack.config.server.js",
+    "ssr:dev": "webpack --config config/webpack.config.server.js && node ./dist/server.js",
     "ssr:dev:watch": "webpack --config config/webpack.config.server.js --watch",
     "lint": "yarn lint-ts ; yarn lint-less ; yarn lint-prettier",
     "lint-ts": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",

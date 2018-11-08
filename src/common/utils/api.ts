@@ -1,5 +1,6 @@
 import nodeFetch from 'node-fetch';
 import { DOMAIN } from '../constants/endpoints';
+import { __CLIENT__ } from '../constants/environment';
 import { toQueryString } from './queryString';
 
 import { IAuthUser } from 'authentication/models/User';
@@ -22,7 +23,7 @@ const makeRequest = (query: string, parameters: object = {}, options: RequestIni
 };
 
 const performRequest = async (request: Request) => {
-  const respons = await fetch(request);
+  const respons = await universalFetch(request);
   return respons.json();
 };
 
@@ -36,13 +37,10 @@ export const withUser = (user: IAuthUser, options: RequestInit = {}): RequestIni
   });
 };
 
-const getFetch = () => {
-  if (typeof window !== 'undefined') {
-    return fetch;
-  } else {
-    return nodeFetch;
-  }
-}
+/** TODO: Why are these not the same type?! */
+export type Fetch = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
+/** Force fetch and node-fetch to have the same typing */
+const universalFetch: Fetch = __CLIENT__ ? fetch : nodeFetch as any as Fetch;
 
 /**
  * @summary Simple fetch-API wrapper for HTTP GET
