@@ -32,7 +32,7 @@ class Articles extends Component<IProps, IState> {
     const end = start + DISPLAY_NUMBER;
     return (
       <section className={style.articles}>
-        <Heading title="artikler" />
+        <Heading title="Artikler" />
         <div className={style.container}>
           {articles.length ? (
             <>

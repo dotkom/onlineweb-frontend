@@ -1,14 +1,10 @@
 import React, { Props } from 'react';
 import style from './heading.less';
 
-export interface IProps extends React.HtmlHTMLAttributes<IProps> {
-  title?: string;
+export interface IProps {
+  title: string;
 }
 
-const Heading = ({ title, children }: IProps) => (
-  <div className={style.heading}>
-    <h1>{title || children}</h1>
-  </div>
-);
+const Heading = ({ title }: IProps) => <h1 className={style.heading}>{title}</h1>;
 
 export default Heading;
