@@ -26,16 +26,24 @@
   margin-top: 20px;
 
   a {
-    color: @lightBlue;
+    color: lighten(@blue, 25%);
+
+    &::after {
+      background: lighten(@blue, 25%);
+    }
+  }
+}
+
+.contactDevelopers a:hover {
+  color: lighten(@blue, 45%);
+
+  &::after {
+    background: lighten(@blue, 45%);
   }
 }
 
 .social a:hover {
   opacity: 1;
-}
-
-.contactDevelopers a:hover {
-  color: lighten(@lightBlue, 15%);
 }
 
 .contactInfo,
