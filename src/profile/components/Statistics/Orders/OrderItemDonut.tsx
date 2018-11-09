@@ -31,11 +31,12 @@ const OrderItemDonut = ({ orderLines }: IProps) => {
       <Markdown source={ABOUT_ORDER_CALENDAR} />
       <Pie
         data={values}
-        height={350}
-        width={275}
+        height={300}
+        width={350}
         fit
         animate
         innerRadius={0.6}
+        margin={{ top: 60, right: 30, bottom: 40, left: 30 }}
       />
     </div>
   )
