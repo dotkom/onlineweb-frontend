@@ -17,6 +17,8 @@ const RuleBundleBox = ({ children }: IRuleBundleBox) => <span className={style.r
 const RuleBundles = ({ event }: IAttendanceEventProps) => {
   const bundlesEnabled = event.rule_bundles && event.rule_bundles.length;
 
+  // Sorting alphabetically on rule_bundle description or rule_string if needed
+  // Multiple comparison cases as not all rule_bundles have a description
   const sortedBundles = event.rule_bundles.sort((ba, bb) => {
     if (ba.description) {
       if (bb.description) {
