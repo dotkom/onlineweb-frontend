@@ -1,0 +1,26 @@
+@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
+
+@grid-gap: 30px;
+
+.profilePane {
+  width: 100%;
+  background: #fff;
+
+  .owCard();
+
+  & > div {
+    padding: 30px;
+  }
+}
+
+.profilePage {
+  display: grid;
+  gap: @grid-gap;
+}
+
+.profileSplitPane {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: @grid-gap;
+}
