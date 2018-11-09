@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { IEventViewProps } from '../../models/Event';
 import style from './image.less';
 import LargeEvent from './LargeEvent';
+import LargeEventPlaceholder from './LargeEventPlaceholder';
 import SmallEventColumn from './SmallEvent';
 
 export type IProps = IEventViewProps;
@@ -25,9 +26,9 @@ class ImageView extends Component<IProps> {
     return (
       <>
         <div className={style.largeEventGrid}>
-          <LargeEvent {...eventsLeft[0]} />
-          <LargeEvent {...eventsMiddle[0]} />
-          <LargeEvent {...eventsRight[0]} />
+          {eventsLeft[0] ? <LargeEvent {...eventsLeft[0]} /> : <LargeEventPlaceholder event_type={2} />}
+          {eventsMiddle[0] ? <LargeEvent {...eventsMiddle[0]} /> : <LargeEventPlaceholder event_type={3} />}
+          {eventsRight[0] ? <LargeEvent {...eventsRight[0]} /> : <LargeEventPlaceholder event_type={1} />}
         </div>
         <div className={style.smallEventGrid}>
           <SmallEventColumn events={eventsLeft.slice(1, 4)} />
