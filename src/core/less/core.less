@@ -43,9 +43,36 @@ input {
 
 a {
   text-decoration: none;
+  color: inherit;
+}
 
-  &:visited {
-    color: inherit;
+p a,
+li a {
+  color: @blue;
+  position: relative;
+  transition: color 0.1s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: @blue;
+    bottom: 0;
+    left: 0;
+    transition: transform 0.1s, color 0.1s;
+    transform: scaleX(0);
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
+    color: darken(@blue, 20%);
+
+    &::after {
+      transform: scaleX(1);
+      background: darken(@blue, 20%);
+    }
   }
 }
 
