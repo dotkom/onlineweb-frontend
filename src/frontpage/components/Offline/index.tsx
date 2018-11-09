@@ -53,7 +53,7 @@ class Offline extends Component<IProps, IState> {
     const end = start + DISPLAY_NUMBER;
     return (
       <section className={style.container}>
-        <Heading title="offline" />
+        <Heading title="Offline" />
         {offlines.length ? (
           <>
             <CarouselArrow direction="left" onClick={() => this.clickNext(-1)} disabled={index === 0} />
