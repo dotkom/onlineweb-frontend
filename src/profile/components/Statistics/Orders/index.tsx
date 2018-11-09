@@ -25,7 +25,7 @@ export interface IState {
 
 class Orders extends Component<IProps, IState> {
   public state: IState = {
-    orderLines: []
+    orderLines: [],
   };
 
   public async componentDidMount() {
@@ -35,24 +35,20 @@ class Orders extends Component<IProps, IState> {
 
   public render() {
     const { orderLines } = this.state;
-    const orders = orderLines.reduce<IOrder[]>((prev, curr) => ([...prev, ...curr.orders]), [])
+    const orders = orderLines.reduce<IOrder[]>((prev, curr) => [...prev, ...curr.orders], []);
     const frequency = orderLines.map((line) => DateTime.fromISO(line.datetime)).sort();
-    const totalOrderLines = orderLines.length
-    const totalOrders = orders.length
-    const totalItems = orders.reduce<number>((acc, order) => (acc + order.quantity), 0);
-    const totalCost = orders.reduce<number>((acc, order) => (acc + order.price), 0);
+    const totalOrderLines = orderLines.length;
+    const totalOrders = orders.length;
+    const totalItems = orders.reduce<number>((acc, order) => acc + order.quantity, 0);
+    const totalCost = orders.reduce<number>((acc, order) => acc + order.price, 0);
     return (
       <Page>
         <Pane>
-          <Markdown source={ABOUT_STATISTICS}/>
+          <Markdown source={ABOUT_STATISTICS} />
         </Pane>
-        <Pane>
-          { orderLines.length &&  <OrderBar orderLines={orderLines} />}
-        </Pane>
+        <Pane>{orderLines.length && <OrderBar orderLines={orderLines} />}</Pane>
         <SplitPane>
-          <Pane>
-            { orderLines.length &&  <OrderItemDonut orderLines={orderLines} />}
-          </Pane>
+          <Pane>{orderLines.length && <OrderItemDonut orderLines={orderLines} />}</Pane>
           <FourSplitPane>
             <Pane>
               <NumberStat name="Antall Kjøp" value={totalOrderLines} />
@@ -68,12 +64,10 @@ class Orders extends Component<IProps, IState> {
             </Pane>
           </FourSplitPane>
         </SplitPane>
-        <Pane>
-          { frequency.length && <OrderFrequency frequency={frequency} /> }
-        </Pane>
+        <Pane>{frequency.length && <OrderFrequency frequency={frequency} />}</Pane>
       </Page>
-    )
-  };
+    );
+  }
 }
 
 export default Orders;

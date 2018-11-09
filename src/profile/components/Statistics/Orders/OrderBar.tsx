@@ -13,13 +13,13 @@ export interface IProps {
 }
 
 const OrderBar = ({ orderLines }: IProps) => {
-  const orders: IOrder[] = orderLines.reduce<IOrder[]>((prev, curr) => ([...prev, ...curr.orders]), [])
+  const orders: IOrder[] = orderLines.reduce<IOrder[]>((prev, curr) => [...prev, ...curr.orders], []);
   const items = orders.reduce<{ [name: string]: number }>((prev, curr) => {
     const name = curr.content_object.name.replace('[Discontinued] ', '');
-    const prevValues = prev.hasOwnProperty(name) ? prev[name] + curr.quantity : 1
-    return { ...prev, [name]: prevValues}
+    const prevValues = prev.hasOwnProperty(name) ? prev[name] + curr.quantity : 1;
+    return { ...prev, [name]: prevValues };
   }, {});
-  const values = Object.keys(items).map((name) => ({ id: name, label: name, value: items[name] }))
+  const values = Object.keys(items).map((name) => ({ id: name, label: name, value: items[name] }));
 
   return (
     <div className={style.centerChart}>
@@ -32,7 +32,7 @@ const OrderBar = ({ orderLines }: IProps) => {
           top: 50,
           right: 130,
           bottom: 50,
-          left: 60
+          left: 60,
         }}
         colorBy="value"
         animate
@@ -54,15 +54,15 @@ const OrderBar = ({ orderLines }: IProps) => {
               {
                 on: 'hover',
                 style: {
-                  itemOpacity: 1
-                }
-              }
-            ]
-          }
+                  itemOpacity: 1,
+                },
+              },
+            ],
+          },
         ]}
       />
     </div>
-  )
-}
+  );
+};
 
 export default OrderBar;

@@ -1,4 +1,4 @@
-import {  Calendar, CalendarDatum, CalendarLegend } from '@nivo/calendar';
+import { Calendar, CalendarDatum, CalendarLegend } from '@nivo/calendar';
 import Markdown from 'common/components/Markdown';
 import { DateTime } from 'luxon';
 import React from 'react';
@@ -26,30 +26,32 @@ const MARGINS = {
   dayBorderWidth: 2,
 };
 
-const LEGENDS: CalendarLegend[] = [{
-  anchor: 'bottom-right',
-  direction: 'row',
-  translateY: 36,
-  itemCount: 4,
-  itemWidth: 34,
-  itemHeight: 36,
-  itemDirection: 'top-to-bottom'
-}];
+const LEGENDS: CalendarLegend[] = [
+  {
+    anchor: 'bottom-right',
+    direction: 'row',
+    translateY: 36,
+    itemCount: 4,
+    itemWidth: 34,
+    itemHeight: 36,
+    itemDirection: 'top-to-bottom',
+  },
+];
 
 const OrderFrequency = ({ frequency }: IProps) => {
-  const last = frequency[frequency.length - 1]
+  const last = frequency[frequency.length - 1];
   const first = last.minus({ years: 1 });
-  const filtered = frequency.filter((a) => first < a)
+  const filtered = frequency.filter((a) => first < a);
   const dateStrings = frequency.map((date) => date.toISODate());
-  const inter: Array<{[date: string]: number}> = dateStrings.map((date) => ({[date]: 1}));
-  const inter2: {[date: string]: number} = inter.reduce((prev, curr) => {
+  const inter: Array<{ [date: string]: number }> = dateStrings.map((date) => ({ [date]: 1 }));
+  const inter2: { [date: string]: number } = inter.reduce((prev, curr) => {
     const key = Object.keys(curr)[0];
-    return {...prev, [key]: (prev[key] + 1 || 1)}
-  })
-  const values: CalendarDatum[] = Object.keys(inter2).map((key) => ({ day: key, value: inter2[key] }))
+    return { ...prev, [key]: prev[key] + 1 || 1 };
+  });
+  const values: CalendarDatum[] = Object.keys(inter2).map((key) => ({ day: key, value: inter2[key] }));
   return (
     <div className={style.centerChart}>
-      <Markdown source={ABOUT_ORDER_CALENDAR}/>
+      <Markdown source={ABOUT_ORDER_CALENDAR} />
       <Calendar
         width={1000}
         height={450}
@@ -61,7 +63,7 @@ const OrderFrequency = ({ frequency }: IProps) => {
         {...MARGINS}
       />
     </div>
-  )
-}
+  );
+};
 
 export default OrderFrequency;
