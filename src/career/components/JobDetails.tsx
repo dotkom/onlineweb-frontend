@@ -20,7 +20,7 @@ export interface IJobDetails {
 
 const JobDetails = (props: IJobDetails) => (
   <div>
-    <Heading>{props.title}</Heading>
+    <Heading title={props.title} />
     <div className={style.detail}>
       <Markdown className={style.jobDescription} source={props.description} escapeHtml />
       <div>
