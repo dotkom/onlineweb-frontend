@@ -1,5 +1,6 @@
 @import './reset.less';
 @import '~common/less/colors.less';
+@import '~common/less/constants.less';
 @import '~common/less/mixins.less';
 
 @import (css) url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,600,700');
@@ -77,11 +78,15 @@ li a {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: @owFontXL;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: @owFontL;
+}
+
+h3 {
+  font-size: @owFontM;
 }
 
 p,
