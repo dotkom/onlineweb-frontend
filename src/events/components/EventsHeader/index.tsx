@@ -17,7 +17,7 @@ export interface IProps {
 
 const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
   <div className={style.grid}>
-    <h1>ARRANGEMENTER</h1>
+    <h1>Arrangementer</h1>
     <div className={style.choiceGrid}>
       <div
         className={classNames(style.choice, {

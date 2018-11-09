@@ -17,7 +17,7 @@ export interface IFilterableJobListProps {
 
 const FilterableJobList = (props: IFilterableJobListProps) => (
   <div>
-    <Heading>KARRIEREMULIGHETER</Heading>
+    <Heading title="Karrieremuligheter" />
     <div className={style.topGrid}>
       <FilterList
         tags={props.tags}
