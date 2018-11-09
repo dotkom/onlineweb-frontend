@@ -3,7 +3,7 @@
 
 @grid-gap: 30px;
 
-.profilePane {
+.pane {
   width: 100%;
   background: #fff;
 
@@ -14,13 +14,20 @@
   }
 }
 
-.profilePage {
+.page {
   display: grid;
   gap: @grid-gap;
 }
 
-.profileSplitPane {
+.splitPane {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: @grid-gap;
+}
+
+.fourSplitPane {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: @grid-gap;
 }
