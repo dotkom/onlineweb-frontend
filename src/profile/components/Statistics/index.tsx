@@ -8,7 +8,6 @@ import Menu from '../Settings/Menu';
 import style from '../Settings/settings.less';
 import Orders from './Orders';
 
-
 const BASE_ROUTE = '/profile/statistics';
 
 export const routes = {
@@ -30,12 +29,7 @@ interface ISettingsRouteProps extends RouteProps {
 
 const StatisticsRoute = ({ view, ...props }: ISettingsRouteProps) => {
   const View = view;
-  return (
-    <Route
-      {...props}
-      render={({ match, ...routeProps }) => <View {...routeProps} />}
-    />
-  );
+  return <Route {...props} render={({ match, ...routeProps }) => <View {...routeProps} />} />;
 };
 
 export default Settings;

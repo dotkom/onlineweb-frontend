@@ -8,12 +8,8 @@ export interface IProps {
 
 const NumberStat = ({ name, value }: IProps) => (
   <div className={style.numberStat}>
-    <h2>
-      { name }
-    </h2>
-    <p>
-      { value }
-    </p>
+    <h2>{name}</h2>
+    <p>{value}</p>
   </div>
 );
 
