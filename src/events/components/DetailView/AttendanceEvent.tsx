@@ -17,15 +17,28 @@ const RuleBundleBox = ({ children }: IRuleBundleBox) => <span className={styles.
 const RuleBundles = ({ event }: IAttendanceEventProps) => {
   const bundlesEnabled = event.rule_bundles && event.rule_bundles.length;
 
+  const sortedBundles = event.rule_bundles.sort((ba, bb) => {
+    if (ba.description) {
+      if (bb.description) {
+        return ba.description.localeCompare(bb.description);
+      } else {
+        return ba.description.localeCompare(bb.rule_strings[0]);
+      }
+    } else if (bb.description) {
+      return ba.rule_strings[0].localeCompare(bb.description);
+    }
+    return ba.rule_strings[0].localeCompare(bb.rule_strings[0]);
+  });
+
   return (
     <Block title="Åpent for" className={styles.fullBlock}>
       <div className={styles.ruleBoxes}>
         {event.guest_attendance ? (
           <RuleBundleBox>Alle</RuleBundleBox>
         ) : bundlesEnabled ? (
-          event.rule_bundles.map((bundle) => (
-            <RuleBundleBox key={bundle.id}>{bundle.description || bundle.rule_strings}</RuleBundleBox>
-          ))
+          sortedBundles.map((bundle) =>
+            bundle.rule_strings.map((rule_string) => <RuleBundleBox key={bundle.id}>{rule_string}</RuleBundleBox>)
+          )
         ) : (
           <RuleBundleBox>Alle medlemmer</RuleBundleBox>
         )}
