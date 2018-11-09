@@ -1,3 +1,4 @@
+@import '~common/less/constants.less';
 @import '~common/less/mixins.less';
 
 .container {
@@ -44,7 +45,7 @@
 }
 
 .registration {
-  grid-row: ~'1 / 3';
+  grid-row: 1 / span 2;
 }
 
 .contact {
@@ -52,36 +53,34 @@
 }
 
 .infoBoxHeader {
-  font-size: 18px;
-  margin-bottom: 0;
+  font-size: @owFontM;
   font-style: italic;
 }
 
 .infoBoxContent {
-  line-height: 1.65rem;
-  font-size: 16px;
-  margin-top: 1rem;
-
-  p {
-    margin-top: 1rem;
-  }
+  margin-top: 15px;
 }
 
 .attendanceMessage {
-  margin-top: 1rem;
+  color: @gray;
+  font-size: @owFontL;
+  text-align: center;
+  margin-top: 50%;
+  transform: translateY(-50%);
 }
 
 .ruleBoxes {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  margin-top: 0.6rem;
+  margin-top: 5px;
 }
 
 .ruleBox {
   background: @offWhite;
-  padding: 0.3rem 0.5rem;
-  font-size: 0.85rem;
-  margin: 0.2rem;
+  padding: 5px;
+  font-size: @owFontXS;
+  margin: 4px;
 }
 
 .detailHeader {
