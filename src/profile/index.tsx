@@ -8,6 +8,7 @@ import MainMenu from './components/MainMenu';
 import MyProfile from './components/Profile';
 import Search from './components/Search';
 import Settings from './components/Settings';
+import Statistics from './components/Statistics';
 
 const BASE_ROUTE = '/profile';
 
@@ -16,6 +17,7 @@ export const routes = {
   search: BASE_ROUTE + '/search',
   public: BASE_ROUTE + '/public/:id',
   settings: BASE_ROUTE + '/settings',
+  statistics: BASE_ROUTE + '/statistics',
 };
 
 class Profile extends React.Component<{}> {
@@ -26,6 +28,7 @@ class Profile extends React.Component<{}> {
         <ProfileRoute path={routes.search} view={Search} />
         <ProfileRoute path={routes.public} view={MyProfile} />
         <ProfileRoute path={routes.settings} view={Settings} />
+        <ProfileRoute path={routes.statistics} view={Statistics} />
         <Route path="*" render={() => <HttpError code={404} />} />
       </Switch>
     );

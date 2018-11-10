@@ -16,6 +16,7 @@ class MainMenu extends Component<IProps, {}> {
         <MenuElement text="Min Profil" link={routes.personal} active={path === routes.personal} />
         <MenuElement text="Brukersøk" link={routes.search} active={path === routes.search} />
         <MenuElement text="Innstillinger" link={routes.settings} active={path === routes.settings} />
+        <MenuElement text="Statistikk" link={routes.statistics} active={path === routes.statistics} />
       </div>
     );
   }
@@ -27,7 +28,7 @@ export interface IElementProps {
   link: string;
 }
 
-const MenuElement = ({ text, active, link }: IElementProps) => (
+export const MenuElement = ({ text, active, link }: IElementProps) => (
   <Link to={link} className={classnames(style.menuElement, { [style.menuElementActive]: active })}>
     <h1>{text}</h1>
   </Link>
