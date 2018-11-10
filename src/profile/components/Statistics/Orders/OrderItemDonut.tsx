@@ -1,4 +1,5 @@
 import { Pie } from '@nivo/pie';
+import { LIGHT_EVENT_COLORS } from 'events/models/Event';
 import { IOrder, IOrderLine } from 'profile/models/Orders';
 import React from 'react';
 import style from './orders.less';
@@ -31,6 +32,7 @@ const OrderItemDonut = ({ orderLines }: IProps) => {
         fit
         animate
         innerRadius={0.6}
+        colors={LIGHT_EVENT_COLORS.reverse()}
         margin={{ top: 60, right: 30, bottom: 40, left: 30 }}
       />
     </div>

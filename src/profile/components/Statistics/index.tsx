@@ -3,9 +3,6 @@ import { Route, RouteProps, Switch } from 'react-router-dom';
 
 import HttpError from 'core/components/errors/HttpError';
 import { IProfileProps } from 'profile';
-import { MenuElement } from '../MainMenu';
-import Menu from '../Settings/Menu';
-import style from '../Settings/settings.less';
 import Orders from './Orders';
 
 const BASE_ROUTE = '/profile/statistics';

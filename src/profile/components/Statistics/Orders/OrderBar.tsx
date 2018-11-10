@@ -1,5 +1,5 @@
 import { Bar } from '@nivo/bar';
-import Markdown from 'common/components/Markdown';
+import { LIGHT_EVENT_COLORS } from 'events/models/Event';
 import { IOrder, IOrderLine } from 'profile/models/Orders';
 import React from 'react';
 import style from './orders.less';
@@ -30,6 +30,7 @@ const OrderBar = ({ orderLines }: IProps) => {
           bottom: 50,
           left: 60,
         }}
+        colors={LIGHT_EVENT_COLORS}
         colorBy="value"
         animate
         legends={[
