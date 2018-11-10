@@ -1,12 +1,7 @@
 import { Calendar, CalendarDatum, CalendarLegend } from '@nivo/calendar';
-import Markdown from 'common/components/Markdown';
 import { DateTime } from 'luxon';
 import React from 'react';
 import style from './orders.less';
-
-const ABOUT_ORDER_CALENDAR = `
-  # Ordrehistorikk
-`;
 
 export interface IProps {
   frequency: DateTime[]; // Datetime
@@ -51,7 +46,7 @@ const OrderFrequency = ({ frequency }: IProps) => {
   const values: CalendarDatum[] = Object.keys(inter2).map((key) => ({ day: key, value: inter2[key] }));
   return (
     <div className={style.centerChart}>
-      <Markdown source={ABOUT_ORDER_CALENDAR} />
+      <h1>Kjøpskalender</h1>
       <Calendar
         width={1000}
         height={450}

@@ -1,12 +1,7 @@
 import { Pie } from '@nivo/pie';
-import Markdown from 'common/components/Markdown';
 import { IOrder, IOrderLine } from 'profile/models/Orders';
 import React from 'react';
 import style from './orders.less';
-
-const ABOUT_ORDER_CALENDAR = `
-  # Ordrehistorikk
-`;
 
 export interface IProps {
   orderLines: IOrderLine[];
@@ -28,7 +23,7 @@ const OrderItemDonut = ({ orderLines }: IProps) => {
 
   return (
     <div className={style.centerChart}>
-      <Markdown source={ABOUT_ORDER_CALENDAR} />
+      <h1>Kategorier</h1>
       <Pie
         data={values}
         height={300}

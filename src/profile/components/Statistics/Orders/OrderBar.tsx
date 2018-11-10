@@ -4,10 +4,6 @@ import { IOrder, IOrderLine } from 'profile/models/Orders';
 import React from 'react';
 import style from './orders.less';
 
-const ABOUT_ORDER_CALENDAR = `
-  # Ordrehistorikk
-`;
-
 export interface IProps {
   orderLines: IOrderLine[];
 }
@@ -23,7 +19,7 @@ const OrderBar = ({ orderLines }: IProps) => {
 
   return (
     <div className={style.centerChart}>
-      <Markdown source={ABOUT_ORDER_CALENDAR} />
+      <h1>Varefordeling</h1>
       <Bar
         data={values}
         height={450}
