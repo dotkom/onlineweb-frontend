@@ -5,7 +5,6 @@ import Medal from './Medal';
 
 export interface IProps {
   medals: IMedal[];
-  name: string;
 }
 
 export interface IState {
@@ -30,16 +29,12 @@ class Name extends React.Component<IProps, IState> {
 
   public render() {
     const { slice, showAmount } = this.state;
-    const { medals, name } = this.props;
+    const { medals } = this.props;
     return (
-      <div className={style.infoGroup}>
-        {/*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/}
-        <h1>{name}</h1>
-        <div className={style.medalGrid}>
-          {medals.slice(slice - showAmount, slice).map((medal) => (
-            <Medal key={medal.committee + medal.position + medal.range} {...medal} />
-          ))}
-        </div>
+      <div className={style.medalGrid}>
+        {medals.slice(slice - showAmount, slice).map((medal) => (
+          <Medal key={medal.committee + medal.position + medal.range} {...medal} />
+        ))}
       </div>
     );
   }
