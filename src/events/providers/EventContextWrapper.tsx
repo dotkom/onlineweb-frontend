@@ -13,7 +13,9 @@ const Wrapper = ({ children, image, list, calendar, ...props }: IProps) => {
   return (
     <CalendarEvents cache={calendar} {...props}>
       <ImageEvents cache={image} {...props}>
-        <ListEvents cache={list} {...props}>{children}</ListEvents>
+        <ListEvents cache={list} {...props}>
+          {children}
+        </ListEvents>
       </ImageEvents>
     </CalendarEvents>
   );
