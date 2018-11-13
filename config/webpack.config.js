@@ -1,5 +1,5 @@
 const path = require('path');
-
+var AssetsPlugin = require('assets-webpack-plugin');
 const htmlPlugin = require('./html.config');
 const CSSPlugin = require('./css.config');
 const devServer = require('./devServer.config');
@@ -15,9 +15,9 @@ module.exports = (env) => {
     },
     output: {
       path: path.resolve('./dist/'),
-      filename: '[name].js',
-      chunkFilename: '[name].js',
-      publicPath: '/',
+      filename: '[name].[chunkHash].js',
+      chunkFilename: '[name].[chunkHash].js',
+      publicPath: '/public/',
     },
     optimization: {
       splitChunks: {
@@ -39,6 +39,7 @@ module.exports = (env) => {
       CSSPlugin.plugin,
       htmlPlugin.plugin,
       environment.pluginBrowser,
+      new AssetsPlugin({path: path.join(__dirname, '../dist')}),
     ]
   }
 }

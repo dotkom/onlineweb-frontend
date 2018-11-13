@@ -6,6 +6,7 @@ import ContextWrapper from 'core/providers/ContextWrapper';
 import Settings from 'core/providers/Settings';
 import { getEventView } from 'events/components/EventsContainer';
 import express from 'express';
+import fs from 'fs';
 import { Settings as LuxonSettings } from 'luxon';
 import path from 'path';
 import React from 'react';
