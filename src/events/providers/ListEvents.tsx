@@ -17,11 +17,16 @@ const INITIAL_STATE: IListEventsState = {
 
 export const ListEventsContext = createContext(INITIAL_STATE);
 
-class ListEvents extends Component<IEventViewProps, IListEventsState> {
-  public state: IListEventsState = {
-    ...INITIAL_STATE,
-    events: getServerCacheListEvents(),
-  };
+export interface IProps extends IEventViewProps {
+  cache?: INewEvent[];
+}
+
+class ListEvents extends Component<IProps, IListEventsState> {
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = { ...INITIAL_STATE, events: props.cache || [] };
+  }
 
   public init = async () => await this.fetchEvents();
 
