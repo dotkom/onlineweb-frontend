@@ -1,6 +1,5 @@
 import Collapsible from 'common/components/Collapsible';
 import { DateTime, Interval } from 'luxon';
-import React from 'react';
 import { IPenalty } from '../../../models/Penalty';
 
 export interface IProps<T> {

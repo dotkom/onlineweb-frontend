@@ -1,7 +1,4 @@
-import { get } from 'common/utils/api';
 import { IMail } from '../models/Mail';
-
-const API_URL = '/api/v1/profile';
 
 /**
  *

@@ -1,8 +1,7 @@
 import { get } from 'common/utils/api';
-import { IApiCompany } from 'core/models/Company';
 import { DateTime } from 'luxon';
 import { IApiJob, IJob } from '../models/Job';
-import { ITag, ITags } from '../models/Tag';
+import { ITags } from '../models/Tag';
 
 const API_URL = '/api/v1/career/';
 

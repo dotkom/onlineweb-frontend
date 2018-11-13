@@ -1,6 +1,6 @@
 import { DOMAIN } from 'common/constants/endpoints';
 import IImage from 'common/models/Image';
-import { getEventColor, getEventType, IAttendanceEvent, ICompanyEvent, INewEvent } from 'events/models/Event';
+import { getEventColor, getEventType, ICompanyEvent, INewEvent } from 'events/models/Event';
 import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
 import React from 'react';

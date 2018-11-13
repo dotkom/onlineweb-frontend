@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import style from '../less/contribution.less';
+import '../less/contribution.less';
 import { IRepositoryLanguage } from '../models/Repository';
 import LanguageSubBar from './LanguageSubBar';
 

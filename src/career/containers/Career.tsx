@@ -1,16 +1,10 @@
-import { IsoDateTime } from 'common/models/Date';
-import { get } from 'common/utils/api';
-import { IApiCompany } from 'core/models/Company';
-import createBrowserHistory from 'history/createBrowserHistory';
 import React from 'react';
-import { Route, Router, Switch } from 'react-router';
+import { Route, Switch } from 'react-router';
 import { getCareerOpportunities } from '../api';
-import { IApiJob, IJob } from '../models/Job';
-import { ITag, ITags, ITagWrapper, TagType } from '../models/Tag';
+import { IJob } from '../models/Job';
+import { ITags, TagType } from '../models/Tag';
 import DetailView from './DetailView';
 import FilterableJobList from './FilterableJobList';
-
-const history = createBrowserHistory();
 
 export interface IDeadlines {
   name: string;

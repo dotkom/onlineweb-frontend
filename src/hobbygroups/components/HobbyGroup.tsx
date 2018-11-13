@@ -3,7 +3,7 @@ import React from 'react';
 import style from '../less/hobbygroups.less';
 import { IHobbyGroup } from '../models/HobbyGroup';
 
-const HobbyGroup = ({ title, description, image, read_more_link }: IHobbyGroup) => {
+const HobbyGroup = ({ title, description, image }: IHobbyGroup) => {
   return (
     <div className={style.hobby}>
       <img src={image} alt={title} />
