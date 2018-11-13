@@ -29,7 +29,7 @@ const FilterableJobList = (props: IFilterableJobListProps) => (
         filterText={props.filterText}
       />
 
-        {/* Tags has wrong type */}
+      {/* Tags has wrong type */}
       <JobList jobs={props.jobs} tags={props.tags} filterText={props.filterText} />
     </div>
   </div>
