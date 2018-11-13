@@ -49,6 +49,26 @@ app.use(cookieParser());
 app.use('/public', express.static(path.resolve(__dirname, '../dist')));
 app.use('/public', express.static('./dist'));
 
+interface IWebpackAssets {
+  [key: string]: {
+    [lang: string]: string
+  }
+}
+
+const getBundles = (): [string[], string[]] => {
+  const assetsString = fs.readFileSync('./dist/webpack-assets.json').toString();
+  const assets: IWebpackAssets = JSON.parse(assetsString);
+  const chunks = Object.keys(assets).map((key) => assets[key]);
+  const js = [assets.app.js, assets.vendor.js].map(getScript);
+  const css = [assets.app.css, assets.profile.css].map(getStyle);
+  return [js, css];
+}
+
+const getStyle = (style: string) => `<link rel="stylesheet" type="text/css" href="${style}">`;
+const getScript = (script: string) => `<script src="${script}"></script>`;
+
+const BUNDLES = getBundles();
+
 /**
  * @summary Main entrypoint for express application backend.
  * @description The back-end application serves a only a single route in Express.
@@ -106,16 +126,14 @@ const wrapHtml = (dom: string, cache: IServerStateCache) => `
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Linjeforeningen Online</title>
-      <link rel="stylesheet" type="text/css" href="/public/main.css">
+      ${ BUNDLES[1].join('\n') }
     </head>
     <body>
       <div id="root">${dom}</div>
       <script>
         window.__INITIAL_PROVIDER_STATE__ = ${JSON.stringify(serialize(cache))}
       </script>
-      <script src="/public/app.js"></script>
-      <script src="/public/vendor.js"></script>
-      <script src="/public/profile.js"></script>
+      ${ BUNDLES[0].join('\n') }
     </body>
   </html>
 `;
