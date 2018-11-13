@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/node';
 import { HOST, PORT } from 'common/constants/backend';
 import { OWF_SENTRY_DSN } from 'common/constants/sentry';
 import cookieParser from 'cookie-parser';
+import ContextWrapper from 'core/providers/ContextWrapper';
 import Settings from 'core/providers/Settings';
 import { getEventView } from 'events/components/EventsContainer';
 import express from 'express';
@@ -79,7 +80,9 @@ app.get('*', (req, res) => {
   const jsx = (
     <StaticRouter location={req.path} context={{}}>
       <Settings eventView={eventView}>
-        <App />
+        <ContextWrapper {...global.STATE_CACHE}>
+          <App />
+        </ContextWrapper>
       </Settings>
     </StaticRouter>
   );
