@@ -44,7 +44,7 @@ class Dropdown extends Collapsible<IProps> {
 }
 
 export interface IItemProps {
-  children: ReactChild;
+  children: React.ReactNode;
   selected: boolean;
   onClick: () => void;
 }
