@@ -28,4 +28,4 @@ const GroupAccess: React.SFC<IProps> = ({ children, authentication, user, alt })
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GroupAccess);  // mismatch of user type from state and local props
+)(GroupAccess);
