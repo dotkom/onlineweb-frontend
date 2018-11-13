@@ -1,0 +1,20 @@
+version: '3.5'
+services:
+  ssr_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/srv/www"
+    environment:
+      - OWF_REDIS_HOST='redis'
+      - OWF_REDIS_PORT='6379'
+      - OW4_ADDRESS,
+      - OWF_SENTRY_DSN
+      - OWF_BACKEND_HOST='0.0.0.0'
+      - OWF_BACKEND_PORT='8080'
+      - NODE_ENV
+      - OWF_SSR=true
+
+  redis_cache:
+    image: redis:5.0-alpine
