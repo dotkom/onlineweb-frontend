@@ -1,0 +1,28 @@
+FROM node:10-alpine
+
+LABEL author=Dotkom
+LABEL contact=dotkom@online.ntnu.no
+
+ENV DIR=/srv/www
+
+WORKDIR ${DIR}
+
+# Python is required to build certain npm packages, like hiredis.
+RUN apk add --no-cache python make g++
+
+COPY package.json .
+COPY yarn.lock .
+
+RUN yarn
+
+RUN apk del python make g++
+
+COPY . .
+
+ENV OWF_SSR=true
+
+RUN yarn build:prod
+
+RUN yarn build-ssr:prod
+
+CMD ["node", "./dist/server.js"]
