@@ -2,11 +2,11 @@ import { IGroup } from 'core/models/Group';
 import { Permission } from 'core/models/Permission';
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { AuthUser } from '../models/User';
+import { AuthUser, IAuthUser } from '../models/User';
 import { IState } from '../reducers';
 
 export interface IProps extends IState {
-  user: AuthUser;
+  user: IAuthUser;
   children: JSX.Element;
   alt?: JSX.Element;
   authentication: IGroup | Permission;
@@ -22,11 +22,11 @@ export const mapDispatchToProps = (dispatch: Function) => ({
 });
 
 const GroupAccess : React.SFC<IProps> = ({ children, authentication, user, alt }) => (
-  <Fragment>{user.hasPermission(authentication) ? children : alt}</Fragment>
+  <Fragment>{(user as AuthUser).hasPermission(authentication) ? children : alt}</Fragment>
 );
 
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-  )(GroupAccess);  // mismatch of user type from state and local props
+)(GroupAccess);  // mismatch of user type from state and local props
