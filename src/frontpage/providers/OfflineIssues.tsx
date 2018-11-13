@@ -39,11 +39,7 @@ class OfflineIssues extends Component<IProps, IOfflineIssuesState> {
   public render() {
     const { init } = this;
     const value = { ...this.state, init };
-    return (
-      <OfflineContext.Provider value={value}>
-        { this.props.children }
-      </OfflineContext.Provider>
-    )
+    return <OfflineContext.Provider value={value}>{this.props.children}</OfflineContext.Provider>;
   }
 }
 

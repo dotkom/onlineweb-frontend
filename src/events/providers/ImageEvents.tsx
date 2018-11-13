@@ -31,10 +31,9 @@ export interface IProps extends IEventViewProps {
 }
 
 class ImageEvents extends Component<IProps, IImageEventsState> {
-
   constructor(props: IProps) {
     super(props);
-    const cache = props.cache ? { ...props.cache, fetched: true }: INITIAL_STATE;
+    const cache = props.cache ? { ...props.cache, fetched: true } : INITIAL_STATE;
     this.state = { ...INITIAL_STATE, ...cache };
   }
 

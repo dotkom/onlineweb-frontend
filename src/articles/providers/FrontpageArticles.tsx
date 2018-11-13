@@ -38,12 +38,8 @@ class FrontpageArticles extends Component<IProps, IFrontpageArticlesState> {
 
   public render() {
     const { init } = this;
-    const value = { ...this.state, init }
-    return (
-      <FrontpageArticleContext.Provider value={value}>
-        { this.props.children }
-      </FrontpageArticleContext.Provider>
-    )
+    const value = { ...this.state, init };
+    return <FrontpageArticleContext.Provider value={value}>{this.props.children}</FrontpageArticleContext.Provider>;
   }
 }
 

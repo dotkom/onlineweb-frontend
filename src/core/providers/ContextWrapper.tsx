@@ -11,9 +11,7 @@ export interface IProps extends IServerStateCache {
 const ContextWrapper = ({ events, articles, offline, children }: IProps) => (
   <EventContextWrapper {...events} accessible={false}>
     <FrontpageArticles cache={articles}>
-      <OfflineIssues cache={offline}>
-        { children }
-      </OfflineIssues>
+      <OfflineIssues cache={offline}>{children}</OfflineIssues>
     </FrontpageArticles>
   </EventContextWrapper>
 );
