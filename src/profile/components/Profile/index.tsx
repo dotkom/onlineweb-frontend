@@ -1,6 +1,5 @@
 import { IProfileProps } from 'profile';
 import React from 'react';
-import { getProfile } from '../../api';
 import style from '../../less/profile.less';
 import { IFullProfileUser } from '../../models/User';
 import Header from './Header';

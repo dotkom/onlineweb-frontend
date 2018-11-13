@@ -1,8 +1,5 @@
-import { STATIC_URL } from 'common/constants/endpoints';
 import React from 'react';
 import style from '../../less/profile.less';
-
-const PROFILE_STATIC = STATIC_URL + 'common/img/profile/';
 
 export interface IProps {
   name: string;
@@ -11,7 +8,7 @@ export interface IProps {
 
 class InfoGroup extends React.Component<IProps> {
   public render() {
-    const { children, name, icon } = this.props;
+    const { children, name } = this.props;
     return (
       <div className={style.infoGroup}>
         {/*<img className="profile-group-icon" src={`${STATIC_URL + icon}.svg`} />*/}

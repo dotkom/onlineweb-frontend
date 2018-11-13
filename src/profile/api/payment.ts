@@ -1,7 +1,4 @@
-import { get } from 'common/utils/api';
 import { IPayment } from '../models/Payment';
-
-const API_URL = '/api/v1/profile/payments';
 
 const paymentsMock: IPayment[] = [
   {

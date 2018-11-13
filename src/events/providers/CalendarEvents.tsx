@@ -29,7 +29,7 @@ const INITIAL_STATE: ICalendarEventsState = {
    * Methods cannot be used outside the component before it is rendered, and class method have to be
    * created for it to be possible to render the child components that can consume them.
    */
-  changeMonth: (n: number) => {
+  changeMonth: () => {
     throw new Error('Month was changed before component was initialized');
   },
   init: async () => {

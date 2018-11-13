@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { IMark } from '../../../models/Penalty';
 import style from './penalties.less';
 import Penalty from './Penalty';

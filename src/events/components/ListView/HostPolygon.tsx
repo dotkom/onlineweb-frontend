@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react';
+import React from 'react';
 import style from './list.less';
 
 const HostPolygon = ({ children, color }: { children: string; color: string }) => (

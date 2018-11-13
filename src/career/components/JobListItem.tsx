@@ -20,8 +20,6 @@ export const formatLocations = (locations: any) => {
   return 'Ikke spesifisert';
 };
 
-const STATIC_URL = process.env.OW4_ADDRESS;
-
 const JobListItem = ({ locations, deadline, companyImage, companyName, title, ingress, type, id }: IJob) => (
   <div className={style.job}>
     <Link to={`/career/${id}`}>
