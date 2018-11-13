@@ -40,6 +40,10 @@ const INITIAL_STATE: ICalendarEventsState = {
 
 export const CalendarEventsContext = createContext(INITIAL_STATE);
 
+export interface IProps extends IEventViewProps {
+  cache?: INewEvent[];
+}
+
 /**
  * @summary Stores the events and related state for the EventCalendar.
  * @description Stores the events for a month in its state. Changing the month
@@ -48,11 +52,15 @@ export const CalendarEventsContext = createContext(INITIAL_STATE);
  * when the browser is closed.
  * @param {IEventViewProps} props Props given to all of the 3 main event views.
  */
-class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
-  public state: ICalendarEventsState = {
-    ...INITIAL_STATE,
-    eventMonth: constructMonthMap(DateTime.local(), getServerCacheCalendarEvents()),
-  };
+class CalendarEvents extends Component<IProps, ICalendarEventsState> {
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = {
+      ...INITIAL_STATE,
+      eventMonth: constructMonthMap(DateTime.local(), props.cache || []),
+    };
+  }
 
   /** Fetch the stored month from the browser session */
   public async componentDidMount() {

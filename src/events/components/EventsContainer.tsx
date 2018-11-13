@@ -76,14 +76,12 @@ class Container extends Component<IProps & ISettingsContextState, IState> {
     const View = getView(view);
     return (
       <section className={style.section}>
-        <EventContextWrapper accessible={accessible}>
-          <EventsHeader
-            changeView={(v: EventView) => this.changeView(v)}
-            toggleAccessible={this.toggleAccessible}
-            {...this.state}
-          />
-          <View accessible={accessible} />
-        </EventContextWrapper>
+        <EventsHeader
+          changeView={(v: EventView) => this.changeView(v)}
+          toggleAccessible={this.toggleAccessible}
+          {...this.state}
+        />
+        <View accessible={accessible} />
       </section>
     );
   }
