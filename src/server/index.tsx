@@ -11,15 +11,11 @@ import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import redis from 'redis';
 import serialize from 'serialize-javascript';
-import { promisify } from 'util';
-import { initStateCache, IServerStateCache } from './stateCache';
+import { IServerStateCache } from './models';
+import StateCache from './stateCache';
 
 import { App } from '../App';
-
-const client = redis.createClient();
-const redisGetAsync = promisify(client.get).bind(client);
 
 /**
  * Server side rendering uses a very simple single route express server to handle
@@ -27,18 +23,10 @@ const redisGetAsync = promisify(client.get).bind(client);
  */
 const app = express();
 
-/**
- * A bit of a hacky solution, but it works.
- * Cache is stored in the server memory. The server needs to be able to get the initial
- * state of the application instantly to render it to the user. The cache is updated at a
- * regular interval to keep it somewhat relevant. Not terribly important to keep it
- * completly up to date ad the user will fetch data when to component mounts in the browser
- * as well.
- * TODO: Replace with something not as hacky. Update when there are changes in the API rather
- * than polling at an interval would be a good start.
- */
-initStateCache();
-setInterval(initStateCache, 5000 * 60);
+const RedisCache = new StateCache();
+
+RedisCache.initStateCache();
+setInterval(RedisCache.initStateCache, 5000 * 60);
 
 /** Initialize Sentry error forwarding for the back-end */
 Sentry.init({ dsn: OWF_SENTRY_DSN });
@@ -75,8 +63,7 @@ app.get('*', async (req, res) => {
    */
   const eventView = getEventView(req.cookies.eventView);
 
-  const cacheString: string = await redisGetAsync('owf-state-cache');
-  const cache: IServerStateCache = JSON.parse(cacheString);
+  const cache = await RedisCache.getStateCache();
 
   /**
    * @summary This is where the magic happens.
@@ -88,7 +75,7 @@ app.get('*', async (req, res) => {
   const jsx = (
     <StaticRouter location={req.path} context={{}}>
       <Settings eventView={eventView}>
-        <ContextWrapper {...global.STATE_CACHE}>
+        <ContextWrapper {...cache}>
           <App />
         </ContextWrapper>
       </Settings>
@@ -97,7 +84,7 @@ app.get('*', async (req, res) => {
   /** Render the DOM to a string which will be used on initial render and then 'rehydrated' by React */
   const reactDom = renderToString(jsx);
   /** Wrap the DOM in standard HTML markup */
-  const HTML = wrapHtml(reactDom);
+  const HTML = wrapHtml(reactDom, cache);
 
   /** Send the finished response to the client */
   res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -111,7 +98,7 @@ app.get('*', async (req, res) => {
  * This is rendered as a string in the DOM and serialized by the front-end when it loads.
  * @param {string} dom A string containing a pre-rendered React DOM.
  */
-const wrapHtml = (dom: string) => `
+const wrapHtml = (dom: string, cache: IServerStateCache) => `
   <!DOCTYPE html>
   <html lang="nb">
     <head>
@@ -123,7 +110,7 @@ const wrapHtml = (dom: string) => `
     <body>
       <div id="root">${dom}</div>
       <script>
-        window.__INITIAL_PROVIDER_STATE__ = ${JSON.stringify(serialize(global.STATE_CACHE))}
+        window.__INITIAL_PROVIDER_STATE__ = ${JSON.stringify(serialize(cache))}
       </script>
       <script src="/public/app.js"></script>
       <script src="/public/vendor.js"></script>
