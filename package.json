@@ -14,11 +14,11 @@
     "lint": "yarn lint-ts ; yarn lint-less ; yarn lint-prettier",
     "lint-ts": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "lint-less": "stylelint src/**/*.less",
-    "lint-prettier": "prettier-check src/**/*.{ts,tsx,less}",
+    "lint-prettier": "prettier-check 'src/**/*.{ts,tsx,less}'",
     "lint:fix": "yarn lint-ts:fix && yarn lint-less:fix && yarn lint-prettier:fix",
     "lint-ts:fix": "tslint --fix -c tslint.json 'src/**/*.{ts,tsx}'",
     "lint-less:fix": "yarn lint-less --fix",
-    "lint-prettier:fix": "prettier-check --write src/**/*.{ts,tsx,less}",
+    "lint-prettier:fix": "prettier-check --write 'src/**/*.{ts,tsx,less}'",
     "test": "jest --env=jsdom"
   },
   "devDependencies": {
