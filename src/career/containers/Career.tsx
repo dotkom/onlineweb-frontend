@@ -149,6 +149,8 @@ class Career extends React.Component<{}, ICareerState> {
             render={(props) => (
               <FilterableJobList
                 handleReset={() => this.handleReset()}
+
+                // Mismatch of types between the FilterableJobList props and this function and its handler.
                 handleTagChange={(type: TagType, changedTag: string, switchMode: boolean) =>
                   this.handleTagChange(type, changedTag, switchMode || false)
                 }
