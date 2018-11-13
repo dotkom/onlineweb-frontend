@@ -11,10 +11,15 @@ import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
+import redis from 'redis';
 import serialize from 'serialize-javascript';
-import { initStateCache } from './stateCache';
+import { promisify } from 'util';
+import { initStateCache, IServerStateCache } from './stateCache';
 
 import { App } from '../App';
+
+const client = redis.createClient();
+const redisGetAsync = promisify(client.get).bind(client);
 
 /**
  * Server side rendering uses a very simple single route express server to handle
@@ -62,13 +67,16 @@ app.use('/public', express.static('./dist'));
  * 'rehydrates' the rendered HTML, it will take over for the StaticRouter with a Browser based Router.
  * Note that the server side will _ONLY_ render the initial route, the rest is done in the front-end.
  */
-app.get('*', (req, res) => {
+app.get('*', async (req, res) => {
   /**
    * Get the settings from cookies to render correct view on front page.
    * Currently only a single setting in cookies ('eventView'). Should expand to support more settings
    * in the future by separating the functionality.
    */
   const eventView = getEventView(req.cookies.eventView);
+
+  const cacheString: string = await redisGetAsync('owf-state-cache');
+  const cache: IServerStateCache = JSON.parse(cacheString);
 
   /**
    * @summary This is where the magic happens.
