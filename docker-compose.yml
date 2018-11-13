@@ -3,7 +3,7 @@ services:
   ssr_backend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
     volumes:
       - ".:/srv/www"
     environment:
@@ -15,6 +15,10 @@ services:
       - OWF_BACKEND_PORT='8080'
       - NODE_ENV
       - OWF_SSR=true
+    depends_on:
+      - redis_cache
+    links:
+      - redis_cache
 
   redis_cache:
     image: redis:5.0-alpine
