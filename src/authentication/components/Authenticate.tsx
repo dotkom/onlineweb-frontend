@@ -21,11 +21,12 @@ export const mapDispatchToProps = (dispatch: Function) => ({
   /** Not going to change the state for user */
 });
 
-const GroupAccess = ({ children, authentication, user, alt = null }: Props) => (
+const GroupAccess : React.SFC<IProps> = ({ children, authentication, user, alt }) => (
   <Fragment>{user.hasPermission(authentication) ? children : alt}</Fragment>
 );
+
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(GroupAccess);
+  )(GroupAccess);  // mismatch of user type from state and local props
