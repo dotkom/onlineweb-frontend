@@ -150,7 +150,7 @@ class Career extends React.Component<{}, ICareerState> {
               <FilterableJobList
                 handleReset={() => this.handleReset()}
                 handleTagChange={(type: TagType, changedTag: string, switchMode: boolean) =>
-                  this.handleTagChange(type, changedTag, switchMode)
+                  this.handleTagChange(type, changedTag, switchMode || false)
                 }
                 handleFilterChange={(e: React.FormEvent<HTMLInputElement>) => this.handleFilterChange(e)}
                 {...this.state}
