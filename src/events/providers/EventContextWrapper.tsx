@@ -1,5 +1,5 @@
 import { IEventViewProps } from 'events/models/Event';
-import React, { ReactChildren } from 'react';
+import React from 'react';
 import CalendarEvents from './CalendarEvents';
 import ImageEvents from './ImageEvents';
 import ListEvents from './ListEvents';

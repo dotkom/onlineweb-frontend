@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { Component, ReactChildren } from 'react';
+import React, { Component } from 'react';
 import Router, { Link } from 'react-router-dom';
 import { routes } from '../index';
 import style from './mainMenu.less';

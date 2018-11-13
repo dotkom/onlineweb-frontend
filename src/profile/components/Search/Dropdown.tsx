@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import Collapsible from 'common/components/Collapsible';
 import { IGroup } from 'core/models/Group';
-import React, { ReactChild } from 'react';
+import React from 'react';
 import style from './search.less';
 
 export interface IProps {

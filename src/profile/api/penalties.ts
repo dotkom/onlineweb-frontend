@@ -1,8 +1,5 @@
-import { get } from 'common/utils/api';
 import { IUser } from 'core/models/User';
 import { IMark, ISuspension } from '../models/Penalty';
-
-const API_URL = '/api/v1/profile';
 
 const userMock: IUser = {
   email: 'ola.nordmann@online.ntnu.no',

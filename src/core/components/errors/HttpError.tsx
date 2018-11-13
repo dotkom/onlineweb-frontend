@@ -9,15 +9,6 @@ export interface IProps {
   text?: string;
 }
 
-const errorString = (code: ErrorCode): string => {
-  switch (code) {
-    case 404:
-      return 'Page not found';
-    default:
-      return '';
-  }
-};
-
 const NotFound = ({ code, text }: IProps) => (
   <section>
     <div className={style.header}>
