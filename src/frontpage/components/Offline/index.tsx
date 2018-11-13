@@ -1,4 +1,5 @@
 import Heading from 'common/components/Heading';
+import { IOfflineIssuesState, OfflineContext } from 'frontpage/providers/OfflineIssues';
 import React, { Component } from 'react';
 <<<<<<< HEAD
 import { getOfflines, getRemaindingOfflines } from '../../api/offline';
@@ -13,27 +14,41 @@ import OfflineCarousel from './OfflineCarousel';
 export interface IProps {}
 
 export interface IState {
+<<<<<<< HEAD
   dataRemainding: boolean;
   offlines: IOfflineIssue[];
+=======
+  index: number;
+>>>>>>> Set up frontapge Articles and Offlines to use a top level provider for cache input
   page: number;
 }
 
 const DISPLAY_NUMBER = 5;
 
 class Offline extends Component<IProps, IState> {
+  public static contextType = OfflineContext;
   public state: IState = {
+<<<<<<< HEAD
 <<<<<<< HEAD
     dataRemainding: false,
     offlines: [],
 =======
     offlines: getServerCacheOfflines(),
+=======
+>>>>>>> Set up frontapge Articles and Offlines to use a top level provider for cache input
     index: 0,
 >>>>>>> Implement standardized cache resolver, and implement enironment to make sure it works without SSR
     page: 1,
   };
 
   public async componentDidMount() {
+<<<<<<< HEAD
     const data = await getOfflines(1);
+=======
+    const { init }: IOfflineIssuesState = this.context;
+    init();
+  }
+>>>>>>> Set up frontapge Articles and Offlines to use a top level provider for cache input
 
     this.setState({
       dataRemainding: Boolean(data.next),
@@ -41,6 +56,7 @@ class Offline extends Component<IProps, IState> {
     });
   }
 
+<<<<<<< HEAD
   public handleNext = async () => {
     if (this.state.dataRemainding) {
       const remainding = await getRemaindingOfflines();
@@ -69,6 +85,17 @@ class Offline extends Component<IProps, IState> {
 
     const visibleOfflines = offlines.slice(DISPLAY_NUMBER * (page - 1), DISPLAY_NUMBER * page);
 
+=======
+  public async clickNext(amount: number) {
+    const { index, loadAll } = this.state;
+  }
+
+  public render() {
+    const { index, page } = this.state;
+    const { offlines }: IOfflineIssuesState = this.context;
+    const start = index;
+    const end = start + DISPLAY_NUMBER;
+>>>>>>> Set up frontapge Articles and Offlines to use a top level provider for cache input
     return (
       <section className={style.container}>
         <Heading title="Offline" />

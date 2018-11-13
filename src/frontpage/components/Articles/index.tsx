@@ -1,5 +1,4 @@
-import { getArticles, getServerCacheArticles } from 'articles/api';
-import { IArticle } from 'articles/models/Article';
+import { FrontpageArticleContext, IFrontpageArticlesState } from 'articles/providers/FrontpageArticles';
 import Heading from 'common/components/Heading';
 import React, { Component } from 'react';
 import style from './articles.less';
@@ -9,25 +8,25 @@ import SmallArticle from './SmallArticle';
 export interface IProps {}
 
 export interface IState {
-  articles: IArticle[];
   index: number;
 }
 
 const DISPLAY_NUMBER = 3;
 
 class Articles extends Component<IProps, IState> {
+  public static contextType = FrontpageArticleContext;
   public state: IState = {
-    articles: getServerCacheArticles(),
     index: 0,
   };
 
   public async componentDidMount() {
-    const articles = await getArticles();
-    this.setState({ articles });
+    const { init }: IFrontpageArticlesState = this.context;
+    init();
   }
 
   public render() {
-    const { articles, index } = this.state;
+    const { index } = this.state;
+    const { articles }: IFrontpageArticlesState = this.context;
     const start = index + 1;
     const end = start + DISPLAY_NUMBER;
     return (
