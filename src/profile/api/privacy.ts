@@ -1,7 +1,4 @@
-import { get, post } from 'common/utils/api';
 import { IPrivacy } from '../models/Privacy';
-
-const API_URL = '/api/v1/profile/privacy';
 
 const privacyMock: IPrivacy = {
   expose_address: false,

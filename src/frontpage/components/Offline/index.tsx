@@ -48,7 +48,7 @@ class Offline extends Component<IProps, IState> {
   }
 
   public render() {
-    const { offlines, index, page } = this.state;
+    const { offlines, index } = this.state;
     const start = index;
     const end = start + DISPLAY_NUMBER;
     return (

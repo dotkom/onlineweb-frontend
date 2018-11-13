@@ -36,7 +36,6 @@ class DoubleSlider extends Component<IProps, IState> {
   }
 
   public render() {
-    const { onChange } = this.props;
     const {
       range: [start, end],
     } = this.state;

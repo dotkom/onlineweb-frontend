@@ -4,7 +4,7 @@ import { DOMAIN } from 'common/constants/endpoints';
 import React from 'react';
 import style from './articles.less';
 
-const MainArticle = ({ absolute_url, heading, image, ingress_short }: IArticle) => {
+const MainArticle = ({ absolute_url, heading, image }: IArticle) => {
   return (
     <a href={DOMAIN + absolute_url}>
       <div className={style.imageContainer}>

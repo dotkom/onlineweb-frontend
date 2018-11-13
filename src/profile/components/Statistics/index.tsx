@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, RouteProps, Switch } from 'react-router-dom';
 
 import HttpError from 'core/components/errors/HttpError';
-import { IProfileProps } from 'profile';
 import Orders from './Orders';
 
 const BASE_ROUTE = '/profile/statistics';
@@ -11,7 +10,7 @@ export const routes = {
   main: BASE_ROUTE + '/',
 };
 
-const Settings = (props: IProfileProps) => {
+const Settings = () => {
   return (
     <Switch>
       <StatisticsRoute exact path={routes.main} view={Orders} />

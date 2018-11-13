@@ -4,7 +4,7 @@ import { getPrivacyOptions, postPrivacyOptions } from '../../../api/privacy';
 import { IPrivacy } from '../../../models/Privacy';
 import Info from './Info';
 import Option from './Option';
-import style from './privacy.less';
+import './privacy.less';
 
 export type IState = { [key in keyof IPrivacy]: boolean };
 

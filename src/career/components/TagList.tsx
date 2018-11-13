@@ -1,6 +1,6 @@
 import React from 'react';
 import style from '../less/career.less';
-import { ITag, ITags, ITagWrapper } from '../models/Tag';
+import { ITagWrapper } from '../models/Tag';
 import Tag from './Tag';
 
 export interface ITagListProps {

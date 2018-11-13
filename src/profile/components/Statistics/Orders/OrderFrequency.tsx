@@ -36,7 +36,6 @@ const LEGENDS: CalendarLegend[] = [
 const OrderFrequency = ({ frequency }: IProps) => {
   const last = frequency[frequency.length - 1];
   const first = last.minus({ years: 1 });
-  const filtered = frequency.filter((a) => first < a);
   const dateStrings = frequency.map((date) => date.toISODate());
   const inter: Array<{ [date: string]: number }> = dateStrings.map((date) => ({ [date]: 1 }));
   const inter2: { [date: string]: number } = inter.reduce((prev, curr) => {

@@ -1,4 +1,3 @@
-import Markdown from 'common/components/Markdown';
 import React from 'react';
 import style from '../less/contribution.less';
 import { IRepository } from '../models/Repository';

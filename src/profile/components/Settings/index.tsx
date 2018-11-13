@@ -20,7 +20,7 @@ export const routes = {
   password: BASE_ROUTE + '/password',
 };
 
-const Settings = (props: IProfileProps) => {
+const Settings = (_: IProfileProps) => {
   return (
     <Switch>
       <SettingsRoute exact path={routes.main} view={SettingsInfo} />
