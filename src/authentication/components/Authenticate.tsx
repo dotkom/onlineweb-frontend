@@ -21,10 +21,9 @@ export const mapDispatchToProps = (dispatch: Function) => ({
   /** Not going to change the state for user */
 });
 
-const GroupAccess : React.SFC<IProps> = ({ children, authentication, user, alt }) => (
+const GroupAccess: React.SFC<IProps> = ({ children, authentication, user, alt }) => (
   <Fragment>{(user as AuthUser).hasPermission(authentication) ? children : alt}</Fragment>
 );
-
 
 export default connect(
   mapStateToProps,
