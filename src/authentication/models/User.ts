@@ -1,10 +1,7 @@
 import { IGroup } from 'core/models/Group';
 import { Permission } from 'core/models/Permission';
-<<<<<<< 3e8809a5d36ae5659f867926f74f6e4cecd8fb2f
 import { Email, FieldOfStudy, IUser } from 'core/models/User';
-=======
 import { User } from 'oidc-client';
->>>>>>> Configure authentication api to use oidc manager, and set up authentication model for oidc
 
 export interface IAuthUser extends User {
   profile: IAuthProfile;
