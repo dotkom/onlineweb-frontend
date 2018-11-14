@@ -1,3 +1,4 @@
+@import '~common/less/constants.less';
 @import '~common/less/mixins.less';
 
 @edge-height: 20px;
@@ -76,6 +77,15 @@
   width: 100%;
 }
 
+.largeImageEmpty {
+  height: 100%;
+  margin: auto;
+
+  path {
+    fill: @lightGray;
+  }
+}
+
 .largeContent {
   position: relative;
   display: grid;
@@ -95,6 +105,15 @@
     transition: all 0.25s;
     transition-timing-function: ease-in;
   }
+}
+
+.largeContentEmpty {
+  display: block;
+  padding: 10px 15px;
+  margin-top: -25px;
+  font-size: @owFontM;
+  text-align: center;
+  color: @gray;
 }
 
 .small {

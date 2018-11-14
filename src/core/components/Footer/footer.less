@@ -1,28 +1,12 @@
+@import '~common/less/colors.less';
+
 .footer {
-  display: flex;
-  background: #333;
+  display: grid;
+  grid-gap: 20px;
+  background: @darkGray;
+  color: @lightGray;
   justify-content: center;
   padding: 30px 20px;
-  line-height: 1.65;
-
-  & > div {
-    width: 300px;
-  }
-
-  & p,
-  & div {
-    color: #bbb;
-  }
-
-  & a {
-    color: #589dd8;
-  }
-}
-
-.addressContainer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 10px;
 }
 
 .social {
@@ -35,18 +19,39 @@
     img {
       height: 32px;
     }
-
-    &:hover {
-      opacity: 1;
-    }
   }
 }
 
 .contactDevelopers {
   margin-top: 20px;
+
+  a {
+    color: lighten(@blue, 25%);
+
+    &::after {
+      background: lighten(@blue, 25%);
+    }
+  }
 }
 
-.contactInfo .contactItem {
+.contactDevelopers a:hover {
+  color: lighten(@blue, 45%);
+
+  &::after {
+    background: lighten(@blue, 45%);
+  }
+}
+
+.social a:hover {
+  opacity: 1;
+}
+
+.contactInfo,
+.addressContainer {
+  grid-column: 2;
+}
+
+.contactItem {
   margin-bottom: 5px;
 
   svg {
@@ -54,13 +59,34 @@
   }
 }
 
-.address {
-  margin-top: 30px;
-  color: #bbb;
-  margin-bottom: 30px;
+.developers {
+  text-align: center;
+}
 
+.dotkom {
+  fill: @lightGray;
+  fill-rule: evenodd;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.developersHovered {
+  opacity: 1;
+}
+
+.addressContainer {
+  display: grid;
+  grid-gap: 25px;
+  grid-auto-flow: column;
+}
+
+.address {
   .addressHeading {
     font-weight: bold;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 5px;
   }
 }
 

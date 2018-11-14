@@ -6,6 +6,7 @@ import { Route, Router, Switch } from 'react-router-dom';
 
 import EventsRouter from 'events/components/EventsRouter';
 import Career from './career/';
+import Contribution from './contribution';
 import Core from './core';
 import HttpError from './core/components/errors/HttpError';
 import Frontpage from './frontpage';
@@ -19,6 +20,7 @@ export const routes = {
   events: '/events',
   home: '/',
   career: '/career',
+  contribution: '/contribution',
   hobbygroups: '/hobbygroups',
   resources: '/resources',
   wiki: '/wiki',
@@ -42,6 +44,7 @@ export const App = () => {
             <Route exact path={routes.home} component={Frontpage} />
             <Route path={routes.events} component={EventsRouter} />
             <Route path={routes.career} component={Career} />
+            <Route path={routes.contribution} component={Contribution} />
             <Route path={routes.hobbygroups} component={Hobbys} />
             <Route path={routes.resources} component={Resources} />
             <Route path={routes.profile} component={LoadableProfile} />

@@ -14,11 +14,11 @@
     "lint": "yarn lint-ts ; yarn lint-less ; yarn lint-prettier",
     "lint-ts": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
     "lint-less": "stylelint src/**/*.less",
-    "lint-prettier": "prettier-check src/**/*.{ts,tsx,less}",
+    "lint-prettier": "prettier-check 'src/**/*.{ts,tsx,less}'",
     "lint:fix": "yarn lint-ts:fix && yarn lint-less:fix && yarn lint-prettier:fix",
     "lint-ts:fix": "tslint --fix -c tslint.json 'src/**/*.{ts,tsx}'",
     "lint-less:fix": "yarn lint-less --fix",
-    "lint-prettier:fix": "prettier-check --write src/**/*.{ts,tsx,less}",
+    "lint-prettier:fix": "prettier-check --write 'src/**/*.{ts,tsx,less}'",
     "test": "jest --env=jsdom"
   },
   "devDependencies": {
@@ -33,6 +33,9 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
     "@dotkomonline/react-components": "^2.0.0",
+    "@nivo/bar": "^0.51.0",
+    "@nivo/calendar": "^0.51.0",
+    "@nivo/pie": "^0.51.0",
     "@types/enzyme": "^3.1.11",
     "@types/jest": "^23.1.6",
     "@types/luxon": "^0.5.2",

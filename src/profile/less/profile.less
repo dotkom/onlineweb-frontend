@@ -1,15 +1,16 @@
+@import '~common/less/colors.less';
 @import '~common/less/mixins.less';
 
 .header {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 20px 0;
+  padding-bottom: 20px;
 
   .profileImage {
     border-radius: 50%;
     width: 140px;
-    border: 6px solid #333;
+    border: 6px solid @darkGray;
   }
 
   h1 {
@@ -21,6 +22,7 @@
 .profile {
   .owCard();
   padding: 30px 20px;
+  width: 100%;
 }
 
 .infoGroup:not(:last-child) {
@@ -96,49 +98,11 @@
   display: block;
 }
 
-.medalDescription {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(29, 106, 154, 0.72);
-  color: #fff;
-  visibility: hidden;
-  opacity: 0;
-
-  /* transition effect. not necessary */
-  transition: opacity 0.2s, visibility 0.2s;
-}
-
-.medalWrapper:hover .medalDescription {
-  visibility: visible;
-  opacity: 1;
-}
-
 .medalWrapper {
   position: relative;
-}
-
-.smallContainer {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  .name {
-    font-size: 2em;
-    font-weight: 800;
-  }
 }
 
 .progressWrapper {
   max-width: 480px;
   margin: 0 200px;
-}
-
-.picturePadding {
-  margin: 20px;
-}
-
-.gridRow {
-  .owCard();
 }
