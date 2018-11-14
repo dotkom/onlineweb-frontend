@@ -50,7 +50,7 @@ export const App = () => {
             <Route path={routes.contribution} component={Contribution} />
             <Route path={routes.hobbygroups} component={Hobbys} />
             <Route path={routes.resources} component={Resources} />
-            <Route path={routes.profile} component={Profile} />
+            <Route path={routes.profile} component={LoadableProfile} />
             <Route path={routes.authCallback} component={AuthCallback} />
             <Route path="*" render={() => <HttpError code={404}/>} />
           </Switch>
