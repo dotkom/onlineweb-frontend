@@ -31,7 +31,13 @@ class Searchbar extends Component<IProps, IState> {
     const { groups } = this.state;
     return (
       <form className={style.grid}>
-        <input className={style.searchInput} type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        <input
+          placeholder="Søk"
+          className={style.searchInput}
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <Dropdown selected={group} onClick={(g: IGroup) => setGroup(g)} groups={groups} />
         <DoubleSlider range={year || [1, 6]} onChange={(range) => setYear(range)} />
       </form>

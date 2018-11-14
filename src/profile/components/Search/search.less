@@ -1,47 +1,31 @@
-@import '../../less/profile.less';
+@import '~common/less/colors.less';
+@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
 
 .grid {
   display: grid;
+  align-items: end;
   grid-template-columns: 5fr 2fr 3fr;
-  padding-top: 10px;
-  padding-bottom: 40px;
   grid-gap: 20px;
-}
-
-.searchField {
-  height: 45px;
+  width: 100%;
 }
 
 .searchInput {
-  border-bottom: 2px solid #808080;
+  color: @darkGray;
   background: none;
-  height: 47px;
-  color: #636363;
-  caret-color: #636363;
-  font-weight: 500;
-  font-size: 32px;
-  padding-left: 6px;
-  transition: background 0.2s ease;
+  border-bottom: 2px solid;
+  font-size: @owFontXL;
+  padding: 5px;
   .owOutline();
 }
 
-.searchInput:focus,
-.searchInput:hover {
-  background: rgba(0, 0, 0, 0);
-  animation: inuse 2.2s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
+.searchInput:focus {
+  animation: inuse 2.5s ease-in-out infinite;
 }
 
 @keyframes inuse {
-  0% {
-    background: rgba(0, 0, 0, 0);
-  }
   50% {
-    background: rgba(#223254, 0.05);
-  }
-  100% {
-    background: rgba(0, 0, 0, 0);
+    background: darken(@pageBackground, 5%);
   }
 }
 
@@ -57,7 +41,7 @@
     display: table;
     text-align: center;
     margin: 0 auto;
-    background: #07244c;
+    background: @blue;
     color: #fff;
     position: relative;
     border-radius: 5px;
@@ -69,7 +53,7 @@
     position: absolute;
     width: 0;
     height: 0;
-    border-right: 20px solid #07244c;
+    border-right: 20px solid @blue;
     border-bottom: 15px solid transparent;
     transform: skewX(-33deg);
     left: 14%;
@@ -78,42 +62,35 @@
   }
 }
 
-.dropdownContainer {
-  z-index: 100;
+.dropdown {
+  position: relative;
+  border: 2px solid @darkGray;
+  user-select: none;
+}
+
+.dropdownItems {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: -2px;
+  transform: translateY(100%);
+  border: 2px solid @darkGray;
 }
 
 .dropdownItem {
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
   position: relative;
-  height: inherit;
-  width: 100%;
-  text-align: center;
   animation: fadein 0.2s;
   animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1);
-  border-left: 2px solid #808080;
-  border-right: 2px solid #808080;
   background: #fff;
-
-  // The percentages in the h4 and svg will stay 'constant' because the height they inherit from is constant
-  > h4 {
-    position: absolute;
-    top: 33%;
-    left: 7%;
-  }
+  transition: background 0.2s;
 
   > svg {
-    position: absolute;
-    right: 7%;
-    top: 26%; //This is 26 and not 33 because the Font-awesome svg has an 'empty' first few pixels on the top
+    margin-left: 20px;
+    margin-bottom: 8px;
   }
-}
-
-.dropdownItem:first-child {
-  border-top: 2px solid #808080;
-  background: #fff;
-}
-
-.dropdownItem:last-child {
-  border-bottom: 2px solid #808080;
 }
 
 @keyframes fadein {
@@ -125,12 +102,38 @@
   }
 }
 
-.dropdownSelected {
-  background: #e3e3e3;
+.dropdownItems .dropdownSelected,
+.dropdownItem:hover {
+  background: darken(#fff, 10%);
 }
 
 .smallProfileGrid {
   display: grid;
+  margin-top: 40px;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  width: 100%;
+}
+
+.smallProfile {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 20px;
+  align-items: center;
+  padding: 20px;
+  .owCard();
+
+  > img {
+    border-radius: 50%;
+  }
+
+  .name {
+    font-size: @owFontXL;
+    font-weight: bold;
+  }
+
+  .infoType {
+    margin-top: 10px;
+    font-weight: bold;
+  }
 }

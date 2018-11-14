@@ -17,26 +17,26 @@ class Dropdown extends Collapsible<IProps> {
     const { groups, selected, onClick } = this.props;
     const { collapsed } = this.state;
     return (
-      <div className={classnames(style.dropdownContainer, style.searchField)}>
-        {collapsed ? (
-          <Item selected={!selected || true} onClick={() => this.toggleCollapse()}>
-            <h4>{selected || 'Velg en gruppe'}</h4>
-            <FontAwesomeIcon icon={faSortDown} />
-          </Item>
-        ) : (
-          groups.map((group) => (
-            <Item
-              key={group.name}
-              selected={group.name === selected}
-              className={style.dropped}
-              onClick={() => {
-                onClick(group);
-                this.toggleCollapse();
-              }}
-            >
-              <h4>{group.name}</h4>
-            </Item>
-          ))
+      <div className={style.dropdown}>
+        <Item selected={!selected || true} onClick={() => this.toggleCollapse()}>
+          <p>{selected || 'Velg en gruppe'}</p>
+          <FontAwesomeIcon icon={faSortDown} />
+        </Item>
+        {!collapsed && (
+          <div className={style.dropdownItems}>
+            {groups.map((group) => (
+              <Item
+                key={group.name}
+                selected={group.name === selected}
+                onClick={() => {
+                  onClick(group);
+                  this.toggleCollapse();
+                }}
+              >
+                <p>{group.name}</p>
+              </Item>
+            ))}
+          </div>
         )}
       </div>
     );
