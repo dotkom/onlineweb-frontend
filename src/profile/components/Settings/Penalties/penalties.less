@@ -36,8 +36,10 @@
 
 .rules {
   margin-top: 20px;
+  animation: rulesIn 1s;
+  overflow: hidden;
   padding: 20px;
-  border: 1px solid;
+  opacity: 1;
 
   h3 {
     margin-bottom: 10px;
@@ -58,5 +60,16 @@
     &:not(:last-child) {
       margin-bottom: 10px;
     }
+  }
+}
+
+@keyframes rulesIn {
+  from {
+    height: 0px;
+    opacity: 0;
+  }
+  to {
+    height: 100%;
+    opacity: 1;
   }
 }
