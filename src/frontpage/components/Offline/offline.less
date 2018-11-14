@@ -1,3 +1,5 @@
+@import '~common/less/mixins.less';
+
 .container {
   margin-top: 40px;
   width: 100%;
@@ -14,12 +16,21 @@
 
 .carousel {
   display: flex;
-  margin: 0 10px;
+  margin: 0 30px;
   flex-grow: 1;
   justify-content: space-between;
+}
 
-  div {
-    transition: 1s ease-in 0.2s;
-    text-align: center;
+.carouselItem {
+  .owCard();
+  transition: 1s ease-in 0.2s;
+  text-align: center;
+
+  a {
+    color: #000;
+  }
+
+  p {
+    margin: 5px 0;
   }
 }
