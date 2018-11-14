@@ -20,6 +20,54 @@
   align-items: center;
 }
 
+.menuButton {
+  position: relative;
+  height: 57px;
+  width: 57px;
+  background: none;
+  border: none;
+  margin: -20px 0 -20px -20px;
+  display: none;
+  cursor: pointer;
+
+  @media (max-width: @owTabletBreakpoint) {
+    display: block;
+  }
+}
+
+.menuButtonSVG {
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: #fff;
+  transition-timing-function: ease-in-out;
+  transition: all 0.3s;
+
+  .open & {
+    transform: rotate3d(0, 0, 1, -135deg);
+
+    &:first-child {
+      transform: rotate3d(0, 0, 1, 135deg);
+    }
+  }
+}
+
+.menuButtonSVGTop {
+  transform: translate3d(0, -8px, 0);
+
+  .open & {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.menuButtonSVGBottom {
+  transform: translate3d(0, 8px, 0);
+
+  .open & {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 .links {
   display: flex;
   text-transform: uppercase;
