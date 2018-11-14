@@ -1,6 +1,8 @@
-import { RequestOptions } from 'http';
 import { DOMAIN } from '../constants/endpoints';
-import { toQueryString } from './queryString';
+import { RequestOptions } from 'http';
+import { toQueryString, toQueryObject } from './queryString';
+
+import { IAuthuser } from 'authentication/models/User';
 
 export interface IAPIData<T> {
   count: number;
@@ -14,21 +16,36 @@ export interface IBaseAPIParameters {
   page?: number;
 }
 
+
+
+const makeRequest = (query: string, parameters: object = {}, options: RequestInit = {}) => {
+  const queryString = toQueryString(parameters);
+  return new Request(DOMAIN + query + queryString, options);
+}
+
+const performRequest = async (request: Request) => {
+  const respons = await fetch(request);
+  return respons.json();
+}
+
+export const withUser = (user: IAuthUser, options: RequestInit={}) : RequstInit => {
+  const token = user.access_token;
+  const headers = Object.assign(options.headers || {}, {
+    'Authorization': `Bearer ${token}`
+  });
+  return Object.assign(options, {
+    headers
+  })
+}
+
 /**
  * @summary Simple fetch-API wrapper for HTTP GET
  * @param {string} query API endpoint URL
  * @returns {Promise<any>} API data
  */
-export const get = async (query: string, parameters: object = {}, options?: RequestInit): Promise<any> => {
-  const queryString = toQueryString(parameters);
-  try {
-    const response = await fetch(DOMAIN + query + queryString, options);
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    /* tslint:disable-next-line: no-console */
-    console.error(error);
-  }
+export const get = async (query: string, parameters: object = {}, options: RequestInit = {}): Promise<any> => {
+  const request = makeRequest(query, parameters, options)
+  return performRequest(request);
 };
 
 /**
@@ -39,17 +56,26 @@ export const get = async (query: string, parameters: object = {}, options?: Requ
  * @param {object} parameters
  * @returns {Promise<any>}
  */
-export const post = async (query: string, data: any, parameters: object = {}, options?: RequestInit): Promise<any> => {
-  const queryString = toQueryString(parameters);
-  try {
-    const response = await fetch(
-      DOMAIN + query + queryString,
-      Object.assign(options || {}, { method: 'POST', body: JSON.stringify(data) })
-    );
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    /* tslint:disable-next-line: no-console */
-    console.error(error);
-  }
+export const post = async (query: string, data: any, parameters: object = {}, options: RequestInit = {}): Promise<any> => {
+  const request = makeRequest(
+    string, 
+    parameters, 
+    Object.assign(options, {
+      methods: 'POST', 
+      body: JSON.stringify(data)
+    })
+  );
+  return performRequest(request);
 };
+
+
+export const getAll = async (query: string, parameters: object = {}, options: RequestInit = {}, page: number = 1): Promise<any> => {
+  parameters.page = page
+  const data = await get(query, parameters, options); 
+  const { result, next } = data;
+  if(next){
+     resutlt = [...result, ... await getAll(query, parameters, options, next)]
+  }
+
+  return result || [];
+}
