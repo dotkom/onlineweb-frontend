@@ -1,13 +1,26 @@
 import { routes } from 'App';
 import Authenticate from 'authentication/components/Authenticate';
 import { STATIC_URL } from 'common/constants/endpoints';
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import style from './header.less';
 import HeaderLogo from './HeaderLogo';
 import MainSponsor from './MainSponsor';
 
-export const Header = () => (
+export interface IProps {}
+
+export interface IState {
+  isOpen: Boolean;
+}
+
+class Header extends Component<IProps, IState> {
+  public state: IState = {
+    isOpen: false,
+  };
+
+
+  public render() {
+    return (
   <header className={style.header}>
     <div className={style.grid}>
       <HeaderLogo />
@@ -27,5 +40,7 @@ export const Header = () => (
     </div>
   </header>
 );
+  }
+}
 
 export default Header;
