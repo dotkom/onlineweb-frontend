@@ -37,8 +37,13 @@
 
 .choice {
   cursor: pointer;
+  transition: transform 0.25s; 
 
   .owOutline();
+}
+
+.choice:hover > svg{
+  transform: scale(1.1, 1.1);
 }
 
 .choiceActive > svg rect {

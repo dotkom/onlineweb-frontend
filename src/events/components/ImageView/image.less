@@ -55,6 +55,20 @@
     width: 100%;
     left: 0;
     clip-path: polygon(0 0, 0 5%, 75% 100%, 100% 5%, 100% 0);
+
+    transition: all 0.25s;
+    transition-timing-function: ease-in;
+  }
+}
+
+.largeEventGrid a:hover .large{
+
+  .imageLargeType::after{
+    clip-path: polygon(0 0, 0 5%, 25% 100%, 100% 5%, 100% 0);
+  }
+
+  .largeContent::before{
+    clip-path: polygon(0 100%, 0 95%, 75% 0, 100% 95%, 100% 100%);
   }
 }
 
@@ -77,6 +91,9 @@
     width: 100%;
     left: 0;
     clip-path: polygon(0 100%, 0 95%, 25% 0, 100% 95%, 100% 100%);
+
+    transition: all 0.25s;
+    transition-timing-function: ease-in;
   }
 }
 
@@ -95,6 +112,33 @@
     top: 0;
     height: 100%;
     clip-path: polygon(0 0, 0 50%, 100% 0);
+
+    transition-timing-function: ease-in;
+    transition: all 0.2s;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+    width: 15px;
+    top: 0;
+    right: 0;
+    height: 100%;
+    clip-path: polygon(100% 100%, 100% 100%, 100% 100%);
+
+    transition-timing-function: ease-in;
+    transition: all 0.2s;
+  }
+}
+
+.smallEventGrid a:hover .small{
+  &::before{
+    clip-path: polygon(0 0, 0 0, 0 0);
+  }
+  
+  &::after{
+    clip-path: polygon(100% 100%, 0 100%, 100% 50%);
   }
 }
 
