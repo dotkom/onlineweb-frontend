@@ -13,7 +13,7 @@
 
 .grid {
   display: flex;
-  width: 1200px;
+  width: 100%;
   padding: 10px 20px;
   margin: auto;
   justify-content: space-between;
@@ -24,6 +24,12 @@
   display: flex;
   text-transform: uppercase;
   color: #fff;
+
+  @media (max-width: @owTabletBreakpoint) {
+    display: none;
+  }
+  @media (max-width: @owMobileBreakpoint) {
+  }
 
   & > a {
     font-size: @owFontXS;
