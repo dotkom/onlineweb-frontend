@@ -9,6 +9,7 @@ import Info from './Info';
 import InfoGroup from './InfoGroup';
 import MedalsView from './MedalsView';
 import Progress from './Progress';
+import Link from './Link';
 
 import { Content, FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
 import KeyValue from './KeyValue';
@@ -87,9 +88,9 @@ class Profile extends React.Component<IProps, IState> {
           <SplitPane>
             <Pane>
               <Content title="Eksterne sider">
-                <KeyValue k="Github" v={user.external.github} />
-                <KeyValue k="Linkedin" v={user.external.linkedin} />
-                <KeyValue k="Hjemmeside" v={user.external.homepage} />
+                <Link k="Github" v={user.external.github} />
+                <Link k="Linkedin" v={user.external.linkedin} />
+                <Link k="Hjemmeside" v={user.external.homepage} />
               </Content>
             </Pane>
           </SplitPane>
