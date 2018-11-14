@@ -12,7 +12,6 @@ const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
       <CardHeader className={style.detailHeader} color={color}>
         Kontakt
       </CardHeader>
-
       <Block title="Arrangør">
         <p>{organizer_name}</p>
         <p>komite@online.ntnu.no</p>

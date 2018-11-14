@@ -1,3 +1,5 @@
+@import '~common/less/colors.less';
+
 @size: 16px;
 @spacing: @size / 8;
 
@@ -13,7 +15,7 @@
   width: @size * 2;
   padding: @spacing;
   height: @size;
-  border: @spacing solid #636363;
+  border: @spacing solid @darkGray;
   border-radius: @size + @spacing;
   box-sizing: inherit;
   cursor: pointer;
@@ -24,14 +26,14 @@
   width: @size;
   height: @size;
   border-radius: 50%;
-  background: #d06969;
+  background: @red;
   transition: 0.2s;
   justify-content: center;
 }
 
 .sliderChecked {
   left: @size;
-  background: #0060a3;
+  background: @green;
 }
 
 .icon {
@@ -41,19 +43,19 @@
 
 .container:hover {
   .slider {
-    background: #a55555;
+    background: darken(@red, 10%);
   }
 
   .sliderChecked {
-    background: #004b80;
+    background: darken(@green, 10%);
   }
 }
 
 .container:disabled {
-  background: #f0f0f0;
-  border-color: #b8b8b8;
+  background: @offWhite;
+  border-color: @lightGray;
 
   .slider {
-    background: #ababab;
+    background: @lightGray;
   }
 }

@@ -1,9 +1,15 @@
+@import '~common/less/colors.less';
 @import '~common/less/constants.less';
 
 @headerHeight: 60px;
 @headerPaddingVertical: 10px;
 @contentHeight: @headerHeight - @headerPaddingVertical * 2;
 @sponsorTextHeight: 8px;
+
+.header {
+  display: flex;
+  background: @deepBlue;
+}
 
 .grid {
   display: flex;
@@ -20,7 +26,7 @@
   color: #fff;
 
   & > a {
-    font-size: @owFontSmall;
+    font-size: @owFontXS;
     padding: 10px;
     margin: 0 5px;
     transition: opacity 0.2s;
@@ -29,11 +35,6 @@
       opacity: 0.75;
     }
   }
-}
-
-.header {
-  display: flex;
-  background: #07244c;
 }
 
 .logo {
@@ -60,4 +61,5 @@
   font-size: @sponsorTextHeight;
   text-align: center;
   user-select: none;
+  line-height: 1;
 }

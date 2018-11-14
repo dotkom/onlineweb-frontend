@@ -5,7 +5,7 @@ import Intro from '../components/Intro';
 
 const HobbyGroupContainer = () => (
   <section>
-    <Heading>Interessegrupper</Heading>
+    <Heading title="Interessegrupper" />
     <Intro />
     <HobbyGroupList />
   </section>

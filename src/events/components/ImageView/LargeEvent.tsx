@@ -15,20 +15,22 @@ const getEventImage = (image: IImage | null, company_event: ICompanyEvent[]) => 
     : 'https://online.ntnu.no/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png';
 };
 
-const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id, company_event }: INewEvent) => (
-  <Link to={`/events/${id}`}>
-    <div className={style.large}>
-      <h2 className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>
-        {getEventType(event_type)}
-      </h2>
-      <img className={style.largeImage} src={getEventImage(image, company_event)} />
-      <div className={style.largeContent}>
-        <p>{title}</p>
-        <p>{getEventAttendees(attendance_event)}</p>
-        <p>{DateTime.fromISO(event_start).toFormat('dd.MM')}</p>
+const LargeEvent = ({ image, event_type, title, event_start, attendance_event, id, company_event }: INewEvent) => {
+  return (
+    <Link to={`/events/${id}`}>
+      <div className={style.large}>
+        <h2 className={style.imageLargeType} style={{ background: getEventColor(event_type) }}>
+          {getEventType(event_type)}
+        </h2>
+        <img className={style.largeImage} src={getEventImage(image, company_event)} />
+        <div className={style.largeContent}>
+          <p>{title}</p>
+          <p>{getEventAttendees(attendance_event)}</p>
+          <p>{DateTime.fromISO(event_start).toFormat('dd.MM')}</p>
+        </div>
       </div>
-    </div>
-  </Link>
-);
+    </Link>
+  );
+};
 
 export default LargeEvent;

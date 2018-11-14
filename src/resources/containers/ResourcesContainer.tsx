@@ -4,7 +4,7 @@ import ResourceList from '../components/ResourceList';
 
 const ResourcesContainer = () => (
   <section>
-    <Heading>Ressurssenter</Heading>
+    <Heading title="Ressurssenter" />
     <ResourceList />
   </section>
 );

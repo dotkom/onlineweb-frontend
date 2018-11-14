@@ -67,6 +67,13 @@ export const getEventColor = (n: number): string => {
   }
 };
 
+/* TODO: Replace with ICSS exports */
+export const EVENT_COLORS = ['#eb536e', '#127dbd', '#43b171', '#fdbd47', '#2ac6f9', '#e75e3b', '#b36bcd'];
+
+/* lighten(EVENT_COLORS, 20%);
+   TODO: Replace with ICSS exports */
+export const LIGHT_EVENT_COLORS = ['#ef758b', '#4197ca', '#69c18d', '#fdca6c', '#55d1fa', '#ec7e62', '#c289d7'];
+
 export const mockEvent: INewEvent = {
   absolute_url: '',
   attendance_event: null,

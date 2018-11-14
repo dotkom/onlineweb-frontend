@@ -1,25 +1,20 @@
+@import '~common/less/colors.less';
+
 .element {
   display: flex;
-  padding-bottom: 3px;
-  border-bottom: 1px solid #b3b3b3;
+  align-items: center;
   justify-content: space-between;
+  padding: 15px 0 5px;
+  border-bottom: 2px solid @lightGray;
+  transition: border-color 0.1s;
 
   &:hover {
-    border-bottom: 1px solid #004b80;
+    border-color: @gray;
   }
 }
 
 .toggle {
   align-self: center;
-}
-
-.container {
-  display: grid;
-  grid-gap: 10px;
-}
-
-.divider {
-  height: 20px;
 }
 
 .margin {

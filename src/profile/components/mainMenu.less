@@ -1,0 +1,25 @@
+@import '~common/less/colors.less';
+@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
+
+.menuGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.menuElement {
+  display: grid;
+  padding: 10px;
+  justify-items: center;
+  border-bottom: 3px solid @lightGray;
+
+  h1 {
+    font-size: @owFontM;
+  }
+}
+
+.menuElementActive {
+  border-color: @darkGray;
+}

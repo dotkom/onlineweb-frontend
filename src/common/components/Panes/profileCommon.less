@@ -1,0 +1,30 @@
+@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
+
+@grid-gap: 30px;
+
+.pane {
+  .owCard();
+
+  & > div {
+    padding: 30px;
+  }
+}
+
+.page {
+  display: grid;
+  gap: @grid-gap;
+}
+
+.splitPane {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: @grid-gap;
+}
+
+.fourSplitPane {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: @grid-gap;
+}

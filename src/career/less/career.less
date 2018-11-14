@@ -15,7 +15,7 @@
 }
 
 .searchBox {
-  border: 3px solid darken(@baby-blue-medium, 10%);
+  border: 3px solid darken(@lightBlue, 10%);
   padding: 10px;
   margin: 10px 0;
   width: 100%;
@@ -26,25 +26,25 @@
 }
 
 .jobInfoTitle {
-  color: #0069b3;
+  color: @blue;
+  transition: color 0.2s;
 
   &:hover {
-    color: darken(#0069b3, 10%);
+    color: darken(@blue, 10%);
     text-decoration: underline;
   }
 }
 
 .jobMeta {
-  border-top: 1px dotted #ccc;
-  margin-top: 10px;
+  border-top: 1px dotted @lightGray;
+  padding-top: 10px;
   display: grid;
-  padding: 10px;
   grid-gap: 10px;
   grid-template-columns: repeat(3, 1fr);
-  font-size: @owFontSmall;
+  font-size: @owFontXS;
 
   & > p {
-    color: #aaa;
+    color: @gray;
   }
 }
 
@@ -85,21 +85,22 @@
 }
 
 .filters {
-  background: @baby-blue-medium;
+  background: @lightBlue;
   padding: 15px;
   margin-bottom: 20px;
   grid-area: filter;
   color: #fff;
 
   button {
-    background: @baby-blue;
+    background: darken(@lightBlue, 10%);
     color: #fff;
     border: none;
     display: inline-block;
     text-align: center;
     width: 100%;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding: 10px;
+    transition: background 0.1s;
+    cursor: pointer;
   }
 }
 
@@ -112,19 +113,18 @@
   }
 
   button {
-    display: inline-flex;
-    padding: 10px;
     margin-right: 5px;
     margin-bottom: 5px;
-    color: #fff;
     width: auto;
-    background: @baby-blue;
-    cursor: pointer;
   }
 
   .selected {
-    background: darken(@baby-blue, 10%);
+    background: darken(@lightBlue, 20%);
   }
+}
+
+.filters button:hover {
+  background: darken(@lightBlue, 15%);
 }
 
 .detail {
@@ -135,9 +135,9 @@
 }
 
 .jobDescription {
-  padding: 30px;
-  color: #454545;
   .owCard();
+  padding: 30px;
+  margin-bottom: auto;
 }
 
 .jobTitle {
@@ -157,14 +157,13 @@
 
 .companyDescriptionBox,
 .keyInfo {
-  background: @baby-blue-medium;
+  background: @lightBlue;
   padding: 20px;
 }
 
 .companyDescriptionTitle,
 .keyInfo h3 {
   display: block;
-  font-size: 24px;
   margin-bottom: 6px;
   color: #fff;
 }
