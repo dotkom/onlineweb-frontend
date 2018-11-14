@@ -36,6 +36,24 @@ main {
   max-width: 1200px;
 }
 
+@media (min-width: @owMobileBreakpoint) {
+  main {
+    max-width: @owMobileBreakpoint;
+  }
+}
+
+@media (min-width: @owTabletBreakpoint) {
+  main {
+    max-width: @owTabletBreakpoint;
+  }
+}
+
+@media (min-width: 1200px) {
+  main {
+    max-width: 1200px;
+  }
+}
+
 a,
 button,
 input {
