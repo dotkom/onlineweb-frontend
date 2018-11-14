@@ -22,7 +22,7 @@ export class Footer extends Component<{}, IState> {
     const devs = this.state.devs;
     return (
       <footer className={style.footer}>
-        <div>
+        <div className="socialMedia">
           <SocialLinks />
 
           <p className={style.contactDevelopers}>
