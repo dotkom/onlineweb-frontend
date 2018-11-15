@@ -8,10 +8,8 @@ class Login extends Component<{}> {
 
   public render() {
     const { user }: IUserContext = this.context;
-    return (
-      <div>{user ? <HeaderUser user={user} /> : <LoginView />}</div>
-    )
-  };
+    return <div>{user ? <HeaderUser user={user} /> : <LoginView />}</div>;
+  }
 }
 
 export interface IProps {
