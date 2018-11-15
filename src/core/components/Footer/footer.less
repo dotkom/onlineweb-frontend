@@ -61,6 +61,11 @@
 
 .developers {
   grid-area: 'developers';
+  text-align: center;
+
+  @media (max-width: @owMobileBreakpoint) {
+    display: none;
+  }
 }
 
 .contactInfo {
@@ -69,6 +74,9 @@
 
 .addressContainer {
   grid-area: 'address';
+  display: grid;
+  grid-gap: 25px;
+  grid-auto-flow: column;
 }
 
 .contactItem {
@@ -77,10 +85,6 @@
   svg {
     margin-right: 10px;
   }
-}
-
-.developers {
-  text-align: center;
 }
 
 .dotkom {
@@ -92,12 +96,6 @@
 
 .developersHovered {
   opacity: 1;
-}
-
-.addressContainer {
-  display: grid;
-  grid-gap: 25px;
-  grid-auto-flow: column;
 }
 
 .address {
