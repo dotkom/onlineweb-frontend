@@ -1,8 +1,10 @@
 import { createBrowserHistory } from 'history';
 import React from 'react';
 import Loadable from 'react-loadable';
-import { Provider } from 'react-redux';
 import { Route, Router, Switch } from 'react-router-dom';
+
+import AuthCallback from 'authentication/components/AuthCallback';
+import AuthProvider from 'authentication/providers/UserProvider';
 
 import EventsRouter from 'events/components/EventsRouter';
 import Career from './career/';
@@ -14,7 +16,6 @@ import Hobbys from './hobbygroups';
 import Resources from './resources';
 
 import Spinner from 'common/components/Spinner';
-import store from './authentication';
 
 export const routes = {
   events: '/events',
@@ -26,6 +27,7 @@ export const routes = {
   wiki: '/wiki',
   webshop: '/webshop',
   profile: '/profile',
+  authCallback: '/auth/callback',
 };
 
 const LoadableProfile = Loadable({
@@ -37,7 +39,7 @@ const history = createBrowserHistory();
 
 export const App = () => {
   return (
-    <Provider store={store}>
+    <AuthProvider>
       <Router history={history}>
         <Core>
           <Switch>
@@ -48,11 +50,12 @@ export const App = () => {
             <Route path={routes.hobbygroups} component={Hobbys} />
             <Route path={routes.resources} component={Resources} />
             <Route path={routes.profile} component={LoadableProfile} />
+            <Route path={routes.authCallback} component={AuthCallback} />
             <Route path="*" render={() => <HttpError code={404} />} />
           </Switch>
         </Core>
       </Router>
-    </Provider>
+    </AuthProvider>
   );
 };
 

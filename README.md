@@ -9,6 +9,8 @@ git clone <repo>
 yarn
 
 export OW4_ADDRESS='https://online.ntnu.no'
+# Key needed for allowing authentication with Onlineweb4
+export OW4_SSO_CLIENT_ID='<your-client-id>'
 
 yarn dev
 ```

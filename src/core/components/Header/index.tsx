@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import style from './header.less';
 import HeaderLogo from './HeaderLogo';
+import HeaderLogin from './Login';
 import MainSponsor from './MainSponsor';
 import MenuButton from './MenuButton';
 
@@ -55,10 +56,9 @@ class Header extends Component<IProps, IState> {
             <Link to={routes.resources}>Ressurser</Link>
             <Link to={routes.contribution}>Bidra</Link>
             <Link to={routes.hobbygroups}>Interessegrupper</Link>
-            <Authenticate authentication={'view_wiki'}>
-              <Link to={routes.wiki}>Wiki</Link>
-            </Authenticate>
+            <Link to={routes.wiki}>Wiki</Link>
             <Link to={routes.webshop}>Webshop</Link>
+            <HeaderLogin />
           </div>
           <MainSponsor />
         </div>

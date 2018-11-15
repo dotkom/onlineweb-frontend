@@ -1,17 +1,26 @@
-import { get } from 'common/utils/api';
-import { IAuthUser } from 'core/models/User';
-import { format } from 'path';
+import { User, UserManager } from 'oidc-client';
+import settings from './settings';
 
-const API_URL = '/sso/openid';
+const MANAGER = new UserManager(settings);
 
-const user: IAuthUser = {
-  username: 'oleast',
-  groups: [{ permissions: ['something'] }],
-  email: 'oleast@stud.ntnu.no',
-  field_of_study: 4,
+/**
+ * @summary Basic wrapper for OIDC login.
+ * Redirects the user to the authentication page defined in settings.
+ */
+export const logIn = async () => {
+  try {
+    await MANAGER.getUser();
+    MANAGER.signinRedirect();
+  } catch (e) {
+    // tslint:disable-next-line no-console
+    console.error(e);
+  }
 };
 
-export const logIn = async (username: string, password: string): Promise<IAuthUser> => {
-  // const { user } = await get(API_URL, { username, password });
+/**
+ * @summary Receives the callback from an OIDC login, and returns the user.
+ */
+export const authCallback = async (): Promise<User> => {
+  const user = await MANAGER.signinRedirectCallback();
   return user;
 };
