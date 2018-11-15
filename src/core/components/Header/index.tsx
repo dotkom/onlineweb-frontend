@@ -7,6 +7,7 @@ import style from './header.less';
 import HeaderLogo from './HeaderLogo';
 import MainSponsor from './MainSponsor';
 import MenuButton from './MenuButton';
+import classnames from 'classnames';
 
 export interface IProps {}
 
@@ -44,7 +45,10 @@ class Header extends Component<IProps, IState> {
         <div className={style.grid}>
           <MenuButton isOpen={this.state.isOpen} onClick={this.toggleMenu} />
           <HeaderLogo onClick={this.closeMenu} />
-          <div className={`${style.links} ${this.state.isOpen ? style.dropdownMode : ''}`} onClick={this.closeMenu}>
+          <div
+            className={classnames(style.links, { [style.dropdownMode]: this.state.isOpen })}
+            onClick={this.closeMenu}
+          >
             <Link to={routes.profile}>Profil</Link>
             <Link to={routes.events}>Arkiv</Link>
             <Link to={routes.career}>Karriere</Link>

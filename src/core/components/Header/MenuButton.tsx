@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './header.less';
+import classnames from 'classnames';
 
 export interface IProps {
   isOpen: boolean;
@@ -7,7 +8,7 @@ export interface IProps {
 }
 
 const MenuButton = (props: IProps) => (
-  <button className={`${style.menuButton} ${props.isOpen ? style.open : ''}`} onClick={props.onClick}>
+  <button className={classnames(style.menuButton, { [style.open]: props.isOpen })} onClick={props.onClick}>
     <svg
       x="0px"
       y="0px"
