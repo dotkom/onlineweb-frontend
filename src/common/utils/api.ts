@@ -1,5 +1,5 @@
 import { DOMAIN } from '../constants/endpoints';
-import { toQueryObject, toQueryString } from './queryString';
+import { toQueryString } from './queryString';
 
 import { IAuthUser } from 'authentication/models/User';
 
@@ -72,7 +72,7 @@ export const post = async (
 
 export const getAll = async (
   query: string,
-  parameters: object = {},
+  parameters: IBaseAPIParameters = {},
   options: RequestInit = {},
   page: number = 1
 ): Promise<any> => {
