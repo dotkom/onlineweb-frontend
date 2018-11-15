@@ -2,7 +2,7 @@ import React from 'react';
 import style from './header.less';
 
 export interface IProps {
-  isOpen: Boolean;
+  isOpen: boolean;
   onClick: any;
 }
 
