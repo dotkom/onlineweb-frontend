@@ -11,13 +11,20 @@ import MenuButton from './MenuButton';
 export interface IProps {}
 
 export interface IState {
-  isOpen: Boolean;
+  isOpen: boolean;
 }
 
 class Header extends Component<IProps, IState> {
   public state: IState = {
     isOpen: false,
   };
+
+  constructor(props: IProps) {
+    super(props);
+
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+  }
 
   public toggleMenu() {
     this.setState({
@@ -35,12 +42,9 @@ class Header extends Component<IProps, IState> {
     return (
       <header className={style.header}>
         <div className={style.grid}>
-          <MenuButton isOpen={this.state.isOpen} onClick={this.toggleMenu.bind(this)} />
-          <HeaderLogo onClick={this.closeMenu.bind(this)} />
-          <div
-            className={`${style.links} ${this.state.isOpen ? style.dropdownMode : ''}`}
-            onClick={this.closeMenu.bind(this)}
-          >
+          <MenuButton isOpen={this.state.isOpen} onClick={this.toggleMenu} />
+          <HeaderLogo onClick={this.closeMenu} />
+          <div className={`${style.links} ${this.state.isOpen ? style.dropdownMode : ''}`} onClick={this.closeMenu}>
             <Link to={routes.profile}>Profil</Link>
             <Link to={routes.events}>Arkiv</Link>
             <Link to={routes.career}>Karriere</Link>
