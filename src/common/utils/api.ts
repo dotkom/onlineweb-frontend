@@ -78,7 +78,8 @@ export const getAll = async (
 ): Promise<any> => {
   parameters.page = page;
   const data = await get(query, parameters, options);
-  const { result, next } = data;
+  const { next } = data;
+  let { result } = data;
   if (next) {
     result = [...result, ...(await getAll(query, parameters, options, next))];
   }
