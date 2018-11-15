@@ -3,7 +3,7 @@ import style from './header.less';
 
 export interface IProps {
   isOpen: boolean;
-  onClick: any;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const MenuButton = (props: IProps) => (
