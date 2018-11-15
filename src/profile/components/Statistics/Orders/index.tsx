@@ -9,6 +9,8 @@ import OrderBar from './OrderBar';
 import OrderFrequency from './OrderFrequency';
 import OrderItemDonut from './OrderItemDonut';
 
+import { UserContext } from 'authentication/providers/UserProvider';
+
 const ABOUT_STATISTICS = `
   # Statistikk
 
@@ -24,13 +26,16 @@ export interface IState {
 }
 
 class Orders extends Component<IProps, IState> {
+  public static contextType = UserContext;
   public state: IState = {
     orderLines: [],
   };
 
   public async componentDidMount() {
-    const orderLines = await getOrders();
-    this.setState({ orderLines });
+    if (this.context.user) {
+      const orderLines = await getOrders(this.context.user);
+      this.setState({ orderLines });
+    }
   }
 
   public render() {
@@ -40,7 +45,7 @@ class Orders extends Component<IProps, IState> {
     const totalOrderLines = orderLines.length;
     const totalOrders = orders.length;
     const totalItems = orders.reduce<number>((acc, order) => acc + order.quantity, 0);
-    const totalCost = orders.reduce<number>((acc, order) => acc + order.price, 0);
+    const totalCost = orders.reduce<number>((acc, order) => acc + Number(order.price), 0);
     return (
       <Page>
         <Pane>
