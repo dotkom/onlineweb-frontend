@@ -1,5 +1,5 @@
 import { IAuthUser } from 'authentication/models/User';
-import { getAll, withUser } from 'common/utils/api';
+import { get, getAll, withUser } from 'common/utils/api';
 import { IOrder, IOrderLine, IStoreItem } from 'profile/models/Orders';
 
 
@@ -45,6 +45,7 @@ const createMockOrderLine = () => ({
   datetime: `201${randomInt(6, 8)}-0${randomInt(1, 9)}-${randomInt(0, 2)}${randomInt(0, 9)}T12:49:09.302313+02:00`,
 });
 
-export const getOrders = async (user: IUser): Promise<IOrderLine[]> => {
-  return getAll(API_URL, {}, withUser(user));
+export const getOrders = async (user: IAuthUser): Promise<IOrderLine[]> => {
+  const { results } = await get(API_URL, { page_size: 80 }, withUser(user));
+  return results;
 };

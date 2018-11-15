@@ -45,7 +45,7 @@ class Orders extends Component<IProps, IState> {
     const totalOrderLines = orderLines.length;
     const totalOrders = orders.length;
     const totalItems = orders.reduce<number>((acc, order) => acc + order.quantity, 0);
-    const totalCost = orders.reduce<number>((acc, order) => acc + order.price, 0);
+    const totalCost = orders.reduce<number>((acc, order) => acc + Number(order.price), 0);
     return (
       <Page>
         <Pane>
