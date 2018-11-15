@@ -10,6 +10,7 @@ export interface IProps {
   // auth?: IUserContext
 }
 
+<<<<<<< HEAD
 export interface IState {
   open: boolean;
 }
@@ -43,6 +44,12 @@ class Login extends Component<IProps, IState> {
       }
     </UserContext.Consumer>
   );
+=======
+  public render() {
+    const { user }: IUserContext = this.context;
+    return <div>{user ? <HeaderUser user={user} /> : <LoginView />}</div>;
+  }
+>>>>>>> Various tsc and prettier fixes
 }
 
 interface IHeaderUserProps {
