@@ -2,6 +2,7 @@ import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
 import { UserContext } from 'authentication/providers/UserProvider';
 import React, { Component } from 'react';
+import style from './header.less';
 
 /*
 export interface IProps {
@@ -12,12 +13,15 @@ export interface IProps {
 // @injectUserContext
 class Login extends Component<{}> {
   public render = () => (
-    <UserContext.Consumer>
-      {({ user }) => <div>{user ? <HeaderUser {...user} /> : <LoginView />}</div>}
-    </UserContext.Consumer>
+    <UserContext.Consumer>{({ user }) => (user ? <HeaderUser {...user} /> : <LoginView />)}</UserContext.Consumer>
   );
 }
 
-const HeaderUser = (user: IAuthUser) => <div>{user.profile.preferred_username}</div>;
+const HeaderUser = (user: IAuthUser) => (
+  <div className={style.user}>
+    <button />
+    <div className={style.username}>kasdsadsdauk{false && user.profile.preferred_username}</div>
+  </div>
+);
 
 export default Login;
