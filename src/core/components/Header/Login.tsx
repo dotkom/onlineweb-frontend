@@ -1,7 +1,7 @@
 import { routes } from 'App';
 import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
-import { UserContext } from 'authentication/providers/UserProvider';
+import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import style from './header.less';
