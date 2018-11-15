@@ -1,5 +1,6 @@
 import { routes } from 'App';
 import Authenticate from 'authentication/components/Authenticate';
+import classnames from 'classnames';
 import { STATIC_URL } from 'common/constants/endpoints';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -7,7 +8,6 @@ import style from './header.less';
 import HeaderLogo from './HeaderLogo';
 import MainSponsor from './MainSponsor';
 import MenuButton from './MenuButton';
-import classnames from 'classnames';
 
 export interface IProps {}
 
