@@ -129,10 +129,15 @@
 
 .sponsor {
   height: @contentHeight;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sponsorLogo {
   margin-bottom: 4px;
+  max-height: calc(15px + 1.5vw);
+  min-height: 20px;
   height: @contentHeight - @sponsorTextHeight - $margin-bottom;
 }
 
