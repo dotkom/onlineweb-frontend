@@ -1,8 +1,11 @@
+@import '~common/less/colors.less';
+
 .login {
   height: 60px;
   margin: -10px 20px -10px 0;
+  position: relative;
 
-  button {
+  > .dropdownButton {
     width: 50px;
     height: 100%;
     background-color: #fff1;
@@ -35,6 +38,49 @@
       width: @lockWidth;
       height: @lockHeight;
       background-color: #fff;
+    }
+  }
+
+  > .loginMenu {
+    position: absolute;
+    z-index: 2;
+    top: 100%;
+    border: 2px solid @deepBlue;
+    border-top: none;
+    left: -150px;
+    width: 225px;
+    display: flex;
+    flex-direction: column;
+    line-height: 30px;
+    padding: 8px 16px;
+    background-color: #fff;
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      color: #333333;
+      background: none;
+      border-bottom: 2px solid;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin: 10px 0;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    .extra {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      button:last-of-type {
+        margin-left: 20px;
+      }
     }
   }
 }

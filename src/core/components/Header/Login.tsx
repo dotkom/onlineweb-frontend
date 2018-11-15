@@ -4,23 +4,56 @@ import { UserContext } from 'authentication/providers/UserProvider';
 import React, { Component } from 'react';
 import style from './header.less';
 
-/*
 export interface IProps {
-  auth?: IUserContext
+  // auth?: IUserContext
 }
-*/
+
+export interface IState {
+  open: boolean;
+}
 
 // @injectUserContext
-class Login extends Component<{}> {
+class Login extends Component<IProps, IState> {
+  public state = {
+    open: false,
+  };
+
+  constructor(props: IProps) {
+    super(props);
+
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+  }
+
+  public toggleDropdown() {
+    this.setState({
+      open: !this.state.open,
+    });
+  }
+
   public render = () => (
-    <UserContext.Consumer>{({ user }) => (user ? <HeaderUser {...user} /> : <LoginView />)}</UserContext.Consumer>
+    <UserContext.Consumer>
+      {({ user }) =>
+        user ? (
+          <HeaderUser user={user} onClick={this.toggleDropdown} isOpen={this.state.open} />
+        ) : (
+          <LoginView onClick={this.toggleDropdown} isOpen={this.state.open} />
+        )
+      }
+    </UserContext.Consumer>
   );
 }
 
-const HeaderUser = (user: IAuthUser) => (
+interface IHeaderUserProps {
+  user: IAuthUser;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  isOpen: boolean;
+}
+
+const HeaderUser = (props: IHeaderUserProps) => (
   <div className={style.user}>
-    <button />
-    <div className={style.username}>{user.profile.preferred_username}</div>
+    <button onClick={props.onClick} className={style.dropdownButton} />
+    <div className={style.username}>{false && props.user.profile.preferred_username}</div>
+    {props.isOpen && <div className={style.userMenu}>Dropdown</div>}
   </div>
 );
 
