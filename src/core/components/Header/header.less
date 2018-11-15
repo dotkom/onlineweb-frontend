@@ -74,6 +74,7 @@
   display: flex;
   text-transform: uppercase;
   color: #fff;
+  width: 100%;
 
   & > a {
     font-size: @owFontXS;
@@ -148,4 +149,91 @@
   text-align: center;
   user-select: none;
   line-height: 1;
+}
+
+.user {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  margin: -10px 20px -10px 0;
+  flex: 0 1 auto;
+
+  > .dropdownButton {
+    width: 50px;
+    height: 100%;
+    background-color: #fff1;
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      @headSize: 12px;
+      top: calc(50% - @headSize / 2 - @headSize / 3);
+      left: calc(50% - @headSize / 2);
+      width: @headSize;
+      height: @headSize;
+      border-radius: @headSize / 2;
+      background-color: #fff;
+      border: 1px solid #173858;
+      box-sizing: border-box;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      @bodySize: 14px;
+      top: calc(50% - 1px);
+      left: calc(50% - @bodySize / 2);
+      border-radius: @bodySize / 2;
+      border: @bodySize / 2 solid #fff;
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      transform: rotate(-45deg);
+    }
+  }
+
+  .username {
+    align-self: center;
+    color: #fff;
+    padding-left: 16px;
+    font-size: 0.8em;
+    flex: 0 1 auto;
+    max-width: 100px;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:empty {
+      display: none;
+    }
+
+    @media (max-width: @owDesktopMaxWidth) {
+      display: none;
+    }
+
+    @media (max-width: @owTabletBreakpoint) {
+      display: unset;
+    }
+
+    @media (max-width: @owTabletBreakpoint / 2) {
+      display: none;
+    }
+  }
+
+  > .userMenu {
+    position: absolute;
+    z-index: 2;
+    top: 100%;
+    border: 2px solid @deepBlue;
+    border-top: none;
+    left: -150px;
+    width: 225px;
+    display: flex;
+    flex-direction: column;
+    line-height: 30px;
+    padding: 8px 16px;
+    background-color: #fff;
+  }
 }
