@@ -1,10 +1,9 @@
 .login {
   height: 60px;
-  width: 50px;
   margin: -10px 20px -10px 0;
 
   button {
-    width: 100%;
+    width: 50px;
     height: 100%;
     background-color: #fff1;
     position: relative;
@@ -13,28 +12,29 @@
     &::after {
       content: '';
       position: absolute;
-      @headSize: 12px;
-      top: calc(50% - @headSize / 2 - @headSize / 3);
-      left: calc(50% - @headSize / 2);
-      width: @headSize;
-      height: @headSize;
-      border-radius: @headSize / 2;
-      background-color: #fff;
-      border: 1px solid #173858;
+      @handleWidth: 8px;
+      @handleBorderSize: 2px;
+      top: calc(50% - @handleWidth * 1.2);
+      left: calc(50% - @handleWidth / 2);
       box-sizing: border-box;
+      border-radius: 2px;
+      border: @handleBorderSize solid #fff;
+      width: @handleWidth;
+      height: @handleWidth;
     }
 
     &::before {
       content: '';
       position: absolute;
-      @bodySize: 14px;
-      top: calc(50% - 1px);
-      left: calc(50% - @bodySize / 2);
-      border-radius: @bodySize / 2;
-      border: @bodySize / 2 solid #fff;
-      border-left-color: transparent;
-      border-bottom-color: transparent;
-      transform: rotate(-45deg);
+      @lockWidth: 12px;
+      @lockHeight: 9px;
+      top: calc(50% - @lockHeight / 2);
+      left: calc(50% - @lockWidth / 2);
+      box-sizing: border-box;
+      border-radius: 1px;
+      width: @lockWidth;
+      height: @lockHeight;
+      background-color: #fff;
     }
   }
 }
