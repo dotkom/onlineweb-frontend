@@ -32,7 +32,7 @@ class Orders extends Component<IProps, IState> {
   };
 
   public async componentDidMount() {
-    if(this.context.user){
+    if (this.context.user) {
       const orderLines = await getOrders(this.context.user);
       this.setState({ orderLines });
     }

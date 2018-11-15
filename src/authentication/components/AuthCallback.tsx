@@ -16,18 +16,10 @@ class AuthCallback extends Component<IProps> {
   }
 
   public render() {
-    return (
-      <div>
-        thonkery
-      </div>
-    );
+    return <div>thonkery</div>;
   }
 }
 
 export default (...props) => {
-  return (
-    <UserContext.Consumer>
-      {(context) => <AuthCallback {...props} auth={context} />}
-    </UserContext.Consumer>
-  );
+  return <UserContext.Consumer>{(context) => <AuthCallback {...props} auth={context} />}</UserContext.Consumer>;
 };
