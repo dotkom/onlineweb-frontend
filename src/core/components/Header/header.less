@@ -7,17 +7,67 @@
 @sponsorTextHeight: 8px;
 
 .header {
-  display: flex;
   background: @deepBlue;
+  position: relative;
 }
 
 .grid {
   display: flex;
-  width: 1200px;
+  width: 100%;
+  max-width: @owDesktopMaxWidth;
   padding: 10px 20px;
+  box-sizing: border-box;
   margin: auto;
   justify-content: space-between;
   align-items: center;
+}
+
+.menuButton {
+  position: relative;
+  height: 57px;
+  width: 57px;
+  background: none;
+  border: none;
+  margin: -20px 0 -20px -20px;
+  display: none;
+  cursor: pointer;
+
+  @media (max-width: @owTabletBreakpoint) {
+    display: block;
+  }
+}
+
+.menuButtonSVG {
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: #fff;
+  transition-timing-function: ease-in-out;
+  transition: all 0.3s;
+
+  .open & {
+    transform: rotate3d(0, 0, 1, -135deg);
+
+    &:first-child {
+      transform: rotate3d(0, 0, 1, 135deg);
+    }
+  }
+}
+
+.menuButtonSVGTop {
+  transform: translate3d(0, -8px, 0);
+
+  .open & {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.menuButtonSVGBottom {
+  transform: translate3d(0, 8px, 0);
+
+  .open & {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .links {
@@ -35,23 +85,59 @@
       opacity: 0.75;
     }
   }
+
+  @media (max-width: @owTabletBreakpoint) {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #191919;
+    z-index: 1;
+
+    & > a {
+      line-height: 40px;
+      font-size: 12px;
+      padding: 0 13px;
+      margin: 0;
+    }
+
+    &:not(.dropdownMode) {
+      display: none;
+    }
+  }
 }
 
 .logo {
   height: @contentHeight;
-  margin-right: 20px;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: @owTabletBreakpoint) {
+    margin-right: auto;
+  }
 
   img {
-    height: 100%;
+    height: 80%;
+    max-height: calc(20px + 1.5vw);
+    min-height: 23px;
   }
 }
 
 .sponsor {
   height: @contentHeight;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sponsorLogo {
   margin-bottom: 4px;
+  max-height: calc(15px + 1.5vw);
+  min-height: 20px;
   height: @contentHeight - @sponsorTextHeight - $margin-bottom;
 }
 
