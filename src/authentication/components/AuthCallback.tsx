@@ -20,6 +20,6 @@ class AuthCallback extends Component<IProps> {
   }
 }
 
-export default (...props) => {
+export default ({ ...props }: IProps) => {
   return <UserContext.Consumer>{(context) => <AuthCallback {...props} auth={context} />}</UserContext.Consumer>;
 };
