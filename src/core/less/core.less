@@ -34,7 +34,7 @@ main {
   box-sizing: border-box;
   margin: 0 auto;
   width: 100%;
-  max-width: 1200px;
+  max-width: @owDesktopMaxWidth;
 }
 
 @media (min-width: @owMobileBreakpoint) {
@@ -49,9 +49,9 @@ main {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: @owDesktopMaxWidth) {
   main {
-    max-width: 1200px;
+    max-width: @owDesktopMaxWidth;
   }
 }
 
