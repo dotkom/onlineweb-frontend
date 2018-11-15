@@ -31,7 +31,7 @@ class Header extends Component<IProps, IState> {
         <div className={style.grid}>
           <MenuButton isOpen={this.state.isOpen} onClick={this.toggleMenu.bind(this)} />
           <HeaderLogo />
-          <div className={style.links}>
+          <div className={`${style.links} ${this.state.isOpen ? style.dropdownMode : ''}`}>
             <Link to={routes.profile}>Profil</Link>
             <Link to={routes.events}>Arkiv</Link>
             <Link to={routes.career}>Karriere</Link>
