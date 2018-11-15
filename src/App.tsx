@@ -17,7 +17,6 @@ import Resources from './resources';
 
 import Spinner from 'common/components/Spinner';
 
-
 export const routes = {
   events: '/events',
   home: '/',
@@ -52,7 +51,7 @@ export const App = () => {
             <Route path={routes.resources} component={Resources} />
             <Route path={routes.profile} component={LoadableProfile} />
             <Route path={routes.authCallback} component={AuthCallback} />
-            <Route path="*" render={() => <HttpError code={404}/>} />
+            <Route path="*" render={() => <HttpError code={404} />} />
           </Switch>
         </Core>
       </Router>

@@ -1,5 +1,5 @@
+import { User, UserManager } from 'oidc-client';
 import settings from './settings';
-import { UserManager, User } from 'oidc-client';
 
 const MANAGER = new UserManager(settings);
 
@@ -12,6 +12,7 @@ export const logIn = async () => {
     await MANAGER.getUser();
     MANAGER.signinRedirect();
   } catch (e) {
+    // tslint:disable-next-line no-console
     console.error(e);
   }
 };

@@ -2,7 +2,6 @@ import { IAuthUser } from 'authentication/models/User';
 import { get, getAll, withUser } from 'common/utils/api';
 import { IOrder, IOrderLine, IStoreItem } from 'profile/models/Orders';
 
-
 const API_URL = '/api/v1/profile/orders';
 
 const MOCK_AMOUNT = 50;

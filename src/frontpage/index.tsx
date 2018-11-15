@@ -9,7 +9,6 @@ const Frontpage = () => (
     <Articles />
     <Offline />
   </>
-
 );
 
 export default Frontpage;

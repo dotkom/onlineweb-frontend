@@ -15,27 +15,25 @@ export interface IBaseAPIParameters {
   page?: number;
 }
 
-
-
 const makeRequest = (query: string, parameters: object = {}, options: RequestInit = {}) => {
   const queryString = toQueryString(parameters);
   return new Request(DOMAIN + query + queryString, options);
-}
+};
 
 const performRequest = async (request: Request) => {
   const respons = await fetch(request);
   return respons.json();
-}
+};
 
-export const withUser = (user: IAuthUser, options: RequestInit={}) : RequstInit => {
+export const withUser = (user: IAuthUser, options: RequestInit = {}): RequstInit => {
   const token = user.access_token;
   const headers = Object.assign(options.headers || {}, {
-    'Authorization': `Bearer ${token}`
+    Authorization: `Bearer ${token}`,
   });
   return Object.assign(options, {
-    headers
-  })
-}
+    headers,
+  });
+};
 
 /**
  * @summary Simple fetch-API wrapper for HTTP GET
@@ -43,7 +41,7 @@ export const withUser = (user: IAuthUser, options: RequestInit={}) : RequstInit 
  * @returns {Promise<any>} API data
  */
 export const get = async (query: string, parameters: object = {}, options: RequestInit = {}): Promise<any> => {
-  const request = makeRequest(query, parameters, options)
+  const request = makeRequest(query, parameters, options);
   return performRequest(request);
 };
 
@@ -55,26 +53,35 @@ export const get = async (query: string, parameters: object = {}, options: Reque
  * @param {object} parameters
  * @returns {Promise<any>}
  */
-export const post = async (query: string, data: any, parameters: object = {}, options: RequestInit = {}): Promise<any> => {
+export const post = async (
+  query: string,
+  data: any,
+  parameters: object = {},
+  options: RequestInit = {}
+): Promise<any> => {
   const request = makeRequest(
-    string, 
-    parameters, 
+    string,
+    parameters,
     Object.assign(options, {
-      methods: 'POST', 
-      body: JSON.stringify(data)
+      methods: 'POST',
+      body: JSON.stringify(data),
     })
   );
   return performRequest(request);
 };
 
-
-export const getAll = async (query: string, parameters: object = {}, options: RequestInit = {}, page: number = 1): Promise<any> => {
-  parameters.page = page
-  const data = await get(query, parameters, options); 
+export const getAll = async (
+  query: string,
+  parameters: object = {},
+  options: RequestInit = {},
+  page: number = 1
+): Promise<any> => {
+  parameters.page = page;
+  const data = await get(query, parameters, options);
   const { result, next } = data;
-  if(next){
-     resutlt = [...result, ... await getAll(query, parameters, options, next)]
+  if (next) {
+    resutlt = [...result, ...(await getAll(query, parameters, options, next))];
   }
 
   return result || [];
-}
+};
