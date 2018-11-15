@@ -1,8 +1,7 @@
 import { DOMAIN } from '../constants/endpoints';
-import { RequestOptions } from 'http';
-import { toQueryString, toQueryObject } from './queryString';
+import { toQueryObject, toQueryString } from './queryString';
 
-import { IAuthuser } from 'authentication/models/User';
+import { IAuthUser } from 'authentication/models/User';
 
 export interface IAPIData<T> {
   count: number;
