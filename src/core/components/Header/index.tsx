@@ -58,8 +58,8 @@ class Header extends Component<IProps, IState> {
             <Link to={routes.hobbygroups}>Interessegrupper</Link>
             <Link to={routes.wiki}>Wiki</Link>
             <Link to={routes.webshop}>Webshop</Link>
-            <HeaderLogin />
           </div>
+          <HeaderLogin />
           <MainSponsor />
         </div>
       </header>
