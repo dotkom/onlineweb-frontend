@@ -25,7 +25,7 @@ const performRequest = async (request: Request) => {
   return respons.json();
 };
 
-export const withUser = (user: IAuthUser, options: RequestInit = {}): RequstInit => {
+export const withUser = (user: IAuthUser, options: RequestInit = {}): RequestInit => {
   const token = user.access_token;
   const headers = Object.assign(options.headers || {}, {
     Authorization: `Bearer ${token}`,
@@ -60,7 +60,7 @@ export const post = async (
   options: RequestInit = {}
 ): Promise<any> => {
   const request = makeRequest(
-    string,
+    query,
     parameters,
     Object.assign(options, {
       methods: 'POST',
@@ -80,7 +80,7 @@ export const getAll = async (
   const data = await get(query, parameters, options);
   const { result, next } = data;
   if (next) {
-    resutlt = [...result, ...(await getAll(query, parameters, options, next))];
+    result = [...result, ...(await getAll(query, parameters, options, next))];
   }
 
   return result || [];
