@@ -25,13 +25,22 @@ class Header extends Component<IProps, IState> {
     });
   }
 
+  public closeMenu() {
+    this.setState({
+      isOpen: false,
+    });
+  }
+
   public render() {
     return (
       <header className={style.header}>
         <div className={style.grid}>
           <MenuButton isOpen={this.state.isOpen} onClick={this.toggleMenu.bind(this)} />
-          <HeaderLogo />
-          <div className={`${style.links} ${this.state.isOpen ? style.dropdownMode : ''}`}>
+          <HeaderLogo onClick={this.closeMenu.bind(this)} />
+          <div
+            className={`${style.links} ${this.state.isOpen ? style.dropdownMode : ''}`}
+            onClick={this.closeMenu.bind(this)}
+          >
             <Link to={routes.profile}>Profil</Link>
             <Link to={routes.events}>Arkiv</Link>
             <Link to={routes.career}>Karriere</Link>
