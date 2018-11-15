@@ -8,6 +8,7 @@
 
 .header {
   background: @deepBlue;
+  position: relative;
 }
 
 .grid {
@@ -73,12 +74,6 @@
   text-transform: uppercase;
   color: #fff;
 
-  @media (max-width: @owTabletBreakpoint) {
-    display: none;
-  }
-  @media (max-width: @owMobileBreakpoint) {
-  }
-
   & > a {
     font-size: @owFontXS;
     padding: 10px;
@@ -87,6 +82,28 @@
 
     &:hover {
       opacity: 0.75;
+    }
+  }
+
+  @media (max-width: @owTabletBreakpoint) {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: #191919;
+    z-index: 1;
+
+    & > a {
+      line-height: 40px;
+      font-size: 12px;
+      padding: 0 13px;
+      margin: 0;
+    }
+
+    &:not(.dropdownMode) {
+      display: none;
     }
   }
 }
