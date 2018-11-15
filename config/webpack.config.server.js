@@ -1,4 +1,5 @@
 const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const htmlPlugin = require('./html.config');
 const CSSPlugin = require('./css.config');
 const devServer = require('./devServer.config');
@@ -28,7 +29,8 @@ module.exports = env => {
       environment.pluginServer,
       new DefinePlugin({
         window: {}, // Fixes OIDC client needing window to be imported.
-      })
+      }),
+      new ForkTsCheckerWebpackPlugin(),
     ]
   }
 }
