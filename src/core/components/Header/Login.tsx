@@ -3,8 +3,8 @@ import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
 import { UserContext } from 'authentication/providers/UserProvider';
 import React, { Component } from 'react';
-import style from './header.less';
 import { Link } from 'react-router-dom';
+import style from './header.less';
 
 export interface IProps {
   // auth?: IUserContext
