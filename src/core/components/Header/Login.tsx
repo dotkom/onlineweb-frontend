@@ -20,7 +20,7 @@ class Login extends Component<{}> {
 const HeaderUser = (user: IAuthUser) => (
   <div className={style.user}>
     <button />
-    <div className={style.username}>kasdsadsdauk{false && user.profile.preferred_username}</div>
+    <div className={style.username}>{user.profile.preferred_username}</div>
   </div>
 );
 
