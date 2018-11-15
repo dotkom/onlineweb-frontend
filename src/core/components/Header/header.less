@@ -152,6 +152,7 @@
 }
 
 .user {
+  position: relative;
   display: flex;
   flex-direction: row;
   height: 60px;
@@ -223,6 +224,16 @@
 
   > .userMenu {
     position: absolute;
+    z-index: 2;
     top: 100%;
+    border: 2px solid @deepBlue;
+    border-top: none;
+    left: -150px;
+    width: 225px;
+    display: flex;
+    flex-direction: column;
+    line-height: 30px;
+    padding: 8px 16px;
+    background-color: #fff;
   }
 }
