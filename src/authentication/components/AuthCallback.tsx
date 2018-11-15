@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { authCallback } from '../api';
-import { injectUserContext, IUserContext, UserContext } from '../providers/UserProvider';
+import { IUserContext, UserContext } from '../providers/UserProvider';
 
 export interface IProps {
   auth?: IUserContext;
