@@ -158,7 +158,7 @@
   margin: -10px 20px -10px 0;
   flex: 0 1 auto;
 
-  button {
+  > .dropdownButton {
     width: 50px;
     height: 100%;
     background-color: #fff1;
@@ -219,5 +219,10 @@
     @media (max-width: @owTabletBreakpoint / 2) {
       display: none;
     }
+  }
+
+  > .userMenu {
+    position: absolute;
+    top: 100%;
   }
 }
