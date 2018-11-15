@@ -100,6 +100,7 @@ module.exports = (env) => {
       }),
       new webpack.EnvironmentPlugin({
         OW4_ADDRESS: 'https://online.ntnu.no',
+        OW4_SSO_CLIENT_ID: '',
         OWF_SENTRY_DSN: '',
         NODE_ENV: 'development',
       }),
