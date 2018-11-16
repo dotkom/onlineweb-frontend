@@ -1,7 +1,9 @@
 import { getCareerOpportunities } from 'career/api';
-import { ICareerOpportunity, IEmployment, ILocation, ISelectable } from 'career/models/Career';
+import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
 import { IApiCompany } from 'core/models/Company';
 import React, { Component, createContext } from 'react';
+
+type Filters = 'locations' | 'companies' | 'jobTypes';
 
 /**
  * State of the provider class, including all the methods which will
@@ -59,29 +61,9 @@ class CareerOpportunities extends Component<{}, ICareerContextState> {
     this.setState({ ...this.state, jobs, companies, jobTypes, locations });
   }
 
-  public toggleLocation = (name: string) => {
-    const { locations } = this.state;
-    const [old] = locations.filter((loc) => loc.value.name === name);
-    const index = locations.indexOf(old);
-    locations[index].selected = !locations[index].selected;
-    this.setState({ locations });
-  };
-
-  public toggleCompany = (name: string) => {
-    const { companies } = this.state;
-    const [old] = companies.filter((company) => company.value.name === name);
-    const index = companies.indexOf(old);
-    companies[index].selected = !companies[index].selected;
-    this.setState({ companies });
-  };
-
-  public toggleJobType = (name: string) => {
-    const { jobTypes } = this.state;
-    const [old] = jobTypes.filter((loc) => loc.value.name === name);
-    const index = jobTypes.indexOf(old);
-    jobTypes[index].selected = !jobTypes[index].selected;
-    this.setState({ jobTypes });
-  };
+  public toggleLocation = (name: string) => this.toggleTag('locations', name);
+  public toggleCompany = (name: string) => this.toggleTag('companies', name);
+  public toggleJobType = (name: string) => this.toggleTag('jobTypes', name);
 
   public handleFilterChange = (event: React.FormEvent<HTMLInputElement>) => {
     if (event.target) {
@@ -114,6 +96,14 @@ class CareerOpportunities extends Component<{}, ICareerContextState> {
       jobs,
     };
     return <CareerContext.Provider value={value}>{this.props.children}</CareerContext.Provider>;
+  }
+
+  private toggleTag(tagType: Filters, name: string) {
+    const tags: Array<ISelectable<TagTypes>> = this.state[tagType];
+    const [old] = tags.filter((tag) => tag.value.name === name);
+    const index = tags.indexOf(old);
+    tags[index].selected = !tags[index].selected;
+    this.setState({ ...this.state, [tagType]: tags });
   }
 
   /**
