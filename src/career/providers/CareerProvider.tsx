@@ -3,6 +3,10 @@ import { ICareerOpportunity, IEmployment, ILocation, ISelectable } from 'career/
 import { IApiCompany } from 'core/models/Company';
 import React, { Component, createContext } from 'react';
 
+/**
+ * State of the provider class, including all the methods which will
+ * be passed as the providers value, and thereby accessible from the Context.Consumer.
+ */
 export interface ICareerContextState {
   jobs: ICareerOpportunity[];
   locations: Array<ISelectable<ILocation>>;
@@ -16,6 +20,10 @@ export interface ICareerContextState {
   handleFilterChange: (event: React.FormEvent<HTMLInputElement>) => void;
 }
 
+/**
+ * The Initial state of the context also contains methods which are designed to be overwritten.
+ * They exist in case of a configuration error where they are not overwritten.
+ */
 const INITIAL_STATE: ICareerContextState = {
   jobs: [],
   locations: [],
@@ -90,9 +98,13 @@ class CareerOpportunities extends Component<{}, ICareerContextState> {
   };
 
   public render() {
+    /**
+     * Get all methods, filtered jobs, and the rest of the state.
+     * Combine them to a single value of the same type as context state, and use it as the value of the provider.
+     */
     const jobs = this.filterJobs();
     const { handleFilterChange, handleReset, toggleCompany, toggleJobType, toggleLocation } = this;
-    const value = {
+    const value: ICareerContextState = {
       ...this.state,
       handleFilterChange,
       handleReset,
@@ -104,15 +116,27 @@ class CareerOpportunities extends Component<{}, ICareerContextState> {
     return <CareerContext.Provider value={value}>{this.props.children}</CareerContext.Provider>;
   }
 
+  /**
+   * @summary Takes the full list of jobs from state and filters them based on the current filter in state.
+   * @description Uses the state to filter the job list based on selected tags, and a filterable text field.
+   * @returns {ICareerOpportunity[]} A list of filtered jobs.
+   */
   private filterJobs(): ICareerOpportunity[] {
     const { jobs, locations, companies, jobTypes, filterText } = this.state;
     let filteredJobs: ICareerOpportunity[] = jobs;
+
+    /**
+     * Filter on a set of text-fields for each career opportunity.
+     * Show the job if any of the field contain any part of the filterText
+     */
     if (filterText !== '') {
       filteredJobs = filteredJobs.filter((job) => {
         const filterables = [job.title, job.ingress, job.description, job.company.name];
         return filterables.some((text) => text.toLocaleLowerCase().includes(filterText.toLocaleLowerCase()));
       });
     }
+
+    /** Filter on selectable tags. Filter on a category if any of the tags in the category is selected. */
     if (companies.some((company) => company.selected)) {
       const filterCompanies = companies.filter((company) => company.selected).map((selectable) => selectable.value);
       filteredJobs = filteredJobs.filter((job) => filterCompanies.includes(job.company));
