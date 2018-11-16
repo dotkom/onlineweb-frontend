@@ -1,5 +1,5 @@
 import { DOMAIN } from '../constants/endpoints';
-import { toQueryObject, toQueryString } from './queryString';
+import { toQueryString } from './queryString';
 
 import { IAuthUser } from 'authentication/models/User';
 
@@ -25,7 +25,7 @@ const performRequest = async (request: Request) => {
   return respons.json();
 };
 
-export const withUser = (user: IAuthUser, options: RequestInit = {}): RequstInit => {
+export const withUser = (user: IAuthUser, options: RequestInit = {}): RequestInit => {
   const token = user.access_token;
   const headers = Object.assign(options.headers || {}, {
     Authorization: `Bearer ${token}`,
@@ -60,7 +60,7 @@ export const post = async (
   options: RequestInit = {}
 ): Promise<any> => {
   const request = makeRequest(
-    string,
+    query,
     parameters,
     Object.assign(options, {
       methods: 'POST',
@@ -72,15 +72,16 @@ export const post = async (
 
 export const getAll = async (
   query: string,
-  parameters: object = {},
+  parameters: IBaseAPIParameters = {},
   options: RequestInit = {},
   page: number = 1
 ): Promise<any> => {
   parameters.page = page;
   const data = await get(query, parameters, options);
-  const { result, next } = data;
+  const { next } = data;
+  let { result } = data;
   if (next) {
-    resutlt = [...result, ...(await getAll(query, parameters, options, next))];
+    result = [...result, ...(await getAll(query, parameters, options, next))];
   }
 
   return result || [];

@@ -6,7 +6,7 @@ import HostPolygon from './HostPolygon';
 import style from './list.less';
 import { PersonSVG, StatusPolygon } from './StatusPolygon';
 
-const ListEvent = ({ title, event_start, attendance_event, event_type, company_event, id }: INewEvent) => {
+const ListEvent = ({ title, event_start, attendance_event, event_type, company_event }: INewEvent) => {
   const eventColor = getEventColor(event_type);
   const eventType = getEventType(event_type);
   const eventDate = DateTime.fromISO(event_start).toFormat('d.MM');

@@ -8,10 +8,6 @@ export interface IProps {
   orderLines: IOrderLine[];
 }
 
-interface ITest {
-  [name: string]: number;
-}
-
 const OrderItemDonut = ({ orderLines }: IProps) => {
   /** TODO: Allow flatMap */
   const orders: IOrder[] = orderLines.reduce<IOrder[]>((prev, curr) => [...prev, ...curr.orders], []);

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { getPayments } from '../../../api/payment';
 import { IPayment } from '../../../models/Payment';
 import Payment from './Payment';

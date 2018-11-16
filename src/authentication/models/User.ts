@@ -1,6 +1,3 @@
-import { IGroup } from 'core/models/Group';
-import { Permission } from 'core/models/Permission';
-import { Email, FieldOfStudy, IUser } from 'core/models/User';
 import { User } from 'oidc-client';
 
 export interface IAuthUser extends User {

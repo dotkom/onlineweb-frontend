@@ -1,48 +1,36 @@
 import { routes } from 'App';
 import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
-import { UserContext } from 'authentication/providers/UserProvider';
+import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import style from './header.less';
-
-export interface IProps {
-  // auth?: IUserContext
-}
 
 export interface IState {
   open: boolean;
 }
 
-// @injectUserContext
-class Login extends Component<IProps, IState> {
-  public state = {
+class Login extends Component<{}, IState> {
+  public static contextType = UserContext;
+
+  public state: IState = {
     open: false,
   };
 
-  constructor(props: IProps) {
-    super(props);
-
-    this.toggleDropdown = this.toggleDropdown.bind(this);
-  }
-
-  public toggleDropdown() {
+  public toggleDropdown = () => {
     this.setState({
       open: !this.state.open,
     });
-  }
+  };
 
-  public render = () => (
-    <UserContext.Consumer>
-      {({ user }) =>
-        user ? (
-          <HeaderUser user={user} onClick={this.toggleDropdown} isOpen={this.state.open} />
-        ) : (
-          <LoginView onClick={this.toggleDropdown} isOpen={this.state.open} />
-        )
-      }
-    </UserContext.Consumer>
-  );
+  public render() {
+    const { user }: IUserContext = this.context;
+    return user ? (
+      <HeaderUser user={user} onClick={this.toggleDropdown} isOpen={this.state.open} />
+    ) : (
+      <LoginView onClick={this.toggleDropdown} isOpen={this.state.open} />
+    );
+  }
 }
 
 interface IHeaderUserProps {

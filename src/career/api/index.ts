@@ -1,98 +1,66 @@
-import { get } from 'common/utils/api';
+import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
+import { get, IAPIData } from 'common/utils/api';
 import { IApiCompany } from 'core/models/Company';
-import { DateTime } from 'luxon';
-import { IApiJob, IJob } from '../models/Job';
-import { ITag, ITags } from '../models/Tag';
 
 const API_URL = '/api/v1/career/';
 
-export const getCareerOpportunities = async () => {
-  const data = await get(API_URL, { format: 'json', mode: 'no-cors' });
-  return loadData(data);
+/** All selectable tags are wrapped in an ISelectable object */
+export type FilterJobs = [
+  ICareerOpportunity[],
+  Array<ISelectable<IApiCompany>>,
+  Array<ISelectable<IEmployment>>,
+  Array<ISelectable<ILocation>>
+];
+
+export const getCareerOpportunities = async (): Promise<FilterJobs> => {
+  const { results }: IAPIData<ICareerOpportunity> = await get(API_URL, { format: 'json', mode: 'no-cors' });
+  return configureFilters(results);
 };
 
 /**
- *
- * @param {ANY} data Can't continue this 'ANY' shit...
- * @returns { Random ass object }
+ * @summary Prepares the jobs from the API for usage in the filterable list.
+ * @description Creates the tags which are needed for filtering jobs in the list. All are:
+ * - Mapped to the correct type.
+ * - Filtered to remove duplicate values.
+ * - Sorted so the representation will not change when the list if changed.
+ * - Mapped to be wrapped in a selectable container, which marks if the tag has been selected.
+ * @param {ICareerOpportunity[]} jobs Career opportunities fetched from the API.
+ * @returns {FilterJobs} All the jobs, and the configured selectable tags.
  */
-const loadData = (data: any) => {
-  const companies: any[] = [];
-  const locations: any[] = [];
-  const jobTypes: any[] = [];
-  const jobs: any[] = [];
-  data.results.forEach((job: IApiJob) => {
-    // Create a new company tag if it does not already exist.
-    if (companies.indexOf(job.company.name) < 0) {
-      // TODO: this kind of needs a rewrite
-      companies.push(job.company);
-    }
-
-    // Create a new employment tag if the employeer does not exist.
-    if (jobTypes.indexOf(job.employment.name) < 0) {
-      jobTypes.push(job.employment);
-    }
-
-    // Create tags for all non-existing locations in the job.
-    job.location.forEach((location) => {
-      if (locations.indexOf(location.name) < 0) {
-        locations.push(location.name);
-      }
-    });
-
-    // Add information to the job that is used to filter using tags.
-    jobs.push(
-      Object.assign(
-        {},
-        {
-          tags: {
-            companies: job.company.id,
-            jobTypes: job.employment.id,
-            locations: job.location.map((location) => location.name),
-          },
-        },
-        normalizeData(job)
-      )
-    );
-  });
-
-  // Update the tags with new information from the server.
-  // Deadlines are not updated here as they're specified in the initial state.
-  const tags: ITags = {
-    companies: {},
-    locations: {},
-    jobTypes: {},
-  };
-
-  companies.forEach((company) => {
-    tags.companies[company.id] = { id: company.id, display: false, name: company.name };
-  });
-
-  jobTypes.forEach((jobType) => {
-    tags.jobTypes[jobType.id] = { id: jobType.id, display: false, name: jobType.name };
-  });
-
-  locations.forEach((location, i) => {
-    tags.locations[i] = { id: i, display: false, name: location };
-  });
-  return { jobs, tags };
-
-  // Store a copy of the tags for use in the reset button.
-  // this.defaultTags = JSON.stringify(this.state.tags);
+const configureFilters = (jobs: ICareerOpportunity[]): FilterJobs => {
+  const companies = jobs
+    .map((job) => job.company)
+    .filter(removeDuplicates)
+    .sort(sortTags)
+    .map(addSelectable) as Array<ISelectable<IApiCompany>>;
+  const jobTypes = jobs
+    .map((job) => job.employment)
+    .filter(removeDuplicates)
+    .sort(sortTags)
+    .map(addSelectable) as Array<ISelectable<IEmployment>>;
+  const locations = jobs
+    .flatMap((job) => job.location)
+    .filter(removeDuplicates)
+    .sort(sortTags)
+    .map(addSelectable) as Array<ISelectable<ILocation>>;
+  return [jobs, companies, jobTypes, locations];
 };
 
-// Normalizes data from the server, most notably converting to camelCase.
-const normalizeData = (job: IApiJob): IJob => ({
-  locations: job.location.map((location) => location.name), // Locations contains name and slug
-  deadline: job.deadline ? DateTime.fromISO(job.deadline).toFormat('dd LLL YYYY') : 'Ikke spesifisert', // Format and give default value
-  companyImage: job.company.image,
-  companyName: job.company.name,
-  companyDescription: job.company.short_description,
-  companyId: job.company.id,
-  title: job.title,
-  ingress: job.ingress,
-  description: job.description,
-  type: job.employment.name,
-  id: job.id,
-  featured: job.featured,
-});
+/** Sorting expects a number, comparison returns a boolean. This makes Typescript happy */
+const sortTags = (a: TagTypes, b: TagTypes) => (a.name > b.name ? 1 : -1);
+
+/** Wrap a TagType in a selectable container */
+const addSelectable = (tag: TagTypes): ISelectable<TagTypes> => {
+  return { value: tag, selected: false };
+};
+
+/** Removes all duplicate TagType objects from a list of a given TagType */
+const removeDuplicates = (tag: TagTypes, i: number, all: TagTypes[]): boolean => {
+  return all.map((arr) => arr.name).indexOf(tag.name) === i;
+};
+
+/** Fetch a single career opportunity */
+export const getCareerOpportunity = async (id: number): Promise<ICareerOpportunity> => {
+  const data: ICareerOpportunity = await get(API_URL + id, { format: 'json', mode: 'no-cors' });
+  return data;
+};

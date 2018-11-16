@@ -116,15 +116,19 @@
     margin-right: 5px;
     margin-bottom: 5px;
     width: auto;
+
+    &:hover {
+      background: darken(@lightBlue, 15%);
+    }
   }
 
   .selected {
     background: darken(@lightBlue, 20%);
-  }
-}
 
-.filters button:hover {
-  background: darken(@lightBlue, 15%);
+    &:hover {
+      background: darken(@lightBlue, 30%);
+    }
+  }
 }
 
 .detail {
