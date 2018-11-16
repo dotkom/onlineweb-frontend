@@ -1,37 +1,32 @@
+import { getCareerOpportunity } from 'career/api';
+import { ICareerOpportunity } from 'career/models/Career';
 import HttpError from 'core/components/errors/HttpError';
 import React from 'react';
 import InfoBox from '../components/JobDetails';
-import { IJob } from '../models/Job';
 
-export interface IDetailViewProps {
+export interface IProps {
   match: { params: { id: string } };
-  jobs: IJob[];
 }
 
-class DetailView extends React.Component<IDetailViewProps, IDetailViewProps> {
-  private id: number;
-  private job: IJob | undefined;
-  constructor(props: IDetailViewProps) {
-    super(props);
-    this.id = parseInt(props.match.params.id, 10);
-    this.job = props.jobs.find((j) => j.id === this.id);
-  }
+export interface IState {
+  job: ICareerOpportunity | undefined;
+}
 
-  public componentDidMount() {
+class DetailView extends React.Component<IProps, IState> {
+  public state: IState = {
+    job: undefined,
+  };
+
+  public async componentDidMount() {
     window.scrollTo(0, 0);
-  }
-
-  public componentWillReceiveProps(nextProps: IDetailViewProps) {
-    this.id = parseInt(nextProps.match.params.id, 10);
-    this.job = nextProps.jobs.find((j) => j.id === this.id);
+    const id = parseInt(this.props.match.params.id, 10);
+    const job = await getCareerOpportunity(id);
+    this.setState({ job });
   }
 
   public render() {
-    return this.job ? (
-      <InfoBox {...this.job} />
-    ) : (
-      <HttpError code={404} text="Denne karrieremuligheten eksisterer ikke." />
-    );
+    const { job } = this.state;
+    return job ? <InfoBox {...job} /> : <HttpError code={404} text="Denne karrieremuligheten eksisterer ikke." />;
   }
 }
 
