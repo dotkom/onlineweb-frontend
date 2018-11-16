@@ -46,8 +46,8 @@ const configureFilters = (jobs: ICareerOpportunity[]): FilterJobs => {
   return [jobs, companies, jobTypes, locations];
 };
 
-/** Sorting expects a number, but values are string. This makes Typescript happy */
-const sortTags = (a: TagTypes, b: TagTypes) => (a.name > b.name ? -1 : 1);
+/** Sorting expects a number, comparison returns a boolean. This makes Typescript happy */
+const sortTags = (a: TagTypes, b: TagTypes) => (a.name > b.name ? 1 : -1);
 
 /** Wrap a TagType in a selectable container */
 const addSelectable = (tag: TagTypes): ISelectable<TagTypes> => {
