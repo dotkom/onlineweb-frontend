@@ -101,6 +101,20 @@
     padding: 10px;
     transition: background 0.1s;
     cursor: pointer;
+    margin-right: 5px;
+    margin-bottom: 5px;
+
+    &:hover {
+      background: darken(@lightBlue, 15%);
+    }
+  }
+
+  .selected {
+    background: darken(@lightBlue, 20%);
+
+    &:hover {
+      background: darken(@lightBlue, 30%);
+    }
   }
 }
 
@@ -111,20 +125,6 @@
   h2 {
     margin-bottom: 10px;
   }
-
-  button {
-    margin-right: 5px;
-    margin-bottom: 5px;
-    width: auto;
-  }
-
-  .selected {
-    background: darken(@lightBlue, 20%);
-  }
-}
-
-.filters button:hover {
-  background: darken(@lightBlue, 15%);
 }
 
 .detail {
