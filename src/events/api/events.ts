@@ -1,5 +1,5 @@
 import { get, IBaseAPIParameters } from 'common/utils/api';
-import { getEventType, INewEvent } from '../models/Event';
+import { INewEvent } from '../models/Event';
 
 export interface IEventAPIParameters extends IBaseAPIParameters {
   event_start__gte?: string;
@@ -51,13 +51,6 @@ async function* getPages(page: string) {
 export const getEvent = async (id: number): Promise<INewEvent> => {
   const event: INewEvent = await get(API_URL + id + '/', { format: 'json' });
   return event;
-};
-
-const normalize = (event: any): any => {
-  return {
-    event_type: getEventType(1),
-    ...event,
-  };
 };
 
 export interface IControlledFetch<T> {

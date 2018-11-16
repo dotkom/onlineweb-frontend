@@ -38,7 +38,7 @@ class Articles extends Component<IProps, IState> {
             <>
               <MainArticle {...articles[index]} />
               <div className={style.smallContainer}>
-                {articles.slice(start, end).map((article, i) => (
+                {articles.slice(start, end).map((article) => (
                   <SmallArticle key={article.absolute_url} {...article} />
                 ))}
               </div>

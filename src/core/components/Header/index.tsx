@@ -1,7 +1,5 @@
 import { routes } from 'App';
-import Authenticate from 'authentication/components/Authenticate';
 import classnames from 'classnames';
-import { STATIC_URL } from 'common/constants/endpoints';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import style from './header.less';

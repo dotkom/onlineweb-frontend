@@ -1,5 +1,5 @@
 import Markdown from 'common/components/Markdown';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { IResource } from '../models/Resource';
 import style from './resources.less';
 

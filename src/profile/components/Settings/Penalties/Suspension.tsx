@@ -1,5 +1,5 @@
-import { DateTime, Interval } from 'luxon';
-import React, { Fragment } from 'react';
+import { DateTime } from 'luxon';
+import React from 'react';
 import { ISuspension } from '../../../models/Penalty';
 import style from './penalties.less';
 import Penalty from './Penalty';
