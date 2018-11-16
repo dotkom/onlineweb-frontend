@@ -32,7 +32,7 @@ class Offline extends Component<IProps, IState> {
     });
   }
 
-  handleNext = async () => {
+  public handleNext = async () => {
     if (this.state.dataRemainding) {
       const remainding = await getRemaindingOfflines();
 
@@ -42,22 +42,22 @@ class Offline extends Component<IProps, IState> {
       });
     }
 
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       page: prevState.page + 1,
     }));
   };
 
-  handlePrevious = async () => {
-    this.setState(prevState => ({
+  public handlePrevious = async () => {
+    this.setState((prevState) => ({
       page: prevState.page - 1,
     }));
-  }
+  };
 
   public render() {
     const { offlines, page } = this.state;
 
     const lastPage = Math.ceil(offlines.length / DISPLAY_NUMBER);
-  
+
     const visibleOfflines = offlines.slice(DISPLAY_NUMBER * (page - 1), DISPLAY_NUMBER * page);
 
     return (
@@ -67,19 +67,11 @@ class Offline extends Component<IProps, IState> {
         <div className={style.carouselContainer}>
           {offlines && (
             <>
-              <CarouselArrow
-                direction="left"
-                onClick={this.handlePrevious}
-                disabled={page === 1}
-              />
-              
+              <CarouselArrow direction="left" onClick={this.handlePrevious} disabled={page === 1} />
+
               <OfflineCarousel offlines={visibleOfflines} />
 
-              <CarouselArrow
-                direction="right"
-                onClick={this.handleNext}
-                disabled={page === lastPage}
-              />
+              <CarouselArrow direction="right" onClick={this.handleNext} disabled={page === lastPage} />
             </>
           )}
         </div>

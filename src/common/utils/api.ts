@@ -50,12 +50,12 @@ export const get = async (query: string, parameters: object = {}, options: Reque
  * @param query The API endpoint to fetch results from.
  * @param page An optional page to start fetching data on.
  */
-export const getAllPages = async (query: string, page:number = 1): Promise<any> => {
-  let data:IAPIData<any>;
-  let results:any[] = [];
+export const getAllPages = async (query: string, page: number = 1): Promise<any> => {
+  let data: IAPIData<any>;
+  let results: any[] = [];
 
   do {
-    data = await get(query, { format: 'json', page: page });
+    data = await get(query, { format: 'json', page });
     results = [...results, ...data.results];
     page += 1;
   } while (data.next);
