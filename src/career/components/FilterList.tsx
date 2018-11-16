@@ -1,58 +1,38 @@
-import React, { FormEvent } from 'react';
+import { CareerContext, ICareerContextState } from 'career/providers/CareerProvider';
+import React, { Component } from 'react';
 import SearchBox from '../components/SearchBox';
-import { ITag, ITags } from '../models/Tag';
+import style from '../less/career.less';
 import TagList from './TagList';
 
-import style from '../less/career.less';
+class FilterList extends Component<{}> {
+  public static contextType = CareerContext;
 
-export interface IFilterListProps {
-  handleTagChange: (s: string, t: ITag, a?: boolean) => void;
-  tags: ITags;
-  handleReset: () => void;
-  handleFilterChange: (e: React.FormEvent<any>) => void;
-  filterText: string;
+  public render() {
+    const {
+      handleReset,
+      companies,
+      toggleCompany,
+      locations,
+      toggleLocation,
+      jobTypes,
+      toggleJobType,
+    }: ICareerContextState = this.context;
+    return (
+      <div>
+        <div className={style.filters}>
+          <SearchBox />
+
+          <TagList heading="Bedrifter" tags={companies} handleChange={toggleCompany} />
+
+          <TagList heading="Typer" tags={jobTypes} handleChange={toggleJobType} />
+
+          <TagList heading="Sted" tags={locations} handleChange={toggleLocation} />
+
+          <button onClick={handleReset}>Reset</button>
+        </div>
+      </div>
+    );
+  }
 }
-
-const FilterList = ({ tags, filterText, handleTagChange, handleReset, handleFilterChange }: IFilterListProps) => (
-  <div>
-    <div className={style.filters}>
-      <SearchBox text={filterText} onChange={(e: FormEvent<HTMLFormElement>) => handleFilterChange(e)} />
-
-      <TagList
-        heading="Bedrifter"
-        tags={tags.companies}
-        handleChange={(tag: any) => {
-          handleTagChange('companies', tag);
-        }}
-      />
-
-      <TagList
-        heading="Typer"
-        tags={tags.jobTypes}
-        handleChange={(tag: any) => {
-          handleTagChange('jobTypes', tag);
-        }}
-      />
-
-      <TagList
-        heading="Sted"
-        tags={tags.locations}
-        handleChange={(tag: any) => {
-          handleTagChange('locations', tag);
-        }}
-      />
-
-      {/*<TagList
-        heading="Frist"
-        tags={tags.deadlines}
-        handleChange={(tag: any) => {
-          handleTagChange('deadlines', tag, true);
-        }}
-      />*/}
-
-      <button onClick={() => handleReset()}>Reset</button>
-    </div>
-  </div>
-);
 
 export default FilterList;
