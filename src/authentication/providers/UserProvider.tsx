@@ -8,7 +8,7 @@ export interface IUserContext {
 }
 
 const initialState: IUserContext = {
-  setUser: (user: IAuthUser) => new Error('setUser called before UserProvider is initialized'),
+  setUser: (_: IAuthUser) => new Error('setUser called before UserProvider is initialized'),
 };
 
 export const UserContext = createContext(initialState);
