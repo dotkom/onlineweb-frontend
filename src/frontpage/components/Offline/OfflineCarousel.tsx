@@ -16,7 +16,7 @@ const OfflineCarousel = ({ offlines }: IProps) => (
   </div>
 );
 
-const CarouselItem = ({ description, id, issue, release_date, title }: IOfflineIssue) => {
+const CarouselItem = ({ issue, title }: IOfflineIssue) => {
   const thumbnail = issue + IMAGE_SUFFIX;
 
   return (

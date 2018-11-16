@@ -1,4 +1,4 @@
-import React, { Props } from 'react';
+import React from 'react';
 import style from './heading.less';
 
 export interface IProps {

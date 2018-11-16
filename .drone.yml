@@ -33,6 +33,14 @@ pipeline:
     commands:
       yarn test
 
+  compile-typescript:
+    image: node:carbon
+    group: testing
+    when:
+      event: [push, pull_request, tag, deployment]
+    commands:
+      - yarn run tsc
+
   lint-typescript:
     image: node:carbon
     group: testing

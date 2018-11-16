@@ -31,9 +31,28 @@ main {
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
+  box-sizing: border-box;
   margin: 0 auto;
   width: 100%;
-  max-width: 1200px;
+  max-width: @owDesktopMaxWidth;
+}
+
+@media (min-width: @owMobileBreakpoint) {
+  main {
+    max-width: @owMobileBreakpoint;
+  }
+}
+
+@media (min-width: @owTabletBreakpoint) {
+  main {
+    max-width: @owTabletBreakpoint;
+  }
+}
+
+@media (min-width: @owDesktopMaxWidth) {
+  main {
+    max-width: @owDesktopMaxWidth;
+  }
 }
 
 a,

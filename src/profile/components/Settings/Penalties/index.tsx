@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { getMarks, getSuspensions } from '../../../api/penalties';
 import { IMark, ISuspension } from '../../../models/Penalty';
 import Mark from './Mark';
-import style from './penalties.less';
 import Placeholder from './Placeholder';
 import Rules from './Rules';
 import Suspension from './Suspension';
