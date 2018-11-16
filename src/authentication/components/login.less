@@ -1,0 +1,86 @@
+@import '~common/less/colors.less';
+
+.login {
+  height: 60px;
+  margin: -10px 20px -10px 0;
+  position: relative;
+
+  > .dropdownButton {
+    width: 50px;
+    height: 100%;
+    background-color: #fff1;
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      @handleWidth: 8px;
+      @handleBorderSize: 2px;
+      top: calc(50% - @handleWidth);
+      left: calc(50% - @handleWidth / 2);
+      box-sizing: border-box;
+      border-radius: 2px;
+      border: @handleBorderSize solid #fff;
+      width: @handleWidth;
+      height: @handleWidth;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      @lockWidth: 12px;
+      @lockHeight: 9px;
+      top: calc(50% - @lockHeight / 3);
+      left: calc(50% - @lockWidth / 2);
+      box-sizing: border-box;
+      border-radius: 1px;
+      width: @lockWidth;
+      height: @lockHeight;
+      background-color: #fff;
+    }
+  }
+
+  > .loginMenu {
+    position: absolute;
+    z-index: 2;
+    top: 100%;
+    border: 2px solid @deepBlue;
+    border-top: none;
+    left: -150px;
+    width: 225px;
+    display: flex;
+    flex-direction: column;
+    line-height: 30px;
+    padding: 8px 16px;
+    background-color: #fff;
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      color: #333;
+      background: none;
+      border-bottom: 2px solid;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin: 10px 0;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    .extra {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      button:last-of-type {
+        margin-left: 20px;
+      }
+    }
+  }
+}

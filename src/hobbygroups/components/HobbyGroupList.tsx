@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { getHobbyGroups } from '../api';
 import style from '../less/hobbygroups.less';
 import { IHobbyGroup } from '../models/HobbyGroup';

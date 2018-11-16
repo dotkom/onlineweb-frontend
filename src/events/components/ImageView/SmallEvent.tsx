@@ -1,4 +1,4 @@
-import { getEventColor, IAttendanceEvent, INewEvent } from 'events/models/Event';
+import { getEventColor, INewEvent } from 'events/models/Event';
 import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
 import React from 'react';
@@ -21,7 +21,7 @@ const SmallEventColumn = ({ events }: { events: INewEvent[] }) => {
   column = column.concat(
     Array.apply(null, {
       length: 3 - column.length,
-    }).map((x: null, i: number) => <a key={i} />)
+    }).map((_: null, i: number) => <a key={i} />)
   );
 
   return <>{column}</>;

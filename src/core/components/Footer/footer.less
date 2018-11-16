@@ -1,4 +1,5 @@
 @import '~common/less/colors.less';
+@import '~common/less/constants.less';
 
 .footer {
   display: grid;
@@ -7,6 +8,14 @@
   color: @lightGray;
   justify-content: center;
   padding: 30px 20px;
+  box-sizing: border-box;
+  grid-template:
+    'social contact'
+    'developers address';
+
+  @media (max-width: @owMobileBreakpoint) {
+    grid-template: 'social' 'developers' 'contact' 'address';
+  }
 }
 
 .social {
@@ -46,9 +55,28 @@
   opacity: 1;
 }
 
-.contactInfo,
+.socialMedia {
+  grid-area: 'social';
+}
+
+.developers {
+  grid-area: 'developers';
+  text-align: center;
+
+  @media (max-width: @owMobileBreakpoint) {
+    display: none;
+  }
+}
+
+.contactInfo {
+  grid-area: 'contact';
+}
+
 .addressContainer {
-  grid-column: 2;
+  grid-area: 'address';
+  display: grid;
+  grid-gap: 25px;
+  grid-auto-flow: column;
 }
 
 .contactItem {
@@ -57,10 +85,6 @@
   svg {
     margin-right: 10px;
   }
-}
-
-.developers {
-  text-align: center;
 }
 
 .dotkom {
@@ -72,12 +96,6 @@
 
 .developersHovered {
   opacity: 1;
-}
-
-.addressContainer {
-  display: grid;
-  grid-gap: 25px;
-  grid-auto-flow: column;
 }
 
 .address {
