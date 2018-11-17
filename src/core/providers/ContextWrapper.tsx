@@ -2,7 +2,7 @@ import FrontpageArticles from 'articles/providers/FrontpageArticles';
 import EventContextWrapper from 'events/providers/EventContextWrapper';
 import OfflineIssues from 'frontpage/providers/OfflineIssues';
 import React, { ReactNode } from 'react';
-import { IServerStateCache } from 'server/stateCache';
+import { IServerStateCache } from 'server/models';
 
 export interface IProps extends IServerStateCache {
   children: ReactNode;

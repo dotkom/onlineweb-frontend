@@ -1,4 +1,3 @@
-import { getServerCacheImageEvents } from 'events/api/cache';
 import { getImageEvents } from 'events/api/imageEvents';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
 import React, { Component, createContext } from 'react';

@@ -1,6 +1,6 @@
 import { IEventViewProps } from 'events/models/Event';
 import React, { ReactNode } from 'react';
-import { IServerStateCacheEvents } from 'server/stateCache';
+import { IServerStateCacheEvents } from 'server/models';
 import CalendarEvents from './CalendarEvents';
 import ImageEvents from './ImageEvents';
 import ListEvents from './ListEvents';
