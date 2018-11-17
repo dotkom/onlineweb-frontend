@@ -1,6 +1,6 @@
-import * as Sentry from '@sentry/node';
+// import * as Sentry from '@sentry/node';
 import { HOST, PORT } from 'common/constants/backend';
-import { OWF_SENTRY_DSN } from 'common/constants/sentry';
+// import { OWF_SENTRY_DSN } from 'common/constants/sentry';
 import cookieParser from 'cookie-parser';
 import ContextWrapper from 'core/providers/ContextWrapper';
 import Settings from 'core/providers/Settings';
@@ -30,9 +30,10 @@ RedisCache.initStateCache();
 setInterval(RedisCache.initStateCache, 5000 * 60);
 
 /** Initialize Sentry error forwarding for the back-end */
-Sentry.init({ dsn: OWF_SENTRY_DSN });
-app.use(Sentry.Handlers.requestHandler());
-app.use(Sentry.Handlers.errorHandler());
+// Disable Sentry, causes Typescript error because its types are not correct.
+// Sentry.init({ dsn: OWF_SENTRY_DSN });
+// app.use(Sentry.Handlers.requestHandler());
+// app.use(Sentry.Handlers.errorHandler());
 
 /** Luxon locale setting has to be the same as in the front-end */
 LuxonSettings.defaultLocale = 'nb';
