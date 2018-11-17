@@ -1,4 +1,3 @@
-import { getServerCacheCalendarEvents } from 'events/api/cache';
 import { getCalendarEventsControlled } from 'events/api/calendarEvents';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
 import { IEventViewProps, INewEvent } from 'events/models/Event';

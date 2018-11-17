@@ -58,7 +58,6 @@ interface IWebpackAssets {
 const getBundles = (): [string[], string[]] => {
   const assetsString = fs.readFileSync('./dist/webpack-assets.json').toString();
   const assets: IWebpackAssets = JSON.parse(assetsString);
-  const chunks = Object.keys(assets).map((key) => assets[key]);
   const js = [assets.app.js, assets.vendor.js].map(getScript);
   const css = [assets.app.css, assets.profile.css].map(getStyle);
   return [js, css];

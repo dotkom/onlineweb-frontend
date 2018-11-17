@@ -1,5 +1,4 @@
 import { ISettingsContextState, SettingsContext } from 'core/providers/Settings';
-import EventContextWrapper from 'events/providers/EventContextWrapper';
 import React, { Component } from 'react';
 import { getEventSettings, IEventSettings, saveEventSettings } from '../api/eventSettings';
 import { EventView } from '../models/Event';
