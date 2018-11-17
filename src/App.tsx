@@ -16,7 +16,6 @@ import Hobbys from './hobbygroups';
 import Resources from './resources';
 
 import Spinner from 'common/components/Spinner';
-import { IServerStateCache } from 'server/stateCache';
 
 export const routes = {
   events: '/events',
