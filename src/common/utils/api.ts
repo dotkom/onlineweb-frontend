@@ -16,14 +16,15 @@ export interface IBaseAPIParameters {
   page_size?: number;
   page?: number;
 }
-
+/*
 const makeRequest = (query: string, parameters: object = {}, options: RequestInit = {}) => {
   const queryString = toQueryString(parameters);
   return new Request(DOMAIN + query + queryString, options);
 };
-
-const performRequest = async (request: Request) => {
-  const respons = await universalFetch(request);
+*/
+const performRequest = async (query: string, parameters: object = {}, options: RequestInit = {}) => {
+  const queryString = toQueryString(parameters);
+  const respons = await universalFetch(DOMAIN + query + queryString, options);
   return respons.json();
 };
 
@@ -48,8 +49,8 @@ const universalFetch: Fetch = __CLIENT__ ? fetch : ((nodeFetch as any) as Fetch)
  * @returns {Promise<any>} API data
  */
 export const get = async (query: string, parameters: object = {}, options: RequestInit = {}): Promise<any> => {
-  const request = makeRequest(query, parameters, options);
-  return performRequest(request);
+  // const request = makeRequest(query, parameters, options);
+  return performRequest(query, parameters, options);
 };
 
 /**
@@ -91,7 +92,7 @@ export const post = async (
   parameters: object = {},
   options: RequestInit = {}
 ): Promise<any> => {
-  const request = makeRequest(
+  return performRequest(
     query,
     parameters,
     Object.assign(options, {
@@ -99,5 +100,4 @@ export const post = async (
       body: JSON.stringify(data),
     })
   );
-  return performRequest(request);
 };
