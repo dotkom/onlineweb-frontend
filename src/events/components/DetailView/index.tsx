@@ -1,3 +1,4 @@
+import { prefetch } from 'common/utils/prefetch';
 import React, { Component } from 'react';
 import { getEvent } from '../../api/events';
 import { INewEvent, mockEvent } from '../../models/Event';
@@ -8,22 +9,31 @@ import InfoBox from './InfoBox';
 import PictureCard from './PictureCard';
 import Registration from './Registation';
 
-export interface IProps {
-  eventId: string;
-}
-
 export interface IState {
   eventId: number;
   event: INewEvent | null;
 }
 
+export interface IProps {
+  eventId: string;
+  prefetch?: INewEvent;
+}
+
+@prefetch('EventsDetailView')
 class DetailView extends Component<IProps, IState> {
+  public static async getServerState(props: IProps): Promise<INewEvent> {
+    const eventId = parseInt(props.eventId, 10);
+    const event = await getEvent(eventId);
+    return event;
+  }
+
   constructor(props: IProps) {
     super(props);
-
+    const eventId = parseInt(props.eventId, 10);
+    const event = props.prefetch && eventId === props.prefetch.id ? props.prefetch : null;
     this.state = {
-      eventId: parseInt(props.eventId, 10),
-      event: null,
+      eventId,
+      event,
     };
   }
 
@@ -35,7 +45,6 @@ class DetailView extends Component<IProps, IState> {
 
   public render() {
     const event = this.state.event || mockEvent;
-
     return (
       <div className={style.container}>
         <ListEvent {...event} />
