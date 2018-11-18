@@ -1,5 +1,5 @@
 import { __CLIENT__ } from 'common/constants/environment';
-import { User, /*UserManager*/ } from 'oidc-client';
+import { User /*UserManager*/ } from 'oidc-client';
 // import settings from './settings';
 
 /**
