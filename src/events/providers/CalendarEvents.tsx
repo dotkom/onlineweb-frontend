@@ -1,4 +1,5 @@
-import { getCalendarEventsControlled } from 'events/api/calendarEvents';
+import { prefetch } from 'common/utils/prefetch';
+import { getCalendarEvents, getCalendarEventsControlled } from 'events/api/calendarEvents';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
@@ -40,7 +41,12 @@ const INITIAL_STATE: ICalendarEventsState = {
 export const CalendarEventsContext = createContext(INITIAL_STATE);
 
 export interface IProps extends IEventViewProps {
-  cache?: INewEvent[];
+  preftech?: IPrefetch;
+}
+
+export interface IPrefetch {
+  eventMonth: INewEvent[][];
+  month: DateTime;
 }
 
 /**
@@ -51,14 +57,25 @@ export interface IProps extends IEventViewProps {
  * when the browser is closed.
  * @param {IEventViewProps} props Props given to all of the 3 main event views.
  */
+@prefetch('FrontpageEventCalendar')
 class CalendarEvents extends Component<IProps, ICalendarEventsState> {
+  public static async getServerState(_: IProps): Promise<IPrefetch> {
+    const month = DateTime.local();
+    const data = await getCalendarEvents(month);
+    const eventMonth = constructMonthMap(month, data);
+    return { eventMonth, month };
+  }
+
   constructor(props: IProps) {
     super(props);
 
     this.state = {
       ...INITIAL_STATE,
-      eventMonth: constructMonthMap(DateTime.local(), props.cache || []),
     };
+
+    if (props.preftech) {
+      this.state = { ...this.state, ...props.preftech };
+    }
   }
 
   /** Fetch the stored month from the browser session */
