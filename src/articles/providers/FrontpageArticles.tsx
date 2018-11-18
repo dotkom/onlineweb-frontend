@@ -1,3 +1,4 @@
+import { prefetch } from 'common/utils/prefetch';
 import React, { Component, createContext } from 'react';
 import { getArticles } from '../api';
 import { IArticle } from '../models/Article';
@@ -16,17 +17,23 @@ const INITIAL_STATE: IFrontpageArticlesState = {
 
 export interface IProps {
   /** Cache from SSR */
-  cache?: IArticle[];
+  prefetch?: IArticle[];
 }
 
 export const FrontpageArticleContext = createContext(INITIAL_STATE);
 
+@prefetch('FrontpageArticles')
 class FrontpageArticles extends Component<IProps, IFrontpageArticlesState> {
+  public static async getServerState(_: IProps): Promise<IArticle[]> {
+    const articles = await getArticles();
+    return articles;
+  }
+
   constructor(props: IProps) {
     super(props);
 
     /** If there is a cache from SSR, set it to state */
-    this.state = { ...INITIAL_STATE, articles: props.cache || [] };
+    this.state = { ...INITIAL_STATE, articles: props.prefetch || [] };
   }
 
   public init = async () => this.getArticles();
