@@ -13,8 +13,6 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
-import { IServerStateCache } from './models';
-import StateCache from './stateCache';
 
 import { App } from '../App';
 
@@ -23,11 +21,6 @@ import { App } from '../App';
  * requests, middlwares and other server related things. Rendering is still done by React.
  */
 const app = express();
-
-const RedisCache = new StateCache();
-
-RedisCache.initStateCache();
-setInterval(RedisCache.initStateCache, 5000 * 60);
 
 /** Initialize Sentry error forwarding for the back-end */
 // Disable Sentry, causes Typescript error because its types are not correct.
