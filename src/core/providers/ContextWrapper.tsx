@@ -2,16 +2,15 @@ import FrontpageArticles from 'articles/providers/FrontpageArticles';
 import EventContextWrapper from 'events/providers/EventContextWrapper';
 import OfflineIssues from 'frontpage/providers/OfflineIssues';
 import React, { ReactNode } from 'react';
-import { IServerStateCache } from 'server/models';
 
-export interface IProps extends IServerStateCache {
+export interface IProps {
   children: ReactNode;
 }
 
-const ContextWrapper = ({ events, articles, offline, children }: IProps) => (
-  <EventContextWrapper {...events} accessible={false}>
-    <FrontpageArticles cache={articles}>
-      <OfflineIssues cache={offline}>{children}</OfflineIssues>
+const ContextWrapper = ({ children }: IProps) => (
+  <EventContextWrapper accessible={false}>
+    <FrontpageArticles>
+      <OfflineIssues>{children}</OfflineIssues>
     </FrontpageArticles>
   </EventContextWrapper>
 );
