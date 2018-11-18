@@ -1,6 +1,8 @@
 // import * as Sentry from '@sentry/node';
 import { HOST, PORT } from 'common/constants/backend';
 // import { OWF_SENTRY_DSN } from 'common/constants/sentry';
+import Prefetched from 'common/providers/Prefetched';
+import PrefetchState from 'common/utils/PrefetchState';
 import cookieParser from 'cookie-parser';
 import ContextWrapper from 'core/providers/ContextWrapper';
 import Settings from 'core/providers/Settings';
@@ -70,6 +72,8 @@ const BUNDLES = getBundles();
  * Note that the server side will _ONLY_ render the initial route, the rest is done in the front-end.
  */
 app.get('*', async (req, res) => {
+  const prefetcher = new PrefetchState();
+
   /**
    * Get the settings from cookies to render correct view on front page.
    * Currently only a single setting in cookies ('eventView'). Should expand to support more settings
@@ -77,33 +81,40 @@ app.get('*', async (req, res) => {
    */
   const eventView = getEventView(req.cookies.eventView);
 
-  const cache = await RedisCache.getStateCache();
+  /** Render first time to register all fetches that are needed for current route */
+  const initPrefetch = initJSX(req.path, prefetcher, eventView);
+  renderToString(initPrefetch);
 
-  /**
-   * @summary This is where the magic happens.
-   * @description The node server renders all the JSX just as the browser would do it.
-   * Worth to remember that 'componentDidMount' will _NOT_ be called in the back-end.
-   * Other than that everything is rendered just like in the browser. The StaticRouter uses the
-   * requested url to render the corrent corresponding view to the user.
-   */
-  const jsx = (
-    <StaticRouter location={req.path} context={{}}>
-      <Settings eventView={eventView}>
-        <ContextWrapper {...cache}>
-          <App />
-        </ContextWrapper>
-      </Settings>
-    </StaticRouter>
-  );
-  /** Render the DOM to a string which will be used on initial render and then 'rehydrated' by React */
+  await prefetcher.fetchAll();
+
+  /** Initialize and do the actual render which will be sent to the user */
+  const jsx = initJSX(req.path, prefetcher, eventView);
   const reactDom = renderToString(jsx);
-  /** Wrap the DOM in standard HTML markup */
-  const HTML = wrapHtml(reactDom, cache);
+  const HTML = wrapHtml(reactDom, prefetcher);
 
   /** Send the finished response to the client */
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(HTML);
 });
+
+/**
+ * @summary This is where the magic happens.
+ * @description The node server renders all the JSX just as the browser would do it.
+ * Worth to remember that 'componentDidMount' will _NOT_ be called in the back-end.
+ * Other than that everything is rendered just like in the browser. The StaticRouter uses the
+ * requested url to render the corrent corresponding view to the user.
+ */
+const initJSX = (location: string, prefetcher: PrefetchState, eventView: number): JSX.Element => (
+  <StaticRouter location={location} context={{}}>
+    <Settings eventView={eventView}>
+      <Prefetched prefetcher={prefetcher}>
+        <ContextWrapper>
+          <App />
+        </ContextWrapper>
+      </Prefetched>
+    </Settings>
+  </StaticRouter>
+);
 
 /**
  * @summary Wrap the React DOM in standard HTML.
@@ -112,7 +123,7 @@ app.get('*', async (req, res) => {
  * This is rendered as a string in the DOM and serialized by the front-end when it loads.
  * @param {string} dom A string containing a pre-rendered React DOM.
  */
-const wrapHtml = (dom: string, cache: IServerStateCache) => `
+const wrapHtml = (dom: string, prefetcher: PrefetchState) => `
   <!DOCTYPE html>
   <html lang="nb">
     <head>
@@ -124,7 +135,7 @@ const wrapHtml = (dom: string, cache: IServerStateCache) => `
     <body>
       <div id="root">${dom}</div>
       <script>
-        window.__INITIAL_PROVIDER_STATE__ = ${JSON.stringify(serialize(cache))}
+        window.__PREFETCHED_STATE__ = ${JSON.stringify(serialize(prefetcher.getData()))}
       </script>
       ${BUNDLES[0].join('\n')}
     </body>
