@@ -1,5 +1,6 @@
-import { getCareerOpportunities } from 'career/api';
+import { FilterJobs, getCareerOpportunities } from 'career/api';
 import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
+import { prefetch } from 'common/utils/prefetch';
 import { IApiCompany } from 'core/models/Company';
 import React, { Component, createContext } from 'react';
 
@@ -51,10 +52,26 @@ const INITIAL_STATE: ICareerContextState = {
 
 export const CareerContext = createContext(INITIAL_STATE);
 
-class CareerOpportunities extends Component<{}, ICareerContextState> {
-  public state: ICareerContextState = {
-    ...INITIAL_STATE,
-  };
+export interface IProps {
+  prefetch?: FilterJobs;
+}
+
+@prefetch('CareerProvider')
+class CareerOpportunities extends Component<IProps, ICareerContextState> {
+  public static async getServerState(_: IProps): Promise<FilterJobs> {
+    const filterJobs = await getCareerOpportunities();
+    return filterJobs;
+  }
+
+  constructor(props: IProps) {
+    super(props);
+    this.state = { ...INITIAL_STATE };
+
+    if (props.prefetch) {
+      const [jobs, companies, jobTypes, locations] = props.prefetch;
+      this.state = { ...this.state, jobs, companies, jobTypes, locations };
+    }
+  }
 
   public async componentDidMount() {
     const [jobs, companies, jobTypes, locations] = await getCareerOpportunities();
