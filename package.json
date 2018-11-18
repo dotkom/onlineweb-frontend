@@ -56,7 +56,6 @@
     "@types/react-hot-loader": "^4.1.0",
     "@types/react-loadable": "^5.4.1",
     "@types/react-router-dom": "4.3.1",
-    "@types/redis": "^2.8.7",
     "@types/serialize-javascript": "^1.5.0",
     "@types/webpack-env": "^1.13.6",
     "autoprefixer": "^9.3.1",
@@ -69,7 +68,6 @@
     "express": "^4.16.4",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
-    "hiredis": "^0.5.0",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.2.0",
     "jest-fetch-mock": "^1.6.5",
@@ -119,8 +117,7 @@
     "babel-jest": "^23.6.0",
     "classnames": "^2.2.5",
     "react-ga": "^2.5.5",
-    "react-loadable": "^5.5.0",
-    "redis": "^2.8.0"
+    "react-loadable": "^5.5.0"
   },
   "browserslist": [
     "last 2 versions",
