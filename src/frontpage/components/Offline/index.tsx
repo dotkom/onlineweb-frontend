@@ -62,7 +62,7 @@ class Offline extends Component<IProps, IState> {
 
     return (
       <section className={style.container}>
-        <Heading title="offline" />
+        <Heading title="Offline" />
 
         <div className={style.carouselContainer}>
           {offlines && (
