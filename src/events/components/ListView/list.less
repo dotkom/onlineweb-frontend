@@ -1,6 +1,10 @@
 @import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+
+@polygonMobileSize: 16px;
 
 .grid {
+  max-width: 100%;
   display: grid;
   grid-template-rows: repeat(1fr);
   grid-row-gap: 25px;
@@ -20,6 +24,10 @@
   grid-column-gap: 10px;
   height: 60px;
   .owCard();
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: @polygonMobileSize auto 50px 50px 0;
+  }
 }
 
 .elementGridRow {
@@ -42,6 +50,15 @@
   height: 100%;
   width: 200px;
   clip-path: polygon(90% 0, 0 0, 0 100%, 90% 100%, 100% 65%);
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    width: @polygonMobileSize;
+    clip-path: none;
+
+    & > p {
+      display: none;
+    }
+  }
 }
 
 .host {
@@ -58,6 +75,9 @@
   height: 100%;
   width: 85px;
   clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 35%);
+  @media screen and (max-width: @owMobileBreakpoint) {
+    display: none;
+  }
 }
 
 .personSvg {

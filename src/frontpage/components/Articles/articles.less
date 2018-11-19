@@ -1,4 +1,7 @@
-@grid-gap: 2px;
+@import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+
+@grid-gap: 30px;
 
 .articles {
   margin-top: 40px;
@@ -6,8 +9,12 @@
 
 .container {
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: @grid-gap;
+
+  @media screen and (max-width: @owTabletBreakpoint) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .smallContainer {
@@ -18,23 +25,37 @@
   overflow: hidden;
 }
 
-.imageContainer {
+.articleContainer {
   position: relative;
   height: 100%;
 
   & img {
-    height: 100%;
     width: 100%;
+  }
+
+  & > div {
+    padding: 16px;
+  }
+
+  & h2 {
+    padding: 0 0 8px;
+
+    @media screen and (max-width: @owMobileBreakpoint) {
+      font-size: 18px;
+      padding: 0;
+    }
+  }
+
+  .owCard();
+}
+
+.smallImage {
+  @media screen and (max-width: @owDesktopMaxWidth) and (min-width: @owTabletBreakpoint) {
+    height: 100%;
   }
 }
 
-.title {
-  box-sizing: border-box;
-  padding: 10px;
-  color: #fff;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5);
+.smallArticle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
