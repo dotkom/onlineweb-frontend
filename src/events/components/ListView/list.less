@@ -1,4 +1,7 @@
 @import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+
+@polygonMobileSize: 16px;
 
 .grid {
   display: grid;
@@ -20,6 +23,10 @@
   grid-column-gap: 10px;
   height: 60px;
   .owCard();
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: @polygonMobileSize auto 50px 50px 85px;
+  }
 }
 
 .elementGridRow {
@@ -42,6 +49,15 @@
   height: 100%;
   width: 200px;
   clip-path: polygon(90% 0, 0 0, 0 100%, 90% 100%, 100% 65%);
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    width: @polygonMobileSize;
+    clip-path: none;
+
+    & > p {
+      display: none;
+    }
+  }
 }
 
 .host {
