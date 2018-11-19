@@ -26,7 +26,7 @@ class UserProvider extends Component<{}, IUserContext> {
   public logout = async () => {
     await logOut();
     this.setState({ user: null });
-  }
+  };
 
   public async componentDidMount() {
     // check if user is already logged in
@@ -39,7 +39,9 @@ class UserProvider extends Component<{}, IUserContext> {
   public render() {
     const setUser = (user: User) => this.completeLogin(user);
     const logout = this.logout;
-    return <UserContext.Provider value={{ ...this.state, setUser, logout }}>{this.props.children}</UserContext.Provider>;
+    return (
+      <UserContext.Provider value={{ ...this.state, setUser, logout }}>{this.props.children}</UserContext.Provider>
+    );
   }
 }
 
