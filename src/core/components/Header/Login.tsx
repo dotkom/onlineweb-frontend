@@ -42,10 +42,10 @@ interface IHeaderUserProps {
 const HeaderUser = (props: IHeaderUserProps) => (
   <div className={style.user}>
     <button onClick={props.onClick} className={style.dropdownButton} />
-    <div className={style.username}>niklasmh{false && props.user.profile.preferred_username}</div>
+    <div className={style.username}>{props.user.profile.preferred_username}</div>
     {props.isOpen && (
       <div className={style.userMenu} onClick={props.onClick}>
-        <Link to={routes.profile}>Min side: niklasmh{false && props.user.profile.preferred_username}</Link>
+        <Link to={routes.profile}>Min side: {props.user.profile.preferred_username}</Link>
         <Link to={routes.home}>Kontakt oss</Link>
         <Link to={routes.home}>Finn brukere</Link>
         <Link to={routes.home}>Logg ut</Link>
