@@ -1,15 +1,45 @@
+@import '~common/less/mixins.less';
+@import '~common/less/colors.less';
+
 .container {
   margin-top: 40px;
   width: 100%;
 }
 
+.carouselContainer {
+  display: flex;
+}
+
+.carouselArrow {
+  width: 50px;
+  padding: 10px;
+  cursor: pointer;
+  height: 50px;
+  align-self: center;
+  background: none;
+}
+
 .carousel {
   display: flex;
+  margin: 0 20px;
+  flex-grow: 1;
   justify-content: space-between;
-  overflow: auto;
-  max-width: calc(100vw - 60px);
+}
 
-  div {
-    transition: 1s ease-in 0.2s;
+.carouselItem {
+  .owCard();
+  transition: 1s ease-in 0.2s;
+  text-align: center;
+
+  a {
+    color: @darkGray;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+
+  img {
+    width: 100%;
   }
 }
