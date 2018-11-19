@@ -8,7 +8,7 @@ import style from './detail.less';
 
 const PictureCard = ({ image, event_start, event_end, location, company_event, event_type }: INewEvent) => {
   const eventImage = company_event[0] ? company_event[0].company.image : image;
-  const imageUrl = eventImage ? eventImage.wide : '';
+  const imageUrl = eventImage ? eventImage.md : '';
   const color = getEventColor(event_type);
 
   const startDate = DateTime.fromISO(event_start).toFormat('d MMM');
