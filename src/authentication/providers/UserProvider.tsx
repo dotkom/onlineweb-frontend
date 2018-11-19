@@ -1,5 +1,6 @@
 import { User } from 'oidc-client';
 import React, { Component, createContext } from 'react';
+import { getUser, logOut } from '../api';
 import { IAuthUser } from '../models/User';
 
 export interface IUserContext {
@@ -22,9 +23,23 @@ class UserProvider extends Component<{}, IUserContext> {
     this.setState({ user });
   };
 
+  public logout = async () => {
+    await logOut();
+    this.setState({ user: null });
+  }
+
+  public async componentDidMount() {
+    // check if user is already logged in
+    const user = await getUser();
+    if (user) {
+      this.completeLogin(user);
+    }
+  }
+
   public render() {
     const setUser = (user: User) => this.completeLogin(user);
-    return <UserContext.Provider value={{ ...this.state, setUser }}>{this.props.children}</UserContext.Provider>;
+    const logout = this.logout;
+    return <UserContext.Provider value={{ ...this.state, setUser, logout }}>{this.props.children}</UserContext.Provider>;
   }
 }
 

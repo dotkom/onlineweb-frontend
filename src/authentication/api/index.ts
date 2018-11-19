@@ -24,3 +24,26 @@ export const authCallback = async (): Promise<User> => {
   const user = await MANAGER.signinRedirectCallback();
   return user;
 };
+
+
+/**
+ * @summary Returns user if logged in
+ */
+export const getUser = async (): Promise<User> => {
+  const user = await MANAGER.getUser();
+  return user;
+}
+
+/**
+ * @summary Removes user from storage
+ */
+
+export const logOut = async () => {
+  try{
+    // Should maybe logout from onlineweb aswell
+    await MANAGER.removeUser()
+  } catch (e) {
+    // tslint:disable-next-line no-console
+    console.error(e);
+  }
+}
