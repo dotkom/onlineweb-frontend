@@ -101,6 +101,7 @@ module.exports = (env) => {
       new webpack.EnvironmentPlugin({
         OW4_ADDRESS: 'https://online.ntnu.no',
         OW4_SSO_CLIENT_ID: '',
+        OW4_SSO_CALLBACK: 'http://localhost:8080/auth/callback',
         OWF_SENTRY_DSN: '',
         NODE_ENV: 'development',
       }),
