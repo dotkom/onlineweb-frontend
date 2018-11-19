@@ -3,7 +3,7 @@ import { DOMAIN } from 'common/constants/endpoints';
 const settings = {
   authority: DOMAIN + '/openid',
   client_id: process.env.OW4_SSO_CLIENT_ID || '',
-  redirect_uri: 'http://localhost:8080/auth/callback',
+  redirect_uri: rocess.env.OW4_SSO_CALLBACK || '',
   post_logout_redirect_uri: DOMAIN + '/',
   response_type: 'id_token token',
   scope: 'openid profile',
