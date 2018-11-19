@@ -48,8 +48,9 @@ const HeaderUser = (props: IHeaderUserProps) => (
         <Link to={routes.profile}>Min side: {props.user.profile.preferred_username}</Link>
         <Link to={routes.home}>Kontakt oss</Link>
         <Link to={routes.home}>Finn brukere</Link>
-        <Link to={routes.home} onClick={props.logout}>Logg ut</Link>
-        
+        <Link to={routes.home} onClick={props.logout}>
+          Logg ut
+        </Link>
       </div>
     )}
   </div>
