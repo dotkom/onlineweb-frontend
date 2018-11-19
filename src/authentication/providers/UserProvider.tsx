@@ -5,11 +5,13 @@ import { IAuthUser } from '../models/User';
 
 export interface IUserContext {
   user?: IAuthUser;
+  logout: () => void;
   setUser: (auth: IAuthUser) => void;
 }
 
 const initialState: IUserContext = {
   setUser: (_: IAuthUser) => new Error('setUser called before UserProvider is initialized'),
+  logout: () => new Error('logout called before UserProvider is initialized'),
 };
 
 export const UserContext = createContext(initialState);
@@ -25,7 +27,7 @@ class UserProvider extends Component<{}, IUserContext> {
 
   public logout = async () => {
     await logOut();
-    this.setState({ user: null });
+    this.setState({ user: undefined });
   };
 
   public async componentDidMount() {

@@ -35,6 +35,7 @@ class Login extends Component<{}, IState> {
 
 interface IHeaderUserProps {
   user: IAuthUser;
+  logout: () => void;
   onClick: (event: React.MouseEvent<HTMLButtonElement | HTMLElement>) => void;
   isOpen: boolean;
 }
