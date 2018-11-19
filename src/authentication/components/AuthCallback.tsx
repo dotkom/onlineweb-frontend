@@ -16,7 +16,7 @@ class AuthCallback extends Component<IProps> {
   }
 
   public render() {
-    return <div>thonkery</div>;
+    return <div>Logged in</div>;
   }
 }
 
