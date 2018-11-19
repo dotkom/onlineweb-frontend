@@ -24,9 +24,9 @@ class Login extends Component<{}, IState> {
   };
 
   public render() {
-    const { user }: IUserContext = this.context;
+    const { user, logout }: IUserContext = this.context;
     return user ? (
-      <HeaderUser user={user} onClick={this.toggleDropdown} isOpen={this.state.open} />
+      <HeaderUser user={user} logout={logout} onClick={this.toggleDropdown} isOpen={this.state.open} />
     ) : (
       <LoginView onClick={this.toggleDropdown} isOpen={this.state.open} />
     );
@@ -48,7 +48,8 @@ const HeaderUser = (props: IHeaderUserProps) => (
         <Link to={routes.profile}>Min side: {props.user.profile.preferred_username}</Link>
         <Link to={routes.home}>Kontakt oss</Link>
         <Link to={routes.home}>Finn brukere</Link>
-        <Link to={routes.home}>Logg ut</Link>
+        <Link to={routes.home} onClick={props.logout}>Logg ut</Link>
+        
       </div>
     )}
   </div>
