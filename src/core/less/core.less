@@ -37,21 +37,9 @@ main {
   max-width: @owDesktopMaxWidth;
 }
 
-@media (min-width: @owMobileBreakpoint) {
+@media (max-width: @owDesktopMaxWidth) {
   main {
-    max-width: @owMobileBreakpoint;
-  }
-}
-
-@media (min-width: @owTabletBreakpoint) {
-  main {
-    max-width: @owTabletBreakpoint;
-  }
-}
-
-@media (min-width: @owDesktopMaxWidth) {
-  main {
-    max-width: @owDesktopMaxWidth;
+    max-width: 100vw;
   }
 }
 
