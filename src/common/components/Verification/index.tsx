@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Cross from './Cross';
 import Check from './Check';
+import Cross from './Cross';
 import style from './verification.less';
 
 export interface IProps {
@@ -9,11 +9,7 @@ export interface IProps {
 }
 
 const Verified = ({ checked = false }: IProps) => {
-  return(
-    <div className={style.container}>
-      { checked ? <Check /> : <Cross /> }
-    </div>
-  );
+  return <div className={style.container}>{checked ? <Check /> : <Cross />}</div>;
 };
 
 export default Verified;

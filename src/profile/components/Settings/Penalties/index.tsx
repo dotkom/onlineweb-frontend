@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { Component, ContextType } from 'react';
 
 import { UserContext } from 'authentication/providers/UserProvider';
@@ -8,16 +7,8 @@ import { IMark, ISuspension } from 'profile/models/Penalty';
 
 import Mark from './Mark';
 import { PenaltyPane } from './Penalty';
-=======
-import React, { Component } from 'react';
-import { IMark, ISuspension } from '../../../models/Penalty';
-import Mark from './Mark';
->>>>>>> Move profile/penalties to profile/settings/penalties and upgrade design
 import Rules from './Rules';
 import Suspension from './Suspension';
-import Placeholder from './Placeholder';
-import { getMarks, getSuspensions } from '../../../api/penalties';
-import style from './penalties.less';
 
 export interface IState {
   marks: IMark[];
