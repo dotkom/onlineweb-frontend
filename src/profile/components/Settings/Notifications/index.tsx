@@ -56,7 +56,7 @@ class Notifications extends Component<{}, IState> {
   };
 
   public async componentDidMount() {
-    await registerServiceWorker();
+    // const serviceWorker = await registerServiceWorker();
   }
 
   public toggleGlobalNotifications = async () => {
