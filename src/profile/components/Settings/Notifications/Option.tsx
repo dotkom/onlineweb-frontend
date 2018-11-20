@@ -1,6 +1,6 @@
+import ToggleSwitch from 'common/components/ToggleSwitch';
 import React from 'react';
 import { INotificationOption, translations } from '../../../models/Notification';
-import ToggleSwitch from 'common/components/ToggleSwitch';
 import style from './notifications.less';
 
 export interface IProps {
@@ -11,7 +11,7 @@ export interface IProps {
 
 const Option = ({ option, value, toggle }: IProps) => (
   <div className={style.element}>
-    <h4>{ translations[option] }</h4>
+    <h4>{translations[option]}</h4>
     <div className={style.toggle}>
       <ToggleSwitch checked={value} onChange={toggle} />
     </div>

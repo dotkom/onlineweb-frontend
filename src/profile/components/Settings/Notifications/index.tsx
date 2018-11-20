@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import Markdown from 'react-markdown';
-import { INotificationOption } from '../../../models/Notification';
+import Markdown from 'common/components/Markdown';
 import {
-  resolveNotificationPermission,
   getNotificationPermission,
+  resolveNotificationPermission,
   verifyNotification,
 } from 'common/utils/notification';
-import { registerServiceWorker, verifyServiceWorker } from 'common/utils/serviceWorker';
 import { verifyPushManager } from 'common/utils/pushManager';
-import Option from './Option';
-import BrowserSupport from './BrowserSupport';
+import { registerServiceWorker, verifyServiceWorker } from 'common/utils/serviceWorker';
 import { getKeys } from 'common/utils/tsHacks';
+import React, { Component } from 'react';
+import { INotificationOption } from '../../../models/Notification';
+import BrowserSupport from './BrowserSupport';
 import style from './notifications.less';
+import Option from './Option';
 
 const ABOUT_NOTIFICATIONS = `
   # Notifikasjoner
@@ -56,14 +56,13 @@ class Notifications extends Component<{}, IState> {
   };
 
   public async componentDidMount() {
-    const serviceWorker = await registerServiceWorker();
-    console.log(serviceWorker);
+    await registerServiceWorker();
   }
 
   public toggleGlobalNotifications = async () => {
     const permission = await getNotificationPermission();
     this.setState({ allow_notifications: permission });
-  }
+  };
 
   /**
    * @summary Toggles an option in state
@@ -72,13 +71,13 @@ class Notifications extends Component<{}, IState> {
   public toggleNotificationOption(key: keyof INotificationOption) {
     const { options } = this.state;
     const option = options[key];
-    this.setState({ options: { ...options, [key]: !option }});
+    this.setState({ options: { ...options, [key]: !option } });
   }
 
   public render() {
     const { options, allow_notifications } = this.state;
     return (
-      <div>
+      <div className={style.container}>
         <Markdown source={ABOUT_NOTIFICATIONS} />
         <Markdown source={ABOUT_BROWSER_SUPPORT} />
         <div className={style.container}>
@@ -97,13 +96,8 @@ class Notifications extends Component<{}, IState> {
         </div>
         <Markdown source={ABOUT_NOTIFICATION_OPTIONS} />
         <div className={style.container}>
-          { getKeys<INotificationOption>(options).map((key) => (
-            <Option
-              key={key}
-              option={key}
-              value={options[key]}
-              toggle={() => this.toggleNotificationOption(key)}
-            />
+          {getKeys<INotificationOption>(options).map((key) => (
+            <Option key={key} option={key} value={options[key]} toggle={() => this.toggleNotificationOption(key)} />
           ))}
         </div>
       </div>
