@@ -50,7 +50,11 @@ export const get = async (query: string, parameters: object = {}, options: Reque
  * @param query The API endpoint to fetch results from.
  * @param page An optional page to start fetching data on.
  */
-export async function getAllPages<T>(query: string, parameters: IBaseAPIParameters = {}, options: RequestInit = {}): Promise<T[]> {
+export async function getAllPages<T>(
+  query: string,
+  parameters: IBaseAPIParameters = {},
+  options: RequestInit = {}
+): Promise<T[]> {
   let data: IAPIData<T>;
   let results: T[] = [];
   let page = parameters.page || 1;
@@ -60,7 +64,7 @@ export async function getAllPages<T>(query: string, parameters: IBaseAPIParamete
     page += 1;
   } while (data.next);
   return results;
-};
+}
 
 /**
  * @summary Simple fetch-API wrapper for HTTP POST

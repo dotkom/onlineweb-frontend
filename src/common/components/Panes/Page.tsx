@@ -8,9 +8,7 @@ export interface IProps {
 }
 
 export const Page = ({ children, loading }: IProps) => (
-  <div className={style.page}>
-    { loading ? <Spinner /> : children }
-  </div>
+  <div className={style.page}>{loading ? <Spinner /> : children}</div>
 );
 
 export default Page;
