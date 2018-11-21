@@ -1,4 +1,4 @@
-import { ResponsiveBar } from '@nivo/bar';
+import { BarExtendedDatum, ResponsiveBar } from '@nivo/bar';
 import { LIGHT_EVENT_COLORS } from 'events/models/Event';
 import { IOrder, IOrderLine } from 'profile/models/Orders';
 import React from 'react';
@@ -8,7 +8,7 @@ export interface IProps {
   orderLines: IOrderLine[];
 }
 
-const Tooltip = ({ id, value, index, indexValue, color, data }) => (
+const Tooltip = ({ value, indexValue }: BarExtendedDatum) => (
   <span>
     {indexValue} - {value}
   </span>
