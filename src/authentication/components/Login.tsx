@@ -12,11 +12,7 @@ const LoginView = (props: ILoginViewProps) => (
     <button className={style.dropdownButton} onClick={props.onClick} title="Logg inn" />
     {props.isOpen && (
       <div className={style.loginMenu}>
-        <label htmlFor="username">Brukernavn</label>
-        <input id="username" type="text" />
-        <label htmlFor="password">Passord</label>
-        <input id="password" type="password" />
-        <button onClick={() => logIn()}>Logg inn</button>
+        <button onClick={logIn}>Logg inn</button>
         <div className={style.extra}>
           <button>Registrer</button>
           <button>Glemt passord</button>
