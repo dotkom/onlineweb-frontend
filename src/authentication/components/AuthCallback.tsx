@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect, Switch } from 'react-router';
 import { authCallback } from '../api';
 import { IUserContext, UserContext } from '../providers/UserProvider';
 
@@ -16,7 +17,15 @@ class AuthCallback extends Component<IProps> {
   }
 
   public render() {
-    return <div>Logged in</div>;
+    if (this.props.auth && this.props.auth.user && this.props.auth.user.state) {
+      return (
+        <Switch>
+          <Redirect to={this.props.auth.user.state} />
+        </Switch>
+      );
+    }
+
+    return null;
   }
 }
 
