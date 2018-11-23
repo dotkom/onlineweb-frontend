@@ -2,8 +2,8 @@ import { ICareerOpportunity } from 'career/models/Career';
 import Img from 'common/components/Img';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { formatDeadline } from './JobDetails';
 import style from '../less/career.less';
+import { formatDeadline } from './JobDetails';
 
 // Accepts a list of locations and returns a comma-separated list of locations
 // with 'og' inserted before the last element, and 'Ikke spesifisert' if no
