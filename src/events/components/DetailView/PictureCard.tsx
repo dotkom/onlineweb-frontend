@@ -11,7 +11,7 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
   const imageUrl = eventImage ? eventImage.md : '';
   const color = getEventColor(event_type);
 
-  const startDate = DateTime.fromISO(event_start).toFormat('d MMM ');
+  const startDate = DateTime.fromISO(event_start).toFormat('d MMM');
   const startTime = DateTime.fromISO(event_start).toFormat('t');
   const endDate = DateTime.fromISO(event_end).toFormat('d MMM');
   const endTime = DateTime.fromISO(event_end).toFormat('t');
