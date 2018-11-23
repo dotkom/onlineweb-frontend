@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import style from '../less/career.less';
 import { formatLocations } from './JobListItem';
 
-const formatDeadline = (deadline: any) => {
+export const formatDeadline = (deadline: any) => {
   // Will return a formated date from ISO form if there's a deadline
   if (deadline) {
     return DateTime.fromISO(deadline).toFormat('d MMM y');
