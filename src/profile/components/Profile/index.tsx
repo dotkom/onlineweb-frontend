@@ -13,39 +13,10 @@ import KeyValue from './KeyValue';
 export interface IProps extends IProfileProps {}
 
 export interface IState {
-  user: IFullProfileUser;
+  user?: IFullProfileUser;
 }
 
 class Profile extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props);
-
-    this.state = {
-      user: {
-        first_name: 'Kari',
-        last_name: 'Nordmann',
-        username: 'dragonslayer',
-        ntnu_username: 'karinor',
-        kallenavn: 'javaGuru',
-        grade: 3,
-        primary_email: 'karinor@stud.ntnu.no',
-        gsuite_username: 'kari.nordmann',
-        phone_number: '98765432',
-        address: 'Høgskoleringen 3 (R.I.P)',
-        committees: [
-          { committee: 'dotkom', position: 'medlem', range: '2015-2018' },
-          { committee: 'dotkom', position: 'nestleder', range: '2018-2019' },
-          { committee: 'hovedstyret', position: 'leder', range: '2038-0001' },
-          { committee: 'prokom', position: 'redaktør', range: '2015-2018' },
-        ],
-        external: {
-          github: 'https://github.com/karinor',
-          linkedin: 'https://linkedin.com/in/karinor',
-          homepage: 'https://kari.nordmann.no',
-        },
-      },
-    };
-  }
 
   /*async componentDidMount() {
     const user = await getProfile();
@@ -62,31 +33,31 @@ class Profile extends React.Component<IProps, IState> {
             <Pane>
               <Content title="Kontakt">
                 <KeyValue k="Telefon" v={user.phone_number} />
-                <KeyValue k="E-post" v={user.primary_email} />
-                <KeyValue k="Komité-e-post" v={`${user.gsuite_username}@online.ntnu.no`} />
+                <KeyValue k="E-post" v={user.email} />
+                <KeyValue k="Komité-e-post" v={`${user.online_mail}@online.ntnu.no`} />
               </Content>
             </Pane>
             <Pane>
               <Content title="Studie">
                 <div className={style.studyText}>
-                  <KeyValue k="Klassetrinn" v={`${user.grade}. Klasse`} />
+                  <KeyValue k="Klassetrinn" v={`${user.year}. Klasse`} />
                   <KeyValue k="Startår" v="2015" />
                 </div>
-                <Progress ongoingYear={user.grade} completedYear={user.grade - 1} />
+                <Progress ongoingYear={user.year} completedYear={user.year - 1} />
               </Content>
             </Pane>
           </SplitPane>
           <Pane>
             <Content title="Komitéverv">
-              <MedalsView medals={user.committees} />
+              <MedalsView medals={user.positions} />
             </Content>
           </Pane>
           <SplitPane>
             <Pane>
               <Content title="Eksterne sider">
-                <Link k="Github" v={user.external.github} />
-                <Link k="Linkedin" v={user.external.linkedin} />
-                <Link k="Hjemmeside" v={user.external.homepage} />
+                <Link k="Github" v={user.github} />
+                <Link k="Linkedin" v={user.linkedin} />
+                <Link k="Hjemmeside" v={user.website} />
               </Content>
             </Pane>
           </SplitPane>
