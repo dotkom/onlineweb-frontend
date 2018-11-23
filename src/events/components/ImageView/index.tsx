@@ -35,6 +35,15 @@ class ImageView extends Component<IProps> {
           <SmallEventColumn events={eventsMiddle.slice(1, 4)} />
           <SmallEventColumn events={eventsRight.slice(1, 4)} />
         </div>
+
+        <div className={style.smallerWidthGrid}>
+          {eventsLeft[0] ? <LargeEvent {...eventsLeft[0]} /> : <LargeEventPlaceholder event_type={2} />}
+          <SmallEventColumn events={eventsLeft.slice(1, 4)} />
+          {eventsMiddle[0] ? <LargeEvent {...eventsMiddle[0]} /> : <LargeEventPlaceholder event_type={3} />}
+          <SmallEventColumn events={eventsMiddle.slice(1, 4)} />
+          {eventsRight[0] ? <LargeEvent {...eventsRight[0]} /> : <LargeEventPlaceholder event_type={1} />}
+          <SmallEventColumn events={eventsRight.slice(1, 4)} />
+        </div>
       </>
     );
   }

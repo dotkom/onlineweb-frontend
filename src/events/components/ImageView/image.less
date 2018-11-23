@@ -4,7 +4,8 @@
 @edge-height: 20px;
 
 .largeEventGrid,
-.smallEventGrid {
+.smallEventGrid,
+.smallerWidthGrid {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 20px;
@@ -23,6 +24,15 @@
 }
 
 @media (min-width: 1024px) {
+  .largeEventGrid,
+  .smallEventGrid {
+    display: grid;
+  }
+
+  .smallerWidthGrid {
+    display: none;
+  }
+
   .largeEventGrid {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -31,6 +41,17 @@
     grid-auto-flow: column;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 1023px) {
+  .smallerWidthGrid {
+    display: grid;
+  }
+
+  .largeEventGrid,
+  .smallEventGrid {
+    display: none;
   }
 }
 
