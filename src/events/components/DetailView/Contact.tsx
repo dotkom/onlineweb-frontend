@@ -11,7 +11,9 @@ const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
   let organizer_email: string = 'hovedstyret@online.ntnu.no';
   if (organizer_name.match(regex)) {
     organizer_email = organizer_name.substring(0, 3).toLowerCase() + 'kom@online.ntnu.no';
-  }
+  } else if (organizer_name === 'seniorKom') {
+    organizer_email = organizer_name.substring(0, 6).toLowerCase() + 'kom@online.ntnu.no';
+  };
   const mailtoString: string = 'mailto:' + organizer_email;
 
   return (
