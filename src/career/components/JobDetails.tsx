@@ -2,18 +2,18 @@ import { ICareerOpportunity } from 'career/models/Career';
 import Heading from 'common/components/Heading';
 import Img from 'common/components/Img';
 import Markdown from 'common/components/Markdown';
+import { DateTime } from 'luxon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from '../less/career.less';
 import { formatLocations } from './JobListItem';
-import { DateTime } from 'luxon';
 
 const formatDeadline = (deadline: any) => {
-  //Will return a formated date from ISO form if there's a deadline
+  // Will return a formated date from ISO form if there's a deadline
   if (deadline) {
     return DateTime.fromISO(deadline).toFormat('d MMM y');
   }
-  //No deadline is specified
+  // No deadline is specified
   return 'Ikke spesifisert';
 };
 
