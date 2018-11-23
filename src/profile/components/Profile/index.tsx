@@ -29,9 +29,7 @@ class Profile extends React.Component<IProps, IState> {
     const { user } = this.state;
     return (
       <div className={style.profileContainer}>
-        <Page loading={!user}>
-          {!!user ? <MainProfile user={user} /> : null }
-        </Page>
+        <Page loading={!user}>{!!user ? <MainProfile user={user} /> : null}</Page>
       </div>
     );
   }
