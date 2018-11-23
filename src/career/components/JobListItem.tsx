@@ -3,6 +3,7 @@ import Img from 'common/components/Img';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import style from '../less/career.less';
+import { formatDeadline } from './JobDetails';
 
 // Accepts a list of locations and returns a comma-separated list of locations
 // with 'og' inserted before the last element, and 'Ikke spesifisert' if no
@@ -37,7 +38,7 @@ const JobListItem = ({ location, deadline, company, title, ingress, id, employme
       <div className={style.jobMeta}>
         <p>Type: {employment.name}</p>
         <p>Sted: {formatLocations(location.map((loc) => loc.name))}</p>
-        <p>Frist: {deadline}</p>
+        <p>Frist: {formatDeadline(deadline)}</p>
       </div>
     </div>
   </div>
