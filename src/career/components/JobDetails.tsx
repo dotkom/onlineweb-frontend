@@ -6,6 +6,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from '../less/career.less';
 import { formatLocations } from './JobListItem';
+import { DateTime } from 'luxon';
+
+const formatDeadline = (deadline: any) => {
+  //Will return a formated date from ISO form if there's a deadline
+  if (deadline) {
+    return DateTime.fromISO(deadline).toFormat('d MMM y');
+  }
+  //No deadline is specified
+  return 'Ikke spesifisert';
+};
 
 const JobDetails = (props: ICareerOpportunity) => (
   <div>
@@ -27,7 +37,7 @@ const JobDetails = (props: ICareerOpportunity) => (
             <h3>Nøkkelinformasjon</h3>
             <p>Type: {props.employment.name}</p>
             <p>Sted: {formatLocations(props.location.map((loc) => loc.name))}</p>
-            <p>Frist: {props.deadline}</p>
+            <p>Frist: {formatDeadline(props.deadline)}</p>
           </div>
         </div>
       </div>
