@@ -1,13 +1,14 @@
 import { IProfileProps } from 'profile';
 import React from 'react';
-import style from '../../less/profile.less';
 import { IFullProfileUser } from '../../models/User';
 import Header from './Header';
-import IconInfo from './IconInfo';
-import Info from './Info';
-import InfoGroup from './InfoGroup';
+import Link from './Link';
 import MedalsView from './MedalsView';
+import style from './profile.less';
 import Progress from './Progress';
+
+import { Content, Page, Pane, SplitPane } from 'common/components/Panes';
+import KeyValue from './KeyValue';
 
 export interface IProps extends IProfileProps {}
 
@@ -54,29 +55,43 @@ class Profile extends React.Component<IProps, IState> {
   public render() {
     const { user } = this.state;
     return (
-      <>
-        <Header name={`${user.first_name} ${user.last_name}`} />
-        <div className={style.profile}>
-          <InfoGroup name="Navn" icon="names">
-            <Info type="NTNU Brukernavn" content={user.ntnu_username} />
-            <Info type="Kallenavn" content={user.kallenavn} />
-            <Info type="Brukernavn" content={user.username} />
-          </InfoGroup>
-          <Progress ongoingYear={user.grade} completedYear={user.grade - 1} name="Studieprogresjon" />
-          <InfoGroup name="Kontakt" icon="contact">
-            <Info type="Primær e-post" content={user.primary_email} />
-            <Info type="Online e-post" content={`${user.gsuite_username}@online.ntnu.no`} />
-            <Info type="Telefonnummer" content={user.phone_number} />
-            <Info type="Adresse" content={user.address} />
-          </InfoGroup>
-          <MedalsView medals={user.committees} name="Komitéverv" />
-          <InfoGroup name="Eksterne Lenker" icon="external">
-            <IconInfo type="Github" content={user.external.github} />
-            <IconInfo type="Linkedin" content={user.external.linkedin} />
-            <IconInfo type="Hjemmeside" content={user.external.homepage} />
-          </InfoGroup>
-        </div>
-      </>
+      <div className={style.profileContainer}>
+        <Page>
+          <Header name={`${user.first_name} ${user.last_name}`} />
+          <SplitPane>
+            <Pane>
+              <Content title="Kontakt">
+                <KeyValue k="Telefon" v={user.phone_number} />
+                <KeyValue k="E-post" v={user.primary_email} />
+                <KeyValue k="Komité-e-post" v={`${user.gsuite_username}@online.ntnu.no`} />
+              </Content>
+            </Pane>
+            <Pane>
+              <Content title="Studie">
+                <div className={style.studyText}>
+                  <KeyValue k="Klassetrinn" v={`${user.grade}. Klasse`} />
+                  <KeyValue k="Startår" v="2015" />
+                </div>
+                <Progress ongoingYear={user.grade} completedYear={user.grade - 1} />
+              </Content>
+            </Pane>
+          </SplitPane>
+          <Pane>
+            <Content title="Komitéverv">
+              <MedalsView medals={user.committees} />
+            </Content>
+          </Pane>
+          <SplitPane>
+            <Pane>
+              <Content title="Eksterne sider">
+                <Link k="Github" v={user.external.github} />
+                <Link k="Linkedin" v={user.external.linkedin} />
+                <Link k="Hjemmeside" v={user.external.homepage} />
+              </Content>
+            </Pane>
+          </SplitPane>
+        </Page>
+      </div>
     );
   }
 }
