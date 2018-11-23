@@ -8,8 +8,8 @@ export interface IProps {
 
 export const Content = ({ children, title }: IProps) => (
   <div className={style.content}>
-    <h2>{ title }</h2>
-    <div>{ children }</div>
+    <h2>{title}</h2>
+    <div>{children}</div>
   </div>
 );
 

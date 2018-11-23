@@ -1,17 +1,13 @@
 import { IProfileProps } from 'profile';
 import React from 'react';
-import style from '../../less/profile.less';
-import { getProfile } from '../../api';
 import { IFullProfileUser } from '../../models/User';
 import Header from './Header';
-import IconInfo from './IconInfo';
-import Info from './Info';
-import InfoGroup from './InfoGroup';
-import MedalsView from './MedalsView';
-import Progress from './Progress';
 import Link from './Link';
+import MedalsView from './MedalsView';
+import style from './profile.less';
+import Progress from './Progress';
 
-import { Content, FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
+import { Content, Page, Pane, SplitPane } from 'common/components/Panes';
 import KeyValue from './KeyValue';
 
 export interface IProps extends IProfileProps {}
@@ -76,7 +72,7 @@ class Profile extends React.Component<IProps, IState> {
                   <KeyValue k="Klassetrinn" v={`${user.grade}. Klasse`} />
                   <KeyValue k="Startår" v="2015" />
                 </div>
-                <Progress ongoingYear={user.grade} completedYear={user.grade-1} />
+                <Progress ongoingYear={user.grade} completedYear={user.grade - 1} />
               </Content>
             </Pane>
           </SplitPane>
