@@ -30,7 +30,9 @@ class Progress extends React.Component<IProps> {
       return (
         <>
           <g>
-            <text x={x-1.333} y="5" fontSize="5">{ year }</text>
+            <text x={x - 1.333} y="5" fontSize="5">
+              {year}
+            </text>
             <Circle x={x} radius={radius} lineWidth={lineWidth} />
             {year <= ongoingYear && <CircleCheck x={x} radius={checkRadius} />}
             {year <= completedYear && <CheckMark x={x} radius={checkRadius} />}
