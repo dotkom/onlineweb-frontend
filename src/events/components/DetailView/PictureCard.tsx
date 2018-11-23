@@ -12,9 +12,9 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
   const color = getEventColor(event_type);
 
   const startDate = DateTime.fromISO(event_start).toFormat('d MMM');
-  const startTime = DateTime.fromISO(event_start).toFormat('hh:mm');
+  const startTime = DateTime.fromISO(event_start).toFormat('HH:mm');
   const endDate = DateTime.fromISO(event_end).toFormat('d MMM');
-  const endTime = DateTime.fromISO(event_end).toFormat('hh:mm');
+  const endTime = DateTime.fromISO(event_end).toFormat('HH:mm');
 
   return (
     <div className={style.pictureCard}>
