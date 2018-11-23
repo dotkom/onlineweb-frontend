@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom';
 import style from '../less/career.less';
 import { formatLocations } from './JobListItem';
 
-export const formatDeadline = (deadline: any) => {
-  // Will return a formated date from ISO form if there's a deadline
+/**
+ * @summary formats the deadline from ISO format to Date Month Year
+ * @return the formated deadline as a string or the string "Ikke spesifisert" if deadline is null
+ */
+export const formatDeadline = (deadline: string): string => {
   if (deadline) {
     return DateTime.fromISO(deadline).toFormat('d MMM y');
   }
-  // No deadline is specified
   return 'Ikke spesifisert';
 };
 
