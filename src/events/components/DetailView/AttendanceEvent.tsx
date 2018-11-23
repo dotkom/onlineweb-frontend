@@ -50,9 +50,9 @@ const RuleBundles = ({ event }: IAttendanceEventProps) => {
 };
 
 const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
-  const registrationStart = DateTime.fromISO(event.registration_start).toFormat('d MMM t');
-  const registrationEnd = DateTime.fromISO(event.registration_end).toFormat('d MMM t');
-  const cancellationDeadline = DateTime.fromISO(event.unattend_deadline).toFormat('d MMM t');
+  const registrationStart = DateTime.fromISO(event.registration_start).toFormat('d MMM HH:mm');
+  const registrationEnd = DateTime.fromISO(event.registration_end).toFormat('d MMM HH:mm');
+  const cancellationDeadline = DateTime.fromISO(event.unattend_deadline).toFormat('d MMM HH:mm');
 
   return (
     <div className={style.blockGrid}>
