@@ -1,15 +1,14 @@
-import { get } from 'common/utils/api';
+import { IAuthUser } from 'authentication/models/User';
+import { get, withUser } from 'common/utils/api';
 import { IFullProfileUser } from '../models/User';
 
 /** Base URL for the profile API */
-const API_URL = '/api/v1/profile';
+const API_URL = '/api/v1/profile/';
 
 /**
  *
  */
-export const getProfile = async (): Promise<IFullProfileUser> => {
-  const data = await get(API_URL, { format: 'json' });
-  // TODO: Create the API endpoint...
-  const user = data.results[2];
-  return user;
+export const getProfile = async (user: IAuthUser): Promise<IFullProfileUser> => {
+  const data: IFullProfileUser = await get(API_URL, { format: 'json' }, withUser(user));
+  return data;
 };
