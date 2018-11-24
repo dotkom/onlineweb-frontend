@@ -3,13 +3,13 @@ import { Route, RouteProps, Switch } from 'react-router-dom';
 
 import HttpError from 'core/components/errors/HttpError';
 import { IProfileProps } from 'profile';
+import AccessCard from './AccessCard';
 import Mails from './Mails';
 import Menu from './Menu';
 import Penalties from './Penalties';
 import Privacy from './Privacy';
 import style from './settings.less';
 import SettingsInfo from './SettingsInfo';
-import AccessCard from './AccessCard';
 
 const BASE_ROUTE = '/profile/settings';
 

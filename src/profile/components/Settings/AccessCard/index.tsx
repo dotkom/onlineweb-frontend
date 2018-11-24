@@ -1,8 +1,8 @@
+import Markdown from 'common/components/Markdown';
 import React from 'react';
+import style from './card.less';
 import CardBack from './CardBack';
 import CardFront from './CardFront';
-import style from './card.less';
-import Markdown from 'react-markdown';
 
 const INFO_TEXT = `
   # NTNU Adganskort
@@ -14,6 +14,7 @@ const INFO_TEXT = `
 
   - 1. Verifisering av identitet og oppmøte på arrangementer.
   - 2. Kjøp i kiosksystemet Nibble på Onlinekontoret.
+
 
   ## Grafisk Representasjon
 
