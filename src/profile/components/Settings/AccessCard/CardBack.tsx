@@ -9,7 +9,7 @@ export interface IProps {
 
 const CardBack = ({ barcode, code, id }: IProps) => (
   <svg viewBox="0 0 344 216" width="100%" height="100%">
-    <rect y="216" width="216" height="344" rx="15" transform="rotate(-90 0 216)" fill="white" />
+    <rect y="216" width="216" height="344" rx="15" transform="rotate(-90 0 216)" fill="#eeeeee" />
     <rect y="20" width="344" height="48" fill="#000000" />
     <g x="116" y="144">
       <Barcode barcode={barcode} />
