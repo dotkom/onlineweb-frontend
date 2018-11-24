@@ -6,7 +6,7 @@ import { IMedal } from '../../models/Medal';
 
 class Medal extends React.Component<IMedal> {
   public render() {
-    const { committee, position, range } = this.props;
+    const { committee, position, period } = this.props;
     return (
       <div className={style.medalContainer}>
         <div className={style.committeeCrownContainer}>
@@ -15,7 +15,7 @@ class Medal extends React.Component<IMedal> {
           )}
         </div>
         <img className={style.committeeMedal} src={medals[committee]} title={committee} />
-        <p className={style.committeeRange}>{range}</p>
+        <p className={style.committeeRange}>{period}</p>
       </div>
     );
   }

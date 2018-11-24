@@ -1,96 +1,35 @@
+import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
+import { Page } from 'common/components/Panes';
 import { IProfileProps } from 'profile';
+import { getProfile } from 'profile/api';
 import React from 'react';
 import { IFullProfileUser } from '../../models/User';
-import Header from './Header';
-import Link from './Link';
-import MedalsView from './MedalsView';
+import { MainProfile } from './MainProfile';
 import style from './profile.less';
-import Progress from './Progress';
-
-import { Content, Page, Pane, SplitPane } from 'common/components/Panes';
-import KeyValue from './KeyValue';
 
 export interface IProps extends IProfileProps {}
 
 export interface IState {
-  user: IFullProfileUser;
+  user?: IFullProfileUser;
 }
 
 class Profile extends React.Component<IProps, IState> {
-  constructor(props: IProps) {
-    super(props);
+  public static contextType = UserContext;
+  public state: IState = {};
 
-    this.state = {
-      user: {
-        first_name: 'Kari',
-        last_name: 'Nordmann',
-        username: 'dragonslayer',
-        ntnu_username: 'karinor',
-        kallenavn: 'javaGuru',
-        grade: 3,
-        primary_email: 'karinor@stud.ntnu.no',
-        gsuite_username: 'kari.nordmann',
-        phone_number: '98765432',
-        address: 'Høgskoleringen 3 (R.I.P)',
-        committees: [
-          { committee: 'dotkom', position: 'medlem', range: '2015-2018' },
-          { committee: 'dotkom', position: 'nestleder', range: '2018-2019' },
-          { committee: 'hovedstyret', position: 'leder', range: '2038-0001' },
-          { committee: 'prokom', position: 'redaktør', range: '2015-2018' },
-        ],
-        external: {
-          github: 'https://github.com/karinor',
-          linkedin: 'https://linkedin.com/in/karinor',
-          homepage: 'https://kari.nordmann.no',
-        },
-      },
-    };
+  public async componentDidMount() {
+    const userContext: IUserContext = this.context;
+    if (userContext.user) {
+      const user = await getProfile(userContext.user);
+      this.setState({ user });
+    }
   }
-
-  /*async componentDidMount() {
-    const user = await getProfile();
-    this.setState({ user });
-  }*/
 
   public render() {
     const { user } = this.state;
     return (
       <div className={style.profileContainer}>
-        <Page>
-          <Header name={`${user.first_name} ${user.last_name}`} />
-          <SplitPane>
-            <Pane>
-              <Content title="Kontakt">
-                <KeyValue k="Telefon" v={user.phone_number} />
-                <KeyValue k="E-post" v={user.primary_email} />
-                <KeyValue k="Komité-e-post" v={`${user.gsuite_username}@online.ntnu.no`} />
-              </Content>
-            </Pane>
-            <Pane>
-              <Content title="Studie">
-                <div className={style.studyText}>
-                  <KeyValue k="Klassetrinn" v={`${user.grade}. Klasse`} />
-                  <KeyValue k="Startår" v="2015" />
-                </div>
-                <Progress ongoingYear={user.grade} completedYear={user.grade - 1} />
-              </Content>
-            </Pane>
-          </SplitPane>
-          <Pane>
-            <Content title="Komitéverv">
-              <MedalsView medals={user.committees} />
-            </Content>
-          </Pane>
-          <SplitPane>
-            <Pane>
-              <Content title="Eksterne sider">
-                <Link k="Github" v={user.external.github} />
-                <Link k="Linkedin" v={user.external.linkedin} />
-                <Link k="Hjemmeside" v={user.external.homepage} />
-              </Content>
-            </Pane>
-          </SplitPane>
-        </Page>
+        <Page loading={!user}>{!!user ? <MainProfile user={user} /> : null}</Page>
       </div>
     );
   }
