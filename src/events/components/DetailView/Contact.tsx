@@ -7,6 +7,8 @@ import style from './detail.less';
 const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
   const color = getEventColor(event_type);
 
+  const organizerEmail = `${organizer_name.toLowerCase()}@online.ntnu.no`;
+
   return (
     <div className={style.contact}>
       <CardHeader className={style.detailHeader} color={color}>
@@ -14,7 +16,7 @@ const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
       </CardHeader>
       <Block title="Arrangør">
         <p>{organizer_name}</p>
-        <p>komite@online.ntnu.no</p>
+        <a href={`mailto:${organizerEmail}`}>{organizerEmail}</a>
       </Block>
 
       {company_event && company_event.length > 0 && (
