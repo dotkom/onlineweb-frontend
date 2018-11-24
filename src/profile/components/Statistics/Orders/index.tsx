@@ -3,7 +3,7 @@ import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
 import { DateTime } from 'luxon';
 import { getOrders } from 'profile/api/orders';
 import { IOrder, IOrderLine } from 'profile/models/Orders';
-import React, { Component } from 'react';
+import React, { Component, ContextType } from 'react';
 import NumberStat from './NumberStat';
 import OrderBar from './OrderBar';
 import OrderFrequency from './OrderFrequency';
@@ -27,13 +27,15 @@ export interface IState {
 
 class Orders extends Component<IProps, IState> {
   public static contextType = UserContext;
+  public context!: ContextType<typeof UserContext>;
   public state: IState = {
     orderLines: [],
   };
 
   public async componentDidMount() {
-    if (this.context.user) {
-      const orderLines = await getOrders(this.context.user);
+    const { user } = this.context;
+    if (user) {
+      const orderLines = await getOrders(user);
       this.setState({ orderLines });
     }
   }
