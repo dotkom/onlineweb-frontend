@@ -3,32 +3,29 @@ import { Redirect, Switch } from 'react-router';
 import { authCallback } from '../api';
 import { IUserContext, UserContext } from '../providers/UserProvider';
 
-export interface IProps {
-  auth?: IUserContext;
-}
+export interface IProps {}
 
 class AuthCallback extends Component<IProps> {
+  public static contextType = UserContext;
+
   public async componentDidMount() {
-    const { auth } = this.props;
-    if (auth) {
-      const user = await authCallback();
-      auth.setUser(user);
-    }
+    const auth: IUserContext = this.context;
+    const user = await authCallback();
+    auth.setUser(user);
   }
 
   public render() {
-    if (this.props.auth && this.props.auth.user && this.props.auth.user.state) {
-      return (
-        <Switch>
-          <Redirect to={this.props.auth.user.state} />
-        </Switch>
-      );
-    }
-
-    return null;
+    const { user }: IUserContext = this.context;
+    return (
+      <>
+        {user && user.state ? (
+          <Switch>
+            <Redirect to={user.state} />
+          </Switch>
+        ) : null}
+      </>
+    );
   }
 }
 
-export default ({ ...props }: IProps) => {
-  return <UserContext.Consumer>{(context) => <AuthCallback {...props} auth={context} />}</UserContext.Consumer>;
-};
+export default AuthCallback;
