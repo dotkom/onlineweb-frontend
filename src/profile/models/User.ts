@@ -5,18 +5,17 @@ export interface IFullProfileUser {
   last_name: string;
   username: string;
   ntnu_username: string;
-  kallenavn: string;
-  grade: number;
-  primary_email: string;
-  gsuite_username: string;
+  nickname: string;
+  year: number;
+  email: string;
+  online_mail: string;
   phone_number: string;
   address: string;
-  committees: IMedal[];
-  external: {
-    github: string;
-    linkedin: string;
-    homepage: string;
-  };
+  website: string;
+  github: string;
+  linkedin: string;
+  positions: IMedal[];
+  special_positions: any[];
 }
 
 export interface ISearchUser {

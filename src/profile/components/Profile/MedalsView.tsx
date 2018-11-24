@@ -32,8 +32,8 @@ class Name extends React.Component<IProps, IState> {
     const { medals } = this.props;
     return (
       <div className={style.medalGrid}>
-        {medals.slice(slice - showAmount, slice).map((medal) => (
-          <Medal key={medal.committee + medal.position + medal.range} {...medal} />
+        {medals.slice(slice - showAmount, slice).map((medal, i) => (
+          <Medal key={medal.committee + medal.position + medal.period + i} {...medal} />
         ))}
       </div>
     );
