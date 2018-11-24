@@ -11,9 +11,11 @@ const Intro = () => (
     </p>
     <h2>Hvordan søke om støtte til din interessegruppe?</h2>
     <p>
-      Du kan søke om økonomisk støtte til din interessegruppe ved å sende en mail til <a href="mailto:seniorkom@online.ntnu.no">seniorkom@online.ntnu.no</a>
+      Du kan søke om økonomisk støtte til din interessegruppe ved å sende en mail til{' '}
+      <a href="mailto:seniorkom@online.ntnu.no">seniorkom@online.ntnu.no</a>
       <br />
-      Mer informasjon om hvordan dette gjøres finnes <a href="https://online.ntnu.no/wiki/online/info/innsikt-og-interface/interessegrupper/">her</a>.
+      Mer informasjon om hvordan dette gjøres finnes{' '}
+      <a href="https://online.ntnu.no/wiki/online/info/innsikt-og-interface/interessegrupper/">her</a>.
     </p>
   </div>
 );
