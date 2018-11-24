@@ -10,7 +10,7 @@ const MANAGER = new UserManager(settings);
 export const logIn = async () => {
   try {
     await MANAGER.getUser();
-    MANAGER.signinRedirect();
+    MANAGER.signinRedirect({ data: window.location.pathname });
   } catch (e) {
     // tslint:disable-next-line no-console
     console.error(e);
