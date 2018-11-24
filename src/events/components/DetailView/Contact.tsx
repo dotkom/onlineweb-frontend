@@ -7,14 +7,7 @@ import style from './detail.less';
 const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
   const color = getEventColor(event_type);
 
-  const regex: RegExp = new RegExp('[a-z]{3}(Kom)');
-  let organizer_email: string = 'hovedstyret@online.ntnu.no';
-  if (organizer_name.match(regex)) {
-    organizer_email = organizer_name.substring(0, 3).toLowerCase() + 'kom@online.ntnu.no';
-  } else if (organizer_name === 'seniorKom') {
-    organizer_email = organizer_name.substring(0, 6).toLowerCase() + 'kom@online.ntnu.no';
-  }
-  const mailtoString: string = 'mailto:' + organizer_email;
+  const organizer_email = `${organizer_name.toLowerCase()}@online.ntnu.no`;
 
   return (
     <div className={style.contact}>
@@ -23,7 +16,7 @@ const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
       </CardHeader>
       <Block title="Arrangør">
         <p>{organizer_name}</p>
-        <a href={mailtoString}>{organizer_email}</a>
+        <a href={`mailto:${organizerEmail}`}>{organizer_email}</a>
       </Block>
 
       {company_event && company_event.length > 0 && (
