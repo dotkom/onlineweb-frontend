@@ -7,7 +7,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import style from './image.less';
 
-const getEventImage = (image: IImage | null, company_event: ICompanyEvent[]) => {
+export const getEventImage = (image: IImage | null, company_event: ICompanyEvent[]) => {
   return image
     ? DOMAIN + image.wide
     : company_event[0]
