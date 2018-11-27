@@ -1,7 +1,7 @@
 import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
 import { getKeys } from 'common/utils/tsHacks';
 import React, { Component } from 'react';
-import { getPrivacyOptions, postPrivacyOptions } from '../../../api/privacy';
+import { getPrivacyOptions, putPrivacyOptions } from '../../../api/privacy';
 import { IPrivacy } from '../../../models/Privacy';
 import Info from './Info';
 import Option from './Option';
@@ -41,7 +41,7 @@ class Privacy extends Component<{}, IState> {
     if (user) {
       const option = this.state[key];
       this.setState({ ...this.state, [key]: !option }, async () => {
-        const options = await postPrivacyOptions(this.state, user);
+        const options = await putPrivacyOptions(this.state, user);
         this.setState(options);
       });
     }

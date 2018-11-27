@@ -1,5 +1,5 @@
 import { IAuthUser } from 'authentication/models/User';
-import { get, post, withUser } from 'common/utils/api';
+import { get, put, withUser } from 'common/utils/api';
 import { IPrivacy } from '../models/Privacy';
 
 const API_URL = '/api/v1/profile/privacy/';
@@ -17,7 +17,7 @@ export const getPrivacyOptions = async (user: IAuthUser): Promise<IPrivacy> => {
  * @param {IPrivacy} privacyOptions Changed Privacy options for a user.
  * @returns {IPrivacy} The current state of OnlineUsers Privacy options.
  */
-export const postPrivacyOptions = async (privacyOptions: IPrivacy, user: IAuthUser): Promise<IPrivacy> => {
-  const data = await post(API_URL, privacyOptions, {}, withUser(user));
+export const putPrivacyOptions = async (privacyOptions: IPrivacy, user: IAuthUser): Promise<IPrivacy> => {
+  const data = await put(API_URL, privacyOptions, {}, { user });
   return data;
 };
