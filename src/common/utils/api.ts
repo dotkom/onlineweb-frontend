@@ -43,6 +43,8 @@ const performRequest = async (query: string, parameters: object = {}, options: I
   return data;
 };
 
+export type RequestInitWithUser = RequestInit & { user?: IAuthUser };
+
 export const withUser = (user: IAuthUser, options: IRequestOptions = {}): IRequestOptions => {
   const token = user.access_token;
   const headers = Object.assign(options.headers || {}, {
@@ -90,7 +92,6 @@ export async function getAllPages<T>(
 
 /**
  * @summary Simple fetch-API wrapper for HTTP POST
- * TODO: implement Request options, Done with Object.assign, not tested yet
  * @param {string} query
  * @param {any} data
  * @param {object} parameters
@@ -100,14 +101,37 @@ export const post = async (
   query: string,
   data: any,
   parameters: object = {},
-  options: IRequestOptions = {}
+  options: RequestInitWithUser = {}
 ): Promise<any> => {
-  return performRequest(
-    query,
-    parameters,
-    Object.assign(options, {
-      methods: 'POST',
-      body: JSON.stringify(data),
-    })
-  );
+  const { user, ...rest } = options;
+  const headers = {
+    Authorization: user ? `Bearer ${user.access_token}` : '',
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  const body = JSON.stringify(data);
+  const opts = { ...rest, method: 'POST', body, headers };
+  return performRequest(query, parameters, opts);
+};
+
+export type PutParams = [string, any, object, RequestInitWithUser];
+
+/**
+ * @summary Simple fetch-API wrapper for HTTP PUT
+ * @param {string} query
+ * @param {any} data
+ * @param {object} parameters
+ * @returns {Promise<any>}
+ */
+export const put = async (...putParams: PutParams): Promise<any> => {
+  const [query, data, parameters = {}, options = {}] = putParams;
+  const { user, ...rest } = options;
+  const headers = {
+    Authorization: user ? `Bearer ${user.access_token}` : '',
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  const body = JSON.stringify(data);
+  const opts = { ...rest, method: 'PUT', body, headers };
+  return performRequest(query, parameters, opts);
 };
