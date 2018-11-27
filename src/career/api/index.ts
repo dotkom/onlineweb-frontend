@@ -28,6 +28,7 @@ export const getCareerOpportunities = async (): Promise<FilterJobs> => {
  * @returns {FilterJobs} All the jobs, and the configured selectable tags.
  */
 const configureFilters = (jobs: ICareerOpportunity[]): FilterJobs => {
+  const flatMap = require('array.prototype.flatmap');
   const companies = jobs
     .map((job) => job.company)
     .filter(removeDuplicates)
