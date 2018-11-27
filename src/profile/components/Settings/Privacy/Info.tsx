@@ -1,10 +1,12 @@
+import Markdown from 'common/components/Markdown';
 import React from 'react';
 
-export const Info = () => (
-  <div>
-    <h2>Personvern n shit</h2>
-    <p>Masse stuff om GDPR og slikt antar jeg?</p>
-  </div>
-);
+const ABOUT_PROFILE_PRIVACY = `
+  # Personvern
+
+  Her kan du endre personvernsinstillingene koblet til profilen din.
+`;
+
+export const Info = () => <Markdown source={ABOUT_PROFILE_PRIVACY} />;
 
 export default Info;
