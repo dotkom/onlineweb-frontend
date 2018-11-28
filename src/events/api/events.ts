@@ -59,7 +59,7 @@ export interface IControlledFetch<T> {
 }
 
 export const controlledGetEvents = (args?: IEventAPIParameters): IControlledFetch<INewEvent> => {
-  const AbortController = require("abort-controller");
+  const AbortController = require('abort-controller');
   const controller = new AbortController();
   const signal = controller.signal;
   const data: Promise<IAPIData<INewEvent>> = get(API_URL, { format: 'json', ...args }, { signal });
