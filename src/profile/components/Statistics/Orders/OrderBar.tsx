@@ -1,7 +1,8 @@
+import React from 'react';
+import classNames from 'classnames';
 import { BarExtendedDatum, ResponsiveBar } from '@nivo/bar';
 import { LIGHT_EVENT_COLORS } from 'events/models/Event';
 import { IOrder, IOrderLine } from 'profile/models/Orders';
-import React from 'react';
 import style from './orders.less';
 
 export interface IProps {
@@ -24,14 +25,14 @@ const OrderBar = ({ orderLines }: IProps) => {
   const values = Object.keys(items).map((name) => ({ id: name, label: name, value: items[name] }));
 
   return (
-    <div className={style.centerChart}>
+    <div className={classNames(style.centerChart, style.barChart)}>
       <h1>Varefordeling</h1>
       <ResponsiveBar
         data={values}
         margin={{
           top: 65,
           right: 65,
-          bottom: 150,
+          bottom: 175,
           left: 65,
         }}
         enableLabel={false}
