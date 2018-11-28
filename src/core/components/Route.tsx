@@ -7,7 +7,7 @@ export interface IProps extends RouteProps {
 }
 
 const Route = ({ requireLogin, ...props }: IProps) => {
-  return requireLogin ? <PrivateRoute {...props} /> : <DefaultRoute {...props} />
+  return requireLogin ? <PrivateRoute {...props} /> : <DefaultRoute {...props} />;
 };
 
 export default Route;
