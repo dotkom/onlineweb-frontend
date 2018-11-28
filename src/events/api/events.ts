@@ -1,3 +1,4 @@
+import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 import { get, IBaseAPIParameters } from 'common/utils/api';
 import { INewEvent } from '../models/Event';
 
@@ -59,7 +60,6 @@ export interface IControlledFetch<T> {
 }
 
 export const controlledGetEvents = (args?: IEventAPIParameters): IControlledFetch<INewEvent> => {
-  const AbortController = require('abort-controller');
   const controller = new AbortController();
   const signal = controller.signal;
   const data: Promise<IAPIData<INewEvent>> = get(API_URL, { format: 'json', ...args }, { signal });
