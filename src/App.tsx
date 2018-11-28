@@ -1,5 +1,6 @@
 import { createBrowserHistory } from 'history';
 import React from 'react';
+import ReactGA from 'react-ga';
 import Loadable from 'react-loadable';
 import { Router, Switch } from 'react-router-dom';
 
