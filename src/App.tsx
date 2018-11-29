@@ -29,7 +29,7 @@ export const routes = {
   webshop: '/webshop',
   profile: '/profile',
   authCallback: '/auth/callback',
-  spinner: '/spinner'
+  spinner: '/spinner',
 };
 
 const LoadableProfile = Loadable({
