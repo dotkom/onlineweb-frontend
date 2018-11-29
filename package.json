@@ -38,6 +38,7 @@
     "@nivo/bar": "^0.51.0",
     "@nivo/calendar": "^0.51.0",
     "@nivo/pie": "^0.51.0",
+    "@types/core-js": "^2.5.0",
     "@types/enzyme": "^3.1.11",
     "@types/jest": "^23.1.6",
     "@types/luxon": "^0.5.2",
