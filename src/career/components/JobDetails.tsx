@@ -2,9 +2,9 @@ import { ICareerOpportunity } from 'career/models/Career';
 import Heading from 'common/components/Heading';
 import Img from 'common/components/Img';
 import Markdown from 'common/components/Markdown';
+import { Link } from 'core/components/Router';
 import { DateTime } from 'luxon';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import style from '../less/career.less';
 import { formatLocations } from './JobListItem';
 
