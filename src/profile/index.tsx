@@ -1,5 +1,5 @@
 import HttpError from 'core/components/errors/HttpError';
-import Route from 'core/components/Route';
+import { Route } from 'core/components/Router';
 import { History } from 'history';
 import 'multirange';
 import qs from 'query-string';
