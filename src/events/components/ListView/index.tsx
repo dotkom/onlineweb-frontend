@@ -1,6 +1,6 @@
+import { Link } from 'core/components/Router';
 import { IListEventsState, ListEventsContext } from 'events/providers/ListEvents';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';

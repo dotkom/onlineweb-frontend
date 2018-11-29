@@ -1,7 +1,7 @@
 import { routes } from 'App';
 import { STATIC_URL } from 'common/constants/endpoints';
+import { Link } from 'core/components/Router';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import style from './header.less';
 
 export interface IProps {

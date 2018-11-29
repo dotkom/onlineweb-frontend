@@ -1,7 +1,7 @@
 import { ICareerOpportunity } from 'career/models/Career';
 import Img from 'common/components/Img';
+import { Link } from 'core/components/Router';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import style from '../less/career.less';
 import { formatDeadline } from './JobDetails';
 

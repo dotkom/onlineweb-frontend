@@ -1,6 +1,7 @@
 import classnames from 'classnames';
+import { Link } from 'core/components/Router';
 import React, { Component } from 'react';
-import Router, { Link } from 'react-router-dom';
+import Router from 'react-router-dom';
 import { routes } from '../index';
 import style from './mainMenu.less';
 
