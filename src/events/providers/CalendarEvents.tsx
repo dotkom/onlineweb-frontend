@@ -1,4 +1,4 @@
-import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
+import 'abortcontroller-polyfill';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
 import { controlledGetEvents, IEventAPIParameters } from 'events/api/events';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
