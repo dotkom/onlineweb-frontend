@@ -7,5 +7,5 @@ export interface ILinkProps extends LinkProps {
 }
 
 export const Link = ({ requireLogin, ...props }: ILinkProps) => {
-  return requireLogin ? <PrivateLink {...props} /> : <DefaultLink {...props} />
+  return requireLogin ? <PrivateLink {...props} /> : <DefaultLink {...props} />;
 };
