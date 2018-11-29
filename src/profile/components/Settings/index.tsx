@@ -1,8 +1,8 @@
 import React from 'react';
-import { RouteProps, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import HttpError from 'core/components/errors/HttpError';
-import { Route } from 'core/components/Router';
+import { IRouteProps, Route } from 'core/components/Router';
 import { IProfileProps } from 'profile';
 import AccessCard from './AccessCard';
 import Mails from './Mails';
@@ -37,7 +37,7 @@ const Settings = (_: IProfileProps) => {
   );
 };
 
-interface ISettingsRouteProps extends RouteProps {
+interface ISettingsRouteProps extends IRouteProps {
   view: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
