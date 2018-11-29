@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteProps, Switch } from 'react-router-dom';
 
 import HttpError from 'core/components/errors/HttpError';
-import Route from 'core/components/Route';
+import { Route } from 'core/components/Router';
 import Orders from './Orders';
 
 const BASE_ROUTE = '/profile/statistics';

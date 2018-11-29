@@ -2,12 +2,10 @@ import PrivateRoute from 'authentication/components/PrivateRoute';
 import React from 'react';
 import { Route as DefaultRoute, RouteProps } from 'react-router-dom';
 
-export interface IProps extends RouteProps {
+export interface IRouteProps extends RouteProps {
   requireLogin?: boolean;
 }
 
-const Route = ({ requireLogin, ...props }: IProps) => {
+export const Route = ({ requireLogin, ...props }: IRouteProps) => {
   return requireLogin ? <PrivateRoute {...props} /> : <DefaultRoute {...props} />;
 };
-
-export default Route;
