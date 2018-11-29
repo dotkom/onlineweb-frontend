@@ -1,10 +1,10 @@
 import { DOMAIN } from 'common/constants/endpoints';
 import IImage from 'common/models/Image';
+import { Link } from 'core/components/Router';
 import { getEventColor, getEventType, ICompanyEvent, INewEvent } from 'events/models/Event';
 import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import style from './image.less';
 
 const getEventImage = (image: IImage | null, company_event: ICompanyEvent[]) => {

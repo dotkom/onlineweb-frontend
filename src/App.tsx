@@ -11,7 +11,7 @@ import Career from './career/';
 import Contribution from './contribution';
 import Core from './core';
 import HttpError from './core/components/errors/HttpError';
-import Route from './core/components/Route';
+import { Route } from './core/components/Router';
 import Frontpage from './frontpage';
 import Hobbys from './hobbygroups';
 import Resources from './resources';

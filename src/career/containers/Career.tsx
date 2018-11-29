@@ -1,5 +1,5 @@
 import CareerOpportunities from 'career/providers/CareerProvider';
-import Route from 'core/components/Route';
+import { Route } from 'core/components/Router';
 import React from 'react';
 import { Switch } from 'react-router';
 import DetailView from './DetailView';
