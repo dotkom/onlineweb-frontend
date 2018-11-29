@@ -2,8 +2,8 @@ import { routes } from 'App';
 import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
 import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
+import { Link } from 'core/components/Router';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import style from './header.less';
 
 export interface IState {
