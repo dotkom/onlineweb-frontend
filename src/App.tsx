@@ -29,6 +29,7 @@ export const routes = {
   webshop: '/webshop',
   profile: '/profile',
   authCallback: '/auth/callback',
+  spinner: '/spinner'
 };
 
 const LoadableProfile = Loadable({
@@ -52,6 +53,7 @@ export const App = () => {
             <Route path={routes.resources} component={Resources} />
             <Route path={routes.profile} component={LoadableProfile} requireLogin />
             <Route path={routes.authCallback} component={AuthCallback} />
+            <Route path={routes.spinner} component={Spinner} />
             <Route path="*" render={() => <HttpError code={404} />} />
           </Switch>
         </Core>
