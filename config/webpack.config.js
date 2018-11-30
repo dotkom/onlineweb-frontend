@@ -103,6 +103,7 @@ module.exports = (env) => {
         OW4_SSO_CLIENT_ID: '',
         OW4_SSO_CALLBACK: 'http://localhost:8080/auth/callback',
         OWF_SENTRY_DSN: '',
+        OWF_GOOGLE_ANALYTICS_KEY: '',
         NODE_ENV: 'development',
       }),
     ],
