@@ -40,6 +40,8 @@ const LoadableProfile = Loadable({
 
 const history = createBrowserHistory();
 
+history.listen((location) => ReactGA.pageview(location.pathname));
+
 export const App = () => {
   return (
     <AuthProvider>
