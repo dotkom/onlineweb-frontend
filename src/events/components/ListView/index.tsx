@@ -1,6 +1,6 @@
 import { Link } from 'core/components/Router';
-import { IListEventsState, ListEventsContext } from 'events/providers/ListEvents';
-import React, { Component } from 'react';
+import { ListEventsContext } from 'events/providers/ListEvents';
+import React, { Component, ContextType } from 'react';
 import { IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
@@ -9,14 +9,15 @@ export type IProps = IEventViewProps;
 
 class ListView extends Component<IProps> {
   public static contextType = ListEventsContext;
+  public context!: ContextType<typeof ListEventsContext>;
 
   public async componentDidMount() {
-    const { init }: IListEventsState = this.context;
+    const { init } = this.context;
     await init();
   }
 
   public render() {
-    const { events }: IListEventsState = this.context;
+    const { events } = this.context;
     return (
       <>
         <div className={style.grid}>

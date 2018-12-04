@@ -1,21 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, ContextType } from 'react';
 import { Redirect, Switch } from 'react-router';
 import { authCallback } from '../api';
-import { IUserContext, UserContext } from '../providers/UserProvider';
+import { UserContext } from '../providers/UserProvider';
 
 export interface IProps {}
 
 class AuthCallback extends Component<IProps> {
   public static contextType = UserContext;
+  public context!: ContextType<typeof UserContext>;
 
   public async componentDidMount() {
-    const auth: IUserContext = this.context;
+    const auth = this.context;
     const user = await authCallback();
     auth.setUser(user);
   }
 
   public render() {
-    const { user }: IUserContext = this.context;
+    const { user } = this.context;
     return (
       <>
         {user && user.state ? (
