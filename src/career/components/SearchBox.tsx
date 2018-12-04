@@ -1,11 +1,13 @@
-import { CareerContext, ICareerContextState } from 'career/providers/CareerProvider';
-import React, { Component } from 'react';
+import { CareerContext } from 'career/providers/CareerProvider';
+import React, { Component, ContextType } from 'react';
 import style from '../less/career.less';
 
 class SearchBox extends Component<{}> {
   public static contextType = CareerContext;
+  public context!: ContextType<typeof CareerContext>;
+
   public render() {
-    const { filterText, handleFilterChange }: ICareerContextState = this.context;
+    const { filterText, handleFilterChange } = this.context;
     return (
       <div>
         <h2>Søk</h2>
