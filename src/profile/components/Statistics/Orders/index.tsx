@@ -1,4 +1,3 @@
-import Markdown from 'common/components/Markdown';
 import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
 import { DateTime } from 'luxon';
 import { getOrders } from 'profile/api/orders';
@@ -6,18 +5,10 @@ import { IOrder, IOrderLine } from 'profile/models/Orders';
 import React, { Component, ContextType } from 'react';
 import NumberStat from './NumberStat';
 import OrderBar from './OrderBar';
-import OrderFrequency from './OrderFrequency';
 import OrderItemDonut from './OrderItemDonut';
 
 import { UserContext } from 'authentication/providers/UserProvider';
-
-const ABOUT_STATISTICS = `
-  # Statistikk
-
-  Her kan du se statistikk for forskjellige metrikker relatert til din bruker.
-
-  _Denne statistikken vises kun for deg, og brukes ikke av Online på noen måte._
-`;
+import CalendarChart from 'common/components/Charts/CalendarChart';
 
 export interface IProps {}
 
@@ -50,9 +41,6 @@ class Orders extends Component<IProps, IState> {
     const totalCost = orders.reduce<number>((acc, order) => acc + Number(order.price), 0);
     return (
       <Page loading={orderLines.length === 0}>
-        <Pane>
-          <Markdown source={ABOUT_STATISTICS} />
-        </Pane>
         <Pane>{orderLines.length && <OrderBar orderLines={orderLines} />}</Pane>
         <SplitPane>
           <Pane>{orderLines.length && <OrderItemDonut orderLines={orderLines} />}</Pane>
