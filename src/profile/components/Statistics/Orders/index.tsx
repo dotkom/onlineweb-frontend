@@ -71,7 +71,7 @@ class Orders extends Component<IProps, IState> {
             </Pane>
           </FourSplitPane>
         </SplitPane>
-        <Pane>{frequency.length && <OrderFrequency frequency={frequency} />}</Pane>
+        <Pane>{frequency.length && <CalendarChart frequency={frequency} header="Kjøpskalender" />}</Pane>
       </Page>
     );
   }
