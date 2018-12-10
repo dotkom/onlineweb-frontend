@@ -1,7 +1,7 @@
 import Markdown from 'common/components/Markdown';
 import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
+import { Link } from 'core/components/Router';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { routes } from './';
 import StringStat from './Events/StringStat';
 
