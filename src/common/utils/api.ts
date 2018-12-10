@@ -55,14 +55,18 @@ export async function getAllPages<T>(
   parameters: IBaseAPIParameters = {},
   options: RequestInit = {}
 ): Promise<T[]> {
-  let data: IAPIData<T>;
-  let results: T[] = [];
-  let page = parameters.page || 1;
-  do {
-    data = await get(query, { ...parameters, page }, options);
-    results = [...results, ...data.results];
-    page += 1;
-  } while (data.next);
+  const { page = 1, page_size = 80 } = parameters;
+  /** Get the amount of objects to get in total by fetching a single object */
+  const { count }: IAPIData<T> = await get(query, { ...parameters, page, page_size: 1 }, options);
+  /** Prepare an array with an index for each page which will be fetched */
+  const pageNumber = Math.ceil(count / page_size);
+  const requestCount = [...Array(pageNumber)];
+  /** Initialize the fetches for all the pages at the same time */
+  const requests = requestCount.map((_, i) => get(query, { ...parameters, page: i + 1, page_size }, options));
+  /** Await all the fetches to a single array */
+  const data: Array<IAPIData<T>> = await Promise.all(requests);
+  /** Reduce all results to a single array for all objects in the resource */
+  const results = data.reduce<T[]>((res, d) => res.concat(d.results), []);
   return results;
 }
 
