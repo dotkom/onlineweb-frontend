@@ -1,5 +1,4 @@
 import { get, getAllPages, IAPIData } from 'common/utils/api';
-import { get, IAPIData } from 'common/utils/api';
 import { IOfflineIssue } from '../models/Offline';
 
 const API_URL = '/api/v1/offline/';
