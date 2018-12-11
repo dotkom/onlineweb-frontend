@@ -12,7 +12,9 @@ class AuthCallback extends Component<IProps> {
   public async componentDidMount() {
     const auth = this.context;
     const user = await authCallback();
-    auth.setUser(user);
+    if (user) {
+      auth.setUser(user);
+    }
   }
 
   public render() {
