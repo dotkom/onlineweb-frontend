@@ -1,10 +1,9 @@
-import React from 'react';
-import ReactGA from 'react-ga';
-import Loadable from 'react-loadable';
 import AuthCallback from 'authentication/components/AuthCallback';
 import AuthProvider from 'authentication/providers/UserProvider';
-
+import Spinner from 'common/components/Spinner';
 import EventsRouter from 'events/components/EventsRouter';
+import React from 'react';
+import Loadable from 'react-loadable';
 import { Switch } from 'react-router-dom';
 import Career from './career/';
 import Contribution from './contribution';
@@ -14,8 +13,6 @@ import { Route } from './core/components/Router';
 import Frontpage from './frontpage';
 import Hobbys from './hobbygroups';
 import Resources from './resources';
-
-import Spinner from 'common/components/Spinner';
 
 export const routes = {
   events: '/events',
