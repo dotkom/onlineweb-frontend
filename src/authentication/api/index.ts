@@ -1,6 +1,8 @@
 import { __CLIENT__ } from 'common/constants/environment';
-import { User /*UserManager*/ } from 'oidc-client';
-// import settings from './settings';
+import { User, UserManager } from 'oidc-client';
+import settings from './settings';
+
+const MANAGER = new UserManager(settings);
 
 /**
  * @summary Basic wrapper for OIDC login.
@@ -8,12 +10,10 @@ import { User /*UserManager*/ } from 'oidc-client';
  */
 export const logIn = async () => {
   try {
-    await MANAGER.getUser();
-    MANAGER.signinRedirect({ data: window.location.pathname });
     if (__CLIENT__) {
-      // const manager = new UserManager(settings);
-      // await manager.getUser();
-      // manager.signinRedirect();
+      const manager = new UserManager(settings);
+      await manager.getUser();
+      manager.signinRedirect({ data: window.location.pathname });
     } else {
       throw new Error('Login attempted from server side renderer');
     }
