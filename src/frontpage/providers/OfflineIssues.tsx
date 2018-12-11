@@ -24,8 +24,8 @@ export const OfflineContext = createContext(INITIAL_STATE);
 @prefetch('FrontpageOfflines')
 class OfflineIssues extends Component<IProps, IOfflineIssuesState> {
   public static async getServerState(_: IProps): Promise<IOfflineIssue[]> {
-    const offlines = await getOfflines(1);
-    return offlines;
+    const data = await getOfflines(1);
+    return data.results;
   }
 
   constructor(props: IProps) {
@@ -38,8 +38,8 @@ class OfflineIssues extends Component<IProps, IOfflineIssuesState> {
   public init = async () => this.getOfflines();
 
   public async getOfflines() {
-    const offlines = await getOfflines(1);
-    this.setState({ offlines });
+    const { results } = await getOfflines(1);
+    this.setState({ offlines: results });
   }
 
   public render() {
