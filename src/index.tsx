@@ -31,7 +31,7 @@ prefetcher.serialize();
 const render = (RootComponent: any) => {
   const eventView = getEventView(cookies.get('eventView'));
   /** Define renderer to use, hydrate if SSR back-end is enabled, render if no back-end */
-  const reactRender = __SSR__ ? ReactDOM.render : ReactDOM.hydrate;
+  const reactRender = __SSR__ ? ReactDOM.hydrate : ReactDOM.render;
   reactRender(
     <Router history={history}>
       <Settings eventView={eventView}>
