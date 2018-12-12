@@ -4,6 +4,7 @@ const CSSPlugin = require('./css.config');
 const devServer = require('./devServer.config');
 const environment = require('./environment.config');
 const mainModule = require('./module.config');
+const { DefinePlugin } = require('webpack');
 
 module.exports = env => {
   return {
@@ -25,6 +26,9 @@ module.exports = env => {
       CSSPlugin.plugin,
       htmlPlugin.plugin,
       environment.pluginServer,
+      new DefinePlugin({
+        window: {}, // Fixes OIDC client needing window to be imported.
+      })
     ]
   }
 }

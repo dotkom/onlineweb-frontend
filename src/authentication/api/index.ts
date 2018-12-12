@@ -2,8 +2,6 @@ import { __CLIENT__ } from 'common/constants/environment';
 import { User, UserManager } from 'oidc-client';
 import settings from './settings';
 
-const MANAGER = new UserManager(settings);
-
 /**
  * @summary Basic wrapper for OIDC login.
  * Redirects the user to the authentication page defined in settings.
@@ -29,9 +27,9 @@ export const logIn = async () => {
 export const authCallback = async (): Promise<User | undefined> => {
   try {
     if (__CLIENT__) {
-      // const manager = new UserManager(settings);
-      // const user = await manager.signinRedirectCallback();
-      // return user;
+      const manager = new UserManager(settings);
+      const user = await manager.signinRedirectCallback();
+      return user;
     } else {
       throw new Error('Auth Callback attempted from server side renderer');
     }
@@ -46,7 +44,8 @@ export const authCallback = async (): Promise<User | undefined> => {
  * @summary Returns user if logged in
  */
 export const getUser = async (): Promise<User> => {
-  const user = await MANAGER.getUser();
+  const manager = new UserManager(settings);
+  const user = await manager.getUser();
   return user;
 };
 
@@ -57,7 +56,8 @@ export const getUser = async (): Promise<User> => {
 export const logOut = async () => {
   try {
     // Should maybe logout from onlineweb aswell
-    await MANAGER.removeUser();
+    const manager = new UserManager(settings);
+    await manager.removeUser();
   } catch (e) {
     // tslint:disable-next-line no-console
     console.error(e);
