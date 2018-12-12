@@ -1,9 +1,10 @@
 import HttpError from 'core/components/errors/HttpError';
+import { IRouteProps, Route } from 'core/components/Router';
 import { History } from 'history';
 import 'multirange';
 import qs from 'query-string';
 import React from 'react';
-import { Route, RouteProps, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import MainMenu from './components/MainMenu';
 import MyProfile from './components/Profile';
 import Search from './components/Search';
@@ -40,7 +41,7 @@ export interface IProfileProps {
   history: History;
 }
 
-interface IProfileRouteProps extends RouteProps {
+interface IProfileRouteProps extends IRouteProps {
   view: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 

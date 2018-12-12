@@ -1,8 +1,10 @@
 import React from 'react';
-import { Route, RouteProps, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import HttpError from 'core/components/errors/HttpError';
+import { IRouteProps, Route } from 'core/components/Router';
 import { IProfileProps } from 'profile';
+import AccessCard from './AccessCard';
 import Mails from './Mails';
 import Menu from './Menu';
 import Penalties from './Penalties';
@@ -18,6 +20,7 @@ export const routes = {
   privacy: BASE_ROUTE + '/privacy',
   mail: BASE_ROUTE + '/mail',
   password: BASE_ROUTE + '/password',
+  accessCard: BASE_ROUTE + '/access-card',
 };
 
 const Settings = (_: IProfileProps) => {
@@ -28,12 +31,13 @@ const Settings = (_: IProfileProps) => {
       <SettingsRoute path={routes.privacy} view={Privacy} />
       <SettingsRoute path={routes.mail} view={Mails} />
       <SettingsRoute path={routes.password} view={Privacy} />
+      <SettingsRoute path={routes.accessCard} view={AccessCard} />
       <Route path="*" render={() => <HttpError code={404} text="Undersiden du leter etter finnes ikke" />} />
     </Switch>
   );
 };
 
-interface ISettingsRouteProps extends RouteProps {
+interface ISettingsRouteProps extends IRouteProps {
   view: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 

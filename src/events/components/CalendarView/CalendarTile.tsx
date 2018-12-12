@@ -1,6 +1,6 @@
 import classNames from 'classnames';
+import { Link } from 'core/components/Router';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { getEventColor, INewEvent } from '../../models/Event';
 import style from './calendar.less';
 

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, ContextType } from 'react';
 import { IEventViewProps } from '../../models/Event';
-import { CalendarEventsContext, ICalendarEventsState } from '../../providers/CalendarEvents';
+import { CalendarEventsContext } from '../../providers/CalendarEvents';
 import { getFirstWeekdayOfMonth, getPreviousMonthLength } from '../../utils/calendarUtils';
 import style from './calendar.less';
 import CalendarTile, { CalendarFillerTiles, createDayList } from './CalendarTile';
@@ -9,14 +9,15 @@ export type IProps = IEventViewProps;
 
 class CalendarView extends Component<IProps> {
   public static contextType = CalendarEventsContext;
+  public context!: ContextType<typeof CalendarEventsContext>;
 
   public async componentDidMount() {
-    const { init }: ICalendarEventsState = this.context;
+    const { init } = this.context;
     await init();
   }
 
   public render() {
-    const { eventMonth, month, changeMonth }: ICalendarEventsState = this.context;
+    const { eventMonth, month, changeMonth } = this.context;
 
     const firstWeekDay = getFirstWeekdayOfMonth(month.toJSDate());
     const lastDayPrevMonth = getPreviousMonthLength(month.toJSDate());

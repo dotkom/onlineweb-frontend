@@ -1,9 +1,9 @@
 import { routes } from 'App';
 import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
-import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { UserContext } from 'authentication/providers/UserProvider';
+import { Link } from 'core/components/Router';
+import React, { Component, ContextType } from 'react';
 import style from './header.less';
 
 export interface IState {
@@ -12,6 +12,7 @@ export interface IState {
 
 class Login extends Component<{}, IState> {
   public static contextType = UserContext;
+  public context!: ContextType<typeof UserContext>;
 
   public state: IState = {
     open: false,
@@ -24,7 +25,7 @@ class Login extends Component<{}, IState> {
   };
 
   public render() {
-    const { user, logout }: IUserContext = this.context;
+    const { user, logout } = this.context;
     return user ? (
       <HeaderUser user={user} logout={logout} onClick={this.toggleDropdown} isOpen={this.state.open} />
     ) : (
