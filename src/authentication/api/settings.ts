@@ -1,9 +1,5 @@
 import { DOMAIN } from 'common/constants/endpoints';
-import { UserManagerSettings, WebStorageStateStore } from 'oidc-client';
-
-const store = new WebStorageStateStore({
-  store: {},
-});
+import { UserManagerSettings } from 'oidc-client';
 
 const settings: UserManagerSettings = {
   authority: DOMAIN + '/openid',
@@ -14,8 +10,6 @@ const settings: UserManagerSettings = {
   scope: 'openid profile',
   filterProtocolClaims: true,
   loadUserInfo: true,
-  userStore: store,
-  stateStore: store,
 };
 
 export default settings;
