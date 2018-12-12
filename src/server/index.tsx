@@ -58,8 +58,6 @@ const getBundles = (): [string[], string[]] => {
 const getStyle = (style: string) => `<link rel="stylesheet" type="text/css" href="${style}">`;
 const getScript = (script: string) => `<script src="${script}"></script>`;
 
-const BUNDLES = getBundles();
-
 /**
  * @summary Main entrypoint for express application backend.
  * @description The back-end application serves a only a single route in Express.
@@ -89,8 +87,7 @@ app.get('*', async (req, res) => {
   const HTML = wrapHtml(reactDom, prefetcher);
 
   /** Send the finished response to the client */
-  res.writeHead(200, { 'Content-Type': 'text/html' });
-  res.end(HTML);
+  res.send(HTML);
 });
 
 /**
@@ -119,24 +116,27 @@ const initJSX = (location: string, prefetcher: PrefetchState, eventView: number)
  * This is rendered as a string in the DOM and serialized by the front-end when it loads.
  * @param {string} dom A string containing a pre-rendered React DOM.
  */
-const wrapHtml = (dom: string, prefetcher: PrefetchState) => `
-  <!DOCTYPE html>
-  <html lang="nb">
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Linjeforeningen Online</title>
-      ${BUNDLES[1].join('\n')}
-    </head>
-    <body>
-      <div id="root">${dom}</div>
-      <script>
-        window.__PREFETCHED_STATE__ = ${JSON.stringify(serialize(prefetcher.getData()))}
-      </script>
-      ${BUNDLES[0].join('\n')}
-    </body>
-  </html>
-`;
+const wrapHtml = (dom: string, prefetcher: PrefetchState) => {
+  const [scripts, stylesheets] = getBundles();
+  return `
+    <!DOCTYPE html>
+    <html lang="nb">
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Linjeforeningen Online</title>
+        ${stylesheets.join('\n')}
+      </head>
+      <body>
+        <div id="root">${dom}</div>
+        <script>
+          window.__PREFETCHED_STATE__ = ${JSON.stringify(serialize(prefetcher.getData()))}
+        </script>
+        ${scripts.join('\n')}
+      </body>
+    </html>
+  `;
+};
 
 /** Initialize the Express server to listen for requests */
 app.listen(Number(PORT), HOST || '', () => {
