@@ -9,13 +9,10 @@ import Settings from 'core/providers/Settings';
 import { getEventView } from 'events/components/EventsContainer';
 import { createBrowserHistory } from 'history';
 import cookies from 'js-cookie';
-import { Settings as LuxonSettings } from 'luxon';
 import React from 'react';
 import * as ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import { Router } from 'react-router-dom';
-
-LuxonSettings.defaultLocale = 'nb';
 
 import App from './App';
 

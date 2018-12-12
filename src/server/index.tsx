@@ -9,7 +9,6 @@ import Settings from 'core/providers/Settings';
 import { getEventView } from 'events/components/EventsContainer';
 import express from 'express';
 import fs from 'fs';
-import { Settings as LuxonSettings } from 'luxon';
 import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -29,9 +28,6 @@ const app = express();
 // Sentry.init({ dsn: OWF_SENTRY_DSN });
 // app.use(Sentry.Handlers.requestHandler());
 // app.use(Sentry.Handlers.errorHandler());
-
-/** Luxon locale setting has to be the same as in the front-end */
-LuxonSettings.defaultLocale = 'nb';
 
 /**
  * Cookies are used to store anonymous user data that has to be used by both
