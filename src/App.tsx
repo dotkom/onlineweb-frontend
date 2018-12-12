@@ -2,6 +2,7 @@ import AuthCallback from 'authentication/components/AuthCallback';
 import AuthProvider from 'authentication/providers/UserProvider';
 import Spinner from 'common/components/Spinner';
 import EventsRouter from 'events/components/EventsRouter';
+import { Settings as LuxonSettings } from 'luxon';
 import React from 'react';
 import Loadable from 'react-loadable';
 import { Switch } from 'react-router-dom';
@@ -13,6 +14,9 @@ import { Route } from './core/components/Router';
 import Frontpage from './frontpage';
 import Hobbys from './hobbygroups';
 import Resources from './resources';
+
+/** Luxon locale setting has to be the same as in the front-end */
+LuxonSettings.defaultLocale = 'nb';
 
 export const routes = {
   events: '/events',
