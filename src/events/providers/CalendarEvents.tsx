@@ -1,5 +1,6 @@
+import { prefetch } from 'common/utils/prefetch';
+import { getCalendarEvents, getCalendarEventsControlled } from 'events/api/calendarEvents';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
-import { controlledGetEvents, IEventAPIParameters } from 'events/api/events';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
 import React, { Component, createContext } from 'react';
@@ -39,6 +40,15 @@ const INITIAL_STATE: ICalendarEventsState = {
 
 export const CalendarEventsContext = createContext(INITIAL_STATE);
 
+export interface IProps extends IEventViewProps {
+  preftech?: IPrefetch;
+}
+
+export interface IPrefetch {
+  eventMonth: INewEvent[][];
+  month: DateTime;
+}
+
 /**
  * @summary Stores the events and related state for the EventCalendar.
  * @description Stores the events for a month in its state. Changing the month
@@ -47,12 +57,30 @@ export const CalendarEventsContext = createContext(INITIAL_STATE);
  * when the browser is closed.
  * @param {IEventViewProps} props Props given to all of the 3 main event views.
  */
-class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
-  public state: ICalendarEventsState = { ...INITIAL_STATE };
+@prefetch('FrontpageEventCalendar')
+class CalendarEvents extends Component<IProps, ICalendarEventsState> {
+  public static async getServerState(_: IProps): Promise<IPrefetch> {
+    const month = DateTime.local();
+    const data = await getCalendarEvents(month);
+    const eventMonth = constructMonthMap(month, data);
+    return { eventMonth, month };
+  }
+
+  constructor(props: IProps) {
+    super(props);
+
+    this.state = {
+      ...INITIAL_STATE,
+    };
+
+    if (props.preftech) {
+      this.state = { ...this.state, ...props.preftech };
+    }
+  }
 
   /** Fetch the stored month from the browser session */
   public async componentDidMount() {
-    await this.getSession();
+    // await this.getSession();
   }
 
   /**
@@ -97,19 +125,8 @@ class CalendarEvents extends Component<IEventViewProps, ICalendarEventsState> {
    * @param {DateTime} month DateTime set to a month of which to fetch events.
    */
   public fetchEvents = async (month: DateTime = this.state.month) => {
-    /** Calculate the range this month represents */
-    const firstDayOfMonth = month.minus({ days: month.day - 1 });
-    const lastDayOfMonth = firstDayOfMonth.plus({ months: 1 }).minus({ days: 1 });
-
-    /** Set the query parameters of the fetch to the range, set page size large enough to get all */
-    const args: IEventAPIParameters = {
-      event_start__gte: firstDayOfMonth.toISODate(),
-      event_start__lte: lastDayOfMonth.toISODate(),
-      page_size: 60,
-    };
-
     /** Get a promise which resolves to events, and a controller which makes the data fetch abortable */
-    const { data, controller } = controlledGetEvents(args);
+    const { data, controller } = getCalendarEventsControlled(month);
     this.setState({ controller });
 
     /** Await the events, construct the month representation and set it to state */

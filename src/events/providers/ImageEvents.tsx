@@ -1,12 +1,15 @@
-import { getEvents } from 'events/api/events';
-import { EventTypeEnum, IEventViewProps, INewEvent } from 'events/models/Event';
-import { DateTime } from 'luxon';
+import { prefetch } from 'common/utils/prefetch';
+import { getImageEvents } from 'events/api/imageEvents';
+import { IEventViewProps, INewEvent } from 'events/models/Event';
 import React, { Component, createContext } from 'react';
 
-export interface IImageEventsState {
+export interface IImageEvents {
   eventsLeft: INewEvent[];
   eventsMiddle: INewEvent[];
   eventsRight: INewEvent[];
+}
+
+export interface IImageEventsState extends IImageEvents {
   fetched: boolean;
   init: () => void;
 }
@@ -23,32 +26,28 @@ const INITIAL_STATE: IImageEventsState = {
 
 export const ImageEventsContext = createContext(INITIAL_STATE);
 
-class ImageEvents extends Component<IEventViewProps, IImageEventsState> {
-  public state: IImageEventsState = { ...INITIAL_STATE };
+export interface IProps extends IEventViewProps {
+  prefetch?: IImageEvents;
+}
 
-  public init = async () => await this.getEventsParallell();
-
-  public async getEventsParallell() {
-    const left = this.getTypeEvents([EventTypeEnum.BEDPRES]);
-    const middle = this.getTypeEvents([EventTypeEnum.KURS]);
-    const right = this.getTypeEvents([
-      EventTypeEnum.SOSIALT,
-      EventTypeEnum.UTFLUKT,
-      EventTypeEnum.EKSKURSJON,
-      EventTypeEnum.ANNET,
-    ]);
-
-    const [eventsLeft, eventsMiddle, eventsRight] = await Promise.all([left, middle, right]);
-
-    this.setState({ eventsLeft, eventsMiddle, eventsRight, fetched: true });
+@prefetch('FrontpageImageEvents')
+class ImageEvents extends Component<IProps, IImageEventsState> {
+  public static async getServerState(_: IProps): Promise<IImageEvents> {
+    const [eventsLeft, eventsMiddle, eventsRight] = await getImageEvents();
+    return { eventsLeft, eventsMiddle, eventsRight };
   }
 
-  public async getTypeEvents(types: EventTypeEnum[]) {
-    return await getEvents({
-      event_end__gte: DateTime.local().toISODate(),
-      event_type: types,
-      page_size: 4,
-    });
+  constructor(props: IProps) {
+    super(props);
+    const fetched = !!props.prefetch;
+    this.state = { ...INITIAL_STATE, ...props.prefetch, fetched };
+  }
+
+  public init = async () => await this.getEvents();
+
+  public async getEvents() {
+    const [eventsLeft, eventsMiddle, eventsRight] = await getImageEvents();
+    this.setState({ eventsLeft, eventsMiddle, eventsRight, fetched: true });
   }
 
   public render() {
