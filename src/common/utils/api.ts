@@ -1,7 +1,14 @@
+import 'isomorphic-fetch';
 import { DOMAIN } from '../constants/endpoints';
+import { __CLIENT__ } from '../constants/environment';
 import { toQueryString } from './queryString';
 
 import { IAuthUser } from 'authentication/models/User';
+import { getCache, hasCache, IRequestCacheOptions, setCache } from './requestCache';
+
+export interface IRequestOptions extends RequestInit {
+  cacheOptions?: IRequestCacheOptions;
+}
 
 export interface IAPIData<T> {
   count: number;
@@ -14,18 +21,29 @@ export interface IBaseAPIParameters {
   page_size?: number;
   page?: number;
 }
-
+/*
 const makeRequest = (query: string, parameters: object = {}, options: RequestInit = {}) => {
   const queryString = toQueryString(parameters);
   return new Request(DOMAIN + query + queryString, options);
 };
-
-const performRequest = async (request: Request) => {
-  const respons = await fetch(request);
-  return respons.json();
+*/
+const performRequest = async (query: string, parameters: object = {}, options: IRequestOptions = {}) => {
+  const queryString = toQueryString(parameters);
+  const url = DOMAIN + query + queryString;
+  const { cacheOptions } = options;
+  if (hasCache({ url, options: cacheOptions })) {
+    const { cache } = getCache({ url, options: cacheOptions });
+    if (cache) {
+      return cache.content;
+    }
+  }
+  const response = await fetch(url, options);
+  const data = await response.json();
+  setCache({ content: data, options: cacheOptions, url });
+  return data;
 };
 
-export const withUser = (user: IAuthUser, options: RequestInit = {}): RequestInit => {
+export const withUser = (user: IAuthUser, options: IRequestOptions = {}): IRequestOptions => {
   const token = user.access_token;
   const headers = Object.assign(options.headers || {}, {
     Authorization: `Bearer ${token}`,
@@ -40,9 +58,9 @@ export const withUser = (user: IAuthUser, options: RequestInit = {}): RequestIni
  * @param {string} query API endpoint URL
  * @returns {Promise<any>} API data
  */
-export const get = async (query: string, parameters: object = {}, options: RequestInit = {}): Promise<any> => {
-  const request = makeRequest(query, parameters, options);
-  return performRequest(request);
+export const get = async (query: string, parameters: object = {}, options: IRequestOptions = {}): Promise<any> => {
+  // const request = makeRequest(query, parameters, options);
+  return performRequest(query, parameters, options);
 };
 
 /**
@@ -53,7 +71,7 @@ export const get = async (query: string, parameters: object = {}, options: Reque
 export async function getAllPages<T>(
   query: string,
   parameters: IBaseAPIParameters = {},
-  options: RequestInit = {}
+  options: IRequestOptions = {}
 ): Promise<T[]> {
   const { page = 1, page_size = 80 } = parameters;
   /** Get the amount of objects to get in total by fetching a single object */
@@ -82,9 +100,9 @@ export const post = async (
   query: string,
   data: any,
   parameters: object = {},
-  options: RequestInit = {}
+  options: IRequestOptions = {}
 ): Promise<any> => {
-  const request = makeRequest(
+  return performRequest(
     query,
     parameters,
     Object.assign(options, {
@@ -92,5 +110,4 @@ export const post = async (
       body: JSON.stringify(data),
     })
   );
-  return performRequest(request);
 };
