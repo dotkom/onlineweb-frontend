@@ -80,7 +80,7 @@ class CalendarEvents extends Component<IProps, ICalendarEventsState> {
 
   /** Fetch the stored month from the browser session */
   public async componentDidMount() {
-    await this.getSession();
+    // await this.getSession();
   }
 
   /**

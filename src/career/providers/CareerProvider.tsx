@@ -67,7 +67,7 @@ class CareerOpportunities extends Component<IProps, ICareerContextState> {
     super(props);
     this.state = { ...INITIAL_STATE };
 
-    if (props.prefetch) {
+    if (props.prefetch && props.prefetch.length) {
       const [jobs, companies, jobTypes, locations] = props.prefetch;
       this.state = { ...this.state, jobs, companies, jobTypes, locations };
     }
