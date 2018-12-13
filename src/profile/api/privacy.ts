@@ -18,6 +18,6 @@ export const getPrivacyOptions = async (user: IAuthUser): Promise<IPrivacy> => {
  * @returns {IPrivacy} The current state of OnlineUsers Privacy options.
  */
 export const putPrivacyOptions = async (privacyOptions: IPrivacy, user: IAuthUser): Promise<IPrivacy> => {
-  const data = await put(API_URL, privacyOptions, {}, { user });
+  const data = await put({ query: API_URL, data: privacyOptions, options: { user } });
   return data;
 };

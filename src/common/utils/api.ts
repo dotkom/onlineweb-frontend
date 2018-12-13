@@ -8,6 +8,7 @@ import { getCache, hasCache, IRequestCacheOptions, setCache } from './requestCac
 
 export interface IRequestOptions extends RequestInit {
   cacheOptions?: IRequestCacheOptions;
+  user?: IAuthUser;
 }
 
 export interface IAPIData<T> {
@@ -42,8 +43,6 @@ const performRequest = async (query: string, parameters: object = {}, options: I
   setCache({ content: data, options: cacheOptions, url });
   return data;
 };
-
-export type RequestInitWithUser = RequestInit & { user?: IAuthUser };
 
 export const withUser = (user: IAuthUser, options: IRequestOptions = {}): IRequestOptions => {
   const token = user.access_token;
@@ -101,7 +100,7 @@ export const post = async (
   query: string,
   data: any,
   parameters: object = {},
-  options: RequestInitWithUser = {}
+  options: IRequestOptions = {}
 ): Promise<any> => {
   const { user, ...rest } = options;
   const headers = {
@@ -114,17 +113,15 @@ export const post = async (
   return performRequest(query, parameters, opts);
 };
 
-export type PutParams = [string, any, object, RequestInitWithUser];
+export interface IPutParams {
+  query: string;
+  data: any;
+  parameters?: object;
+  options?: IRequestOptions;
+}
 
-/**
- * @summary Simple fetch-API wrapper for HTTP PUT
- * @param {string} query
- * @param {any} data
- * @param {object} parameters
- * @returns {Promise<any>}
- */
-export const put = async (...putParams: PutParams): Promise<any> => {
-  const [query, data, parameters = {}, options = {}] = putParams;
+export const put = async (putParams: IPutParams): Promise<any> => {
+  const { query, data, parameters = {}, options = {} } = putParams;
   const { user, ...rest } = options;
   const headers = {
     Authorization: user ? `Bearer ${user.access_token}` : '',
