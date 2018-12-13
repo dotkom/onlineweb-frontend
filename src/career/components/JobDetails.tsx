@@ -1,7 +1,7 @@
 import { ICareerOpportunity } from 'career/models/Career';
 import Heading from 'common/components/Heading';
-import Img from 'common/components/Img';
 import Markdown from 'common/components/Markdown';
+import ResponsiveImage from 'common/components/ResponsiveImage';
 import { Link } from 'core/components/Router';
 import { DateTime } from 'luxon';
 import React from 'react';
@@ -27,7 +27,7 @@ const JobDetails = (props: ICareerOpportunity) => (
       <div>
         <div className={style.company}>
           <Link className={style.companyImage} to={`/company/${props.company.id}`}>
-            <Img src={props.company.image.lg} alt={props.company.name} />
+            <ResponsiveImage image={props.company.image} size="lg" alt={props.company.name} />
           </Link>
           <div className={style.companyDescriptionBox}>
             <Link className={style.companyDescriptionTitle} to={`/company/${props.company.id}`}>
