@@ -6,6 +6,8 @@ const devServer = require('./devServer.config');
 const environment = require('./environment.config');
 const mainModule = require('./module.config');
 
+const __SSR__ = process.env.OWF_SSR;
+
 module.exports = (env) => {
   return {
     mode: 'development',
@@ -15,9 +17,9 @@ module.exports = (env) => {
     },
     output: {
       path: path.resolve('./dist/'),
-      filename: '[name].[chunkHash].js',
-      chunkFilename: '[name].[chunkHash].js',
-      publicPath: '/public/',
+      filename: '[name].[hash].js',
+      chunkFilename: '[name].[hash].js',
+      publicPath: __SSR__ ? '/public/' : '/',
     },
     optimization: {
       splitChunks: {

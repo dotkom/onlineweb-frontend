@@ -1,3 +1,5 @@
+import { __SSR__ } from 'common/constants/environment';
+
 export type Fetcher = () => Promise<any>;
 
 export default class PrefetchState {
@@ -36,6 +38,9 @@ export default class PrefetchState {
   };
 
   public serialize = () => {
+    if (!__SSR__) {
+      return;
+    }
     const data = JSON.parse(window.__PREFETCHED_STATE__);
     Object.keys(data).forEach((key) => {
       this.keys.push(key);
