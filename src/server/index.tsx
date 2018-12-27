@@ -16,6 +16,7 @@ import { StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 
 import { App } from '../App';
+import { apiRouter } from './router';
 
 /**
  * Server side rendering uses a very simple single route express server to handle
@@ -40,6 +41,7 @@ app.use(cookieParser());
 /** Public folders are currently not set up corectly, TODO: Fix it? */
 app.use('/public', express.static(path.resolve(__dirname, '../dist')));
 app.use('/public', express.static('./dist'));
+app.use(apiRouter);
 
 interface IWebpackAssets {
   [key: string]: {
