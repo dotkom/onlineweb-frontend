@@ -18,7 +18,7 @@ export interface ICalendarEventsState {
  * The events are stored in a '2D list', where each index of the outer list represents a day in the month.
  * For more information, see the description of the 'contructMonthMap' function.
  */
-const EMPTY_EVENT_MONTH = constructMonthMap(DateTime.local(), []);
+const EMPTY_EVENT_MONTH = constructMonthMap(DateTime.local(), [], () => '');
 
 const INITIAL_STATE: ICalendarEventsState = {
   /** The empty month will let the calendar render all the tiles even without events in it */
@@ -62,7 +62,7 @@ class CalendarEvents extends Component<IProps, ICalendarEventsState> {
   public static async getServerState(_: IProps): Promise<IPrefetch> {
     const month = DateTime.local();
     const data = await getCalendarEvents(month);
-    const eventMonth = constructMonthMap(month, data);
+    const eventMonth = constructMonthMap(month, data, (event) => event.event_start);
     return { eventMonth, month };
   }
 
@@ -131,7 +131,7 @@ class CalendarEvents extends Component<IProps, ICalendarEventsState> {
 
     /** Await the events, construct the month representation and set it to state */
     const { results } = await data;
-    const eventMonth = constructMonthMap(month, results);
+    const eventMonth = constructMonthMap(month, results, (event) => event.event_start);
     this.setState({ eventMonth });
   };
 
