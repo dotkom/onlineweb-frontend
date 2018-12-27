@@ -8,7 +8,7 @@ export const toQueryString = (queryObject: any): string => {
   if (!keys.length) {
     return '';
   }
-  const queries = keys.map((key: string) => `${key}=${queryObject[key]}`);
+  const queries = keys.map((key: string) => `${key}=${encodeURIComponent(queryObject[key])}`);
   return `?${queries.join('&')}`;
 };
 

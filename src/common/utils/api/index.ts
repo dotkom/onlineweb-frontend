@@ -1,13 +1,14 @@
 import 'isomorphic-fetch';
-import { DOMAIN } from '../constants/endpoints';
-import { __CLIENT__ } from '../constants/environment';
-import { toQueryString } from './queryString';
+import { DOMAIN } from '../../constants/endpoints';
+import { __CLIENT__ } from '../../constants/environment';
+import { toQueryString } from '../queryString';
 
 import { IAuthUser } from 'authentication/models/User';
-import { getCache, hasCache, IRequestCacheOptions, setCache } from './requestCache';
+import { getCache, hasCache, IRequestCacheOptions, setCache } from '../requestCache';
 
 export interface IRequestOptions extends RequestInit {
   cacheOptions?: IRequestCacheOptions;
+  domain?: string;
 }
 
 export interface IAPIData<T> {
@@ -29,7 +30,7 @@ const makeRequest = (query: string, parameters: object = {}, options: RequestIni
 */
 const performRequest = async (query: string, parameters: object = {}, options: IRequestOptions = {}) => {
   const queryString = toQueryString(parameters);
-  const url = DOMAIN + query + queryString;
+  const url = (options.domain || DOMAIN) + query + queryString;
   const { cacheOptions } = options;
   if (hasCache({ url, options: cacheOptions })) {
     const { cache } = getCache({ url, options: cacheOptions });
