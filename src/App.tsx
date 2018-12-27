@@ -13,6 +13,7 @@ import HttpError from './core/components/errors/HttpError';
 import { Route } from './core/components/Router';
 import Frontpage from './frontpage';
 import Hobbys from './hobbygroups';
+import Office from './office';
 import Resources from './resources';
 
 /** Luxon locale setting has to be the same as in the front-end */
@@ -30,6 +31,7 @@ export const routes = {
   profile: '/profile',
   authCallback: '/auth/callback',
   spinner: '/spinner',
+  office: '/office',
 };
 
 const LoadableProfile = Loadable({
@@ -57,6 +59,7 @@ export const Client = () => (
       <Route path={routes.profile} component={LoadableProfile} requireLogin />
       <Route path={routes.authCallback} component={AuthCallback} />
       <Route path={routes.spinner} component={Spinner} />
+      <Route path={routes.office} component={Office} />
       <Route path="*" render={() => <HttpError code={404} />} />
     </Switch>
   </Core>
