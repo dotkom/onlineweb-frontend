@@ -29,17 +29,29 @@ class CountDown extends Component<IProps, IState> {
   public countDownIntervalHandle?: number;
   public triggerTimeoutHandles: number[] = [];
 
+  /**
+   * Initialize timeouts and intervals on component mount.
+   * Will therefore not run on server for SSR.
+   */
   public componentDidMount() {
     this.initTimeout();
     this.initTriggerTimeouts();
   }
 
+  /**
+   * All timeouts and intervals will need to be cleared when the component unmounts,
+   * because they may handle the `this`/state of this, or other components.
+   */
   public componentWillUnmount() {
     this.clearTimeout();
     this.clearInterval();
     this.clearTriggerTimeouts();
   }
 
+  /**
+   * Initialize the pre countdown timeout.
+   * This will wait with starting the visual countdown until the offset is reached.
+   */
   public initTimeout() {
     const { endTime, startOffset } = this.props;
     const endTimeMillis = endTime.toMillis();
@@ -53,6 +65,10 @@ class CountDown extends Component<IProps, IState> {
     clearTimeout(this.preCountDownTimeoutHandle);
   }
 
+  /**
+   * Initialize timeouts for triggers.
+   * Set timeouts to call trigger function when the countdown is finished.
+   */
   public initTriggerTimeouts() {
     const { triggers, endTime } = this.props;
     const millisToCountDownEnd = endTime.toMillis() - DateTime.local().toMillis();
@@ -67,6 +83,10 @@ class CountDown extends Component<IProps, IState> {
     this.triggerTimeoutHandles.forEach((handle) => clearTimeout(handle));
   }
 
+  /**
+   * Starts the visual countdown which the user sees.
+   * The interval triggers every secound, and ticks the counter down.
+   */
   public initInterval() {
     const { startOffset } = this.props;
     const timer = Math.ceil(startOffset / 1000);
@@ -79,6 +99,11 @@ class CountDown extends Component<IProps, IState> {
     clearInterval(this.countDownIntervalHandle);
   }
 
+  /**
+   * A single tick of the countdown.
+   * If the end is not reached, count down a single second.
+   * It not, set the count as finished, and stop the interval from running again.
+   */
   public countDownTick() {
     const { timer } = this.state;
     if (timer >= 0) {
