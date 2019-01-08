@@ -11,12 +11,8 @@ import Progress from './Progress';
 export interface IProps {
   user: IFullProfileUser;
 }
-const committee_mail = (mail: string): string => {
-  if (mail) {
-    return `${mail}@online.ntnu.no`;
-  }
-  return '';
-};
+
+const committeeMail = (mail: string) => mail ? `${mail}@online.ntnu.no`  : ''
 
 export const MainProfile = ({ user }: IProps) => (
   <>
@@ -26,7 +22,7 @@ export const MainProfile = ({ user }: IProps) => (
         <Content title="Kontakt">
           <KeyValue k="Telefon" v={user.phone_number} />
           <KeyValue k="E-post" v={user.email} />
-          <KeyValue k="Komité-e-post" v={committee_mail(user.online_mail)} />
+          <KeyValue k="Komité-e-post" v={committeeMail(user.online_mail)} />
         </Content>
       </Pane>
       <Pane>
