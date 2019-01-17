@@ -6,7 +6,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { INewEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
 import React from 'react';
-import { getEventImage } from '../ImageView/LargeEvent';
+import EventImage from '../EventImage';
 import style from './calendar.less';
 
 const CalendarHoverCard = ({ location, image, company_event, attendance_event, title, event_start }: INewEvent) => {
@@ -15,7 +15,7 @@ const CalendarHoverCard = ({ location, image, company_event, attendance_event, t
   const eventStart = DateTime.fromISO(event_start).toFormat('d MMM HH:mm');
   return (
     <div className={style.hoverCard}>
-      <img src={getEventImage(image, company_event)} />
+      <EventImage image={image} companyEvents={company_event} size="sm" />
       <div>
         <h3>{title}</h3>
         <InfoTag icon={MapMarked} content={location} />
