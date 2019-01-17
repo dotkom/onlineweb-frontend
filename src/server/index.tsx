@@ -36,8 +36,7 @@ const app = express();
  */
 app.use(cookieParser());
 
-/** Public folders are currently not set up corectly, TODO: Fix it? */
-app.use('/dist', express.static('./public'));
+app.use('/public', express.static('./dist'));
 app.use('/static', express.static('./static'));
 
 interface IWebpackAssets {
@@ -124,7 +123,8 @@ const wrapHtml = (dom: string, prefetcher: PrefetchState) => {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Linjeforeningen Online</title>
-        <link rel="manifest" href="/static/owf.webmanifest">
+        <link rel="icon" type="image/png" href="/static/icon-256.png" />
+        <link rel="manifest" href="/static/owf.webmanifest" />
         ${stylesheets.join('\n')}
       </head>
       <body>
