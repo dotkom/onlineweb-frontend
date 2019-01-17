@@ -1,6 +1,7 @@
 import HttpError from 'core/components/errors/HttpError';
+import { Route } from 'core/components/Router';
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import DetailView from './DetailView';
 import EventsContainer from './EventsContainer';
 

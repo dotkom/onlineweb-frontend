@@ -1,11 +1,11 @@
 import { IEventViewProps } from 'events/models/Event';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import CalendarEvents from './CalendarEvents';
 import ImageEvents from './ImageEvents';
 import ListEvents from './ListEvents';
 
 export interface IProps extends IEventViewProps {
-  children: JSX.Element[];
+  children: ReactNode;
 }
 
 const Wrapper = ({ children, ...props }: IProps) => {
