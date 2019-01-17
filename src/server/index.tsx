@@ -9,7 +9,6 @@ import Settings from 'core/providers/Settings';
 import { getEventView } from 'events/components/EventsContainer';
 import express from 'express';
 import fs from 'fs';
-import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
@@ -37,9 +36,8 @@ const app = express();
  */
 app.use(cookieParser());
 
-/** Public folders are currently not set up corectly, TODO: Fix it? */
-app.use('/public', express.static(path.resolve(__dirname, '../dist')));
 app.use('/public', express.static('./dist'));
+app.use('/static', express.static('./static'));
 
 interface IWebpackAssets {
   [key: string]: {
@@ -125,6 +123,8 @@ const wrapHtml = (dom: string, prefetcher: PrefetchState) => {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Linjeforeningen Online</title>
+        <link rel="icon" type="image/png" href="/static/icon-256.png" />
+        <link rel="manifest" href="/static/owf.webmanifest" />
         ${stylesheets.join('\n')}
       </head>
       <body>
