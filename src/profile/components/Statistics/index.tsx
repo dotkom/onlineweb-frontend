@@ -1,7 +1,8 @@
 import React from 'react';
-import { Route, RouteProps, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import HttpError from 'core/components/errors/HttpError';
+import { IRouteProps, Route } from 'core/components/Router';
 import Orders from './Orders';
 
 const BASE_ROUTE = '/profile/statistics';
@@ -19,7 +20,7 @@ const Settings = () => {
   );
 };
 
-interface ISettingsRouteProps extends RouteProps {
+interface ISettingsRouteProps extends IRouteProps {
   view: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 

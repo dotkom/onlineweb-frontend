@@ -1,4 +1,4 @@
-import IImage from 'common/models/Image';
+import IImage, { DEFAULT_EVENT_IMAGE } from 'common/models/Image';
 import { ICompany } from 'core/models/Company';
 import { IGroup } from 'core/models/Group';
 import { IUser } from 'core/models/User';
@@ -84,15 +84,7 @@ export const mockEvent: INewEvent = {
   event_start: '',
   event_type: 0,
   id: 0,
-  image: {
-    lg: '',
-    md: '/media/images/responsive/md/86b20aca-4368-4b3a-8f10-707c747eb03f.png',
-    original: '',
-    sm: '',
-    thumb: '',
-    wide: '',
-    xs: '',
-  },
+  image: DEFAULT_EVENT_IMAGE,
   ingress: '',
   ingress_short: '',
   location: '',

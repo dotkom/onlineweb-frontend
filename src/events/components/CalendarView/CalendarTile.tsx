@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import HoverCard from 'common/components/HoverCard';
+import { Link } from 'core/components/Router';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { getEventColor, INewEvent } from '../../models/Event';
 import style from './calendar.less';
 import CalendarHoverCard from './CalendarHoverCard';
