@@ -8,6 +8,7 @@ import { getCache, hasCache, IRequestCacheOptions, setCache } from './requestCac
 
 export interface IRequestOptions extends RequestInit {
   cacheOptions?: IRequestCacheOptions;
+  user?: IAuthUser;
 }
 
 export interface IAPIData<T> {
@@ -90,7 +91,6 @@ export async function getAllPages<T>(
 
 /**
  * @summary Simple fetch-API wrapper for HTTP POST
- * TODO: implement Request options, Done with Object.assign, not tested yet
  * @param {string} query
  * @param {any} data
  * @param {object} parameters
@@ -102,12 +102,33 @@ export const post = async (
   parameters: object = {},
   options: IRequestOptions = {}
 ): Promise<any> => {
-  return performRequest(
-    query,
-    parameters,
-    Object.assign(options, {
-      methods: 'POST',
-      body: JSON.stringify(data),
-    })
-  );
+  const { user, ...rest } = options;
+  const headers = {
+    Authorization: user ? `Bearer ${user.access_token}` : '',
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  const body = JSON.stringify(data);
+  const opts = { ...rest, method: 'POST', body, headers };
+  return performRequest(query, parameters, opts);
+};
+
+export interface IPutParams {
+  query: string;
+  data: any;
+  parameters?: object;
+  options?: IRequestOptions;
+}
+
+export const put = async (putParams: IPutParams): Promise<any> => {
+  const { query, data, parameters = {}, options = {} } = putParams;
+  const { user, ...rest } = options;
+  const headers = {
+    Authorization: user ? `Bearer ${user.access_token}` : '',
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  const body = JSON.stringify(data);
+  const opts = { ...rest, method: 'PUT', body, headers };
+  return performRequest(query, parameters, opts);
 };
