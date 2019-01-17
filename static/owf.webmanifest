@@ -1,0 +1,16 @@
+{
+    "name": "Linjeforeningen Online",
+    "short_name": "Onlineweb",
+    "description": "Nettstedet for Linjeforeningen Online",
+    "icons": [
+        {
+            "src": "static/icon-256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/",
+    "display": "fullscreen",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff"
+}
