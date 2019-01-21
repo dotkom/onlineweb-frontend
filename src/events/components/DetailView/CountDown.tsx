@@ -7,10 +7,16 @@ export interface ITrigger {
 }
 
 export interface IProps {
-  triggers: ITrigger[];
-  startOffset: number;
+  triggers?: ITrigger[];
+  startOffset?: number;
   endTime: DateTime;
+  /** Luxon DateTime format string */
+  format?: string;
 }
+
+const DEFAULT_OFFSET = 15 * 60 * 1000; // 15 minutes
+const DEFAULT_TRIGGERS: ITrigger[] = [];
+const DEFAULT_FORMAT = 'd MMM HH:mm';
 
 export interface IState {
   timer: number;
@@ -52,16 +58,25 @@ class CountDown extends Component<IProps, IState> {
    * Initialize the pre countdown timeout.
    * This will wait with starting the visual countdown until the offset is reached.
    */
-  public initTimeout() {
-    const { endTime, startOffset } = this.props;
+  public initTimeout = () => {
+    const { endTime, startOffset = DEFAULT_OFFSET } = this.props;
+
     const endTimeMillis = endTime.toMillis();
     const countDownStart = endTimeMillis - startOffset;
     const now = DateTime.local().toMillis();
     const millisToCountDownStart = countDownStart - now;
-    this.preCountDownTimeoutHandle = window.setTimeout(this.initInterval, millisToCountDownStart);
+    const millisToCountDownEnd = endTimeMillis - now;
+
+    if (millisToCountDownEnd <= 0) {
+      this.setState({ started: true, finished: true });
+    } else if (millisToCountDownEnd > 0 && millisToCountDownStart <= 0) {
+      this.initInterval(millisToCountDownEnd);
+    } else if (millisToCountDownStart > 0) {
+      this.preCountDownTimeoutHandle = window.setTimeout(this.initInterval, millisToCountDownStart);
+    }
   }
 
-  public clearTimeout() {
+  public clearTimeout = () => {
     clearTimeout(this.preCountDownTimeoutHandle);
   }
 
@@ -69,8 +84,8 @@ class CountDown extends Component<IProps, IState> {
    * Initialize timeouts for triggers.
    * Set timeouts to call trigger function when the countdown is finished.
    */
-  public initTriggerTimeouts() {
-    const { triggers, endTime } = this.props;
+  public initTriggerTimeouts = () => {
+    const { triggers = DEFAULT_TRIGGERS, endTime } = this.props;
     const millisToCountDownEnd = endTime.toMillis() - DateTime.local().toMillis();
     this.triggerTimeoutHandles = triggers.map((trigger) => {
       const offset = millisToCountDownEnd + trigger.offset;
@@ -79,7 +94,7 @@ class CountDown extends Component<IProps, IState> {
     });
   }
 
-  public clearTriggerTimeouts() {
+  public clearTriggerTimeouts = () => {
     this.triggerTimeoutHandles.forEach((handle) => clearTimeout(handle));
   }
 
@@ -87,15 +102,15 @@ class CountDown extends Component<IProps, IState> {
    * Starts the visual countdown which the user sees.
    * The interval triggers every secound, and ticks the counter down.
    */
-  public initInterval() {
-    const { startOffset } = this.props;
-    const timer = Math.ceil(startOffset / 1000);
+  public initInterval = (offset?: number) => {
+    const { startOffset = DEFAULT_OFFSET } = this.props;
+    const timer = Math.ceil((offset || startOffset) / 1000);
     this.setState({ timer, started: true }, () => {
       this.countDownIntervalHandle = window.setInterval(this.countDownTick, 1000);
     });
   }
 
-  public clearInterval() {
+  public clearInterval = () => {
     clearInterval(this.countDownIntervalHandle);
   }
 
@@ -104,7 +119,7 @@ class CountDown extends Component<IProps, IState> {
    * If the end is not reached, count down a single second.
    * It not, set the count as finished, and stop the interval from running again.
    */
-  public countDownTick() {
+  public countDownTick = () => {
     const { timer } = this.state;
     if (timer >= 0) {
       this.setState({ timer: timer - 1 });
@@ -116,12 +131,13 @@ class CountDown extends Component<IProps, IState> {
 
   public render() {
     const { timer, started, finished } = this.state;
+    const { endTime, format = DEFAULT_FORMAT } = this.props;
     if (started && !finished) {
-      const mins = Math.ceil(timer / 60);
+      const mins = Math.floor(timer / 60);
       const secs = timer % 60;
-      return <p>{`${mins}:${secs}`}</p>;
+      return <p>{mins === 0 ? secs : `${mins}:${secs < 10 ? `0${secs}` : secs}`}</p>;
     } else {
-      return this.props.children;
+      return <p>{ endTime.toFormat(format) }</p>
     }
   }
 }
