@@ -8,7 +8,7 @@ export interface IEventAPIParameters extends IBaseAPIParameters {
   event_end__gte?: string;
   event_end__lte?: string;
   event_type?: number[] | number;
-  is_attendee?: 'True' | 'False' | null;
+  is_attendee?: 'True' | 'False';
 }
 
 export interface IAPIData<T> {
