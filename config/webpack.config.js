@@ -14,6 +14,7 @@ module.exports = (env) => {
     devtool: 'source-map',
     entry: {
       app: './src/index.tsx',
+      serviceworker: './src/serviceworker/index.js'
     },
     output: {
       path: path.resolve('./dist/'),

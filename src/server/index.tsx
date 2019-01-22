@@ -9,6 +9,7 @@ import Settings from 'core/providers/Settings';
 import { getEventView } from 'events/components/EventsContainer';
 import express from 'express';
 import fs from 'fs';
+import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
@@ -45,9 +46,13 @@ interface IWebpackAssets {
   };
 }
 
-const getBundles = (): [string[], string[]] => {
+const getAssets = (): IWebpackAssets => {
   const assetsString = fs.readFileSync('./dist/webpack-assets.json').toString();
-  const assets: IWebpackAssets = JSON.parse(assetsString);
+  return JSON.parse(assetsString);
+};
+
+const getBundles = (): [string[], string[]] => {
+  const assets = getAssets();
   const js = [assets.app.js, assets.vendor.js].map(getScript);
   const css = [assets.app.css, assets.profile.css].map(getStyle);
   return [js, css];
@@ -55,6 +60,13 @@ const getBundles = (): [string[], string[]] => {
 
 const getStyle = (style: string) => `<link rel="stylesheet" type="text/css" href="${style}">`;
 const getScript = (script: string) => `<script src="${script}"></script>`;
+
+app.get('/serviceworker', (_, res) => {
+  const assets = getAssets();
+  const swPath = `.${assets.serviceworker.js}`.replace('public', 'dist');
+  const swAbsPath = path.resolve(swPath);
+  res.sendFile(swAbsPath);
+});
 
 /**
  * @summary Main entrypoint for express application backend.
