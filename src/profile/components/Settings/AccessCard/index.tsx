@@ -3,6 +3,7 @@ import React from 'react';
 import style from './card.less';
 import CardBack from './CardBack';
 import CardFront from './CardFront';
+import EditCard from './EditCard';
 
 const INFO_TEXT = `
   # NTNU Adganskort
@@ -41,6 +42,7 @@ export default class Barcode extends React.Component {
     return (
       <>
         <Markdown source={INFO_TEXT} />
+        <EditCard emCode={card.code} />
         <div className={style.container}>
           <CardFront {...card} />
           <CardBack {...card} />
