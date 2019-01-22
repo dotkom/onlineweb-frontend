@@ -13,8 +13,11 @@ import React from 'react';
 import * as ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import { Router } from 'react-router-dom';
+import { registerServiceWorker } from 'serviceworker/browser';
 
 import App from './App';
+
+registerServiceWorker();
 
 Sentry.init({
   dsn: OWF_SENTRY_DSN,
