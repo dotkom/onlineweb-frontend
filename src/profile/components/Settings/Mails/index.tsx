@@ -1,3 +1,4 @@
+import { Pane } from 'common/components/Panes';
 import React, { Component } from 'react';
 import { getMails } from '../../../api/mail';
 import { IMail } from '../../../models/Mail';
@@ -29,11 +30,11 @@ class Mails extends Component<{}, IState> {
   public render() {
     const { addresses } = this.state;
     return (
-      <>
+      <Pane>
         {addresses.map((addr, index) => (
           <Mail {...addr} toggle={() => this.togglePrimary(index)} key={addr.email} />
         ))}
-      </>
+      </Pane>
     );
   }
 }

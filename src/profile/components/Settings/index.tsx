@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 
+import { Page } from 'common/components/Panes';
 import HttpError from 'core/components/errors/HttpError';
 import { IRouteProps, Route } from 'core/components/Router';
 import { IProfileProps } from 'profile';
@@ -49,9 +50,9 @@ const SettingsRoute = ({ view, ...props }: ISettingsRouteProps) => {
       render={({ match, ...routeProps }) => (
         <div className={style.container}>
           <Menu path={match.path} />
-          <div className={style.settings}>
+          <Page>
             <View {...routeProps} />
-          </div>
+          </Page>
         </div>
       )}
     />
