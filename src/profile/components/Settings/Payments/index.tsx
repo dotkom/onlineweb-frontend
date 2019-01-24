@@ -1,3 +1,4 @@
+import { Pane } from 'common/components/Panes';
 import React, { Component } from 'react';
 import { getPayments } from '../../../api/payment';
 import { IPayment } from '../../../models/Payment';
@@ -23,7 +24,7 @@ class Payments extends Component<{}, IState> {
   public render() {
     const { payments, loaded } = this.state;
     return (
-      <div>
+      <Pane>
         {!loaded ? (
           <Placeholder />
         ) : !payments.length ? (
@@ -31,7 +32,7 @@ class Payments extends Component<{}, IState> {
         ) : (
           payments.map((payment) => <Payment key={payment.object_id} {...payment} />)
         )}
-      </div>
+      </Pane>
     );
   }
 }

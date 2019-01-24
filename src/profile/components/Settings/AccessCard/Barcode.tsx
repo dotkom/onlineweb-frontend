@@ -58,9 +58,9 @@ const Barcode = ({ barcode }: { barcode: string }) => {
   const height = Math.ceil(width / 5);
   return (
     <svg viewBox={`0 0 ${width} ${height}`} x="116" y="144" height="40" width="200">
-      {binaryArray.map((bin, pos) => (
-        <>{bin === '1' ? <rect key={pos} x={pos} width="1" height={height} fill="3C3A3A" /> : null}</>
-      ))}
+      {binaryArray.map((bin, pos) =>
+        bin === '1' ? <rect key={pos} x={pos} width="1" height={height} fill="3C3A3A" /> : null
+      )}
     </svg>
   );
 };
