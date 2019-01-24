@@ -21,7 +21,7 @@ const ABOUT_EDIT_CARD = `
 
   For å registrere kortet ditt, trenger du bare å skrive inn EM koden du finner på baksiden.
   
-  Gjennom litt magi kan vi regne ut RFID koden til kortet, og kortet skal så være mulig å bruke!
+  Gjennom litt magi kan vi regne ut RFID koden til kortet, deretter skal kortet være mulig å bruke!
 `;
 
 const ABOUT_CARD_GRAPHIC = `
@@ -53,7 +53,7 @@ export default class Barcode extends React.Component {
         </Pane>
         <Pane>
           <Markdown source={ABOUT_EDIT_CARD} />
-          <EditCard emCode={card.code} />
+          <EditCard />
         </Pane>
         <Pane>
           <Markdown source={ABOUT_CARD_GRAPHIC} />
