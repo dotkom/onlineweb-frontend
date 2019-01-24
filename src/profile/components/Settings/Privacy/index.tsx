@@ -1,4 +1,5 @@
 import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
+import { Pane } from 'common/components/Panes';
 import { getKeys } from 'common/utils/tsHacks';
 import React, { Component } from 'react';
 import { getPrivacyOptions, putPrivacyOptions } from '../../../api/privacy';
@@ -50,12 +51,12 @@ class Privacy extends Component<{}, IState> {
   public render() {
     const { state } = this;
     return (
-      <>
+      <Pane>
         <Info />
         {getKeys<IPrivacy>(state).map((key) => (
           <Option key={key} option={key} value={state[key]} toggle={() => this.togglePrivacyOption(key)} />
         ))}
-      </>
+      </Pane>
     );
   }
 }

@@ -1,3 +1,4 @@
+import { Pane } from 'common/components/Panes';
 import React, { Component } from 'react';
 import { getMarks, getSuspensions } from '../../../api/penalties';
 import { IMark, ISuspension } from '../../../models/Penalty';
@@ -38,8 +39,8 @@ class Marks extends Component<{}, IState> {
     const { marks, suspensions, loaded } = this.state;
     return (
       <>
-        <h2>Prikker</h2>
-        <div>
+        <Pane>
+          <h2>Prikker</h2>
           {/** If not loaded from API; show placeholder. If list of marks is empty; show empty-text */}
           {!loaded ? (
             <Placeholder />
@@ -48,9 +49,9 @@ class Marks extends Component<{}, IState> {
           ) : (
             <p>Du har ingen prikker</p>
           )}
-        </div>
-        <h2>Suspensjoner</h2>
-        <div>
+        </Pane>
+        <Pane>
+          <h2>Suspensjoner</h2>
           {/** If not loaded from API; show placeholder. If list of suspensions is empty; show empty-text */}
           {!loaded ? (
             <Placeholder />
@@ -61,8 +62,10 @@ class Marks extends Component<{}, IState> {
           ) : (
             <p>Du har ingen suspensjoner</p>
           )}
-        </div>
-        <Rules />
+        </Pane>
+        <Pane>
+          <Rules />
+        </Pane>
       </>
     );
   }
