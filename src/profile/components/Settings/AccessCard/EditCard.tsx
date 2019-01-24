@@ -31,7 +31,8 @@ class EditCard extends Component<IProps, IState> {
           type="text"
           onChange={this.editEMCode}
           placeholder={oldCode}
-          value={newCode ? newCode : undefined} />
+          value={newCode ? newCode : undefined}
+        />
       </div>
     )
   }
