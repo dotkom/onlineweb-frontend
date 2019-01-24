@@ -1,5 +1,5 @@
 import Markdown from 'common/components/Markdown';
-import { Page, Pane } from 'common/components/Panes';
+import { Pane } from 'common/components/Panes';
 import React from 'react';
 import style from './card.less';
 import CardBack from './CardBack';
