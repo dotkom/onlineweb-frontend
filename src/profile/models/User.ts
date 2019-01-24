@@ -16,6 +16,7 @@ export interface IFullProfileUser {
   linkedin: string;
   positions: IMedal[];
   special_positions: any[];
+  rfid: string;
 }
 
 export interface ISearchUser {
