@@ -1,0 +1,28 @@
+@import '~common/less/colors.less';
+
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 50px;
+  justify-items: center;
+  text-align: center;
+
+  .icon {
+    width: 160px;
+  }
+
+  button {
+    background: none;
+    color: @blue;
+    border: solid @blue 2px;
+    border-radius: 6px;
+    width: 120px;
+    height: 48px;
+    font-weight: 600;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
