@@ -1,5 +1,5 @@
 import React, { Component, ContextType } from 'react';
-import { Redirect, Switch } from 'react-router';
+import { Redirect, Switch } from 'react-router-dom';
 import { authCallback } from '../api';
 import { UserContext } from '../providers/UserProvider';
 
