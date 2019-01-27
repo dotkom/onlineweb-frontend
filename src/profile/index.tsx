@@ -9,6 +9,7 @@ import MyProfile from './components/Profile';
 import Search from './components/Search';
 import Settings from './components/Settings';
 import Statistics from './components/Statistics';
+import UserProfileProvider from './providers/UserProfile';
 
 const BASE_ROUTE = '/profile';
 
@@ -20,9 +21,9 @@ export const routes = {
   statistics: BASE_ROUTE + '/statistics',
 };
 
-class Profile extends React.Component<{}> {
-  public render() {
-    return (
+const ProfileRouter = () => {
+  return (
+    <UserProfileProvider>
       <Switch>
         <ProfileRoute exact path={routes.personal} view={MyProfile} />
         <ProfileRoute path={routes.search} view={Search} />
@@ -31,9 +32,9 @@ class Profile extends React.Component<{}> {
         <ProfileRoute path={routes.statistics} view={Statistics} />
         <Route path="*" render={() => <HttpError code={404} />} />
       </Switch>
-    );
-  }
-}
+    </UserProfileProvider>
+  );
+};
 
 export interface IProfileProps {
   params: qs.OutputParams;
@@ -59,4 +60,4 @@ const ProfileRoute = ({ view, ...props }: IProfileRouteProps) => {
   );
 };
 
-export default Profile;
+export default ProfileRouter;
