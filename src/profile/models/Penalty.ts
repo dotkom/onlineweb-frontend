@@ -52,6 +52,8 @@ export interface IMark {
     last_changed_date: IsoDateTime;
     last_changed_by: IUser;
     category: MarkCategory;
+    /** Max length of 255 characters */
+    description: string;
   };
 }
 
@@ -78,11 +80,11 @@ export const sortByExpiration = (a: Penalty, b: Penalty): number => {
  * @param {Penalty} penalty Given penalty, (Prikk | Suspensjon)
  * @returns {number} Percentage of completion
  */
-export const getPenaltyCompletion = (penalty: Penalty): number => {
+export const getPenaltyCompletion = (expiration: string): number => {
   // Set number of days a Penalty lasts, number between 0.0 and 100.0
   const penaltyLength = 30;
 
-  const end = DateTime.fromISO(penalty.expiration_date);
+  const end = DateTime.fromISO(expiration);
   const start = end.minus({ days: penaltyLength });
   const now = DateTime.local();
 
