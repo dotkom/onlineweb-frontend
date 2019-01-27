@@ -18,8 +18,8 @@ export const PenaltyTitle = ({ title, added }: IPenaltyTitleProps) => {
       <h3>{title}</h3>
       <span>{added.toFormat('d MMMM y')}</span>
     </div>
-  )
-}
+  );
+};
 
 export interface IPenaltyProgressProps {
   completion: number;
@@ -27,10 +27,8 @@ export interface IPenaltyProgressProps {
 
 export const PenaltyProgress = ({ completion }: IPenaltyProgressProps) => {
   const completionColor = getCompletionColor(completion);
-  return (
-    <div className={style.progressBar} style={{ width: completion + '%', backgroundColor: completionColor }} />
-  )
-}
+  return <div className={style.progressBar} style={{ width: completion + '%', backgroundColor: completionColor }} />;
+};
 
 export interface IPenaltyPaneProps {
   render: (penalty: Penalty) => JSX.Element;
@@ -44,13 +42,7 @@ export const PenaltyPane = ({ loaded, render, penalties, ifNone, name }: IPenalt
   return (
     <Pane>
       <h2>{name}</h2>
-      {!loaded ? (
-        <Placeholder />
-      ) : penalties.length ? (
-        penalties.sort(sortByExpiration).map(render)
-      ) : (
-        <p>{ ifNone }</p>
-      )}
+      {!loaded ? <Placeholder /> : penalties.length ? penalties.sort(sortByExpiration).map(render) : <p>{ifNone}</p>}
     </Pane>
   );
 };
