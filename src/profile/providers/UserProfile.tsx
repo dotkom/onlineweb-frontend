@@ -11,7 +11,7 @@ export interface IState {
 
 const INITIAL_STATE: IState = {
   refetch: () => {
-    throw new Error('Refetch method was called without being overwritten')
+    throw new Error('Refetch method was called without being overwritten');
   },
 };
 
@@ -20,7 +20,7 @@ export const UserProfileContext = createContext(INITIAL_STATE);
 export class UserProfileProvider extends React.Component<{}, IState> {
   public static contextType = UserContext;
   public context!: ContextType<typeof UserContext>;
-  public state: IState = INITIAL_STATE;;
+  public state: IState = INITIAL_STATE;
 
   public init = async () => {
     const auth = this.context;
@@ -28,11 +28,11 @@ export class UserProfileProvider extends React.Component<{}, IState> {
       const user = await getProfile(auth.user);
       this.setState({ user });
     }
-  }
+  };
 
   public refetch = async () => {
     await this.init();
-  }
+  };
 
   public async componentDidMount() {
     this.init();
@@ -41,9 +41,7 @@ export class UserProfileProvider extends React.Component<{}, IState> {
   public render() {
     const { refetch } = this;
     const value = { ...this.state, refetch };
-    return (
-      <UserProfileContext.Provider value={value}>{this.props.children}</UserProfileContext.Provider>
-    );
+    return <UserProfileContext.Provider value={value}>{this.props.children}</UserProfileContext.Provider>;
   }
 }
 
