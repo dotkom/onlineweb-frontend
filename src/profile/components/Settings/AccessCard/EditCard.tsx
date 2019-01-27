@@ -8,7 +8,9 @@ import { toggleEMandRFID } from 'profile/utils/rfid';
 import React, { Component, ContextType } from 'react';
 import style from './input.less';
 
-export interface IProps {}
+export interface IProps {
+  refetchProfile: () => void;
+}
 
 export interface IState {
   emCode: string | null;
@@ -45,6 +47,7 @@ class EditCard extends Component<IProps, IState> {
   };
 
   public submitCode = async () => {
+    const { refetchProfile } = this.props;
     const { emCode, valid } = this.state;
     const { user } = this.context;
     if (valid && emCode) {
@@ -53,6 +56,7 @@ class EditCard extends Component<IProps, IState> {
         // TODO: Give more feedback to the user
         const profile = await putProfile({ rfid }, user);
         this.setState({ registered: profile.rfid === rfid });
+        refetchProfile();
       }
     }
   };
@@ -62,7 +66,7 @@ class EditCard extends Component<IProps, IState> {
     return (
       <div className={style.editCardInput}>
         <p>EM</p>
-        <input type="text" tabIndex={0} onChange={this.editEMCode} value={newCode !== null ? newCode : ''} />
+        <input type="number" tabIndex={0} onChange={this.editEMCode} value={newCode !== null ? newCode : ''} />
         <button
           className={classname({
             [style.buttonChecked]: registered,
