@@ -60,7 +60,9 @@ class Marks extends Component<{}, IState> {
           ifNone="Du har ingen suspensjoner"
           loaded={loaded}
           penalties={suspensions}
-          render={(suspension) => <Suspension suspension={suspension as ISuspension} key={suspension.expiration_date} />}
+          render={(suspension) => (
+            <Suspension suspension={suspension as ISuspension} key={suspension.expiration_date} />
+          )}
         />
         <Pane>
           <Rules />
