@@ -1,7 +1,10 @@
+import React, { Component, ContextType } from 'react';
+
+import { UserContext } from 'authentication/providers/UserProvider';
 import { Pane } from 'common/components/Panes';
-import React, { Component } from 'react';
-import { getMarks, getSuspensions } from '../../../api/penalties';
-import { IMark, ISuspension } from '../../../models/Penalty';
+import { getMarks, getSuspensions } from 'profile/api/penalties';
+import { IMark, ISuspension } from 'profile/models/Penalty';
+
 import Mark from './Mark';
 import Placeholder from './Placeholder';
 import Rules from './Rules';
@@ -19,21 +22,27 @@ export interface IState {
  * @description Connects to API-endpoint to fetch data.
  */
 class Marks extends Component<{}, IState> {
-  constructor(props: {}) {
-    super(props);
+  public static contextType = UserContext;
+  public context!: ContextType<typeof UserContext>;
 
-    this.state = {
-      marks: [],
-      suspensions: [],
-      loaded: false,
-    } as IState;
-  }
+  public state: IState = {
+    loaded: false,
+    marks: [],
+    suspensions: [],
+  };
 
   public async componentDidMount() {
-    const marks = await getMarks();
-    const suspensions = await getSuspensions();
-    this.setState({ marks, suspensions, loaded: true });
+    this.init();
   }
+
+  public init = async () => {
+    const { user } = this.context;
+    if (user) {
+      const marks = await getMarks(user);
+      const suspensions = await getSuspensions(user);
+      this.setState({ marks, suspensions, loaded: true });
+    }
+  };
 
   public render() {
     const { marks, suspensions, loaded } = this.state;
