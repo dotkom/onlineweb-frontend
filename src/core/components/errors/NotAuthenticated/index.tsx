@@ -2,31 +2,32 @@ import React from 'react';
 
 import { logIn } from 'authentication/api';
 import Markdown from 'common/components/Markdown';
-import { Page, Pane } from 'common/components/Panes';
 
+import { Button } from './Button';
 import { Lock } from './Lock';
 import style from './notAuthenticated.less';
 
 const ABOUT_NOT_AUTHENTICATED = `
-  # 401: Ikke logget inn
+  # Logg inn
 
-  #### Vennligst logg inn inn for å se innholdet på denne siden
+  #### Vennligst logg inn for å se innholdet på denne siden
 `;
 
 export const NotAuthenticated = () => {
   return (
-    <Page>
-      <Pane>
-        <div className={style.container}>
-          <Markdown source={ABOUT_NOT_AUTHENTICATED} />
-          <div className={style.icon}>
-            <Lock />
-          </div>
-          <button onClick={logIn} title="Logg inn">
-            Logg inn
-          </button>
-        </div>
-      </Pane>
-    </Page>
+    <div className={style.container}>
+      <Markdown source={ABOUT_NOT_AUTHENTICATED} />
+      <div className={style.icon}>
+        <Lock />
+      </div>
+      <div className={style.buttons}>
+        <Button inverse onClick={logIn} title="Registrer">
+          Registrer
+        </Button>
+        <Button onClick={logIn} title="Logg inn">
+          Logg inn
+        </Button>
+      </div>
+    </div>
   );
 };
