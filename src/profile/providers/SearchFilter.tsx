@@ -76,7 +76,7 @@ export class ProfileSearchProvider extends Component<IProps, IState> {
     const { search = '', group, range, page, users } = this.state;
     const newUsers = await searchUsers({ search, group, range, page });
     this.setState({ users: [...users, ...newUsers] });
-  }
+  };
 
   public render() {
     const { setSearch, setGroup, setRange, nextPage } = this;
