@@ -36,6 +36,10 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: @grid-gap;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: auto;
+  }
 }
 
 .content {
