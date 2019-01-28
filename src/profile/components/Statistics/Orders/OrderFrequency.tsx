@@ -1,4 +1,5 @@
-import { Calendar, CalendarDatum, CalendarLegend } from '@nivo/calendar';
+import { CalendarDatum, CalendarLegend, ResponsiveCalendar } from '@nivo/calendar';
+import classnames from 'classnames';
 import { DateTime } from 'luxon';
 import React from 'react';
 import style from './orders.less';
@@ -44,11 +45,9 @@ const OrderFrequency = ({ frequency }: IProps) => {
   });
   const values: CalendarDatum[] = Object.keys(inter2).map((key) => ({ day: key, value: inter2[key] }));
   return (
-    <div className={style.centerChart}>
+    <div className={classnames(style.centerChart, style.calendarChart)}>
       <h1>Kjøpskalender</h1>
-      <Calendar
-        width={1000}
-        height={450}
+      <ResponsiveCalendar
         from={first.toISODate()}
         to={last.toISODate()}
         data={values}
