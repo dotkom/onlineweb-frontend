@@ -3,8 +3,8 @@ import React, { ReactChild } from 'react';
 
 import { IAttendanceEvent } from '../../models/Event';
 import Block from './Block';
-import CountDown from './CountDown';
 import style from './detail.less';
+import { EventCountDown } from './EventCountDown';
 
 interface IRuleBundleBox {
   children: ReactChild | ReactChild[];
@@ -52,22 +52,22 @@ const RuleBundles = ({ event }: IAttendanceEventProps) => {
 };
 
 const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
-  const registrationStart = DateTime.fromISO(event.registration_start)
-  const registrationEnd = DateTime.fromISO(event.registration_end)
-  const cancellationDeadline = DateTime.fromISO(event.unattend_deadline)
+  const registrationStart = DateTime.fromISO(event.registration_start);
+  const registrationEnd = DateTime.fromISO(event.registration_end);
+  const cancellationDeadline = DateTime.fromISO(event.unattend_deadline);
 
   return (
     <div className={style.blockGrid}>
       <Block title="Påmeldingsstart">
-        <CountDown endTime={registrationStart} />
+        <EventCountDown endTime={registrationStart} />
       </Block>
 
       <Block title="Påmeldingslutt">
-        <CountDown endTime={registrationEnd} />
+        <EventCountDown endTime={registrationEnd} />
       </Block>
 
       <Block title="Avmeldingsfrist">
-        <CountDown endTime={cancellationDeadline} />
+        <EventCountDown endTime={cancellationDeadline} />
       </Block>
 
       <RuleBundles event={event} />
@@ -78,7 +78,9 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
         </p>
       </Block>
 
-      <Block title="Venteliste"><p>{event.waitlist ? event.number_on_waitlist : '-'}</p></Block>
+      <Block title="Venteliste">
+        <p>{event.waitlist ? event.number_on_waitlist : '-'}</p>
+      </Block>
     </div>
   );
 };
