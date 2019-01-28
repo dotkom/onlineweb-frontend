@@ -14,7 +14,7 @@ export interface IState {
   setRange: (range: [number, number]) => void;
   users: ISearchUser[];
   page: number;
-  setPage: (page: number) => void;
+  nextPage: () => void;
 }
 
 const INITIAL_STATE: IState = {
@@ -30,8 +30,8 @@ const INITIAL_STATE: IState = {
   },
   users: [],
   page: 1,
-  setPage: (_) => {
-    throw new Error('setPage method not overwritten');
+  nextPage: () => {
+    throw new Error('nextPage method not overwritten');
   },
 };
 
@@ -47,7 +47,7 @@ export class ProfileSearchProvider extends Component<IProps, IState> {
   public init = async () => {
     const { search = '', group, range, page } = this.state;
     const users = await searchUsers({ search, group, range, page });
-    this.setState({ users });
+    this.setState({ users, page: 1 });
   };
 
   public async componentDidMount() {
@@ -67,13 +67,20 @@ export class ProfileSearchProvider extends Component<IProps, IState> {
     this.setStateAndRefetch({ range });
   };
 
-  public setPage = (page: number) => {
-    this.setStateAndRefetch({ page });
+  public nextPage = () => {
+    const { page } = this.state;
+    this.setState({ page: page + 1 }, () => this.fetchNextPage());
   };
 
+  public fetchNextPage = async () => {
+    const { search = '', group, range, page, users } = this.state;
+    const newUsers = await searchUsers({ search, group, range, page });
+    this.setState({ users: [...users, ...newUsers] });
+  }
+
   public render() {
-    const { setSearch, setGroup, setRange, setPage } = this;
-    const value = { ...this.state, setSearch, setGroup, setRange, setPage };
+    const { setSearch, setGroup, setRange, nextPage } = this;
+    const value = { ...this.state, setSearch, setGroup, setRange, nextPage };
     return <ProfileSearchContext.Provider value={value}>{this.props.children}</ProfileSearchContext.Provider>;
   }
 }
