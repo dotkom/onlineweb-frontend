@@ -1,22 +1,22 @@
-import { IGroup } from 'core/models/Group';
-import React, { Component } from 'react';
+import React, { Component, ContextType } from 'react';
+
+import { ProfileSearchContext } from 'profile/providers/SearchFilter';
+
 import { getGroups } from '../../api/groups';
-import { ISearchFilter } from '../../models/Search';
 import DoubleSlider from './DoubleSlider';
 import Dropdown from './Dropdown';
 import style from './search.less';
 
-export interface IProps extends ISearchFilter {
-  setName: (s: string) => boolean;
-  setGroup: (g: IGroup) => boolean;
-  setYear: (y: [number, number]) => boolean;
-}
+export interface IProps {}
 
 export interface IState {
-  groups: IGroup[];
+  groups: string[];
 }
 
 class Searchbar extends Component<IProps, IState> {
+  public static contextType = ProfileSearchContext;
+  public context!: ContextType<typeof ProfileSearchContext>;
+
   public state: IState = {
     groups: [],
   };
@@ -27,7 +27,7 @@ class Searchbar extends Component<IProps, IState> {
   }
 
   public render() {
-    const { name, group, year, setName, setGroup, setYear } = this.props;
+    const { search, group, range, setSearch, setGroup, setRange } = this.context;
     const { groups } = this.state;
     return (
       <form className={style.grid}>
@@ -35,11 +35,11 @@ class Searchbar extends Component<IProps, IState> {
           placeholder="Søk"
           className={style.searchInput}
           type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={search || ''}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <Dropdown selected={group} onClick={(g: IGroup) => setGroup(g)} groups={groups} />
-        <DoubleSlider range={year || [1, 6]} onChange={(range) => setYear(range)} />
+        <Dropdown selected={group} onClick={setGroup} groups={groups} />
+        <DoubleSlider range={range || [1, 6]} onChange={setRange} />
       </form>
     );
   }

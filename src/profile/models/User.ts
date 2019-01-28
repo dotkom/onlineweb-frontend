@@ -20,8 +20,10 @@ export interface IFullProfileUser {
 }
 
 export interface ISearchUser {
-  name: string;
-  phone: string;
-  mail: string;
-  image: string;
+  first_name: string;
+  last_name: string;
+  nickname: string | null;
+  online_mail: string | null;
+  phone_number: string | null;
+  username: string;
 }
