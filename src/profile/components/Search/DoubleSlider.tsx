@@ -3,7 +3,7 @@ import style from './search.less';
 
 export interface IProps {
   range: [number, number];
-  onChange: (range: [number, number]) => boolean;
+  onChange: (range: [number, number]) => void;
 }
 
 export interface IState {
