@@ -11,6 +11,6 @@ export interface IUserSearchParameters extends IBaseAPIParameters {
 const API_URL = '/api/v1/profile/search/';
 
 export const searchUsers = async (params: IUserSearchParameters): Promise<ISearchUser[]> => {
-  const { results }: IAPIData<ISearchUser> = await get(API_URL, { format: 'json', ...params });
+  const { results = [] }: IAPIData<ISearchUser> = await get(API_URL, { format: 'json', ...params });
   return results;
 };

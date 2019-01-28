@@ -1,21 +1,20 @@
 import React, { useContext } from 'react';
 
-import { Pagination } from 'common/components/Pagination';
 import { ProfileSearchContext } from 'profile/providers/SearchFilter';
 
 import ProfileSmall from './ProfileSmall';
 import style from './search.less';
 
 export const Users = () => {
-  const { users, page, setPage } = useContext(ProfileSearchContext);
+  const { users, nextPage } = useContext(ProfileSearchContext);
   return (
     <>
       <div className={style.smallProfileGrid}>
         {users.map((user) => (
-          <ProfileSmall user={user} />
+          <ProfileSmall user={user} key={user.username} />
         ))}
       </div>
-      <Pagination page={page} count={10} setPage={setPage} />
+      <button onClick={nextPage}>Neste side</button>
     </>
   );
 };
