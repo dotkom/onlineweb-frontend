@@ -1,7 +1,10 @@
-import { Pie } from '@nivo/pie';
+import { ResponsivePie } from '@nivo/pie';
+import classnames from 'classnames';
+import React from 'react';
+
 import { LIGHT_EVENT_COLORS } from 'events/models/Event';
 import { IOrder, IOrderLine } from 'profile/models/Orders';
-import React from 'react';
+
 import style from './orders.less';
 
 export interface IProps {
@@ -19,12 +22,10 @@ const OrderItemDonut = ({ orderLines }: IProps) => {
   const values = Object.keys(categories).map((name) => ({ id: name, label: name, value: categories[name] }));
 
   return (
-    <div className={style.centerChart}>
+    <div className={classnames(style.centerChart, style.pieChart)}>
       <h1>Kategorier</h1>
-      <Pie
+      <ResponsivePie
         data={values}
-        height={300}
-        width={350}
         fit
         animate
         innerRadius={0.6}
