@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 
 import { Button } from 'core/components/errors/NotAuthenticated/Button';
+import { Link } from 'core/components/Router';
 import { ProfileSearchContext } from 'profile/providers/SearchFilter';
 
+import { routes } from 'profile';
 import ProfileSmall from './ProfileSmall';
 import style from './search.less';
 
@@ -15,7 +17,9 @@ export const Users = () => {
     <>
       <div className={style.smallProfileGrid}>
         {users.map((user) => (
-          <ProfileSmall user={user} key={user.username} />
+          <Link to={routes.public + `/${user.id}`}>
+            <ProfileSmall user={user} key={user.username} />
+          </Link>
         ))}
       </div>
       <div className={style.marginTop}>
