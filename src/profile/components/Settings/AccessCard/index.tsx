@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import Markdown, { md } from 'common/components/Markdown';
 import { Pane } from 'common/components/Panes';
+import { IFullProfileUser } from 'profile/models/User';
 import { UserProfileContext } from 'profile/providers/UserProfile';
 import { toggleEMandRFID } from 'profile/utils/rfid';
 
@@ -47,8 +48,8 @@ const NOT_REGISTERED = `
 `;
 
 export const Barcode = () => {
-  const { user, refetch } = useContext(UserProfileContext);
-
+  const profileContext = useContext(UserProfileContext);
+  const user = profileContext.user as IFullProfileUser;
   return (
     <>
       <Pane>{INFO_TEXT}</Pane>
@@ -56,7 +57,7 @@ export const Barcode = () => {
         {ABOUT_EDIT_CARD}
         <br />
         {user && user.rfid ? <Markdown source={registeredCard(user.rfid)} /> : NOT_REGISTERED}
-        <EditCard refetchProfile={refetch} />
+        <EditCard refetchProfile={profileContext.refetch} />
       </Pane>
       <Pane>
         {ABOUT_CARD_GRAPHIC}

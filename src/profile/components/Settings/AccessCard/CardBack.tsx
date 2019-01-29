@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 
+import { IFullProfileUser } from 'profile/models/User';
 import { UserProfileContext } from 'profile/providers/UserProfile';
 import { toggleEMandRFID } from 'profile/utils/rfid';
 
@@ -12,7 +13,7 @@ export interface IProps {
 }
 
 const CardBack = () => {
-  const { user } = useContext(UserProfileContext);
+  const { user } = useContext(UserProfileContext) as { user: IFullProfileUser };
   const emCode = user && toggleEMandRFID(user.rfid);
   return (
     <svg viewBox="0 0 344 216" width="100%" height="100%">
