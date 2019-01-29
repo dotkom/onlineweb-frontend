@@ -3,9 +3,9 @@ import { IRouteProps, Route } from 'core/components/Router';
 import { History } from 'history';
 import qs from 'query-string';
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { match as IMatch, Switch } from 'react-router-dom';
 import MainMenu from './components/MainMenu';
-import MyProfile from './components/Profile';
+import UserProfile from './components/Profile';
 import Search from './components/Search';
 import Settings from './components/Settings';
 import Statistics from './components/Statistics';
@@ -16,7 +16,7 @@ const BASE_ROUTE = '/profile';
 export const routes = {
   personal: BASE_ROUTE + '/',
   search: BASE_ROUTE + '/search',
-  public: BASE_ROUTE + '/public/:id',
+  public: BASE_ROUTE + '/public',
   settings: BASE_ROUTE + '/settings',
   statistics: BASE_ROUTE + '/statistics',
 };
@@ -25,9 +25,9 @@ const ProfileRouter = () => {
   return (
     <UserProfileProvider>
       <Switch>
-        <ProfileRoute exact path={routes.personal} view={MyProfile} />
+        <ProfileRoute exact path={routes.personal} view={UserProfile} />
         <ProfileRoute path={routes.search} view={Search} />
-        <ProfileRoute path={routes.public} view={MyProfile} />
+        <ProfileRoute path={routes.public + '/:id'} view={PublicProfile} />
         <ProfileRoute path={routes.settings} view={Settings} />
         <ProfileRoute path={routes.statistics} view={Statistics} />
         <Route path="*" render={() => <HttpError code={404} />} />
@@ -36,8 +36,9 @@ const ProfileRouter = () => {
   );
 };
 
-export interface IProfileProps {
+export interface IProfileProps<T = {}> {
   params: qs.OutputParams;
+  match: IMatch<T>;
   history: History;
 }
 
@@ -53,10 +54,19 @@ const ProfileRoute = ({ view, ...props }: IProfileRouteProps) => {
       render={({ match, location, history }) => (
         <>
           <MainMenu match={match} />
-          <View params={qs.parse(location.search)} history={history} />
+          <View params={qs.parse(location.search)} match={match} history={history} />
         </>
       )}
     />
+  );
+};
+
+const PublicProfile = (props: IProfileProps<{ id: string }>) => {
+  const userId = Number(props.match.params.id);
+  return (
+    <UserProfileProvider userId={userId}>
+      <UserProfile />
+    </UserProfileProvider>
   );
 };
 
