@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import { Content, Pane, SplitPane } from 'common/components/Panes';
-import { IFullProfileUser } from 'profile/models/User';
 import { UserProfileContext } from 'profile/providers/UserProfile';
 
 import { Bio } from './Bio';
@@ -14,7 +13,10 @@ import { Study } from './Study';
 const committeeMail = (mail: string) => (mail ? `${mail}@online.ntnu.no` : null);
 
 export const MainProfile = () => {
-  const { user } = useContext(UserProfileContext) as { user: IFullProfileUser };
+  const { user } = useContext(UserProfileContext);
+  if (!user) {
+    return null;
+  }
   return (
     <>
       <Header />
