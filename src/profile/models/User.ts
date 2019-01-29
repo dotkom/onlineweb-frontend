@@ -38,10 +38,25 @@ export interface IFullProfileUser {
 }
 
 export interface ISearchUser {
+  id: number;
   first_name: string;
   last_name: string;
   nickname: string | null;
   online_mail: string | null;
   phone_number: string | null;
   username: string;
+  address: string;
+  zip_code: string;
+  email: string;
+  website: string | null;
+  github: string | null;
+  linkedin: string | null;
+  ntnu_username: string;
+  field_of_study: FieldOfStudy;
+  year: number;
+  bio: string;
+  positions: IMedal[];
+  special_positions: any[];
+  image: string;
+  started_date: string;
 }
