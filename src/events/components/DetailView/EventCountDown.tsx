@@ -10,7 +10,7 @@ export interface IProps {
   endTime: DateTime;
 }
 
-const OFFSET = 30 * 1000; // 15 minutes
+const OFFSET = 15 * 60 * 1000; // 15 minutes
 
 export const EventCountDown = ({ startOffset = OFFSET, endTime }: IProps) => {
   const startTime = endTime.minus({ milliseconds: startOffset });
