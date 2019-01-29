@@ -146,15 +146,19 @@ class CareerOpportunities extends Component<IProps, ICareerContextState> {
     /** Filter on selectable tags. Filter on a category if any of the tags in the category is selected. */
     if (companies.some((company) => company.selected)) {
       const filterCompanies = companies.filter((company) => company.selected).map((selectable) => selectable.value);
-      filteredJobs = filteredJobs.filter((job) => filterCompanies.includes(job.company));
+      filteredJobs = filteredJobs.filter((job) => !!filterCompanies.find((company) => company.id === job.company.id));
     }
     if (jobTypes.some((employment) => employment.selected)) {
       const filterJobTypes = jobTypes.filter((employment) => employment.selected).map((selectable) => selectable.value);
-      filteredJobs = filteredJobs.filter((job) => filterJobTypes.includes(job.employment));
+      filteredJobs = filteredJobs.filter(
+        (job) => !!filterJobTypes.find((employment) => employment.id === job.employment.id)
+      );
     }
     if (locations.some((location) => location.selected)) {
       const filterLocations = locations.filter((location) => location.selected).map((selectable) => selectable.value);
-      filteredJobs = filteredJobs.filter((job) => job.location.some((loc) => filterLocations.includes(loc)));
+      filteredJobs = filteredJobs.filter((job) =>
+        job.location.some((loc) => !!filterLocations.find((location) => location.name === loc.name))
+      );
     }
     return filteredJobs;
   }
