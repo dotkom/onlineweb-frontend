@@ -2,10 +2,11 @@ import { CalendarDatum, CalendarLegend, ResponsiveCalendar } from '@nivo/calenda
 import classnames from 'classnames';
 import { DateTime } from 'luxon';
 import React from 'react';
-import style from './orders.less';
+import style from './charts.less';
 
 export interface IProps {
-  frequency: DateTime[]; // Datetime
+  frequency: DateTime[];
+  header: string;
 }
 
 const COLORS = {
@@ -34,19 +35,23 @@ const LEGENDS: CalendarLegend[] = [
   },
 ];
 
-const OrderFrequency = ({ frequency }: IProps) => {
+interface IFrequncyCount {
+  [date: string]: number;
+}
+
+const CalendarChart = ({ frequency, header }: IProps) => {
   const last = frequency[frequency.length - 1];
   const first = last.minus({ years: 1 });
   const dateStrings = frequency.map((date) => date.toISODate());
-  const inter: Array<{ [date: string]: number }> = dateStrings.map((date) => ({ [date]: 1 }));
-  const inter2: { [date: string]: number } = inter.reduce((prev, curr) => {
+  const inter: IFrequncyCount[] = dateStrings.map((date) => ({ [date]: 1 }));
+  const inter2: IFrequncyCount = inter.reduce((prev, curr) => {
     const key = Object.keys(curr)[0];
     return { ...prev, [key]: prev[key] + 1 || 1 };
   });
   const values: CalendarDatum[] = Object.keys(inter2).map((key) => ({ day: key, value: inter2[key] }));
   return (
     <div className={classnames(style.centerChart, style.calendarChart)}>
-      <h1>Kjøpskalender</h1>
+      <h1>{header}</h1>
       <ResponsiveCalendar
         from={first.toISODate()}
         to={last.toISODate()}
@@ -59,4 +64,4 @@ const OrderFrequency = ({ frequency }: IProps) => {
   );
 };
 
-export default OrderFrequency;
+export default CalendarChart;

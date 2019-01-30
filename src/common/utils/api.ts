@@ -20,6 +20,7 @@ export interface IAPIData<T> {
 export interface IBaseAPIParameters {
   page_size?: number;
   page?: number;
+  format?: 'json' | string;
 }
 /*
 const makeRequest = (query: string, parameters: object = {}, options: RequestInit = {}) => {
