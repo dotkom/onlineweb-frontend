@@ -1,4 +1,3 @@
-import 'isomorphic-fetch';
 import { DOMAIN } from '../constants/endpoints';
 import { __CLIENT__ } from '../constants/environment';
 import { toQueryString } from './queryString';

@@ -1,3 +1,5 @@
+import 'core/polyfills';
+
 import * as Sentry from '@sentry/browser';
 import { __SSR__ } from 'common/constants/environment';
 import { GA_KEY } from 'common/constants/google';

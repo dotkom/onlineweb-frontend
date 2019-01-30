@@ -1,3 +1,5 @@
+import 'core/polyfills';
+
 // import * as Sentry from '@sentry/node';
 import { HOST, PORT } from 'common/constants/backend';
 // import { OWF_SENTRY_DSN } from 'common/constants/sentry';

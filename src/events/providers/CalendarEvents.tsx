@@ -1,5 +1,3 @@
-import 'abortcontroller-polyfill';
-
 import { prefetch } from 'common/utils/prefetch';
 import { getCalendarEvents, getCalendarEventsControlled } from 'events/api/calendarEvents';
 import { getCalendarSession, saveCalendarSession } from 'events/api/calendarSession';
