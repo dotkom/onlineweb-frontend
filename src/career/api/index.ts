@@ -1,5 +1,6 @@
 import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
 import { get, IAPIData } from 'common/utils/api';
+import 'core-js/fn/array/flat-map';
 import { IApiCompany } from 'core/models/Company';
 
 const API_URL = '/api/v1/career/';
