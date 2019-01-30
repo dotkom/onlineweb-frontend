@@ -1,4 +1,3 @@
-import 'abortcontroller-polyfill/dist/polyfill-patch-fetch';
 import { get, IBaseAPIParameters } from 'common/utils/api';
 import { INewEvent } from '../models/Event';
 
