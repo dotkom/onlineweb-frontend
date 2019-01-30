@@ -60,7 +60,7 @@ class Orders extends Component<IProps, IState> {
               <StringStat name="Favorittbedrift" value={favCompany} />
             </Pane>
             <Pane>
-              <NumberStat name="Antall bedrifts- arrangementer" value={companyEvents.length} />
+              <NumberStat name="Antall bedriftsarrangementer" value={companyEvents.length} />
             </Pane>
             <Pane>
               <NumberStat name="Antall Bedpres" value={companyPresentations.length} />
