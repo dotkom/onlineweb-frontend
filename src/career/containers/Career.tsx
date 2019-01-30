@@ -1,6 +1,7 @@
 import CareerOpportunities from 'career/providers/CareerProvider';
+import { Route } from 'core/components/Router';
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Switch } from 'react-router-dom';
 import DetailView from './DetailView';
 import FilterableJobList from './FilterableJobList';
 

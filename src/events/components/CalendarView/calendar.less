@@ -1,5 +1,6 @@
 @import '~common/less/constants.less';
 @import '~common/less/mixins.less';
+@import '~common/less/colors.less';
 
 .gridWrapper {
   max-width: 90vw;
@@ -62,6 +63,26 @@
   > h3 {
     user-select: none;
     cursor: pointer;
+  }
+}
+
+.hoverCard {
+  width: 260px;
+  .owCard();
+  color: @darkGray;
+
+  & > img {
+    width: 100%;
+  }
+  > div {
+    margin: 8px;
+  }
+}
+
+.infoTag {
+  padding: 5px 3px;
+  & > svg {
+    padding-right: 10px;
   }
 }
 

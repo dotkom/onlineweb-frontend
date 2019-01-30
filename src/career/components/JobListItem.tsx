@@ -1,7 +1,7 @@
 import { ICareerOpportunity } from 'career/models/Career';
-import Img from 'common/components/Img';
+import ResponsiveImage from 'common/components/ResponsiveImage';
+import { Link } from 'core/components/Router';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import style from '../less/career.less';
 import { formatDeadline } from './JobDetails';
 
@@ -24,7 +24,7 @@ export const formatLocations = (locations: any) => {
 const JobListItem = ({ location, deadline, company, title, ingress, id, employment }: ICareerOpportunity) => (
   <div className={style.job}>
     <Link to={`/career/${id}`}>
-      <Img src={company.image.md} alt="Firmalogo" />
+      <ResponsiveImage image={company.image} size="md" alt="Firmalogo" />
     </Link>
     <div className={style.jobInfo}>
       <Link to={`/career/${id}`}>

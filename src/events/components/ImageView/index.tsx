@@ -1,5 +1,5 @@
-import { IImageEventsState, ImageEventsContext } from 'events/providers/ImageEvents';
-import React, { Component } from 'react';
+import { ImageEventsContext } from 'events/providers/ImageEvents';
+import React, { Component, ContextType } from 'react';
 import { IEventViewProps } from '../../models/Event';
 import style from './image.less';
 import LargeEvent from './LargeEvent';
@@ -10,14 +10,15 @@ export type IProps = IEventViewProps;
 
 class ImageView extends Component<IProps> {
   public static contextType = ImageEventsContext;
+  public context!: ContextType<typeof ImageEventsContext>;
 
   public async componentDidMount() {
-    const { init }: IImageEventsState = this.context;
+    const { init } = this.context;
     await init();
   }
 
   public render() {
-    const { eventsLeft, eventsMiddle, eventsRight, fetched }: IImageEventsState = this.context;
+    const { eventsLeft, eventsMiddle, eventsRight, fetched } = this.context;
 
     if (!fetched) {
       return null;

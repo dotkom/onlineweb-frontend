@@ -1,3 +1,4 @@
+import cookie from 'js-cookie';
 import { EventView } from '../models/Event';
 
 /**
@@ -24,5 +25,6 @@ export const getEventSettings = async (): Promise<IEventSettings> => {
 
 export const saveEventSettings = async (settings: IEventSettings) => {
   const str = JSON.stringify(settings);
+  cookie.set('eventView', settings.view.toString());
   await window.localStorage.setItem(EVENT_SETTINGS_KEY, str);
 };

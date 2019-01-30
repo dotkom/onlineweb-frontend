@@ -12,6 +12,8 @@ export interface IProps {
   user: IFullProfileUser;
 }
 
+const committeeMail = (mail: string) => (mail ? `${mail}@online.ntnu.no` : '');
+
 export const MainProfile = ({ user }: IProps) => (
   <>
     <Header name={`${user.first_name} ${user.last_name}`} />
@@ -20,7 +22,7 @@ export const MainProfile = ({ user }: IProps) => (
         <Content title="Kontakt">
           <KeyValue k="Telefon" v={user.phone_number} />
           <KeyValue k="E-post" v={user.email} />
-          <KeyValue k="Komité-e-post" v={`${user.online_mail}@online.ntnu.no`} />
+          <KeyValue k="Komité-e-post" v={committeeMail(user.online_mail)} />
         </Content>
       </Pane>
       <Pane>

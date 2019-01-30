@@ -1,7 +1,9 @@
 import React from 'react';
-import { Route, RouteProps, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
+import { Page } from 'common/components/Panes';
 import HttpError from 'core/components/errors/HttpError';
+import { IRouteProps, Route } from 'core/components/Router';
 import { IProfileProps } from 'profile';
 import AccessCard from './AccessCard';
 import Mails from './Mails';
@@ -36,7 +38,7 @@ const Settings = (_: IProfileProps) => {
   );
 };
 
-interface ISettingsRouteProps extends RouteProps {
+interface ISettingsRouteProps extends IRouteProps {
   view: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 
@@ -48,9 +50,9 @@ const SettingsRoute = ({ view, ...props }: ISettingsRouteProps) => {
       render={({ match, ...routeProps }) => (
         <div className={style.container}>
           <Menu path={match.path} />
-          <div className={style.settings}>
+          <Page>
             <View {...routeProps} />
-          </div>
+          </Page>
         </div>
       )}
     />

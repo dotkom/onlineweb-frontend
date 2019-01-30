@@ -1,4 +1,5 @@
 import Markdown from 'common/components/Markdown';
+import { Pane } from 'common/components/Panes';
 import React from 'react';
 
 const MAIN_INFO_TEXT = `
@@ -8,9 +9,9 @@ const MAIN_INFO_TEXT = `
 `;
 
 const SettingsInfo = () => (
-  <div>
+  <Pane>
     <Markdown source={MAIN_INFO_TEXT} />
-  </div>
+  </Pane>
 );
 
 export default SettingsInfo;
