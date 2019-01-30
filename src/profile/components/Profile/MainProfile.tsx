@@ -12,7 +12,7 @@ export interface IProps {
   user: IFullProfileUser;
 }
 
-const committeeMail = (mail: string) => mail ? `${mail}@online.ntnu.no`  : ''
+const committeeMail = (mail: string) => (mail ? `${mail}@online.ntnu.no` : '');
 
 export const MainProfile = ({ user }: IProps) => (
   <>
