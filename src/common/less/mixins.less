@@ -1,7 +1,7 @@
 @import '~common/less/colors.less';
 
 .owOutline {
-  &:focus {
+  &:focus-visible {
     outline: 2px solid @blue;
     outline-offset: 1px;
   }
@@ -10,4 +10,15 @@
 .owCard {
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+:global {
+  .focus-visible {
+    outline: 2px solid @blue;
+    outline-offset: 1px;
+  }
+
+  :focus:not(.focus-visible) {
+    outline: none;
+  }
 }
