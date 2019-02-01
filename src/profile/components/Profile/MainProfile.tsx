@@ -10,7 +10,7 @@ import KeyValue from './KeyValue';
 import MedalsView from './MedalsView';
 import { Study } from './Study';
 
-const committeeMail = (mail: string) => (mail ? `${mail}@online.ntnu.no` : null);
+const committeeMail = (mail: string | null) => (mail ? `${mail}@online.ntnu.no` : null);
 
 export const MainProfile = () => {
   const profile = useContext(ProfilePageContext);
