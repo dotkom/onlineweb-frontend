@@ -5,10 +5,10 @@ export interface INotificationOption {
   feedback: boolean;
 }
 
-export const translations: { [Key in keyof INotificationOption | 'allow_notifications']: string } = {
+export const optionStrings: { [Key in keyof INotificationOption | 'allowNotifications']: string } = {
   articles: 'Nye Artikler',
   events: 'Arrangementpåmelding',
   offlines: 'Nye Offline',
   feedback: 'Nye tilbakemeldingsskjemaer',
-  allow_notifications: 'Tillat notifikasjoner på dette nettstedet',
+  allowNotifications: 'Tillat notifikasjoner på dette nettstedet',
 };
