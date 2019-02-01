@@ -1,8 +1,8 @@
 @import '~common/less/colors.less';
 
 .owOutline {
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
   &:focus-visible {
-    /* stylelint-disable-line selector-pseudo-class-no-unknown */
     outline: 2px solid @blue;
     outline-offset: 1px;
   }
@@ -15,14 +15,14 @@
 
 /* Polyfill for focus-visible adds a class to the focused elements */
 :global {
+  /* stylelint-disable-next-line selector-class-pattern */
   .focus-visible {
-    /* stylelint-disable-line selector-class-pattern */
     outline: 2px solid @blue;
     outline-offset: 1px;
   }
 
+  /* stylelint-disable-next-line selector-class-pattern */
   :focus:not(.focus-visible) {
-    /* stylelint-disable-line selector-class-pattern */
     outline: none;
   }
 }
