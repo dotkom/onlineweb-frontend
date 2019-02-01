@@ -30,7 +30,7 @@ export const withAnalytics = (app: Application) => {
   app.use(ANALYTICS_URL, (_, res) => {
     const swAbsPath = path.resolve('./static/analytics.js');
     res.sendFile(swAbsPath);
-    res.sendFile('./public/analytics.js')
+    res.sendFile('./public/analytics.js');
   });
   app.use(
     ANALYTICS_ROUTE,
