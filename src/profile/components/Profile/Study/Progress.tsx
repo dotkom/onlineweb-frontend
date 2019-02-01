@@ -30,9 +30,6 @@ class Progress extends React.Component<IProps> {
       return (
         <>
           <g>
-            <text x={x - 1.333} y="5" fontSize="5">
-              {year}
-            </text>
             <Circle x={x} radius={radius} lineWidth={lineWidth} />
             {year <= ongoingYear && <CircleCheck x={x} radius={checkRadius} />}
             {year <= completedYear && <CheckMark x={x} radius={checkRadius} />}
@@ -44,6 +41,15 @@ class Progress extends React.Component<IProps> {
     return (
       <svg width="100%" height="100%" viewBox="0 0 112 20">
         <rect x="10" y={12 - lineWidth / 2} width="90" height={lineWidth} />
+        <text x="17.33366666666667" y="5" fontSize="5">
+          Bachelor
+        </text>
+        <text x="64.83366666666667" y="5" fontSize="5">
+          Master
+        </text>
+        <text x="97.33366666666667" y="5" fontSize="5">
+          PhD
+        </text>
         <Year year={1} />
         <Year year={2} />
         <Year year={3} />

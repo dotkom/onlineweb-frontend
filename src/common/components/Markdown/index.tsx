@@ -8,4 +8,6 @@ const Markdown = ({ ...props }: ReactMarkdownProps) => {
   return <ReactMarkdown {...props} className={markdownStyles} />;
 };
 
+export const md = (sourceTemplate: TemplateStringsArray) => <Markdown source={sourceTemplate.join('\n')} />;
+
 export default Markdown;

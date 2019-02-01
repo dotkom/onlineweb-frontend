@@ -1,7 +1,8 @@
-import React, { Component, createContext } from 'react';
+import React, { Component, ContextType, createContext } from 'react';
 
+import { UserContext } from 'authentication/providers/UserProvider';
 import { searchUsers } from 'profile/api/search';
-import { ISearchUser } from 'profile/models/User';
+import { IPublicProfile } from 'profile/models/User';
 
 export interface IProps {}
 
@@ -12,7 +13,7 @@ export interface IState {
   setSearch: (search: string) => void;
   setGroup: (group: string) => void;
   setRange: (range: [number, number]) => void;
-  users: ISearchUser[];
+  users: IPublicProfile[];
   page: number;
   nextPage: () => void;
 }
@@ -38,6 +39,9 @@ const INITIAL_STATE: IState = {
 export const ProfileSearchContext = createContext(INITIAL_STATE);
 
 export class ProfileSearchProvider extends Component<IProps, IState> {
+  public static contextType = UserContext;
+  public context!: ContextType<typeof UserContext>;
+
   public state: IState = INITIAL_STATE;
 
   public setStateAndRefetch = async (newState: Partial<IState>) => {
@@ -45,9 +49,12 @@ export class ProfileSearchProvider extends Component<IProps, IState> {
   };
 
   public init = async () => {
-    const { search = '', group, range, page } = this.state;
-    const users = await searchUsers({ search, group, range, page });
-    this.setState({ users, page: 1 });
+    const { user } = this.context;
+    if (user) {
+      const { search = '', group, range, page } = this.state;
+      const users = await searchUsers({ search, group, range, page }, user);
+      this.setState({ users, page: 1 });
+    }
   };
 
   public async componentDidMount() {
@@ -73,9 +80,12 @@ export class ProfileSearchProvider extends Component<IProps, IState> {
   };
 
   public fetchNextPage = async () => {
-    const { search = '', group, range, page, users } = this.state;
-    const newUsers = await searchUsers({ search, group, range, page });
-    this.setState({ users: [...users, ...newUsers] });
+    const { user } = this.context;
+    if (user) {
+      const { search = '', group, range, page, users } = this.state;
+      const newUsers = await searchUsers({ search, group, range, page }, user);
+      this.setState({ users: [...users, ...newUsers] });
+    }
   };
 
   public render() {
