@@ -2,16 +2,13 @@ import React, { ContextType, createContext } from 'react';
 
 import { UserContext } from 'authentication/providers/UserProvider';
 import { getProfile } from 'profile/api';
-import { publicProfile } from 'profile/api/search';
-import { IFullProfileUser, ISearchUser } from 'profile/models/User';
+import { IUserProfile } from 'profile/models/User';
 
-export interface IProps {
-  userId?: number;
-}
+export interface IProps {}
 
 export interface IState {
   refetch: () => void;
-  user?: IFullProfileUser | ISearchUser;
+  user?: IUserProfile;
 }
 
 const INITIAL_STATE: IState = {
@@ -30,14 +27,8 @@ export class UserProfileProvider extends React.Component<IProps, IState> {
   public init = async () => {
     const auth = this.context;
     if (auth.user) {
-      const { userId } = this.props;
-      if (userId) {
-        const user = await publicProfile(userId, auth.user);
-        this.setState({ user });
-      } else {
-        const user = await getProfile(auth.user);
-        this.setState({ user });
-      }
+      const user = await getProfile(auth.user);
+      this.setState({ user });
     }
   };
 

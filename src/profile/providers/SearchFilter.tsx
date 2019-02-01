@@ -2,7 +2,7 @@ import React, { Component, ContextType, createContext } from 'react';
 
 import { UserContext } from 'authentication/providers/UserProvider';
 import { searchUsers } from 'profile/api/search';
-import { ISearchUser } from 'profile/models/User';
+import { IPublicProfile } from 'profile/models/User';
 
 export interface IProps {}
 
@@ -13,7 +13,7 @@ export interface IState {
   setSearch: (search: string) => void;
   setGroup: (group: string) => void;
   setRange: (range: [number, number]) => void;
-  users: ISearchUser[];
+  users: IPublicProfile[];
   page: number;
   nextPage: () => void;
 }
