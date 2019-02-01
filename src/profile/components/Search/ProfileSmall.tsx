@@ -2,10 +2,10 @@ import React from 'react';
 
 import DEFAULT_USER_IMAGE from 'common/img/profile/user.png';
 
-import { ISearchUser } from '../../models/User';
+import { IPublicProfile } from '../../models/User';
 import style from './search.less';
 
-class ProfileSmall extends React.Component<{ user: ISearchUser }> {
+class ProfileSmall extends React.Component<{ user: IPublicProfile }> {
   public render() {
     const { first_name, last_name, phone_number, online_mail, image, email } = this.props.user;
     const name = `${first_name} ${last_name}`;
