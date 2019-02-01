@@ -31,14 +31,17 @@ const makeRequest = (query: string, parameters: object = {}, options: RequestIni
 const performRequest = async (query: string, parameters: object = {}, options: IRequestOptions = {}) => {
   const queryString = toQueryString(parameters);
   const url = DOMAIN + query + queryString;
-  const { cacheOptions } = options;
+  const { cacheOptions, user, ...optionsRest } = options;
   if (hasCache({ url, options: cacheOptions })) {
     const { cache } = getCache({ url, options: cacheOptions });
     if (cache) {
       return cache.content;
     }
   }
-  const response = await fetch(url, options);
+  const headers = {
+    Authorization: user ? `Bearer ${user.access_token}` : '',
+  };
+  const response = await fetch(url, { headers, ...optionsRest });
   const data = await response.json();
   setCache({ content: data, options: cacheOptions, url });
   return data;
