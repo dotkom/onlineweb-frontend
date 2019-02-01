@@ -2,6 +2,7 @@
 
 .owOutline {
   &:focus-visible {
+    /* stylelint-disable-line selector-pseudo-class-no-unknown */
     outline: 2px solid @blue;
     outline-offset: 1px;
   }
@@ -12,13 +13,16 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
+/* Polyfill for focus-visible adds a class to the focused elements */
 :global {
   .focus-visible {
+    /* stylelint-disable-line selector-class-pattern */
     outline: 2px solid @blue;
     outline-offset: 1px;
   }
 
   :focus:not(.focus-visible) {
+    /* stylelint-disable-line selector-class-pattern */
     outline: none;
   }
 }
