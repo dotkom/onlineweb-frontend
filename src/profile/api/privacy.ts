@@ -1,5 +1,5 @@
 import { IAuthUser } from 'authentication/models/User';
-import { get, put, withUser } from 'common/utils/api';
+import { get, put } from 'common/utils/api';
 import { IPrivacy } from '../models/Privacy';
 
 const API_URL = '/api/v1/profile/privacy/';
@@ -8,7 +8,7 @@ const API_URL = '/api/v1/profile/privacy/';
  * @returns {IPrivacy} Privacy options for a logged in OnlineUser.
  */
 export const getPrivacyOptions = async (user: IAuthUser): Promise<IPrivacy> => {
-  const data = await get(API_URL, { format: 'json' }, withUser(user));
+  const data = await get(API_URL, { format: 'json' }, { user });
   return data;
 };
 

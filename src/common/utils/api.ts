@@ -31,7 +31,7 @@ const makeRequest = (query: string, parameters: object = {}, options: RequestIni
 const performRequest = async (query: string, parameters: object = {}, options: IRequestOptions = {}) => {
   const queryString = toQueryString(parameters);
   const url = DOMAIN + query + queryString;
-  const { cacheOptions, user, ...optionsRest } = options;
+  const { cacheOptions, user, ...restOptions } = options;
   if (hasCache({ url, options: cacheOptions })) {
     const { cache } = getCache({ url, options: cacheOptions });
     if (cache) {
@@ -39,22 +39,13 @@ const performRequest = async (query: string, parameters: object = {}, options: I
     }
   }
   const headers = {
-    Authorization: user ? `Bearer ${user.access_token}` : '',
+    Authorization: options.user ? `Bearer ${options.user.access_token}` : '',
   };
-  const response = await fetch(url, { headers, ...optionsRest });
+  const requestOptions = { ...restOptions, headers };
+  const response = await fetch(url, requestOptions);
   const data = await response.json();
   setCache({ content: data, options: cacheOptions, url });
   return data;
-};
-
-export const withUser = (user: IAuthUser, options: IRequestOptions = {}): IRequestOptions => {
-  const token = user.access_token;
-  const headers = Object.assign(options.headers || {}, {
-    Authorization: `Bearer ${token}`,
-  });
-  return Object.assign(options, {
-    headers,
-  });
 };
 
 /**

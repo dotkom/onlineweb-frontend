@@ -1,5 +1,5 @@
 import { IAuthUser } from 'authentication/models/User';
-import { get, getAllPages, IBaseAPIParameters, withUser } from 'common/utils/api';
+import { get, getAllPages, IBaseAPIParameters } from 'common/utils/api';
 import { INewEvent } from '../models/Event';
 
 export interface IEventAPIParameters extends IBaseAPIParameters {
@@ -26,7 +26,7 @@ export const getEvents = async (args?: IEventAPIParameters): Promise<INewEvent[]
 };
 
 export const getAllUserEvents = async (args: IEventAPIParameters, user: IAuthUser): Promise<INewEvent[]> => {
-  const data = await getAllPages<INewEvent>(API_URL, { format: 'json', page_size: 80, ...args }, withUser(user));
+  const data = await getAllPages<INewEvent>(API_URL, { format: 'json', page_size: 80, ...args }, { user });
   return data;
 };
 
