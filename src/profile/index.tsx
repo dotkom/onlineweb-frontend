@@ -6,6 +6,7 @@ import React from 'react';
 import { match as IMatch, Switch } from 'react-router-dom';
 import MainMenu from './components/MainMenu';
 import UserProfile from './components/Profile';
+import { PublicProfile } from './components/Profile/PublicProfile';
 import Search from './components/Search';
 import Settings from './components/Settings';
 import Statistics from './components/Statistics';
@@ -27,7 +28,7 @@ const ProfileRouter = () => {
       <Switch>
         <ProfileRoute exact path={routes.personal} view={UserProfile} />
         <ProfileRoute path={routes.search} view={Search} />
-        <ProfileRoute path={routes.public + '/:id'} view={PublicProfile} />
+        <ProfileRoute path={routes.public + '/:id'} view={PublicProfileContainer} />
         <ProfileRoute path={routes.settings} view={Settings} />
         <ProfileRoute path={routes.statistics} view={Statistics} />
         <Route path="*" render={() => <HttpError code={404} />} />
@@ -61,13 +62,9 @@ const ProfileRoute = ({ view, ...props }: IProfileRouteProps) => {
   );
 };
 
-const PublicProfile = (props: IProfileProps<{ id: string }>) => {
-  const userId = Number(props.match.params.id);
-  return (
-    <UserProfileProvider userId={userId}>
-      <UserProfile />
-    </UserProfileProvider>
-  );
+const PublicProfileContainer = (props: IProfileProps<{ id: string }>) => {
+  const profileId = Number(props.match.params.id);
+  return <PublicProfile profileId={profileId} />;
 };
 
 export default ProfileRouter;
