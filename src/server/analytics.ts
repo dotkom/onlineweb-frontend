@@ -1,5 +1,6 @@
 import { Application, Request as ExpressRequest } from 'express';
 import proxy from 'express-http-proxy';
+import path from 'path';
 
 /**
  * Inspiration taken from:
@@ -26,7 +27,11 @@ const pathResolver = (req: ExpressRequest) => {
 };
 
 export const withAnalytics = (app: Application) => {
-  app.use(ANALYTICS_URL, (_, res) => res.sendFile('./public/analytics.js'));
+  app.use(ANALYTICS_URL, (_, res) => {
+    const swAbsPath = path.resolve('./static/analytics.js');
+    res.sendFile(swAbsPath);
+    res.sendFile('./public/analytics.js')
+  });
   app.use(
     ANALYTICS_ROUTE,
     proxy(GOOGLE_ANALYTICS_URL, {

@@ -25,7 +25,7 @@ Sentry.init({
   dsn: OWF_SENTRY_DSN,
 });
 
-ReactGA.initialize(GA_KEY, { gaAddress: '/analytics-script.js' });
+ReactGA.initialize(GA_KEY, { gaAddress: '/static/analytics.js' });
 ReactGA.pageview(window.location.pathname);
 const history = createBrowserHistory();
 history.listen((location) => ReactGA.pageview(location.pathname));
