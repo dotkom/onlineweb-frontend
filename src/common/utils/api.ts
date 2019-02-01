@@ -39,6 +39,7 @@ const performRequest = async (query: string, parameters: object = {}, options: I
     }
   }
   const headers = {
+    ...options.headers,
     Authorization: options.user ? `Bearer ${options.user.access_token}` : '',
   };
   const requestOptions = { ...restOptions, headers };
@@ -96,14 +97,12 @@ export const post = async (
   parameters: object = {},
   options: IRequestOptions = {}
 ): Promise<any> => {
-  const { user, ...rest } = options;
   const headers = {
-    Authorization: user ? `Bearer ${user.access_token}` : '',
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
   const body = JSON.stringify(data);
-  const opts = { ...rest, method: 'POST', body, headers };
+  const opts = { ...options, method: 'POST', body, headers };
   return performRequest(query, parameters, opts);
 };
 
@@ -116,13 +115,11 @@ export interface IPutParams {
 
 export const put = async (putParams: IPutParams): Promise<any> => {
   const { query, data, parameters = {}, options = {} } = putParams;
-  const { user, ...rest } = options;
   const headers = {
-    Authorization: user ? `Bearer ${user.access_token}` : '',
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
   const body = JSON.stringify(data);
-  const opts = { ...rest, method: 'PUT', body, headers };
+  const opts = { ...options, method: 'PUT', body, headers };
   return performRequest(query, parameters, opts);
 };
