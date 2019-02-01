@@ -12,7 +12,7 @@ export interface IProps {
 }
 
 const CardBack = () => {
-  const { user } = useContext(UserProfileContext)
+  const { user } = useContext(UserProfileContext);
   const emCode = user && toggleEMandRFID(user.rfid);
   return (
     <svg viewBox="0 0 344 216" width="100%" height="100%">
