@@ -1,19 +1,20 @@
 import ToggleSwitch from 'common/components/ToggleSwitch';
 import React from 'react';
-import { INotificationOption, translations } from '../../../models/Notification';
+import { INotificationOption, optionStrings } from '../../../models/Notification';
 import style from './notifications.less';
 
 export interface IProps {
-  option: keyof INotificationOption | 'allow_notifications';
+  option: keyof INotificationOption | 'allowNotifications';
   value: boolean;
   toggle: () => void;
+  disabled?: boolean;
 }
 
-const Option = ({ option, value, toggle }: IProps) => (
+const Option = ({ option, value, toggle, disabled }: IProps) => (
   <div className={style.element}>
-    <h4>{translations[option]}</h4>
+    <h4>{optionStrings[option]}</h4>
     <div className={style.toggle}>
-      <ToggleSwitch checked={value} onChange={toggle} />
+      <ToggleSwitch checked={value} onChange={toggle} disabled={disabled} />
     </div>
   </div>
 );
