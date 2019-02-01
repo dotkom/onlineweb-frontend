@@ -1,20 +1,17 @@
 import React, { useContext } from 'react';
 
 import { Content, Pane } from 'common/components/Panes';
-import { UserProfileContext } from 'profile/providers/UserProfile';
+import { ProfilePageContext } from 'profile/providers/ProfilePage';
 import Link from './Link';
 
 export const ExternalLinks = () => {
-  const { user } = useContext(UserProfileContext);
-  if (!user) {
-    return null;
-  }
+  const { github, linkedin, website } = useContext(ProfilePageContext);
   return (
     <Pane>
       <Content title="Eksterne sider">
-        <Link k="Github" v={user.github} />
-        <Link k="Linkedin" v={user.linkedin} />
-        <Link k="Hjemmeside" v={user.website} />
+        <Link k="Github" v={github} />
+        <Link k="Linkedin" v={linkedin} />
+        <Link k="Hjemmeside" v={website} />
       </Content>
     </Pane>
   );

@@ -2,18 +2,15 @@ import React, { useContext } from 'react';
 
 import Markdown from 'common/components/Markdown';
 import { Content, Pane } from 'common/components/Panes';
-import { UserProfileContext } from 'profile/providers/UserProfile';
+import { ProfilePageContext } from 'profile/providers/ProfilePage';
 
 export const Bio = () => {
-  const { user } = useContext(UserProfileContext);
-  if (!user || user.bio.length === 0) {
-    return null;
-  }
-  return (
+  const { bio } = useContext(ProfilePageContext);
+  return bio.length ? (
     <Pane>
       <Content title="Bio">
-        <Markdown source={user.bio} />
+        <Markdown source={bio} />
       </Content>
     </Pane>
-  );
+  ) : null;
 };

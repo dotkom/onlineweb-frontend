@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { Content, Pane, SplitPane } from 'common/components/Panes';
-import { UserProfileContext } from 'profile/providers/UserProfile';
+import { ProfilePageContext } from 'profile/providers/ProfilePage';
 
 import { Bio } from './Bio';
 import { ExternalLinks } from './ExternalLinks';
@@ -13,19 +13,16 @@ import { Study } from './Study';
 const committeeMail = (mail: string) => (mail ? `${mail}@online.ntnu.no` : null);
 
 export const MainProfile = () => {
-  const { user } = useContext(UserProfileContext);
-  if (!user) {
-    return null;
-  }
+  const profile = useContext(ProfilePageContext);
   return (
     <>
       <Header />
       <SplitPane>
         <Pane>
           <Content title="Kontakt">
-            <KeyValue k="Telefon" v={user.phone_number} />
-            <KeyValue k="E-post" v={user.email} />
-            <KeyValue k="Komité-e-post" v={committeeMail(user.online_mail)} />
+            <KeyValue k="Telefon" v={profile.phone_number} />
+            <KeyValue k="E-post" v={profile.email} />
+            <KeyValue k="Komité-e-post" v={committeeMail(profile.online_mail)} />
           </Content>
         </Pane>
         <Study />
@@ -33,7 +30,7 @@ export const MainProfile = () => {
       <Bio />
       <Pane>
         <Content title="Komitéverv">
-          <MedalsView medals={user.positions} />
+          <MedalsView medals={profile.positions} />
         </Content>
       </Pane>
       <SplitPane>
