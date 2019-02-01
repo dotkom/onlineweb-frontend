@@ -1,9 +1,12 @@
+import React, { Component, ContextType } from 'react';
+
+import { UserContext } from 'authentication/providers/UserProvider';
 import { Pane } from 'common/components/Panes';
-import React, { Component } from 'react';
-import { getMarks, getSuspensions } from '../../../api/penalties';
-import { IMark, ISuspension } from '../../../models/Penalty';
+import { getMarks, getSuspensions } from 'profile/api/penalties';
+import { IMark, ISuspension } from 'profile/models/Penalty';
+
 import Mark from './Mark';
-import Placeholder from './Placeholder';
+import { PenaltyPane } from './Penalty';
 import Rules from './Rules';
 import Suspension from './Suspension';
 
@@ -19,50 +22,48 @@ export interface IState {
  * @description Connects to API-endpoint to fetch data.
  */
 class Marks extends Component<{}, IState> {
-  constructor(props: {}) {
-    super(props);
+  public static contextType = UserContext;
+  public context!: ContextType<typeof UserContext>;
 
-    this.state = {
-      marks: [],
-      suspensions: [],
-      loaded: false,
-    } as IState;
-  }
+  public state: IState = {
+    loaded: false,
+    marks: [],
+    suspensions: [],
+  };
 
   public async componentDidMount() {
-    const marks = await getMarks();
-    const suspensions = await getSuspensions();
-    this.setState({ marks, suspensions, loaded: true });
+    this.init();
   }
+
+  public init = async () => {
+    const { user } = this.context;
+    if (user) {
+      const marks = await getMarks(user);
+      const suspensions = await getSuspensions(user);
+      this.setState({ marks, suspensions, loaded: true });
+    }
+  };
 
   public render() {
     const { marks, suspensions, loaded } = this.state;
     return (
       <>
-        <Pane>
-          <h2>Prikker</h2>
-          {/** If not loaded from API; show placeholder. If list of marks is empty; show empty-text */}
-          {!loaded ? (
-            <Placeholder />
-          ) : marks.length ? (
-            marks.sort(Mark.sortByExpiration).map((mark) => <Mark penalty={mark} key={mark.added_date} />)
-          ) : (
-            <p>Du har ingen prikker</p>
+        <PenaltyPane
+          name="Prikker"
+          ifNone="Du har ingen prikker"
+          loaded={loaded}
+          penalties={marks}
+          render={(mark) => <Mark markUser={mark as IMark} key={mark.expiration_date} />}
+        />
+        <PenaltyPane
+          name="Suspensjoner"
+          ifNone="Du har ingen suspensjoner"
+          loaded={loaded}
+          penalties={suspensions}
+          render={(suspension) => (
+            <Suspension suspension={suspension as ISuspension} key={suspension.expiration_date} />
           )}
-        </Pane>
-        <Pane>
-          <h2>Suspensjoner</h2>
-          {/** If not loaded from API; show placeholder. If list of suspensions is empty; show empty-text */}
-          {!loaded ? (
-            <Placeholder />
-          ) : suspensions.length ? (
-            suspensions
-              .sort(Suspension.sortByExpiration)
-              .map((suspension) => <Suspension penalty={suspension} key={suspension.added_date} />)
-          ) : (
-            <p>Du har ingen suspensjoner</p>
-          )}
-        </Pane>
+        />
         <Pane>
           <Rules />
         </Pane>
