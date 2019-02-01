@@ -18,6 +18,7 @@ import { StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 
 import { App } from '../App';
+import { withAnalytics } from './analytics';
 
 /**
  * Server side rendering uses a very simple single route express server to handle
@@ -41,6 +42,9 @@ app.use(cookieParser());
 
 app.use('/public', express.static('./dist'));
 app.use('/static', express.static('./static'));
+
+/** Initialize analytics endpoints */
+withAnalytics(app);
 
 interface IWebpackAssets {
   [key: string]: {
