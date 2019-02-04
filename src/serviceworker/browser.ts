@@ -24,3 +24,7 @@ export const registerServiceWorker = async (): Promise<ServiceWorkerRegistration
     return;
   }
 };
+
+export const getServiceWorker = async () => {
+  return serviceWorker.ready;
+};
