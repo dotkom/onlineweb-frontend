@@ -8,6 +8,7 @@ import { getCache, hasCache, IRequestCacheOptions, setCache } from './requestCac
 export interface IRequestOptions extends RequestInit {
   cacheOptions?: IRequestCacheOptions;
   user?: IAuthUser;
+  domain?: string;
 }
 
 export interface IAPIData<T> {
@@ -30,8 +31,8 @@ const makeRequest = (query: string, parameters: object = {}, options: RequestIni
 */
 const performRequest = async (query: string, parameters: object = {}, options: IRequestOptions = {}) => {
   const queryString = toQueryString(parameters);
-  const url = DOMAIN + query + queryString;
-  const { cacheOptions, user, ...restOptions } = options;
+  const { cacheOptions, user, domain, ...restOptions } = options;
+  const url = (domain || DOMAIN) + query + queryString;
   if (hasCache({ url, options: cacheOptions })) {
     const { cache } = getCache({ url, options: cacheOptions });
     if (cache) {
