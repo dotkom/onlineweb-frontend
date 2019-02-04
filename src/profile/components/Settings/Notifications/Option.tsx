@@ -1,10 +1,10 @@
 import ToggleSwitch from 'common/components/ToggleSwitch';
 import React from 'react';
-import { INotificationOption, optionStrings } from '../../../models/Notification';
+import { INotificationSetting, optionStrings } from '../../../models/Notification';
 import style from './notifications.less';
 
 export interface IProps {
-  option: keyof INotificationOption | 'allowNotifications';
+  option: keyof INotificationSetting | 'allowNotifications';
   value: boolean;
   toggle: () => void;
   disabled?: boolean;
