@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ContextType } from 'react';
 
 import { md } from 'common/components/Markdown';
 import { Pane } from 'common/components/Panes';
@@ -7,9 +7,11 @@ import {
   resolveNotificationPermission,
   verifyNotification,
 } from 'common/utils/notification';
-import { verifyPushManager } from 'common/utils/pushManager';
+import { getNotificationSubscription, registerPushManager, verifyPushManager } from 'common/utils/pushManager';
 import { getKeys } from 'common/utils/tsHacks';
 
+import { UserContext } from 'authentication/providers/UserProvider';
+import { subscribe } from 'profile/api/notifications';
 import { verifyServiceWorker } from 'serviceworker/browser';
 
 import { INotificationOption } from '../../../models/Notification';
@@ -50,9 +52,14 @@ const ABOUT_NOTIFICATION_OPTIONS = md`
 export interface IState {
   options: INotificationOption;
   allowNotifications: boolean;
+  subscription?: PushSubscription;
+  message?: string;
 }
 
 class Notifications extends Component<{}, IState> {
+  public static contextType = UserContext;
+  public context!: ContextType<typeof UserContext>;
+
   public state: IState = {
     allowNotifications: resolveNotificationPermission(),
     options: {
@@ -63,9 +70,30 @@ class Notifications extends Component<{}, IState> {
     },
   };
 
+  public async componentDidMount() {
+    this.getCurrentSubscription();
+  }
+
   public toggleGlobalNotifications = async () => {
     const permission = await getNotificationPermission();
     this.setState({ allowNotifications: permission });
+  };
+
+  public getCurrentSubscription = async () => {
+    const subscription = await getNotificationSubscription();
+    if (subscription) {
+      this.setState({ subscription });
+    }
+  };
+
+  public subscribe = async () => {
+    const { subscription, message } = await registerPushManager();
+    this.setState({ message, subscription });
+
+    const { user } = this.context;
+    if (user && subscription) {
+      await subscribe(subscription, user);
+    }
   };
 
   /**
@@ -79,7 +107,7 @@ class Notifications extends Component<{}, IState> {
   }
 
   public render() {
-    const { options, allowNotifications } = this.state;
+    const { options, allowNotifications, subscription, message } = this.state;
     return (
       <>
         <Pane>{ABOUT_NOTIFICATIONS}</Pane>
@@ -93,13 +121,10 @@ class Notifications extends Component<{}, IState> {
         </Pane>
         <Pane>
           {ABOUT_ENABLE_NOTIFICATIONS}
-          <div>
-            <Option
-              key="allowNotifications"
-              option="allowNotifications"
-              value={allowNotifications}
-              toggle={this.toggleGlobalNotifications}
-            />
+          <div className={style.container}>
+            {message && md`**${message}**`}
+            <Option option="allowNotifications" value={allowNotifications} toggle={this.toggleGlobalNotifications} />
+            <Option option="subscription" value={!!subscription} toggle={this.subscribe} />
           </div>
         </Pane>
         <Pane>
