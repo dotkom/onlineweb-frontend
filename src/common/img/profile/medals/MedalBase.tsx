@@ -31,7 +31,7 @@ export const MedalTag = () => (
 );
 
 export interface IMedalRibbonProps {
-  letters: (() => JSX.Element);
+  letters: () => JSX.Element;
 }
 
 export const MedalRibbon = ({ letters: Letters }: IMedalRibbonProps) => (
@@ -44,8 +44,8 @@ export const MedalRibbon = ({ letters: Letters }: IMedalRibbonProps) => (
 );
 
 export interface IMedalbaseProps {
-  letters: (() => JSX.Element);
-  icon: (() => JSX.Element);
+  letters: () => JSX.Element;
+  icon: () => JSX.Element;
   title: string;
 }
 
