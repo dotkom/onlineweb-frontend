@@ -8,13 +8,12 @@ import {
   verifyNotification,
 } from 'common/utils/notification';
 import { getNotificationSubscription, registerPushManager, verifyPushManager } from 'common/utils/pushManager';
-import { getKeys } from 'common/utils/tsHacks';
 
 import { UserContext } from 'authentication/providers/UserProvider';
-import { subscribe } from 'profile/api/notifications';
+import { getAllChannels, getUserChannels, postUserChannels, subscribe } from 'profile/api/notifications';
 import { verifyServiceWorker } from 'serviceworker/browser';
 
-import { INotificationOption } from '../../../models/Notification';
+import { IChannel } from '../../../models/Notification';
 import BrowserSupport from './BrowserSupport';
 import style from './notifications.less';
 import Option from './Option';
@@ -50,7 +49,8 @@ const ABOUT_NOTIFICATION_OPTIONS = md`
 `;
 
 export interface IState {
-  options: INotificationOption;
+  channels: IChannel[];
+  selectedChannels: string[];
   allowNotifications: boolean;
   subscription?: PushSubscription;
   message?: string;
@@ -62,17 +62,48 @@ class Notifications extends Component<{}, IState> {
 
   public state: IState = {
     allowNotifications: resolveNotificationPermission(),
-    options: {
-      articles: false,
-      events: false,
-      feedback: false,
-      offlines: false,
-    },
+    channels: [],
+    selectedChannels: [],
   };
 
   public async componentDidMount() {
     this.getCurrentSubscription();
+    this.getAllChannels();
+    this.getUserChannels();
   }
+
+  public getAllChannels = async () => {
+    const { user } = this.context;
+    if (user) {
+      const channels = await getAllChannels(user);
+      this.setState({ channels });
+    }
+  };
+
+  public getUserChannels = async () => {
+    const { user } = this.context;
+    if (user) {
+      const selectedChannels = await getUserChannels(user);
+      this.setState({ selectedChannels });
+    }
+  };
+
+  public toggleChannel = (channelName: string) => {
+    const { selectedChannels } = this.state;
+    const channels = selectedChannels.includes(channelName)
+      ? selectedChannels.filter((i) => i !== channelName)
+      : [...selectedChannels, channelName];
+    this.setState({ selectedChannels: channels }, this.updateChannels);
+  };
+
+  public updateChannels = async () => {
+    const { user } = this.context;
+    const { selectedChannels } = this.state;
+    if (user) {
+      const selected = await postUserChannels(selectedChannels, user);
+      this.setState({ selectedChannels: selected });
+    }
+  };
 
   public toggleGlobalNotifications = async () => {
     const permission = await getNotificationPermission();
@@ -96,18 +127,9 @@ class Notifications extends Component<{}, IState> {
     }
   };
 
-  /**
-   * @summary Toggles an option in state
-   * @param {keyof INotificationOption} key Key of the option to toggle.
-   */
-  public toggleNotificationOption(key: keyof INotificationOption) {
-    const { options } = this.state;
-    const option = options[key];
-    this.setState({ options: { ...options, [key]: !option } });
-  }
-
   public render() {
-    const { options, allowNotifications, subscription, message } = this.state;
+    const { channels, allowNotifications, subscription, message } = this.state;
+    const { selectedChannels } = this.state;
     return (
       <>
         <Pane>{ABOUT_NOTIFICATIONS}</Pane>
@@ -123,20 +145,30 @@ class Notifications extends Component<{}, IState> {
           {ABOUT_ENABLE_NOTIFICATIONS}
           <div className={style.container}>
             {message && md`**${message}**`}
-            <Option option="allowNotifications" value={allowNotifications} toggle={this.toggleGlobalNotifications} />
-            <Option option="subscription" value={!!subscription} toggle={this.subscribe} />
+            <Option
+              description="Tillat notifikasjoner på dette nettstedet"
+              name="allowNotifications"
+              value={allowNotifications}
+              toggle={this.toggleGlobalNotifications}
+            />
+            <Option
+              description="Registrer denne enheten for å motta notifikasjoner"
+              name="subscription"
+              value={!!subscription}
+              toggle={this.subscribe}
+            />
           </div>
         </Pane>
         <Pane>
           {ABOUT_NOTIFICATION_OPTIONS}
           <div className={style.container}>
-            {getKeys<INotificationOption>(options).map((key) => (
+            {channels.map((channel) => (
               <Option
-                key={key}
-                option={key}
-                value={options[key]}
-                toggle={() => this.toggleNotificationOption(key)}
-                disabled
+                key={channel.name}
+                name={channel.name}
+                description={channel.description}
+                value={selectedChannels.includes(channel.name)}
+                toggle={() => this.toggleChannel(channel.name)}
               />
             ))}
           </div>
