@@ -11,11 +11,11 @@
     }]
   ],
   "plugins": [
-    "@babel/proposal-class-properties",
     "@babel/proposal-object-rest-spread",
     "@babel/proposal-async-generator-functions",
     "@babel/proposal-optional-chaining",
     "@babel/plugin-syntax-dynamic-import",
-    ["@babel/plugin-proposal-decorators", { "legacy": true }]
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }]
   ]
 }
