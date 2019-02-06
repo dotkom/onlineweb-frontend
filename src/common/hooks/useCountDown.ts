@@ -17,13 +17,10 @@ const calculateOffset = (time: DateTime): number => {
 export const useCountDown = (endTime: DateTime): number => {
   const duration = calculateOffset(endTime);
   const [remaining, decrement] = useDecrement(duration);
-  useEffect(
-    () => {
-      const interval = setInterval(decrement, 1000);
-      const clear = () => clearInterval(interval);
-      return clear;
-    },
-    [remaining]
-  );
+  useEffect(() => {
+    const interval = setInterval(decrement, 1000);
+    const clear = () => clearInterval(interval);
+    return clear;
+  }, [remaining]);
   return remaining;
 };
