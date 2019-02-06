@@ -10,6 +10,8 @@ import OrderItemDonut from './OrderItemDonut';
 import { UserContext } from 'authentication/providers/UserProvider';
 import CalendarChart from 'common/components/Charts/CalendarChart';
 
+import { AccountBalance } from './AccountBalance';
+
 export interface IProps {}
 
 export interface IState {
@@ -36,7 +38,6 @@ class Orders extends Component<IProps, IState> {
     const orders = orderLines.reduce<IOrder[]>((prev, curr) => [...prev, ...curr.orders], []);
     const frequency = orderLines.map((line) => DateTime.fromISO(line.datetime)).sort();
     const totalOrderLines = orderLines.length;
-    const totalOrders = orders.length;
     const totalItems = orders.reduce<number>((acc, order) => acc + order.quantity, 0);
     const totalCost = orders.reduce<number>((acc, order) => acc + Number(order.price), 0);
     return (
@@ -49,10 +50,10 @@ class Orders extends Component<IProps, IState> {
               <NumberStat name="Antall Kjøp" value={totalOrderLines} />
             </Pane>
             <Pane>
-              <NumberStat name="Antall Ordre" value={totalOrders} />
+              <NumberStat name="Antall Enheter" value={totalItems} />
             </Pane>
             <Pane>
-              <NumberStat name="Antall Enheter" value={totalItems} />
+              <AccountBalance />
             </Pane>
             <Pane>
               <NumberStat name="Total kostnad" value={`${totalCost} Kr`} />
