@@ -9,15 +9,12 @@ import { useEffect, useState } from 'react';
 export const useTimeout = (ms: number = 0): boolean => {
   const [done, setDone] = useState(false);
 
-  useEffect(
-    () => {
-      const trigger = () => setDone(true);
-      const timer = setTimeout(trigger, ms);
-      const clear = () => clearTimeout(timer);
-      return clear;
-    },
-    [ms, done]
-  );
+  useEffect(() => {
+    const trigger = () => setDone(true);
+    const timer = setTimeout(trigger, ms);
+    const clear = () => clearTimeout(timer);
+    return clear;
+  }, [ms, done]);
 
   return done;
 };
