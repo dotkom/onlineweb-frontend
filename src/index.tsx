@@ -7,8 +7,7 @@ import { OWF_SENTRY_DSN } from 'common/constants/sentry';
 import Prefetched from 'common/providers/Prefetched';
 import PrefetchState from 'common/utils/PrefetchState';
 import ContextWrapper from 'core/providers/ContextWrapper';
-import Settings from 'core/providers/Settings';
-import { getEventView } from 'events/components/EventsContainer';
+import { Cookies } from 'core/providers/Cookies';
 import { createBrowserHistory } from 'history';
 import cookies from 'js-cookie';
 import React from 'react';
@@ -34,18 +33,18 @@ const prefetcher = new PrefetchState();
 prefetcher.serialize();
 
 const render = (RootComponent: any) => {
-  const eventView = getEventView(cookies.get('eventView'));
+  const initialCookies = cookies.getJSON();
   /** Define renderer to use, hydrate if SSR back-end is enabled, render if no back-end */
   const reactRender = __SSR__ ? ReactDOM.hydrate : ReactDOM.render;
   reactRender(
     <Router history={history}>
-      <Settings eventView={eventView}>
+      <Cookies cookies={initialCookies}>
         <Prefetched prefetcher={prefetcher}>
           <ContextWrapper>
             <RootComponent />
           </ContextWrapper>
         </Prefetched>
-      </Settings>
+      </Cookies>
     </Router>,
     document.getElementById('root')
   );
