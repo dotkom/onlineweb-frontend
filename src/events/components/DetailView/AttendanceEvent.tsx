@@ -1,8 +1,10 @@
 import { DateTime } from 'luxon';
 import React, { ReactChild } from 'react';
+
 import { IAttendanceEvent } from '../../models/Event';
 import Block from './Block';
 import style from './detail.less';
+import { EventCountDown } from './EventCountDown';
 
 interface IRuleBundleBox {
   children: ReactChild | ReactChild[];
@@ -57,15 +59,15 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
   return (
     <div className={style.blockGrid}>
       <Block title="Påmeldingsstart">
-        <p>{registrationStart}</p>
+        <EventCountDown endTime={registrationStart} />
       </Block>
 
       <Block title="Påmeldingslutt">
-        <p>{registrationEnd}</p>
+        <EventCountDown endTime={registrationEnd} />
       </Block>
 
       <Block title="Avmeldingsfrist">
-        <p>{cancellationDeadline}</p>
+        <EventCountDown endTime={cancellationDeadline} />
       </Block>
 
       <RuleBundles event={event} />
@@ -76,7 +78,9 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
         </p>
       </Block>
 
-      <Block title="Venteliste">{event.waitlist ? <p>{event.number_on_waitlist}</p> : <p>Ikke tilgjengelig</p>}</Block>
+      <Block title="Venteliste">
+        <p>{event.waitlist ? event.number_on_waitlist : '-'}</p>
+      </Block>
     </div>
   );
 };

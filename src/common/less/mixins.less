@@ -1,7 +1,8 @@
 @import '~common/less/colors.less';
 
 .owOutline {
-  &:focus {
+  /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+  &:focus-visible {
     outline: 2px solid @blue;
     outline-offset: 1px;
   }
@@ -10,4 +11,18 @@
 .owCard {
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Polyfill for focus-visible adds a class to the focused elements */
+:global {
+  /* stylelint-disable-next-line selector-class-pattern */
+  .focus-visible {
+    outline: 2px solid @blue;
+    outline-offset: 1px;
+  }
+
+  /* stylelint-disable-next-line selector-class-pattern */
+  :focus:not(.focus-visible) {
+    outline: none;
+  }
 }

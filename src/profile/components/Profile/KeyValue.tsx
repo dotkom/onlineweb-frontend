@@ -3,13 +3,13 @@ import style from './kv.less';
 
 export interface IProps {
   k: string;
-  v: string;
+  v: string | null;
 }
 
 export const KeyValue = ({ k, v }: IProps) => (
   <div className={style.kv}>
     <p>{k}</p>
-    <h3>{v}</h3>
+    <h3>{v || 'Ikke tilgjengelig'}</h3>
   </div>
 );
 

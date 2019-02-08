@@ -1,5 +1,6 @@
 const path = require('path');
 var AssetsPlugin = require('assets-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const htmlPlugin = require('./html.config');
 const CSSPlugin = require('./css.config');
 const devServer = require('./devServer.config');
@@ -14,6 +15,7 @@ module.exports = (env) => {
     devtool: 'source-map',
     entry: {
       app: './src/index.tsx',
+      serviceworker: './src/serviceworker/index.js'
     },
     output: {
       path: path.resolve('./dist/'),
@@ -42,6 +44,7 @@ module.exports = (env) => {
       htmlPlugin.plugin,
       environment.pluginBrowser,
       new AssetsPlugin({path: path.join(__dirname, '../dist')}),
+      new ForkTsCheckerWebpackPlugin(),
     ]
   }
 }

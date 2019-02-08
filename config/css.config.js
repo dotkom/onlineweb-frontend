@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const postcssFocusVisible = require('postcss-focus-visible');
 
 module.exports = {
   main: MiniCssExtractPlugin,
@@ -15,7 +16,13 @@ module.exports = {
       }
     },
     {
-      loader: 'postcss-loader'
+      loader: 'postcss-loader',
+      options: {
+        ident: 'postcss',
+        plugins: () => [
+          postcssFocusVisible({ preserve: true }),
+        ]
+      }
     },
     'less-loader'
   ],

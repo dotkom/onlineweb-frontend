@@ -1,4 +1,3 @@
-import 'isomorphic-fetch';
 import { DOMAIN } from '../constants/endpoints';
 import { __CLIENT__ } from '../constants/environment';
 import { toQueryString } from './queryString';
@@ -8,6 +7,7 @@ import { getCache, hasCache, IRequestCacheOptions, setCache } from './requestCac
 
 export interface IRequestOptions extends RequestInit {
   cacheOptions?: IRequestCacheOptions;
+  user?: IAuthUser;
 }
 
 export interface IAPIData<T> {
@@ -20,6 +20,7 @@ export interface IAPIData<T> {
 export interface IBaseAPIParameters {
   page_size?: number;
   page?: number;
+  format?: 'json' | string;
 }
 /*
 const makeRequest = (query: string, parameters: object = {}, options: RequestInit = {}) => {
@@ -30,27 +31,22 @@ const makeRequest = (query: string, parameters: object = {}, options: RequestIni
 const performRequest = async (query: string, parameters: object = {}, options: IRequestOptions = {}) => {
   const queryString = toQueryString(parameters);
   const url = DOMAIN + query + queryString;
-  const { cacheOptions } = options;
+  const { cacheOptions, user, ...restOptions } = options;
   if (hasCache({ url, options: cacheOptions })) {
     const { cache } = getCache({ url, options: cacheOptions });
     if (cache) {
       return cache.content;
     }
   }
-  const response = await fetch(url, options);
+  const headers = {
+    ...options.headers,
+    Authorization: options.user ? `Bearer ${options.user.access_token}` : '',
+  };
+  const requestOptions = { ...restOptions, headers };
+  const response = await fetch(url, requestOptions);
   const data = await response.json();
   setCache({ content: data, options: cacheOptions, url });
   return data;
-};
-
-export const withUser = (user: IAuthUser, options: IRequestOptions = {}): IRequestOptions => {
-  const token = user.access_token;
-  const headers = Object.assign(options.headers || {}, {
-    Authorization: `Bearer ${token}`,
-  });
-  return Object.assign(options, {
-    headers,
-  });
 };
 
 /**
@@ -90,7 +86,6 @@ export async function getAllPages<T>(
 
 /**
  * @summary Simple fetch-API wrapper for HTTP POST
- * TODO: implement Request options, Done with Object.assign, not tested yet
  * @param {string} query
  * @param {any} data
  * @param {object} parameters
@@ -102,12 +97,29 @@ export const post = async (
   parameters: object = {},
   options: IRequestOptions = {}
 ): Promise<any> => {
-  return performRequest(
-    query,
-    parameters,
-    Object.assign(options, {
-      methods: 'POST',
-      body: JSON.stringify(data),
-    })
-  );
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  const body = JSON.stringify(data);
+  const opts = { ...options, method: 'POST', body, headers };
+  return performRequest(query, parameters, opts);
+};
+
+export interface IPutParams {
+  query: string;
+  data: any;
+  parameters?: object;
+  options?: IRequestOptions;
+}
+
+export const put = async (putParams: IPutParams): Promise<any> => {
+  const { query, data, parameters = {}, options = {} } = putParams;
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  const body = JSON.stringify(data);
+  const opts = { ...options, method: 'PUT', body, headers };
+  return performRequest(query, parameters, opts);
 };

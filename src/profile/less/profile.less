@@ -1,5 +1,6 @@
 @import '~common/less/colors.less';
 @import '~common/less/mixins.less';
+@import '~common/less/constants.less';
 
 .header {
   display: flex;
@@ -34,6 +35,10 @@
 
 .committeeMedal {
   width: 100px;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    width: 36px;
+  }
 }
 
 .committeeCrownContainer {
@@ -47,6 +52,11 @@
   vertical-align: bottom;
   position: absolute;
   bottom: 0;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    width: 30px;
+    padding: 1px 3px;
+  }
 }
 
 .committeeRange {

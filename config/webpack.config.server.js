@@ -28,7 +28,7 @@ module.exports = env => {
       environment.pluginServer,
       new DefinePlugin({
         window: {}, // Fixes OIDC client needing window to be imported.
-      })
+      }),
     ]
   }
 }

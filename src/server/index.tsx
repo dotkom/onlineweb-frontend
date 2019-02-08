@@ -1,3 +1,5 @@
+import 'core/polyfills';
+
 // import * as Sentry from '@sentry/node';
 import { HOST, PORT } from 'common/constants/backend';
 // import { OWF_SENTRY_DSN } from 'common/constants/sentry';
@@ -5,8 +7,7 @@ import Prefetched from 'common/providers/Prefetched';
 import PrefetchState from 'common/utils/PrefetchState';
 import cookieParser from 'cookie-parser';
 import ContextWrapper from 'core/providers/ContextWrapper';
-import Settings from 'core/providers/Settings';
-import { getEventView } from 'events/components/EventsContainer';
+import { Cookies } from 'core/providers/Cookies';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
@@ -16,6 +17,7 @@ import { StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 
 import { App } from '../App';
+import { withAnalytics } from './analytics';
 
 /**
  * Server side rendering uses a very simple single route express server to handle
@@ -37,9 +39,11 @@ const app = express();
  */
 app.use(cookieParser());
 
-/** Public folders are currently not set up corectly, TODO: Fix it? */
-app.use('/public', express.static(path.resolve(__dirname, '../dist')));
 app.use('/public', express.static('./dist'));
+app.use('/static', express.static('./static'));
+
+/** Initialize analytics endpoints */
+withAnalytics(app);
 
 interface IWebpackAssets {
   [key: string]: {
@@ -47,9 +51,13 @@ interface IWebpackAssets {
   };
 }
 
-const getBundles = (): [string[], string[]] => {
+const getAssets = (): IWebpackAssets => {
   const assetsString = fs.readFileSync('./dist/webpack-assets.json').toString();
-  const assets: IWebpackAssets = JSON.parse(assetsString);
+  return JSON.parse(assetsString);
+};
+
+const getBundles = (): [string[], string[]] => {
+  const assets = getAssets();
   const js = [assets.app.js, assets.vendor.js].map(getScript);
   const css = [assets.app.css, assets.profile.css].map(getStyle);
   return [js, css];
@@ -57,6 +65,13 @@ const getBundles = (): [string[], string[]] => {
 
 const getStyle = (style: string) => `<link rel="stylesheet" type="text/css" href="${style}">`;
 const getScript = (script: string) => `<script src="${script}"></script>`;
+
+app.get('/serviceworker', (_, res) => {
+  const assets = getAssets();
+  const swPath = `.${assets.serviceworker.js}`.replace('public', 'dist');
+  const swAbsPath = path.resolve(swPath);
+  res.sendFile(swAbsPath);
+});
 
 /**
  * @summary Main entrypoint for express application backend.
@@ -68,21 +83,14 @@ const getScript = (script: string) => `<script src="${script}"></script>`;
 app.get('*', async (req, res) => {
   const prefetcher = new PrefetchState();
 
-  /**
-   * Get the settings from cookies to render correct view on front page.
-   * Currently only a single setting in cookies ('eventView'). Should expand to support more settings
-   * in the future by separating the functionality.
-   */
-  const eventView = getEventView(req.cookies.eventView);
-
   /** Render first time to register all fetches that are needed for current route */
-  const initPrefetch = initJSX(req.path, prefetcher, eventView);
+  const initPrefetch = initJSX(req.path, prefetcher, req.cookies);
   renderToString(initPrefetch);
 
   await prefetcher.fetchAll();
 
   /** Initialize and do the actual render which will be sent to the user */
-  const jsx = initJSX(req.path, prefetcher, eventView);
+  const jsx = initJSX(req.path, prefetcher, req.cookies);
   const reactDom = renderToString(jsx);
   const HTML = wrapHtml(reactDom, prefetcher);
 
@@ -97,15 +105,15 @@ app.get('*', async (req, res) => {
  * Other than that everything is rendered just like in the browser. The StaticRouter uses the
  * requested url to render the corrent corresponding view to the user.
  */
-const initJSX = (location: string, prefetcher: PrefetchState, eventView: number): JSX.Element => (
+const initJSX = (location: string, prefetcher: PrefetchState, cookies: { [name: string]: string }): JSX.Element => (
   <StaticRouter location={location} context={{}}>
-    <Settings eventView={eventView}>
+    <Cookies cookies={cookies}>
       <Prefetched prefetcher={prefetcher}>
         <ContextWrapper>
           <App />
         </ContextWrapper>
       </Prefetched>
-    </Settings>
+    </Cookies>
   </StaticRouter>
 );
 
@@ -124,7 +132,11 @@ const wrapHtml = (dom: string, prefetcher: PrefetchState) => {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
         <title>Linjeforeningen Online</title>
+        <link rel="icon" type="image/png" href="/static/icon-256.png" />
+        <link rel="manifest" href="/static/owf.webmanifest" />
         ${stylesheets.join('\n')}
       </head>
       <body>
