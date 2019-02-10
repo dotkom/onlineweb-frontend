@@ -7,10 +7,15 @@ import {
   resolveNotificationPermission,
   verifyNotification,
 } from 'common/utils/notification';
-import { getNotificationSubscription, registerPushManager, verifyPushManager } from 'common/utils/pushManager';
+import {
+  getNotificationSubscription,
+  registerPushManager,
+  removeNotificationSubscription,
+  verifyPushManager,
+} from 'common/utils/pushManager';
 
 import { UserContext } from 'authentication/providers/UserProvider';
-import { getAllChannels, getUserChannels, postUserChannels, subscribe } from 'profile/api/notifications';
+import { getAllChannels, getUserChannels, postUserChannels, subscribe, unsubscribe } from 'profile/api/notifications';
 import { verifyServiceWorker } from 'serviceworker/browser';
 
 import { IChannel } from '../../../models/Notification';
@@ -83,7 +88,8 @@ class Notifications extends Component<{}, IState> {
   public getUserChannels = async () => {
     const { user } = this.context;
     if (user) {
-      const selectedChannels = await getUserChannels(user);
+      const channels = await getUserChannels(user);
+      const selectedChannels = channels.map((channel) => channel.name);
       this.setState({ selectedChannels });
     }
   };
@@ -100,7 +106,8 @@ class Notifications extends Component<{}, IState> {
     const { user } = this.context;
     const { selectedChannels } = this.state;
     if (user) {
-      const selected = await postUserChannels(selectedChannels, user);
+      const channels = await postUserChannels(selectedChannels, user);
+      const selected = channels.map((channel) => channel.name);
       this.setState({ selectedChannels: selected });
     }
   };
@@ -124,6 +131,18 @@ class Notifications extends Component<{}, IState> {
     const { user } = this.context;
     if (user && subscription) {
       await subscribe(subscription, user);
+    }
+  };
+
+  public unsubscribe = async () => {
+    const { user } = this.context;
+    const sub = await getNotificationSubscription();
+    if (user && sub) {
+      await unsubscribe(sub, user);
+      const removed = await removeNotificationSubscription();
+      if (removed) {
+        this.setState({ subscription: undefined });
+      }
     }
   };
 
@@ -155,7 +174,7 @@ class Notifications extends Component<{}, IState> {
               description="Registrer denne enheten for å motta notifikasjoner"
               name="subscription"
               value={!!subscription}
-              toggle={this.subscribe}
+              toggle={!!subscription ? this.unsubscribe : this.subscribe}
             />
           </div>
         </Pane>
