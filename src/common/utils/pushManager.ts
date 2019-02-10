@@ -63,3 +63,17 @@ export const getNotificationSubscription = async (): Promise<PushSubscription | 
     return null;
   }
 };
+
+export const removeNotificationSubscription = async () => {
+  try {
+    const registration = await getServiceWorker();
+    const subscription = await registration.pushManager.getSubscription();
+    if (subscription) {
+      return await subscription.unsubscribe();
+    }
+  } catch (err) {
+    /* tslint:disable-next-line no-console */
+    console.error(err);
+  }
+  return false;
+};
