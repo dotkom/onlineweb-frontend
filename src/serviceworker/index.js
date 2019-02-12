@@ -15,9 +15,9 @@ const displayNotification = async (event) => {
   }
 
   const { title, ...noti } = event.data.json();
-  console.log(`Got notification with title: ${title}`)
+  await self.registration.showNotification(title, noti);
 
-  return sw.registration.showNotification(title, noti);
+  return;
 };
 
 sw.addEventListener('push', (event) => {
