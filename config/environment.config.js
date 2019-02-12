@@ -11,6 +11,7 @@ const BASE_CONFIG = {
   NODE_ENV: 'development',
   OWF_SSR: 'false',
   OWF_VAPID_PUBLIC_KEY: '',
+  OWF_WEBPUSH_SERVER_URL: '',
 }
 
 module.exports = {
