@@ -1,13 +1,13 @@
 import { IAuthUser } from 'authentication/models/User';
 import { get, getAllPages, IBaseAPIParameters } from 'common/utils/api';
-import { INewEvent } from '../models/Event';
+import { EventTypeEnum, INewEvent } from '../models/Event';
 
 export interface IEventAPIParameters extends IBaseAPIParameters {
   event_start__gte?: string;
   event_start__lte?: string;
   event_end__gte?: string;
   event_end__lte?: string;
-  event_type?: number[] | number;
+  event_type?: EventTypeEnum[] | EventTypeEnum;
   is_attendee?: 'True' | 'False';
 }
 
