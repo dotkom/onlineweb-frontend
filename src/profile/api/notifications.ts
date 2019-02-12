@@ -1,8 +1,9 @@
 import { IAuthUser } from 'authentication/models/User';
+import { WEBPUSH_SERVER_URL } from 'common/constants/vapid';
 import { get, post } from 'common/utils/api';
 import { IChannel } from 'profile/models/Notification';
 
-const API_DOMAIN = 'http://localhost:8081';
+const API_DOMAIN = WEBPUSH_SERVER_URL;
 const API_URL = '/public';
 
 export const subscribe = async (sub: PushSubscription, user: IAuthUser) => {
