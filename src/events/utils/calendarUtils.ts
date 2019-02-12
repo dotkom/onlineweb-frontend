@@ -1,37 +1,58 @@
 import { DateTime } from 'luxon';
 import { INewEvent } from '../models/Event';
 
+export function getFirstDayOfMonth(date: DateTime) {
+  return date.minus({
+    days: date.day - 1,
+    hours: date.hour,
+    minutes: date.minute,
+    seconds: date.second,
+  });
+}
+
+export function getLastDayOfMonth(date: DateTime) {
+  return getFirstDayOfMonth(date).plus({
+    month: 1,
+    second: 10,
+  });
+}
+
+export function getStartOfDay(date: DateTime = DateTime.local()) {
+  return date.minus({
+    hours: date.hour,
+    minutes: date.minute,
+    second: date.second,
+    milliseconds: date.millisecond,
+  });
+}
+
 /**
  * Returns the weekday of the first day of a month from a date object.
- * @param {Date} date A JavaScript Date object.
+ * @param {DateTime} date A Luxon DateTime object.
  * @returns {number} Zero indexed number between 0 and 6.
  */
-export function getFirstWeekdayOfMonth(date: Date) {
-  /** Create DateTime from the date object */
-  let dt = DateTime.fromJSDate(date);
+export function getFirstWeekdayOfMonth(date: DateTime) {
   /** Set the DateTime to the first day of the month */
-  dt = dt.minus({ days: dt.day - 1 });
+  const firstDay = getFirstDayOfMonth(date);
   /** Get index of first day from DateTime, zero-index and return */
-  return dt.weekday - 1;
+  return firstDay.weekday - 1;
 }
 
 /**
- * @param {Date} date JavaScript Date object.
+ * @param {DateTime} date Luxon DateTime object.
  * @returns {number} Length of the given month. Number between 28 and 31.
  */
-export function getMonthLength(date: Date) {
-  const dt = DateTime.fromJSDate(date);
-  return dt.daysInMonth;
+export function getMonthLength(date: DateTime) {
+  return date.daysInMonth;
 }
 
 /**
- * @param {Date} date JavaScript Date object.
+ * @param {DateTime} date Luxon DateTime object.
  * @returns {number} Length of the month previous to the given month. Number between 28 and 31.
  */
-export function getPreviousMonthLength(date: Date) {
-  let dt = DateTime.fromJSDate(date);
-  dt = dt.minus({ months: 1 });
-  return getMonthLength(dt.toJSDate());
+export function getPreviousMonthLength(date: DateTime) {
+  const prev = date.minus({ months: 1 });
+  return getMonthLength(prev);
 }
 
 /**
