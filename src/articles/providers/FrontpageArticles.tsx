@@ -1,5 +1,8 @@
-import { prefetch } from 'common/utils/prefetch';
 import React, { Component, createContext } from 'react';
+
+import { prefetch } from 'common/utils/prefetch';
+import { PrefetchKey } from 'common/utils/PrefetchState';
+
 import { getArticles } from '../api';
 import { IArticle } from '../models/Article';
 
@@ -22,7 +25,7 @@ export interface IProps {
 
 export const FrontpageArticleContext = createContext(INITIAL_STATE);
 
-@prefetch('FrontpageArticles')
+@prefetch(PrefetchKey.ARTICLES)
 class FrontpageArticles extends Component<IProps, IFrontpageArticlesState> {
   public static async getServerState(_: IProps): Promise<IArticle[]> {
     const articles = await getArticles();

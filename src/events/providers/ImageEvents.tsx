@@ -1,7 +1,9 @@
+import React, { Component, createContext } from 'react';
+
 import { prefetch } from 'common/utils/prefetch';
+import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getImageEvents } from 'events/api/imageEvents';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
-import React, { Component, createContext } from 'react';
 
 export interface IImageEvents {
   eventsLeft: INewEvent[];
@@ -30,7 +32,7 @@ export interface IProps extends IEventViewProps {
   prefetch?: IImageEvents;
 }
 
-@prefetch('FrontpageImageEvents')
+@prefetch(PrefetchKey.EVENTS_IMAGE)
 class ImageEvents extends Component<IProps, IImageEventsState> {
   public static async getServerState(_: IProps): Promise<IImageEvents> {
     const [eventsLeft, eventsMiddle, eventsRight] = await getImageEvents();

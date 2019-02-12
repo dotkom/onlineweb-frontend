@@ -1,7 +1,9 @@
+import React, { Component, createContext } from 'react';
+
 import { prefetch } from 'common/utils/prefetch';
+import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getListEvents } from 'events/api/listEvents';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
-import React, { Component, createContext } from 'react';
 
 export interface IListEventsState {
   events: INewEvent[];
@@ -21,7 +23,7 @@ export interface IProps extends IEventViewProps {
   prefetch?: INewEvent[];
 }
 
-@prefetch('FrontpageListEvents')
+@prefetch(PrefetchKey.EVENTS_LIST)
 class ListEvents extends Component<IProps, IListEventsState> {
   public static async getServerState(_: IProps): Promise<INewEvent[]> {
     const events = await getListEvents();
