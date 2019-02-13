@@ -66,7 +66,7 @@ const getBundles = (): [string[], string[]] => {
 const getStyle = (style: string) => `<link rel="stylesheet" type="text/css" href="${style}">`;
 const getScript = (script: string) => `<script src="${script}"></script>`;
 
-app.get('/serviceworker', (_, res) => {
+app.get('/serviceworker.js', (_, res) => {
   const assets = getAssets();
   const swPath = `.${assets.serviceworker.js}`.replace('public', 'dist');
   const swAbsPath = path.resolve(swPath);
