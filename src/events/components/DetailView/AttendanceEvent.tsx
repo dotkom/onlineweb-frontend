@@ -41,7 +41,7 @@ const RuleBundles = ({ event }: IAttendanceEventProps) => {
           <RuleBundleBox>Alle</RuleBundleBox>
         ) : bundlesEnabled ? (
           sortedBundles.map((bundle) =>
-            bundle.rule_strings.map((rule_string) => <RuleBundleBox key={bundle.id}>{rule_string}</RuleBundleBox>)
+            bundle.rule_strings.map((rule_string) => <RuleBundleBox key={rule_string}>{rule_string}</RuleBundleBox>)
           )
         ) : (
           <RuleBundleBox>Alle medlemmer</RuleBundleBox>

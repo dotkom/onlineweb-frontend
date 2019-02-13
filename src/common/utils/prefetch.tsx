@@ -1,8 +1,9 @@
 import { __SERVER__ } from 'common/constants/environment';
 import { IPreFetchState, PreFetchContext } from 'common/providers/Prefetched';
 import React from 'react';
+import { PrefetchKey } from './PrefetchState';
 
-export function prefetch(key: string) {
+export function prefetch(key: PrefetchKey) {
   return function wrap(WrappedComponent: typeof PrefetchableComponent): any {
     return class extends React.Component<{}> {
       public static contextType = PreFetchContext;
