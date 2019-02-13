@@ -2,6 +2,8 @@ import { Link } from 'core/components/Router';
 import { getEventColor, getEventType, INewEvent } from 'events/models/Event';
 import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
+import { faUser, faCalendarAlt } from '@fortawesome/free-solid-svg-icons/'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import EventImage from '../EventImage';
 import style from './image.less';
@@ -16,8 +18,14 @@ const LargeEvent = ({ image, event_type, title, event_start, attendance_event, i
         <EventImage className={style.largeImage} image={image} companyEvents={company_event} size="md" />
         <div className={style.largeContent}>
           <p>{title}</p>
-          <p>{getEventAttendees(attendance_event)}</p>
-          <p>{DateTime.fromISO(event_start).toFormat('dd.MM')}</p>
+          <div className={style.textWithIcon}>
+            <FontAwesomeIcon icon={faUser} fixedWidth />
+            <p>{DateTime.fromISO(event_start).toFormat('dd.MM')}</p>
+          </div>
+          <div className={style.textWithIcon}>
+            <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
+            <p>{getEventAttendees(attendance_event)}</p>
+          </div>
         </div>
       </div>
     </Link>
