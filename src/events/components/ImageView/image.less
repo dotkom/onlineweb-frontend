@@ -69,9 +69,10 @@
 .largeContent {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 9fr 2fr 2fr;
+  grid-template-columns: 1fr 9fr 1fr 1fr 1fr 1fr;
   flex: 1;
   border-top: 0.5px solid #b7b7b7;
+  padding-right: 10px;
 }
 
 .largeContent > span,
@@ -91,10 +92,11 @@
 
 .small {
   display: grid;
-  grid-template-columns: 1fr 9fr 2fr 2fr;
+  grid-template-columns: 1fr 9fr 1fr 1fr 1fr 1fr;
   position: relative;
   height: 100%;
   .owCard();
+  padding-right: 10px;
 }
 
 .largeContent,
@@ -106,18 +108,12 @@
   }
 }
 
-.textWithIcon {
-  color: #333;
-  display: flex;
+.icon {
   align-self: center;
-  padding-right: 5px;
-
-  &:last-child {
-    padding-right: 15px;
-  }
+  margin-bottom: 2px;
+  margin-left: 5px;
 }
 
-.textWithIcon > svg {
-  align-self: center;
-  color: #7f7f7f;
+.attendees {
+  width: 40px;
 }
