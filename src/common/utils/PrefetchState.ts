@@ -1,4 +1,14 @@
-import { __SSR__ } from 'common/constants/environment';
+import { __SERVER__, __SSR__ } from 'common/constants/environment';
+
+export enum PrefetchKey {
+  EVENTS_CALENDAR = 'EVENTS_CALENDAR',
+  EVENTS_LIST = 'EVENTS_LIST',
+  EVENTS_IMAGE = 'EVENTS_IMAGE',
+  EVENT_SINGLE = 'EVENT_SINGLE',
+  CAREER = 'CAREER',
+  ARTICLES = 'ARTICLES',
+  OFFLINES = 'OFFLINES',
+}
 
 export type Fetcher = () => Promise<any>;
 
@@ -7,8 +17,10 @@ export default class PrefetchState {
   public fetchers: Array<Promise<any>> = [];
 
   public queue = (fetcher: Fetcher, key: string) => {
-    this.fetchers.push(fetcher());
-    this.keys.push(key);
+    if (__SERVER__) {
+      this.fetchers.push(fetcher());
+      this.keys.push(key);
+    }
   };
 
   public get = (key: string) => {

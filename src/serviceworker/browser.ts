@@ -13,7 +13,7 @@ export const verifyServiceWorker = (): boolean => {
 export const registerServiceWorker = async (): Promise<ServiceWorkerRegistration | undefined> => {
   try {
     if (verifyServiceWorker()) {
-      const registration = await serviceWorker.register('/serviceworker');
+      const registration = await serviceWorker.register('/serviceworker.js');
       return registration;
     } else {
       throw new Error('Could not register serviceWorker. Browser is not supported');
@@ -23,4 +23,8 @@ export const registerServiceWorker = async (): Promise<ServiceWorkerRegistration
     console.error(err);
     return;
   }
+};
+
+export const getServiceWorker = async () => {
+  return serviceWorker.ready;
 };
