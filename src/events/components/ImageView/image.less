@@ -39,7 +39,6 @@
   flex-direction: column;
   height: 100%;
   .owCard();
-  border-radius: 5px;
 }
 
 .imageLargeType {
@@ -52,21 +51,6 @@
   font-weight: 200;
   letter-spacing: 1px;
   font-size: 20px;
-
-
-
-  /*
-  &::after {
-    content: '';
-    position: absolute;
-    background: inherit;
-    height: @edge-height;
-    bottom: -@edge-height + 1px;
-    width: 100%;
-    left: 0;
-    clip-path: polygon(0 0, 0 5%, 75% 100%, 100% 5%, 100% 0);
-  }
-  */
 }
 
 .largeImage {
@@ -85,36 +69,15 @@
 .largeContent {
   position: relative;
   display: grid;
-  grid-template-columns: 14fr 2fr 2fr;
+  grid-template-columns: 1fr 9fr 2fr 2fr;
   flex: 1;
   border-top: 0.5px solid #b7b7b7;
 
-  /*
-  &::before {
-    content: '';
-    position: absolute;
-    background: #fff;
-    height: @edge-height;
-    top: -@edge-height + 1px;
-    width: 100%;
-    left: 0;
-    clip-path: polygon(0 100%, 0 95%, 25% 0, 100% 95%, 100% 100%);
-  }
-  */
 }
 
-.largeContent > p:first-child {
-
-  &::before {
-    content: '';
-    background-color: rgb(18, 125, 189); //temp
-    width: 3px;
-    height: 28px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 5px;
-    margin-top: -5px; // To center the line with the text
-  }
+.largeContent > span, .small > span {
+  width: 4px;
+  margin: 10px 0px 10px 8px;
 }
 
 .largeContentEmpty {
@@ -128,34 +91,18 @@
 
 .small {
   display: grid;
-  grid-template-columns: 10fr 1fr 2fr 2fr;
+  grid-template-columns: 1fr 9fr 2fr 2fr;
   position: relative;
   height: 100%;
   .owCard();
-
-  &::before {
-    content: '';
-    position: absolute;
-    background: currentColor;
-    width: 15px;
-    top: 0;
-    height: 100%;
-    clip-path: polygon(0 0, 0 50%, 100% 0);
-  }
 }
 
 .largeContent,
 .small {
   > p {
-    padding: 0px 5px;
     align-self: center;
-    text-align: right;
+    text-align: left;
     color: initial;
-
-    &:first-child {
-      text-align: left;
-      padding-left: 10px;
-    }
   }
 }
 
@@ -163,7 +110,7 @@
   color: #333333;
   display: flex;
   align-self: center;
-  padding-right: 10px;
+  padding-right: 5px;
 
 }
 
