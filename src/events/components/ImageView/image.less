@@ -43,7 +43,7 @@
 
 .imageLargeType {
   position: relative;
-  padding: 7px 0 7px;
+  padding: 7px 0;
   color: #fff;
   text-align: center;
   border-top-left-radius: 5px;
@@ -72,12 +72,12 @@
   grid-template-columns: 1fr 9fr 2fr 2fr;
   flex: 1;
   border-top: 0.5px solid #b7b7b7;
-
 }
 
-.largeContent > span, .small > span {
+.largeContent > span,
+.small > span {
   width: 4px;
-  margin: 10px 0px 10px 8px;
+  margin: 10px 0 10px 8px;
 }
 
 .largeContentEmpty {
@@ -106,19 +106,18 @@
   }
 }
 
-.textWithIcon{
-  color: #333333;
+.textWithIcon {
+  color: #333;
   display: flex;
   align-self: center;
   padding-right: 5px;
 
+  &:last-child {
+    padding-right: 15px;
+  }
 }
 
-.textWithIcon > svg {
+.textWithIcon > svg {
   align-self: center;
   color: #7f7f7f;
-}
-
-.textWithIcon:last-child {
-  padding-right: 15px;
 }
