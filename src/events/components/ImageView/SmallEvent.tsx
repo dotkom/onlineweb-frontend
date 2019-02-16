@@ -9,13 +9,14 @@ import style from './image.less';
 
 const SmallEvent = ({ title, event_type, event_start, attendance_event, id }: INewEvent) => (
   <Link to={`/events/${id}`}>
-    <div className={style.small} style={{ color: getEventColor(event_type) }}>
+    <div className={style.small}>
+      <span style={{ background: getEventColor(event_type) }}></span>
       <p> {title} </p>
-      <div className={style.imageSmallType}>
+      <div className={style.textWithIcon}>
         <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
         <p> {DateTime.fromISO(event_start).toFormat('dd.MM')} </p>
       </div>
-      <div className={style.imageSmallType}>
+      <div className={style.textWithIcon}>
         <FontAwesomeIcon icon={faUser} fixedWidth />
         <p> {getEventAttendees(attendance_event)} </p>
       </div>
