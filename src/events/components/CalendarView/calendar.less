@@ -8,6 +8,12 @@
 
 .monthChanger {
   .owOutline();
+  font-size: 30px;
+  color: @lightGray;
+  & :hover {
+    color: @gray;
+    cursor: pointer;
+  }
 }
 
 .grid {
@@ -59,11 +65,6 @@
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   margin-bottom: 20px;
-
-  > h3 {
-    user-select: none;
-    cursor: pointer;
-  }
 }
 
 .hoverCard {

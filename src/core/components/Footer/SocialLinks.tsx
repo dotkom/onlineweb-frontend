@@ -29,6 +29,11 @@ const SOCIAL: ISocialLink[] = [
     link: 'https://www.github.com/dotkom/',
     icon: '/static/img/social/github.svg',
   },
+  {
+    name: 'slack',
+    link: 'https://onlinentnu.slack.com/',
+    icon: '/static/img/social/slack.svg',
+  },
 ];
 
 const SocialLink = ({ name, link, icon }: ISocialLink) => (

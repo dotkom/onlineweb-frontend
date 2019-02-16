@@ -1,7 +1,9 @@
+import React, { Component, createContext } from 'react';
+
 import { prefetch } from 'common/utils/prefetch';
+import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getOfflines } from 'frontpage/api/offline';
 import { IOfflineIssue } from 'frontpage/models/Offline';
-import React, { Component, createContext } from 'react';
 
 export interface IOfflineIssuesState {
   offlines: IOfflineIssue[];
@@ -21,7 +23,7 @@ export interface IProps {
 
 export const OfflineContext = createContext(INITIAL_STATE);
 
-@prefetch('FrontpageOfflines')
+@prefetch(PrefetchKey.OFFLINES)
 class OfflineIssues extends Component<IProps, IOfflineIssuesState> {
   public static async getServerState(_: IProps): Promise<IOfflineIssue[]> {
     const data = await getOfflines(1);
