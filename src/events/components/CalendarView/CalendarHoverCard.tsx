@@ -1,6 +1,6 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faCalendarAlt as CalendarAlt } from '@fortawesome/free-solid-svg-icons/faCalendarAlt';
-import { faCalendarCheck as CalendarCheck } from '@fortawesome/free-solid-svg-icons/faCalendarCheck';
+import { faCalendarAlt as CalendarAlt } from '@fortawesome/free-regular-svg-icons/faCalendarAlt';
+import { faCalendarCheck as CalendarCheck } from '@fortawesome/free-regular-svg-icons/faCalendarCheck';
 import { faMapMarkedAlt as MapMarked } from '@fortawesome/free-solid-svg-icons/faMapMarkedAlt';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import { INewEvent } from 'events/models/Event';
