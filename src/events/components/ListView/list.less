@@ -82,9 +82,12 @@
   .gridRow > .elementGridRow:last-child {
     margin-right: 25px;
   }
-
   .eventTitle {
     font-size: 16px;
+  }
+  .elementGridRow:nth-child(4) {
+    // 4, to select the date text so we can pull the icons closer to eachother
+    margin-right: -15px;
   }
 }
 
@@ -92,12 +95,25 @@
 @media (max-width: 610px) {
   .gridRow {
     width: 95%;
+    height: 4rem;
+  }
+  .eventType {
+    top: 0.5rem;
+  }
+  .eventTitle {
+    top: 1.5rem;
   }
 }
 
-@media (max-width: 485px) {
-  .gridRow {// Because iPhone 5
-    height: 5rem;
+@media (max-width: 505px) {
+  .gridRow {
+    height: 5rem; // Because iPhone 5
+  }
+  .elementGridRow:last-child {
+    margin-right: 0px;
+  }
+  .elementGridRow:nth-child(4) {
+    margin-right: -5px;
   }
 }
 /* End of Mobile CSS */
