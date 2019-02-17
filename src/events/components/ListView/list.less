@@ -30,7 +30,7 @@
   position: relative;
   grid-template-columns: 1fr 20fr 1fr 1fr 2fr 4fr;
   grid-column-gap: 10px;
-  max-width: 65%;
+  width: 65%;
   margin: auto;
   height: 80px;
   .owCard();
@@ -74,14 +74,11 @@
 @media (max-width: 830px) {
   .gridRow {
     height: 100px;
+    width: 75%;
   }
 }
 
 @media (max-width: 705px) {
-  .gridRow {
-    width: 460px;
-  }
-
   .gridRow > .elementGridRow:last-child {
     margin-right: 25px;
   }
@@ -91,20 +88,16 @@
   }
 }
 
+
 @media (max-width: 610px) {
   .gridRow {
-    width: 425px;
-  }
-  .elementGridRow > p {
-    font-size: 16px;
+    width: 95%;
   }
 }
 
 @media (max-width: 485px) {
-  .gridRow {
-    width: 320px; // Because iPhone 5
+  .gridRow {// Because iPhone 5
     height: 5rem;
   }
 }
-
 /* End of Mobile CSS */
