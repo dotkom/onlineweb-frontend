@@ -4,10 +4,10 @@
 @polygonMobileSize: 16px;
 
 .grid {
-  max-width: 100%;
+  margin: auto;
   display: grid;
-  grid-template-rows: repeat(1fr);
   grid-row-gap: 25px;
+  margin-top: 40px; // More spacing before the cards
 
   & > a {
     color: initial;
@@ -18,15 +18,30 @@
   }
 }
 
+.icon {
+  align-self: center;
+  margin-bottom: 2px;
+  margin-right: -5px; // Moves the icons a bit closer to the accompanying text
+  text-align: right;
+}
+
 .gridRow {
   display: grid;
-  grid-template-columns: 200px auto 50px 50px 85px;
+  position: relative;
+  grid-template-columns: 1fr 20fr 1fr 1fr 2fr 4fr;
   grid-column-gap: 10px;
-  height: 60px;
+  max-width: 65%;
+  margin: auto;
+  height: 80px;
   .owCard();
 
-  @media screen and (max-width: @owMobileBreakpoint) {
-    grid-template-columns: @polygonMobileSize auto 50px 50px 0;
+  > span {
+    width: 5px;
+    margin: 10px 0 10px 15px;
+  }
+
+  > p {
+    font-size: 20px;
   }
 }
 
@@ -35,54 +50,61 @@
   position: relative;
   display: flex;
   align-items: center;
-  height: 60px;
-
-  &:first-child,
-  &:nth-child(2) {
-    > p {
-      padding-left: 15px;
-    }
-  }
 }
 
-.hostPolygon {
-  background: currentColor;
-  height: 100%;
-  width: 200px;
-  clip-path: polygon(90% 0, 0 0, 0 100%, 90% 100%, 100% 65%);
-
-  @media screen and (max-width: @owMobileBreakpoint) {
-    width: @polygonMobileSize;
-    clip-path: none;
-
-    & > p {
-      display: none;
-    }
-  }
+.eventType {
+  font-weight: 600;
+  top: 1rem;
+  color: #7f7f7f;
+  font-size: 14px;
 }
 
-.host {
-  color: #fff;
-  display: inline;
+.eventTitle {
+  top: 2rem;
+  font-size: 20px;
+}
+
+.eventType,
+.eventTitle {
   position: absolute;
-  top: 50%;
-  left: 20%;
-  transform: translateY(-50%);
 }
 
-.statusPolygon {
-  background: @gray;
-  height: 100%;
-  width: 85px;
-  clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 35%);
-  @media screen and (max-width: @owMobileBreakpoint) {
-    display: none;
+/* Mobile CSS */
+
+@media (max-width: 830px) {
+  .gridRow {
+    height: 100px;
   }
 }
 
-.personSvg {
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  transform: translate(-30%, -50%);
+@media (max-width: 705px) {
+  .gridRow {
+    width: 460px;
+  }
+
+  .gridRow > .elementGridRow:last-child {
+    margin-right: 25px;
+  }
+
+  .eventTitle {
+    font-size: 16px;
+  }
 }
+
+@media (max-width: 610px) {
+  .gridRow {
+    width: 425px;
+  }
+  .elementGridRow > p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 485px) {
+  .gridRow {
+    width: 320px; // Because iPhone 5
+    height: 5rem;
+  }
+}
+
+/* End of Mobile CSS */
