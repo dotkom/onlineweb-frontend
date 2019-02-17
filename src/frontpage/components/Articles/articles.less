@@ -68,3 +68,44 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+/* Mobile CSS */
+
+@media (max-width: 1024px) {
+  .articles {
+    margin: auto;
+    max-width: 60%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 920px) {
+  .smallArticle {
+    grid-template-columns: 1fr;
+  }
+  .smallImage {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 5px;
+  }
+}
+
+@media (max-width: 705px) {
+  .articles {
+    width: 460px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 610px) {
+  .articles {
+    width: 425px;
+  }
+}
+
+@media (max-width: 485px) {
+  .articles {
+    width: 320px; // Because iPhone 5
+  }
+}
+
+/* End of Mobile CSS */
