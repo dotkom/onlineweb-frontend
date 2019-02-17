@@ -32,7 +32,14 @@
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+  .large,
+  .small {
+    height: 100%;
+  }
 }
+
+/* Mobile CSS */
 
 @media (max-width: 1024px) {
   .largeEventGrid,
@@ -42,17 +49,44 @@
   }
   .largeContent,
   .small {
-    height: 4rem !important;
+    height: 4rem;
   }
   .largeEventGrid {
     margin-bottom: 20px;
   }
 }
 
+@media (max-width: 705px) {
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 460px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 610px) {
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 425px;
+  }
+}
+
+@media (max-width: 485px) {
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 320px; // Because iPhone 5
+  }
+  .largeContent,
+  .small {
+    height: 5rem;
+  }
+}
+
+/* End of Mobile CSS */
+
 .large {
   display: flex;
   flex-direction: column;
-  height: 100%;
   .owCard();
 }
 
@@ -109,7 +143,6 @@
   display: grid;
   grid-template-columns: 1fr 9fr 1fr 1fr 1fr 1fr;
   position: relative;
-  height: 100%;
   .owCard();
   padding-right: 10px;
 }
