@@ -22,7 +22,7 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-gap: @grid-gap;
-  overflow: hidden;
+  overflow: visible; // Changed because the box-shadow was clipping
 }
 
 .articleContainer {
@@ -31,6 +31,11 @@
 
   & img {
     width: 100%;
+  }
+
+  & .largeImage {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
   }
 
   & > div {
@@ -50,6 +55,9 @@
 }
 
 .smallImage {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+
   @media screen and (max-width: @owDesktopMaxWidth) and (min-width: @owTabletBreakpoint) {
     height: 100%;
   }
