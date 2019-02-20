@@ -1,5 +1,6 @@
 @import '~common/less/mixins.less';
 @import '~common/less/colors.less';
+@import '~common/less/constants.less';
 
 .container {
   margin-top: 40px;
@@ -8,6 +9,12 @@
 
 .carouselContainer {
   display: flex;
+
+  overflow-x: scroll;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .carouselArrow {
@@ -18,15 +25,18 @@
 
 .carousel {
   display: flex;
-  margin: 0 2vw;
-  flex-grow: 1;
-  justify-content: space-between;
 }
 
 .carouselItem {
   .owCard();
   transition: 1s ease-in 0.2s;
   text-align: center;
+
+  width: 200px;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    width: 150px;
+  }
 
   a {
     color: @darkGray;
@@ -38,5 +48,9 @@
 
   img {
     width: 100%;
+  }
+
+  &:not(:last-child) {
+    margin-right: 20px;
   }
 }
