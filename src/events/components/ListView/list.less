@@ -20,28 +20,28 @@
 
 .icon {
   align-self: center;
-  margin-bottom: 2px;
-  margin-right: -5px; // Moves the icons a bit closer to the accompanying text
   text-align: right;
 }
 
 .gridRow {
   display: grid;
+  grid-template-columns: 1fr 9fr 1fr 1fr 1fr 1fr;
   position: relative;
-  grid-template-columns: 1fr 20fr 1fr 1fr 2fr 4fr;
-  grid-column-gap: 10px;
+  .owCard();
+  padding-right: 10px;
   width: 65%;
   margin: auto;
   height: 80px;
   .owCard();
 
   > span {
-    width: 5px;
-    margin: 10px 0 10px 15px;
+    width: 4px;
+    margin: 10px 0 10px 8px;
   }
 
   > p {
-    font-size: 20px;
+    align-self: center;
+    font-size: 18px;
   }
 }
 
@@ -67,6 +67,7 @@
 .eventType,
 .eventTitle {
   position: absolute;
+  left: -3px;
 }
 
 /* Mobile CSS */

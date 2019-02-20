@@ -22,15 +22,11 @@ const ListEvent = ({ title, event_start, attendance_event, event_type }: INewEve
       <div className={style.icon}>
         <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
       </div>
-      <div className={style.elementGridRow}>
-        <p> {eventDate} </p>
-      </div>
+      <p> {eventDate} </p>
       <div className={style.icon}>
         <FontAwesomeIcon icon={faUser} fixedWidth />
       </div>
-      <div className={style.elementGridRow}>
-        <p> {eventAttendees} </p>
-      </div>
+      <p> {eventAttendees} </p>
     </div>
   );
 };
