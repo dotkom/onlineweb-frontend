@@ -1,8 +1,11 @@
-import Heading from 'common/components/Heading';
 import React, { useEffect, useRef, useState } from 'react';
-import { getOfflines, getRemainingOfflines } from '../../api/offline';
 
-import { IOfflineIssue } from '../../models/Offline';
+import Heading from 'common/components/Heading';
+import { usePrefetch } from 'common/hooks/usePrefetch';
+import { PrefetchKey } from 'common/utils/PrefetchState';
+import { getOfflines, getRemainingOfflines } from 'frontpage/api/offline';
+import { IOfflineIssue } from 'frontpage/models/Offline';
+
 import CarouselArrow from './CarouselArrow';
 import style from './offline.less';
 import OfflineCarousel from './OfflineCarousel';
@@ -29,7 +32,13 @@ const createOfflineRefs = (offlines: IOfflineIssue[]): IOfflineRef[] => {
 };
 
 export const Offline = ({  }: IProps) => {
-  const [offlines, setOfflines] = useState<IOfflineRef[]>([]);
+  const prefetch = usePrefetch(PrefetchKey.OFFLINES, async () => {
+    const { results } = await getOfflines(1);
+    return results;
+  });
+  const initialOfflines = prefetch && prefetch.length ? createOfflineRefs(prefetch) : [];
+
+  const [offlines, setOfflines] = useState<IOfflineRef[]>(initialOfflines);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const getSizes = () => {
@@ -47,6 +56,7 @@ export const Offline = ({  }: IProps) => {
   };
 
   const scrollToIndex = (index: number) => {
+    /** Bound the index by the upper and lower limits of the array */
     const boundedIndex = index < 0 ? 0 : index >= offlines.length ? offlines.length - 1 : index;
     const target = offlines[boundedIndex];
     const ref = target ? target.ref.current : null;
@@ -58,7 +68,9 @@ export const Offline = ({  }: IProps) => {
   const scrollToNextRef = () => {
     const sizes = getSizes();
     if (sizes) {
+      /** Calculate number of places to move based on screen size */
       const amount = Math.floor(sizes.container / sizes.element);
+      /** Calculate current position the array based on location of scroll */
       const currentIndex = Math.floor(sizes.position / (sizes.element + 20));
       scrollToIndex(currentIndex + amount * 2 - 1);
     }
@@ -67,7 +79,9 @@ export const Offline = ({  }: IProps) => {
   const scrollToPrevRef = () => {
     const sizes = getSizes();
     if (sizes) {
+      /** Calculate number of places to move based on screen size */
       const amount = Math.floor(sizes.container / sizes.element);
+      /** Calculate current position the array based on location of scroll */
       const currentIndex = Math.ceil(sizes.position / (sizes.element + 20));
       scrollToIndex(currentIndex - amount);
     }

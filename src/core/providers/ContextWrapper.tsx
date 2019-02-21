@@ -2,7 +2,6 @@ import React, { ReactNode } from 'react';
 
 import FrontpageArticles from 'articles/providers/FrontpageArticles';
 import { EventsRepoProvider } from 'events/providers/EventsRepo';
-import OfflineIssues from 'frontpage/providers/OfflineIssues';
 
 export interface IProps {
   children: ReactNode;
@@ -10,9 +9,7 @@ export interface IProps {
 
 const ContextWrapper = ({ children }: IProps) => (
   <EventsRepoProvider>
-    <FrontpageArticles>
-      <OfflineIssues>{children}</OfflineIssues>
-    </FrontpageArticles>
+    <FrontpageArticles>{children}</FrontpageArticles>
   </EventsRepoProvider>
 );
 
