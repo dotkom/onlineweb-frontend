@@ -30,7 +30,6 @@ const createOfflineRefs = (offlines: IOfflineIssue[]): IOfflineRef[] => {
 
 export const Offline = ({  }: IProps) => {
   const [offlines, setOfflines] = useState<IOfflineRef[]>([]);
-  const [currentScroll, setCurrentScroll] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const getSizes = () => {
@@ -40,40 +39,37 @@ export const Offline = ({  }: IProps) => {
         return {
           element: first.ref.current.scrollWidth,
           container: carouselRef.current.clientWidth,
+          position: carouselRef.current.scrollLeft,
         };
       }
     }
     return null;
   };
 
-  const scroll = (amount: number) => {
-    const targetIndex = currentScroll + amount;
-    const target = offlines[targetIndex];
+  const scrollToIndex = (index: number) => {
+    const boundedIndex = index < 0 ? 0 : index >= offlines.length ? offlines.length - 1 : index;
+    const target = offlines[boundedIndex];
     const ref = target ? target.ref.current : null;
-    console.log('reg:', ref);
     if (ref) {
       ref.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
-      setCurrentScroll(targetIndex);
     }
   };
 
   const scrollToNextRef = () => {
     const sizes = getSizes();
-    console.log(sizes);
     if (sizes) {
       const amount = Math.floor(sizes.container / sizes.element);
-      console.log('Amount:', amount);
-      scroll(amount);
+      const currentIndex = Math.floor(sizes.position / (sizes.element + 20));
+      scrollToIndex(currentIndex + amount * 2 - 1);
     }
   };
 
   const scrollToPrevRef = () => {
     const sizes = getSizes();
-    console.log(sizes);
     if (sizes) {
-      const amount = -Math.floor(sizes.container / sizes.element);
-      console.log('Amount:', amount);
-      scroll(amount);
+      const amount = Math.floor(sizes.container / sizes.element);
+      const currentIndex = Math.ceil(sizes.position / (sizes.element + 20));
+      scrollToIndex(currentIndex - amount);
     }
   };
 
@@ -99,13 +95,14 @@ export const Offline = ({  }: IProps) => {
 
   return (
     <section className={style.container}>
-      <Heading title="Offline" />
-
-      <CarouselArrow direction="left" onClick={scrollToPrevRef} />
+      <div className={style.arrowContainer}>
+        <CarouselArrow direction="left" onClick={scrollToPrevRef} />
+        <Heading title="Offline" />
+        <CarouselArrow direction="right" onClick={scrollToNextRef} />
+      </div>
       <div className={style.carouselContainer} ref={carouselRef}>
         {offlines.length && <OfflineCarousel offlines={offlines} />}
       </div>
-      <CarouselArrow direction="right" onClick={scrollToNextRef} />
     </section>
   );
 };
