@@ -9,7 +9,7 @@
 
 .carouselContainer {
   display: flex;
-
+  scroll-snap-type: x mandatory;
   overflow-x: scroll;
   scrollbar-width: none;
   &::-webkit-scrollbar {
@@ -18,9 +18,18 @@
 }
 
 .carouselArrow {
+<<<<<<< HEAD
   cursor: pointer;
+=======
+>>>>>>> Offlines: add scrollsnap, restyle arrows and header
   align-self: center;
   background: none;
+  font-size: 30px;
+  color: @lightGray;
+  & :hover {
+    color: @gray;
+    cursor: pointer;
+  }
 }
 
 .carousel {
@@ -31,7 +40,7 @@
   .owCard();
   transition: 1s ease-in 0.2s;
   text-align: center;
-
+  scroll-snap-align: start;
   width: 200px;
 
   @media screen and (max-width: @owMobileBreakpoint) {
@@ -53,4 +62,11 @@
   &:not(:last-child) {
     margin-right: 20px;
   }
+}
+
+.arrowContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  margin-bottom: 20px;
 }
