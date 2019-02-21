@@ -99,7 +99,7 @@ export const Offline = ({  }: IProps) => {
   const fetchRemaining = async () => {
     const remaining = await getRemainingOfflines();
     const offlineRefs = createOfflineRefs(remaining);
-    setOfflines([...offlines, ...offlineRefs]);
+    setOfflines(offlineRefs);
   };
 
   /** Fetch offlines on first mount */
