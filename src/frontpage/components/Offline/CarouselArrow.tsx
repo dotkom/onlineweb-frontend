@@ -1,6 +1,6 @@
-import { faArrowAltCircleLeft } from '@fortawesome/free-solid-svg-icons/faArrowAltCircleLeft';
-import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons/faArrowAltCircleRight';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronCircleLeft as ChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronCircleLeft';
+import { faChevronCircleRight as ChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronCircleRight';
+import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styles from './offline.less';
 
@@ -12,7 +12,7 @@ export interface IProps {
 
 const CarouselArrow = ({ direction, onClick, disabled = false }: IProps) => (
   <button onClick={onClick} disabled={disabled} className={styles.carouselArrow}>
-    <FontAwesomeIcon icon={direction === 'left' ? faArrowAltCircleLeft : faArrowAltCircleRight} size="2x" />
+    <Icon icon={direction === 'left' ? ChevronLeft : ChevronRight} fixedWidth />
   </button>
 );
 

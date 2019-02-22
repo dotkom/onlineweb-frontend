@@ -1,9 +1,11 @@
-import Heading from 'common/components/Heading';
-import { IOfflineIssuesState, OfflineContext } from 'frontpage/providers/OfflineIssues';
-import React, { Component } from 'react';
-import { getOfflines, getRemaindingOfflines } from '../../api/offline';
+import React, { useEffect, useRef, useState } from 'react';
 
-import { IOfflineIssue } from '../../models/Offline';
+import Heading from 'common/components/Heading';
+import { usePrefetch } from 'common/hooks/usePrefetch';
+import { PrefetchKey } from 'common/utils/PrefetchState';
+import { getOfflines, getRemainingOfflines } from 'frontpage/api/offline';
+import { IOfflineIssue } from 'frontpage/models/Offline';
+
 import CarouselArrow from './CarouselArrow';
 import style from './offline.less';
 import OfflineCarousel from './OfflineCarousel';
@@ -11,83 +13,112 @@ import OfflineCarousel from './OfflineCarousel';
 export interface IProps {}
 
 export interface IState {
-  dataRemainding: boolean;
+  dataRemaining: boolean;
   offlines: IOfflineIssue[];
   index: number;
   page: number;
 }
 
-const DISPLAY_NUMBER = 5;
-
-class Offline extends Component<IProps, IState> {
-  public static contextType = OfflineContext;
-  public state: IState = {
-    dataRemainding: false,
-    offlines: [],
-    index: 0,
-    page: 1,
-  };
-
-  public async componentDidMount() {
-    const data = await getOfflines(1);
-    const { init }: IOfflineIssuesState = this.context;
-    init();
-
-    this.setState({
-      dataRemainding: Boolean(data.next),
-      offlines: data.results,
-    });
-  }
-
-  public handleNext = async () => {
-    if (this.state.dataRemainding) {
-      const remainding = await getRemaindingOfflines();
-
-      this.setState({
-        offlines: [...this.state.offlines, ...remainding],
-        dataRemainding: false,
-      });
-    }
-
-    this.setState((prevState) => ({
-      page: prevState.page + 1,
-    }));
-  };
-
-  public handlePrevious = async () => {
-    this.setState((prevState) => ({
-      page: prevState.page - 1,
-    }));
-  };
-
-  public render() {
-    const { offlines, page } = this.state;
-    const lastPage = Math.ceil(offlines.length / DISPLAY_NUMBER);
-    const visibleOfflines = offlines.slice(DISPLAY_NUMBER * (page - 1), DISPLAY_NUMBER * page);
-    /*
-    const { index } = this.state;
-    const { offlines }: IOfflineIssuesState = this.context;
-    const start = index;
-    const end = start + DISPLAY_NUMBER;
-    */
-    return (
-      <section className={style.container}>
-        <Heading title="Offline" />
-
-        <div className={style.carouselContainer}>
-          {offlines && (
-            <>
-              <CarouselArrow direction="left" onClick={this.handlePrevious} disabled={page === 1} />
-
-              <OfflineCarousel offlines={visibleOfflines} />
-
-              <CarouselArrow direction="right" onClick={this.handleNext} disabled={page === lastPage} />
-            </>
-          )}
-        </div>
-      </section>
-    );
-  }
+export interface IOfflineRef {
+  issue: IOfflineIssue;
+  ref: React.RefObject<HTMLDivElement>;
 }
+
+const createOfflineRefs = (offlines: IOfflineIssue[]): IOfflineRef[] => {
+  return offlines.map((issue) => ({
+    issue,
+    ref: React.createRef<HTMLDivElement>(),
+  }));
+};
+
+export const Offline = ({  }: IProps) => {
+  const prefetch = usePrefetch(PrefetchKey.OFFLINES, async () => {
+    const { results } = await getOfflines(1);
+    return results;
+  });
+  const initialOfflines = prefetch && prefetch.length ? createOfflineRefs(prefetch) : [];
+
+  const [offlines, setOfflines] = useState<IOfflineRef[]>(initialOfflines);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  const getSizes = () => {
+    if (offlines.length) {
+      const [first] = offlines;
+      if (first.ref.current && carouselRef.current) {
+        return {
+          element: first.ref.current.scrollWidth,
+          container: carouselRef.current.clientWidth,
+          position: carouselRef.current.scrollLeft,
+        };
+      }
+    }
+    return null;
+  };
+
+  const scrollToIndex = (index: number) => {
+    /** Bound the index by the upper and lower limits of the array */
+    const boundedIndex = index < 0 ? 0 : index >= offlines.length ? offlines.length - 1 : index;
+    const target = offlines[boundedIndex];
+    const ref = target ? target.ref.current : null;
+    if (ref) {
+      ref.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
+    }
+  };
+
+  const scrollToNextRef = () => {
+    const sizes = getSizes();
+    if (sizes) {
+      /** Calculate number of places to move based on screen size */
+      const amount = Math.floor(sizes.container / sizes.element);
+      /** Calculate current position the array based on location of scroll */
+      const currentIndex = Math.floor(sizes.position / (sizes.element + 20));
+      scrollToIndex(currentIndex + amount * 2 - 1);
+    }
+  };
+
+  const scrollToPrevRef = () => {
+    const sizes = getSizes();
+    if (sizes) {
+      /** Calculate number of places to move based on screen size */
+      const amount = Math.floor(sizes.container / sizes.element);
+      /** Calculate current position the array based on location of scroll */
+      const currentIndex = Math.ceil(sizes.position / (sizes.element + 20));
+      scrollToIndex(currentIndex - amount);
+    }
+  };
+
+  /** Get the first batch of Offlines for feast loading */
+  const fetchInitial = async () => {
+    const { results } = await getOfflines(1);
+    const offlineRefs = createOfflineRefs(results);
+    setOfflines(offlineRefs);
+    fetchRemaining();
+  };
+
+  /** Get all the remaining Offlines to fill out the list */
+  const fetchRemaining = async () => {
+    const remaining = await getRemainingOfflines();
+    const offlineRefs = createOfflineRefs(remaining);
+    setOfflines(offlineRefs);
+  };
+
+  /** Fetch offlines on first mount */
+  useEffect(() => {
+    fetchInitial();
+  }, []);
+
+  return (
+    <section className={style.container}>
+      <div className={style.arrowContainer}>
+        <CarouselArrow direction="left" onClick={scrollToPrevRef} />
+        <Heading title="Offline" />
+        <CarouselArrow direction="right" onClick={scrollToNextRef} />
+      </div>
+      <div className={style.carouselContainer} ref={carouselRef}>
+        {offlines.length && <OfflineCarousel offlines={offlines} />}
+      </div>
+    </section>
+  );
+};
 
 export default Offline;
