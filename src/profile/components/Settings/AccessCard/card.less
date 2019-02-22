@@ -1,0 +1,23 @@
+@import '~common/less/constants.less';
+
+.container {
+  margin: 40px 0 0;
+  display: grid;
+  grid-template-columns: 300px 480px;
+  gap: 40px;
+
+  & > svg {
+    height: 480px;
+  }
+}
+
+@media screen and (max-width: @owMobileBreakpoint) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 480px 300px;
+
+    & > svg:last-child {
+      height: 300px;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@import '~common/less/constants.less';
+
+.centerChart {
+  & > div,
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.calendarChart {
+  height: 450px;
+  max-width: 90vw;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    height: 300px;
+  }
+}

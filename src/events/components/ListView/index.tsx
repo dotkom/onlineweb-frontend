@@ -1,34 +1,52 @@
-import { IListEventsState, ListEventsContext } from 'events/providers/ListEvents';
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { IEventViewProps } from '../../models/Event';
+import React, { useContext, useEffect } from 'react';
+
+import { usePrefetch } from 'common/hooks/usePrefetch';
+import { PrefetchKey } from 'common/utils/PrefetchState';
+import { Link } from 'core/components/Router';
+import { getListEvents } from 'events/api/listEvents';
+import { EventsRepo } from 'events/providers/EventsRepo';
+import { isOngoingOrFuture } from 'events/utils/isOngoing';
+
+import { IEventViewProps, INewEvent } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
 
 export type IProps = IEventViewProps;
 
-class ListView extends Component<IProps> {
-  public static contextType = ListEventsContext;
+const filterListEvents = (events: INewEvent[]) => {
+  return events.filter((event) => isOngoingOrFuture(event)).slice(0, 7);
+};
 
-  public async componentDidMount() {
-    const { init }: IListEventsState = this.context;
-    await init();
-  }
+export const ListView = ({  }: IProps) => {
+  const { eventList, updateEventList } = useContext(EventsRepo);
 
-  public render() {
-    const { events }: IListEventsState = this.context;
-    return (
-      <>
-        <div className={style.grid}>
-          {events.map((event) => (
-            <Link to={`/events/${event.id}`} key={event.id}>
-              <ListEvent {...event} />
-            </Link>
-          ))}
-        </div>
-      </>
-    );
-  }
-}
+  const prefetch = usePrefetch(PrefetchKey.EVENTS_LIST, async () => {
+    const prefetchedEvents = await getListEvents();
+    return filterListEvents(prefetchedEvents);
+  });
+
+  useEffect(() => {
+    (async () => {
+      const newEvents = await getListEvents();
+      updateEventList(newEvents);
+    })();
+  }, []);
+
+  const events = filterListEvents(eventList);
+
+  const displayEvents = events.length ? events : prefetch || [];
+
+  return (
+    <>
+      <div className={style.grid}>
+        {displayEvents.map((event) => (
+          <Link to={`/events/${event.id}`} key={event.id}>
+            <ListEvent {...event} />
+          </Link>
+        ))}
+      </div>
+    </>
+  );
+};
 
 export default ListView;

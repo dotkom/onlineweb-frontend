@@ -30,9 +30,9 @@ const SOCIAL: ISocialLink[] = [
     icon: '/static/img/social/github.svg',
   },
   {
-    name: 'googleplus',
-    link: 'https://plus.google.com/107294836198591872251',
-    icon: '/static/img/social/gpluss.svg',
+    name: 'slack',
+    link: 'https://onlinentnu.slack.com/',
+    icon: '/static/img/social/slack.svg',
   },
 ];
 

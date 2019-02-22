@@ -1,6 +1,6 @@
 import classnames from 'classnames';
+import { Link } from 'core/components/Router';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import style from './menu.less';
 
 export interface IProps {

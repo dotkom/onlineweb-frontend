@@ -1,8 +1,10 @@
 import { DateTime } from 'luxon';
 import React, { ReactChild } from 'react';
+
 import { IAttendanceEvent } from '../../models/Event';
 import Block from './Block';
 import style from './detail.less';
+import { EventCountDown } from './EventCountDown';
 
 interface IRuleBundleBox {
   children: ReactChild | ReactChild[];
@@ -39,7 +41,7 @@ const RuleBundles = ({ event }: IAttendanceEventProps) => {
           <RuleBundleBox>Alle</RuleBundleBox>
         ) : bundlesEnabled ? (
           sortedBundles.map((bundle) =>
-            bundle.rule_strings.map((rule_string) => <RuleBundleBox key={bundle.id}>{rule_string}</RuleBundleBox>)
+            bundle.rule_strings.map((rule_string) => <RuleBundleBox key={rule_string}>{rule_string}</RuleBundleBox>)
           )
         ) : (
           <RuleBundleBox>Alle medlemmer</RuleBundleBox>
@@ -50,22 +52,22 @@ const RuleBundles = ({ event }: IAttendanceEventProps) => {
 };
 
 const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
-  const registrationStart = DateTime.fromISO(event.registration_start).toFormat('d MMM hh:mm');
-  const registrationEnd = DateTime.fromISO(event.registration_end).toFormat('d MMM hh:mm');
-  const cancellationDeadline = DateTime.fromISO(event.unattend_deadline).toFormat('d MMM hh:mm');
+  const registrationStart = DateTime.fromISO(event.registration_start);
+  const registrationEnd = DateTime.fromISO(event.registration_end);
+  const cancellationDeadline = DateTime.fromISO(event.unattend_deadline);
 
   return (
     <div className={style.blockGrid}>
       <Block title="Påmeldingsstart">
-        <p>{registrationStart}</p>
+        <EventCountDown endTime={registrationStart} />
       </Block>
 
       <Block title="Påmeldingslutt">
-        <p>{registrationEnd}</p>
+        <EventCountDown endTime={registrationEnd} />
       </Block>
 
       <Block title="Avmeldingsfrist">
-        <p>{cancellationDeadline}</p>
+        <EventCountDown endTime={cancellationDeadline} />
       </Block>
 
       <RuleBundles event={event} />
@@ -76,7 +78,9 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
         </p>
       </Block>
 
-      <Block title="Venteliste">{event.waitlist ? <p>{event.number_on_waitlist}</p> : <p>Ikke tilgjengelig</p>}</Block>
+      <Block title="Venteliste">
+        <p>{event.waitlist ? event.number_on_waitlist : '-'}</p>
+      </Block>
     </div>
   );
 };

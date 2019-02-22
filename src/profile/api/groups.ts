@@ -1,18 +1,28 @@
-import { IGroup } from 'core/models/Group';
-
-export const getGroups = async (): Promise<IGroup[]> => {
+export const getGroups = async (): Promise<string[]> => {
   // const { data } = await get(API_URL, { format: 'json' }) as { data: IGroup[] }
-  const data: IGroup[] = [
-    { name: 'Alle grupper', permissions: [''] },
-    { name: 'arrkom', permissions: [''] },
-    { name: 'bedkom', permissions: [''] },
-    { name: 'bankom', permissions: [''] },
-    { name: 'dotkom', permissions: [''] },
-    { name: 'fagkom', permissions: [''] },
-    { name: 'hovedstyret', permissions: [''] },
-    { name: 'prokom', permissions: [''] },
-    { name: 'seniorkom', permissions: [''] },
-    { name: 'trikom', permissions: [''] },
+  const data: string[] = [
+    'Alle grupper',
+    'arrKom',
+    'bedKom',
+    'banKom',
+    'dotKom',
+    'fagKom',
+    'Hovedstyret',
+    'proKom',
+    'seniorKom',
+    'triKom',
+    'Æresmedlemmer',
+    'Eldsterådet',
+    'Ex-Hovedstyre',
+    'Fond',
+    'itex',
+    'jubKom',
+    'Komiteer',
+    'pangKom',
+    'Realfagskjelleren',
+    'Redaksjonen',
+    'Riddere',
+    'velKom',
   ];
   return data;
 };

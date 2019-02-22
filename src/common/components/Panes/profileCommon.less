@@ -1,5 +1,6 @@
 @import '~common/less/colors.less';
 @import '~common/less/mixins.less';
+@import '~common/less/constants.less';
 
 @grid-gap: 30px;
 
@@ -16,10 +17,18 @@
   gap: @grid-gap;
 }
 
+.fill {
+  width: 100%;
+}
+
 .splitPane {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: @grid-gap;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: auto;
+  }
 }
 
 .fourSplitPane {
@@ -27,4 +36,15 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: @grid-gap;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: auto;
+  }
+}
+
+.content {
+  & > h2 {
+    text-align: center;
+    padding: 0 0 10px;
+  }
 }

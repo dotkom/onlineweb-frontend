@@ -8,7 +8,9 @@ export const toQueryString = (queryObject: any): string => {
   if (!keys.length) {
     return '';
   }
-  const queries = keys.map((key: string) => `${key}=${queryObject[key]}`);
+  const queries = keys
+    .filter((key) => queryObject[key] !== undefined)
+    .map((key: string) => `${key}=${queryObject[key]}`);
   return `?${queries.join('&')}`;
 };
 

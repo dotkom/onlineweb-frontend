@@ -1,6 +1,8 @@
-import EventContextWrapper from 'events/providers/EventContextWrapper';
-import React, { Component } from 'react';
-import { getEventSettings, IEventSettings, saveEventSettings } from '../api/eventSettings';
+import React, { useContext, useState } from 'react';
+
+import { clearCache } from 'common/utils/cache';
+import { CookieActionType, CookieContext } from 'core/providers/Cookies';
+
 import { EventView } from '../models/Event';
 import CalendarView from './CalendarView';
 import EventsHeader from './EventsHeader';
@@ -8,7 +10,7 @@ import ImageView from './ImageView';
 import style from './less/eventsContainer.less';
 import ListView from './ListView';
 
-const getView = (view: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
+const getView = (view?: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
   switch (view) {
     case EventView.IMAGE:
       return ImageView;
@@ -21,53 +23,27 @@ const getView = (view: EventView): typeof ListView | typeof CalendarView | typeo
   }
 };
 
-export interface IProps {}
-
-export interface IState extends IEventSettings {}
-
-class Container extends Component<IProps, IState> {
-  public state: IState = {
-    view: EventView.IMAGE,
-    accessible: false,
+export const EventContainer = () => {
+  const { cookies, dispatch } = useContext(CookieContext);
+  const View = getView(cookies.eventView);
+  const changeView = (view: EventView) => {
+    dispatch({ type: CookieActionType.CHANGE, value: { eventView: view } });
+    clearCache();
   };
 
-  public async componentDidMount() {
-    this.getSettings();
-  }
+  const [accessible, setAccessible] = useState(false);
+  const toggleAccessible = () => setAccessible(!accessible);
+  return (
+    <section className={style.section}>
+      <EventsHeader
+        changeView={changeView}
+        toggleAccessible={toggleAccessible}
+        accessible={accessible}
+        view={cookies.eventView}
+      />
+      <View accessible={accessible} />
+    </section>
+  );
+};
 
-  public getSettings = async () => {
-    const settings = await getEventSettings();
-    this.setState({ ...settings });
-  };
-
-  public saveSettings = async () => {
-    saveEventSettings(this.state);
-  };
-
-  public changeView = (view: EventView) => {
-    this.setState({ view }, () => this.saveSettings());
-  };
-
-  public toggleAccessible = () => {
-    this.setState({ accessible: !this.state.accessible }, () => this.saveSettings());
-  };
-
-  public render() {
-    const { view, accessible } = this.state;
-    const View = getView(view);
-    return (
-      <section className={style.section}>
-        <EventContextWrapper accessible={accessible}>
-          <EventsHeader
-            changeView={(v: EventView) => this.changeView(v)}
-            toggleAccessible={this.toggleAccessible}
-            {...this.state}
-          />
-          <View accessible={accessible} />
-        </EventContextWrapper>
-      </section>
-    );
-  }
-}
-
-export default Container;
+export default EventContainer;

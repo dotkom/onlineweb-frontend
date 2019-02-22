@@ -1,62 +1,48 @@
-import Collapsible from 'common/components/Collapsible';
-import { DateTime, Interval } from 'luxon';
-import { IPenalty } from '../../../models/Penalty';
+import { DateTime } from 'luxon';
+import React from 'react';
 
-export interface IProps<T> {
-  penalty: T;
+import { Pane } from 'common/components/Panes';
+import { getCompletionColor, Penalty, sortByExpiration } from 'profile/models/Penalty';
+
+import style from './penalties.less';
+import Placeholder from './Placeholder';
+
+export interface IPenaltyTitleProps {
+  title: string;
+  added: DateTime;
 }
 
-/**
- * @extends React.Component
- * @summary Displays a single Penalty (Prikk | Suspensjon).
- * @description Abstract Component for displaying Marks or Suspensions.
- * @param {IPenalty} IPenalty Component needs to be supplied the type of penalty it supports.
- * @param {IPenalty} penalty Component needs to be supplied a penalty to display.
- */
-abstract class Penalty<T> extends Collapsible<IProps<T>> {
-  public static sortByExpiration(a: IPenalty, b: IPenalty): number {
-    return new Date(b.expiration_date).getTime() - new Date(a.expiration_date).getTime();
-  }
-  constructor(props: IProps<T>) {
-    super(props);
-  }
+export const PenaltyTitle = ({ title, added }: IPenaltyTitleProps) => {
+  return (
+    <div className={style.penaltyTitle}>
+      <h3>{title}</h3>
+      <span>{added.toFormat('d MMMM y')}</span>
+    </div>
+  );
+};
 
-  /**
-   * @summary Finds the percentage of completion for an IPenalty.
-   * @param {IPenalty} penalty Given penalty, (Prikk | Suspensjon)
-   * @returns {number} Percentage of completion
-   */
-  public getPenaltyCompletion(penalty: IPenalty): number {
-    // Set number of days a Penalty lasts, number between 0.0 and 100.0
-    const penaltyLength = 30;
-
-    const end = DateTime.fromISO(penalty.expiration_date);
-    const start = end.minus({ days: penaltyLength });
-    const now = DateTime.local();
-
-    // Check if penalty is ongoing
-    if (Interval.fromDateTimes(start, end).contains(now)) {
-      const progress = now.diff(start).as('seconds');
-      const total = end.diff(start).as('seconds');
-      return Math.round((progress / total) * 100);
-    } else if (now > end) {
-      return 100;
-    }
-    return 0;
-  }
-
-  public getCompletionColor(percentage: number): 'red' | 'white' | 'gray' {
-    switch (percentage) {
-      case 100:
-        return 'gray';
-      case 0:
-        return 'white';
-      default:
-        return 'red';
-    }
-  }
-
-  public abstract render(): JSX.Element;
+export interface IPenaltyProgressProps {
+  completion: number;
 }
 
-export default Penalty;
+export const PenaltyProgress = ({ completion }: IPenaltyProgressProps) => {
+  const completionColor = getCompletionColor(completion);
+  return <div className={style.progressBar} style={{ width: completion + '%', backgroundColor: completionColor }} />;
+};
+
+export interface IPenaltyPaneProps {
+  render: (penalty: Penalty) => JSX.Element;
+  penalties: Penalty[];
+  loaded: boolean;
+  ifNone: string;
+  name: string;
+}
+
+export const PenaltyPane = ({ loaded, render, penalties, ifNone, name }: IPenaltyPaneProps) => {
+  return (
+    <Pane>
+      <h2>{name}</h2>
+      {!loaded ? <Placeholder /> : penalties.length ? penalties.sort(sortByExpiration).map(render) : <p>{ifNone}</p>}
+    </Pane>
+  );
+};

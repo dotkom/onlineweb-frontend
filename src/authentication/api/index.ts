@@ -1,7 +1,6 @@
+import { __CLIENT__ } from 'common/constants/environment';
 import { User, UserManager } from 'oidc-client';
 import settings from './settings';
-
-const MANAGER = new UserManager(settings);
 
 /**
  * @summary Basic wrapper for OIDC login.
@@ -9,8 +8,13 @@ const MANAGER = new UserManager(settings);
  */
 export const logIn = async () => {
   try {
-    await MANAGER.getUser();
-    MANAGER.signinRedirect();
+    if (__CLIENT__) {
+      const manager = new UserManager(settings);
+      await manager.getUser();
+      manager.signinRedirect({ data: window.location.pathname });
+    } else {
+      throw new Error('Login attempted from server side renderer');
+    }
   } catch (e) {
     // tslint:disable-next-line no-console
     console.error(e);
@@ -20,16 +24,28 @@ export const logIn = async () => {
 /**
  * @summary Receives the callback from an OIDC login, and returns the user.
  */
-export const authCallback = async (): Promise<User> => {
-  const user = await MANAGER.signinRedirectCallback();
-  return user;
+export const authCallback = async (): Promise<User | undefined> => {
+  try {
+    if (__CLIENT__) {
+      const manager = new UserManager(settings);
+      const user = await manager.signinRedirectCallback();
+      return user;
+    } else {
+      throw new Error('Auth Callback attempted from server side renderer');
+    }
+  } catch (e) {
+    // tslint:disable-next-line no-console
+    console.error(e);
+  }
+  return;
 };
 
 /**
  * @summary Returns user if logged in
  */
 export const getUser = async (): Promise<User> => {
-  const user = await MANAGER.getUser();
+  const manager = new UserManager(settings);
+  const user = await manager.getUser();
   return user;
 };
 
@@ -40,7 +56,8 @@ export const getUser = async (): Promise<User> => {
 export const logOut = async () => {
   try {
     // Should maybe logout from onlineweb aswell
-    await MANAGER.removeUser();
+    const manager = new UserManager(settings);
+    await manager.removeUser();
   } catch (e) {
     // tslint:disable-next-line no-console
     console.error(e);

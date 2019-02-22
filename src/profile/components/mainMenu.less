@@ -17,6 +17,10 @@
 
   h1 {
     font-size: @owFontM;
+
+    @media screen and (max-width: @owMobileBreakpoint) {
+      font-size: calc(~'@{owFontM} - 4px');
+    }
   }
 }
 
