@@ -1,0 +1,49 @@
+@import '~common/less/colors.less';
+
+@inputHeight: 42px;
+
+.editCardInput {
+  display: grid;
+  width: 100%;
+  height: @inputHeight;
+  grid-template-columns: 34px minmax(auto, 460px) @inputHeight;
+  margin: 16px 0 0;
+  gap: 8px;
+
+  p {
+    font-weight: bold;
+    text-align: center;
+    margin: auto;
+  }
+
+  input,
+  button {
+    height: 100%;
+    width: 100%;
+  }
+
+  input {
+    box-sizing: border-box;
+    border: @offWhite solid 2px;
+  }
+
+  button {
+    color: #fff;
+  }
+}
+
+.buttonValid {
+  background: @blue;
+}
+
+.buttonInvalid {
+  background: @gray;
+}
+
+.buttonChecked {
+  background: @green;
+}
+
+.buttonReset {
+  background: @red;
+}

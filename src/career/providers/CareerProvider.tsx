@@ -1,7 +1,11 @@
-import { getCareerOpportunities } from 'career/api';
-import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
-import { IApiCompany } from 'core/models/Company';
 import React, { Component, createContext } from 'react';
+
+import { FilterJobs, getCareerOpportunities } from 'career/api';
+import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
+import { prefetch } from 'common/utils/prefetch';
+import { PrefetchKey } from 'common/utils/PrefetchState';
+
+import { IApiCompany } from 'core/models/Company';
 
 type Filters = 'locations' | 'companies' | 'jobTypes';
 
@@ -51,10 +55,26 @@ const INITIAL_STATE: ICareerContextState = {
 
 export const CareerContext = createContext(INITIAL_STATE);
 
-class CareerOpportunities extends Component<{}, ICareerContextState> {
-  public state: ICareerContextState = {
-    ...INITIAL_STATE,
-  };
+export interface IProps {
+  prefetch?: FilterJobs;
+}
+
+@prefetch(PrefetchKey.CAREER)
+class CareerOpportunities extends Component<IProps, ICareerContextState> {
+  public static async getServerState(_: IProps): Promise<FilterJobs> {
+    const filterJobs = await getCareerOpportunities();
+    return filterJobs;
+  }
+
+  constructor(props: IProps) {
+    super(props);
+    this.state = { ...INITIAL_STATE };
+
+    if (props.prefetch && props.prefetch.length) {
+      const [jobs, companies, jobTypes, locations] = props.prefetch;
+      this.state = { ...this.state, jobs, companies, jobTypes, locations };
+    }
+  }
 
   public async componentDidMount() {
     const [jobs, companies, jobTypes, locations] = await getCareerOpportunities();
@@ -129,15 +149,19 @@ class CareerOpportunities extends Component<{}, ICareerContextState> {
     /** Filter on selectable tags. Filter on a category if any of the tags in the category is selected. */
     if (companies.some((company) => company.selected)) {
       const filterCompanies = companies.filter((company) => company.selected).map((selectable) => selectable.value);
-      filteredJobs = filteredJobs.filter((job) => filterCompanies.includes(job.company));
+      filteredJobs = filteredJobs.filter((job) => !!filterCompanies.find((company) => company.id === job.company.id));
     }
     if (jobTypes.some((employment) => employment.selected)) {
       const filterJobTypes = jobTypes.filter((employment) => employment.selected).map((selectable) => selectable.value);
-      filteredJobs = filteredJobs.filter((job) => filterJobTypes.includes(job.employment));
+      filteredJobs = filteredJobs.filter(
+        (job) => !!filterJobTypes.find((employment) => employment.id === job.employment.id)
+      );
     }
     if (locations.some((location) => location.selected)) {
       const filterLocations = locations.filter((location) => location.selected).map((selectable) => selectable.value);
-      filteredJobs = filteredJobs.filter((job) => job.location.some((loc) => filterLocations.includes(loc)));
+      filteredJobs = filteredJobs.filter((job) =>
+        job.location.some((loc) => !!filterLocations.find((location) => location.name === loc.name))
+      );
     }
     return filteredJobs;
   }

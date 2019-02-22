@@ -12,7 +12,7 @@ const Repository = ({ id, name, description, public_url, languages, issues }: IR
           <p>{description}</p>
         </div>
         <div className={style.issues}>
-          <h2>{issues ? issues : '??'}</h2>
+          <h2>{issues ? issues : '0'}</h2>
           <h2>Issues</h2>
         </div>
       </div>

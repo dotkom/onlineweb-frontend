@@ -1,0 +1,40 @@
+@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+
+.container {
+  .owCard();
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 50px;
+  justify-items: center;
+  text-align: center;
+  background: @darkBlue;
+  padding: 30px;
+  max-width: 400px;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    max-width: 320px;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: #fff;
+  }
+
+  .icon {
+    width: 160px;
+  }
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 30px;
+  width: 100%;
+  background: #fff;
+}

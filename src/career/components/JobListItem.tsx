@@ -1,8 +1,9 @@
 import { ICareerOpportunity } from 'career/models/Career';
-import Img from 'common/components/Img';
+import ResponsiveImage from 'common/components/ResponsiveImage';
+import { Link } from 'core/components/Router';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import style from '../less/career.less';
+import { formatDeadline } from './JobDetails';
 
 // Accepts a list of locations and returns a comma-separated list of locations
 // with 'og' inserted before the last element, and 'Ikke spesifisert' if no
@@ -23,7 +24,7 @@ export const formatLocations = (locations: any) => {
 const JobListItem = ({ location, deadline, company, title, ingress, id, employment }: ICareerOpportunity) => (
   <div className={style.job}>
     <Link to={`/career/${id}`}>
-      <Img src={company.image.md} alt="Firmalogo" />
+      <ResponsiveImage image={company.image} size="md" alt="Firmalogo" />
     </Link>
     <div className={style.jobInfo}>
       <Link to={`/career/${id}`}>
@@ -37,7 +38,7 @@ const JobListItem = ({ location, deadline, company, title, ingress, id, employme
       <div className={style.jobMeta}>
         <p>Type: {employment.name}</p>
         <p>Sted: {formatLocations(location.map((loc) => loc.name))}</p>
-        <p>Frist: {deadline}</p>
+        <p>Frist: {formatDeadline(deadline)}</p>
       </div>
     </div>
   </div>

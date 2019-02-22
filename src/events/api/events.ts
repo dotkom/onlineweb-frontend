@@ -1,12 +1,14 @@
-import { get, IBaseAPIParameters } from 'common/utils/api';
-import { INewEvent } from '../models/Event';
+import { IAuthUser } from 'authentication/models/User';
+import { get, getAllPages, IBaseAPIParameters } from 'common/utils/api';
+import { EventTypeEnum, INewEvent } from '../models/Event';
 
 export interface IEventAPIParameters extends IBaseAPIParameters {
   event_start__gte?: string;
   event_start__lte?: string;
   event_end__gte?: string;
   event_end__lte?: string;
-  event_type?: number[] | number;
+  event_type?: EventTypeEnum[] | EventTypeEnum;
+  is_attendee?: 'True' | 'False';
 }
 
 export interface IAPIData<T> {
@@ -23,30 +25,10 @@ export const getEvents = async (args?: IEventAPIParameters): Promise<INewEvent[]
   return data.results;
 };
 
-export const getAllEvents = async (args?: IEventAPIParameters): Promise<INewEvent[]> => {
-  const data: IAPIData<INewEvent> = await get(API_URL, { format: 'json', ...args });
-  let { results } = data;
-  if (data.next) {
-    let next: IAPIData<INewEvent>; // tslint:disable-line no-shadowed-variable
-    for await (next of getPages(data.next)) {
-      results = [...results, ...next.results];
-      if (!next.next) {
-        break;
-      }
-    }
-  }
-  return results;
+export const getAllUserEvents = async (args: IEventAPIParameters, user: IAuthUser): Promise<INewEvent[]> => {
+  const data = await getAllPages<INewEvent>(API_URL, { format: 'json', page_size: 80, ...args }, { user });
+  return data;
 };
-
-async function* getPages(page: string) {
-  let nextPage = page;
-  while (true) {
-    const response = await fetch(nextPage);
-    const data: IAPIData<INewEvent> = await response.json();
-    nextPage = data.next || '';
-    yield data;
-  }
-}
 
 export const getEvent = async (id: number): Promise<INewEvent> => {
   const event: INewEvent = await get(API_URL + id + '/', { format: 'json' });

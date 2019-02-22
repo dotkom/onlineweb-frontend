@@ -1,30 +1,14 @@
+import { IAuthUser } from 'authentication/models/User';
+import { get, put } from 'common/utils/api';
 import { IPrivacy } from '../models/Privacy';
 
-const privacyMock: IPrivacy = {
-  expose_address: false,
-  expose_email: false,
-  expose_nickname: false,
-  expose_phone_number: false,
-  visible_for_other_users: false,
-};
-
-const setMockPrivacy = async (privacy: IPrivacy): Promise<IPrivacy> => {
-  localStorage.setItem('privacy', JSON.stringify(privacy));
-  return await getMockPrivacy();
-};
-
-const getMockPrivacy = async (): Promise<IPrivacy> => {
-  await setTimeout(() => {}, 1000); // tslint:disable-line no-empty
-  const data = localStorage.getItem('privacy');
-  return JSON.parse(data || '');
-};
+const API_URL = '/api/v1/profile/privacy/';
 
 /**
  * @returns {IPrivacy} Privacy options for a logged in OnlineUser.
  */
-export const getPrivacyOptions = async (): Promise<IPrivacy> => {
-  // const { data } = await get(API_URL, { format: 'json' })
-  const data = getMockPrivacy();
+export const getPrivacyOptions = async (user: IAuthUser): Promise<IPrivacy> => {
+  const data = await get(API_URL, { format: 'json' }, { user });
   return data;
 };
 
@@ -33,10 +17,7 @@ export const getPrivacyOptions = async (): Promise<IPrivacy> => {
  * @param {IPrivacy} privacyOptions Changed Privacy options for a user.
  * @returns {IPrivacy} The current state of OnlineUsers Privacy options.
  */
-export const postPrivacyOptions = async (privacyOptions: IPrivacy): Promise<IPrivacy> => {
-  // const { data } = await post(API_URL, privacyOptions, { format: 'json' })
-  const data = await setMockPrivacy(privacyOptions);
+export const putPrivacyOptions = async (privacyOptions: IPrivacy, user: IAuthUser): Promise<IPrivacy> => {
+  const data = await put({ query: API_URL, data: privacyOptions, options: { user } });
   return data;
 };
-
-setMockPrivacy(privacyMock);

@@ -1,22 +1,15 @@
-import { CareerContext, ICareerContextState } from 'career/providers/CareerProvider';
-import React, { Component } from 'react';
+import { CareerContext } from 'career/providers/CareerProvider';
+import React, { Component, ContextType } from 'react';
 import SearchBox from '../components/SearchBox';
 import style from '../less/career.less';
 import TagList from './TagList';
 
 class FilterList extends Component<{}> {
   public static contextType = CareerContext;
+  public context!: ContextType<typeof CareerContext>;
 
   public render() {
-    const {
-      handleReset,
-      companies,
-      toggleCompany,
-      locations,
-      toggleLocation,
-      jobTypes,
-      toggleJobType,
-    }: ICareerContextState = this.context;
+    const { handleReset, companies, toggleCompany, locations, toggleLocation, jobTypes, toggleJobType } = this.context;
     return (
       <div>
         <div className={style.filters}>

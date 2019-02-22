@@ -8,5 +8,5 @@ export const getOfflines = async (page: number = 1): Promise<IAPIData<IOfflineIs
 };
 
 export const getRemaindingOfflines = (): Promise<IOfflineIssue[]> => {
-  return getAllPages(API_URL, 2);
+  return getAllPages<IOfflineIssue>(API_URL, { page: 2 });
 };
