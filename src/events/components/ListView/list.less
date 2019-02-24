@@ -25,7 +25,7 @@
 
 .gridRow {
   display: grid;
-  grid-template-columns: 1fr 9fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 10fr 1fr 2fr 1fr 2fr;
   position: relative;
   .owCard();
   padding-right: 10px;
@@ -54,20 +54,22 @@
 
 .eventType {
   font-weight: 600;
-  top: 1rem;
   color: #7f7f7f;
-  font-size: 14px;
+  top: 40%;
+  font-size: 20px;
 }
 
 .eventTitle {
-  top: 2rem;
   font-size: 20px;
+  top: 60%;
 }
 
 .eventType,
 .eventTitle {
   position: absolute;
-  left: -3px;
+  left: 50%; /* position the left edge of the element at the middle of the parent */
+  width: 100%;
+  transform: translate(-50%, -50%);
 }
 
 /* Mobile CSS */
@@ -96,12 +98,6 @@
   .gridRow {
     width: 95%;
     height: 4rem;
-  }
-  .eventType {
-    top: 0.5rem;
-  }
-  .eventTitle {
-    top: 1.5rem;
   }
 }
 
