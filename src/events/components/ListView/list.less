@@ -2,6 +2,7 @@
 @import '~common/less/constants.less';
 
 @polygonMobileSize: 16px;
+@listBarWidth: 8px;
 
 .grid {
   margin: auto;
@@ -21,11 +22,13 @@
 .icon {
   align-self: center;
   text-align: right;
+  margin-right: 5px;
+  font-size: 20px;
 }
 
 .gridRow {
   display: grid;
-  grid-template-columns: 1fr 20fr 0fr 2fr 0fr 3fr;
+  grid-template-columns: 1fr 20fr 0 3fr 0 3fr;
   position: relative;
   .owCard();
   padding-right: 10px;
@@ -35,8 +38,9 @@
   .owCard();
 
   > span {
-    width: 7px;
-    margin: 10px 0 10px 10px;
+    width: @listBarWidth;
+    margin: @listBarWidth 0 @listBarWidth @listBarWidth;
+    border-radius: 2px;
   }
 
   > p {
@@ -53,15 +57,14 @@
 }
 
 .eventType {
-  font-weight: 600;
-  color: #7f7f7f;
-  top: 35%;
+  font-weight: 500;
+  top: 26%;
   font-size: 16px;
 }
 
 .eventTitle {
   font-size: 20px;
-  top: 61%;
+  top: 57%;
 }
 
 .eventType,
@@ -77,7 +80,7 @@
 @media (max-width: 830px) {
   .gridRow {
     height: 85px;
-    width: 75%;
+    width: 95%;
   }
   .eventTitle,
   .eventType {
@@ -93,30 +96,20 @@
   .gridRow > .elementGridRow:last-child {
     margin-right: 25px;
   }
+}
+
+@media (max-width: 540px) {
   .eventTitle {
-    font-size: 16px;
-  }
-  .eventType {
     font-size: 14px;
   }
-}
-
-@media (max-width: 610px) {
-  .gridRow {
-    width: 95%;
-    height: 4rem;
+  .eventType {
+    font-size: 13px;
   }
-}
-
-@media (max-width: 505px) {
-  .gridRow {
-    height: 5rem; // Because iPhone 5
+  .icons {
+    font-size: 15px;
   }
-  .elementGridRow:last-child {
-    margin-right: 0;
-  }
-  .elementGridRow:nth-child(4) {
-    margin-right: -5px;
+  .gridRow > p {
+    font-size: 16px;
   }
 }
 
