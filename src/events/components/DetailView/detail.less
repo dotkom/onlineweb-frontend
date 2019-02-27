@@ -21,14 +21,21 @@
   grid-template-columns: 2fr 1fr;
   margin-bottom: auto;
 
-  @media screen and (max-width: @owTabletBreakpoint) {
-    grid-template-columns: 1fr;
-  }
-
   img {
     width: 100%;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-right: 1px solid #b7b7b7;
+  }
+
+  @media screen and (max-width: @owTabletBreakpoint) {
+    grid-template-columns: 1fr;
+    img {
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 3px;
+      border-right: none;
+      border-bottom: 1px solid #b7b7b7;
+    }
   }
 }
 
@@ -102,4 +109,8 @@
 
 .detailHeader {
   text-align: center;
+}
+
+.title {
+  margin-bottom: 10px;
 }
