@@ -1,7 +1,7 @@
 import { faCalendarAlt, faUser } from '@fortawesome/free-regular-svg-icons/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'core/components/Router';
-import { getEventColor, getEventType, INewEvent } from 'events/models/Event';
+import { getEventColor, INewEvent } from 'events/models/Event';
 import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
 import React from 'react';
