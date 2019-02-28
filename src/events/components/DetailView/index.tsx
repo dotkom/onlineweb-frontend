@@ -6,7 +6,6 @@ import { EventsRepo } from 'events/providers/EventsRepo';
 
 import { getEvent } from '../../api/events';
 import { mockEvent } from '../../models/Event';
-import ListEvent from '../ListView/ListEvent';
 import Contact from './Contact';
 import style from './detail.less';
 import InfoBox from './InfoBox';
