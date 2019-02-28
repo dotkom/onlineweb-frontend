@@ -7,6 +7,6 @@ export const getOfflines = async (page: number = 1): Promise<IAPIData<IOfflineIs
   return await get(API_URL, { format: 'json', page });
 };
 
-export const getRemaindingOfflines = (): Promise<IOfflineIssue[]> => {
+export const getRemainingOfflines = (): Promise<IOfflineIssue[]> => {
   return getAllPages<IOfflineIssue>(API_URL, { page: 2 });
 };

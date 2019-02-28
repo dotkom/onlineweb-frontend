@@ -16,9 +16,7 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
     <div className={style.gridRow}>
       <span style={{ background: eventColor }} />
       <div className={style.eventText}>
-        <p className={style.eventType} style={{ color: eventColor }}>
-          {eventType}
-        </p>
+        <p style={{ color: eventColor }}>{eventType}</p>
         <p className={style.eventTitle}>{company_event.length === 1 ? company_event[0].company.name : title}</p>
       </div>
       <div className={style.icon}>
