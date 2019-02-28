@@ -18,7 +18,7 @@ const LargeEvent = ({ image, event_type, title, event_start, attendance_event, i
         <EventImage className={style.largeImage} image={image} companyEvents={company_event} size="md" />
         <div className={style.largeContent}>
           <span style={{ background: getEventColor(event_type) }} />
-          <p>{title}</p>
+          <p className={style.eventTitle}> {company_event.length === 1 ? company_event[0].company.name : title} </p>
           <div className={style.icon}>
             <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
           </div>

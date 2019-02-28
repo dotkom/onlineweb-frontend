@@ -28,7 +28,7 @@
 
 .gridRow {
   display: grid;
-  grid-template-columns: 1fr 20fr 0 3fr 0 3fr;
+  grid-template-columns: 1fr 20fr 1fr 3fr 1fr 3fr;
   position: relative;
   .owCard();
   padding-right: 10px;
@@ -49,30 +49,19 @@
   }
 }
 
-.elementGridRow {
-  width: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
+.eventIcon {
+  align-self: center;
 }
 
-.eventType {
-  font-weight: 500;
-  top: 26%;
-  font-size: 16px;
+.eventText {
+  position: relative;
+  top: 15%;
+  left: 2%;
+  line-height: 1;
 }
 
 .eventTitle {
   font-size: 20px;
-  top: 57%;
-}
-
-.eventType,
-.eventTitle {
-  position: absolute;
-  left: 50%; /* position the left edge of the element at the middle of the parent */
-  width: 100%;
-  transform: translate(-50%, -50%);
 }
 
 /* Mobile CSS */
@@ -81,10 +70,6 @@
   .gridRow {
     height: 85px;
     width: 95%;
-  }
-  .eventTitle,
-  .eventType {
-    left: 52%;
   }
 }
 
@@ -99,12 +84,6 @@
 }
 
 @media (max-width: 540px) {
-  .eventTitle {
-    font-size: 14px;
-  }
-  .eventType {
-    font-size: 13px;
-  }
   .icons {
     font-size: 15px;
   }

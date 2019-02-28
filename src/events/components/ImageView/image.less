@@ -39,51 +39,6 @@
   }
 }
 
-/* Mobile CSS */
-
-@media (max-width: 1024px) {
-  .largeEventGrid,
-  .smallEventGrid {
-    margin: auto;
-    max-width: 60%;
-  }
-  .largeContent,
-  .small {
-    height: 4rem;
-  }
-  .largeEventGrid {
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 705px) {
-  .largeEventGrid,
-  .smallEventGrid {
-    width: 460px;
-    max-width: none;
-  }
-}
-
-@media (max-width: 610px) {
-  .largeEventGrid,
-  .smallEventGrid {
-    width: 425px;
-  }
-}
-
-@media (max-width: 485px) {
-  .largeEventGrid,
-  .smallEventGrid {
-    width: 320px; // Because iPhone 5
-  }
-  .largeContent,
-  .small {
-    height: 5rem;
-  }
-}
-
-/* End of Mobile CSS */
-
 .large {
   display: flex;
   flex-direction: column;
@@ -146,6 +101,7 @@
   position: relative;
   .owCard();
   padding-right: 10px;
+  height: 4rem;
 }
 
 .largeContent,
@@ -165,6 +121,62 @@
   color: rgba(0, 0, 0, 0.8);
 }
 
-.attendees {
-  width: 40px;
+.eventTitle {
+  margin-left: 5px;
 }
+
+/* Mobile CSS */
+
+@media (max-width: 1024px) {
+  .largeEventGrid,
+  .smallEventGrid {
+    margin: auto;
+    max-width: 60%;
+  }
+  .largeEventGrid {
+    margin-bottom: 20px;
+  }
+  .eventTitle {
+    font-size: 20px;
+  }
+  .small,
+  .largeContent {
+    grid-template-columns: 0 11fr 1fr 1fr 1fr 1fr;
+    height: 5rem;
+  }
+  .icon {
+    font-size: 21px;
+  }
+  .small > p,
+  .largeContent > p {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 705px) {
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 460px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 610px) {
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 425px;
+  }
+}
+
+@media (max-width: 485px) {
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 320px; // Because iPhone 5
+  }
+  .largeContent,
+  .small {
+    height: 5rem;
+  }
+}
+
+/* End of Mobile CSS */
