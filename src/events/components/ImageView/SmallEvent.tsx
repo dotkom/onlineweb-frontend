@@ -19,7 +19,7 @@ const SmallEvent = ({ title, event_type, event_start, attendance_event, id, comp
       <div className={style.icon}>
         <FontAwesomeIcon icon={faUser} fixedWidth />
       </div>
-      <p className={style.attendees}> {getEventAttendees(attendance_event)} </p>
+      <p> {getEventAttendees(attendance_event)} </p>
     </div>
   </Link>
 );

@@ -26,7 +26,7 @@ const LargeEvent = ({ image, event_type, title, event_start, attendance_event, i
           <div className={style.icon}>
             <FontAwesomeIcon icon={faUser} fixedWidth />
           </div>
-          <p className={style.attendees}>{getEventAttendees(attendance_event)}</p>
+          <p>{getEventAttendees(attendance_event)}</p>
         </div>
       </div>
     </Link>

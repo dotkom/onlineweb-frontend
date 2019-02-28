@@ -138,6 +138,7 @@
   }
   .eventTitle {
     font-size: 20px;
+    margin-left: 25px;
   }
   .small,
   .largeContent {
@@ -156,26 +157,41 @@
 @media (max-width: 705px) {
   .largeEventGrid,
   .smallEventGrid {
-    width: 460px;
-    max-width: none;
+    max-width: 70%;
   }
 }
 
-@media (max-width: 610px) {
+@media (max-width: 600px) {
   .largeEventGrid,
   .smallEventGrid {
-    width: 425px;
+    width: 400px;
+    max-width: none;
+  }
+  //Change text sizes
+  .small > p,
+  .largeContent > p {
+    font-size: 16px;
+  }
+  .icon {
+    font-size: 17px;
   }
 }
 
 @media (max-width: 485px) {
   .largeEventGrid,
   .smallEventGrid {
-    width: 320px; // Because iPhone 5
+    width: 320px;
   }
   .largeContent,
   .small {
     height: 5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 300px;
   }
 }
 
