@@ -22,11 +22,11 @@ const LargeEvent = ({ image, event_type, title, event_start, attendance_event, i
           <div className={style.icon}>
             <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
           </div>
-          <p>{DateTime.fromISO(event_start).toFormat('dd.MM')}</p>
+          <p className={style.suppText}>{DateTime.fromISO(event_start).toFormat('dd.MM')}</p>
           <div className={style.icon}>
             <FontAwesomeIcon icon={faUser} fixedWidth />
           </div>
-          <p>{getEventAttendees(attendance_event)}</p>
+          <p className={style.suppText}>{getEventAttendees(attendance_event)}</p>
         </div>
       </div>
     </Link>

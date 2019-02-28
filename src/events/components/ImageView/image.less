@@ -73,7 +73,7 @@
 .largeContent {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 11fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0 6fr 1fr 1fr 1fr 1fr;
   border-top: 0.5px solid #b7b7b7;
   padding-right: 10px;
   height: 4rem;
@@ -97,7 +97,7 @@
 
 .small {
   display: grid;
-  grid-template-columns: 1fr 11fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0 6fr 1fr 1fr 1fr 1fr;
   position: relative;
   .owCard();
   padding-right: 10px;
@@ -116,13 +116,16 @@
 .icon {
   align-self: center;
   margin-left: 10px;
-  margin-right: 2px;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.8);
 }
 
 .eventTitle {
   margin-left: 5px;
+}
+
+.suppText {
+  width: 40px;
 }
 
 /* Mobile CSS */
@@ -138,15 +141,14 @@
   }
   .eventTitle {
     font-size: 20px;
-    margin-left: 25px;
   }
   .small,
   .largeContent {
-    grid-template-columns: 0 11fr 1fr 1fr 1fr 1fr;
     height: 5rem;
   }
   .icon {
     font-size: 21px;
+    margin-left: 20px;
   }
   .small > p,
   .largeContent > p {
@@ -157,17 +159,12 @@
 @media (max-width: 705px) {
   .largeEventGrid,
   .smallEventGrid {
-    max-width: 70%;
+    max-width: 90%;
   }
 }
 
 @media (max-width: 600px) {
-  .largeEventGrid,
-  .smallEventGrid {
-    width: 400px;
-    max-width: none;
-  }
-  //Change text sizes
+  // Change text sizes
   .small > p,
   .largeContent > p {
     font-size: 16px;
@@ -175,23 +172,8 @@
   .icon {
     font-size: 17px;
   }
-}
-
-@media (max-width: 485px) {
-  .largeEventGrid,
-  .smallEventGrid {
-    width: 320px;
-  }
-  .largeContent,
-  .small {
-    height: 5rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .largeEventGrid,
-  .smallEventGrid {
-    width: 300px;
+  .suppText {
+    width: 35px;
   }
 }
 
