@@ -28,7 +28,7 @@
 
 .gridRow {
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 0fr;
+  grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 0;
   position: relative;
   .owCard();
   padding-right: 10px;
@@ -72,12 +72,13 @@
 }
 
 /* Mobile CSS */
+
 @media (max-width: 750px) {
   .eventTypeDiv {
     width: 120px;
   }
   .eventType,
-  .suppText {
+  .suppText {
     font-size: 14px;
   }
   .eventTitle,
@@ -85,4 +86,5 @@
     font-size: 16px;
   }
 }
+
 /* End of Mobile CSS */
