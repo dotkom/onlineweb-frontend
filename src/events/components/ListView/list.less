@@ -28,83 +28,61 @@
 
 .gridRow {
   display: grid;
-  grid-template-columns: 1fr 20fr 1fr 3fr 1fr 3fr;
+  grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 0fr;
   position: relative;
   .owCard();
   padding-right: 10px;
-  width: 65%;
   margin: auto;
   height: 80px;
   .owCard();
 
-  > span {
-    width: @listBarWidth;
-    margin: @listBarWidth 0 @listBarWidth @listBarWidth;
-    border-radius: 2px;
-  }
-
   > p {
     align-self: center;
-    font-size: 18px;
   }
 }
 
-.eventText {
-  position: relative;
-  top: 15%;
-  left: 2%;
-  line-height: 1;
+.eventTypeDiv {
+  height: 100%;
+  padding: 0 10px;
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  width: 180px;
+}
+
+.eventTypeDiv > span {
+  width: @listBarWidth;
+  margin: @listBarWidth @listBarWidth @listBarWidth 0;
+  border-radius: 2px;
+}
+
+.eventType {
+  font-weight: 600;
+  align-self: center;
+  font-size: 18px;
 }
 
 .eventTitle {
   font-size: 20px;
+  padding-left: 10px;
+  text-align: center;
+}
+
+.suppText {
+  font-size: 18px;
 }
 
 /* Mobile CSS */
-
-@media (max-width: 830px) {
-  .gridRow {
-    height: 85px;
-    width: 95%;
+@media (max-width: 750px) {
+  .eventTypeDiv {
+    width: 120px;
   }
-}
-
-@media (max-width: 705px) {
-  .elementGridRow:nth-child(4) {
-    // 4, to select the date text so we can pull the icons closer to eachother
-    margin-right: -15px;
+  .eventType,
+  .suppText {
+    font-size: 14px;
   }
-  .gridRow > .elementGridRow:last-child {
-    margin-right: 25px;
-  }
-}
-
-@media (max-width: 540px) {
-  .icons {
-    font-size: 15px;
-  }
-  .gridRow > p {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 515px) {
-  .gridRow {
-    height: 100px;
-  }
-}
-
-@media (max-width: 480px) {
+  .eventTitle,
   .icon {
     font-size: 16px;
-    margin-right: 2px;
   }
 }
-
-@media (max-width: 440px) {
-  .eventTitle {
-    font-size: 18px;
-  }
-}
-
 /* End of Mobile CSS */
