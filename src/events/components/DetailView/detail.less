@@ -4,8 +4,6 @@
 .container {
   display: grid;
   grid-template-columns: 5fr 2fr;
-  grid-template-rows: repeat(3, auto);
-  grid-auto-flow: column;
   grid-gap: 30px;
 
   @media screen and (max-width: @owMobileBreakpoint) {
@@ -64,14 +62,6 @@
   padding: 30px;
 }
 
-.registration {
-  grid-row: 1 / span 2;
-
-  @media screen and (max-width: @owMobileBreakpoint) {
-    grid-row: initial;
-  }
-}
-
 .contact {
   margin-bottom: auto;
 }
@@ -113,4 +103,8 @@
 
 .title {
   margin-bottom: 10px;
+}
+
+.pictureCard, .registration {
+  margin-bottom: 20px;
 }

@@ -25,10 +25,14 @@ export const DetailView = (props: IProps) => {
   const event = prefetchEvent && prefetchEvent.id === eventId ? prefetchEvent : eventMap.get(eventId) || mockEvent;
   return (
     <div className={style.container}>
-      <PictureCard {...event} />
-      <InfoBox {...event} />
-      <Registration {...event} />
-      <Contact {...event} />
+      <div>
+        <PictureCard {...event} />
+        <InfoBox {...event} />
+      </div>
+      <div>
+        <Registration {...event} />
+        <Contact {...event} />
+      </div>
     </div>
   );
 };
