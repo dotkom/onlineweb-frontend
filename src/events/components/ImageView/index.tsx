@@ -30,6 +30,7 @@ const RIGHT = [
   EventTypeEnum.INTERNT,
   EventTypeEnum.SOSIALT,
   EventTypeEnum.UTFLUKT,
+  EventTypeEnum.KJELLEREN,
 ];
 
 export interface IState {
