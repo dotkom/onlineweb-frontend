@@ -19,9 +19,18 @@ export enum EventTypeEnum {
   EKSKURSJON,
   INTERNT,
   ANNET,
+  KJELLEREN,
 }
 
-export type EventType = 'Sosialt' | 'Kurs' | 'Annet' | 'Bedriftspresentasjon' | 'Utflukt' | 'Ekskursjon' | 'Internt';
+export type EventType =
+  | 'Sosialt'
+  | 'Kurs'
+  | 'Annet'
+  | 'Bedriftspresentasjon'
+  | 'Utflukt'
+  | 'Ekskursjon'
+  | 'Internt'
+  | 'Kjelleren';
 
 export const getEventType = (n: number): EventType => {
   switch (n) {
@@ -39,6 +48,8 @@ export const getEventType = (n: number): EventType => {
       return 'Internt';
     case 7:
       return 'Annet';
+    case 8:
+      return 'Kjelleren';
     default:
       return 'Annet';
   }
@@ -62,6 +73,8 @@ export const getEventColor = (n: number): string => {
       return '#E75E3B';
     case 7:
       return '#B36BCD';
+    case 8:
+      return '#E75E3B';
     default:
       return '#828282';
   }
