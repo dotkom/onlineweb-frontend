@@ -16,7 +16,7 @@ export interface IProps {
   availableViews: number[];
 }
 
-const viewIcon = (viewType: number) => {
+const viewIcon = (viewType: EventView) => {
   switch (viewType) {
     case EventView.CALENDAR: {
       return <CalendarViewIcon />;
@@ -26,9 +26,6 @@ const viewIcon = (viewType: number) => {
     }
     case EventView.IMAGE: {
       return <ImageViewIcon />;
-    }
-    default: {
-      return;
     }
   }
 };
