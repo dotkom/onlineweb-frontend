@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
-
 import { clearCache } from 'common/utils/cache';
 import { CookieActionType, CookieContext } from 'core/providers/Cookies';
+import React, { useContext, useState } from 'react';
 
 import { EventView } from '../models/Event';
 import CalendarView from './CalendarView';
@@ -25,9 +24,9 @@ const getView = (view?: EventView): typeof ListView | typeof CalendarView | type
 
 export const EventContainer = () => {
   const { cookies, dispatch } = useContext(CookieContext);
-  const View = getView(cookies.eventView);
+  const View = getView(cookies.frontpageEventView);
   const changeView = (view: EventView) => {
-    dispatch({ type: CookieActionType.CHANGE, value: { eventView: view } });
+    dispatch({ type: CookieActionType.CHANGE, value: { frontpageEventView: view } });
     clearCache();
   };
 
@@ -39,7 +38,8 @@ export const EventContainer = () => {
         changeView={changeView}
         toggleAccessible={toggleAccessible}
         accessible={accessible}
-        view={cookies.eventView}
+        view={cookies.frontpageEventView}
+        availableViews={[EventView.IMAGE, EventView.LIST, EventView.CALENDAR]}
       />
       <View accessible={accessible} />
     </section>
