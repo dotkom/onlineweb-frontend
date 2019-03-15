@@ -8,7 +8,6 @@ import EventsHeader from './EventsHeader';
 import ImageView from './ImageView';
 import style from './less/eventsContainer.less';
 import ListView from './ListView';
-import SearchModule from './SearchModule';
 
 const getView = (view?: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
   switch (view) {
@@ -33,7 +32,6 @@ export const EventArchive = () => {
   const toggleAccessible = () => setAccessible(!accessible);
   return (
     <section className={style.section}>
-      <SearchModule />
       <EventsHeader
         changeView={changeView}
         toggleAccessible={toggleAccessible}
