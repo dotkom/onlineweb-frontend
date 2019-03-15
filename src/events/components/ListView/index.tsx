@@ -5,7 +5,7 @@ import { PrefetchKey } from 'common/utils/PrefetchState';
 import { Link } from 'core/components/Router';
 import { getListEvents } from 'events/api/listEvents';
 import { EventsRepo } from 'events/providers/EventsRepo';
-import { isOngoingOrFuture } from 'events/utils/isOngoing';
+import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
 
 import { IEventViewProps, INewEvent } from '../../models/Event';
 import style from './list.less';

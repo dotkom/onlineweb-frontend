@@ -3,19 +3,21 @@ import React, { createContext, ReactNode, useReducer } from 'react';
 
 import { __CLIENT__ } from 'common/constants/environment';
 import { EventView } from 'events/models/Event';
-import { getEventView } from 'events/utils/eventView';
+import { getArchiveEventView, getFrontpageEventView } from 'events/utils/eventView';
 
 /**
  * All available cookies should de declared as optionals here.
  * This lets us have som more control of what cookies are avaiable.
  */
 export interface ICookies {
-  eventView: EventView;
+  frontpageEventView: EventView;
+  archiveEventView: EventView;
 }
 
 const initializeCookies = (inital: { [name: string]: any }): ICookies => ({
   ...inital,
-  eventView: getEventView(inital.eventView),
+  frontpageEventView: getFrontpageEventView(inital.eventView),
+  archiveEventView: getArchiveEventView(inital.eventView),
 });
 
 export interface IProps {
