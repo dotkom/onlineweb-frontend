@@ -64,6 +64,7 @@
 .largeImageEmpty {
   height: 100%;
   margin: auto;
+  border-bottom: 0.5px solid #b7b7b7;
 
   path {
     fill: @lightGray;
@@ -131,6 +132,12 @@
 /* Mobile CSS */
 
 @media (max-width: 1024px) {
+  .large,
+  .small {
+    width: 60%;
+    margin: auto;
+    padding-right: 0;
+  }
   .largeEventGrid {
     margin-bottom: 20px;
   }
@@ -152,6 +159,13 @@
   }
 }
 
+@media (max-width: 784px) {
+  .large,
+  .small {
+    width: 80%;
+  }
+}
+
 @media (max-width: 600px) {
   // Change text sizes
   .small > p,
@@ -164,12 +178,9 @@
   .suppText {
     width: 35px;
   }
-}
-
-@media (max-width: 485px) {
-  .smallEventGrid,
-  .largeEventGrid {
-    width: 320px;
+  .large,
+  .small {
+    width: 95%;
   }
 }
 
