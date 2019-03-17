@@ -28,13 +28,13 @@
 
 .gridRow {
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr 1fr 1fr 0;
+  grid-template-columns: 3fr 4fr 1fr 0 2fr 1fr 0;
   position: relative;
   .owCard();
   padding-right: 10px;
   margin: auto;
   height: 80px;
-  .owCard();
+  color: @darkGray;
 
   > p {
     align-self: center;
@@ -64,7 +64,7 @@
 .eventTitle {
   font-size: 20px;
   padding-left: 10px;
-  text-align: center;
+  text-align: left;
 }
 
 .suppText {
@@ -73,17 +73,33 @@
 
 /* Mobile CSS */
 
-@media (max-width: 750px) {
-  .eventTypeDiv {
-    width: 120px;
+@media (max-width: @owMobileBreakpoint) {
+  .gridRow {
+    grid-template-columns: 6fr 1fr 1fr 1fr 1fr;
+    height: 110px;
+  }
+  .eventType {
+    position: absolute;
+    top: 5px;
+    left: 25px;
+  }
+  .eventTitle {
+    position: absolute;
+    left: 15px;
+    width: 50%;
+  }
+}
+
+@media (max-width: 505px) {
+  .gridRow {
+    height: 130px;
   }
   .eventType,
   .suppText {
-    font-size: 14px;
-  }
-  .eventTitle,
-  .icon {
     font-size: 16px;
+  }
+  .eventTitle {
+    font-size: 18px;
   }
 }
 
