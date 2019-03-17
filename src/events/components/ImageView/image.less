@@ -131,11 +131,6 @@
 /* Mobile CSS */
 
 @media (max-width: 1024px) {
-  .largeEventGrid,
-  .smallEventGrid {
-    margin: auto;
-    max-width: 60%;
-  }
   .largeEventGrid {
     margin-bottom: 20px;
   }
@@ -144,7 +139,8 @@
   }
   .small,
   .largeContent {
-    height: 5rem;
+    height: auto;
+    min-height: 5rem;
   }
   .icon {
     font-size: 21px;
@@ -153,13 +149,6 @@
   .small > p,
   .largeContent > p {
     font-size: 20px;
-  }
-}
-
-@media (max-width: 705px) {
-  .largeEventGrid,
-  .smallEventGrid {
-    max-width: 90%;
   }
 }
 
@@ -177,4 +166,16 @@
   }
 }
 
+@media (max-width: 485px) {
+	.smallEventGrid,
+	.largeEventGrid {
+		width: 320px;
+	}
+}
+
+@media (max-width: 320px) {
+	.largeContent {
+		grid-template-columns: 0.5fr 3fr 1fr 1fr 1fr 1fr;
+	}
+}
 /* End of Mobile CSS */
