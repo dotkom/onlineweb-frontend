@@ -22,7 +22,7 @@
   margin-top: 20px;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: @owTabletBreakpoint) {
   .largeEventGrid {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -77,7 +77,7 @@
   grid-template-columns: 0.5fr 6fr 1fr 1fr 1fr 1fr;
   border-top: 0.5px solid #b7b7b7;
   padding-right: 10px;
-  height: 4rem;
+  min-height: 4rem;
 }
 
 .largeContent > span,
@@ -131,7 +131,7 @@
 
 /* Mobile CSS */
 
-@media (max-width: 1024px) {
+@media (max-width: @owTabletBreakpoint) {
   .large,
   .small {
     width: 60%;
@@ -148,6 +148,7 @@
   .largeContent {
     height: auto;
     min-height: 5rem;
+    grid-template-columns: 0.3fr 4fr 0.1fr 1fr 0.1fr 1fr;
   }
   .icon {
     font-size: 21px;
@@ -159,7 +160,7 @@
   }
 }
 
-@media (max-width: 784px) {
+@media (max-width: @owMobileBreakpoint) {
   .large,
   .small {
     width: 80%;
@@ -180,7 +181,7 @@
   }
   .large,
   .small {
-    width: 95%;
+    width: 100%;
   }
 }
 
