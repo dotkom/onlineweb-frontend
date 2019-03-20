@@ -32,17 +32,13 @@
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
   }
-
-  .large,
-  .small {
-    height: 100%;
-  }
 }
 
 .large {
   display: flex;
   flex-direction: column;
   .owCard();
+  height: 100%;
 }
 
 .imageLargeType {
@@ -102,7 +98,7 @@
   position: relative;
   .owCard();
   padding-right: 10px;
-  height: 4rem;
+  min-height: 4rem;
 }
 
 .largeContent,
@@ -132,23 +128,14 @@
 /* Mobile CSS */
 
 @media (max-width: @owTabletBreakpoint) {
-  .large,
-  .small {
-    width: 60%;
-    margin: auto;
-    padding-right: 0;
-  }
-  .largeEventGrid {
-    margin-bottom: 20px;
-  }
   .eventTitle {
     font-size: 20px;
   }
   .small,
   .largeContent {
-    height: auto;
     min-height: 5rem;
     grid-template-columns: 0.3fr 4fr 0.1fr 1fr 0.1fr 1fr;
+    max-width: 17rem;
   }
   .icon {
     font-size: 21px;
@@ -157,13 +144,6 @@
   .small > p,
   .largeContent > p {
     font-size: 20px;
-  }
-}
-
-@media (max-width: @owMobileBreakpoint) {
-  .large,
-  .small {
-    width: 80%;
   }
 }
 
@@ -177,18 +157,9 @@
     font-size: 17px;
   }
   .suppText {
-    width: 35px;
-  }
-  .large,
-  .small {
-    width: 100%;
+    max-width: 35px;
   }
 }
 
-@media (max-width: 320px) {
-  .largeContent {
-    grid-template-columns: 0.5fr 3fr 1fr 1fr 1fr 1fr;
-  }
-}
 
 /* End of Mobile CSS */
