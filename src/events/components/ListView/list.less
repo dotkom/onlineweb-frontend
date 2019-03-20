@@ -77,7 +77,6 @@
   .gridRow {
     min-height: 80px;
     grid-template-columns: 5fr 1fr 1fr 1fr 1fr;
-    max-width: 17rem;
   }
   .eventTypeDiv,
   .eventType {
@@ -94,12 +93,23 @@
 }
 
 @media (max-width: 505px) {
-  .eventType,
+  .eventType {
+    font-size: 15px;
+  }
+  .icon {
+    font-size: 15px;
+  }
   .suppText {
-    font-size: 16px;
+    font-size: 12px;
   }
   .eventTitle {
-    font-size: 18px;
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 320px) {
+  .gridRow {
+    max-width: 17rem;
   }
 }
 

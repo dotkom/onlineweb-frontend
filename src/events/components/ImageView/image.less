@@ -138,7 +138,6 @@
   .largeContent {
     min-height: 5rem;
     grid-template-columns: 0.3fr 4fr 0.1fr 1fr 0.1fr 1fr;
-    max-width: 17rem;
   }
   .icon {
     font-size: 21px;
@@ -161,6 +160,13 @@
   }
   .suppText {
     max-width: 35px;
+  }
+}
+
+@media (max-width: 320px) {
+  .small,
+  .largeContent {
+    max-width: 17rem;
   }
 }
 
