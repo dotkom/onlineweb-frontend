@@ -33,7 +33,7 @@
   .owCard();
   padding-right: 10px;
   margin: auto;
-  height: 80px;
+  min-height: 80px;
   color: @darkGray;
 
   > p {
@@ -75,9 +75,9 @@
 
 @media (max-width: @owMobileBreakpoint) {
   .gridRow {
-    height: max-content;
     min-height: 80px;
     grid-template-columns: 5fr 1fr 1fr 1fr 1fr;
+    max-width: 17rem;
   }
   .eventTypeDiv,
   .eventType {
