@@ -144,6 +144,12 @@
   .largeContent > p {
     font-size: 20px;
   }
+  // Change size so that the cards aren't too big
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 70%;
+    margin: auto;
+  }
 }
 
 @media (max-width: 600px) {
@@ -157,6 +163,11 @@
   }
   .suppText {
     max-width: 35px;
+  }
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 100%;
+    margin: 0;
   }
 }
 
