@@ -61,7 +61,7 @@ export class Footer extends Component<{}, IState> {
             </p>
             <p>Online Linjeforening</p>
             <p>Sem Sælandsv. 9</p>
-            <p>7491 Trondheim</p>
+            <p>7034 Trondheim</p>
           </div>
         </div>
       </footer>
