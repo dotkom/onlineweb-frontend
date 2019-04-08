@@ -6,7 +6,7 @@ export interface IProps {
   format?: string;
 }
 
-const FORMAT = 'd MMM HH:mm';
+const FORMAT = 'd. MMM HH:mm';
 
 export const DisplayTime = ({ time, format = FORMAT }: IProps) => {
   const formattedTime = time.toFormat(format);
