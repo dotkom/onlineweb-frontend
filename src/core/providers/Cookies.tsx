@@ -1,9 +1,10 @@
 import clientCookies from 'js-cookie';
+import { DateTime } from 'luxon';
 import React, { createContext, ReactNode, useReducer } from 'react';
 
 import { __CLIENT__ } from 'common/constants/environment';
 import { EventView } from 'events/models/Event';
-import { getArchiveEventView, getFrontpageEventView } from 'events/utils/eventView';
+import { getEventView, getFrontpageEventView } from 'events/utils/eventView';
 
 /**
  * All available cookies should de declared as optionals here.
@@ -11,13 +12,19 @@ import { getArchiveEventView, getFrontpageEventView } from 'events/utils/eventVi
  */
 export interface ICookies {
   frontpageEventView: EventView;
-  archiveEventView: EventView;
+  eventView: EventView;
+  searchText: string;
+  timeStart: DateTime;
+  timeEnd: DateTime;
 }
 
 const initializeCookies = (inital: { [name: string]: any }): ICookies => ({
   ...inital,
   frontpageEventView: getFrontpageEventView(inital.eventView),
-  archiveEventView: getArchiveEventView(inital.eventView),
+  eventView: getEventView(inital.eventView),
+  searchText: '',
+  timeStart: DateTime.fromJSDate(new Date(new Date().setDate(new Date().getDate() - 690))),
+  timeEnd: DateTime.fromJSDate(new Date(new Date().setDate(new Date().getDate() + 690))),
 });
 
 export interface IProps {
