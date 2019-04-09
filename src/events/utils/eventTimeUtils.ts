@@ -26,9 +26,9 @@ export const isOngoingOrFuture = (event: INewEvent, time: DateTime = DateTime.lo
  * @param endTime The time to check.
  * @returns {Boolean} Whether the event starts before the given time.
  */
-export const isBefore = (event: INewEvent, endTime: string): boolean => {
+export const isBefore = (event: INewEvent, endTime: DateTime = DateTime.local()): boolean => {
   const start = DateTime.fromISO(event.event_start);
-  const endTimeDateTime = DateTime.fromISO(endTime);
+  const endTimeDateTime = endTime;
   return start <= endTimeDateTime;
 };
 
@@ -38,9 +38,9 @@ export const isBefore = (event: INewEvent, endTime: string): boolean => {
  * @param startTime The time to check.
  * @returns {Boolean} Whether the event starts after the given time.
  */
-export const isAfter = (event: INewEvent, startTime: string): boolean => {
+export const isAfter = (event: INewEvent, startTime: DateTime = DateTime.local()): boolean => {
   const start = DateTime.fromISO(event.event_start);
-  const startTimeDateTime = DateTime.fromISO(startTime);
+  const startTimeDateTime = startTime;
   return start >= startTimeDateTime;
 };
 
@@ -51,11 +51,9 @@ export const isAfter = (event: INewEvent, startTime: string): boolean => {
  * @param endTime The end of the interval.
  * @returns {Boolean} Whether the event start or end is within the interval.
  */
-export const isInDateRange = (event: INewEvent, startTime: string, endTime: string): boolean => {
+export const isInDateRange = (event: INewEvent, startTime: DateTime, endTime: DateTime): boolean => {
   const start = DateTime.fromISO(event.event_start);
   const end = DateTime.fromISO(event.event_end);
-  const startRangeDateTime = DateTime.fromISO(startTime);
-  const endRangeDateTime = DateTime.fromISO(endTime);
-  const range = Interval.fromDateTimes(startRangeDateTime, endRangeDateTime);
+  const range = Interval.fromDateTimes(startTime, endTime);
   return range.contains(start) || range.contains(end);
 };
