@@ -12,7 +12,7 @@ export const getFrontpageEventView = (viewString: string | undefined) => {
   }
 };
 
-export const getArchiveEventView = (viewString: string | undefined) => {
+export const getEventView = (viewString: string | undefined) => {
   if (!viewString) {
     return EventView.LIST;
   }
