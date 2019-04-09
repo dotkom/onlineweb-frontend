@@ -1,6 +1,6 @@
 import { clearCache } from 'common/utils/cache';
 import { CookieActionType, CookieContext } from 'core/providers/Cookies';
-import React, { useContext, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 
 import { EventView } from '../models/Event';
 import CalendarView from './CalendarView';
@@ -8,6 +8,7 @@ import EventsHeader from './EventsHeader';
 import ImageView from './ImageView';
 import style from './less/eventsContainer.less';
 import ListView from './ListView';
+import SearchModule from './SearchModule';
 
 const getView = (view?: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
   switch (view) {
@@ -29,7 +30,23 @@ export const EventArchive = () => {
   };
 
   const [accessible, setAccessible] = useState(false);
+  const [text, setText] = useState('');
+  const [timeStart, setTimeStart] = useState('');
+  const [timeEnd, setTimeEnd] = useState('');
+
   const toggleAccessible = () => setAccessible(!accessible);
+  const onTextInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setText(event.target.value);
+  };
+
+  const onTimeStartInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setTimeStart(event.target.value);
+  };
+
+  const onTimeEndInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setTimeEnd(event.target.value);
+  };
+
   return (
     <section className={style.section}>
       <EventsHeader
@@ -38,6 +55,14 @@ export const EventArchive = () => {
         accessible={accessible}
         view={cookies.archiveEventView}
         availableViews={[EventView.LIST, EventView.CALENDAR]}
+      />
+      <SearchModule
+        searchText={text}
+        onTextInput={onTextInput}
+        timeStart={timeStart}
+        timeEnd={timeEnd}
+        onTimeStartInput={onTimeStartInput}
+        onTimeEndInput={onTimeEndInput}
       />
       <View accessible={accessible} />
     </section>
