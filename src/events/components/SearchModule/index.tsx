@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC} from 'react'; // , { useContext, useEffect }
+import React, { ChangeEvent, FC } from 'react'; // , { useContext, useEffect }
 import DateInput from './DateInput';
 
 // import { EventTypeEnum, IEvent } from '../../models/Event';
@@ -12,12 +12,19 @@ export interface IProps {
   onTimeEndInput: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchModule: FC<IProps> = ({ searchText, timeStart, timeEnd, onTextInput, onTimeEndInput, onTimeStartInput }) => {
+const SearchModule: FC<IProps> = ({
+  searchText,
+  timeStart,
+  timeEnd,
+  onTextInput,
+  onTimeEndInput,
+  onTimeStartInput,
+}) => {
   return (
     <>
-      <DateInput label={'Fra: '} time={timeStart} onChange={onTimeStartInput}/>
-      <DateInput label={'Til: '} time={timeEnd} onChange={onTimeEndInput}/>
-      <input type="text" value={searchText} placeholder="Søk" onChange={onTextInput}/>
+      <DateInput label={'Fra: '} time={timeStart} onChange={onTimeStartInput} />
+      <DateInput label={'Til: '} time={timeEnd} onChange={onTimeEndInput} />
+      <input type="text" value={searchText} placeholder="Søk" onChange={onTextInput} />
     </>
   );
 };
