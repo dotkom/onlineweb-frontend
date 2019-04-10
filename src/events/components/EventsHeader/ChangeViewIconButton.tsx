@@ -4,13 +4,13 @@ import { EventView } from '../../models/Event';
 import style from './eventsHeader.less';
 import ViewIcon from './ViewIcon';
 
-export interface IPropsChangeViewIconButton {
+export interface IProps {
   changeView: (view: EventView) => void;
   viewType: number;
   view: EventView;
 }
 
-const ChangeViewIconButton = ({ viewType, changeView, view }: IPropsChangeViewIconButton) => (
+const ChangeViewIconButton = ({ viewType, changeView, view }: IProps) => (
   <div
     className={classNames(style.choice, {
       [style.choiceActive]: view === viewType,
