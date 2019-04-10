@@ -23,8 +23,8 @@ const initializeCookies = (inital: { [name: string]: any }): ICookies => ({
   frontpageEventView: getFrontpageEventView(inital.eventView),
   eventView: getEventView(inital.eventView),
   searchText: '',
-  timeStart: DateTime.fromJSDate(new Date(new Date().setDate(new Date().getDate() - 690))),
-  timeEnd: DateTime.fromJSDate(new Date(new Date().setDate(new Date().getDate() + 690))),
+  timeStart: DateTime.local().minus({ years: 5 }),
+  timeEnd: DateTime.local().plus({ years: 5 }),
 });
 
 export interface IProps {

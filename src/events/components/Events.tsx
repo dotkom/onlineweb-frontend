@@ -32,17 +32,29 @@ export const Events = () => {
 
   const [accessible, setAccessible] = useState(false);
 
+  const parsedURL = new URL(window.location.href);
+
   const toggleAccessible = () => setAccessible(!accessible);
+
   const onTextInput = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: CookieActionType.CHANGE, value: { searchText: event.target.value } });
+    parsedURL.searchParams.set('text', event.target.value);
+    history.pushState({}, document.title, parsedURL.href);
+    clearCache();
   };
 
   const onTimeStartInput = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: CookieActionType.CHANGE, value: { timeStart: DateTime.fromISO(event.target.value) } });
+    parsedURL.searchParams.set('timeStart', event.target.value);
+    history.pushState({}, document.title, parsedURL.href);
+    clearCache();
   };
 
   const onTimeEndInput = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch({ type: CookieActionType.CHANGE, value: { timeEnd: DateTime.fromISO(event.target.value) } });
+    parsedURL.searchParams.set('timeEnd', event.target.value);
+    history.pushState({}, document.title, parsedURL.href);
+    clearCache();
   };
 
   return (
@@ -57,8 +69,8 @@ export const Events = () => {
       <SearchModule
         searchText={cookies.searchText}
         onTextInput={onTextInput}
-        timeStart={cookies.timeStart.toFormat('yyyy-MM-dd') || '2013-01-01'}
-        timeEnd={cookies.timeEnd.toFormat('yyyy-MM-dd') || '2020-01-01'}
+        timeStart={cookies.timeStart.toFormat('yyyy-MM-dd')}
+        timeEnd={cookies.timeEnd.toFormat('yyyy-MM-dd')}
         onTimeStartInput={onTimeStartInput}
         onTimeEndInput={onTimeEndInput}
       />
