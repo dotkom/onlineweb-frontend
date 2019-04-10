@@ -106,6 +106,7 @@
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.14",
+    "@fortawesome/free-regular-svg-icons": "^5.7.2",
     "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@sentry/browser": "^4.5.3",

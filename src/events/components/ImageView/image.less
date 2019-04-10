@@ -22,7 +22,7 @@
   margin-top: 20px;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: @owTabletBreakpoint + 1) {
   .largeEventGrid {
     grid-template-columns: 1fr 1fr 1fr;
   }
@@ -37,26 +37,20 @@
 .large {
   display: flex;
   flex-direction: column;
-  height: 100%;
   .owCard();
+  height: 100%;
 }
 
 .imageLargeType {
   position: relative;
-  padding: 10px 0 5px;
+  padding: 7px 0;
   color: #fff;
   text-align: center;
-
-  &::after {
-    content: '';
-    position: absolute;
-    background: inherit;
-    height: @edge-height;
-    bottom: -@edge-height + 1px;
-    width: 100%;
-    left: 0;
-    clip-path: polygon(0 0, 0 5%, 75% 100%, 100% 5%, 100% 0);
-  }
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  font-size: 20px;
 }
 
 .largeImage {
@@ -66,6 +60,7 @@
 .largeImageEmpty {
   height: 100%;
   margin: auto;
+  border-bottom: 0.5px solid #b7b7b7;
 
   path {
     fill: @lightGray;
@@ -75,19 +70,17 @@
 .largeContent {
   position: relative;
   display: grid;
-  grid-template-columns: 8fr 2fr 2fr;
-  flex: 1;
+  grid-template-columns: 0.5fr 6fr 1fr 1fr 1fr 1fr;
+  border-top: 0.5px solid #b7b7b7;
+  padding-right: 10px;
+  min-height: 4rem;
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    background: #fff;
-    height: @edge-height;
-    top: -@edge-height + 1px;
-    width: 100%;
-    left: 0;
-    clip-path: polygon(0 100%, 0 95%, 25% 0, 100% 95%, 100% 100%);
-  }
+.largeContent > span,
+.small > span {
+  width: 7px;
+  margin: 10px 0 10px 8px;
+  border-radius: 2px;
 }
 
 .largeContentEmpty {
@@ -101,37 +94,91 @@
 
 .small {
   display: grid;
-  grid-template-columns: 8fr 2fr 2fr;
+  grid-template-columns: 0.5fr 6fr 1fr 1fr 1fr 1fr;
   position: relative;
-  height: 100%;
   .owCard();
-
-  &::before {
-    content: '';
-    position: absolute;
-    background: currentColor;
-    width: 15px;
-    top: 0;
-    height: 100%;
-    clip-path: polygon(0 0, 0 50%, 100% 0);
-  }
+  padding-right: 10px;
+  min-height: 4rem;
 }
 
 .largeContent,
 .small {
   > p {
-    padding: 10px 5px;
     align-self: center;
-    text-align: right;
+    text-align: left;
     color: initial;
-
-    &:first-child {
-      text-align: left;
-      padding-left: 15px;
-    }
-
-    &:last-child {
-      padding-right: 15px;
-    }
   }
 }
+
+.icon {
+  align-self: center;
+  margin-left: 10px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.eventTitle {
+  margin-left: 5px;
+}
+
+.suppText {
+  width: 40px;
+}
+
+/* Mobile CSS */
+
+@media (max-width: @owTabletBreakpoint) {
+  .eventTitle {
+    font-size: 20px;
+  }
+  .small,
+  .largeContent {
+    min-height: 5rem;
+    grid-template-columns: 0.3fr 4fr 0.1fr 1fr 0.1fr 1fr;
+  }
+  .icon {
+    font-size: 21px;
+    margin-left: 20px;
+  }
+  .small > p,
+  .largeContent > p {
+    font-size: 20px;
+  }
+  // Change size so that the cards aren't too big
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 70%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  // Change text sizes
+  .small > p,
+  .largeContent > p {
+    font-size: 16px;
+  }
+  .icon {
+    font-size: 17px;
+  }
+  .suppText {
+    max-width: 35px;
+  }
+  .largeEventGrid,
+  .smallEventGrid {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .small,
+  .largeContent {
+    max-width: 17rem;
+  }
+  .largeContent {
+    padding-right: 0;
+  }
+}
+
+/* End of Mobile CSS */

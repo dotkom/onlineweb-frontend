@@ -9,10 +9,11 @@ import style from './detail.less';
 const PictureCard = ({ image, event_start, event_end, location, company_event, event_type }: INewEvent) => {
   const color = getEventColor(event_type);
 
-  const startDate = DateTime.fromISO(event_start).toFormat('d MMM');
+  const startDate = DateTime.fromISO(event_start).toFormat('d. MMM');
   const startTime = DateTime.fromISO(event_start).toFormat('HH:mm');
-  const endDate = DateTime.fromISO(event_end).toFormat('d MMM');
+  const endDate = DateTime.fromISO(event_end).toFormat('d. MMM');
   const endTime = DateTime.fromISO(event_end).toFormat('HH:mm');
+  const weekday = DateTime.fromISO(event_start).weekdayLong;
 
   return (
     <div className={style.pictureCard}>
@@ -36,6 +37,10 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
 
           <Block title="Sted">
             <p>{location}</p>
+          </Block>
+
+          <Block title="Ukedag">
+            <p>{weekday}</p>
           </Block>
         </div>
       </div>

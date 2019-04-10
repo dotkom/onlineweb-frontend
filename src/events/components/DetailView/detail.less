@@ -4,9 +4,7 @@
 .container {
   display: grid;
   grid-template-columns: 5fr 2fr;
-  grid-template-rows: repeat(3, auto);
-  grid-auto-flow: column;
-  grid-gap: 30px;
+  grid-gap: 20px;
 
   @media screen and (max-width: @owMobileBreakpoint) {
     grid-auto-flow: row;
@@ -19,14 +17,23 @@
   .owCard();
   display: grid;
   grid-template-columns: 2fr 1fr;
-  margin-bottom: auto;
-
-  @media screen and (max-width: @owTabletBreakpoint) {
-    grid-template-columns: 1fr;
-  }
+  margin-top: 20px;
 
   img {
     width: 100%;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-right: 1px solid #b7b7b7;
+  }
+
+  @media screen and (max-width: @owTabletBreakpoint) {
+    grid-template-columns: 1fr;
+    img {
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 3px;
+      border-right: none;
+      border-bottom: 1px solid #b7b7b7;
+    }
   }
 }
 
@@ -38,14 +45,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-}
 
-.blockGrid > div {
-  width: 50%;
-}
+  > div {
+    width: 50%;
 
-.blockGrid > .fullBlock {
-  width: 100%;
+    > p {
+      text-transform: capitalize;
+    }
+  }
+
+  > .fullBlock {
+    width: 100%;
+  }
 }
 
 .registration,
@@ -53,14 +64,6 @@
 .infoBox {
   .owCard();
   padding: 30px;
-}
-
-.registration {
-  grid-row: 1 / span 2;
-
-  @media screen and (max-width: @owMobileBreakpoint) {
-    grid-row: initial;
-  }
 }
 
 .contact {
@@ -100,4 +103,13 @@
 
 .detailHeader {
   text-align: center;
+}
+
+.title {
+  margin-bottom: 10px;
+}
+
+.pictureCard,
+.registration {
+  margin-bottom: 20px;
 }
