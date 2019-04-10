@@ -1,9 +1,7 @@
 import React, { ChangeEvent, FC } from 'react';
 import style from '../../../profile/components/Search/search.less';
-import { EventTypeEnum, getEventType } from '../../models/Event'; // , { useContext, useEffect }
+import { EventTypeEnum, getEventType } from '../../models/Event';
 import DateInput from './DateInput';
-
-// import { EventTypeEnum, IEvent } from '../../models/Event';
 
 export interface IProps {
   searchText: string;
