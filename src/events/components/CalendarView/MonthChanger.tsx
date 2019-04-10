@@ -1,5 +1,4 @@
-import { faChevronCircleLeft as ChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronCircleLeft';
-import { faChevronCircleRight as ChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronCircleRight';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons/';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
@@ -11,7 +10,7 @@ export interface IProps {
 }
 
 export const MonthChanger = ({ direction, onClick }: IProps) => {
-  const icon = direction === 'right' ? ChevronRight : ChevronLeft;
+  const icon = direction === 'right' ? faArrowRight : faArrowLeft;
   return (
     <div className={style.monthChanger} onClick={onClick} tabIndex={0}>
       <Icon icon={icon} />
