@@ -82,27 +82,37 @@ export const ImageView = ({  }: IProps) => {
 
   return (
     <>
-      <div className={style.largeEventGrid}>
-        {displayEvents.eventsLeft[0] ? (
-          <LargeEvent {...displayEvents.eventsLeft[0]} />
-        ) : (
-          <LargeEventPlaceholder event_type={2} />
-        )}
-        {displayEvents.eventsMiddle[0] ? (
-          <LargeEvent {...displayEvents.eventsMiddle[0]} />
-        ) : (
-          <LargeEventPlaceholder event_type={3} />
-        )}
-        {displayEvents.eventsRight[0] ? (
-          <LargeEvent {...displayEvents.eventsRight[0]} />
-        ) : (
-          <LargeEventPlaceholder event_type={1} />
-        )}
-      </div>
-      <div className={style.smallEventGrid}>
-        <SmallEventColumn events={displayEvents.eventsLeft.slice(1, 4)} />
-        <SmallEventColumn events={displayEvents.eventsMiddle.slice(1, 4)} />
-        <SmallEventColumn events={displayEvents.eventsRight.slice(1, 4)} />
+      <div className={style.eventGrid}>
+        <div className={style.eventColumn}>
+          {displayEvents.eventsLeft[0] ? (
+            <>
+              <LargeEvent {...displayEvents.eventsLeft[0]} />
+              <SmallEventColumn events={displayEvents.eventsLeft.slice(1, 4)} />
+            </>
+          ) : (
+            <LargeEventPlaceholder event_type={2} />
+          )}
+        </div>
+        <div className={style.eventColumn}>
+          {displayEvents.eventsMiddle[0] ? (
+            <>
+              <LargeEvent {...displayEvents.eventsMiddle[0]} />
+              <SmallEventColumn events={displayEvents.eventsMiddle.slice(1, 4)} />
+            </>
+          ) : (
+            <LargeEventPlaceholder event_type={3} />
+          )}
+        </div>
+        <div className={style.eventColumn}>
+          {displayEvents.eventsRight[0] ? (
+            <>
+              <LargeEvent {...displayEvents.eventsRight[0]} />
+              <SmallEventColumn events={displayEvents.eventsRight.slice(1, 4)} />
+            </>
+          ) : (
+            <LargeEventPlaceholder event_type={1} />
+          )}
+        </div>
       </div>
     </>
   );

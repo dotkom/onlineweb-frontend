@@ -3,8 +3,7 @@
 
 @edge-height: 20px;
 
-.largeEventGrid,
-.smallEventGrid {
+.eventGrid {
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 20px;
@@ -18,27 +17,25 @@
   }
 }
 
-.smallEventGrid {
-  margin-top: 20px;
+@media (min-width: @owTabletBreakpoint + 1) {
+  .eventGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .large {
+    max-height: 19rem;
+  }
 }
 
-@media (min-width: @owTabletBreakpoint + 1) {
-  .largeEventGrid {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  .smallEventGrid {
-    grid-auto-flow: column;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
+.eventColumn {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
 }
 
 .large {
   display: flex;
   flex-direction: column;
   .owCard();
-  height: 100%;
 }
 
 .imageLargeType {
@@ -60,7 +57,6 @@
 .largeImageEmpty {
   height: 100%;
   margin: auto;
-  border-bottom: 0.5px solid #b7b7b7;
 
   path {
     fill: @lightGray;
@@ -145,8 +141,7 @@
     font-size: 20px;
   }
   // Change size so that the cards aren't too big
-  .largeEventGrid,
-  .smallEventGrid {
+  .eventGrid {
     width: 70%;
     margin: auto;
   }
@@ -164,8 +159,7 @@
   .suppText {
     max-width: 35px;
   }
-  .largeEventGrid,
-  .smallEventGrid {
+  .eventGrid {
     width: 100%;
     margin: 0;
   }
