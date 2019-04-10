@@ -25,7 +25,13 @@ const SmallEvent = ({ title, event_type, event_start, attendance_event, id, comp
 );
 
 const SmallEventColumn = ({ events }: { events: INewEvent[] }) => {
-  return events.map((event) => <SmallEvent key={event.id} {...event} />);
+  return (
+    <>
+      {events.map((event) => (
+        <SmallEvent key={event.id} {...event} />
+      ))}
+    </>
+  );
 };
 
 export default SmallEventColumn;
