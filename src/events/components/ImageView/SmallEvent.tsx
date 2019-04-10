@@ -25,15 +25,7 @@ const SmallEvent = ({ title, event_type, event_start, attendance_event, id, comp
 );
 
 const SmallEventColumn = ({ events }: { events: INewEvent[] }) => {
-  let column = events.map((event) => <SmallEvent key={event.id} {...event} />);
-
-  if (events.length > 3) {
-    column = column.concat([...Array(3 - column.length)].map((_, i) => <a key={i} />));
-  } else {
-    column = column.concat([...Array(column.length)].map((_, i) => <a key={i} />));
-  }
-
-  return <>{column}</>;
+  return events.map((event) => <SmallEvent key={event.id} {...event} />);
 };
 
 export default SmallEventColumn;
