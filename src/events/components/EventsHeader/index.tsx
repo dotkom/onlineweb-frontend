@@ -16,7 +16,17 @@ export interface IProps {
   availableViews: number[];
 }
 
-const viewIcon = (viewType: EventView) => {
+export interface IPropsChangeViewIconButton {
+  changeView: (view: EventView) => void;
+  viewType: number;
+  view: EventView;
+}
+
+export interface IPropsViewIcon {
+  viewType: EventView;
+}
+
+const ViewIcon = ({ viewType }: IPropsViewIcon) => {
   switch (viewType) {
     case EventView.CALENDAR: {
       return <CalendarViewIcon />;
@@ -27,10 +37,13 @@ const viewIcon = (viewType: EventView) => {
     case EventView.IMAGE: {
       return <ImageViewIcon />;
     }
+    default: {
+      return <div />;
+    }
   }
 };
 
-const changeViewIconButton = (viewType: number, changeView: (view: EventView) => void, view: EventView) => (
+const ChangeViewIconButton = ({ viewType, changeView, view }: IPropsChangeViewIconButton) => (
   <div
     className={classNames(style.choice, {
       [style.choiceActive]: view === viewType,
@@ -38,7 +51,7 @@ const changeViewIconButton = (viewType: number, changeView: (view: EventView) =>
     onClick={() => changeView(viewType)}
     tabIndex={0}
   >
-    {viewIcon(viewType)}
+    <ViewIcon viewType={viewType} />
   </div>
 );
 
@@ -46,9 +59,15 @@ const EventsHeader = ({ toggleAccessible, changeView, accessible, view, availabl
   <div className={style.grid}>
     <h1>Arrangementer</h1>
     <div className={style.choiceGrid}>
-      {availableViews.includes(EventView.IMAGE) && changeViewIconButton(EventView.IMAGE, changeView, view)}
-      {availableViews.includes(EventView.LIST) && changeViewIconButton(EventView.LIST, changeView, view)}
-      {availableViews.includes(EventView.CALENDAR) && changeViewIconButton(EventView.CALENDAR, changeView, view)}
+      {availableViews.includes(EventView.IMAGE) && (
+        <ChangeViewIconButton viewType={EventView.IMAGE} changeView={changeView} view={view} />
+      )}
+      {availableViews.includes(EventView.LIST) && (
+        <ChangeViewIconButton viewType={EventView.LIST} changeView={changeView} view={view} />
+      )}
+      {availableViews.includes(EventView.CALENDAR) && (
+        <ChangeViewIconButton viewType={EventView.CALENDAR} changeView={changeView} view={view} />
+      )}
     </div>
 
     <span className={style.toggleAccessible}>

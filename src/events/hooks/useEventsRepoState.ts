@@ -1,15 +1,46 @@
 import { DateTime } from 'luxon';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { getCalendarEvents } from 'events/api/calendarEvents';
 import { getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
 import { INewEvent } from 'events/models/Event';
-import { CookieContext } from '../../core/providers/Cookies';
 import { isAfter, isBefore, isInDateRange } from '../utils/eventTimeUtils';
 
 export type EventMap = Map<number, INewEvent>;
 
 const INITIAL_STATE: INewEvent[] = [];
+
+const getFilteredEventList = (eventList: INewEvent[]) => {
+  const searchParams = new URL(window.location.href).searchParams;
+  let filteringEventList = eventList;
+
+  if (searchParams.get('text') !== undefined) {
+    const searchText = searchParams.get('text')!;
+    filteringEventList = filteringEventList.filter(
+      (event: INewEvent) =>
+        event.title.includes(searchText) ||
+        event.description.includes(searchText) ||
+        event.ingress.includes(searchText) ||
+        event.location.includes(searchText) ||
+        event.organizer_name.includes(searchText)
+    );
+  }
+  if (searchParams.get('timeEnd') !== undefined && searchParams.get('timeStart') !== undefined) {
+    const timeEnd = DateTime.fromISO(searchParams.get('timeEnd')!);
+    const timeStart = DateTime.fromISO(searchParams.get('timeStart')!);
+
+    filteringEventList = filteringEventList.filter((event: INewEvent) => isInDateRange(event, timeStart, timeEnd));
+  } else if (searchParams.get('timeStart') !== undefined) {
+    const timeStart = DateTime.fromISO(searchParams.get('timeStart')!);
+
+    filteringEventList = filteringEventList.filter((event) => isAfter(event, timeStart));
+  } else if (searchParams.get('timeEnd') !== undefined) {
+    const timeEnd = DateTime.fromISO(searchParams.get('timeEnd')!);
+
+    filteringEventList = filteringEventList.filter((event) => isBefore(event, timeEnd));
+  }
+  return filteringEventList;
+};
 
 /**
  * Contains the complete collection of events fetched for use in the application.
@@ -53,32 +84,11 @@ export const useEventsRepoState = () => {
     updateEventList(events);
   };
 
-  const getFilteredEventList = () => {
-    const { cookies, dispatch } = useContext(CookieContext);
-    let filteringEventList = eventList;
-
-    if (cookies.searchText !== '') {
-      filteringEventList = filteringEventList.filter(
-        (event: INewEvent) =>
-          event.title.includes(cookies.searchText) ||
-          event.description.includes(cookies.searchText) ||
-          event.ingress.includes(cookies.searchText) ||
-          event.location.includes(cookies.searchText) ||
-          event.organizer_name.includes(cookies.searchText)
-      );
-    }
-    if (cookies.timeEnd !== undefined && cookies.timeStart !== undefined) {
-      filteringEventList = filteringEventList.filter((event: INewEvent) =>
-        isInDateRange(event, cookies.timeStart, cookies.timeEnd)
-      );
-    } else if (cookies.timeStart !== undefined) {
-      filteringEventList = filteringEventList.filter((event) => isAfter(event, cookies.timeStart));
-    } else if (cookies.timeEnd !== undefined) {
-      filteringEventList = filteringEventList.filter((event) => isBefore(event, cookies.timeEnd));
-    }
-    return filteringEventList;
-  };
-  const filteredEventList = getFilteredEventList();
+  // const filteredEventList = ({ eventList }) => {
+  const filteredEventList = useMemo(() => {
+    return getFilteredEventList(eventList);
+  }, [eventList]);
+  // };
 
   return {
     fetchEvent,
