@@ -1,11 +1,16 @@
 import React from 'react';
 
-import { IEventColumn } from 'events/models/Event';
-
+import { INewEvent } from 'events/models/Event';
+import { EventTypeEnum } from '../../models/Event';
 import style from './image.less';
 import LargeEvent from './LargeEvent';
 import LargeEventPlaceholder from './LargeEventPlaceholder';
 import SmallEventColumn from './SmallEvent';
+
+export interface IEventColumn {
+  events: INewEvent[];
+  event_type: EventTypeEnum;
+}
 
 const EventColumn = ({ events, event_type }: IEventColumn) => {
   return (
