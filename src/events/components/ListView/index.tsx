@@ -33,7 +33,7 @@ export const ListView = ({ filtered }: IProps) => {
     })();
   }, []);
 
-  const events = filtered ? filterListEvents(eventList) : eventList;
+  const events = filtered ? eventList : filterListEvents(eventList);
 
   const displayEvents = events.length ? events : prefetch || [];
 

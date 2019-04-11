@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { getCalendarEvents } from 'events/api/calendarEvents';
-import { getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
+import { getAllEventsParamtered, getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
 import { INewEvent } from 'events/models/Event';
 import { useQueryParamsState } from '../../core/hooks/useQueryParamsState';
 import { QueryParams } from '../../core/providers/QueryParams';
@@ -17,13 +17,14 @@ const getFilteredEventList = (searchContext: ReturnType<typeof useQueryParamsSta
   let filteringEventList = eventList.filter((event) => eventTypes.includes(event.event_type));
 
   if (search) {
+    const smallSearch = search.toLowerCase();
     filteringEventList = filteringEventList.filter(
       (event: INewEvent) =>
-        event.title.toLowerCase().includes(search) ||
-        event.description.toLowerCase().includes(search) ||
-        event.ingress.toLowerCase().includes(search) ||
-        event.location.toLowerCase().includes(search) ||
-        event.organizer_name.toLowerCase().includes(search)
+        event.title.toLowerCase().includes(smallSearch) ||
+        event.description.toLowerCase().includes(smallSearch) ||
+        event.ingress.toLowerCase().includes(smallSearch) ||
+        event.location.toLowerCase().includes(smallSearch) ||
+        event.organizer_name.toLowerCase().includes(smallSearch)
     );
   }
 
@@ -84,6 +85,22 @@ export const useEventsRepoState = () => {
   const filteredEventList = useMemo(() => {
     return getFilteredEventList(searchContext, eventList);
   }, [searchContext, eventList]);
+
+  useEffect(() => {
+    fetchQueryEvents();
+  }, [searchContext.dateEnd, searchContext.dateStart, searchContext.eventTypes]);
+
+  const fetchQueryEvents = async () => {
+    const { dateEnd, dateStart, eventTypes } = searchContext;
+    if (!false) {
+      const newEvents = await getAllEventsParamtered({
+        event_start__gte: dateStart.toISODate(),
+        event_end__lte: dateEnd.toISODate(),
+        event_type: eventTypes,
+      });
+      updateEventList(newEvents);
+    }
+  };
 
   return {
     fetchEvent,
