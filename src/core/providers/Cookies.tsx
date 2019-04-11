@@ -1,5 +1,4 @@
 import clientCookies from 'js-cookie';
-import { DateTime } from 'luxon';
 import React, { createContext, ReactNode, useReducer } from 'react';
 
 import { __CLIENT__ } from 'common/constants/environment';
@@ -13,18 +12,12 @@ import { getEventView, getFrontpageEventView } from 'events/utils/eventView';
 export interface ICookies {
   frontpageEventView: EventView;
   eventView: EventView;
-  searchText: string;
-  timeStart: DateTime;
-  timeEnd: DateTime;
 }
 
 const initializeCookies = (inital: { [name: string]: any }): ICookies => ({
   ...inital,
   frontpageEventView: getFrontpageEventView(inital.eventView),
   eventView: getEventView(inital.eventView),
-  searchText: '',
-  timeStart: DateTime.local(),
-  timeEnd: DateTime.local().plus({ months: 1 }),
 });
 
 export interface IProps {

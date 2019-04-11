@@ -1,43 +1,42 @@
 import React, { ChangeEvent, FC } from 'react';
 import style from '../../../profile/components/Search/search.less';
-import { EventTypeEnum, getEventType } from '../../models/Event';
+import { EventTypeEnum } from '../../models/Event';
 import DateInput from './DateInput';
+import { SelectMultiple } from './SelectMultiple';
 
 export interface IProps {
   searchText: string;
-  timeStart: string;
-  timeEnd: string;
+  dateStart: string;
+  dateEnd: string;
+  eventTypes: EventTypeEnum[] | EventTypeEnum;
   onTextInput: (event: ChangeEvent<HTMLInputElement>) => void;
   onTimeStartInput: (event: ChangeEvent<HTMLInputElement>) => void;
   onTimeEndInput: (event: ChangeEvent<HTMLInputElement>) => void;
+  onEventTypesInput: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
-
-const selectItems = () => {
-  const eventTypeNumberList = Array(Object.keys(EventTypeEnum).length / 2 - 1)
-    .fill(1)
-    .map((x, y) => x + y);
-
-  return eventTypeNumberList.map((eventType) => (
-    <option key={eventType} value={eventType}>
-      {getEventType(eventType)}
-    </option>
-  ));
-};
 
 const SearchModule: FC<IProps> = ({
   searchText,
-  timeStart,
-  timeEnd,
+  dateStart,
+  dateEnd,
+  eventTypes,
   onTextInput,
   onTimeEndInput,
   onTimeStartInput,
+  onEventTypesInput,
 }) => {
   return (
     <div className={style.grid}>
-      <input className={style.searchInput} type="search" value={searchText} placeholder="Søk" onChange={onTextInput} />
-      <DateInput label="Fra: " time={timeStart} onChange={onTimeStartInput} />
-      <DateInput label="Til: " time={timeEnd} onChange={onTimeEndInput} />
-      <select multiple>{selectItems()}</select>
+      <input
+        className={style.searchInput}
+        type="search"
+        defaultValue={searchText}
+        placeholder="Søk"
+        onChange={onTextInput}
+      />
+      <DateInput label="Fra: " time={dateStart} onChange={onTimeStartInput} />
+      <DateInput label="Til: " time={dateEnd} onChange={onTimeEndInput} />
+      <SelectMultiple onEventTypesInput={onEventTypesInput} eventTypes={eventTypes} />
     </div>
   );
 };
