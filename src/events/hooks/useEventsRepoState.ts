@@ -4,6 +4,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { getCalendarEvents } from 'events/api/calendarEvents';
 import { getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
 import { INewEvent } from 'events/models/Event';
+import { useQueryParamsState } from '../../core/hooks/useQueryParamsState';
 import { QueryParams } from '../../core/providers/QueryParams';
 import { isAfter, isBefore, isInDateRange } from '../utils/eventTimeUtils';
 
@@ -11,18 +12,18 @@ export type EventMap = Map<number, INewEvent>;
 
 const INITIAL_STATE: INewEvent[] = [];
 
-const getFilteredEventList = (eventList: INewEvent[]) => {
-  const { search, dateStart, dateEnd, eventTypes } = useContext(QueryParams);
-  let filteringEventList = eventList.filter((event) => event.event_type in eventTypes);
+const getFilteredEventList = (searchContext: ReturnType<typeof useQueryParamsState>, eventList: INewEvent[]) => {
+  const { search, dateStart, dateEnd, eventTypes } = searchContext;
+  let filteringEventList = eventList.filter((event) => eventTypes.includes(event.event_type));
 
   if (search) {
     filteringEventList = filteringEventList.filter(
       (event: INewEvent) =>
-        event.title.includes(search) ||
-        event.description.includes(search) ||
-        event.ingress.includes(search) ||
-        event.location.includes(search) ||
-        event.organizer_name.includes(search)
+        event.title.toLowerCase().includes(search) ||
+        event.description.toLowerCase().includes(search) ||
+        event.ingress.toLowerCase().includes(search) ||
+        event.location.toLowerCase().includes(search) ||
+        event.organizer_name.toLowerCase().includes(search)
     );
   }
 
@@ -44,6 +45,7 @@ const getFilteredEventList = (eventList: INewEvent[]) => {
 export const useEventsRepoState = () => {
   const [eventList, setEventList] = useState(INITIAL_STATE);
   const [eventMap, setEventMap] = useState<EventMap>(new Map());
+  const searchContext = useContext(QueryParams);
 
   /** Sync list of events with the map if the map is updated */
   useEffect(() => {
@@ -80,8 +82,8 @@ export const useEventsRepoState = () => {
   };
 
   const filteredEventList = useMemo(() => {
-    return getFilteredEventList(eventList);
-  }, [eventList]);
+    return getFilteredEventList(searchContext, eventList);
+  }, [searchContext, eventList]);
 
   return {
     fetchEvent,

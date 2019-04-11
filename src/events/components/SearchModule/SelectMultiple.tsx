@@ -19,7 +19,7 @@ export interface IProps {
 }
 
 export const SelectMultiple: FC<IProps> = ({ eventTypes, onEventTypesInput }) => (
-  <select onChange={onEventTypesInput} value={eventTypes.toString()} multiple>
+  <select onChange={onEventTypesInput} value={eventTypes.map((item) => item.toString())} multiple>
     {selectItems()}
   </select>
 );
