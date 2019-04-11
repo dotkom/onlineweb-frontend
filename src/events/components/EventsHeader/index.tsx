@@ -51,7 +51,9 @@ const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps
     </div>
 
     <span className={style.toggleAccessible}>
-      <span className={style.toggleAccessibleDescription}>Vis kun tilgjengelige arrangementer</span>
+      <span className={style.toggleAccessibleDescription}>
+        {!accessible ? 'Kan delta?' : 'Viser arrangementer du kan delta på'}
+      </span>
 
       <ToggleSwitch checked={accessible} onChange={toggleAccessible} />
     </span>
