@@ -10,7 +10,7 @@ const DateInput: FC<IProps> = ({ label, time, onChange }) => {
   return (
     <label>
       {label}
-      <input type="date" value={time} onChange={onChange} pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" />
+      <input type="date" value={time} onChange={onChange} pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required />
     </label>
   );
 };

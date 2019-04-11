@@ -37,25 +37,41 @@ const Events = ({ location, history }: RouteComponentProps) => {
   const params = new URLSearchParams(location.search);
 
   const onTextInput = (event: ChangeEvent<HTMLInputElement>) => {
-    params.set('search', event.target.value);
+    if (event.target.value) {
+      params.set('search', event.target.value);
+    } else {
+      params.delete('search');
+    }
     history.replace(location.pathname + '?' + params);
   };
 
   const onTimeStartInput = (event: ChangeEvent<HTMLInputElement>) => {
-    params.set('dateStart', event.target.value);
+    if (event.target.value) {
+      params.set('dateStart', event.target.value);
+    } else {
+      params.delete('dateStart');
+    }
     history.replace(location.pathname + '?' + params);
   };
 
   const onTimeEndInput = (event: ChangeEvent<HTMLInputElement>) => {
-    params.set('dateEnd', event.target.value);
+    if (event.target.value) {
+      params.set('dateEnd', event.target.value);
+    } else {
+      params.delete('dateEnd');
+    }
     history.replace(location.pathname + '?' + params);
   };
 
   const onEventTypeInput = (event: ChangeEvent<HTMLSelectElement>) => {
-    const eventTypes: EventTypeEnum[] = [...event.target.options]
-      .filter((o) => o.selected)
-      .map((o) => parseInt(o.value, 10));
-    params.set('eventTypes', JSON.stringify(eventTypes));
+    if (event.target.value) {
+      const eventTypes: EventTypeEnum[] = [...event.target.options]
+        .filter((o) => o.selected)
+        .map((o) => parseInt(o.value, 10));
+      params.set('eventTypes', JSON.stringify(eventTypes));
+    } else {
+      params.delete('eventTypes');
+    }
     history.replace(location.pathname + '?' + params);
   };
 
