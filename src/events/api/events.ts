@@ -25,6 +25,11 @@ export const getEvents = async (args?: IEventAPIParameters): Promise<INewEvent[]
   return data.results;
 };
 
+export const getAllEventsParamtered = async (args: IEventAPIParameters): Promise<INewEvent[]> => {
+  const data = await getAllPages<INewEvent>(API_URL, { format: 'json', page_size: 80, ...args });
+  return data;
+};
+
 export const getAllUserEvents = async (args: IEventAPIParameters, user: IAuthUser): Promise<INewEvent[]> => {
   const data = await getAllPages<INewEvent>(API_URL, { format: 'json', page_size: 80, ...args }, { user });
   return data;
