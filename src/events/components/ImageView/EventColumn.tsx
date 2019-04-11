@@ -7,12 +7,12 @@ import LargeEvent from './LargeEvent';
 import LargeEventPlaceholder from './LargeEventPlaceholder';
 import SmallEventColumn from './SmallEvent';
 
-export interface IEventColumn {
+export interface IProps {
   events: INewEvent[];
   event_type: EventTypeEnum;
 }
 
-const EventColumn = ({ events, event_type }: IEventColumn) => {
+const EventColumn = ({ events, event_type }: IProps) => {
   return (
     <div className={style.eventColumn}>
       {events[0] ? (
