@@ -41,7 +41,7 @@ export const EventContainer = () => {
         view={cookies.frontpageEventView}
         availableViews={[EventView.IMAGE, EventView.LIST, EventView.CALENDAR]}
       />
-      <View accessible={accessible} />
+      <View accessible={accessible} filtered={false} />
     </section>
   );
 };

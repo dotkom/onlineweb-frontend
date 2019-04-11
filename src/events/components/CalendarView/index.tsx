@@ -21,8 +21,9 @@ import { MonthChanger } from './MonthChanger';
 
 export type IProps = IEventViewProps;
 
-export const CalendarView = ({  }: IProps) => {
-  const { eventList, fetchEventsByMonth } = useContext(EventsRepo);
+export const CalendarView = ({ filtered }: IProps) => {
+  const eventContext = useContext(EventsRepo);
+  const eventList = filtered ? eventContext.filteredEventList : eventContext.eventList;
   const [month, changeMonth] = useMonth();
   const [eventMonth, setEventMonth] = useState<INewEvent[][]>([[]]);
 
@@ -46,7 +47,7 @@ export const CalendarView = ({  }: IProps) => {
 
   /** Fetch events when the month is changed */
   useEffect(() => {
-    fetchEventsByMonth(month);
+    eventContext.fetchEventsByMonth(month);
   }, [month]);
 
   /** Update stored events when month or list of events is changed */

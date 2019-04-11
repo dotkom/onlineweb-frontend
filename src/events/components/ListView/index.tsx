@@ -17,8 +17,9 @@ const filterListEvents = (events: INewEvent[]) => {
   return events.filter((event) => isOngoingOrFuture(event)).slice(0, 7);
 };
 
-export const ListView = ({  }: IProps) => {
-  const { eventList, updateEventList } = useContext(EventsRepo);
+export const ListView = ({ filtered }: IProps) => {
+  const eventContext = useContext(EventsRepo);
+  const eventList = filtered ? eventContext.filteredEventList : eventContext.eventList;
 
   const prefetch = usePrefetch(PrefetchKey.EVENTS_LIST, async () => {
     const prefetchedEvents = await getListEvents();
@@ -28,11 +29,11 @@ export const ListView = ({  }: IProps) => {
   useEffect(() => {
     (async () => {
       const newEvents = await getListEvents();
-      updateEventList(newEvents);
+      eventContext.updateEventList(newEvents);
     })();
   }, []);
 
-  const events = filterListEvents(eventList);
+  const events = filtered ? filterListEvents(eventList) : eventList;
 
   const displayEvents = events.length ? events : prefetch || [];
 

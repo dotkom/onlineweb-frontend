@@ -80,7 +80,7 @@ const Events = ({ location, history }: RouteComponentProps) => {
         onTimeEndInput={onTimeEndInput}
         onEventTypesInput={onEventTypeInput}
       />
-      <View accessible={accessible} />
+      <View accessible={accessible} filtered={true} />
     </section>
   );
 };
