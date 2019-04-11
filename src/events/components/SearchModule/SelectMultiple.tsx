@@ -13,15 +13,13 @@ const selectItems = () => {
   ));
 };
 
-const getValuesFromEventTypes = (eventTypes: EventTypeEnum[] | EventTypeEnum) => eventTypes.toString();
-
 export interface IProps {
-  eventTypes: EventTypeEnum[] | EventTypeEnum;
+  eventTypes: EventTypeEnum[];
   onEventTypesInput: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export const SelectMultiple: FC<IProps> = ({ eventTypes, onEventTypesInput }) => (
-  <select onChange={onEventTypesInput} value={getValuesFromEventTypes(eventTypes)} multiple>
+  <select onChange={onEventTypesInput} value={eventTypes.toString()} multiple>
     {selectItems()}
   </select>
 );

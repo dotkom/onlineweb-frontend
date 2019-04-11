@@ -1,7 +1,7 @@
 import { clearCache } from 'common/utils/cache';
 import { CookieActionType, CookieContext } from 'core/providers/Cookies';
 import React, { ChangeEvent, useContext, useState } from 'react';
-import { RouteComponentProps, withRouter } from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import { QueryParams } from '../../core/providers/QueryParams';
 
 import { EventTypeEnum, EventView } from '../models/Event';
@@ -85,6 +85,4 @@ const Events = ({ location, history }: RouteComponentProps) => {
   );
 };
 
-const EventsWithRouter = withRouter(Events);
-
-export default EventsWithRouter;
+export default Events;

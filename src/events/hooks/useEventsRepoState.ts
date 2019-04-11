@@ -1,9 +1,10 @@
 import { DateTime } from 'luxon';
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { getCalendarEvents } from 'events/api/calendarEvents';
 import { getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
 import { INewEvent } from 'events/models/Event';
+import { QueryParams } from '../../core/providers/QueryParams';
 import { isAfter, isBefore, isInDateRange } from '../utils/eventTimeUtils';
 
 export type EventMap = Map<number, INewEvent>;
@@ -11,32 +12,27 @@ export type EventMap = Map<number, INewEvent>;
 const INITIAL_STATE: INewEvent[] = [];
 
 const getFilteredEventList = (eventList: INewEvent[]) => {
-  const searchParams = new URL(window.location.href).searchParams;
-  let filteringEventList = eventList;
+  const { search, dateStart, dateEnd, eventTypes } = useContext(QueryParams);
+  let filteringEventList = eventList.filter((event) => event.event_type in eventTypes);
 
-  if (searchParams.get('search')) {
-    const searchText = searchParams.get('search')!;
+  if (search) {
     filteringEventList = filteringEventList.filter(
       (event: INewEvent) =>
-        event.title.includes(searchText) ||
-        event.description.includes(searchText) ||
-        event.ingress.includes(searchText) ||
-        event.location.includes(searchText) ||
-        event.organizer_name.includes(searchText)
+        event.title.includes(search) ||
+        event.description.includes(search) ||
+        event.ingress.includes(search) ||
+        event.location.includes(search) ||
+        event.organizer_name.includes(search)
     );
   }
 
-  const dateStart = searchParams.get('dateStart') ? DateTime.fromISO(searchParams.get('dateStart')!) : DateTime.local();
-  const dateEnd = searchParams.get('dateEnd')
-    ? DateTime.fromISO(searchParams.get('dateEnd')!)
-    : DateTime.local().plus({ months: 1 });
-
-  if (searchParams.get('dateEnd') && searchParams.get('dateStart')) {
+  if (dateEnd && dateStart) {
     filteringEventList = filteringEventList.filter((event: INewEvent) => isInDateRange(event, dateStart, dateEnd));
-  } else if (searchParams.get('dateStart')) {
-    filteringEventList = filteringEventList.filter((event) => isAfter(event, dateStart));
-  } else if (searchParams.get('dateEnd')) {
-    filteringEventList = filteringEventList.filter((event) => isBefore(event, dateEnd));
+  } else {
+    filteringEventList = dateStart
+      ? filteringEventList.filter((event) => isAfter(event, dateStart))
+      : filteringEventList;
+    filteringEventList = dateEnd ? filteringEventList.filter((event) => isBefore(event, dateEnd)) : filteringEventList;
   }
   return filteringEventList;
 };
@@ -83,11 +79,9 @@ export const useEventsRepoState = () => {
     updateEventList(events);
   };
 
-  // const filteredEventList = ({ eventList }) => {
   const filteredEventList = useMemo(() => {
     return getFilteredEventList(eventList);
   }, [eventList]);
-  // };
 
   return {
     fetchEvent,
