@@ -8,7 +8,7 @@ export interface IProps {
   searchText: string;
   dateStart: string;
   dateEnd: string;
-  eventTypes: EventTypeEnum[] | EventTypeEnum;
+  eventTypes: EventTypeEnum[];
   onTextInput: (event: ChangeEvent<HTMLInputElement>) => void;
   onTimeStartInput: (event: ChangeEvent<HTMLInputElement>) => void;
   onTimeEndInput: (event: ChangeEvent<HTMLInputElement>) => void;
