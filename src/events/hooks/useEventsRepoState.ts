@@ -14,8 +14,8 @@ const getFilteredEventList = (eventList: INewEvent[]) => {
   const searchParams = new URL(window.location.href).searchParams;
   let filteringEventList = eventList;
 
-  if (searchParams.get('text') !== undefined) {
-    const searchText = searchParams.get('text')!;
+  if (searchParams.get('search')) {
+    const searchText = searchParams.get('search')!;
     filteringEventList = filteringEventList.filter(
       (event: INewEvent) =>
         event.title.includes(searchText) ||
@@ -25,19 +25,18 @@ const getFilteredEventList = (eventList: INewEvent[]) => {
         event.organizer_name.includes(searchText)
     );
   }
-  if (searchParams.get('timeEnd') !== undefined && searchParams.get('timeStart') !== undefined) {
-    const timeEnd = DateTime.fromISO(searchParams.get('timeEnd')!);
-    const timeStart = DateTime.fromISO(searchParams.get('timeStart')!);
 
-    filteringEventList = filteringEventList.filter((event: INewEvent) => isInDateRange(event, timeStart, timeEnd));
-  } else if (searchParams.get('timeStart') !== undefined) {
-    const timeStart = DateTime.fromISO(searchParams.get('timeStart')!);
+  const dateStart = searchParams.get('dateStart') ? DateTime.fromISO(searchParams.get('dateStart')!) : DateTime.local();
+  const dateEnd = searchParams.get('dateEnd')
+    ? DateTime.fromISO(searchParams.get('dateEnd')!)
+    : DateTime.local().plus({ months: 1 });
 
-    filteringEventList = filteringEventList.filter((event) => isAfter(event, timeStart));
-  } else if (searchParams.get('timeEnd') !== undefined) {
-    const timeEnd = DateTime.fromISO(searchParams.get('timeEnd')!);
-
-    filteringEventList = filteringEventList.filter((event) => isBefore(event, timeEnd));
+  if (searchParams.get('dateEnd') && searchParams.get('dateStart')) {
+    filteringEventList = filteringEventList.filter((event: INewEvent) => isInDateRange(event, dateStart, dateEnd));
+  } else if (searchParams.get('dateStart')) {
+    filteringEventList = filteringEventList.filter((event) => isAfter(event, dateStart));
+  } else if (searchParams.get('dateEnd')) {
+    filteringEventList = filteringEventList.filter((event) => isBefore(event, dateEnd));
   }
   return filteringEventList;
 };

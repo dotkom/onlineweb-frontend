@@ -1,9 +1,10 @@
 import { clearCache } from 'common/utils/cache';
 import { CookieActionType, CookieContext } from 'core/providers/Cookies';
-import { DateTime } from 'luxon';
 import React, { ChangeEvent, useContext, useState } from 'react';
+import { RouteComponentProps, withRouter } from 'react-router';
+import { QueryParams } from '../../core/providers/QueryParams';
 
-import { EventView } from '../models/Event';
+import { EventTypeEnum, EventView } from '../models/Event';
 import CalendarView from './CalendarView';
 import EventsHeader from './EventsHeader';
 import ImageView from './ImageView';
@@ -22,8 +23,9 @@ const getView = (view?: EventView): typeof ListView | typeof CalendarView | type
   }
 };
 
-export const Events = () => {
+const Events = ({ location, history }: RouteComponentProps) => {
   const { cookies, dispatch } = useContext(CookieContext);
+  const searchParams = useContext(QueryParams);
   const View = getView(cookies.eventView);
   const changeView = (view: EventView) => {
     dispatch({ type: CookieActionType.CHANGE, value: { eventView: view } });
@@ -32,29 +34,31 @@ export const Events = () => {
 
   const [accessible, setAccessible] = useState(false);
 
-  const parsedURL = new URL(window.location.href);
-
   const toggleAccessible = () => setAccessible(!accessible);
 
+  const params = new URLSearchParams(location.search);
+
   const onTextInput = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: CookieActionType.CHANGE, value: { searchText: event.target.value } });
-    parsedURL.searchParams.set('text', event.target.value);
-    history.pushState({}, document.title, parsedURL.href);
-    clearCache();
+    params.set('search', event.target.value);
+    history.replace(location.pathname + '?' + params);
   };
 
   const onTimeStartInput = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: CookieActionType.CHANGE, value: { timeStart: DateTime.fromISO(event.target.value) } });
-    parsedURL.searchParams.set('timeStart', event.target.value);
-    history.pushState({}, document.title, parsedURL.href);
-    clearCache();
+    params.set('dateStart', event.target.value);
+    history.replace(location.pathname + '?' + params);
   };
 
   const onTimeEndInput = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: CookieActionType.CHANGE, value: { timeEnd: DateTime.fromISO(event.target.value) } });
-    parsedURL.searchParams.set('timeEnd', event.target.value);
-    history.pushState({}, document.title, parsedURL.href);
-    clearCache();
+    params.set('dateEnd', event.target.value);
+    history.replace(location.pathname + '?' + params);
+  };
+
+  const onEventTypeInput = (event: ChangeEvent<HTMLSelectElement>) => {
+    const eventTypes: EventTypeEnum[] = [...event.target.options]
+      .filter((o) => o.selected)
+      .map((o) => parseInt(o.value, 10));
+    params.set('eventTypes', JSON.stringify(eventTypes));
+    history.replace(location.pathname + '?' + params);
   };
 
   return (
@@ -67,16 +71,20 @@ export const Events = () => {
         availableViews={[EventView.LIST, EventView.CALENDAR]}
       />
       <SearchModule
-        searchText={cookies.searchText}
+        searchText={searchParams.search}
         onTextInput={onTextInput}
-        timeStart={cookies.timeStart.toFormat('yyyy-MM-dd')}
-        timeEnd={cookies.timeEnd.toFormat('yyyy-MM-dd')}
+        dateStart={searchParams.dateStart.toFormat('yyyy-MM-dd')}
+        dateEnd={searchParams.dateEnd.toFormat('yyyy-MM-dd')}
+        eventTypes={searchParams.eventTypes}
         onTimeStartInput={onTimeStartInput}
         onTimeEndInput={onTimeEndInput}
+        onEventTypesInput={onEventTypeInput}
       />
       <View accessible={accessible} />
     </section>
   );
 };
 
-export default Events;
+const EventsWithRouter = withRouter(Events);
+
+export default EventsWithRouter;
