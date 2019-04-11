@@ -2,7 +2,6 @@ import { clearCache } from 'common/utils/cache';
 import { CookieActionType, CookieContext } from 'core/providers/Cookies';
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
-import { QueryParams } from '../../core/providers/QueryParams';
 
 import { EventTypeEnum, EventView } from '../models/Event';
 import CalendarView from './CalendarView';
@@ -25,7 +24,6 @@ const getView = (view?: EventView): typeof ListView | typeof CalendarView | type
 
 const Events = ({ location, history }: RouteComponentProps) => {
   const { cookies, dispatch } = useContext(CookieContext);
-  const searchParams = useContext(QueryParams);
   const View = getView(cookies.eventView);
   const changeView = (view: EventView) => {
     dispatch({ type: CookieActionType.CHANGE, value: { eventView: view } });
@@ -71,11 +69,7 @@ const Events = ({ location, history }: RouteComponentProps) => {
         availableViews={[EventView.LIST, EventView.CALENDAR]}
       />
       <SearchModule
-        searchText={searchParams.search}
         onTextInput={onTextInput}
-        dateStart={searchParams.dateStart.toFormat('yyyy-MM-dd')}
-        dateEnd={searchParams.dateEnd.toFormat('yyyy-MM-dd')}
-        eventTypes={searchParams.eventTypes}
         onTimeStartInput={onTimeStartInput}
         onTimeEndInput={onTimeEndInput}
         onEventTypesInput={onEventTypeInput}
