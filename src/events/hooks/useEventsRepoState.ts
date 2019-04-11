@@ -13,7 +13,7 @@ export type EventMap = Map<number, INewEvent>;
 const INITIAL_STATE: INewEvent[] = [];
 
 const getFilteredEventList = (searchContext: ReturnType<typeof useQueryParamsState>, eventList: INewEvent[]) => {
-  const { search, dateStart, dateEnd, eventTypes } = searchContext;
+  const { search, dateStart, dateEnd, eventTypes, attendanceEventsChecked } = searchContext;
   let filteringEventList = eventList.filter((event) => eventTypes.includes(event.event_type));
 
   if (search) {
@@ -36,6 +36,11 @@ const getFilteredEventList = (searchContext: ReturnType<typeof useQueryParamsSta
       : filteringEventList;
     filteringEventList = dateEnd ? filteringEventList.filter((event) => isBefore(event, dateEnd)) : filteringEventList;
   }
+
+  filteringEventList = !attendanceEventsChecked
+    ? filteringEventList.filter((event) => event.attendance_event)
+    : filteringEventList;
+
   return filteringEventList;
 };
 
@@ -92,14 +97,12 @@ export const useEventsRepoState = () => {
 
   const fetchQueryEvents = async () => {
     const { dateEnd, dateStart, eventTypes } = searchContext;
-    if (!false) {
-      const newEvents = await getAllEventsParamtered({
-        event_start__gte: dateStart.toISODate(),
-        event_end__lte: dateEnd.toISODate(),
-        event_type: eventTypes,
-      });
-      updateEventList(newEvents);
-    }
+    const newEvents = await getAllEventsParamtered({
+      event_start__gte: dateStart.toISODate(),
+      event_end__lte: dateEnd.toISODate(),
+      event_type: eventTypes,
+    });
+    updateEventList(newEvents);
   };
 
   return {

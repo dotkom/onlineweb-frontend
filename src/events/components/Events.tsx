@@ -59,6 +59,15 @@ const Events = ({ location, history }: RouteComponentProps) => {
     history.replace(location.pathname + '?' + params);
   };
 
+  const onAttendanceEventInput = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.checked) {
+      params.delete('attendanceEvents');
+    } else {
+      params.set('attendanceEvents', 'off');
+    }
+    history.replace(location.pathname + '?' + params);
+  };
+
   return (
     <section className={style.section}>
       <EventsHeader
@@ -73,6 +82,7 @@ const Events = ({ location, history }: RouteComponentProps) => {
         onTimeStartInput={onTimeStartInput}
         onTimeEndInput={onTimeEndInput}
         onEventTypesInput={onEventTypeInput}
+        onAttendanceEventInput={onAttendanceEventInput}
       />
       <View accessible={accessible} filtered={true} />
     </section>

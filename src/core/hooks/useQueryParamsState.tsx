@@ -14,11 +14,13 @@ export const useQueryParamsState = (location: H.Location<H.LocationState>) => {
         .toISODate()
   );
   const eventTypes: EventTypeEnum[] = JSON.parse(params.get('eventTypes') || '[1, 2, 3, 4, 5, 6, 7, 8]');
+  const attendanceEventsChecked: boolean = !params.get('attendanceEvents');
 
   return {
     search,
     dateStart,
     dateEnd,
     eventTypes,
+    attendanceEventsChecked,
   };
 };
