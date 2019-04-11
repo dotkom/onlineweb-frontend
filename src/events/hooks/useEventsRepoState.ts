@@ -74,7 +74,6 @@ export const useEventsRepoState = () => {
 
   const fetchEvents = async (params?: IEventAPIParameters) => {
     const events = await getEvents(params);
-    console.log(events);
     updateEventList(events);
   };
 
@@ -93,9 +92,8 @@ export const useEventsRepoState = () => {
 
   const fetchQueryEvents = async () => {
     const { dateEnd, dateStart, eventTypes } = searchContext;
-    let newEvents: INewEvent[];
     if (!false) {
-      newEvents = await getAllEventsParamtered({
+      const newEvents = await getAllEventsParamtered({
         event_start__gte: dateStart.toISODate(),
         event_end__lte: dateEnd.toISODate(),
         event_type: eventTypes,
