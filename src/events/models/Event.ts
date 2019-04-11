@@ -197,8 +197,3 @@ export interface INewEvent {
   slug: string;
   title: string;
 }
-
-export interface IEventColumn {
-  events: INewEvent[];
-  event_type: number;
-}

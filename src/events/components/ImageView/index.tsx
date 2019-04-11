@@ -81,9 +81,9 @@ export const ImageView = ({  }: IProps) => {
   return (
     <>
       <div className={style.eventGrid}>
-        <EventColumn events={displayEvents.eventsLeft} event_type={2} />
-        <EventColumn events={displayEvents.eventsMiddle} event_type={3} />
-        <EventColumn events={displayEvents.eventsRight} event_type={1} />
+        <EventColumn events={displayEvents.eventsLeft} event_type={EventTypeEnum.BEDPRES} />
+        <EventColumn events={displayEvents.eventsMiddle} event_type={EventTypeEnum.KURS} />
+        <EventColumn events={displayEvents.eventsRight} event_type={EventTypeEnum.SOSIALT} />
       </div>
     </>
   );
