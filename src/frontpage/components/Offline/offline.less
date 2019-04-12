@@ -2,36 +2,6 @@
 @import '~common/less/colors.less';
 @import '~common/less/constants.less';
 
-.container {
-  margin-top: 40px;
-  width: 100%;
-}
-
-.carouselContainer {
-  display: flex;
-  scroll-snap-type: x mandatory;
-  overflow-x: scroll;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.carouselArrow {
-  align-self: center;
-  background: none;
-  font-size: 20px;
-  color: @lightGray;
-  & :hover {
-    color: @gray;
-    cursor: pointer;
-  }
-}
-
-.carousel {
-  display: flex;
-}
-
 .carouselItem {
   .owCard();
   transition: 1s ease-in 0.2s;
@@ -60,11 +30,4 @@
   &:not(:last-child) {
     margin-right: 20px;
   }
-}
-
-.arrowContainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  justify-items: center;
-  margin-bottom: 20px;
 }

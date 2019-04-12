@@ -1,7 +1,8 @@
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import styles from './offline.less';
+
+import styles from './carousel.less';
 
 export interface IProps {
   direction: 'right' | 'left';
