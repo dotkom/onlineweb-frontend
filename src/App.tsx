@@ -1,3 +1,4 @@
+import ArticlesRouter from 'articles/components/ArticlesRouter';
 import AuthCallback from 'authentication/components/AuthCallback';
 import AuthProvider from 'authentication/providers/UserProvider';
 import Spinner from 'common/components/Spinner';
@@ -30,6 +31,7 @@ export const routes = {
   profile: '/profile',
   authCallback: '/auth/callback',
   spinner: '/spinner',
+  article: '/articles',
 };
 
 const LoadableProfile = Loadable({
@@ -49,6 +51,7 @@ export const Client = () => (
   <Core>
     <Switch>
       <Route exact path={routes.home} component={Frontpage} />
+      <Route path={routes.article} component={ArticlesRouter} />
       <Route path={routes.events} component={EventsRouter} />
       <Route path={routes.career} component={Career} />
       <Route path={routes.contribution} component={Contribution} />

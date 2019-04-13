@@ -1,4 +1,4 @@
-import IImage from 'common/models/Image';
+import IImage, { DEFAULT_EVENT_IMAGE } from 'common/models/Image';
 
 export interface IArticle {
   articleUrl: string;
@@ -7,4 +7,15 @@ export interface IArticle {
   ingress: string;
   absolute_url: string;
   ingress_short: string;
+  id: number;
 }
+
+export const mockArticle: IArticle = {
+  articleUrl: '',
+  heading: 'ha',
+  image: DEFAULT_EVENT_IMAGE,
+  ingress: '',
+  absolute_url: '',
+  ingress_short: '',
+  id: 0,
+};
