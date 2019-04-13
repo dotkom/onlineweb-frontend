@@ -18,9 +18,9 @@ export const useIntersection = (options?: IntersectionObserverInit): [Entry | nu
         observer.observe(targetRef.current);
       }
       return () => observer.disconnect();
-    } else {
-      setCount((oldCount) => oldCount + 1);
     }
+    setCount((oldCount) => oldCount + 1);
+    return
   }, [targetRef.current]);
   return [observerEntry, targetRef];
 };
