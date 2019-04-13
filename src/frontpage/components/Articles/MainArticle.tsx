@@ -1,12 +1,11 @@
 import { IArticle } from 'articles/models/Article';
 import ResponsiveImage from 'common/components/ResponsiveImage';
-import { DOMAIN } from 'common/constants/endpoints';
 import React from 'react';
 import style from './articles.less';
 
-const MainArticle = ({ absolute_url, heading, image, ingress }: IArticle) => {
+const MainArticle = ({ heading, image, ingress, id }: IArticle) => {
   return (
-    <a href={DOMAIN + absolute_url}>
+    <a href={'articles/' + id}>
       <div className={style.articleContainer}>
         <ResponsiveImage className={style.largeImage} image={image} size="sm" />
         <div>
