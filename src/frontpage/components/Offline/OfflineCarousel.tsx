@@ -1,22 +1,22 @@
 import React from 'react';
 
+import { IRefObject } from 'common/hooks/useRefMap';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 
-import { IOfflineRef } from './index';
 import style from './offline.less';
 
 export interface IProps {
-  offlines: IOfflineRef[];
+  offlines: Array<IRefObject<IOfflineIssue, HTMLDivElement>>;
 }
 
 const IMAGE_SUFFIX = '.thumb.png';
 
 const OfflineCarousel = ({ offlines }: IProps) => (
-  <div className={style.carousel}>
+  <>
     {offlines.map((offline) => (
-      <CarouselItem key={offline.issue.id} offline={offline.issue} scrollRef={offline.ref} />
+      <CarouselItem key={offline.value.id} offline={offline.value} scrollRef={offline.ref} />
     ))}
-  </div>
+  </>
 );
 
 export interface ICarouselItemProps {
