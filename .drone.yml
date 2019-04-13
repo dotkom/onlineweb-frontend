@@ -57,6 +57,38 @@ steps:
     commands:
       - yarn lint-prettier
 
+  - name: release
+    image: plugins/docker
+    secrets:
+      - docker_username
+      - docker_password
+      - owf_sentry_dsn
+      - ow4_address
+      - ow4_sso_callback
+      - ow4_sso_client_id
+      - owf_sentry_dsn
+      - owf_google_analytics_keys
+      - owf_vapid_public_key
+      - owf_webpush_server_url
+    when:
+      event: tag
+      status: success
+    repo: registry.online.ntnu.no/dotkom/onlineweb-frontend
+    registry: registry.online.ntnu.no
+    dockerfile: Dockerfile.prod
+    build_args_from_env:
+      - owf_sentry_dsn
+      - ow4_address
+      - ow4_sso_callback
+      - ow4_sso_client_id
+      - owf_sentry_dsn
+      - owf_google_analytics_keys
+      - owf_vapid_public_key
+      - owf_webpush_server_url
+    tags:
+      - "${DRONE_TAG}"
+      - latest
+
   - name: deploy
     image: appleboy/drone-ssh
     pull: true
