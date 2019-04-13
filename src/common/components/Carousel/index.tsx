@@ -68,7 +68,7 @@ export function Carousel<T>({ children, values: inputValues, title = '' }: IProp
   };
 
   return (
-    <section className={style.container}>
+    <div className={style.container}>
       <div className={style.arrowContainer}>
         <CarouselArrow direction="left" onClick={scrollToPrevRef} />
         <Heading title={title} />
@@ -77,6 +77,6 @@ export function Carousel<T>({ children, values: inputValues, title = '' }: IProp
       <div className={style.carouselContainer} ref={carouselRef}>
         {values.length && children && <div className={style.carousel}>{children(values)}</div>}
       </div>
-    </section>
+    </div>
   );
 }

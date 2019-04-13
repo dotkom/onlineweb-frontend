@@ -6,6 +6,7 @@ import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getOfflines, getRemainingOfflines } from 'frontpage/api/offline';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 
+import style from './offline.less';
 import OfflineCarousel from './OfflineCarousel';
 
 export interface IProps {}
@@ -44,9 +45,11 @@ export const Offline = ({  }: IProps) => {
   }, []);
 
   return (
-    <Carousel values={offlines} title="Offline">
-      {(offlineRefs) => <OfflineCarousel offlines={offlineRefs} />}
-    </Carousel>
+    <section className={style.container}>
+      <Carousel values={offlines} title="Offline">
+        {(offlineRefs) => <OfflineCarousel offlines={offlineRefs} />}
+      </Carousel>
+    </section>
   );
 };
 
