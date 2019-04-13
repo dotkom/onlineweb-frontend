@@ -1,0 +1,34 @@
+
+FROM node:11.14.0-alpine
+
+ARG OW4_ADDRESS="https://online.ntnu.no"
+ARG OW4_SSO_CALLBACK="http://beta.online.ntnu.no/auth/callback"
+
+ARG OW4_SSO_CLIENT_ID
+ARG OWF_SENTRY_DSN
+ARG OWF_GOOGLE_ANALYTICS_KEY
+ARG OWF_VAPID_PUBLIC_KEY
+ARG OWF_WEBPUSH_SERVER_URL
+
+ENV APP_DIR=/srv/app
+ENV PRODUCTION=true
+ENV NODE_ENV=production
+ENV OWF_SSR=true
+ENV OWF_BACKEND_HOST="0.0.0.0"
+ENV OWF_BACKEND_PORT="8080"
+
+RUN mkdir -p $APP_DIR
+WORKDIR $APP_DIR
+
+RUN apk --no-cache --update add git
+
+COPY package.json yarn.lock $APP_DIR/
+RUN yarn
+
+COPY . .
+RUN yarn build:prod
+RUN yarn build-ssr:prod
+
+EXPOSE 8080
+
+ENTRYPOINT ["/srv/app/docker-entrypoint.sh"]
