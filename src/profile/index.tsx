@@ -38,7 +38,7 @@ const ProfileRouter = () => {
 };
 
 export interface IProfileProps<T = {}> {
-  params: qs.OutputParams;
+  params: qs.ParsedQuery;
   match: IMatch<T>;
   history: History;
 }
