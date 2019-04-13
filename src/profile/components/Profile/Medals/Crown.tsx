@@ -1,15 +1,15 @@
+import React, { FC } from 'react';
+
 import { CommitteePosition } from 'profile/models/Comittee';
 import { getPositionCrown } from 'profile/utils/comittee';
-import React from 'react';
-import style from '../../less/profile.less';
+
+import style from './medals.less';
 
 export interface IProps {
   position: CommitteePosition;
 }
 
-const Crown = ({ position }: IProps) => {
+export const Crown: FC<IProps> = ({ position }) => {
   const CrownComponent = getPositionCrown(position);
-  return <div className={style.committeeCrown}>{CrownComponent && <CrownComponent />}</div>;
+  return <div className={style.crown}>{CrownComponent && <CrownComponent />}</div>;
 };
-
-export default Crown;
