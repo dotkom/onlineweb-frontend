@@ -36,31 +36,15 @@ const Events = ({ location, history }: RouteComponentProps) => {
 
   const params = new URLSearchParams(location.search);
 
-  const onTextInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      params.set('search', event.target.value);
-    } else {
-      params.delete('search');
-    }
-    history.replace(location.pathname + '?' + params);
-  };
-
-  const onTimeStartInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      params.set('dateStart', event.target.value);
-    } else {
-      params.delete('dateStart');
-    }
-    history.replace(location.pathname + '?' + params);
-  };
-
-  const onTimeEndInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      params.set('dateEnd', event.target.value);
-    } else {
-      params.delete('dateEnd');
-    }
-    history.replace(location.pathname + '?' + params);
+  const onInput = (parameterName: string) => {
+    return (event: ChangeEvent<HTMLInputElement>) => {
+      if (event.target.value) {
+        params.set(parameterName, event.target.value);
+      } else {
+        params.delete(parameterName);
+      }
+      history.replace(location.pathname + '?' + params);
+    };
   };
 
   const onEventTypeInput = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -75,8 +59,8 @@ const Events = ({ location, history }: RouteComponentProps) => {
     history.replace(location.pathname + '?' + params);
   };
 
-  const onAttendanceEventInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
+  const onAttendanceEventInput = () => {
+    if (params.get('attendanceEvents')) {
       params.delete('attendanceEvents');
     } else {
       params.set('attendanceEvents', 'off');
@@ -94,9 +78,9 @@ const Events = ({ location, history }: RouteComponentProps) => {
         availableViews={[EventView.LIST, EventView.CALENDAR]}
       />
       <SearchModule
-        onTextInput={onTextInput}
-        onTimeStartInput={onTimeStartInput}
-        onTimeEndInput={onTimeEndInput}
+        onTextInput={onInput('search')}
+        onTimeStartInput={onInput('dateStart')}
+        onTimeEndInput={onInput('dateEnd')}
         onEventTypesInput={onEventTypeInput}
         onAttendanceEventInput={onAttendanceEventInput}
       />
