@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
-import { Button } from 'core/components/errors/NotAuthenticated/Button';
+import { useIntersection } from 'common/hooks/useIntersection';
 import { Link } from 'core/components/Router';
 import { ProfileSearchContext } from 'profile/providers/SearchFilter';
 
@@ -10,21 +10,33 @@ import style from './search.less';
 
 export const Users = () => {
   const { users, nextPage } = useContext(ProfileSearchContext);
-  if (users.length === 0) {
-    return <h3 className={style.marginTop}>Finner ingen brukere med disse filterene</h3>;
-  }
+  const [entry, targetRef] = useIntersection();
+  const [count, setCount] = useState(0); // TODO: Implement inside useIntersection somehow.
+
+  useEffect(() => {
+    if (entry && entry.isIntersecting && count !== 0) {
+      nextPage();
+    }
+    // TODO: Figure out why this is needed, and implement it inside the hook.
+    setCount((stateCount) => stateCount + 1);
+  }, [entry]);
+
   return (
     <>
-      <div className={style.smallProfileGrid}>
-        {users.map((user) => (
-          <Link to={routes.public + `/${user.id}`}>
-            <ProfileSmall user={user} key={user.username} />
-          </Link>
-        ))}
-      </div>
-      <div className={style.marginTop}>
-        <Button onClick={nextPage}>Last inn mer</Button>
-      </div>
+      {!users.length ? (
+        <div className={style.marginTop}>
+          <h3>Finner ingen brukere med disse filterene</h3>
+        </div>
+      ) : (
+        <div className={style.smallProfileGrid}>
+          {users.map((user) => (
+            <Link to={routes.public + `/${user.id}`} key={`${user.id} ${user.first_name} ${user.last_name}`}>
+              <ProfileSmall user={user} key={user.username} />
+            </Link>
+          ))}
+        </div>
+      )}
+      <div ref={targetRef} />
     </>
   );
 };
