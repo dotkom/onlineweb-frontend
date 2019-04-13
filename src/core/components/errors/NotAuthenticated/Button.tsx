@@ -5,6 +5,7 @@ import style from './button.less';
 
 export interface IButtonProps extends HTMLProps<HTMLButtonElement> {
   inverse?: boolean;
+  type?: 'button' | 'reset' | 'submit'; // Type mismatch in TypeScript?
 }
 
 export const Button = ({ inverse = false, ...props }: IButtonProps) => {
