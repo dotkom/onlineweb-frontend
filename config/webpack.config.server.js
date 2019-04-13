@@ -1,5 +1,4 @@
 const path = require('path');
-const htmlPlugin = require('./html.config');
 const CSSPlugin = require('./css.config');
 const devServer = require('./devServer.config');
 const environment = require('./environment.config');
@@ -24,7 +23,6 @@ module.exports = env => {
     resolve: mainModule.resolve,
     plugins: [
       CSSPlugin.plugin,
-      htmlPlugin.plugin,
       environment.pluginServer,
       new DefinePlugin({
         window: {}, // Fixes OIDC client needing window to be imported.
