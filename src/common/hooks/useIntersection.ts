@@ -20,7 +20,7 @@ export const useIntersection = (options?: IntersectionObserverInit): [Entry | nu
       return () => observer.disconnect();
     }
     setCount((oldCount) => oldCount + 1);
-    return
+    return;
   }, [targetRef.current]);
   return [observerEntry, targetRef];
 };
