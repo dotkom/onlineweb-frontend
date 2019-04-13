@@ -3,8 +3,8 @@
 @import '~common/less/constants.less';
 
 .container {
-  margin-top: 40px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .carouselContainer {
@@ -19,6 +19,8 @@
 
 .carousel {
   display: flex;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .arrowContainer {
@@ -26,6 +28,7 @@
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
 .carouselArrow {

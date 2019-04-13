@@ -9,7 +9,9 @@
 
   & > div {
     padding: 30px;
+    box-sizing: border-box;
   }
+  box-sizing: border-box;
 }
 
 .page {
@@ -19,12 +21,14 @@
 
 .fill {
   width: 100%;
+  box-sizing: border-box;
 }
 
 .splitPane {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: @grid-gap;
+  box-sizing: border-box;
 
   @media screen and (max-width: @owMobileBreakpoint) {
     grid-template-columns: auto;
@@ -36,6 +40,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: @grid-gap;
+  box-sizing: border-box;
 
   @media screen and (max-width: @owMobileBreakpoint) {
     grid-template-columns: auto;
@@ -43,8 +48,10 @@
 }
 
 .content {
+  box-sizing: border-box;
   & > h2 {
     text-align: center;
     padding: 0 0 10px;
+    box-sizing: border-box;
   }
 }
