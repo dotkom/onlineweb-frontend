@@ -1,17 +1,16 @@
 .dateInput {
-    position: relative;
-    background: rgba(255, 255, 255, 0.8); 
-    width: 10rem;
-    height: 2rem;
+  position: relative;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 3px;
+  border: 2px solid #353535;
+  padding: 10px 5px;
+  width: fit-content;
 
-    > input {
-	background: none;
-	margin-left: 1.5rem;
-    }
-    > label {
-	position: absolute;
-	top: 0;
-	left: 0;
-    }
+  > input {
+    background: none;
+  }
+
+  > input::-webkit-inner-spin-button {
+    display: none;
+  }
 }
-
