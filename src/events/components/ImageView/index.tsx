@@ -7,10 +7,8 @@ import { getImageEvents } from 'events/api/imageEvents';
 import { EventTypeEnum, IEventViewProps, INewEvent } from 'events/models/Event';
 import { EventsRepo } from 'events/providers/EventsRepo';
 
+import EventColumn from './EventColumn';
 import style from './image.less';
-import LargeEvent from './LargeEvent';
-import LargeEventPlaceholder from './LargeEventPlaceholder';
-import SmallEventColumn from './SmallEvent';
 
 export type IProps = IEventViewProps;
 
@@ -82,27 +80,10 @@ export const ImageView = ({  }: IProps) => {
 
   return (
     <>
-      <div className={style.largeEventGrid}>
-        {displayEvents.eventsLeft[0] ? (
-          <LargeEvent {...displayEvents.eventsLeft[0]} />
-        ) : (
-          <LargeEventPlaceholder event_type={2} />
-        )}
-        {displayEvents.eventsMiddle[0] ? (
-          <LargeEvent {...displayEvents.eventsMiddle[0]} />
-        ) : (
-          <LargeEventPlaceholder event_type={3} />
-        )}
-        {displayEvents.eventsRight[0] ? (
-          <LargeEvent {...displayEvents.eventsRight[0]} />
-        ) : (
-          <LargeEventPlaceholder event_type={1} />
-        )}
-      </div>
-      <div className={style.smallEventGrid}>
-        <SmallEventColumn events={displayEvents.eventsLeft.slice(1, 4)} />
-        <SmallEventColumn events={displayEvents.eventsMiddle.slice(1, 4)} />
-        <SmallEventColumn events={displayEvents.eventsRight.slice(1, 4)} />
+      <div className={style.eventGrid}>
+        <EventColumn events={displayEvents.eventsLeft} event_type={EventTypeEnum.BEDPRES} />
+        <EventColumn events={displayEvents.eventsMiddle} event_type={EventTypeEnum.KURS} />
+        <EventColumn events={displayEvents.eventsRight} event_type={EventTypeEnum.SOSIALT} />
       </div>
     </>
   );

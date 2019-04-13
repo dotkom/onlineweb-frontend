@@ -8,7 +8,7 @@ const MainArticle = ({ absolute_url, heading, image, ingress }: IArticle) => {
   return (
     <a href={DOMAIN + absolute_url}>
       <div className={style.articleContainer}>
-        <ResponsiveImage image={image} size="sm" />
+        <ResponsiveImage className={style.largeImage} image={image} size="sm" />
         <div>
           <h2>{heading}</h2>
           <p>{ingress}</p>

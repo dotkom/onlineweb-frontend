@@ -22,7 +22,7 @@
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-gap: @grid-gap;
-  overflow: hidden;
+  overflow: visible; // Changed because the box-shadow was clipping
 }
 
 .articleContainer {
@@ -31,6 +31,12 @@
 
   & img {
     width: 100%;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  & .largeImage {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
   }
 
   & > div {
@@ -50,6 +56,9 @@
 }
 
 .smallImage {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+
   @media screen and (max-width: @owDesktopMaxWidth) and (min-width: @owTabletBreakpoint) {
     height: 100%;
   }
@@ -59,3 +68,44 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+
+/* Mobile CSS */
+
+@media (max-width: 1024px) {
+  .articles {
+    margin: auto;
+    max-width: 60%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 920px) {
+  .smallArticle {
+    grid-template-columns: 1fr;
+  }
+  .smallImage {
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 3px;
+  }
+}
+
+@media (max-width: 705px) {
+  .articles {
+    width: 460px;
+    max-width: none;
+  }
+}
+
+@media (max-width: 610px) {
+  .articles {
+    width: 425px;
+  }
+}
+
+@media (max-width: 485px) {
+  .articles {
+    width: 280px; // Because iPhone 5
+  }
+}
+
+/* End of Mobile CSS */

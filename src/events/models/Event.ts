@@ -189,7 +189,7 @@ export interface INewEvent {
   organizer_name: string;
   event_end: string;
   event_start: string;
-  event_type: number;
+  event_type: EventTypeEnum;
   id: number;
   image: IImage | null;
   ingress: string;
