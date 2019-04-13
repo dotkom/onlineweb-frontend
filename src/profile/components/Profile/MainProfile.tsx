@@ -7,7 +7,7 @@ import { Bio } from './Bio';
 import { ExternalLinks } from './ExternalLinks';
 import Header from './Header';
 import KeyValue from './KeyValue';
-import MedalsView from './MedalsView';
+import { Medals } from './Medals';
 import { Study } from './Study';
 
 const committeeMail = (mail: string | null) => (mail ? `${mail}@online.ntnu.no` : null);
@@ -29,9 +29,7 @@ export const MainProfile = () => {
       </SplitPane>
       <Bio />
       <Pane>
-        <Content title="Komitéverv">
-          <MedalsView medals={profile.positions} />
-        </Content>
+        <Medals medals={profile.positions} />
       </Pane>
       <SplitPane>
         <ExternalLinks />
