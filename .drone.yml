@@ -58,7 +58,7 @@ steps:
       - yarn lint-prettier
 
   - name: deploy
-    image: appleboy/drone-ssh
+    image: appleboy/drone-ssh:1.5.0
     pull: true
     secrets: [ssh_key]
     when:
@@ -69,7 +69,8 @@ steps:
       host: nansen.online.ntnu.no
       port: 22
       username: root
-      key: ${SSH_KEY}
+      key:
+        from_secret: ssh_key
       command_timeout: 600s
       script:
         - /srv/www/owf-staging/deploy.sh
