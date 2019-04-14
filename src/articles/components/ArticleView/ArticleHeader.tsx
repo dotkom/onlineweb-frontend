@@ -22,7 +22,10 @@ export const ArticleHeader: FC<IProps> = ({ article }) => {
         <time dateTime={published_date}>{pubDateTime.toLocaleString()}</time> |<span> Skrevet av </span>
         {authors}
         {published_date !== changed_date && pubDateTime < changeDateTime ? (
-          <span className={style.lastChanged}> | Sist endret {changeDateTime.toLocaleString()}</span>
+          <>
+            <span className={style.lastChanged}> | Sist endret </span>
+            <time>{changeDateTime.toLocaleString()}</time>
+          </>
         ) : null}
       </div>
     </header>

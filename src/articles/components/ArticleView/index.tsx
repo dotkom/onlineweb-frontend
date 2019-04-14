@@ -7,6 +7,7 @@ import { mockArticle } from '../../models/Article';
 import { ArticleHeader } from './ArticleHeader';
 import { ArticleImage } from './ArticleImage';
 import style from './articleView.less';
+import { RelatedArticles } from './RelatedArticles';
 
 export interface IProps {
   articleId: number;
@@ -32,11 +33,11 @@ export const ArticleView = ({ articleId }: IProps) => {
       <article>
         <ArticleImage image={article.image} />
         <ArticleHeader article={article} />
-        <div className={style.articleText}>
+        <section className={style.articleText}>
           <Markdown source={article.content} />
-        </div>
+        </section>
       </article>
-      <aside className={style.relatedArticles}>Her vil det komme relatere artikler og sånt</aside>
+      <RelatedArticles mainArticle={article} />
     </div>
   );
 };

@@ -8,10 +8,10 @@ export interface IProps {
 }
 
 export const ArticleImage: FC<IProps> = ({ image }) => (
-  <div className={style.articleimage}>
+  <section className={style.articleimage}>
     <img alt={image.description} src={DOMAIN + image.original} />
     <div>
       <span>Fotograf</span> {image.photographer}
     </div>
-  </div>
+  </section>
 );
