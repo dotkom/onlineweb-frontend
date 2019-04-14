@@ -58,7 +58,7 @@ steps:
       - yarn lint-prettier
 
   - name: deploy
-    image: appleboy/drone-ssh:1.5.0
+    image: appleboy/drone-ssh
     pull: true
     secrets: [ssh_key]
     when:
