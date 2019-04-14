@@ -10,8 +10,10 @@ export interface IProps {
 export const ArticleImage: FC<IProps> = ({ image }) => (
   <section className={style.articleimage}>
     <img alt={image.description} src={DOMAIN + image.original} />
-    <div>
-      <span>Fotograf</span> {image.photographer}
-    </div>
+    {image.photographer ? (
+      <div>
+        <span>Fotograf</span> {image.photographer}
+      </div>
+    ) : null}
   </section>
 );
