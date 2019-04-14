@@ -1,4 +1,5 @@
 @import '~common/less/mixins.less';
+@import '~common/less/colors.less';
 @import '~common/less/constants.less';
 
 .byline {
@@ -25,16 +26,23 @@
 }
 
 .articleimage {
-  .owCard();
   margin-bottom: 1rem;
+  position: relative;
 
   > img {
+    .owCard();
     width: 100%;
-    border-radius: 3px 3px 0 0;
   }
 
   > div {
-    padding: 1rem;
+    padding: 0.5rem;
+    bottom: 0;
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: @darkGray;
+    margin-bottom: 2px;
+    border-radius: 0 3px;
 
     > span {
       font-weight: bold;
@@ -94,8 +102,4 @@
   width: 100%;
   position: relative;
   border-radius: 3px 3px 0 0;
-}
-
-.main {
-  padding-top: 20px !important;
 }
