@@ -1,0 +1,57 @@
+@import '~common/less/colors.less';
+@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
+
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-column-gap: 10px;
+
+  > article {
+    grid-column: 1;
+  }
+}
+
+.articleText {
+  .owCard();
+  padding: 1rem;
+}
+
+.relatedArticles {
+  grid-column: 2;
+}
+
+.articleHeader {
+  .owCard();
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.byline {
+  margin-top: 1em;
+  > span {
+    font-weight: bold;
+  }
+}
+
+.lastChanged {
+  font-style: italic;
+}
+
+.articleimage {
+  .owCard();
+  margin-bottom: 1rem;
+
+  > img {
+    width: 100%;
+  }
+
+  > div {
+    padding: 0.5rem;
+
+    > span {
+      font-weight: bold;
+    }
+  }
+}
