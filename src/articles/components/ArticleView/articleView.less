@@ -1,10 +1,21 @@
 @import '~common/less/mixins.less';
+@import '~common/less/constants.less';
 
 .byline {
   margin-top: 1em;
+  line-height: 1.5;
 
   > span {
     font-weight: bold;
+
+    &:not(:first-child)::before {
+      content: ' | ';
+      font-weight: normal;
+      @media screen and (max-width: @owMobileBreakpoint) {
+        content: '\A';
+        white-space: pre;
+      }
+    }
   }
 
   > .lastChanged {
@@ -44,12 +55,22 @@
 
 .container {
   width: 100%;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-column-gap: 1rem;
+}
 
-  > article {
-    grid-column: 1;
+@media screen and (min-width: @owMobileBreakpoint) {
+  .container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-column-gap: 1rem;
+
+    > article {
+      grid-column: 1;
+    }
+  }
+
+  .relatedArticle {
+    margin-top: 0;
   }
 }
 
@@ -62,6 +83,7 @@
   width: 100%;
   position: relative;
   margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .relatedArticleHeading {
@@ -72,4 +94,8 @@
   width: 100%;
   position: relative;
   border-radius: 3px 3px 0 0;
+}
+
+.main {
+  padding-top: 20px !important;
 }
