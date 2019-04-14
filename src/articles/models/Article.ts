@@ -8,6 +8,12 @@ export interface IArticle {
   absolute_url: string;
   ingress_short: string;
   id: number;
+  authors: string;
+  content: string;
+  changed_date: string;
+  published_date: string;
+  tags: string[];
+  slug: string;
 }
 
 export const mockArticle: IArticle = {
@@ -18,4 +24,10 @@ export const mockArticle: IArticle = {
   absolute_url: '',
   ingress_short: '',
   id: 0,
+  authors: '',
+  content: '',
+  changed_date: '',
+  published_date: '',
+  tags: [],
+  slug: '',
 };
