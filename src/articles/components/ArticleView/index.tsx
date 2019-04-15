@@ -30,8 +30,8 @@ export const ArticleView = ({ articleId }: IProps) => {
 
   return (
     <div className={style.container}>
-      <article>
-        <ArticleImage image={article.image} />
+      <ArticleImage image={article.image} />
+      <article className={style.article}>
         <ArticleHeader article={article} />
         <section className={style.articleText}>
           <Markdown source={article.content} />
