@@ -4,13 +4,24 @@
   border-radius: 3px;
   border: 2px solid #353535;
   padding: 10px 5px;
-  width: fit-content;
+  width: 11rem;
 
   > input {
     background: none;
   }
-
   > input::-webkit-inner-spin-button {
     display: none;
   }
+  > input::-webkit-calendar-picker-indicator {
+    color: rgba(255, 255, 255, 1);
+  }
+  > input::-webkit-calendar-picker-indicator:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.dateIcon {
+  position: absolute;
+  right: 5px;
+  pointer-events: none;
 }
