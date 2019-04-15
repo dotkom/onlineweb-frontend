@@ -9,7 +9,7 @@ declare module 'react-router-dom' {
     location: H.Location<H.LocationState>;
     match: match<{}>;
   }
-  
+
   // tslint:disable-next-line variable-name
   export const __RouterContext: Context<RouterContext>;
 }
