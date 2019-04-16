@@ -1,18 +1,18 @@
 import React, { ChangeEvent, FC } from 'react';
-import { EventTypeEnum, getEventType, getEventColor } from '../../models/Event';
 import Select from 'react-select';
 import makeAnimated from 'react-select/lib/animated';
+import { EventTypeEnum, getEventColor, getEventType } from '../../models/Event';
 
 const selectItems = (events) => {
   const eventTypeNumberList = Array(Object.keys(EventTypeEnum).length / 2 - 1)
     .fill(1)
     .map((x, y) => x + y);
 
-  return eventTypeNumberList.map((eventType) => ({value: eventType, label: getEventType(eventType)}));	
+  return eventTypeNumberList.map((eventType) => ({ value: eventType, label: getEventType(eventType) }));
 };
 
 const optionStyles = {
-  control: styles => ({ ...styles, backgroundColor: 'white' }),
+  control: (styles) => ({ ...styles, backgroundColor: 'white' }),
   option: (styles, { data, isFocused }) => {
     return {
       ...styles,
@@ -29,18 +29,16 @@ const optionStyles = {
   },
   multiValueLabel: (styles) => ({
     ...styles,
-    color: 'white', 
+    color: 'white',
   }),
-  multiValueRemove: (styles, { data }) => ({
+  multiValueRemove: (styles) => ({
     ...styles,
     color: 'white',
     ':hover': {
-      color: '#ff5d5d', 
-    }
+      color: '#ff5d5d',
+    },
   }),
 };
-
-
 
 export interface IProps {
   eventTypes: EventTypeEnum[];
@@ -48,13 +46,13 @@ export interface IProps {
 }
 
 export const SelectMultiple: FC<IProps> = ({ onEventTypesInput }) => (
-	<Select 
-	    options={selectItems()} 
-	    onChange={onEventTypesInput}
-	    isMulti
-	    styles={optionStyles}
-	    components={makeAnimated()}
-	    closeMenuOnSelect={false}
-	    placeholder={'Arrangement...'}
-	/>
+  <Select
+    options={selectItems()}
+    onChange={onEventTypesInput}
+    isMulti
+    styles={optionStyles}
+    components={makeAnimated()}
+    closeMenuOnSelect={false}
+    placeholder={'Arrangement...'}
+  />
 );
