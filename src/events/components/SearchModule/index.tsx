@@ -20,7 +20,7 @@ const SearchModule: FC<IProps> = ({
   onEventTypesInput,
   onAttendanceEventInput,
 }) => {
-  const { search, dateStart, dateEnd, eventTypes, attendanceEventsChecked } = useContext(QueryParams);
+  const { search, dateStart, dateEnd, attendanceEventsChecked } = useContext(QueryParams);
 
   return (
     <div className={style.grid}>
@@ -33,7 +33,7 @@ const SearchModule: FC<IProps> = ({
       />
       <DateInput label="Fra: " time={dateStart.toFormat('yyyy-MM-dd')} onChange={onTimeStartInput} />
       <DateInput label="Til: " time={dateEnd.toFormat('yyyy-MM-dd')} onChange={onTimeEndInput} />
-      <SelectMultiple onEventTypesInput={onEventTypesInput} eventTypes={eventTypes} />
+      <SelectMultiple onEventTypesInput={onEventTypesInput} />
       <AttendanceEventToggle
         label="Vis påmeldingsarrangement"
         onChange={onAttendanceEventInput}

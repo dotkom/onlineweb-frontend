@@ -64,11 +64,9 @@ const Events = ({ location, history }: RouteComponentProps) => {
   };
 
   const onEventTypeInput = (event: ChangeEvent<HTMLSelectElement>) => {
-    if (event.target.value) {
-      const eventTypes: EventTypeEnum[] = [...event.target.options]
-        .filter((o) => o.selected)
-        .map((o) => parseInt(o.value, 10));
-      params.set('eventTypes', JSON.stringify(eventTypes));
+    if (event.length > 0) {
+      const selected = event.map((entry) => entry.value);
+      params.set('eventTypes', JSON.stringify(selected));
     } else {
       params.delete('eventTypes');
     }
