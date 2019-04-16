@@ -2,8 +2,9 @@ import React, { ChangeEvent, FC } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/lib/animated';
 import { EventTypeEnum, getEventColor, getEventType } from '../../models/Event';
+import style from './search.less';
 
-const selectItems = (events) => {
+const selectItems = () => {
   const eventTypeNumberList = Array(Object.keys(EventTypeEnum).length / 2 - 1)
     .fill(1)
     .map((x, y) => x + y);
@@ -12,26 +13,26 @@ const selectItems = (events) => {
 };
 
 const optionStyles = {
-  control: (styles) => ({ ...styles, backgroundColor: 'white' }),
-  option: (styles, { data, isFocused }) => {
+  control: (styles: any) => ({ ...styles, backgroundColor: 'white' }),
+  option: (styles: any, { data, isFocused }: any) => {
     return {
       ...styles,
       backgroundColor: isFocused ? getEventColor(data.value) : null,
       color: isFocused ? 'white' : '#7f7f7f',
     };
   },
-  multiValue: (styles, { data }) => {
+  multiValue: (styles: any, { data }: any) => {
     const eventColor = getEventColor(data.value);
     return {
       ...styles,
       backgroundColor: eventColor,
     };
   },
-  multiValueLabel: (styles) => ({
+  multiValueLabel: (styles: any) => ({
     ...styles,
     color: 'white',
   }),
-  multiValueRemove: (styles) => ({
+  multiValueRemove: (styles: any) => ({
     ...styles,
     color: 'white',
     ':hover': {
@@ -53,6 +54,7 @@ export const SelectMultiple: FC<IProps> = ({ onEventTypesInput }) => (
     styles={optionStyles}
     components={makeAnimated()}
     closeMenuOnSelect={false}
-    placeholder={'Arrangement...'}
+    placeholder={'Arrangementtype...'}
+    className={style.eventType}
   />
 );
