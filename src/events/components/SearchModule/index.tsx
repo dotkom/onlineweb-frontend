@@ -3,10 +3,10 @@ import React, { ChangeEvent, FC } from 'react';
 import ToggleSwitch from '../../../common/components/ToggleSwitch';
 import { useQueryParam } from '../../../common/hooks/useQueryParam';
 import {
-  DEFAULTDATEENDPARAM,
-  DEFAULTDATESTARTPARAM,
-  DEFAULTEVENTTYPESPARAM,
-  DEFAULTSEARCHPARAM,
+  DEFAULT_DATE_END_PARAM,
+  DEFAULT_DATE_START_PARAM,
+  DEFAULT_EVENT_TYPES_PARAM,
+  DEFAULT_SEARCH_PARAM,
 } from '../../../core/hooks/useQueryParamsState';
 import style from '../../../profile/components/Search/search.less';
 import DateInput from './DateInput';
@@ -33,23 +33,23 @@ const SearchModule: FC = () => {
       <input
         className={style.searchInput}
         type="search"
-        defaultValue={search || DEFAULTSEARCHPARAM}
+        defaultValue={search || DEFAULT_SEARCH_PARAM}
         placeholder="Søk"
         onChange={(event) => setSearch(event.target.value)}
       />
       <DateInput
         label="Fra: "
-        time={DateTime.fromISO(dateStart || DEFAULTDATESTARTPARAM).toFormat('yyyy-MM-dd')}
+        time={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM).toFormat('yyyy-MM-dd')}
         onChange={(event) => setDateStart(event.target.value)}
       />
       <DateInput
         label="Til: "
-        time={DateTime.fromISO(dateEnd || DEFAULTDATEENDPARAM).toFormat('yyyy-MM-dd')}
+        time={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM).toFormat('yyyy-MM-dd')}
         onChange={(event) => setDateEnd(event.target.value)}
       />
       <SelectMultiple
         onEventTypesInput={onEventTypesInput}
-        eventTypes={JSON.parse(eventTypes || DEFAULTEVENTTYPESPARAM)}
+        eventTypes={JSON.parse(eventTypes || DEFAULT_EVENT_TYPES_PARAM)}
       />
       <label>
         Vis arrangementer med påmelding
