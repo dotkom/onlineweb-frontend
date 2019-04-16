@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC } from 'react';
+import style from './search.less';
 
 export interface IProps {
   label: string;
@@ -8,9 +9,9 @@ export interface IProps {
 
 export const AttendanceEventToggle: FC<IProps> = ({ label, checked, onChange }) => {
   return (
-    <label>
-      {label}
+    <label className={style.attendanceEventToggle}>
       <input type="checkbox" checked={checked} onChange={onChange} />
+      <span>{label}</span>
     </label>
   );
 };
