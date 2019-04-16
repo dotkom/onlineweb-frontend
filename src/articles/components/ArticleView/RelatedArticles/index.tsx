@@ -1,9 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { DOMAIN } from '../../../../common/constants/endpoints';
-import { getArticles } from '../../../api';
-import { IArticle } from '../../../models/Article';
-import { routes } from '../../ArticlesRouter';
+
+import ResponsiveImage from 'common/components/ResponsiveImage';
+import { Link } from 'core/components/Router';
+
+import { getArticles } from 'articles/api';
+import { routes } from 'articles/components/ArticlesRouter';
+import { IArticle } from 'articles/models/Article';
 
 import style from '../articleView.less';
 
@@ -19,41 +21,37 @@ export const RelatedArticles: FC<IProps> = ({ mainArticle }) => {
       const newArticleIds = articles.map((article) => article.id);
       return !newArticleIds.includes(oldArticle.id);
     });
+
     const allArticles = oldArticles
       .concat(articles)
-      .filter((article) => article.id !== mainArticle.id)
       .filter((article) => article.tags.some((articleTag) => mainArticle.tags.includes(articleTag)));
 
     return allArticles
       .filter((article, idx, final) => final.map((e) => e.id).indexOf(article.id) === idx)
-      .sort((a, b) => {
-        return Date.parse(b.published_date) - Date.parse(a.published_date);
-      });
+      .sort((a, b) => Date.parse(b.published_date) - Date.parse(a.published_date))
+      .filter((article) => article.id !== mainArticle.id);
   };
 
   useEffect(() => {
     const fetchArticles = async () => {
-      let incomingRelatedArticleList: IArticle[] = [];
-      for (const tag of mainArticle.tags) {
-        const tagArticles = await getArticles({ tags: tag });
-        incomingRelatedArticleList = incomingRelatedArticleList.concat(tagArticles);
-      }
-      const updatedRelatedArticleList = updateRelatedArticleList(incomingRelatedArticleList);
+      const relatedArticlePromises = mainArticle.tags.map(async (tag) => getArticles({ tags: tag }));
+      const newRelatedArticles = await Promise.all(relatedArticlePromises);
+      const updatedRelatedArticleList = updateRelatedArticleList(
+        newRelatedArticles.reduce((prev, next) => prev.concat(next), [])
+      );
       setRelatedArticles(updatedRelatedArticleList);
     };
-    fetchArticles();
+    if (mainArticle.tags.length !== 0) {
+      fetchArticles();
+    }
   }, [mainArticle]);
 
   return (
     <aside className={style.relatedArticles}>
       {relatedArticles.map((article) => (
         <section key={article.id} className={style.relatedArticle}>
-          <Link to={routes.detail.slice(0, -3) + article.id}>
-            <img
-              className={style.relatedArticleImage}
-              src={DOMAIN + article.image.lg}
-              alt={article.image.description}
-            />
+          <Link to={routes.detail + article.id}>
+            <ResponsiveImage className={style.relatedArticleImage} image={article.image} size="md" />
             <h3 className={style.relatedArticleHeading}>{article.heading}</h3>
           </Link>
         </section>
