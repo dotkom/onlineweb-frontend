@@ -1,48 +1,73 @@
 import { DateTime } from 'luxon';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
+// import { useQueryParamsState } from 'core/hooks/useQueryParamsState';
+import { QueryParams } from 'core/providers/QueryParams';
 import { getCalendarEvents } from 'events/api/calendarEvents';
 import { getAllEvents, getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
-import { INewEvent } from 'events/models/Event';
-import { useQueryParamsState } from '../../core/hooks/useQueryParamsState';
-import { QueryParams } from '../../core/providers/QueryParams';
+import { EventTypeEnum, INewEvent } from 'events/models/Event';
+import { EventsRepo } from 'events/providers/EventsRepo';
 import { isAfter, isBefore, isInDateRange } from '../utils/eventTimeUtils';
 
 export type EventMap = Map<number, INewEvent>;
 
 const INITIAL_STATE: INewEvent[] = [];
 
-const getFilteredEventList = (searchContext: ReturnType<typeof useQueryParamsState>, eventList: INewEvent[]) => {
+const getTextFiltered = (search: string, eventList: INewEvent[]) =>
+  eventList.filter(
+    (event: INewEvent) =>
+      event.title.toLowerCase().includes(search) ||
+      event.description.toLowerCase().includes(search) ||
+      event.ingress.toLowerCase().includes(search) ||
+      event.location.toLowerCase().includes(search) ||
+      event.organizer_name.toLowerCase().includes(search)
+  );
+
+const getEventTypeFiltered = (eventTypes: EventTypeEnum[], eventList: INewEvent[]) =>
+  eventList.filter((event) => eventTypes.includes(event.event_type));
+
+const getDateFiltered = (dateStart: DateTime, dateEnd: DateTime, eventList: INewEvent[]) =>
+  dateEnd && dateStart
+    ? eventList.filter((event) => isInDateRange(event, dateStart, dateEnd))
+    : dateStart
+    ? eventList.filter((event) => isAfter(event, dateStart))
+    : dateEnd
+    ? eventList.filter((event) => isBefore(event, dateEnd))
+    : eventList;
+
+const getAttendanceEventFiltered = (attendanceEventsChecked: boolean, eventList: INewEvent[]) =>
+  !attendanceEventsChecked ? eventList.filter((event) => event.attendance_event) : eventList;
+
+/*const getFilteredEventList = (searchContext: ReturnType<typeof useQueryParamsState>, eventList: INewEvent[]) => {
+  const t0 = performance.now();
+
   const { search, dateStart, dateEnd, eventTypes, attendanceEventsChecked } = searchContext;
-  let filteringEventList = eventList.filter((event) => eventTypes.includes(event.event_type));
 
-  if (search) {
-    const smallSearch = search.toLowerCase();
-    filteringEventList = filteringEventList.filter(
-      (event: INewEvent) =>
-        event.title.toLowerCase().includes(smallSearch) ||
-        event.description.toLowerCase().includes(smallSearch) ||
-        event.ingress.toLowerCase().includes(smallSearch) ||
-        event.location.toLowerCase().includes(smallSearch) ||
-        event.organizer_name.toLowerCase().includes(smallSearch)
-    );
-  }
+  const eventListAttendanceEventFiltered = useMemo(
+    () => getAttendanceEventFiltered(attendanceEventsChecked, eventList),
+    [attendanceEventsChecked, eventList]
+  );
 
-  if (dateEnd && dateStart) {
-    filteringEventList = filteringEventList.filter((event: INewEvent) => isInDateRange(event, dateStart, dateEnd));
-  } else {
-    filteringEventList = dateStart
-      ? filteringEventList.filter((event) => isAfter(event, dateStart))
-      : filteringEventList;
-    filteringEventList = dateEnd ? filteringEventList.filter((event) => isBefore(event, dateEnd)) : filteringEventList;
-  }
+  const eventListEventTypeFiltered = useMemo(() => getEventTypeFiltered(eventTypes, eventListAttendanceEventFiltered), [
+    eventTypes,
+    eventListAttendanceEventFiltered,
+  ]);
 
-  filteringEventList = !attendanceEventsChecked
-    ? filteringEventList.filter((event) => event.attendance_event)
-    : filteringEventList;
+  const eventListDateFiltered = useMemo(() => getDateFiltered(dateStart, dateEnd, eventListEventTypeFiltered), [
+    dateStart,
+    dateEnd,
+    eventListEventTypeFiltered,
+  ]);
 
-  return filteringEventList;
-};
+  const eventListFinal = useMemo(() => getTextFiltered(search.toLowerCase(), eventListDateFiltered), [
+    search.toLowerCase(),
+    eventListDateFiltered,
+  ]);
+
+  const t1 = performance.now();
+  console.log('Call to getFilteredEventList took ' + (t1 - t0) + ' milliseconds.');
+  return eventListFinal;
+};*/
 
 /**
  * Contains the complete collection of events fetched for use in the application.
@@ -51,7 +76,6 @@ const getFilteredEventList = (searchContext: ReturnType<typeof useQueryParamsSta
 export const useEventsRepoState = () => {
   const [eventList, setEventList] = useState(INITIAL_STATE);
   const [eventMap, setEventMap] = useState<EventMap>(new Map());
-  const searchContext = useContext(QueryParams);
 
   /** Sync list of events with the map if the map is updated */
   useEffect(() => {
@@ -87,16 +111,22 @@ export const useEventsRepoState = () => {
     updateEventList(events);
   };
 
-  const filteredEventList = useMemo(() => {
-    return getFilteredEventList(searchContext, eventList);
-  }, [searchContext, eventList]);
+  return {
+    fetchEvent,
+    fetchEvents,
+    fetchEventsByMonth,
+    eventMap,
+    eventList,
+    updateEventList,
+  };
+};
 
-  useEffect(() => {
-    fetchQueryEvents();
-  }, [searchContext.dateEnd, searchContext.dateStart, searchContext.eventTypes]);
+export const useFilteredEventList = () => {
+  const searchContext = useContext(QueryParams);
+  const { eventList, updateEventList } = useContext(EventsRepo);
+  const { search, dateStart, dateEnd, eventTypes, attendanceEventsChecked } = searchContext;
 
   const fetchQueryEvents = async () => {
-    const { dateEnd, dateStart, eventTypes } = searchContext;
     const newEvents = await getAllEvents({
       event_start__gte: dateStart.toISODate(),
       event_end__lte: dateEnd.toISODate(),
@@ -105,13 +135,43 @@ export const useEventsRepoState = () => {
     updateEventList(newEvents);
   };
 
-  return {
-    fetchEvent,
-    fetchEvents,
-    fetchEventsByMonth,
-    eventMap,
-    eventList,
-    updateEventList,
-    filteredEventList,
-  };
+  const eventListAttendanceEventFiltered = useMemo(
+    () => getAttendanceEventFiltered(attendanceEventsChecked, eventList),
+    [attendanceEventsChecked, eventList]
+  );
+
+  const eventListEventTypeFiltered = useMemo(() => getEventTypeFiltered(eventTypes, eventListAttendanceEventFiltered), [
+    eventTypes,
+    eventListAttendanceEventFiltered,
+  ]);
+
+  const eventListDateFiltered = useMemo(() => getDateFiltered(dateStart, dateEnd, eventListEventTypeFiltered), [
+    dateStart,
+    dateEnd,
+    eventListEventTypeFiltered,
+  ]);
+
+  const eventListFinal = useMemo(() => getTextFiltered(search.toLowerCase(), eventListDateFiltered), [
+    search.toLowerCase(),
+    eventListDateFiltered,
+  ]);
+  const [filteredEvents, setFilteredEvents] = useState(eventListFinal);
+
+  useEffect(() => {
+    const t0 = performance.now();
+    setFilteredEvents(eventListFinal);
+    const t1 = performance.now();
+    console.log('Call to useEffect ONE took ' + (t1 - t0) + ' milliseconds.');
+  }, [search, attendanceEventsChecked]);
+
+  useEffect(() => {
+    const t0 = performance.now();
+    fetchQueryEvents().then(() => {
+      setFilteredEvents(eventListFinal);
+      const t1 = performance.now();
+      console.log('Call to useEffect TWO took ' + (t1 - t0) + ' milliseconds.');
+    });
+  }, [dateEnd, dateStart, eventTypes]);
+
+  return filteredEvents;
 };

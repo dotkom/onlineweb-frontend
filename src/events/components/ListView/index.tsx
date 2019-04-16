@@ -6,6 +6,7 @@ import { Link } from 'core/components/Router';
 import { getListEvents } from 'events/api/listEvents';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
+import { useFilteredEventList } from '../../hooks/useEventsRepoState';
 
 import { IEventViewProps, INewEvent } from '../../models/Event';
 import style from './list.less';
@@ -18,8 +19,8 @@ const filterListEvents = (events: INewEvent[]) => {
 };
 
 export const ListView = ({ filtered }: IProps) => {
-  const eventContext = useContext(EventsRepo);
-  const eventList = filtered ? eventContext.filteredEventList : eventContext.eventList;
+  const { eventList, updateEventList } = useContext(EventsRepo);
+  const filteredList = useFilteredEventList();
 
   const prefetch = usePrefetch(PrefetchKey.EVENTS_LIST, async () => {
     const prefetchedEvents = await getListEvents();
@@ -29,11 +30,11 @@ export const ListView = ({ filtered }: IProps) => {
   useEffect(() => {
     (async () => {
       const newEvents = await getListEvents();
-      eventContext.updateEventList(newEvents);
+      updateEventList(newEvents);
     })();
   }, []);
 
-  const events = filtered ? eventList : filterListEvents(eventList);
+  const events = filtered ? filteredList : filterListEvents(eventList);
 
   const displayEvents = events.length ? events : prefetch || [];
 

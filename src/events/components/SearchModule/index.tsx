@@ -54,8 +54,12 @@ const SearchModule: FC = () => {
       <label>
         Vis arrangementer med påmelding
         <ToggleSwitch
-          onChange={() => setAttendanceEventsChecked(attendanceEventsChecked === 'true' ? 'false' : 'true')}
-          checked={attendanceEventsChecked === 'true'}
+          onChange={() =>
+            setAttendanceEventsChecked(
+              attendanceEventsChecked === 'true' || attendanceEventsChecked === null ? 'false' : 'true'
+            )
+          }
+          checked={attendanceEventsChecked === 'true' || attendanceEventsChecked === null}
         />
       </label>
     </div>

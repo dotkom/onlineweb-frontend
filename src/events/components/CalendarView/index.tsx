@@ -14,6 +14,7 @@ import {
   getLastDayOfMonth,
   getPreviousMonthLength,
 } from 'events/utils/calendarUtils';
+import { useFilteredEventList } from '../../hooks/useEventsRepoState';
 
 import style from './calendar.less';
 import CalendarTile, { CalendarFillerTiles, createDayList } from './CalendarTile';
@@ -22,8 +23,9 @@ import { MonthChanger } from './MonthChanger';
 export type IProps = IEventViewProps;
 
 export const CalendarView = ({ filtered }: IProps) => {
-  const eventContext = useContext(EventsRepo);
-  const eventList = filtered ? eventContext.filteredEventList : eventContext.eventList;
+  const { fetchEventsByMonth, eventList } = useContext(EventsRepo);
+  const filteredEventList = useFilteredEventList();
+  const eventListFinal = filtered ? filteredEventList : eventList;
   const [month, changeMonth] = useMonth();
   const [eventMonth, setEventMonth] = useState<INewEvent[][]>([[]]);
 
@@ -47,7 +49,7 @@ export const CalendarView = ({ filtered }: IProps) => {
 
   /** Fetch events when the month is changed */
   useEffect(() => {
-    eventContext.fetchEventsByMonth(month);
+    fetchEventsByMonth(month);
   }, [month]);
 
   /** Update stored events when month or list of events is changed */
@@ -55,10 +57,10 @@ export const CalendarView = ({ filtered }: IProps) => {
     const firstDay = getFirstDayOfMonth(month);
     const lastDay = getLastDayOfMonth(month);
     const monthInterval = Interval.fromDateTimes(firstDay, lastDay);
-    const eventsInMonth = eventList.filter((event) => monthInterval.contains(DateTime.fromISO(event.event_start)));
+    const eventsInMonth = eventListFinal.filter((event) => monthInterval.contains(DateTime.fromISO(event.event_start)));
     const eventMonthMap = constructMonthMap(month, eventsInMonth);
     setEventMonth(eventMonthMap);
-  }, [month, eventList]);
+  }, [month, eventListFinal]);
 
   const displayEventMonth = eventMonth.some((eventDay) => !!eventDay.length)
     ? eventMonth
