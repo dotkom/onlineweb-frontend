@@ -1,27 +1,41 @@
+@import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+
 .dateInput {
   position: relative;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 3px;
-  border: 2px solid #353535;
   padding: 10px 5px;
-  width: 11rem;
+  width: fit-content;
+  border-bottom: 2px solid @darkGray;
+  margin: 0 auto;
 
-  > input {
+  > input[type='date'] {
+    font-size: 20px;
+    color: @gray;
     background: none;
+    appearance: none;
+    width: 7rem;
   }
-  > input::-webkit-inner-spin-button {
+
+  > input[type='date']::-webkit-clear-button,
+  input[type='date']::-webkit-inner-spin-button {
     display: none;
   }
-  > input::-webkit-calendar-picker-indicator {
-    color: rgba(255, 255, 255, 1);
-  }
-  > input::-webkit-calendar-picker-indicator:hover {
-    background: rgba(255, 255, 255, 0.8);
-  }
-}
 
-.dateIcon {
-  position: absolute;
-  right: 5px;
-  pointer-events: none;
+  > input[type='date']::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+  }
+  > span {
+    font-size: 20px;
+    color: @gray;
+  }
 }
