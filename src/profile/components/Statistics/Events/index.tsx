@@ -1,7 +1,7 @@
 import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
 import CalendarChart from 'common/components/Charts/CalendarChart';
 import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
-import { getAllUserEvents } from 'events/api/events';
+import { getAllEvents } from 'events/api/events';
 import { INewEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
 import React, { Component } from 'react';
@@ -25,7 +25,7 @@ class Orders extends Component<IProps, IState> {
   public async componentDidMount() {
     const { user }: IUserContext = this.context;
     if (user) {
-      const events = await getAllUserEvents({ is_attendee: 'True' }, user);
+      const events = await getAllEvents({ is_attendee: 'True' }, user);
       this.setState({ events });
     }
   }

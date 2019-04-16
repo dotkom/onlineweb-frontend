@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import ToggleSwitch from '../../../common/components/ToggleSwitch';
 import { useQueryParam } from '../../../common/hooks/useQueryParam';
 import {
-  defaultDateEndParam,
-  defaultDateStartParam,
-  defaultEventTypesParam,
-  defaultSearchParam,
+  DEFAULTDATEENDPARAM,
+  DEFAULTDATESTARTPARAM,
+  DEFAULTEVENTTYPESPARAM,
+  DEFAULTSEARCHPARAM,
 } from '../../../core/hooks/useQueryParamsState';
 import style from '../../../profile/components/Search/search.less';
 import DateInput from './DateInput';
@@ -19,36 +19,37 @@ const SearchModule: FC = () => {
   const [eventTypes, setEventTypes] = useQueryParam('eventTypes');
   const [attendanceEventsChecked, setAttendanceEventsChecked] = useQueryParam('attendanceEvents');
 
+  const onEventTypesInput = (event: ChangeEvent<HTMLSelectElement>) =>
+    setEventTypes(
+      JSON.stringify(
+        [...event.target.options]
+          .filter((eventType) => eventType.selected)
+          .map((eventType) => parseInt(eventType.value, 10))
+      )
+    );
+
   return (
     <div className={style.grid}>
       <input
         className={style.searchInput}
         type="search"
-        defaultValue={search || defaultSearchParam}
+        defaultValue={search || DEFAULTSEARCHPARAM}
         placeholder="Søk"
         onChange={(event) => setSearch(event.target.value)}
       />
       <DateInput
         label="Fra: "
-        time={DateTime.fromISO(dateStart || defaultDateStartParam).toFormat('yyyy-MM-dd')}
+        time={DateTime.fromISO(dateStart || DEFAULTDATESTARTPARAM).toFormat('yyyy-MM-dd')}
         onChange={(event) => setDateStart(event.target.value)}
       />
       <DateInput
         label="Til: "
-        time={DateTime.fromISO(dateEnd || defaultDateEndParam).toFormat('yyyy-MM-dd')}
+        time={DateTime.fromISO(dateEnd || DEFAULTDATEENDPARAM).toFormat('yyyy-MM-dd')}
         onChange={(event) => setDateEnd(event.target.value)}
       />
       <SelectMultiple
-        onEventTypesInput={(event) =>
-          setEventTypes(
-            JSON.stringify(
-              [...event.target.options]
-                .filter((eventType) => eventType.selected)
-                .map((eventType) => parseInt(eventType.value, 10))
-            )
-          )
-        }
-        eventTypes={JSON.parse(eventTypes || defaultEventTypesParam)}
+        onEventTypesInput={onEventTypesInput}
+        eventTypes={JSON.parse(eventTypes || DEFAULTEVENTTYPESPARAM)}
       />
       <label>
         Vis arrangementer med påmelding

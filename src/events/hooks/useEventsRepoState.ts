@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { getCalendarEvents } from 'events/api/calendarEvents';
-import { getAllEventsParamtered, getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
+import { getAllEvents, getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
 import { INewEvent } from 'events/models/Event';
 import { useQueryParamsState } from '../../core/hooks/useQueryParamsState';
 import { QueryParams } from '../../core/providers/QueryParams';
@@ -97,7 +97,7 @@ export const useEventsRepoState = () => {
 
   const fetchQueryEvents = async () => {
     const { dateEnd, dateStart, eventTypes } = searchContext;
-    const newEvents = await getAllEventsParamtered({
+    const newEvents = await getAllEvents({
       event_start__gte: dateStart.toISODate(),
       event_end__lte: dateEnd.toISODate(),
       event_type: eventTypes,
