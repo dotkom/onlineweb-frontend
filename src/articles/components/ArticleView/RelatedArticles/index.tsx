@@ -36,9 +36,7 @@ export const RelatedArticles: FC<IProps> = ({ mainArticle }) => {
     const fetchArticles = async () => {
       const relatedArticlePromises = mainArticle.tags.map(async (tag) => getArticles({ tags: tag }));
       const newRelatedArticles = await Promise.all(relatedArticlePromises);
-      const updatedRelatedArticleList = updateRelatedArticleList(
-        newRelatedArticles.reduce((prev, next) => prev.concat(next), [])
-      );
+      const updatedRelatedArticleList = updateRelatedArticleList(newRelatedArticles.flat());
       setRelatedArticles(updatedRelatedArticleList);
     };
     if (mainArticle.tags.length !== 0) {

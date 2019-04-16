@@ -10,11 +10,11 @@ export const routes = {
   detail: BASE_URL + '/',
 };
 
-const EventsRouter = ({}) => (
+const ArticlesRouter = ({}) => (
   <Switch>
     <Route path={routes.detail + ':id'} render={({ match }) => <ArticleView articleId={match.params.id} />} />
     <Route path="*" render={() => <HttpError code={404} />} />
   </Switch>
 );
 
-export default EventsRouter;
+export default ArticlesRouter;

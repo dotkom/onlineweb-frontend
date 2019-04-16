@@ -1,9 +1,10 @@
+import classnames from 'classnames';
 import React from 'react';
 
-import { IArticle } from 'articles/models/Article';
-import classnames from 'classnames';
 import ResponsiveImage from 'common/components/ResponsiveImage';
 import { Link } from 'core/components/Router';
+
+import { IArticle } from 'articles/models/Article';
 import { routes } from '../../../articles/components/ArticlesRouter';
 import style from './articles.less';
 
