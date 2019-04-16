@@ -4,13 +4,15 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import { ArticleView } from './ArticleView';
 
+const BASE_URL = '/articles';
+
 export const routes = {
-  detail: '/articles/:id',
+  detail: BASE_URL + '/',
 };
 
 const EventsRouter = ({}) => (
   <Switch>
-    <Route path={routes.detail} render={({ match }) => <ArticleView articleId={match.params.id} />} />
+    <Route path={routes.detail + ':id'} render={({ match }) => <ArticleView articleId={match.params.id} />} />
     <Route path="*" render={() => <HttpError code={404} />} />
   </Switch>
 );

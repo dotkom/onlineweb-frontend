@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Markdown from '../../../common/components/Markdown';
-import { usePrefetch } from '../../../common/hooks/usePrefetch';
-import { PrefetchKey } from '../../../common/utils/PrefetchState';
-import { getArticle } from '../../api';
-import { mockArticle } from '../../models/Article';
+
+import Markdown from 'common/components/Markdown';
+import { Pane } from 'common/components/Panes';
+import { usePrefetch } from 'common/hooks/usePrefetch';
+import { PrefetchKey } from 'common/utils/PrefetchState';
+
+import { getArticle } from 'articles/api';
+import { mockArticle } from 'articles/models/Article';
+
 import { ArticleHeader } from './ArticleHeader';
 import { ArticleImage } from './ArticleImage';
 import style from './articleView.less';
@@ -33,9 +37,9 @@ export const ArticleView = ({ articleId }: IProps) => {
       <ArticleImage image={article.image} />
       <article className={style.article}>
         <ArticleHeader article={article} />
-        <section className={style.articleText}>
+        <Pane>
           <Markdown source={article.content} />
-        </section>
+        </Pane>
       </article>
       <RelatedArticles mainArticle={article} />
     </div>

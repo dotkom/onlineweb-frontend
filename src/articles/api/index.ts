@@ -5,7 +5,7 @@ export interface IArticleAPIParameters extends IBaseAPIParameters {
   year?: string;
   month?: string;
   query?: string;
-  tags?: string;
+  tags?: string[] | string;
 }
 
 const API_URL = '/api/v1/articles/';

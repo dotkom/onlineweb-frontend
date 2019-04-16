@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
-import { DOMAIN } from '../../../common/constants/endpoints';
-import IImage from '../../../common/models/Image';
+
+import ResponsiveImage from 'common/components/ResponsiveImage';
+import IImage from 'common/models/Image';
+
 import style from './articleView.less';
 
 export interface IProps {
@@ -9,7 +11,7 @@ export interface IProps {
 
 export const ArticleImage: FC<IProps> = ({ image }) => (
   <section className={style.articleimage}>
-    <img alt={image.description} src={DOMAIN + image.original} />
+    <ResponsiveImage image={image} size="original" />
     {image.photographer ? (
       <div>
         <span>Fotograf</span> {image.photographer}
