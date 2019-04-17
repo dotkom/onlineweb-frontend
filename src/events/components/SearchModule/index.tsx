@@ -48,7 +48,7 @@ const SearchModule: FC = () => {
         eventTypes={JSON.parse(eventTypes || DEFAULT_EVENT_TYPES_PARAM)}
       />
       <label className={style.attendanceEvent}>
-        Vis arrangementer uten påmelding
+        <span>Vis arrangementer uten påmelding</span>
         <ToggleSwitch
           onChange={() => setAttendanceEventsChecked(attendanceEventsChecked === 'true' ? 'false' : 'true')}
           checked={attendanceEventsChecked === 'true'}

@@ -5,7 +5,7 @@
 .grid {
   display: grid;
   align-items: end;
-  grid-template-columns: 5fr 3fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
   width: 100%;
 
@@ -88,5 +88,9 @@
 }
 
 .attendanceEvent {
-  position: relative;
+  text-align: right;
+
+  > span {
+    margin-right: 10px;
+  }
 }
