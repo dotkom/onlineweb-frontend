@@ -50,6 +50,7 @@ export const SelectMultiple: FC<IProps> = ({ eventTypes, onEventTypesInput }) =>
   <Select
     options={selectItems()}
     onChange={onEventTypesInput}
+    defaultValue={eventTypes.map((event) => ({ value: event, label: getEventType(event) }))}
     isMulti
     styles={optionStyles}
     components={makeAnimated()}

@@ -10,7 +10,7 @@ export interface IProps {
   changeView: (view: EventView) => void;
   accessible: boolean;
   view: EventView;
-  availableViews: number[];
+  availableViews: EventView[];
 }
 
 const EventsHeader = ({ toggleAccessible, changeView, accessible, view, availableViews }: IProps) => (

@@ -1,9 +1,7 @@
 import { clearCache } from 'common/utils/cache';
 import { CookieActionType, CookieContext } from 'core/providers/Cookies';
-import React, { ChangeEvent, useContext, useState } from 'react';
-import { RouteComponentProps } from 'react-router';
-
-import { EventTypeEnum, EventView } from '../models/Event';
+import React, { useContext, useState } from 'react';
+import { EventView } from '../models/Event';
 import CalendarView from './CalendarView';
 import EventsHeader from './EventsHeader';
 import ImageView from './ImageView';
@@ -22,7 +20,7 @@ const getView = (view?: EventView): typeof ListView | typeof CalendarView | type
   }
 };
 
-const Events = ({ location, history }: RouteComponentProps) => {
+const Events = () => {
   const { cookies, dispatch } = useContext(CookieContext);
   const View = getView(cookies.eventView);
   const changeView = (view: EventView) => {
@@ -34,54 +32,6 @@ const Events = ({ location, history }: RouteComponentProps) => {
 
   const toggleAccessible = () => setAccessible(!accessible);
 
-  const params = new URLSearchParams(location.search);
-
-  const onTextInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      params.set('search', event.target.value);
-    } else {
-      params.delete('search');
-    }
-    history.replace(location.pathname + '?' + params);
-  };
-
-  const onTimeStartInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      params.set('dateStart', event.target.value);
-    } else {
-      params.delete('dateStart');
-    }
-    history.replace(location.pathname + '?' + params);
-  };
-
-  const onTimeEndInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      params.set('dateEnd', event.target.value);
-    } else {
-      params.delete('dateEnd');
-    }
-    history.replace(location.pathname + '?' + params);
-  };
-
-  const onEventTypeInput = (event: ChangeEvent<HTMLSelectElement>) => {
-    if (event.length > 0) {
-      const selected = event.map((entry) => entry.value);
-      params.set('eventTypes', JSON.stringify(selected));
-    } else {
-      params.delete('eventTypes');
-    }
-    history.replace(location.pathname + '?' + params);
-  };
-
-  const onAttendanceEventInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.checked) {
-      params.delete('attendanceEvents');
-    } else {
-      params.set('attendanceEvents', 'off');
-    }
-    history.replace(location.pathname + '?' + params);
-  };
-
   return (
     <section className={style.section}>
       <EventsHeader
@@ -91,13 +41,7 @@ const Events = ({ location, history }: RouteComponentProps) => {
         view={cookies.eventView}
         availableViews={[EventView.LIST, EventView.CALENDAR]}
       />
-      <SearchModule
-        onTextInput={onTextInput}
-        onTimeStartInput={onTimeStartInput}
-        onTimeEndInput={onTimeEndInput}
-        onEventTypesInput={onEventTypeInput}
-        onAttendanceEventInput={onAttendanceEventInput}
-      />
+      <SearchModule />
       <View accessible={accessible} filtered={true} />
     </section>
   );
