@@ -89,12 +89,12 @@ export const useEventsRepoState = () => {
   };
 };
 
-export const useFilteredEventList = () => {
-  const searchContext = useContext(QueryParams);
+const useFilteredEventList = () => {
   const { eventList, updateEventList } = useContext(EventsRepo);
+  const searchContext = useContext(QueryParams);
   const { search, dateStart, dateEnd, eventTypes, attendanceEventsChecked } = searchContext;
-  const highestDate = useRef(dateEnd);
-  const lowestDate = useRef(dateStart);
+  const highestDate = useRef(dateEnd.minus(1));
+  const lowestDate = useRef(dateStart.plus(1));
 
   const fetchQueryEvents = async (paramChanged: fetchEventParam) => {
     let options = {};
@@ -110,8 +110,11 @@ export const useFilteredEventList = () => {
           options = { event_start__gte: highestDate.current.toISODate(), event_end__lte: dateEnd.toISODate() };
           highestDate.current = dateEnd;
         }
+        break;
+      case fetchEventParam.INIT:
+        options = { event_start__gte: dateStart.toISODate(), event_end__lte: dateEnd.toISODate() };
     }
-    if (options !== {}) {
+    if (Object.keys(options).length !== 0) {
       const newEvents = await getAllEvents(options);
       updateEventList(newEvents);
     }
@@ -119,17 +122,17 @@ export const useFilteredEventList = () => {
 
   const eventListAttendanceEventFiltered = useMemo(
     () => getAttendanceEventFiltered(attendanceEventsChecked, eventList),
-    [attendanceEventsChecked, eventList]
+    [attendanceEventsChecked, eventList.toString()]
   );
 
   const eventListEventTypeFiltered = useMemo(() => getEventTypeFiltered(eventTypes, eventListAttendanceEventFiltered), [
-    eventTypes,
+    eventTypes.toString(),
     eventListAttendanceEventFiltered,
   ]);
 
   const eventListDateFiltered = useMemo(() => getDateFiltered(dateStart, dateEnd, eventListEventTypeFiltered), [
-    dateStart,
-    dateEnd,
+    dateStart.toISODate(),
+    dateEnd.toISODate(),
     eventListEventTypeFiltered,
   ]);
 
@@ -144,10 +147,13 @@ export const useFilteredEventList = () => {
   }, [search, attendanceEventsChecked, eventTypes.toString()]);
 
   useEffect(() => {
-    const changedDate = dateStart !== lowestDate.current ? fetchEventParam.DATESTART : fetchEventParam.DATEEND;
-    fetchQueryEvents(changedDate).then(() => {
-      setFilteredEvents(eventListFinal);
-    });
+    const changedDate =
+      dateStart !== lowestDate.current && dateEnd !== highestDate.current
+        ? fetchEventParam.INIT
+        : dateEnd !== highestDate.current
+        ? fetchEventParam.DATEEND
+        : fetchEventParam.DATESTART;
+    fetchQueryEvents(changedDate).then(() => setFilteredEvents(eventListFinal));
   }, [dateEnd.toISODate(), dateStart.toISODate()]);
 
   return filteredEvents;
@@ -156,4 +162,22 @@ export const useFilteredEventList = () => {
 enum fetchEventParam {
   DATESTART,
   DATEEND,
+  INIT,
 }
+
+const useDebounce = (value: INewEvent[], delay: number) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value]);
+
+  return debouncedValue;
+};
+
+export const useDebouncedFilteredEventList = () => useDebounce(useFilteredEventList(), 50);

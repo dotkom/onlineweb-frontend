@@ -14,7 +14,7 @@ import {
   getLastDayOfMonth,
   getPreviousMonthLength,
 } from 'events/utils/calendarUtils';
-import { useFilteredEventList } from '../../hooks/useEventsRepoState';
+import { useDebouncedFilteredEventList } from '../../hooks/useEventsRepoState';
 
 import style from './calendar.less';
 import CalendarTile, { CalendarFillerTiles, createDayList } from './CalendarTile';
@@ -24,7 +24,7 @@ export type IProps = IEventViewProps;
 
 export const CalendarView = ({ filtered }: IProps) => {
   const { fetchEventsByMonth, eventList } = useContext(EventsRepo);
-  const filteredEventList = useFilteredEventList();
+  const filteredEventList = useDebouncedFilteredEventList();
   const eventListFinal = filtered ? filteredEventList : eventList;
   const [month, changeMonth] = useMonth();
   const [eventMonth, setEventMonth] = useState<INewEvent[][]>([[]]);

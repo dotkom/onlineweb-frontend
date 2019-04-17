@@ -4,9 +4,9 @@ import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 import { Link } from 'core/components/Router';
 import { getListEvents } from 'events/api/listEvents';
+import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
-import { useFilteredEventList } from '../../hooks/useEventsRepoState';
 
 import { IEventViewProps, INewEvent } from '../../models/Event';
 import style from './list.less';
@@ -20,7 +20,7 @@ const filterListEvents = (events: INewEvent[]) => {
 
 export const ListView = ({ filtered }: IProps) => {
   const { eventList, updateEventList } = useContext(EventsRepo);
-  const filteredList = useFilteredEventList();
+  const filteredList = useDebouncedFilteredEventList();
 
   const prefetch = usePrefetch(PrefetchKey.EVENTS_LIST, async () => {
     const prefetchedEvents = await getListEvents();
