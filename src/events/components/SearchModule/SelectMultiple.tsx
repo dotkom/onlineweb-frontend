@@ -46,7 +46,7 @@ export interface IProps {
   onEventTypesInput: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const SelectMultiple: FC<IProps> = ({ onEventTypesInput }) => (
+export const SelectMultiple: FC<IProps> = ({ eventTypes, onEventTypesInput }) => (
   <Select
     options={selectItems()}
     onChange={onEventTypesInput}
