@@ -2,6 +2,36 @@
 @import '~common/less/constants.less';
 @import '~common/less/colors.less';
 
+.grid {
+  display: grid;
+  align-items: end;
+  grid-template-columns: 5fr 3fr;
+  grid-gap: 20px;
+  width: 100%;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: auto;
+  }
+}
+
+.searchInput {
+  color: @darkGray;
+  background: none;
+  border-bottom: 2px solid;
+  font-size: @owFontXL;
+  padding: 5px;
+  .owOutline();
+}
+
+.searchInput:focus {
+  animation: inuse 2.5s ease-in-out infinite;
+}
+
+@keyframes inuse {
+  50% {
+    background: darken(@pageBackground, 5%);
+  }
+}
 .dateInput {
   position: relative;
   padding: 10px 5px;
@@ -52,3 +82,11 @@
   }
 }
 
+.dates {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+}
+
+.attendanceEvent {
+  position: relative;
+}

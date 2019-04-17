@@ -1,8 +1,8 @@
-import { DateTime } from 'luxon';
-import { useContext, useEffect, useMemo, useState } from 'react';
 import { getCalendarEvents } from 'events/api/calendarEvents';
 import { getAllEvents, getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
 import { INewEvent } from 'events/models/Event';
+import { DateTime } from 'luxon';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useQueryParamsState } from '../../core/hooks/useQueryParamsState';
 import { QueryParams } from '../../core/providers/QueryParams';
 import { isAfter, isBefore, isInDateRange } from '../utils/eventTimeUtils';

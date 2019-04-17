@@ -8,8 +8,8 @@ import {
   DEFAULT_EVENT_TYPES_PARAM,
   DEFAULT_SEARCH_PARAM,
 } from '../../../core/hooks/useQueryParamsState';
-import style from '../../../profile/components/Search/search.less';
 import DateInput from './DateInput';
+import style from './search.less';
 import { SelectMultiple } from './SelectMultiple';
 
 const SearchModule: FC = () => {
@@ -20,13 +20,7 @@ const SearchModule: FC = () => {
   const [attendanceEventsChecked, setAttendanceEventsChecked] = useQueryParam('attendanceEvents');
 
   const onEventTypesInput = (event: ChangeEvent<HTMLSelectElement>) =>
-    setEventTypes(
-      JSON.stringify(
-        [...event.target.options]
-          .filter((eventType) => eventType.selected)
-          .map((eventType) => parseInt(eventType.value, 10))
-      )
-    );
+    setEventTypes(JSON.stringify(event.map((option) => option.value)));
 
   return (
     <div className={style.grid}>
@@ -37,22 +31,24 @@ const SearchModule: FC = () => {
         placeholder="Søk"
         onChange={(event) => setSearch(event.target.value)}
       />
-      <DateInput
-        label="Fra: "
-        time={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM).toFormat('yyyy-MM-dd')}
-        onChange={(event) => setDateStart(event.target.value)}
-      />
-      <DateInput
-        label="Til: "
-        time={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM).toFormat('yyyy-MM-dd')}
-        onChange={(event) => setDateEnd(event.target.value)}
-      />
+      <div className={style.dates}>
+        <DateInput
+          label="Fra: "
+          time={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM).toFormat('yyyy-MM-dd')}
+          onChange={(event) => setDateStart(event.target.value)}
+        />
+        <DateInput
+          label="Til: "
+          time={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM).toFormat('yyyy-MM-dd')}
+          onChange={(event) => setDateEnd(event.target.value)}
+        />
+      </div>
       <SelectMultiple
         onEventTypesInput={onEventTypesInput}
         eventTypes={JSON.parse(eventTypes || DEFAULT_EVENT_TYPES_PARAM)}
       />
-      <label>
-        Vis arrangementer med påmelding
+      <label className={style.attendanceEvent}>
+        Vis arrangementer uten påmelding
         <ToggleSwitch
           onChange={() => setAttendanceEventsChecked(attendanceEventsChecked === 'true' ? 'false' : 'true')}
           checked={attendanceEventsChecked === 'true'}

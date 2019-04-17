@@ -8,7 +8,6 @@ const selectItems = () => {
   const eventTypeNumberList = Array(Object.keys(EventTypeEnum).length / 2 - 1)
     .fill(1)
     .map((x, y) => x + y);
-
   return eventTypeNumberList.map((eventType) => ({ value: eventType, label: getEventType(eventType) }));
 };
 
