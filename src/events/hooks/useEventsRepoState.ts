@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-// import { useQueryParamsState } from 'core/hooks/useQueryParamsState';
 import { QueryParams } from 'core/providers/QueryParams';
 import { getCalendarEvents } from 'events/api/calendarEvents';
 import { getAllEvents, getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
@@ -109,7 +108,7 @@ export const useFilteredEventList = () => {
       case fetchEventParam.DATEEND:
         if (dateEnd > highestDate.current) {
           options = { event_start__gte: highestDate.current.toISODate(), event_end__lte: dateEnd.toISODate() };
-          lowestDate.current = dateStart;
+          highestDate.current = dateEnd;
         }
     }
     if (options !== {}) {
@@ -142,7 +141,7 @@ export const useFilteredEventList = () => {
 
   useEffect(() => {
     setFilteredEvents(eventListFinal);
-  }, [search.toLowerCase(), attendanceEventsChecked.valueOf(), eventTypes.toString()]);
+  }, [search, attendanceEventsChecked, eventTypes.toString()]);
 
   useEffect(() => {
     const changedDate = dateStart !== lowestDate.current ? fetchEventParam.DATESTART : fetchEventParam.DATEEND;
