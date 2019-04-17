@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 // import { useQueryParamsState } from 'core/hooks/useQueryParamsState';
 import { QueryParams } from 'core/providers/QueryParams';
@@ -37,37 +37,6 @@ const getDateFiltered = (dateStart: DateTime, dateEnd: DateTime, eventList: INew
 
 const getAttendanceEventFiltered = (attendanceEventsChecked: boolean, eventList: INewEvent[]) =>
   !attendanceEventsChecked ? eventList.filter((event) => event.attendance_event) : eventList;
-
-/*const getFilteredEventList = (searchContext: ReturnType<typeof useQueryParamsState>, eventList: INewEvent[]) => {
-  const t0 = performance.now();
-
-  const { search, dateStart, dateEnd, eventTypes, attendanceEventsChecked } = searchContext;
-
-  const eventListAttendanceEventFiltered = useMemo(
-    () => getAttendanceEventFiltered(attendanceEventsChecked, eventList),
-    [attendanceEventsChecked, eventList]
-  );
-
-  const eventListEventTypeFiltered = useMemo(() => getEventTypeFiltered(eventTypes, eventListAttendanceEventFiltered), [
-    eventTypes,
-    eventListAttendanceEventFiltered,
-  ]);
-
-  const eventListDateFiltered = useMemo(() => getDateFiltered(dateStart, dateEnd, eventListEventTypeFiltered), [
-    dateStart,
-    dateEnd,
-    eventListEventTypeFiltered,
-  ]);
-
-  const eventListFinal = useMemo(() => getTextFiltered(search.toLowerCase(), eventListDateFiltered), [
-    search.toLowerCase(),
-    eventListDateFiltered,
-  ]);
-
-  const t1 = performance.now();
-  console.log('Call to getFilteredEventList took ' + (t1 - t0) + ' milliseconds.');
-  return eventListFinal;
-};*/
 
 /**
  * Contains the complete collection of events fetched for use in the application.
@@ -125,14 +94,28 @@ export const useFilteredEventList = () => {
   const searchContext = useContext(QueryParams);
   const { eventList, updateEventList } = useContext(EventsRepo);
   const { search, dateStart, dateEnd, eventTypes, attendanceEventsChecked } = searchContext;
+  const highestDate = useRef(dateEnd);
+  const lowestDate = useRef(dateStart);
 
-  const fetchQueryEvents = async () => {
-    const newEvents = await getAllEvents({
-      event_start__gte: dateStart.toISODate(),
-      event_end__lte: dateEnd.toISODate(),
-      event_type: eventTypes,
-    });
-    updateEventList(newEvents);
+  const fetchQueryEvents = async (paramChanged: fetchEventParam) => {
+    let options = {};
+    switch (paramChanged) {
+      case fetchEventParam.DATESTART:
+        if (dateStart < lowestDate.current) {
+          options = { event_start__gte: dateStart.toISODate(), event_end__lte: lowestDate.current.toISODate() };
+          lowestDate.current = dateStart;
+        }
+        break;
+      case fetchEventParam.DATEEND:
+        if (dateEnd > highestDate.current) {
+          options = { event_start__gte: highestDate.current.toISODate(), event_end__lte: dateEnd.toISODate() };
+          lowestDate.current = dateStart;
+        }
+    }
+    if (options !== {}) {
+      const newEvents = await getAllEvents(options);
+      updateEventList(newEvents);
+    }
   };
 
   const eventListAttendanceEventFiltered = useMemo(
@@ -158,20 +141,20 @@ export const useFilteredEventList = () => {
   const [filteredEvents, setFilteredEvents] = useState(eventListFinal);
 
   useEffect(() => {
-    const t0 = performance.now();
     setFilteredEvents(eventListFinal);
-    const t1 = performance.now();
-    console.log('Call to useEffect ONE took ' + (t1 - t0) + ' milliseconds.');
-  }, [search, attendanceEventsChecked]);
+  }, [search.toLowerCase(), attendanceEventsChecked.valueOf(), eventTypes.toString()]);
 
   useEffect(() => {
-    const t0 = performance.now();
-    fetchQueryEvents().then(() => {
+    const changedDate = dateStart !== lowestDate.current ? fetchEventParam.DATESTART : fetchEventParam.DATEEND;
+    fetchQueryEvents(changedDate).then(() => {
       setFilteredEvents(eventListFinal);
-      const t1 = performance.now();
-      console.log('Call to useEffect TWO took ' + (t1 - t0) + ' milliseconds.');
     });
-  }, [dateEnd, dateStart, eventTypes]);
+  }, [dateEnd.toISODate(), dateStart.toISODate()]);
 
   return filteredEvents;
 };
+
+enum fetchEventParam {
+  DATESTART,
+  DATEEND,
+}
