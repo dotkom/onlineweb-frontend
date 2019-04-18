@@ -31,7 +31,7 @@ const SearchModule: FC = () => {
 
   const handleToDateClick = (day: Date) => {
     const clonedDate: Date = new Date(day.getTime());
-    const datetime = DateTime.fromJSDate(new Date(clonedDate.setHours(0, 0, 0, 0)));
+    const datetime = DateTime.fromMillis(clonedDate.setHours(0, 0, 0, 0));
     const dateStartDateTime = DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM);
 
     if (datetime > dateStartDateTime || datetime.toISODate() === dateStartDateTime.toISODate()) {
@@ -41,7 +41,7 @@ const SearchModule: FC = () => {
 
   const handleFromDateClick = (day: Date) => {
     const clonedDate: Date = new Date(day.getTime());
-    const datetime = DateTime.fromJSDate(new Date(clonedDate.setHours(0, 0, 0, 0)));
+    const datetime = DateTime.fromMillis(clonedDate.setHours(0, 0, 0, 0));
     const dateEndDateTime = DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM);
 
     if (datetime < dateEndDateTime || datetime.toISODate() === dateEndDateTime.toISODate()) {
