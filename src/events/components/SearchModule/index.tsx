@@ -9,6 +9,7 @@ import {
   DEFAULT_SEARCH_PARAM,
 } from '../../../core/hooks/useQueryParamsState';
 import DateInput from './DateInput';
+import DatePicker from './DatePicker';
 import style from './search.less';
 import { SelectMultiple } from './SelectMultiple';
 
@@ -31,18 +32,11 @@ const SearchModule: FC = () => {
         placeholder="Søk"
         onChange={(event) => setSearch(event.target.value)}
       />
-      <div className={style.dates}>
-        <DateInput
-          label="Fra: "
-          time={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM).toFormat('yyyy-MM-dd')}
-          onChange={(event) => setDateStart(event.target.value)}
-        />
-        <DateInput
-          label="Til: "
-          time={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM).toFormat('yyyy-MM-dd')}
-          onChange={(event) => setDateEnd(event.target.value)}
-        />
-      </div>
+      <DateInput
+	  startDate={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM).toJSDate()}
+	  endDate={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM).toJSDate()}
+          onChange={(event) => console.log(event)}
+      />
       <SelectMultiple
         onEventTypesInput={onEventTypesInput}
         eventTypes={JSON.parse(eventTypes || DEFAULT_EVENT_TYPES_PARAM)}

@@ -1,4 +1,6 @@
 import React, { ChangeEvent, FC } from 'react';
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
 import style from './search.less';
 
 export interface IProps {
@@ -7,12 +9,26 @@ export interface IProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const DateInput: FC<IProps> = ({ label, time, onChange }) => {
+const DateInput: FC<IProps> = ({ startDate, endDate, onChange }) => {
   return (
-    <label className={style.dateInput}>
-      <span>{label}</span>
-      <input type="date" value={time} onChange={onChange} pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" required />
-    </label>
+    <div className={style.dateInput}>
+	<DatePicker
+	    selected={startDate}
+	    selectsStart
+	    dateFormat="MMMM d, yyyy"
+	    startDate={startDate}
+	    endDate={endDate}
+	    onChange={onChange}
+	/>
+	<DatePicker
+	    selected={endDate}
+	    selectsEnd
+	    dateFormat="MMMM d, yyyy"
+	    startDate={startDate}
+	    endDate={endDate}
+	    onChange={onChange}
+	/>
+    </div>
   );
 };
 
