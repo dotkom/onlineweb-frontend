@@ -32,12 +32,9 @@ const SearchModule: FC = () => {
   const handleToDateClick = (day: Date) => {
     const clonedDate: Date = new Date(day.getTime());
     const datetime = DateTime.fromJSDate(new Date(clonedDate.setHours(0, 0, 0, 0)));
-    const dateEndDateTime = DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM);
     const dateStartDateTime = DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM);
 
-    if (datetime.toISODate() !== dateStartDateTime.toISODate() && datetime > dateEndDateTime) {
-      setDateEnd(datetime.toISODate());
-    } else if (datetime.toISODate() === dateStartDateTime.toISODate()) {
+    if (datetime > dateStartDateTime || datetime.toISODate() === dateStartDateTime.toISODate()) {
       setDateEnd(datetime.toISODate());
     }
   };
@@ -46,11 +43,8 @@ const SearchModule: FC = () => {
     const clonedDate: Date = new Date(day.getTime());
     const datetime = DateTime.fromJSDate(new Date(clonedDate.setHours(0, 0, 0, 0)));
     const dateEndDateTime = DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM);
-    const dateStartDateTime = DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM);
 
-    if (datetime < dateStartDateTime) {
-      setDateStart(datetime.toISODate());
-    } else if (datetime.toISODate() === dateEndDateTime.toISODate()) {
+    if (datetime < dateEndDateTime || datetime.toISODate() === dateEndDateTime.toISODate()) {
       setDateStart(datetime.toISODate());
     }
   };
