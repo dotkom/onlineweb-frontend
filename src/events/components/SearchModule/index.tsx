@@ -51,11 +51,6 @@ const SearchModule: FC = () => {
       attendanceEventsChecked === 'true' || attendanceEventsChecked === null ? 'false' : 'true'
     );
 
-  const handleDateResetClick = () => {
-    setDateStart(DEFAULT_DATE_START_PARAM);
-    setDateEnd(DEFAULT_DATE_END_PARAM);
-  };
-
   return (
     <>
       <div className={style.grid}>
@@ -83,7 +78,6 @@ const SearchModule: FC = () => {
         dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
         handleFromDateClick={handleFromDateClick}
         handleToDateClick={handleToDateClick}
-        handleResetClick={handleDateResetClick}
       />
     </>
   );

@@ -31,7 +31,6 @@ const LABELS = { nextMonth: 'Neste måned', previousMonth: 'Forrige måned' };
 export interface IProps {
   dateStart: DateTime;
   dateEnd: DateTime;
-  handleResetClick: () => void;
   handleToDateClick: (day: DateTime) => void;
   handleFromDateClick: (day: DateTime) => void;
 }
@@ -41,7 +40,6 @@ export const DateRangeInput: FC<IProps> = ({
   dateEnd: dateTimeEnd,
   handleToDateClick,
   handleFromDateClick,
-  handleResetClick,
 }) => {
   const dateStart = dateTimeStart.toJSDate();
   const dateEnd = dateTimeEnd.toJSDate();
@@ -85,7 +83,6 @@ export const DateRangeInput: FC<IProps> = ({
 
   return (
     <div className={style.inputFromTo}>
-      <button onClick={handleResetClick}>Reset</button>
       <DayPickerInput
         value={dateStart}
         placeholder="Fra"
