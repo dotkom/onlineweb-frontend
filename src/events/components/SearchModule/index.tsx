@@ -10,7 +10,6 @@ import {
 } from '../../../core/hooks/useQueryParamsState';
 import style from '../../../profile/components/Search/search.less';
 import { DateRangeInput } from './DateRangeInput';
-import './dateRangeInput.css';
 import { SelectMultiple } from './SelectMultiple';
 
 const SearchModule: FC = () => {
@@ -29,24 +28,32 @@ const SearchModule: FC = () => {
       )
     );
 
-  const handleToDateClick = (day: Date) => {
-    const clonedDate: Date = new Date(day.getTime());
-    const datetime = DateTime.fromMillis(clonedDate.setHours(0, 0, 0, 0));
-    const dateStartDateTime = DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM);
+  const handleToDateClick = (day: DateTime) => {
+    const dateTime = day.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+    const dateTimeStart = DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM);
 
-    if (datetime > dateStartDateTime || datetime.toISODate() === dateStartDateTime.toISODate()) {
-      setDateEnd(datetime.toISODate());
+    if (dateTime > dateTimeStart || dateTime.toISODate() === dateTimeStart.toISODate()) {
+      setDateEnd(dateTime.toISODate());
     }
   };
 
-  const handleFromDateClick = (day: Date) => {
-    const clonedDate: Date = new Date(day.getTime());
-    const datetime = DateTime.fromMillis(clonedDate.setHours(0, 0, 0, 0));
-    const dateEndDateTime = DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM);
+  const handleFromDateClick = (day: DateTime) => {
+    const dateTime = day.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+    const dateTimeEnd = DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM);
 
-    if (datetime < dateEndDateTime || datetime.toISODate() === dateEndDateTime.toISODate()) {
-      setDateStart(datetime.toISODate());
+    if (dateTime < dateTimeEnd || dateTime.toISODate() === dateTimeEnd.toISODate()) {
+      setDateStart(dateTime.toISODate());
     }
+  };
+
+  const onToggleSwitchChange = () =>
+    setAttendanceEventsChecked(
+      attendanceEventsChecked === 'true' || attendanceEventsChecked === null ? 'false' : 'true'
+    );
+
+  const handleDateResetClick = () => {
+    setDateStart(DEFAULT_DATE_START_PARAM);
+    setDateEnd(DEFAULT_DATE_END_PARAM);
   };
 
   return (
@@ -66,11 +73,7 @@ const SearchModule: FC = () => {
         <label>
           Vis arrangementer med påmelding
           <ToggleSwitch
-            onChange={() =>
-              setAttendanceEventsChecked(
-                attendanceEventsChecked === 'true' || attendanceEventsChecked === null ? 'false' : 'true'
-              )
-            }
+            onChange={onToggleSwitchChange}
             checked={attendanceEventsChecked === 'true' || attendanceEventsChecked === null}
           />
         </label>
@@ -80,10 +83,7 @@ const SearchModule: FC = () => {
         dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
         handleFromDateClick={handleFromDateClick}
         handleToDateClick={handleToDateClick}
-        handleResetClick={() => {
-          setDateStart(DEFAULT_DATE_START_PARAM);
-          setDateEnd(DEFAULT_DATE_END_PARAM);
-        }}
+        handleResetClick={handleDateResetClick}
       />
     </>
   );
