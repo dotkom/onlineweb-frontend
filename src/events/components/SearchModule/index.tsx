@@ -29,7 +29,7 @@ const SearchModule: FC = () => {
     );
 
   const handleToDateClick = (day: DateTime) => {
-    const dateTime = day.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+    const dateTime = day.set({ hour: 0 });
     const dateTimeStart = DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM);
 
     if (dateTime > dateTimeStart || dateTime.toISODate() === dateTimeStart.toISODate()) {
@@ -38,7 +38,7 @@ const SearchModule: FC = () => {
   };
 
   const handleFromDateClick = (day: DateTime) => {
-    const dateTime = day.set({ hour: 0, minute: 0, second: 0, millisecond: 0 });
+    const dateTime = day.set({ hour: 0 });
     const dateTimeEnd = DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM);
 
     if (dateTime < dateTimeEnd || dateTime.toISODate() === dateTimeEnd.toISODate()) {
