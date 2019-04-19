@@ -3,7 +3,30 @@ import React, { FC, useRef } from 'react';
 import { DayPickerProps } from 'react-day-picker';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
+
 import style from './search.less';
+
+const WEEKDAYS_SHORT = ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'];
+const MONTHS = [
+  'Januar',
+  'Februar',
+  'Mars',
+  'April',
+  'Mai',
+  'Juni',
+  'Juli',
+  'August',
+  'September',
+  'Oktober',
+  'November',
+  'Desember',
+];
+
+const WEEKDAYS_LONG = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'];
+
+const FIRST_DAY_OF_WEEK = 1;
+
+const LABELS = { nextMonth: 'Neste måned', previousMonth: 'Forrige måned' };
 
 export interface IProps {
   dateStart: DateTime;
@@ -37,6 +60,12 @@ export const DateRangeInput: FC<IProps> = ({
         inputRef.current.getInput().focus();
       }
     },
+    locale: 'no',
+    months: MONTHS,
+    weekdaysLong: WEEKDAYS_LONG,
+    weekdaysShort: WEEKDAYS_SHORT,
+    firstDayOfWeek: FIRST_DAY_OF_WEEK,
+    labels: LABELS,
   };
 
   const toMonthProps: DayPickerProps = {
@@ -46,6 +75,12 @@ export const DateRangeInput: FC<IProps> = ({
     month: dateStart,
     fromMonth: dateStart,
     numberOfMonths: 2,
+    locale: 'no',
+    months: MONTHS,
+    weekdaysLong: WEEKDAYS_LONG,
+    weekdaysShort: WEEKDAYS_SHORT,
+    firstDayOfWeek: FIRST_DAY_OF_WEEK,
+    labels: LABELS,
   };
 
   return (
