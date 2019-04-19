@@ -1,17 +1,32 @@
-.dateInput {
-  position: relative;
-  background: rgba(255, 255, 255, 0.8);
-  width: 10rem;
-  height: 2rem;
-  display: block;
+.inputFromTo {
+  :global {
+    /* stylelint-disable selector-class-pattern */
+    .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+      background-color: #f0f8ff !important;
+      color: #4a90e2;
+    }
 
-  > input {
-    background: none;
-    margin-left: 1.5rem;
+    .DayPicker-Day {
+      border-radius: 0 !important;
+    }
+
+    .DayPicker-Day--start {
+      border-top-left-radius: 50% !important;
+      border-bottom-left-radius: 50% !important;
+    }
+
+    .DayPicker-Day--end {
+      border-top-right-radius: 50% !important;
+      border-bottom-right-radius: 50% !important;
+    }
+
+    .DayPickerInput-Overlay {
+      width: 550px;
+    }
+    /* stylelint-enable */
   }
-  > span {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+}
+/* stylelint-disable-next-line selector-type-case, selector-type-no-unknown */
+.inputFromToTo :global DayPickerInput-Overlay {
+  margin-left: -198px;
 }

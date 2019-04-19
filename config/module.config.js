@@ -16,6 +16,10 @@ module.exports = {
         use: CSSPlugin.loaders,
       },
       {
+        test: /\.css$/,
+        loader: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.(png|gif|jpe?g)$/,
         loader: 'url-loader?limit=5000',
       },
