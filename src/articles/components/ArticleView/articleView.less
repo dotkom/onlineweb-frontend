@@ -25,7 +25,7 @@
   }
 }
 
-.articleimage {
+.articleImage {
   position: relative;
   margin-bottom: 1rem;
 
@@ -85,7 +85,7 @@
     grid-area: relatedArticles;
   }
 
-  .articleimage {
+  .articleImage {
     grid-area: articleImage;
     margin-bottom: 0;
   }
@@ -103,4 +103,21 @@
   width: 100%;
   position: relative;
   border-radius: 3px 3px 0 0;
+}
+
+.articleVideo {
+  .owCard();
+  position: relative;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+
+  iframe,
+  object,
+  embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
 }

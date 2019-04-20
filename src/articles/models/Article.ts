@@ -14,6 +14,7 @@ export interface IArticle {
   published_date: string;
   tags: string[];
   slug: string;
+  video: string;
 }
 
 export const mockArticle: IArticle = {
@@ -30,4 +31,5 @@ export const mockArticle: IArticle = {
   published_date: '',
   tags: [],
   slug: '',
+  video: '',
 };
