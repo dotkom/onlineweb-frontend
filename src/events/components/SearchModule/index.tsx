@@ -5,11 +5,9 @@ import { useQueryParam } from '../../../common/hooks/useQueryParam';
 import {
   DEFAULT_DATE_END_PARAM,
   DEFAULT_DATE_START_PARAM,
-  DEFAULT_EVENT_TYPES_PARAM,
   DEFAULT_SEARCH_PARAM,
 } from '../../../core/hooks/useQueryParamsState';
-import DateInput from './DateInput';
-import DatePicker from './DatePicker';
+import { DateRangeInput } from './DateRangeInput';
 import style from './search.less';
 import { SelectMultiple } from './SelectMultiple';
 
@@ -20,39 +18,61 @@ const SearchModule: FC = () => {
   const [eventTypes, setEventTypes] = useQueryParam('eventTypes');
   const [attendanceEventsChecked, setAttendanceEventsChecked] = useQueryParam('attendanceEvents');
 
-  const onEventTypesInput = (event: ChangeEvent<HTMLSelectElement>) =>
-    setEventTypes(JSON.stringify(event.map((option) => option.value)));
+  const onEventTypesInput = (event: ChangeEvent<HTMLSelectElement>) => {
+    setEventTypes(JSON.stringify(event.map((option:any) => option.value)));
+  };
+
+  const handleToDateClick = (day: DateTime) => {
+    const dateTime = day.set({ hour: 0 });
+    const dateTimeStart = DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM);
+
+    if (dateTime > dateTimeStart || dateTime.toISODate() === dateTimeStart.toISODate()) {
+      setDateEnd(dateTime.toISODate());
+    }
+  };
+
+  const handleFromDateClick = (day: DateTime) => {
+    const dateTime = day.set({ hour: 0 });
+    const dateTimeEnd = DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM);
+
+    if (dateTime < dateTimeEnd || dateTime.toISODate() === dateTimeEnd.toISODate()) {
+      setDateStart(dateTime.toISODate());
+    }
+  };
+
+  const onToggleSwitchChange = () =>
+    setAttendanceEventsChecked(
+      attendanceEventsChecked === 'true' || attendanceEventsChecked === null ? 'false' : 'true'
+    );
 
   return (
-    <div className={style.grid}>
-      <input
-        className={style.searchInput}
-        type="search"
-        defaultValue={search || DEFAULT_SEARCH_PARAM}
-        placeholder="Søk"
-        onChange={(event) => setSearch(event.target.value)}
-      />
-      <DateInput
-	  startDate={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM).toJSDate()}
-	  endDate={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM).toJSDate()}
-          onChange={(event) => console.log(event)}
-      />
-      <SelectMultiple
-        onEventTypesInput={onEventTypesInput}
-        eventTypes={JSON.parse(eventTypes || DEFAULT_EVENT_TYPES_PARAM)}
-      />
-      <label className={style.attendanceEvent}>
-        <span>Vis arrangementer uten påmelding</span>
-        <ToggleSwitch
-          onChange={() =>
-            setAttendanceEventsChecked(
-              attendanceEventsChecked === 'true' || attendanceEventsChecked === null ? 'false' : 'true'
-            )
-          }
-          checked={attendanceEventsChecked === 'true' || attendanceEventsChecked === null}
+    <>
+      <div className={style.grid}>
+        <input
+          className={style.searchInput}
+          type="search"
+          defaultValue={search || DEFAULT_SEARCH_PARAM}
+          placeholder="Søk"
+          onChange={(event) => setSearch(event.target.value)}
         />
-      </label>
-    </div>
+        <SelectMultiple
+          onEventTypesInput={onEventTypesInput}
+        />
+        <label>
+          Vis arrangementer uten påmelding
+          <ToggleSwitch
+            onChange={onToggleSwitchChange}
+            checked={attendanceEventsChecked === 'true' || attendanceEventsChecked === null}
+          />
+        </label>
+      </div>
+      <DateRangeInput
+        dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
+        dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
+        handleFromDateClick={handleFromDateClick}
+        handleToDateClick={handleToDateClick}
+      />
+    </>
   );
 };
 

@@ -41,11 +41,10 @@ const optionStyles = {
 };
 
 export interface IProps {
-  eventTypes: EventTypeEnum[];
   onEventTypesInput: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const SelectMultiple: FC<IProps> = ({ eventTypes, onEventTypesInput }) => (
+export const SelectMultiple: FC<IProps> = ({ onEventTypesInput }) => (
   <Select
     options={selectItems()}
     onChange={onEventTypesInput}
