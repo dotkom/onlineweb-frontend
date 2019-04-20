@@ -9,7 +9,7 @@ import ProfileSmall from './ProfileSmall';
 import style from './search.less';
 
 export const Users = () => {
-  const { users, nextPage } = useContext(ProfileSearchContext);
+  const { profiles, nextPage } = useContext(ProfileSearchContext);
   const [entry, targetRef] = useIntersection();
   const [count, setCount] = useState(0); // TODO: Implement inside useIntersection somehow.
 
@@ -23,15 +23,15 @@ export const Users = () => {
 
   return (
     <>
-      {!users.length ? (
+      {!profiles.length ? (
         <div className={style.marginTop}>
           <h3>Finner ingen brukere med disse filterene</h3>
         </div>
       ) : (
         <div className={style.smallProfileGrid}>
-          {users.map((user) => (
-            <Link to={routes.public + `/${user.id}`} key={`${user.id} ${user.first_name} ${user.last_name}`}>
-              <ProfileSmall user={user} key={user.username} />
+          {profiles.map((profile) => (
+            <Link to={routes.public + `/${profile.id}`} key={profile.id}>
+              <ProfileSmall profile={profile} />
             </Link>
           ))}
         </div>
