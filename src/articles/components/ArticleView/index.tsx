@@ -10,6 +10,7 @@ import { mockArticle } from 'articles/models/Article';
 
 import { ArticleHeader } from './ArticleHeader';
 import { ArticleImage } from './ArticleImage';
+import { ArticleVideo } from './ArticleVideo';
 import style from './articleView.less';
 import { RelatedArticles } from './RelatedArticles';
 
@@ -34,7 +35,7 @@ export const ArticleView = ({ articleId }: IProps) => {
 
   return (
     <div className={style.container}>
-      <ArticleImage image={article.image} />
+      {article.video ? <ArticleVideo vimeoId={article.video} /> : <ArticleImage image={article.image} />}
       <article className={style.article}>
         <ArticleHeader article={article} />
         <Pane>
