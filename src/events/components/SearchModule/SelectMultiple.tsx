@@ -41,15 +41,17 @@ const optionStyles = {
 };
 
 export interface IProps {
+  eventTypes: EventTypeEnum[];
   onEventTypesInput: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export const SelectMultiple: FC<IProps> = ({ onEventTypesInput }) => (
+export const SelectMultiple: FC<IProps> = ({ eventTypes, onEventTypesInput }) => (
   <Select
     options={selectItems()}
     onChange={onEventTypesInput}
     isMulti
     styles={optionStyles}
+    defaultValue={eventTypes.map((event) => ({ value: event, label: getEventType(event) }))}
     components={makeAnimated()}
     closeMenuOnSelect={false}
     placeholder={'Arrangementtype...'}

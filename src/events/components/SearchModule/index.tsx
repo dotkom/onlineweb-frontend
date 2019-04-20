@@ -5,6 +5,7 @@ import { useQueryParam } from '../../../common/hooks/useQueryParam';
 import {
   DEFAULT_DATE_END_PARAM,
   DEFAULT_DATE_START_PARAM,
+  DEFAULT_EVENT_TYPES_PARAM,
   DEFAULT_SEARCH_PARAM,
 } from '../../../core/hooks/useQueryParamsState';
 import { DateRangeInput } from './DateRangeInput';
@@ -56,6 +57,7 @@ const SearchModule: FC = () => {
           onChange={(event) => setSearch(event.target.value)}
         />
         <SelectMultiple
+	  eventTypes={JSON.parse(eventTypes || DEFAULT_EVENT_TYPES_PARAM)}
           onEventTypesInput={onEventTypesInput}
         />
         <label>
