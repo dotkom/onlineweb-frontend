@@ -5,9 +5,6 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import style from './search.less';
 
-import MomentLocaleUtils, { formatDate, parseDate } from 'react-day-picker/moment';
-
-import 'moment/locale/nb';
 
 const WEEKDAYS_SHORT = ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'];
 const MONTHS = [
@@ -83,6 +80,11 @@ export const DateRangeInput: FC<IProps> = ({
     firstDayOfWeek: FIRST_DAY_OF_WEEK,
     labels: LABELS,
   };
+  
+  const formatDate = (day) => {
+    return day.getDate() + ". " +  MONTHS[day.getMonth()] + " " + day.getFullYear();
+  };
+
 
   return (
     <div className={style.inputFromTo}>
@@ -91,7 +93,6 @@ export const DateRangeInput: FC<IProps> = ({
         value={dateStart}
         placeholder="Fra"
         formatDate={formatDate}
-        parseDate={parseDate}
         format="LL"
         dayPickerProps={fromMonthProps}
         onDayChange={(day: Date) => handleFromDateClick(DateTime.fromJSDate(day))}
@@ -102,7 +103,6 @@ export const DateRangeInput: FC<IProps> = ({
         value={dateEnd}
         placeholder="Til"
         formatDate={formatDate}
-        parseDate={parseDate}
         format="LL"
         dayPickerProps={toMonthProps}
         onDayChange={(day: Date) => handleToDateClick(DateTime.fromJSDate(day))}
