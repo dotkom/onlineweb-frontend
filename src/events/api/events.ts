@@ -21,7 +21,7 @@ export interface IAPIData<T> {
 const API_URL = '/api/v1/events/';
 
 export const getEvents = async (args?: IEventAPIParameters): Promise<INewEvent[]> => {
-  const data: IAPIData<INewEvent> = await get(API_URL, { format: 'json', ...args });
+  const data = await get<IAPIData<INewEvent>>(API_URL, { format: 'json', ...args });
   return data.results;
 };
 
@@ -31,7 +31,7 @@ export const getAllUserEvents = async (args: IEventAPIParameters, user: IAuthUse
 };
 
 export const getEvent = async (id: number): Promise<INewEvent> => {
-  const event: INewEvent = await get(API_URL + id + '/', { format: 'json' });
+  const event = await get<INewEvent>(API_URL + id + '/', { format: 'json' });
   return event;
 };
 
@@ -43,6 +43,6 @@ export interface IControlledFetch<T> {
 export const controlledGetEvents = (args?: IEventAPIParameters): IControlledFetch<INewEvent> => {
   const controller = new AbortController();
   const signal = controller.signal;
-  const data: Promise<IAPIData<INewEvent>> = get(API_URL, { format: 'json', ...args }, { signal });
+  const data = get<IAPIData<INewEvent>>(API_URL, { format: 'json', ...args }, { signal });
   return { data, controller };
 };

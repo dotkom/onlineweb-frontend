@@ -77,7 +77,9 @@ export async function getAllPages<T>(
   const pageNumber = Math.ceil(count / page_size);
   const requestCount = [...Array(pageNumber)];
   /** Initialize the fetches for all the pages at the same time */
-  const requests = requestCount.map((_, i) => get<IAPIData<T>>(query, { ...parameters, page: i + 1, page_size }, options));
+  const requests = requestCount.map((_, i) =>
+    get<IAPIData<T>>(query, { ...parameters, page: i + 1, page_size }, options)
+  );
   /** Await all the fetches to a single array */
   const data: Array<IAPIData<T>> = await Promise.all(requests);
   /** Reduce all results to a single array for all objects in the resource */
@@ -107,7 +109,7 @@ export const post = async <T>(
   return performRequest(query, parameters, opts);
 };
 
-export interface IPutParams <T>{
+export interface IPutParams<T> {
   query: string;
   data: T;
   parameters?: object;

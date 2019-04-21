@@ -16,17 +16,22 @@ export const unsubscribe = async (sub: PushSubscription, user: IAuthUser) => {
   await post(API_URL + '/unsubscribe', json, {}, { user, domain: API_DOMAIN });
 };
 
-export const getAllChannels = async (user: IAuthUser): Promise<IChannel[]> => {
-  const channels = await get(API_URL + '/channels', {}, { user, domain: API_DOMAIN });
+export const getAllChannels = async (user: IAuthUser) => {
+  const channels = await get<IChannel[]>(API_URL + '/channels', {}, { user, domain: API_DOMAIN });
   return channels;
 };
 
-export const getUserChannels = async (user: IAuthUser): Promise<IChannel[]> => {
-  const channels = await get(API_URL + '/user-channels', {}, { user, domain: API_DOMAIN });
+export const getUserChannels = async (user: IAuthUser) => {
+  const channels = await get<IChannel[]>(API_URL + '/user-channels', {}, { user, domain: API_DOMAIN });
   return channels;
 };
 
-export const postUserChannels = async (channelNames: string[], user: IAuthUser): Promise<IChannel[]> => {
-  const channels = await post(API_URL + '/user-channels', { channels: channelNames }, {}, { user, domain: API_DOMAIN });
+export const postUserChannels = async (channelNames: string[], user: IAuthUser) => {
+  const channels = await post<IChannel[]>(
+    API_URL + '/user-channels',
+    { channels: channelNames },
+    {},
+    { user, domain: API_DOMAIN }
+  );
   return channels;
 };
