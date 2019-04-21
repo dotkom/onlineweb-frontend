@@ -82,7 +82,7 @@ export const DateRangeInput: FC<IProps> = ({
   };
   
   const formatDate = (day) => {
-    return day.getDate() + ". " +  MONTHS[day.getMonth()] + " " + day.getFullYear();
+    return day.getDate() + ". " +  MONTHS[day.getMonth()].toLowerCase() + " " + day.getFullYear();
   };
 
 
