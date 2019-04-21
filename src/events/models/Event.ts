@@ -1,7 +1,5 @@
 import IImage, { DEFAULT_EVENT_IMAGE } from 'common/models/Image';
 import { ICompany } from 'core/models/Company';
-import { IGroup } from 'core/models/Group';
-import { IUser } from 'core/models/User';
 import { IExtra } from 'events/models/Extras';
 import { IRuleBundle } from 'events/models/RuleBundles';
 import { IAttendee } from './Attendee';
@@ -111,44 +109,8 @@ export enum EventView {
   CALENDAR,
 }
 
-export interface IFrontpageEvent {
-  eventUrl: string;
-  startDate: string;
-  author: IUser;
-  title: string;
-  event_start: Date;
-  event_end: Date;
-  ingress: string; // TextField type?
-  description: string; // TextField type?
-  images: IImage[]; // StaticContent URL?
-  event_type: EventType;
-}
-
-export interface IEvent {
-  author: IUser;
-  title: string;
-  event_start: Date;
-  event_end: Date;
-  location: string; // Location type?
-  ingress_short: string; // TextField type?
-  ingress: string; // TextField type?
-  description: string; // TextField type?
-  image: string; // StaticContent URL?
-  event_type: EventType;
-  organizer: IGroup;
-
-  // feedback: Feedback
-}
-
-export interface ICompanyEvent extends IEvent {
+export interface ICompanyEvent {
   company: ICompany;
-}
-
-export enum EEventType {
-  COMPANYPRESENTATION,
-  COMPANYCOURSE,
-  SOCIAL,
-  OTHER,
 }
 
 export interface IAttendanceEvent {
@@ -167,17 +129,6 @@ export interface IAttendanceEvent {
   // payments: [Payment] // GenericRelation
 
   attendees: IAttendee[];
-}
-
-export interface INewAttendanceEvent {
-  automatically_set_marks: boolean;
-  guest_attendance: boolean;
-  max_capacity: number;
-  registration_end: string;
-  registration_start: string;
-  rule_bundles: IRuleBundle[];
-  unattend_deadline: string;
-  waitlist: boolean;
 }
 
 export interface INewEvent {
