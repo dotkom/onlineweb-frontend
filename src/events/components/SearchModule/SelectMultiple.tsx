@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC } from 'react';
+import React, { FC } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/lib/animated';
 import { EventTypeEnum, getEventColor, getEventType } from '../../models/Event';
@@ -41,8 +41,7 @@ const optionStyles = {
 };
 
 export interface IProps {
-  eventTypes: EventTypeEnum[];
-  onEventTypesInput: (event: ChangeEvent<HTMLSelectElement>) => void;
+  onEventTypesInput: (event: Array<number>) => void;
 }
 
 export const SelectMultiple: FC<IProps> = ({ onEventTypesInput }) => (

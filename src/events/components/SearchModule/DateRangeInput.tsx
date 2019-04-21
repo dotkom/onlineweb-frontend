@@ -81,14 +81,14 @@ export const DateRangeInput: FC<IProps> = ({
     labels: LABELS,
   };
   
-  const formatDate = (day) => {
-    return day.getDate() + ". " +  MONTHS[day.getMonth()].toLowerCase() + " " + day.getFullYear();
+  const formatDate = (day: Date) => {
+    return DateTime.fromJSDate(day).toLocaleString(DateTime.DATE_FULL);
   };
 
 
   return (
     <div className={style.inputFromTo}>
-      <span>Fra</span>
+      <span>Fra </span>
       <DayPickerInput
         value={dateStart}
         placeholder="Fra"
@@ -97,7 +97,7 @@ export const DateRangeInput: FC<IProps> = ({
         dayPickerProps={fromMonthProps}
         onDayChange={(day: Date) => handleFromDateClick(DateTime.fromJSDate(day))}
       />
-      <span>til</span>
+      <span>, til</span>
       <DayPickerInput
         ref={inputRef}
         value={dateEnd}

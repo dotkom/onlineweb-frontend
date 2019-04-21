@@ -1,11 +1,10 @@
 import { DateTime } from 'luxon';
-import React, { ChangeEvent, FC } from 'react';
+import React, { FC } from 'react';
 import ToggleSwitch from '../../../common/components/ToggleSwitch';
 import { useQueryParam } from '../../../common/hooks/useQueryParam';
 import {
   DEFAULT_DATE_END_PARAM,
   DEFAULT_DATE_START_PARAM,
-  DEFAULT_EVENT_TYPES_PARAM,
   DEFAULT_SEARCH_PARAM,
 } from '../../../core/hooks/useQueryParamsState';
 import { DateRangeInput } from './DateRangeInput';
@@ -64,7 +63,6 @@ const SearchModule: FC = () => {
           />
         </label>
         <DateRangeInput
-          className={style.dates}
           dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
           dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
           handleFromDateClick={handleFromDateClick}
