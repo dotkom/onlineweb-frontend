@@ -4,7 +4,10 @@ import React from 'react';
 import { PrefetchKey } from './PrefetchState';
 
 export function prefetch(key: PrefetchKey) {
-  return function wrap(WrappedComponent: typeof PrefetchableComponent): {} {
+  // Impossible to type the wrapped component correctly, as it extends the class in a non-OOP way.
+  // Uses 'any', as the types are fairly well enforced when the decorator is used.
+  // tslint:disable-next-line no-any
+  return function wrap(WrappedComponent: typeof PrefetchableComponent): any {
     return class extends React.Component<{}> {
       public static contextType = PreFetchContext;
       public render() {
