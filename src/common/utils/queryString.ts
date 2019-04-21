@@ -1,9 +1,15 @@
+export type QueryTypes = string | number | null | undefined;
+
+export interface IQueryObject {
+  [index: string]: QueryTypes | QueryTypes[];
+}
+
 /**
  * TODO: Add validation
  * @param {object} queryObject e.g. {foo: 'bar', hello: 'world'}
  * @return {string} e.g. ?foo=bar&hello=world
  */
-export const toQueryString = (queryObject: any): string => {
+export const toQueryString = (queryObject: IQueryObject): string => {
   const keys = Object.keys(queryObject);
   if (!keys.length) {
     return '';
@@ -13,10 +19,6 @@ export const toQueryString = (queryObject: any): string => {
     .map((key: string) => `${key}=${queryObject[key]}`);
   return `?${queries.join('&')}`;
 };
-
-export interface IQueryObject {
-  [index: string]: string;
-}
 
 /**
  * TODO: Add validation

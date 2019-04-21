@@ -1,6 +1,6 @@
 import { DOMAIN } from '../constants/endpoints';
 import { __CLIENT__ } from '../constants/environment';
-import { toQueryString } from './queryString';
+import { IQueryObject, toQueryString } from './queryString';
 
 import { IAuthUser } from 'authentication/models/User';
 import { getCache, hasCache, IRequestCacheOptions, setCache } from './requestCache';
@@ -23,13 +23,8 @@ export interface IBaseAPIParameters {
   page?: number;
   format?: 'json' | string;
 }
-/*
-const makeRequest = (query: string, parameters: object = {}, options: RequestInit = {}) => {
-  const queryString = toQueryString(parameters);
-  return new Request(DOMAIN + query + queryString, options);
-};
-*/
-const performRequest = async (query: string, parameters: object = {}, options: IRequestOptions = {}) => {
+
+const performRequest = async (query: string, parameters: IQueryObject = {}, options: IRequestOptions = {}) => {
   const queryString = toQueryString(parameters);
   const { cacheOptions, user, domain, ...restOptions } = options;
   const url = (domain || DOMAIN) + query + queryString;
@@ -55,7 +50,11 @@ const performRequest = async (query: string, parameters: object = {}, options: I
  * @param {string} query API endpoint URL
  * @returns {Promise<any>} API data
  */
-export const get = async <T>(query: string, parameters: object = {}, options: IRequestOptions = {}): Promise<T> => {
+export const get = async <T>(
+  query: string,
+  parameters: IQueryObject = {},
+  options: IRequestOptions = {}
+): Promise<T> => {
   // const request = makeRequest(query, parameters, options);
   return performRequest(query, parameters, options);
 };
@@ -97,7 +96,7 @@ export async function getAllPages<T>(
 export const post = async <T>(
   query: string,
   data: T | {},
-  parameters: object = {},
+  parameters: IQueryObject = {},
   options: IRequestOptions = {}
 ): Promise<T> => {
   const headers = {
@@ -112,7 +111,7 @@ export const post = async <T>(
 export interface IPutParams<T> {
   query: string;
   data: T;
-  parameters?: object;
+  parameters?: IQueryObject;
   options?: IRequestOptions;
 }
 
