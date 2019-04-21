@@ -1,10 +1,10 @@
 import React from 'react';
-import { getEventColor, INewEvent } from '../../models/Event';
+import { getEventColor, IEvent } from '../../models/Event';
 import Block from './Block';
 import CardHeader from './Card/CardHeader';
 import style from './detail.less';
 
-const Contact = ({ event_type, organizer_name, company_event }: INewEvent) => {
+const Contact = ({ event_type, organizer_name, company_event }: IEvent) => {
   const color = getEventColor(event_type);
 
   const organizerEmail = `${organizer_name.toLowerCase()}@online.ntnu.no`;
