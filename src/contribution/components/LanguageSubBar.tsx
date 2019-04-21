@@ -13,46 +13,42 @@ export interface IProps {
   language: IRepositoryLanguage;
 }
 
-export default class LanguageSubBar extends Component<IProps, {}> {
-  public readonly state = { hover: false };
+export interface IState {
+  hover: boolean;
+}
 
-  constructor(props: IProps) {
-    super(props);
-    this.handleMouseIn = this.handleMouseIn.bind(this);
-    this.handleMouseOut = this.handleMouseOut.bind(this);
-  }
+export default class LanguageSubBar extends Component<IProps, IState> {
+  public readonly state: IState = { hover: false };
 
-  public handleMouseIn() {
-    this.setState({ hover: true });
-  }
+  public handleMouseIn = () => this.setState({ hover: true });
 
-  public handleMouseOut() {
-    this.setState({ hover: false });
-  }
+  public handleMouseOut = () => this.setState({ hover: false });
 
   public render() {
-    const color = getLanguageColor(this.props.language.type);
+    const { language, totalLanguageSize, numLanguages, tooltip, index } = this.props;
+
+    const color = getLanguageColor(language.type);
     const subStyle: React.CSSProperties = {
       backgroundColor: color ? color : 'brown',
-      width: (this.props.language.size / this.props.totalLanguageSize) * 100 + '%',
+      width: (language.size / totalLanguageSize) * 100 + '%',
       display: 'flex',
       justifyContent: 'center',
     };
 
     // If there is only 1 language, apply borderRadius to both sides
-    if (this.props.index === 0 && this.props.numLanguages === 1) {
+    if (index === 0 && numLanguages === 1) {
       subStyle.borderRadius = '20px 20px 20px 20px';
       // If language is first, apply borderRadius to left side
-    } else if (this.props.index === 0) {
+    } else if (index === 0) {
       subStyle.borderRadius = '20px 0 0 20px';
       // If language is last, apply borderRadius to right side
-    } else if (this.props.index === this.props.numLanguages - 1) {
+    } else if (index === numLanguages - 1) {
       subStyle.borderRadius = '0 20px 20px 0';
     }
 
     return (
       <div style={subStyle} onMouseOver={this.handleMouseIn} onMouseOut={this.handleMouseOut}>
-        <div className={classNames(style.toolTip, { [style.active]: this.state.hover })}>{this.props.tooltip}</div>
+        <div className={classNames(style.toolTip, { [style.active]: this.state.hover })}>{tooltip}</div>
       </div>
     );
   }
