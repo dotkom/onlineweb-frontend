@@ -7,8 +7,8 @@ const API_URL = '/api/v1/profile/privacy/';
 /**
  * @returns {IPrivacy} Privacy options for a logged in OnlineUser.
  */
-export const getPrivacyOptions = async (user: IAuthUser): Promise<IPrivacy> => {
-  const data = await get(API_URL, { format: 'json' }, { user });
+export const getPrivacyOptions = async (user: IAuthUser) => {
+  const data = await get<IPrivacy>(API_URL, { format: 'json' }, { user });
   return data;
 };
 
@@ -17,7 +17,7 @@ export const getPrivacyOptions = async (user: IAuthUser): Promise<IPrivacy> => {
  * @param {IPrivacy} privacyOptions Changed Privacy options for a user.
  * @returns {IPrivacy} The current state of OnlineUsers Privacy options.
  */
-export const putPrivacyOptions = async (privacyOptions: IPrivacy, user: IAuthUser): Promise<IPrivacy> => {
-  const data = await put({ query: API_URL, data: privacyOptions, options: { user } });
+export const putPrivacyOptions = async (privacyOptions: IPrivacy, user: IAuthUser) => {
+  const data = await put<IPrivacy>({ query: API_URL, data: privacyOptions, options: { user } });
   return data;
 };
