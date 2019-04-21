@@ -3,23 +3,26 @@
 @import '~common/less/constants.less';
 
 .byline {
-  margin-top: 1em;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   line-height: 1.5;
 
-  > span {
+  > span:not(.tags) {
     font-weight: bold;
 
     &:not(:first-child)::before {
-      content: ' | ';
-      font-weight: normal;
-      @media screen and (max-width: @owMobileBreakpoint) {
-        content: '\A';
-        white-space: pre;
-      }
+      content: '\A';
+      white-space: pre;
     }
   }
 
-  > .lastChanged {
+  > span.tags:not(:last-child)::after {
+    content: ', ';
+  }
+
+  span.lastChanged,
+  .tags {
     font-style: italic;
     font-weight: normal;
   }
@@ -54,6 +57,12 @@
   .owCard();
   padding: 30px;
   margin-bottom: 1rem;
+
+  > hr {
+    background-color: #ee7810;
+    height: 2px;
+    border: 0;
+  }
 }
 
 .container {
@@ -68,13 +77,39 @@
   margin-top: 1rem;
 }
 
+.articleVideo {
+  .owCard();
+  position: relative;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  margin-bottom: 1rem;
+
+  iframe,
+  object,
+  embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.bylineContainer {
+  position: relative;
+}
+
 @media screen and (min-width: @owMobileBreakpoint) {
   .container {
     display: grid;
     grid-template:
-      'articleImage .' auto
-      'article relatedArticles' ~'1fr / 2fr' 1fr;
+      '. articleImage byline .' auto
+      '. article relatedArticles .' ~'1fr / 0.5fr' 75ch 1fr 0.5fr;
     grid-gap: 1rem;
+  }
+
+  .bylineContainer {
+    grid-area: byline;
   }
 
   .article {
@@ -104,22 +139,4 @@
   width: 100%;
   position: relative;
   border-radius: 3px 3px 0 0;
-}
-
-.articleVideo {
-  .owCard();
-  position: relative;
-  padding-bottom: 56.25%;
-  overflow: hidden;
-  margin-bottom: 1rem;
-
-  iframe,
-  object,
-  embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-  }
 }
