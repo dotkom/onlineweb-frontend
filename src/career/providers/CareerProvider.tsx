@@ -5,7 +5,7 @@ import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } fro
 import { prefetch } from 'common/utils/prefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 
-import { IApiCompany } from 'core/models/Company';
+import { ICompany } from 'core/models/Company';
 
 type Filters = 'locations' | 'companies' | 'jobTypes';
 
@@ -16,7 +16,7 @@ type Filters = 'locations' | 'companies' | 'jobTypes';
 export interface ICareerContextState {
   jobs: ICareerOpportunity[];
   locations: Array<ISelectable<ILocation>>;
-  companies: Array<ISelectable<IApiCompany>>;
+  companies: Array<ISelectable<ICompany>>;
   jobTypes: Array<ISelectable<IEmployment>>;
   filterText: string;
   toggleLocation: (name: string) => void;

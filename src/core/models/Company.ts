@@ -1,13 +1,6 @@
 import IImage from 'common/models/Image';
 
 export interface ICompany {
-  id: number;
-  name: string;
-  website: string;
-  image: IImage;
-}
-
-export interface IApiCompany {
   readonly id: number;
   readonly name: string;
   readonly short_description: string; // TextField model?
