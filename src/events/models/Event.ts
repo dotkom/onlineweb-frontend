@@ -85,7 +85,7 @@ export const EVENT_COLORS = ['#eb536e', '#127dbd', '#43b171', '#fdbd47', '#2ac6f
    TODO: Replace with ICSS exports */
 export const LIGHT_EVENT_COLORS = ['#ef758b', '#4197ca', '#69c18d', '#fdca6c', '#55d1fa', '#ec7e62', '#c289d7'];
 
-export const mockEvent: INewEvent = {
+export const mockEvent: IEvent = {
   absolute_url: '',
   attendance_event: null,
   organizer_name: '',
@@ -131,7 +131,7 @@ export interface IAttendanceEvent {
   attendees: IAttendee[];
 }
 
-export interface INewEvent {
+export interface IEvent {
   absolute_url: string;
   attendance_event: IAttendanceEvent | null;
   company_event: ICompanyEvent[];

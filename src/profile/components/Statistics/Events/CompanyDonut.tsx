@@ -1,5 +1,5 @@
 import { Pie } from '@nivo/pie';
-import { INewEvent } from 'events/models/Event';
+import { IEvent } from 'events/models/Event';
 import React from 'react';
 import style from '../Orders/orders.less';
 
@@ -11,10 +11,10 @@ export interface ICompanyCount {
  * @summary Reduces a list of events into the amount of events that company has had.
  * @description Reduces a list of events to a an object where the keys are the company name
  * and the values are the amount of events that company has arranged.
- * @param {INewEvent[]} events The list events to count companies in.
+ * @param {IEvent[]} events The list events to count companies in.
  * @returns {ICompanyCount} E.g. { 'Company1': 3, 'Company2': 8 }
  */
-export function countCompanies(events: INewEvent[]): ICompanyCount {
+export function countCompanies(events: IEvent[]): ICompanyCount {
   return events.reduce<ICompanyCount>((counted, { company_event }) => {
     for (const { company } of company_event) {
       counted[company.name] = counted[company.name] + 1 || 1;
@@ -32,7 +32,7 @@ const createPieDatum = (count: ICompanyCount) => {
 };
 
 export interface IProps {
-  events: INewEvent[];
+  events: IEvent[];
 }
 
 const CompanyDonut = ({ events }: IProps) => {

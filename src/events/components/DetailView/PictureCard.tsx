@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
 import React from 'react';
-import { getEventColor, INewEvent } from '../../models/Event';
+import { getEventColor, IEvent } from '../../models/Event';
 import EventImage from '../EventImage';
 import Block from './Block';
 import CardHeader from './Card/CardHeader';
 import style from './detail.less';
 
-const PictureCard = ({ image, event_start, event_end, location, company_event, event_type }: INewEvent) => {
+const PictureCard = ({ image, event_start, event_end, location, company_event, event_type }: IEvent) => {
   const color = getEventColor(event_type);
 
   const startDate = DateTime.fromISO(event_start).toFormat('d. MMM');

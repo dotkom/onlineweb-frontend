@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useMemo } from 'react';
 import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getImageEvents } from 'events/api/imageEvents';
-import { EventTypeEnum, IEventViewProps, INewEvent } from 'events/models/Event';
+import { EventTypeEnum, IEvent, IEventViewProps } from 'events/models/Event';
 import { EventsRepo } from 'events/providers/EventsRepo';
 
 import EventColumn from './EventColumn';
@@ -12,7 +12,7 @@ import style from './image.less';
 
 export type IProps = IEventViewProps;
 
-const filterEventTypes = (events: INewEvent[], types: EventTypeEnum[]) => {
+const filterEventTypes = (events: IEvent[], types: EventTypeEnum[]) => {
   return events
     .filter((event) => types.includes(event.event_type))
     .filter((event) => {
@@ -32,9 +32,9 @@ const RIGHT = [
 ];
 
 export interface IState {
-  eventsLeft: INewEvent[];
-  eventsMiddle: INewEvent[];
-  eventsRight: INewEvent[];
+  eventsLeft: IEvent[];
+  eventsMiddle: IEvent[];
+  eventsRight: IEvent[];
 }
 
 const INITIAL_STATE: IState = {
