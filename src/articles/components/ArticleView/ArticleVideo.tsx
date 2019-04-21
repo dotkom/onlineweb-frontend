@@ -7,6 +7,6 @@ export interface IProps {
 
 export const ArticleVideo: FC<IProps> = ({ vimeoId }) => (
   <div className={style.articleVideo}>
-    <iframe src={`https://player.vimeo.com/video/${vimeoId}`} allowFullScreen />
+    <iframe src={`https://player.vimeo.com/video/${vimeoId}?byline=0&portrait=0`} allowFullScreen />
   </div>
 );

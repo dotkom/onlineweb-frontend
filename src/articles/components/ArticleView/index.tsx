@@ -10,6 +10,7 @@ import { mockArticle } from 'articles/models/Article';
 
 import { ArticleHeader } from './ArticleHeader';
 import { ArticleImage } from './ArticleImage';
+import { ArticleMeta } from './ArticleMeta';
 import { ArticleVideo } from './ArticleVideo';
 import style from './articleView.less';
 import { RelatedArticles } from './RelatedArticles';
@@ -42,6 +43,7 @@ export const ArticleView = ({ articleId }: IProps) => {
           <Markdown source={article.content} />
         </Pane>
       </article>
+      <ArticleMeta article={article} />
       <RelatedArticles mainArticle={article} />
     </div>
   );
