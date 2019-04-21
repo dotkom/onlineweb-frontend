@@ -55,7 +55,7 @@ const performRequest = async (query: string, parameters: object = {}, options: I
  * @param {string} query API endpoint URL
  * @returns {Promise<any>} API data
  */
-export const get = async (query: string, parameters: object = {}, options: IRequestOptions = {}): Promise<any> => {
+export const get = async <T>(query: string, parameters: object = {}, options: IRequestOptions = {}): Promise<T> => {
   // const request = makeRequest(query, parameters, options);
   return performRequest(query, parameters, options);
 };
@@ -72,12 +72,12 @@ export async function getAllPages<T>(
 ): Promise<T[]> {
   const { page = 1, page_size = 80 } = parameters;
   /** Get the amount of objects to get in total by fetching a single object */
-  const { count }: IAPIData<T> = await get(query, { ...parameters, page, page_size: 1 }, options);
+  const { count }: IAPIData<T> = await get<IAPIData<T>>(query, { ...parameters, page, page_size: 1 }, options);
   /** Prepare an array with an index for each page which will be fetched */
   const pageNumber = Math.ceil(count / page_size);
   const requestCount = [...Array(pageNumber)];
   /** Initialize the fetches for all the pages at the same time */
-  const requests = requestCount.map((_, i) => get(query, { ...parameters, page: i + 1, page_size }, options));
+  const requests = requestCount.map((_, i) => get<IAPIData<T>>(query, { ...parameters, page: i + 1, page_size }, options));
   /** Await all the fetches to a single array */
   const data: Array<IAPIData<T>> = await Promise.all(requests);
   /** Reduce all results to a single array for all objects in the resource */
@@ -92,12 +92,12 @@ export async function getAllPages<T>(
  * @param {object} parameters
  * @returns {Promise<any>}
  */
-export const post = async (
+export const post = async <T>(
   query: string,
-  data: any,
+  data: T | {},
   parameters: object = {},
   options: IRequestOptions = {}
-): Promise<any> => {
+): Promise<T> => {
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -107,14 +107,14 @@ export const post = async (
   return performRequest(query, parameters, opts);
 };
 
-export interface IPutParams {
+export interface IPutParams <T>{
   query: string;
-  data: any;
+  data: T;
   parameters?: object;
   options?: IRequestOptions;
 }
 
-export const put = async (putParams: IPutParams): Promise<any> => {
+export const put = async <T>(putParams: IPutParams<Partial<T>>): Promise<T> => {
   const { query, data, parameters = {}, options = {} } = putParams;
   const headers = {
     Accept: 'application/json',
