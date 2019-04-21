@@ -33,45 +33,6 @@
   }
 }
 
-.dateInput {
-  position: relative;
-  padding: 10px 5px;
-  width: fit-content;
-  border-bottom: 2px solid @darkGray;
-  margin: 0 auto;
-
-  > input[type='date'] {
-    font-size: 20px;
-    color: @gray;
-    background: none;
-    appearance: none;
-    width: 7rem;
-  }
-
-  > input[type='date']::-webkit-clear-button,
-  input[type='date']::-webkit-inner-spin-button {
-    display: none;
-  }
-
-  > input[type='date']::-webkit-calendar-picker-indicator {
-    background: transparent;
-    bottom: 0;
-    color: transparent;
-    cursor: pointer;
-    height: auto;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
-  }
-  > span {
-    font-weight: 600;
-    font-size: 20px;
-    color: @gray;
-  }
-}
-
 .eventType {
   background: #fff;
   > div {
@@ -84,12 +45,34 @@
   }
 }
 
-.dates {
-  grid-template-columns: 1fr 1fr;
-  display: grid;
+.attendanceEvent {
+  text-align: right;
+  margin: auto;
+
+  > span {
+    margin-right: 10px;
+  }
 }
 
 .inputFromTo {
+  margin: auto;
+
+  input {
+    color: @blue;
+    background: none;
+    text-align: center;
+    position: relative;
+    text-decoration: none;
+    outline: none;
+    width: 7rem;
+    transition: text-decoration 1s;
+    font-weight: 600;
+  }
+
+  input:hover {
+    text-decoration: underline;
+  }
+
   :global {
     /* stylelint-disable selector-class-pattern */
     .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
@@ -112,7 +95,8 @@
     }
 
     .DayPickerInput-Overlay {
-      width: 550px;
+      width: 525px;
+      .owCard();
     }
     /* stylelint-enable */
   }

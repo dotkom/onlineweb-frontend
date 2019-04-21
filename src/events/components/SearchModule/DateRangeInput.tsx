@@ -5,6 +5,10 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import style from './search.less';
 
+import MomentLocaleUtils, { formatDate, parseDate } from 'react-day-picker/moment';
+
+import 'moment/locale/nb';
+
 const WEEKDAYS_SHORT = ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'];
 const MONTHS = [
   'Januar',
@@ -82,24 +86,27 @@ export const DateRangeInput: FC<IProps> = ({
 
   return (
     <div className={style.inputFromTo}>
+      <span>Fra</span>
       <DayPickerInput
         value={dateStart}
         placeholder="Fra"
-        format={'YYYY-M-D'}
+        formatDate={formatDate}
+        parseDate={parseDate}
+        format="LL"
         dayPickerProps={fromMonthProps}
         onDayChange={(day: Date) => handleFromDateClick(DateTime.fromJSDate(day))}
-      />{' '}
-      —{' '}
-      <span className={style.inputFromToTo}>
-        <DayPickerInput
-          ref={inputRef}
-          value={dateEnd}
-          placeholder="Til"
-          format={'YYYY-M-D'}
-          dayPickerProps={toMonthProps}
-          onDayChange={(day: Date) => handleToDateClick(DateTime.fromJSDate(day))}
-        />
-      </span>
+      />
+      <span>til</span>
+      <DayPickerInput
+        ref={inputRef}
+        value={dateEnd}
+        placeholder="Til"
+        formatDate={formatDate}
+        parseDate={parseDate}
+        format="LL"
+        dayPickerProps={toMonthProps}
+        onDayChange={(day: Date) => handleToDateClick(DateTime.fromJSDate(day))}
+      />
     </div>
   );
 };

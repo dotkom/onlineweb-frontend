@@ -20,7 +20,7 @@ const SearchModule: FC = () => {
   const [attendanceEventsChecked, setAttendanceEventsChecked] = useQueryParam('attendanceEvents');
 
   const onEventTypesInput = (event: ChangeEvent<HTMLSelectElement>) => {
-    setEventTypes(JSON.stringify(event.map((option:any) => option.value)));
+    setEventTypes(JSON.stringify(event.map((option: any) => option.value)));
   };
 
   const handleToDateClick = (day: DateTime) => {
@@ -56,24 +56,22 @@ const SearchModule: FC = () => {
           placeholder="Søk"
           onChange={(event) => setSearch(event.target.value)}
         />
-        <SelectMultiple
-	  eventTypes={JSON.parse(eventTypes || DEFAULT_EVENT_TYPES_PARAM)}
-          onEventTypesInput={onEventTypesInput}
-        />
-        <label>
-          Vis arrangementer uten påmelding
+        <label className={style.attendanceEvent}>
+          <span>Vis arrangementer uten påmelding</span>
           <ToggleSwitch
             onChange={onToggleSwitchChange}
             checked={attendanceEventsChecked === 'true' || attendanceEventsChecked === null}
           />
         </label>
+        <DateRangeInput
+          className={style.dates}
+          dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
+          dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
+          handleFromDateClick={handleFromDateClick}
+          handleToDateClick={handleToDateClick}
+        />
+        <SelectMultiple onEventTypesInput={onEventTypesInput} />
       </div>
-      <DateRangeInput
-        dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
-        dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
-        handleFromDateClick={handleFromDateClick}
-        handleToDateClick={handleToDateClick}
-      />
     </>
   );
 };
