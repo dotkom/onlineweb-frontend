@@ -58,10 +58,7 @@ const SearchModule: FC = () => {
     }
   };
 
-  const onToggleSwitchChange = () =>
-    setAttendanceEventsChecked(
-      attendanceEventsChecked === 'false' ? 'true' : 'false'
-    );
+  const onToggleSwitchChange = () => setAttendanceEventsChecked(attendanceEventsChecked === 'false' ? 'true' : 'false');
 
   return (
     <>
@@ -75,10 +72,7 @@ const SearchModule: FC = () => {
         />
         <label className={style.attendanceEvent}>
           <span>Vis arrangementer uten påmelding</span>
-          <ToggleSwitch
-            onChange={onToggleSwitchChange}
-            checked={attendanceEventsChecked === 'false'}
-          />
+          <ToggleSwitch onChange={onToggleSwitchChange} checked={attendanceEventsChecked === 'false'} />
         </label>
         <DateRangeInput
           dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
