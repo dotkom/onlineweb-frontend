@@ -1,10 +1,10 @@
 import { Pie, PieDatum } from '@nivo/pie';
-import { getEventColor, getEventType, INewEvent } from 'events/models/Event';
+import { getEventColor, getEventType, IEvent } from 'events/models/Event';
 import React from 'react';
 import style from '../Orders/orders.less';
 
 export interface IProps {
-  events: INewEvent[];
+  events: IEvent[];
 }
 
 const getColor = ({ label }: PieDatum): string => {
@@ -18,7 +18,7 @@ export interface ITypeCount {
   [key: string]: number;
 }
 
-function countEventTypes(events: INewEvent[]): ITypeCount {
+function countEventTypes(events: IEvent[]): ITypeCount {
   return events.reduce<ITypeCount>(
     (counted, event) => ({
       ...counted,

@@ -1,6 +1,6 @@
-import { IsoDate, IsoDateTime } from 'common/models/Date';
-import { IUser } from 'core/models/User';
 import { DateTime, Interval } from 'luxon';
+
+import { IsoDate, IsoDateTime } from 'common/models/Date';
 
 export enum MarkCategory {
   NONE,
@@ -48,9 +48,9 @@ export interface IMark {
   mark: {
     title: string;
     added_date: IsoDate;
-    given_by: IUser;
+    given_by: null; // Requires changes in OW4 API.
     last_changed_date: IsoDateTime;
-    last_changed_by: IUser;
+    last_changed_by: null; // Requires changes in OW4 API.
     category: MarkCategory;
     /** Max length of 255 characters */
     description: string;
@@ -58,7 +58,7 @@ export interface IMark {
 }
 
 export interface ISuspension {
-  user: IUser;
+  user: null; // Requires changes in OW4 API.
   /** Max length of 64 characters */
   title: string;
   active: boolean;
