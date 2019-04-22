@@ -3,13 +3,13 @@ import { faCalendarAlt as CalendarAlt } from '@fortawesome/free-regular-svg-icon
 import { faCalendarCheck as CalendarCheck } from '@fortawesome/free-regular-svg-icons/faCalendarCheck';
 import { faMapMarkedAlt as MapMarked } from '@fortawesome/free-solid-svg-icons/faMapMarkedAlt';
 import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome';
-import { INewEvent } from 'events/models/Event';
+import { IEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
 import React from 'react';
 import EventImage from '../EventImage';
 import style from './calendar.less';
 
-const CalendarHoverCard = ({ location, image, company_event, attendance_event, title, event_start }: INewEvent) => {
+const CalendarHoverCard = ({ location, image, company_event, attendance_event, title, event_start }: IEvent) => {
   const registrationStart =
     attendance_event && DateTime.fromISO(attendance_event.registration_start).toFormat('d MMM HH:mm');
   const eventStart = DateTime.fromISO(event_start).toFormat('d MMM HH:mm');

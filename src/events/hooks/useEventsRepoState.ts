@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 
 import { getCalendarEvents } from 'events/api/calendarEvents';
 import { getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
-import { INewEvent } from 'events/models/Event';
+import { IEvent } from 'events/models/Event';
 
-export type EventMap = Map<number, INewEvent>;
+export type EventMap = Map<number, IEvent>;
 
-const INITIAL_STATE: INewEvent[] = [];
+const INITIAL_STATE: IEvent[] = [];
 
 /**
  * Contains the complete collection of events fetched for use in the application.
@@ -19,12 +19,12 @@ export const useEventsRepoState = () => {
 
   /** Sync list of events with the map if the map is updated */
   useEffect(() => {
-    const pairs = eventList.map<[number, INewEvent]>((event) => [event.id, event]);
+    const pairs = eventList.map<[number, IEvent]>((event) => [event.id, event]);
     const newEventMap = new Map(pairs);
     setEventMap(newEventMap);
   }, [eventList]);
 
-  const updateEventList = (events: INewEvent[]) => {
+  const updateEventList = (events: IEvent[]) => {
     const oldEvents = eventList.filter((oldEvent) => {
       const newEventIds = events.map((event) => event.id);
       return !newEventIds.includes(oldEvent.id);

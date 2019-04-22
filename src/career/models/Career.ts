@@ -1,8 +1,8 @@
-import { IApiCompany } from 'core/models/Company';
+import { ICompany } from 'core/models/Company';
 
 export interface ICareerOpportunity {
   id: number;
-  company: IApiCompany;
+  company: ICompany;
   title: string;
   ingress: string;
   description: string;
@@ -31,4 +31,4 @@ export interface ISelectable<T> {
   selected: boolean;
 }
 
-export type TagTypes = IApiCompany | IEmployment | ILocation;
+export type TagTypes = ICompany | IEmployment | ILocation;
