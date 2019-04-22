@@ -17,15 +17,14 @@ export const useQueryParamsState = (location: H.Location<H.LocationState>) => {
   const dateStart: DateTime = DateTime.fromISO(params.get('dateStart') || DEFAULT_DATE_START_PARAM);
   const dateEnd: DateTime = DateTime.fromISO(params.get('dateEnd') || DEFAULT_DATE_END_PARAM);
   const eventTypes: EventTypeEnum[] = JSON.parse(params.get('eventTypes') || DEFAULT_EVENT_TYPES_PARAM);
-  const attendanceEventsChecked: boolean = !(
-    params.get('attendanceEvents') === 'true' || params.get('attendanceEvents') === null
-  );
+  const nonAttendanceEventsChecked: boolean =
+    params.get('nonAttendanceEvents') === 'true' || params.get('nonAttendanceEvents') === null;
 
   return {
     search,
     dateStart,
     dateEnd,
     eventTypes,
-    attendanceEventsChecked,
+    nonAttendanceEventsChecked,
   };
 };

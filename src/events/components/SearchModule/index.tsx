@@ -18,7 +18,7 @@ const SearchModule: FC = () => {
   const [dateStart, setDateStart] = useQueryParam('dateStart');
   const [dateEnd, setDateEnd] = useQueryParam('dateEnd');
   const [eventTypes, setEventTypes] = useQueryParam('eventTypes');
-  const [attendanceEventsChecked, setAttendanceEventsChecked] = useQueryParam('attendanceEvents');
+  const [nonAttendanceEventsChecked, setNonAttendanceEventsChecked] = useQueryParam('nonAttendanceEvents');
 
   const onEventTypesInput = (value: ValueType<{ value: EventTypeEnum; label: EventType }>) => {
     if (value !== null) {
@@ -58,7 +58,8 @@ const SearchModule: FC = () => {
     }
   };
 
-  const onToggleSwitchChange = () => setAttendanceEventsChecked(attendanceEventsChecked === 'false' ? 'true' : 'false');
+  const onToggleSwitchChange = () =>
+    setNonAttendanceEventsChecked(nonAttendanceEventsChecked === 'false' ? 'true' : 'false');
 
   return (
     <>
@@ -72,7 +73,7 @@ const SearchModule: FC = () => {
         />
         <label className={style.attendanceEvent}>
           <span>Vis arrangementer uten påmelding</span>
-          <ToggleSwitch onChange={onToggleSwitchChange} checked={attendanceEventsChecked === 'false'} />
+          <ToggleSwitch onChange={onToggleSwitchChange} checked={!(nonAttendanceEventsChecked === 'false')} />
         </label>
         <DateRangeInput
           dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}

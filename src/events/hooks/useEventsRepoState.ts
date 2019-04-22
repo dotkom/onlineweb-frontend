@@ -92,7 +92,7 @@ export const useEventsRepoState = () => {
 const useFilteredEventList = () => {
   const { eventList, updateEventList } = useContext(EventsRepo);
   const searchContext = useContext(QueryParams);
-  const { search, dateStart, dateEnd, eventTypes, attendanceEventsChecked } = searchContext;
+  const { search, dateStart, dateEnd, eventTypes, nonAttendanceEventsChecked } = searchContext;
   const highestDate = useRef(dateEnd.minus(1));
   const lowestDate = useRef(dateStart.plus(1));
 
@@ -121,8 +121,8 @@ const useFilteredEventList = () => {
   };
 
   const eventListAttendanceEventFiltered = useMemo(
-    () => getAttendanceEventFiltered(attendanceEventsChecked, eventList),
-    [attendanceEventsChecked, eventList.toString()]
+    () => getAttendanceEventFiltered(nonAttendanceEventsChecked, eventList),
+    [nonAttendanceEventsChecked, eventList.toString()]
   );
 
   const eventListEventTypeFiltered = useMemo(() => getEventTypeFiltered(eventTypes, eventListAttendanceEventFiltered), [
@@ -144,7 +144,7 @@ const useFilteredEventList = () => {
 
   useEffect(() => {
     setFilteredEvents(eventListFinal);
-  }, [search, attendanceEventsChecked, eventTypes.toString()]);
+  }, [search, nonAttendanceEventsChecked, eventTypes.toString()]);
 
   useEffect(() => {
     const changedDate =
