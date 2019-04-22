@@ -3,7 +3,7 @@ import { Route } from 'core/components/Router';
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import DetailView from './DetailView';
-import EventsContainer from './EventsContainer';
+import Events from './Events';
 
 export const routes = {
   root: '/events',
@@ -12,7 +12,7 @@ export const routes = {
 
 const EventsRouter = ({}) => (
   <Switch>
-    <Route exact path={routes.root} component={EventsContainer} />
+    <Route exact path={routes.root} component={Events} />
     <Route path={routes.detail} render={({ match }) => <DetailView eventId={match.params.id} />} />
     <Route path="*" render={() => <HttpError code={404} />} />
   </Switch>

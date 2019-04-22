@@ -1,0 +1,106 @@
+@import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+
+.grid {
+  display: grid;
+  align-items: end;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  width: 100%;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: auto;
+  }
+}
+
+.searchInput {
+  color: @darkGray;
+  background: none;
+  border-bottom: 2px solid;
+  font-size: @owFontXL;
+  padding: 5px;
+  .owOutline();
+}
+
+.searchInput:focus {
+  animation: inuse 2.5s ease-in-out infinite;
+}
+
+@keyframes inuse {
+  50% {
+    background: darken(@pageBackground, 5%);
+  }
+}
+
+.eventType {
+  background: #fff;
+  > div {
+    border-radius: 3px;
+    border-width: 2px;
+    border-color: @darkGray;
+  }
+  > div:hover {
+    border-color: @gray;
+  }
+}
+
+.attendanceEvent {
+  text-align: right;
+  margin: auto;
+
+  > span {
+    margin-right: 10px;
+  }
+}
+
+.inputFromTo {
+  margin: auto;
+
+  input {
+    color: @blue;
+    background: none;
+    text-align: center;
+    position: relative;
+    text-decoration: none;
+    outline: none;
+    width: 8rem;
+    transition: text-decoration 1s;
+    font-weight: 600;
+  }
+
+  input:hover {
+    text-decoration: underline;
+  }
+
+  :global {
+    /* stylelint-disable selector-class-pattern */
+    .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+      background-color: #f0f8ff !important;
+      color: #4a90e2;
+    }
+
+    .DayPicker-Day {
+      border-radius: 0 !important;
+    }
+
+    .DayPicker-Day--start {
+      border-top-left-radius: 50% !important;
+      border-bottom-left-radius: 50% !important;
+    }
+
+    .DayPicker-Day--end {
+      border-top-right-radius: 50% !important;
+      border-bottom-right-radius: 50% !important;
+    }
+
+    .DayPickerInput-Overlay {
+      .owCard();
+    }
+    /* stylelint-enable */
+  }
+}
+/* stylelint-disable-next-line selector-class-pattern */
+.inputFromToTo :global .DayPickerInput-Overlay {
+  margin-left: -148px;
+}
