@@ -26,7 +26,7 @@ export default class PrefetchState {
 
   public get = (key: PrefetchKey) => {
     const index = this.keys.indexOf(key);
-    return this.fetchers[index];
+    return this.values[index];
   };
 
   public has = (key: PrefetchKey): boolean => {
@@ -57,7 +57,7 @@ export default class PrefetchState {
     const data = JSON.parse(window.__PREFETCHED_STATE__);
     Object.keys(data).forEach((key) => {
       this.keys.push(key as PrefetchKey);
-      this.fetchers.push(data[key]);
+      this.values.push(data[key]);
     });
   };
 }
