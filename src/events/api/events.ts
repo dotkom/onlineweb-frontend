@@ -1,6 +1,6 @@
 import { IAuthUser } from 'authentication/models/User';
 import { get, getAllPages, IBaseAPIParameters } from 'common/utils/api';
-import { EventTypeEnum, INewEvent } from '../models/Event';
+import { EventTypeEnum, IEvent } from '../models/Event';
 
 export interface IEventAPIParameters extends IBaseAPIParameters {
   event_start__gte?: string;
@@ -20,18 +20,18 @@ export interface IAPIData<T> {
 
 const API_URL = '/api/v1/events/';
 
-export const getEvents = async (args?: IEventAPIParameters): Promise<INewEvent[]> => {
-  const data: IAPIData<INewEvent> = await get(API_URL, { format: 'json', ...args });
+export const getEvents = async (args?: IEventAPIParameters): Promise<IEvent[]> => {
+  const data = await get<IAPIData<IEvent>>(API_URL, { format: 'json', ...args });
   return data.results;
 };
 
-export const getAllEvents = async (args: IEventAPIParameters, user?: IAuthUser): Promise<INewEvent[]> => {
-  const data = await getAllPages<INewEvent>(API_URL, { format: 'json', page_size: 80, ...args }, { user });
+export const getAllEvents = async (args: IEventAPIParameters, user?: IAuthUser): Promise<IEvent[]> => {
+  const data = await getAllPages<IEvent>(API_URL, { format: 'json', page_size: 80, ...args }, { user });
   return data;
 };
 
-export const getEvent = async (id: number): Promise<INewEvent> => {
-  const event: INewEvent = await get(API_URL + id + '/', { format: 'json' });
+export const getEvent = async (id: number): Promise<IEvent> => {
+  const event = await get<IEvent>(API_URL + id + '/', { format: 'json' });
   return event;
 };
 
@@ -40,9 +40,9 @@ export interface IControlledFetch<T> {
   data: Promise<IAPIData<T>>;
 }
 
-export const controlledGetEvents = (args?: IEventAPIParameters): IControlledFetch<INewEvent> => {
+export const controlledGetEvents = (args?: IEventAPIParameters): IControlledFetch<IEvent> => {
   const controller = new AbortController();
   const signal = controller.signal;
-  const data: Promise<IAPIData<INewEvent>> = get(API_URL, { format: 'json', ...args }, { signal });
+  const data = get<IAPIData<IEvent>>(API_URL, { format: 'json', ...args }, { signal });
   return { data, controller };
 };

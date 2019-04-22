@@ -2,7 +2,7 @@ import { IUserContext, UserContext } from 'authentication/providers/UserProvider
 import CalendarChart from 'common/components/Charts/CalendarChart';
 import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
 import { getAllEvents } from 'events/api/events';
-import { INewEvent } from 'events/models/Event';
+import { IEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
 import React, { Component } from 'react';
 import NumberStat from '../Orders/NumberStat';
@@ -13,7 +13,7 @@ import StringStat from './StringStat';
 export interface IProps {}
 
 export interface IState {
-  events: INewEvent[];
+  events: IEvent[];
 }
 
 class Orders extends Component<IProps, IState> {

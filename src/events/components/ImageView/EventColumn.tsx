@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { INewEvent } from 'events/models/Event';
+import { IEvent } from 'events/models/Event';
 import { EventTypeEnum } from '../../models/Event';
 import style from './image.less';
 import LargeEvent from './LargeEvent';
@@ -8,7 +8,7 @@ import LargeEventPlaceholder from './LargeEventPlaceholder';
 import SmallEventColumn from './SmallEvent';
 
 export interface IProps {
-  events: INewEvent[];
+  events: IEvent[];
   event_type: EventTypeEnum;
 }
 

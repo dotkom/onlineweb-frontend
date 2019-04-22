@@ -1,19 +1,19 @@
 import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
 import { get, IAPIData } from 'common/utils/api';
-import { IApiCompany } from 'core/models/Company';
+import { ICompany } from 'core/models/Company';
 
 const API_URL = '/api/v1/career/';
 
 /** All selectable tags are wrapped in an ISelectable object */
 export type FilterJobs = [
   ICareerOpportunity[],
-  Array<ISelectable<IApiCompany>>,
+  Array<ISelectable<ICompany>>,
   Array<ISelectable<IEmployment>>,
   Array<ISelectable<ILocation>>
 ];
 
 export const getCareerOpportunities = async (): Promise<FilterJobs> => {
-  const { results }: IAPIData<ICareerOpportunity> = await get(API_URL, { format: 'json' });
+  const { results } = await get<IAPIData<ICareerOpportunity>>(API_URL, { format: 'json' });
   return configureFilters(results);
 };
 
@@ -32,7 +32,7 @@ const configureFilters = (jobs: ICareerOpportunity[]): FilterJobs => {
     .map((job) => job.company)
     .filter(removeDuplicates)
     .sort(sortTags)
-    .map(addSelectable) as Array<ISelectable<IApiCompany>>;
+    .map(addSelectable) as Array<ISelectable<ICompany>>;
   const jobTypes = jobs
     .map((job) => job.employment)
     .filter(removeDuplicates)

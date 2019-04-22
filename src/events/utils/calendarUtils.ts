@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { INewEvent } from '../models/Event';
+import { IEvent } from '../models/Event';
 
 export function getFirstDayOfMonth(date: DateTime) {
   return date.minus({
@@ -88,10 +88,10 @@ export function getMonthAndYear(date: Date) {
  * The outer Array represents the ((day of the month) - 1) the event is on,
  * while the inner Array represents the events on that day.
  * @param {DateTime} month Current month.
- * @param {INewEvent[]} events Events to inject into the month model.
- * @returns {INewEvent[][]} Events represented in a month model.
+ * @param {IEvent[]} events Events to inject into the month model.
+ * @returns {IEvent[][]} Events represented in a month model.
  */
-export const constructMonthMap = (month: DateTime, events: INewEvent[]): INewEvent[][] => {
+export const constructMonthMap = (month: DateTime, events: IEvent[]): IEvent[][] => {
   /**
    * @summary Create an empty EventMonth.
    * @description Create an array of length `daysInMonth`, containing empty arrays.

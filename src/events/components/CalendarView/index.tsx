@@ -6,7 +6,7 @@ import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getCalendarEvents } from 'events/api/calendarEvents';
 import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
-import { IEventViewProps, INewEvent } from 'events/models/Event';
+import { IEvent, IEventViewProps } from 'events/models/Event';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import {
   constructMonthMap,
@@ -27,7 +27,7 @@ export const CalendarView = ({ filtered }: IProps) => {
   const filteredEventList = useDebouncedFilteredEventList();
   const eventListFinal = filtered ? filteredEventList : eventList;
   const [month, changeMonth] = useMonth();
-  const [eventMonth, setEventMonth] = useState<INewEvent[][]>([[]]);
+  const [eventMonth, setEventMonth] = useState<IEvent[][]>([[]]);
 
   const prefetch = usePrefetch(PrefetchKey.EVENTS_CALENDAR, async () => {
     const data = await getCalendarEvents(month);

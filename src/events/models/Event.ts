@@ -1,7 +1,5 @@
 import IImage, { DEFAULT_EVENT_IMAGE } from 'common/models/Image';
 import { ICompany } from 'core/models/Company';
-import { IGroup } from 'core/models/Group';
-import { IUser } from 'core/models/User';
 import { IExtra } from 'events/models/Extras';
 import { IRuleBundle } from 'events/models/RuleBundles';
 import { IAttendee } from './Attendee';
@@ -88,7 +86,7 @@ export const EVENT_COLORS = ['#eb536e', '#127dbd', '#43b171', '#fdbd47', '#2ac6f
    TODO: Replace with ICSS exports */
 export const LIGHT_EVENT_COLORS = ['#ef758b', '#4197ca', '#69c18d', '#fdca6c', '#55d1fa', '#ec7e62', '#c289d7'];
 
-export const mockEvent: INewEvent = {
+export const mockEvent: IEvent = {
   absolute_url: '',
   attendance_event: null,
   organizer_name: '',
@@ -112,44 +110,8 @@ export enum EventView {
   CALENDAR,
 }
 
-export interface IFrontpageEvent {
-  eventUrl: string;
-  startDate: string;
-  author: IUser;
-  title: string;
-  event_start: Date;
-  event_end: Date;
-  ingress: string; // TextField type?
-  description: string; // TextField type?
-  images: IImage[]; // StaticContent URL?
-  event_type: EventType;
-}
-
-export interface IEvent {
-  author: IUser;
-  title: string;
-  event_start: Date;
-  event_end: Date;
-  location: string; // Location type?
-  ingress_short: string; // TextField type?
-  ingress: string; // TextField type?
-  description: string; // TextField type?
-  image: string; // StaticContent URL?
-  event_type: EventType;
-  organizer: IGroup;
-
-  // feedback: Feedback
-}
-
-export interface ICompanyEvent extends IEvent {
+export interface ICompanyEvent {
   company: ICompany;
-}
-
-export enum EEventType {
-  COMPANYPRESENTATION,
-  COMPANYCOURSE,
-  SOCIAL,
-  OTHER,
 }
 
 export interface IAttendanceEvent {
@@ -170,18 +132,7 @@ export interface IAttendanceEvent {
   attendees: IAttendee[];
 }
 
-export interface INewAttendanceEvent {
-  automatically_set_marks: boolean;
-  guest_attendance: boolean;
-  max_capacity: number;
-  registration_end: string;
-  registration_start: string;
-  rule_bundles: any[];
-  unattend_deadline: string;
-  waitlist: boolean;
-}
-
-export interface INewEvent {
+export interface IEvent {
   absolute_url: string;
   attendance_event: IAttendanceEvent | null;
   company_event: ICompanyEvent[];

@@ -4,17 +4,17 @@ import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { QueryParams } from 'core/providers/QueryParams';
 import { getCalendarEvents } from 'events/api/calendarEvents';
 import { getAllEvents, getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
-import { EventTypeEnum, INewEvent } from 'events/models/Event';
+import { EventTypeEnum, IEvent } from 'events/models/Event';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import { isAfter, isBefore, isInDateRange } from '../utils/eventTimeUtils';
 
-export type EventMap = Map<number, INewEvent>;
+export type EventMap = Map<number, IEvent>;
 
-const INITIAL_STATE: INewEvent[] = [];
+const INITIAL_STATE: IEvent[] = [];
 
-const getTextFiltered = (search: string, eventList: INewEvent[]) =>
+const getTextFiltered = (search: string, eventList: IEvent[]) =>
   eventList.filter(
-    (event: INewEvent) =>
+    (event: IEvent) =>
       event.title.toLowerCase().includes(search) ||
       event.description.toLowerCase().includes(search) ||
       event.ingress.toLowerCase().includes(search) ||
@@ -22,10 +22,10 @@ const getTextFiltered = (search: string, eventList: INewEvent[]) =>
       event.organizer_name.toLowerCase().includes(search)
   );
 
-const getEventTypeFiltered = (eventTypes: EventTypeEnum[], eventList: INewEvent[]) =>
+const getEventTypeFiltered = (eventTypes: EventTypeEnum[], eventList: IEvent[]) =>
   eventList.filter((event) => eventTypes.includes(event.event_type));
 
-const getDateFiltered = (dateStart: DateTime, dateEnd: DateTime, eventList: INewEvent[]) =>
+const getDateFiltered = (dateStart: DateTime, dateEnd: DateTime, eventList: IEvent[]) =>
   dateEnd && dateStart
     ? eventList.filter((event) => isInDateRange(event, dateStart, dateEnd))
     : dateStart
@@ -34,7 +34,7 @@ const getDateFiltered = (dateStart: DateTime, dateEnd: DateTime, eventList: INew
     ? eventList.filter((event) => isBefore(event, dateEnd))
     : eventList;
 
-const getAttendanceEventFiltered = (attendanceEventsChecked: boolean, eventList: INewEvent[]) =>
+const getAttendanceEventFiltered = (attendanceEventsChecked: boolean, eventList: IEvent[]) =>
   !attendanceEventsChecked ? eventList.filter((event) => event.attendance_event) : eventList;
 
 /**
@@ -47,12 +47,12 @@ export const useEventsRepoState = () => {
 
   /** Sync list of events with the map if the map is updated */
   useEffect(() => {
-    const pairs = eventList.map<[number, INewEvent]>((event) => [event.id, event]);
+    const pairs = eventList.map<[number, IEvent]>((event) => [event.id, event]);
     const newEventMap = new Map(pairs);
     setEventMap(newEventMap);
   }, [eventList]);
 
-  const updateEventList = (events: INewEvent[]) => {
+  const updateEventList = (events: IEvent[]) => {
     const oldEvents = eventList.filter((oldEvent) => {
       const newEventIds = events.map((event) => event.id);
       return !newEventIds.includes(oldEvent.id);
@@ -165,7 +165,7 @@ enum fetchEventParam {
   INIT,
 }
 
-const useDebounce = (value: INewEvent[], delay: number) => {
+const useDebounce = (value: IEvent[], delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {

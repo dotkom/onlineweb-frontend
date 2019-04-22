@@ -14,7 +14,7 @@ export interface ICookies {
   eventView: EventView;
 }
 
-const initializeCookies = (inital: { [name: string]: any }): ICookies => ({
+const initializeCookies = (inital: { [name: string]: string | undefined }): ICookies => ({
   ...inital,
   frontpageEventView: getFrontpageEventView(inital.eventView),
   eventView: getEventView(inital.eventView),
@@ -22,7 +22,7 @@ const initializeCookies = (inital: { [name: string]: any }): ICookies => ({
 
 export interface IProps {
   children: ReactNode;
-  cookies: { [name: string]: any };
+  cookies: { [name: string]: string | undefined };
 }
 
 export enum CookieActionType {

@@ -8,13 +8,13 @@ import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
 
-import { IEventViewProps, INewEvent } from 'events/models/Event';
+import { IEvent, IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
 
 export type IProps = IEventViewProps;
 
-const filterListEvents = (events: INewEvent[]) => {
+const filterListEvents = (events: IEvent[]) => {
   return events.filter((event) => isOngoingOrFuture(event)).slice(0, 7);
 };
 

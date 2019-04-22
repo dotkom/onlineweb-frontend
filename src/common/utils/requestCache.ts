@@ -11,7 +11,7 @@ const DEFAULT_OPTIONS: IRequestCacheOptions = {
 };
 
 export interface ICache {
-  content: any;
+  content: {};
   expires: number;
 }
 
@@ -46,7 +46,7 @@ export const getCache = ({ url, options = DEFAULT_OPTIONS }: IGetCache): ICacheR
 export interface ISetCache {
   url: string;
   options?: IRequestCacheOptions;
-  content: any;
+  content: {};
 }
 
 export const setCache = ({ url, options = DEFAULT_OPTIONS, content }: ISetCache) => {
