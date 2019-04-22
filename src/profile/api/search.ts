@@ -11,12 +11,12 @@ export interface IUserSearchParameters extends IBaseAPIParameters {
 
 const API_URL = '/api/v1/profile/search/';
 
-export const searchUsers = async (params: IUserSearchParameters, user: IAuthUser): Promise<IPublicProfile[]> => {
-  const { results = [] }: IAPIData<IPublicProfile> = await get(API_URL, { format: 'json', ...params }, { user });
+export const searchUsers = async (params: IUserSearchParameters, user: IAuthUser) => {
+  const { results = [] } = await get<IAPIData<IPublicProfile>>(API_URL, { format: 'json', ...params }, { user });
   return results;
 };
 
-export const getPublicProfile = async (profileId: number, user: IAuthUser): Promise<IPublicProfile> => {
-  const profile = await get(API_URL + profileId, { format: 'json' }, { user });
+export const getPublicProfile = async (profileId: number, user: IAuthUser) => {
+  const profile = await get<IPublicProfile>(API_URL + profileId, { format: 'json' }, { user });
   return profile;
 };

@@ -42,6 +42,7 @@ const Settings = (_: IProfileProps) => {
 };
 
 interface ISettingsRouteProps extends IRouteProps {
+  // tslint:disable-next-line no-any , they can be anything
   view: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 

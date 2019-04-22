@@ -8,7 +8,8 @@
     "object-literal-sort-keys": false,
     "variable-name": [true, "ban-keywords", "check-format", "allow-pascal-case", "allow-snake-case"],
     "jsx-no-lambda": false,
-    "jsx-boolean-value": false
+    "jsx-boolean-value": false,
+    "no-any": true
   },
   "rulesDirectory": []
 }

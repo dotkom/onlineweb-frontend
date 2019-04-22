@@ -1,10 +1,10 @@
-import PrefetchState from 'common/utils/PrefetchState';
+import PrefetchState, { PrefetchKey } from 'common/utils/PrefetchState';
 import React, { Component, createContext } from 'react';
 
 export interface IPreFetchState {
-  queue: (fetcher: () => any, key: string) => void;
-  get: (key: any) => any;
-  has: (key: any) => boolean;
+  queue: (fetcher: () => Promise<{}>, key: PrefetchKey) => void;
+  get: (key: PrefetchKey) => {};
+  has: (key: PrefetchKey) => boolean;
 }
 
 export interface IProps {
@@ -12,13 +12,13 @@ export interface IProps {
 }
 
 const INITIAL_STATE: IPreFetchState = {
-  queue: (_: (props: any) => any) => {
+  queue: (_: (props: {}) => Promise<{}>) => {
     throw new Error('Queue method from initial state was not overwritten');
   },
-  get: (_: string) => {
+  get: (_: PrefetchKey) => {
     throw new Error('Get method from initial state was not overwritten');
   },
-  has: (_: any) => {
+  has: (_: PrefetchKey) => {
     throw new Error('Has method from initial state was not overwritten');
   },
 };

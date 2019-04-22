@@ -13,7 +13,7 @@ export type FilterJobs = [
 ];
 
 export const getCareerOpportunities = async (): Promise<FilterJobs> => {
-  const { results }: IAPIData<ICareerOpportunity> = await get(API_URL, { format: 'json' });
+  const { results } = await get<IAPIData<ICareerOpportunity>>(API_URL, { format: 'json' });
   return configureFilters(results);
 };
 
