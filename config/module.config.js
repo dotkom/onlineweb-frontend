@@ -1,5 +1,6 @@
 const path = require('path');
 const CSSPlugin = require('./css.config');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   module: {
@@ -14,6 +15,10 @@ module.exports = {
       {
         test: /\.less$/,
         use: CSSPlugin.loaders,
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.(png|gif|jpe?g)$/,

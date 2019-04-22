@@ -4,8 +4,8 @@ import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 import { EventsRepo } from 'events/providers/EventsRepo';
 
-import { getEvent } from '../../api/events';
-import { mockEvent } from '../../models/Event';
+import { getEvent } from 'events/api/events';
+import { mockEvent } from 'events/models/Event';
 import ListEvent from '../ListView/ListEvent';
 import Contact from './Contact';
 import style from './detail.less';
