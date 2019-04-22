@@ -18,7 +18,7 @@ const optionStyles: Partial<Styles> = {
   option: (styles: CSSProperties, { data, isFocused }: any) => {
     return {
       ...styles,
-      backgroundColor: isFocused ? getEventColor(data.value) : '#FFF',
+      backgroundColor: isFocused ? getEventColor(data.value) : 'transparent',
       color: isFocused ? 'white' : '#7f7f7f',
     };
   },
