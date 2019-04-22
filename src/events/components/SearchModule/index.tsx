@@ -1,15 +1,16 @@
 import { DateTime } from 'luxon';
-import React, { ChangeEvent, FC } from 'react';
+import React, { FC } from 'react';
+import { ValueType } from 'react-select/lib/types';
 import ToggleSwitch from '../../../common/components/ToggleSwitch';
 import { useQueryParam } from '../../../common/hooks/useQueryParam';
 import {
   DEFAULT_DATE_END_PARAM,
   DEFAULT_DATE_START_PARAM,
-  DEFAULT_EVENT_TYPES_PARAM,
   DEFAULT_SEARCH_PARAM,
 } from '../../../core/hooks/useQueryParamsState';
-import style from '../../../profile/components/Search/search.less';
+import { EventType, EventTypeEnum, getEventType } from '../../models/Event';
 import { DateRangeInput } from './DateRangeInput';
+import style from './search.less';
 import { SelectMultiple } from './SelectMultiple';
 
 const SearchModule: FC = () => {
@@ -17,16 +18,27 @@ const SearchModule: FC = () => {
   const [dateStart, setDateStart] = useQueryParam('dateStart');
   const [dateEnd, setDateEnd] = useQueryParam('dateEnd');
   const [eventTypes, setEventTypes] = useQueryParam('eventTypes');
-  const [attendanceEventsChecked, setAttendanceEventsChecked] = useQueryParam('attendanceEvents');
+  const [nonAttendanceEventsChecked, setNonAttendanceEventsChecked] = useQueryParam('nonAttendanceEvents');
 
-  const onEventTypesInput = (event: ChangeEvent<HTMLSelectElement>) =>
-    setEventTypes(
-      JSON.stringify(
-        [...event.target.options]
-          .filter((eventType) => eventType.selected)
-          .map((eventType) => parseInt(eventType.value, 10))
-      )
-    );
+  const onEventTypesInput = (value: ValueType<{ value: EventTypeEnum; label: EventType }>) => {
+    if (value !== null) {
+      const actualValue = value as Array<{ value: EventTypeEnum; label: EventType }>;
+      const newEventTypes = actualValue.map((e) => e.value);
+      if (newEventTypes.length > 0) {
+        setEventTypes(JSON.stringify(newEventTypes));
+      } else {
+        setEventTypes(null);
+      }
+    }
+  };
+
+  const selectedItems =
+    eventTypes !== null
+      ? JSON.parse(eventTypes).map((eventType: EventTypeEnum) => ({
+          value: eventType,
+          label: getEventType(eventType),
+        }))
+      : null;
 
   const handleToDateClick = (day: DateTime) => {
     const dateTime = day.set({ hour: 0 });
@@ -47,9 +59,7 @@ const SearchModule: FC = () => {
   };
 
   const onToggleSwitchChange = () =>
-    setAttendanceEventsChecked(
-      attendanceEventsChecked === 'true' || attendanceEventsChecked === null ? 'false' : 'true'
-    );
+    setNonAttendanceEventsChecked(nonAttendanceEventsChecked === 'false' ? 'true' : 'false');
 
   return (
     <>
@@ -61,24 +71,18 @@ const SearchModule: FC = () => {
           placeholder="Søk"
           onChange={(event) => setSearch(event.target.value)}
         />
-        <SelectMultiple
-          onEventTypesInput={onEventTypesInput}
-          eventTypes={JSON.parse(eventTypes || DEFAULT_EVENT_TYPES_PARAM)}
-        />
-        <label>
-          Vis arrangementer med påmelding
-          <ToggleSwitch
-            onChange={onToggleSwitchChange}
-            checked={attendanceEventsChecked === 'true' || attendanceEventsChecked === null}
-          />
+        <label className={style.attendanceEvent}>
+          <span>Vis arrangementer uten påmelding</span>
+          <ToggleSwitch onChange={onToggleSwitchChange} checked={!(nonAttendanceEventsChecked === 'false')} />
         </label>
+        <DateRangeInput
+          dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
+          dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
+          handleFromDateClick={handleFromDateClick}
+          handleToDateClick={handleToDateClick}
+        />
+        <SelectMultiple value={selectedItems} onEventTypesInput={onEventTypesInput} />
       </div>
-      <DateRangeInput
-        dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
-        dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
-        handleFromDateClick={handleFromDateClick}
-        handleToDateClick={handleToDateClick}
-      />
     </>
   );
 };

@@ -61,7 +61,7 @@
     "babel-loader": "^8.0.5",
     "cookie-parser": "^1.4.3",
     "css-hot-loader": "^1.4.3",
-    "css-loader": "1.0.1",
+    "css-loader": "^1.0.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "express": "^4.16.4",
@@ -114,6 +114,7 @@
     "@sentry/node": "^4.5.3",
     "@types/classnames": "^2.2.7",
     "@types/express-http-proxy": "^1.5.0",
+    "@types/react-select": "^2.0.17",
     "abortcontroller-polyfill": "^1.2.3",
     "assets-webpack-plugin": "^3.9.7",
     "babel-core": "7.0.0-bridge.0",
@@ -125,7 +126,8 @@
     "postcss-focus-visible": "^4.0.0",
     "react-day-picker": "^7.3.0",
     "react-ga": "^2.5.7",
-    "react-loadable": "^5.5.0"
+    "react-loadable": "^5.5.0",
+    "react-select": "^2.4.2"
   },
   "resolutions": {
     "@types/react": "^16.8.1"

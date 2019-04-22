@@ -3,7 +3,6 @@ import React, { FC, useRef } from 'react';
 import { DayPickerProps } from 'react-day-picker';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-
 import style from './search.less';
 
 const WEEKDAYS_SHORT = ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'];
@@ -50,9 +49,8 @@ export const DateRangeInput: FC<IProps> = ({
   const fromMonthProps: DayPickerProps = {
     selectedDays: [dateStart, { from: dateStart, to: dateEnd }],
     disabledDays: { after: dateEnd },
-    toMonth: dateEnd,
+    month: dateStart,
     modifiers,
-    numberOfMonths: 2,
     onDayClick: () => {
       if (inputRef.current) {
         inputRef.current.getInput().focus();
@@ -70,9 +68,7 @@ export const DateRangeInput: FC<IProps> = ({
     selectedDays: [dateStart, { from: dateStart, to: dateEnd }],
     disabledDays: { before: dateStart },
     modifiers,
-    month: dateStart,
-    fromMonth: dateStart,
-    numberOfMonths: 2,
+    month: dateEnd,
     locale: 'no',
     months: MONTHS,
     weekdaysLong: WEEKDAYS_LONG,
@@ -81,22 +77,29 @@ export const DateRangeInput: FC<IProps> = ({
     labels: LABELS,
   };
 
+  const formatDate = (day: Date) => {
+    return DateTime.fromJSDate(day).toLocaleString(DateTime.DATE_FULL);
+  };
+
   return (
     <div className={style.inputFromTo}>
+      <span>Fra </span>
       <DayPickerInput
         value={dateStart}
         placeholder="Fra"
-        format={'YYYY-M-D'}
+        formatDate={formatDate}
+        format="LL"
         dayPickerProps={fromMonthProps}
         onDayChange={(day: Date) => handleFromDateClick(DateTime.fromJSDate(day))}
-      />{' '}
-      —{' '}
+      />
+      <span>, til</span>
       <span className={style.inputFromToTo}>
         <DayPickerInput
           ref={inputRef}
           value={dateEnd}
           placeholder="Til"
-          format={'YYYY-M-D'}
+          formatDate={formatDate}
+          format="LL"
           dayPickerProps={toMonthProps}
           onDayChange={(day: Date) => handleToDateClick(DateTime.fromJSDate(day))}
         />

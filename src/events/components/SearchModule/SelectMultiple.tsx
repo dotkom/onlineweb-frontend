@@ -1,25 +1,63 @@
-import React, { ChangeEvent, FC } from 'react';
-import { EventTypeEnum, getEventType } from '../../models/Event';
+import React, { CSSProperties, FC } from 'react';
+import Select from 'react-select';
+import makeAnimated from 'react-select/lib/animated';
+import { Styles } from 'react-select/lib/styles';
+import { ValueType } from 'react-select/lib/types';
+import { DEFAULT_EVENT_TYPES_PARAM } from '../../../core/hooks/useQueryParamsState';
+import { EventType, EventTypeEnum, getEventColor, getEventType } from '../../models/Event';
+import style from './search.less';
 
-const selectItems = () => {
-  const eventTypeNumberList = Array(Object.keys(EventTypeEnum).length / 2 - 1)
-    .fill(1)
-    .map((x, y) => x + y);
+const options = JSON.parse(DEFAULT_EVENT_TYPES_PARAM).map((eventType: EventTypeEnum) => ({
+  value: eventType,
+  label: getEventType(eventType),
+}));
 
-  return eventTypeNumberList.map((eventType) => (
-    <option key={eventType} value={eventType}>
-      {getEventType(eventType)}
-    </option>
-  ));
+const optionStyles: Partial<Styles> = {
+  control: (styles: CSSProperties) => ({ ...styles, backgroundColor: 'white' }),
+  // tslint:disable-next-line no-any , the input is actually any
+  option: (styles: CSSProperties, { data, isFocused }: any) => {
+    return {
+      ...styles,
+      backgroundColor: isFocused ? getEventColor(data.value) : 'transparent',
+      color: isFocused ? 'white' : '#7f7f7f',
+    };
+  },
+  // tslint:disable-next-line no-any , the input is actually any
+  multiValue: (styles: CSSProperties, { data }: any) => {
+    const eventColor = getEventColor(data.value);
+    return {
+      ...styles,
+      backgroundColor: eventColor,
+    };
+  },
+  multiValueLabel: (styles: CSSProperties) => ({
+    ...styles,
+    color: 'white',
+  }),
+  multiValueRemove: (styles: CSSProperties) => ({
+    ...styles,
+    color: 'white',
+    ':hover': {
+      color: '#ff5d5d',
+    },
+  }),
 };
 
 export interface IProps {
-  eventTypes: EventTypeEnum[];
-  onEventTypesInput: (event: ChangeEvent<HTMLSelectElement>) => void;
+  onEventTypesInput: (value: ValueType<{ value: EventTypeEnum; label: EventType }>) => void;
+  value: Array<{ value: EventTypeEnum; label: EventType }>;
 }
 
-export const SelectMultiple: FC<IProps> = ({ eventTypes, onEventTypesInput }) => (
-  <select onChange={onEventTypesInput} value={eventTypes.map((item) => item.toString())} multiple>
-    {selectItems()}
-  </select>
+export const SelectMultiple: FC<IProps> = ({ onEventTypesInput, value }) => (
+  <Select<{ value: EventTypeEnum; label: EventType }>
+    options={options}
+    value={value}
+    onChange={onEventTypesInput}
+    isMulti
+    styles={optionStyles}
+    components={makeAnimated()}
+    closeMenuOnSelect={false}
+    placeholder={'Arrangementtype...'}
+    className={style.eventType}
+  />
 );
