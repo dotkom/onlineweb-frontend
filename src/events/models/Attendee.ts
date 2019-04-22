@@ -1,12 +1,15 @@
-import { IAttendanceEvent } from './Event';
-import { IExtra } from './Extras';
-
+/** Restricted attendee information, primarily used by Regme */
 export interface IAttendee {
-  event: IAttendanceEvent;
-  timestamp: Date;
+  /* Event ID */
+  event: number;
+  /* ISO8601 formatted datetime string */
+  timestamp: string;
   attended: boolean;
-  paid: boolean;
-  note: string;
-  extras: IExtra;
-  show_as_attending_event: boolean;
+  id: number;
+}
+
+/** Restricted subset of user data fetched as attendee */
+export interface IAttendeeUser {
+  first_name: string;
+  last_name: string;
 }
