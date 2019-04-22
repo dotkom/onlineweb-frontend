@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import React, { FC } from 'react';
+import { ValueType } from 'react-select/lib/types';
 import ToggleSwitch from '../../../common/components/ToggleSwitch';
 import { useQueryParam } from '../../../common/hooks/useQueryParam';
 import {
@@ -7,6 +8,7 @@ import {
   DEFAULT_DATE_START_PARAM,
   DEFAULT_SEARCH_PARAM,
 } from '../../../core/hooks/useQueryParamsState';
+import { EventType, EventTypeEnum, getEventType } from '../../models/Event';
 import { DateRangeInput } from './DateRangeInput';
 import style from './search.less';
 import { SelectMultiple } from './SelectMultiple';
@@ -18,9 +20,25 @@ const SearchModule: FC = () => {
   const [eventTypes, setEventTypes] = useQueryParam('eventTypes');
   const [attendanceEventsChecked, setAttendanceEventsChecked] = useQueryParam('attendanceEvents');
 
-  const onEventTypesInput = (event: ChangeEvent<HTMLSelectElement>) => {
-    setEventTypes(JSON.stringify(event.map((option: any) => option.value)));
+  const onEventTypesInput = (value: ValueType<{ value: EventTypeEnum; label: EventType }>) => {
+    if (value !== null) {
+      const actualValue = value as Array<{ value: EventTypeEnum; label: EventType }>;
+      const newEventTypes = actualValue.map((e) => e.value);
+      if (newEventTypes.length > 0) {
+        setEventTypes(JSON.stringify(newEventTypes));
+      } else {
+        setEventTypes(null);
+      }
+    }
   };
+
+  const selectedItems =
+    eventTypes !== null
+      ? JSON.parse(eventTypes).map((eventType: EventTypeEnum) => ({
+          value: eventType,
+          label: getEventType(eventType),
+        }))
+      : null;
 
   const handleToDateClick = (day: DateTime) => {
     const dateTime = day.set({ hour: 0 });
@@ -68,7 +86,7 @@ const SearchModule: FC = () => {
           handleFromDateClick={handleFromDateClick}
           handleToDateClick={handleToDateClick}
         />
-        <SelectMultiple onEventTypesInput={onEventTypesInput} />
+        <SelectMultiple value={selectedItems} onEventTypesInput={onEventTypesInput} />
       </div>
     </>
   );

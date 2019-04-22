@@ -5,7 +5,6 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
 import style from './search.less';
 
-
 const WEEKDAYS_SHORT = ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'];
 const MONTHS = [
   'Januar',
@@ -80,11 +79,10 @@ export const DateRangeInput: FC<IProps> = ({
     firstDayOfWeek: FIRST_DAY_OF_WEEK,
     labels: LABELS,
   };
-  
+
   const formatDate = (day: Date) => {
     return DateTime.fromJSDate(day).toLocaleString(DateTime.DATE_FULL);
   };
-
 
   return (
     <div className={style.inputFromTo}>
