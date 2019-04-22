@@ -1,6 +1,8 @@
-import ToggleSwitch from 'common/components/ToggleSwitch';
 import React from 'react';
-import { EventView } from '../../models/Event';
+
+import ToggleSwitch from 'common/components/ToggleSwitch';
+
+import { EventView } from 'events/models/Event';
 import ChangeViewIconButton from './ChangeViewIconButton';
 
 import style from './eventsHeader.less';

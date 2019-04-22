@@ -1,5 +1,6 @@
 import React from 'react';
-import { EventView } from '../../models/Event';
+
+import { EventView } from 'events/models/Event';
 import CalendarViewIcon from './CalendarViewIcon';
 import ImageViewIcon from './ImageViewIcon';
 import ListViewIcon from './ListViewIcon';

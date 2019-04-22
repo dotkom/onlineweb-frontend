@@ -1,13 +1,16 @@
+import React, { useContext, useState } from 'react';
+
 import { clearCache } from 'common/utils/cache';
 import { CookieActionType, CookieContext } from 'core/providers/Cookies';
-import React, { useContext, useState } from 'react';
-import { EventView } from '../models/Event';
+
+import { EventView } from 'events/models/Event';
 import CalendarView from './CalendarView';
 import EventsHeader from './EventsHeader';
 import ImageView from './ImageView';
-import style from './less/eventsContainer.less';
 import ListView from './ListView';
 import SearchModule from './SearchModule';
+
+import style from './less/eventsContainer.less';
 
 const getView = (view?: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
   switch (view) {

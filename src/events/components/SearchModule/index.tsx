@@ -1,14 +1,11 @@
 import { DateTime } from 'luxon';
 import React, { FC } from 'react';
 import { ValueType } from 'react-select/lib/types';
-import ToggleSwitch from '../../../common/components/ToggleSwitch';
-import { useQueryParam } from '../../../common/hooks/useQueryParam';
-import {
-  DEFAULT_DATE_END_PARAM,
-  DEFAULT_DATE_START_PARAM,
-  DEFAULT_SEARCH_PARAM,
-} from '../../../core/hooks/useQueryParamsState';
-import { EventType, EventTypeEnum, getEventType } from '../../models/Event';
+
+import ToggleSwitch from 'common/components/ToggleSwitch';
+import { useQueryParam } from 'common/hooks/useQueryParam';
+import { DEFAULT_DATE_END_PARAM, DEFAULT_DATE_START_PARAM, DEFAULT_SEARCH_PARAM } from 'core/hooks/useQueryParamsState';
+import { EventType, EventTypeEnum, getEventType } from 'events/models/Event';
 import { DateRangeInput } from './DateRangeInput';
 import style from './search.less';
 import { SelectMultiple } from './SelectMultiple';

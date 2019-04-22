@@ -1,6 +1,7 @@
 import * as H from 'history';
 import { DateTime } from 'luxon';
-import { EventTypeEnum } from '../../events/models/Event';
+
+import { EventTypeEnum } from 'events/models/Event';
 
 export const DEFAULT_SEARCH_PARAM = '';
 export const DEFAULT_DATE_START_PARAM = DateTime.local().toISODate();

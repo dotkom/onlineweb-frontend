@@ -1,6 +1,7 @@
+import React, { useContext, useState } from 'react';
+
 import { clearCache } from 'common/utils/cache';
 import { CookieActionType, CookieContext } from 'core/providers/Cookies';
-import React, { useContext, useState } from 'react';
 
 import { EventView } from '../models/Event';
 import CalendarView from './CalendarView';

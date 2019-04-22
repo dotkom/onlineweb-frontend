@@ -1,8 +1,10 @@
 import classNames from 'classnames';
 import React from 'react';
-import { EventView } from '../../models/Event';
-import style from './eventsHeader.less';
+
+import { EventView } from 'events/models/Event';
 import ViewIcon from './ViewIcon';
+
+import style from './eventsHeader.less';
 
 export interface IProps {
   changeView: (view: EventView) => void;

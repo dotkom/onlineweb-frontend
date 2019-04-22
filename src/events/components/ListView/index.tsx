@@ -8,7 +8,7 @@ import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
 
-import { IEventViewProps, INewEvent } from '../../models/Event';
+import { IEventViewProps, INewEvent } from 'events/models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
 

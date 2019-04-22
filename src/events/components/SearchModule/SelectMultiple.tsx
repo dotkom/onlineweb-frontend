@@ -3,8 +3,9 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/lib/animated';
 import { Styles } from 'react-select/lib/styles';
 import { ValueType } from 'react-select/lib/types';
-import { DEFAULT_EVENT_TYPES_PARAM } from '../../../core/hooks/useQueryParamsState';
-import { EventType, EventTypeEnum, getEventColor, getEventType } from '../../models/Event';
+
+import { DEFAULT_EVENT_TYPES_PARAM } from 'core/hooks/useQueryParamsState';
+import { EventType, EventTypeEnum, getEventColor, getEventType } from 'events/models/Event';
 import style from './search.less';
 
 const options = JSON.parse(DEFAULT_EVENT_TYPES_PARAM).map((eventType: EventTypeEnum) => ({

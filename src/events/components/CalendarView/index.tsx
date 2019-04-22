@@ -5,6 +5,7 @@ import { useMonth } from 'common/hooks/useMonth';
 import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getCalendarEvents } from 'events/api/calendarEvents';
+import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
 import { IEventViewProps, INewEvent } from 'events/models/Event';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import {
@@ -14,7 +15,6 @@ import {
   getLastDayOfMonth,
   getPreviousMonthLength,
 } from 'events/utils/calendarUtils';
-import { useDebouncedFilteredEventList } from '../../hooks/useEventsRepoState';
 
 import style from './calendar.less';
 import CalendarTile, { CalendarFillerTiles, createDayList } from './CalendarTile';
