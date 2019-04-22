@@ -175,7 +175,7 @@ export interface INewAttendanceEvent {
   max_capacity: number;
   registration_end: string;
   registration_start: string;
-  rule_bundles: any[];
+  rule_bundles: IRuleBundle[];
   unattend_deadline: string;
   waitlist: boolean;
 }

@@ -11,7 +11,7 @@ const SUSPENSIONS_URL = API_URL + '/suspensions/';
  * @summary Fetch Marks from API.
  */
 export const getMarks = async (user: IAuthUser): Promise<IMark[]> => {
-  const { results }: IAPIData<IMark> = await get(MARKS_URL, { format: 'json' }, { user });
+  const { results } = await get<IAPIData<IMark>>(MARKS_URL, { format: 'json' }, { user });
   return results;
 };
 
@@ -19,6 +19,6 @@ export const getMarks = async (user: IAuthUser): Promise<IMark[]> => {
  * @summary Fetch Suspensions from API.
  */
 export const getSuspensions = async (user: IAuthUser): Promise<ISuspension[]> => {
-  const { results }: IAPIData<ISuspension> = await get(SUSPENSIONS_URL, { format: 'json' }, { user });
+  const { results } = await get<IAPIData<ISuspension>>(SUSPENSIONS_URL, { format: 'json' }, { user });
   return results;
 };

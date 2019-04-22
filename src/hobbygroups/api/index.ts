@@ -1,13 +1,9 @@
-import { get } from 'common/utils/api';
+import { get, IAPIData } from 'common/utils/api';
+import { IHobbyGroup } from 'hobbygroups/models/HobbyGroup';
 
 const API_URL = '/api/v1/hobbys';
 
 export const getHobbyGroups = async () => {
-  try {
-    const data = await get(API_URL, { format: 'json' });
-    return data;
-  } catch (err) {
-    /* tslint:disable-next-line: no-console */
-    console.error(err);
-  }
+  const data = await get<IAPIData<IHobbyGroup>>(API_URL, { format: 'json' });
+  return data;
 };
