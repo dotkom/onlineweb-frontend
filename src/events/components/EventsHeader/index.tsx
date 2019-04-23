@@ -12,13 +12,12 @@ export interface IProps {
   changeView?: (view: EventView) => void;
   accessible: boolean;
   view?: EventView;
-  availableViews?: EventView[];
 }
 
-const EventsHeader = ({ toggleAccessible, changeView, accessible, view, availableViews }: IProps) => (
+const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
   <div className={style.grid}>
     <h1>Arrangementer</h1>
-    {changeView && view !== undefined && availableViews ? (
+    {changeView && view !== undefined ? (
       <div className={style.choiceGrid}>
         <ChangeViewIconButton viewType={EventView.IMAGE} changeView={changeView} view={view} />
 
