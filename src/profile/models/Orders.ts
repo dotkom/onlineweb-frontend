@@ -1,4 +1,4 @@
-import IImage from 'common/models/Image';
+import IResponsiveImage from 'common/models/ResponsiveImage';
 
 export interface IOrderLine {
   paid: boolean;
@@ -16,8 +16,7 @@ export interface IStoreItem {
   name: string;
   price: number;
   description: string | null;
-  /** removed to make mocking more effective. Not actually optional. */
-  image?: IImage;
+  image: IResponsiveImage;
   category: IStoreItemCategory;
 }
 

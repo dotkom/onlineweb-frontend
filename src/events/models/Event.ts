@@ -1,4 +1,4 @@
-import IImage, { DEFAULT_EVENT_IMAGE } from 'common/models/Image';
+import IResponsiveImage, { DEFAULT_EVENT_IMAGE } from 'common/models/ResponsiveImage';
 import { ICompany } from 'core/models/Company';
 import { IExtra } from 'events/models/Extras';
 import { IRuleBundle } from 'events/models/RuleBundles';
@@ -142,7 +142,7 @@ export interface IEvent {
   event_start: string;
   event_type: EventTypeEnum;
   id: number;
-  image: IImage | null;
+  image: IResponsiveImage | null;
   ingress: string;
   ingress_short: string;
   location: string;
