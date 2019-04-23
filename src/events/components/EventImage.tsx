@@ -1,12 +1,12 @@
 import ResponsiveImage from 'common/components/ResponsiveImage';
-import IImage, { DEFAULT_EVENT_IMAGE, IImageSizes } from 'common/models/Image';
+import IResponsiveImage, { DEFAULT_EVENT_IMAGE, IResponsiveImageSizes } from 'common/models/ResponsiveImage';
 import React, { ImgHTMLAttributes } from 'react';
 import { ICompanyEvent } from '../models/Event';
 
 export interface IProps extends ImgHTMLAttributes<HTMLImageElement> {
-  image: IImage | null;
+  image: IResponsiveImage | null;
   companyEvents: ICompanyEvent[];
-  size: keyof IImageSizes;
+  size: keyof IResponsiveImageSizes;
 }
 
 const EventImage = ({ image, companyEvents: [companyEvent], ...props }: IProps) => {
