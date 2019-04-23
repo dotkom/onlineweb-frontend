@@ -1,0 +1,22 @@
+@import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+
+.searchInput {
+  color: @darkGray;
+  background: none;
+  border-bottom: 2px solid;
+  font-size: @owFontXL;
+  padding: 5px;
+  .owOutline();
+}
+
+.searchInput:focus {
+  animation: inuse 2.5s ease-in-out infinite;
+}
+
+@keyframes inuse {
+  50% {
+    background: darken(@pageBackground, 5%);
+  }
+}
