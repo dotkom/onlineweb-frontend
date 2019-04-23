@@ -40,7 +40,6 @@ export const EventContainer = () => {
         toggleAccessible={toggleAccessible}
         accessible={accessible}
         view={cookies.eventView}
-        availableViews={[EventView.IMAGE, EventView.LIST, EventView.CALENDAR]}
       />
       <View accessible={accessible} filtered={false} />
     </section>
