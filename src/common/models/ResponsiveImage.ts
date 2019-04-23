@@ -1,4 +1,4 @@
-export default interface IImage extends IImageSizes {
+export default interface IResponsiveImage extends IResponsiveImageSizes {
   id: number;
   name: string;
   timestamp: string;
@@ -7,7 +7,7 @@ export default interface IImage extends IImageSizes {
   photographer: string;
 }
 
-export interface IImageSizes {
+export interface IResponsiveImageSizes {
   thumb: string;
   original: string;
   wide: string;
@@ -17,7 +17,7 @@ export interface IImageSizes {
   xs: string;
 }
 
-export const DEFAULT_EVENT_IMAGE: IImage = {
+export const DEFAULT_EVENT_IMAGE: IResponsiveImage = {
   id: 95,
   name: 'Generisk arrangementsbilde',
   timestamp: '2016-10-16T15:26:40.184370+02:00',

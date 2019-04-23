@@ -1,13 +1,13 @@
 import React, { ImgHTMLAttributes } from 'react';
 import { DOMAIN } from '../../constants/endpoints';
-import IImage, { IImageSizes } from '../../models/Image';
+import IResponsiveImage, { IResponsiveImageSizes } from '../../models/ResponsiveImage';
 
 export interface IProps extends ImgHTMLAttributes<HTMLImageElement> {
-  image: IImage;
-  size: keyof IImageSizes;
+  image: IResponsiveImage;
+  size: keyof IResponsiveImageSizes;
 }
 
-const ResponsiveImage = ({ image, size, alt, ...props }: IProps) => {
+export const ResponsiveImage = ({ image, size, alt, ...props }: IProps) => {
   const defaultImage = image[size];
   const altText = alt || image.name;
   return <img {...props} src={DOMAIN + defaultImage} alt={altText} />;
