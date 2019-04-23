@@ -14,37 +14,6 @@
   }
 }
 
-.searchInput {
-  color: @darkGray;
-  background: none;
-  border-bottom: 2px solid;
-  font-size: @owFontXL;
-  padding: 5px;
-  .owOutline();
-}
-
-.searchInput:focus {
-  animation: inuse 2.5s ease-in-out infinite;
-}
-
-@keyframes inuse {
-  50% {
-    background: darken(@pageBackground, 5%);
-  }
-}
-
-.eventType {
-  background: #fff;
-  > div {
-    border-radius: 3px;
-    border-width: 2px;
-    border-color: @darkGray;
-  }
-  > div:hover {
-    border-color: @gray;
-  }
-}
-
 .attendanceEvent {
   text-align: right;
   margin: auto;
