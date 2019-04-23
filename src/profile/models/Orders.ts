@@ -16,8 +16,7 @@ export interface IStoreItem {
   name: string;
   price: number;
   description: string | null;
-  /** removed to make mocking more effective. Not actually optional. */
-  image?: IResponsiveImage;
+  image: IResponsiveImage;
   category: IStoreItemCategory;
 }
 
