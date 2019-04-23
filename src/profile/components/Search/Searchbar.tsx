@@ -1,5 +1,6 @@
 import React, { Component, ContextType } from 'react';
 
+import { SearchInput } from 'common/components/Forms/SearchInput';
 import { ProfileSearchContext } from 'profile/providers/SearchFilter';
 
 import { getGroups } from '../../api/groups';
@@ -31,13 +32,7 @@ class Searchbar extends Component<IProps, IState> {
     const { groups } = this.state;
     return (
       <form className={style.grid}>
-        <input
-          placeholder="Søk"
-          className={style.searchInput}
-          type="text"
-          value={search || ''}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <SearchInput value={search || ''} onChange={(e) => setSearch(e.target.value)} />
         <Dropdown selected={group} onClick={setGroup} groups={groups} />
         <DoubleSlider range={range || [1, 6]} onChange={setRange} />
       </form>
