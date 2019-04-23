@@ -1,9 +1,9 @@
-import IImage from 'common/models/Image';
+import IResponsiveImage from 'common/models/ResponsiveImage';
 
 export interface IArticle {
   articleUrl: string;
   heading: string;
-  image: IImage;
+  image: IResponsiveImage;
   ingress: string;
   absolute_url: string;
   ingress_short: string;
