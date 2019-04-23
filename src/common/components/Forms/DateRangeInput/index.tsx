@@ -3,29 +3,20 @@ import React, { FC, useRef } from 'react';
 import { DayPickerProps } from 'react-day-picker';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
-import style from './search.less';
 
-const WEEKDAYS_SHORT = ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'];
-const MONTHS = [
-  'Januar',
-  'Februar',
-  'Mars',
-  'April',
-  'Mai',
-  'Juni',
-  'Juli',
-  'August',
-  'September',
-  'Oktober',
-  'November',
-  'Desember',
-];
+import { FIRST_DAY_OF_WEEK, LOCALE, MONTHS, WEEKDAYS_LONG, WEEKDAYS_SHORT } from 'common/constants/intl';
 
-const WEEKDAYS_LONG = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'];
+import style from './datePicker.less';
 
-const FIRST_DAY_OF_WEEK = 1;
-
-const LABELS = { nextMonth: 'Neste måned', previousMonth: 'Forrige måned' };
+/** Static properties used by both DayPickerInputs */
+const COMMON_DAY_PICKER_PROPS: DayPickerProps = {
+  locale: LOCALE,
+  months: MONTHS,
+  weekdaysLong: WEEKDAYS_LONG,
+  weekdaysShort: WEEKDAYS_SHORT,
+  firstDayOfWeek: FIRST_DAY_OF_WEEK,
+  labels: { nextMonth: 'Neste måned', previousMonth: 'Forrige måned' },
+};
 
 export interface IProps {
   dateStart: DateTime;
@@ -47,6 +38,7 @@ export const DateRangeInput: FC<IProps> = ({
   const inputRef = useRef<DayPickerInput>(null);
 
   const fromMonthProps: DayPickerProps = {
+    ...COMMON_DAY_PICKER_PROPS,
     selectedDays: [dateStart, { from: dateStart, to: dateEnd }],
     disabledDays: { after: dateEnd },
     month: dateStart,
@@ -56,25 +48,14 @@ export const DateRangeInput: FC<IProps> = ({
         inputRef.current.getInput().focus();
       }
     },
-    locale: 'no',
-    months: MONTHS,
-    weekdaysLong: WEEKDAYS_LONG,
-    weekdaysShort: WEEKDAYS_SHORT,
-    firstDayOfWeek: FIRST_DAY_OF_WEEK,
-    labels: LABELS,
   };
 
   const toMonthProps: DayPickerProps = {
+    ...COMMON_DAY_PICKER_PROPS,
     selectedDays: [dateStart, { from: dateStart, to: dateEnd }],
     disabledDays: { before: dateStart },
     modifiers,
     month: dateEnd,
-    locale: 'no',
-    months: MONTHS,
-    weekdaysLong: WEEKDAYS_LONG,
-    weekdaysShort: WEEKDAYS_SHORT,
-    firstDayOfWeek: FIRST_DAY_OF_WEEK,
-    labels: LABELS,
   };
 
   const formatDate = (day: Date) => {
