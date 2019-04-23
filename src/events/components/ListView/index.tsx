@@ -12,7 +12,9 @@ import { IEvent, IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
 
-export type IProps = IEventViewProps;
+export interface IProps extends IEventViewProps {
+  filtered: boolean;
+}
 
 const filterListEvents = (events: IEvent[]) => {
   return events.filter((event) => isOngoingOrFuture(event)).slice(0, 7);
