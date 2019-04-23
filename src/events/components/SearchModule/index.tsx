@@ -2,13 +2,15 @@ import { DateTime } from 'luxon';
 import React, { FC } from 'react';
 import { ValueType } from 'react-select/lib/types';
 
+import { DateRangeInput } from 'common/components/Forms/DateRangeInput';
+import { SearchInput } from 'common/components/Forms/SearchInput';
 import ToggleSwitch from 'common/components/ToggleSwitch';
 import { useQueryParam } from 'common/hooks/useQueryParam';
 import { DEFAULT_DATE_END_PARAM, DEFAULT_DATE_START_PARAM, DEFAULT_SEARCH_PARAM } from 'core/hooks/useQueryParamsState';
-import { EventType, EventTypeEnum, getEventType } from 'events/models/Event';
-import { DateRangeInput } from './DateRangeInput';
+import { EventType, EventTypeEnum } from 'events/models/Event';
+
 import style from './search.less';
-import { SelectMultiple } from './SelectMultiple';
+import { SelectEventTypes } from './SelectEventTypes';
 
 const SearchModule: FC = () => {
   const [search, setSearch] = useQueryParam('search');
@@ -28,14 +30,6 @@ const SearchModule: FC = () => {
       }
     }
   };
-
-  const selectedItems =
-    eventTypes !== null
-      ? JSON.parse(eventTypes).map((eventType: EventTypeEnum) => ({
-          value: eventType,
-          label: getEventType(eventType),
-        }))
-      : null;
 
   const handleToDateClick = (day: DateTime) => {
     const dateTime = day.set({ hour: 0 });
@@ -61,11 +55,8 @@ const SearchModule: FC = () => {
   return (
     <>
       <div className={style.grid}>
-        <input
-          className={style.searchInput}
-          type="search"
+        <SearchInput
           defaultValue={search || DEFAULT_SEARCH_PARAM}
-          placeholder="Søk"
           onChange={(event) => setSearch(event.target.value)}
         />
         <label className={style.attendanceEvent}>
@@ -78,7 +69,7 @@ const SearchModule: FC = () => {
           handleFromDateClick={handleFromDateClick}
           handleToDateClick={handleToDateClick}
         />
-        <SelectMultiple value={selectedItems} onEventTypesInput={onEventTypesInput} />
+        <SelectEventTypes selected={eventTypes ? JSON.parse(eventTypes) : []} onChange={onEventTypesInput} />
       </div>
     </>
   );
