@@ -5,7 +5,6 @@ import { IRuleBundle } from 'events/models/RuleBundles';
 import { IAttendee } from './Attendee';
 
 export interface IEventViewProps {
-  filtered: boolean;
   accessible: boolean;
 }
 

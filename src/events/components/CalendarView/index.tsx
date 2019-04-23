@@ -5,7 +5,6 @@ import { useMonth } from 'common/hooks/useMonth';
 import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getCalendarEvents } from 'events/api/calendarEvents';
-import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
 import { IEvent, IEventViewProps } from 'events/models/Event';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import {
@@ -22,10 +21,8 @@ import { MonthChanger } from './MonthChanger';
 
 export type IProps = IEventViewProps;
 
-export const CalendarView = ({ filtered }: IProps) => {
+export const CalendarView = () => {
   const { fetchEventsByMonth, eventList } = useContext(EventsRepo);
-  const filteredEventList = useDebouncedFilteredEventList();
-  const eventListFinal = filtered ? filteredEventList : eventList;
   const [month, changeMonth] = useMonth();
   const [eventMonth, setEventMonth] = useState<IEvent[][]>([[]]);
 
@@ -57,10 +54,10 @@ export const CalendarView = ({ filtered }: IProps) => {
     const firstDay = getFirstDayOfMonth(month);
     const lastDay = getLastDayOfMonth(month);
     const monthInterval = Interval.fromDateTimes(firstDay, lastDay);
-    const eventsInMonth = eventListFinal.filter((event) => monthInterval.contains(DateTime.fromISO(event.event_start)));
+    const eventsInMonth = eventList.filter((event) => monthInterval.contains(DateTime.fromISO(event.event_start)));
     const eventMonthMap = constructMonthMap(month, eventsInMonth);
     setEventMonth(eventMonthMap);
-  }, [month, eventListFinal]);
+  }, [month, eventList]);
 
   const displayEventMonth = eventMonth.some((eventDay) => !!eventDay.length)
     ? eventMonth

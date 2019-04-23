@@ -25,9 +25,9 @@ const getView = (view?: EventView): typeof ListView | typeof CalendarView | type
 
 export const EventContainer = () => {
   const { cookies, dispatch } = useContext(CookieContext);
-  const View = getView(cookies.frontpageEventView);
+  const View = getView(cookies.eventView);
   const changeView = (view: EventView) => {
-    dispatch({ type: CookieActionType.CHANGE, value: { frontpageEventView: view } });
+    dispatch({ type: CookieActionType.CHANGE, value: { eventView: view } });
     clearCache();
   };
 
@@ -39,7 +39,7 @@ export const EventContainer = () => {
         changeView={changeView}
         toggleAccessible={toggleAccessible}
         accessible={accessible}
-        view={cookies.frontpageEventView}
+        view={cookies.eventView}
         availableViews={[EventView.IMAGE, EventView.LIST, EventView.CALENDAR]}
       />
       <View accessible={accessible} filtered={false} />
