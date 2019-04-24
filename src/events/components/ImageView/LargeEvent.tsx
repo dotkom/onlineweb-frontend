@@ -1,7 +1,7 @@
 import { faCalendarAlt, faUser } from '@fortawesome/free-regular-svg-icons/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'core/components/Router';
-import { getEventColor, getEventType, IEvent } from 'events/models/Event';
+import { getEventColor, getEventType, IEvent, isCompanyEvent } from 'events/models/Event';
 import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
 import React from 'react';
@@ -18,7 +18,9 @@ const LargeEvent = ({ image, event_type, title, event_start, attendance_event, i
         <EventImage className={style.largeImage} image={image} companyEvents={company_event} size="md" />
         <div className={style.largeContent}>
           <span style={{ background: getEventColor(event_type) }} />
-          <p className={style.eventTitle}> {company_event.length === 1 ? company_event[0].company.name : title} </p>
+          <p className={style.eventTitle}>
+            {isCompanyEvent(event_type, company_event) ? company_event[0].company.name : title}
+          </p>
           <div className={style.icon}>
             <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
           </div>

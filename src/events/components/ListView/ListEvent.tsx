@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
 import React from 'react';
-import { EventTypeEnum, getEventColor, getEventType, IEvent } from '../../models/Event';
+import { getEventColor, getEventType, IEvent, isCompanyEvent } from '../../models/Event';
 import style from './list.less';
 
 const ListEvent = ({ title, event_start, attendance_event, event_type, company_event }: IEvent) => {
@@ -11,7 +11,6 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
   const eventType = getEventType(event_type);
   const eventDate = DateTime.fromISO(event_start).toFormat('dd.MM');
   const eventAttendees = getEventAttendees(attendance_event);
-  const isCompanyEvent = [EventTypeEnum.BEDPRES, EventTypeEnum.KURS].includes(event_type) && company_event.length === 1;
 
   return (
     <div className={style.gridRow}>
@@ -21,7 +20,9 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
           {eventType}
         </p>
       </div>
-      <p className={style.eventTitle}>{isCompanyEvent ? company_event[0].company.name : title}</p>
+      <p className={style.eventTitle}>
+        {isCompanyEvent(event_type, company_event) ? company_event[0].company.name : title}
+      </p>
       <div className={style.icon}>
         <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
       </div>
