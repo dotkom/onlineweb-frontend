@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { DateTime } from 'luxon';
 import React, { FC, useRef } from 'react';
 import { DayPickerProps } from 'react-day-picker';
@@ -32,7 +31,6 @@ export const DateRangeInput: FC<IProps> = ({
   dateEnd: dateTimeEnd,
   handleToDateClick,
   handleFromDateClick,
-  className,
 }) => {
   const dateStart = dateTimeStart.toJSDate();
   const dateEnd = dateTimeEnd.toJSDate();
@@ -66,7 +64,7 @@ export const DateRangeInput: FC<IProps> = ({
   };
 
   return (
-    <div className={classNames(style.inputFromTo, className)}>
+    <div className={style.inputFromTo}>
       <span>Fra </span>
       <DayPickerInput
         value={dateStart}

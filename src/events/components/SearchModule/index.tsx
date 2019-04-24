@@ -64,13 +64,16 @@ const SearchModule: FC = () => {
           <ToggleSwitch onChange={onToggleSwitchChange} checked={!(nonAttendanceEventsChecked === 'false')} />
         </label>
         <SelectEventTypes selected={eventTypes ? JSON.parse(eventTypes) : []} onChange={onEventTypesInput} />
-        <DateRangeInput
-          dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
-          dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
-          handleFromDateClick={handleFromDateClick}
-          handleToDateClick={handleToDateClick}
-          className={style.dateInput}
-        />
+        <div>
+          <div className={style.dateInput}>
+            <DateRangeInput
+              dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
+              dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
+              handleFromDateClick={handleFromDateClick}
+              handleToDateClick={handleToDateClick}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { CSSProperties } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/lib/animated';
@@ -59,10 +58,9 @@ export interface IProps<T, K> {
   selectOptions: Array<ISelectable<T, K>>;
   placeholder: string;
   getColor: (data: T) => string;
-  className?: string;
 }
 
-export function SelectMultiple<T, K>({ selected, selectOptions, getColor, className, ...props }: IProps<T, K>) {
+export function SelectMultiple<T, K>({ selected, selectOptions, getColor, ...props }: IProps<T, K>) {
   const optionStyles = getOptionStyles(getColor);
   return (
     <Select<ISelectable<T, K>>
@@ -72,7 +70,7 @@ export function SelectMultiple<T, K>({ selected, selectOptions, getColor, classN
       styles={optionStyles}
       components={makeAnimated()}
       closeMenuOnSelect={false}
-      className={classNames(style.eventType, className)}
+      className={style.eventType}
       {...props}
     />
   );
