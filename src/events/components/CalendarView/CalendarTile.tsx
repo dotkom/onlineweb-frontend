@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import HoverCard from 'common/components/HoverCard';
 import { Link } from 'core/components/Router';
 import React from 'react';
-import { getEventColor, IEvent } from '../../models/Event';
+import { getEventColor, IEvent, isCompanyEvent } from '../../models/Event';
 import style from './calendar.less';
 import CalendarHoverCard from './CalendarHoverCard';
 
@@ -53,7 +53,7 @@ export const CalendarEvent = (event: IEvent) => (
   <Link to={`/events/${event.id}`}>
     <HoverCard card={<CalendarHoverCard {...event} />}>
       <p className={style.title} style={{ background: getEventColor(event.event_type) }}>
-        {event.company_event.length === 1 ? event.company_event[0].company.name : event.title}
+        {isCompanyEvent(event.event_type, event.company_event) ? event.company_event[0].company.name : event.title}
       </p>
     </HoverCard>
   </Link>
