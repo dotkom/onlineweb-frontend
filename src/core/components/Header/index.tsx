@@ -21,7 +21,7 @@ class Header extends Component<IProps, IState> {
     isOpen: false,
   };
 
-  public toggleMenu = () => this.setState(({ isOpen }) => ({ isOpen }));
+  public toggleMenu = () => this.setState(({ isOpen }) => ({ isOpen: !isOpen }));
 
   public closeMenu = () => this.setState({ isOpen: false });
 
