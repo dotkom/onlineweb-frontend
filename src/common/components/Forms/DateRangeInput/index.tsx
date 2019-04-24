@@ -23,7 +23,6 @@ export interface IProps {
   dateEnd: DateTime;
   handleToDateClick: (day: DateTime) => void;
   handleFromDateClick: (day: DateTime) => void;
-  className?: string;
 }
 
 export const DateRangeInput: FC<IProps> = ({
