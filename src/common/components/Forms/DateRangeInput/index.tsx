@@ -73,7 +73,7 @@ export const DateRangeInput: FC<IProps> = ({
         dayPickerProps={fromMonthProps}
         onDayChange={(day: Date) => handleFromDateClick(DateTime.fromJSDate(day))}
       />
-      <span>, til</span>
+      <span> til </span>
       <span className={style.inputFromToTo}>
         <DayPickerInput
           ref={inputRef}
