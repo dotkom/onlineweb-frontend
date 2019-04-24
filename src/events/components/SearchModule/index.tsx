@@ -63,13 +63,17 @@ const SearchModule: FC = () => {
           <span>Vis arrangementer uten påmelding</span>
           <ToggleSwitch onChange={onToggleSwitchChange} checked={!(nonAttendanceEventsChecked === 'false')} />
         </label>
-        <DateRangeInput
-          dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
-          dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
-          handleFromDateClick={handleFromDateClick}
-          handleToDateClick={handleToDateClick}
-        />
         <SelectEventTypes selected={eventTypes ? JSON.parse(eventTypes) : []} onChange={onEventTypesInput} />
+        <div>
+          <div className={style.dateInput}>
+            <DateRangeInput
+              dateEnd={DateTime.fromISO(dateEnd || DEFAULT_DATE_END_PARAM)}
+              dateStart={DateTime.fromISO(dateStart || DEFAULT_DATE_START_PARAM)}
+              handleFromDateClick={handleFromDateClick}
+              handleToDateClick={handleToDateClick}
+            />
+          </div>
+        </div>
       </div>
     </>
   );

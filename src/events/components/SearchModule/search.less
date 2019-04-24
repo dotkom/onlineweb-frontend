@@ -5,20 +5,29 @@
 .grid {
   display: grid;
   align-items: end;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.618fr minmax(328px, 1fr);
   grid-gap: 20px;
   width: 100%;
 
   @media screen and (max-width: @owMobileBreakpoint) {
     grid-template-columns: auto;
+
+    .dateInput,
+    .attendanceEvent {
+      margin: auto;
+    }
   }
 }
 
 .attendanceEvent {
   text-align: right;
-  margin: auto;
+  margin: auto 0;
 
   > span {
     margin-right: 10px;
   }
+}
+
+.dateInput {
+  float: right;
 }
