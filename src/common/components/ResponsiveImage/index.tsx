@@ -3,7 +3,7 @@ import React, { FC, ImgHTMLAttributes, useEffect, useState } from 'react';
 import { DOMAIN } from 'common/constants/endpoints';
 import { useBoundingRect } from 'common/hooks/useBoundingRect';
 import IResponsiveImage, {
-  IMAGE_DIMENTIONS,
+  IMAGE_DIMENSIONS,
   IResponsiveImageSizes,
   ResponsiveImageTypes,
 } from 'common/models/ResponsiveImage';
@@ -24,11 +24,11 @@ export interface IProps extends ImgHTMLAttributes<HTMLImageElement> {
  * @example ['xs', 'sm', 'md', 'lg']
  * @param {ImageType} type
  */
-const getSortedDimentionKeys = (type: ImageType) => {
-  return getKeys(IMAGE_DIMENTIONS[type])
+const getSortedDimensionKeys = (type: ImageType) => {
+  return getKeys(IMAGE_DIMENSIONS[type])
     .sort((a, b) => {
-      const [aWidth] = IMAGE_DIMENTIONS[type][a];
-      const [bWidth] = IMAGE_DIMENTIONS[type][b];
+      const [aWidth] = IMAGE_DIMENSIONS[type][a];
+      const [bWidth] = IMAGE_DIMENSIONS[type][b];
       return aWidth - bWidth;
     })
     .filter((t) => t !== 'wide'); // Filter wide because it is unstable, and just mimicks 'lg'.
@@ -41,8 +41,8 @@ const getSortedDimentionKeys = (type: ImageType) => {
  * @param {ImageSize} currentSize The default/currently displayed size. Resolution should never be downgraded.
  */
 const getOptimalImageSize = (type: ImageType, displayWidth: number, currentSize: ImageSize): ImageSize => {
-  const dimentions = IMAGE_DIMENTIONS[type];
-  const keys = getSortedDimentionKeys(type);
+  const dimensions = IMAGE_DIMENSIONS[type];
+  const keys = getSortedDimensionKeys(type);
 
   /** Flag if the compared sizes are larger than the currently displayes size */
   let passedCurrent = false;
@@ -54,8 +54,8 @@ const getOptimalImageSize = (type: ImageType, displayWidth: number, currentSize:
     }
 
     /** Find most fitting image size depending on currently displayed size in DOM */
-    const [currentWidth] = dimentions[keys[i]];
-    const [nextWidth] = dimentions[keys[i + 1]];
+    const [currentWidth] = dimensions[keys[i]];
+    const [nextWidth] = dimensions[keys[i + 1]];
     if (passedCurrent && displayWidth > currentWidth && displayWidth <= nextWidth) {
       return keys[i];
     }
