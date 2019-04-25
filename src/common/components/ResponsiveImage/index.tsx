@@ -1,14 +1,13 @@
 import React, { FC, ImgHTMLAttributes, useEffect, useState } from 'react';
 
+import { DOMAIN } from 'common/constants/endpoints';
 import { useBoundingRect } from 'common/hooks/useBoundingRect';
-import { getKeys } from 'common/utils/tsHacks';
-
-import { DOMAIN } from '../../constants/endpoints';
 import IResponsiveImage, {
   IMAGE_DIMENTIONS,
   IResponsiveImageSizes,
   ResponsiveImageTypes,
-} from '../../models/ResponsiveImage';
+} from 'common/models/ResponsiveImage';
+import { getKeys } from 'common/utils/tsHacks';
 
 export type ImageType = ResponsiveImageTypes;
 export type ImageSizes = IResponsiveImageSizes;
@@ -39,7 +38,7 @@ const getSortedDimentionKeys = (type: ImageType) => {
  * @summary Get the most fitting image version to display on screen based on the client screen/pixel size.
  * @param {ResponsiveImageTypes} type
  * @param {number} displayWidth The actual width of the displayed image in real pixel in the screen.
- * @param {ImageSize} currentSize The default/currently displayed size. Resolution should ne be downgraded.
+ * @param {ImageSize} currentSize The default/currently displayed size. Resolution should never be downgraded.
  */
 const getOptimalImageSize = (type: ImageType, displayWidth: number, currentSize: ImageSize): ImageSize => {
   const dimentions = IMAGE_DIMENTIONS[type];
