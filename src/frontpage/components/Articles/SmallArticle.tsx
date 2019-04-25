@@ -9,7 +9,7 @@ const SmallArticle = ({ absolute_url, heading, image, ingress_short }: IArticle)
   return (
     <a href={DOMAIN + absolute_url}>
       <div className={classnames(style.articleContainer, style.smallArticle)}>
-        <ResponsiveImage image={image} size="xs" className={style.smallImage} />
+        <ResponsiveImage image={image} size="xs" className={style.smallImage} type="article" />
         <div>
           <h2>{heading}</h2>
           <p>{ingress_short}</p>

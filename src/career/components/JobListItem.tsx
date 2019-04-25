@@ -24,7 +24,7 @@ export const formatLocations = (locations: string[]) => {
 const JobListItem = ({ location, deadline, company, title, ingress, id, employment }: ICareerOpportunity) => (
   <div className={style.job}>
     <Link to={`/career/${id}`}>
-      <ResponsiveImage image={company.image} size="md" alt="Firmalogo" />
+      <ResponsiveImage image={company.image} size="md" alt="Firmalogo" type="company" />
     </Link>
     <div className={style.jobInfo}>
       <Link to={`/career/${id}`}>
