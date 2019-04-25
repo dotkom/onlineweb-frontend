@@ -19,13 +19,13 @@ export interface IResponsiveImageSizes {
 
 export type ResponsiveImageTypes = 'article' | 'company' | 'event' | 'offline' | 'product';
 
-export type ResponsiveImageDimentions = {
+export type ResponsiveImageDimensions = {
   [Type in ResponsiveImageTypes]: { [Size in keyof IResponsiveImageSizes]: [number, number] }
 };
 
 const DEFAULT_THUMB_SIZE = [200, 112] as [number, number];
 
-export const IMAGE_DIMENTIONS: ResponsiveImageDimentions = {
+export const IMAGE_DIMENSIONS: ResponsiveImageDimensions = {
   article: {
     thumb: DEFAULT_THUMB_SIZE,
     original: [Infinity, Infinity],
