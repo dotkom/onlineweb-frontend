@@ -37,14 +37,14 @@ const getSortedDimensionKeys = (type: ImageType) => {
 /**
  * @summary Get the most fitting image version to display on screen based on the client screen/pixel size.
  * @param {ResponsiveImageTypes} type
- * @param {number} displayWidth The actual width of the displayed image in real pixel in the screen.
+ * @param {number} displayWidth The actual width of the displayed image in real pixels on the screen.
  * @param {ImageSize} currentSize The default/currently displayed size. Resolution should never be downgraded.
  */
 const getOptimalImageSize = (type: ImageType, displayWidth: number, currentSize: ImageSize): ImageSize => {
   const dimensions = IMAGE_DIMENSIONS[type];
   const keys = getSortedDimensionKeys(type);
 
-  /** Flag if the compared sizes are larger than the currently displayes size */
+  /** Flag if the compared sizes are larger than the currently displayed size */
   let passedCurrent = false;
 
   for (let i = 0; i < keys.length - 1; i++) {
