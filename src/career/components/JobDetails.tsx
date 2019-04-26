@@ -27,7 +27,7 @@ const JobDetails = (props: ICareerOpportunity) => (
       <div>
         <div className={style.company}>
           <Link className={style.companyImage} to={`/company/${props.company.id}`}>
-            <ResponsiveImage image={props.company.image} size="lg" alt={props.company.name} />
+            <ResponsiveImage image={props.company.image} size="lg" alt={props.company.name} type="company" />
           </Link>
           <div className={style.companyDescriptionBox}>
             <Link className={style.companyDescriptionTitle} to={`/company/${props.company.id}`}>

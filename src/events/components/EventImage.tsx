@@ -12,7 +12,7 @@ export interface IProps extends ImgHTMLAttributes<HTMLImageElement> {
 const EventImage = ({ image, companyEvents: [companyEvent], ...props }: IProps) => {
   const img = companyEvent ? companyEvent.company.image : image;
   const src = img || DEFAULT_EVENT_IMAGE;
-  return <ResponsiveImage image={src} {...props} />;
+  return <ResponsiveImage image={src} type="event" {...props} />;
 };
 
 export default EventImage;

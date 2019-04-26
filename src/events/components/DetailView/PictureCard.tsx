@@ -17,7 +17,7 @@ const PictureCard = ({ image, event_start, event_end, location, company_event, e
 
   return (
     <div className={style.pictureCard}>
-      <EventImage companyEvents={company_event} image={image} size="lg" />
+      <EventImage companyEvents={company_event} image={image} size="md" />
 
       <div className={style.attendance}>
         <CardHeader className={style.detailHeader} color={color}>
