@@ -27,15 +27,22 @@
 }
 
 .eventColumn {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
+  display: flex;
+  flex-direction: column;
+
+  > a:not(:last-child) {
+    margin-bottom: 20px;
+  }
 }
 
 .large {
   display: flex;
   flex-direction: column;
   .owCard();
+
+  > img {
+    width: 100%;
+  }
 }
 
 .imageLargeType {
@@ -48,19 +55,6 @@
   font-weight: 200;
   letter-spacing: 1px;
   font-size: 20px;
-}
-
-.largeImage {
-  width: 100%;
-}
-
-.largeImageEmpty {
-  height: 100%;
-  margin: auto;
-
-  path {
-    fill: @lightGray;
-  }
 }
 
 .largeContent {
