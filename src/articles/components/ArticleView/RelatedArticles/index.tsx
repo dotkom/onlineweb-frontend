@@ -1,13 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import ResponsiveImage from 'common/components/ResponsiveImage';
-import { Link } from 'core/components/Router';
+import { Carousel } from 'common/components/Carousel';
 
 import { getArticles } from 'articles/api';
-import { routes } from 'articles/components/ArticlesRouter';
 import { IArticle } from 'articles/models/Article';
 
 import style from '../articleView.less';
+import { RelatedArticle } from './RelatedArticle';
 
 export interface IProps {
   mainArticle: IArticle;
@@ -46,14 +45,21 @@ export const RelatedArticles: FC<IProps> = ({ mainArticle }) => {
 
   return (
     <aside className={style.relatedArticles}>
-      {relatedArticles.map((article) => (
-        <section key={article.id} className={style.relatedArticle}>
-          <Link to={routes.detail + article.id}>
-            <ResponsiveImage className={style.relatedArticleImage} image={article.image} size="md" type="article" />
-            <h3 className={style.relatedArticleHeading}>{article.heading}</h3>
-          </Link>
-        </section>
-      ))}
+      <Carousel values={relatedArticles} title="Relaterte artikler">
+        {(relatedArticlesRef) => (
+          <>
+            {relatedArticlesRef.map((article) => (
+              <RelatedArticle
+                key={article.value.id}
+                id={article.value.id}
+                image={article.value.image}
+                heading={article.value.heading}
+                scrollRef={article.ref}
+              />
+            ))}
+          </>
+        )}
+      </Carousel>
     </aside>
   );
 };
