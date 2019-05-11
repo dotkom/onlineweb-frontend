@@ -23,7 +23,7 @@
 
 .arrowContainer {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template: 'left center right' auto / 1fr 1fr 1fr;
   justify-items: center;
   margin-bottom: 20px;
 }
@@ -37,4 +37,16 @@
     color: @gray;
     cursor: pointer;
   }
+}
+
+.leftArrow {
+  grid-area: left;
+}
+
+.rightArrow {
+  grid-area: right;
+}
+
+.carouselHeading {
+  grid-area: center;
 }
