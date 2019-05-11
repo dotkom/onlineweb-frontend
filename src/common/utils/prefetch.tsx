@@ -4,6 +4,9 @@ import React from 'react';
 import { PrefetchKey } from './PrefetchState';
 
 export function prefetch(key: PrefetchKey) {
+  // Impossible to type the wrapped component correctly, as it extends the class in a non-OOP way.
+  // Uses 'any', as the types are fairly well enforced when the decorator is used.
+  // tslint:disable-next-line no-any
   return function wrap(WrappedComponent: typeof PrefetchableComponent): any {
     return class extends React.Component<{}> {
       public static contextType = PreFetchContext;
@@ -23,12 +26,12 @@ export function prefetch(key: PrefetchKey) {
 }
 
 export interface IPrefetchedComponent {
-  getServerState(props: any): Promise<any>;
+  getServerState(props: {}): Promise<{}>;
 }
 
 /* tslint:disable-next-line */
-export class PrefetchableComponent<P = {}, S = {}, SS = any> extends React.Component<P, S, SS> {
-  public static async getServerState(_: any): Promise<any> {
+export class PrefetchableComponent<P = {}, S = {}, SS = {}> extends React.Component<P, S, SS> {
+  public static async getServerState(_: {}): Promise<{}> {
     throw new Error('Static getServerState method of PrefetchableComponent was not overwritten in implemented class');
   }
 }

@@ -6,7 +6,7 @@ import { routes } from '../index';
 import style from './mainMenu.less';
 
 export interface IProps {
-  match: Router.match<any>;
+  match: Router.match<{}>;
 }
 
 class MainMenu extends Component<IProps, {}> {

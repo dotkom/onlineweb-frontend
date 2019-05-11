@@ -1,11 +1,8 @@
-import { get } from '../../common/utils/api';
+import { get, IAPIData } from 'common/utils/api';
+
+import { IRepository } from 'contribution/models/Repository';
 
 export const getRepositories = async () => {
-  try {
-    const data = await get('/api/v1/repositories', { format: 'json' });
-    return data;
-  } catch (err) {
-    /* tslint:disable-next-line: no-console */
-    console.error(err);
-  }
+  const data = await get<IAPIData<IRepository>>('/api/v1/repositories', { format: 'json' });
+  return data;
 };

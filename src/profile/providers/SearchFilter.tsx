@@ -1,10 +1,10 @@
-import React, { Component, ContextType, createContext } from 'react';
+import React, { createContext, FC, useContext, useEffect, useMemo, useState } from 'react';
+import ReactDOM from 'react-dom';
 
 import { UserContext } from 'authentication/providers/UserProvider';
-import { searchUsers } from 'profile/api/search';
+import { useQueryParam } from 'common/hooks/useQueryParam';
+import { getProfilesIterator } from 'profile/api/search';
 import { IPublicProfile } from 'profile/models/User';
-
-export interface IProps {}
 
 export interface IState {
   search?: string;
@@ -13,8 +13,7 @@ export interface IState {
   setSearch: (search: string) => void;
   setGroup: (group: string) => void;
   setRange: (range: [number, number]) => void;
-  users: IPublicProfile[];
-  page: number;
+  profiles: IPublicProfile[];
   nextPage: () => void;
 }
 
@@ -29,8 +28,7 @@ const INITIAL_STATE: IState = {
   setRange: (_) => {
     throw new Error('setRange method not overwritten');
   },
-  users: [],
-  page: 1,
+  profiles: [],
   nextPage: () => {
     throw new Error('nextPage method not overwritten');
   },
@@ -38,61 +36,85 @@ const INITIAL_STATE: IState = {
 
 export const ProfileSearchContext = createContext(INITIAL_STATE);
 
-export class ProfileSearchProvider extends Component<IProps, IState> {
-  public static contextType = UserContext;
-  public context!: ContextType<typeof UserContext>;
+const parseRange = (rangeString: string): [number, number] | null => {
+  const match = rangeString.match(/^\[\d\,\d\]$/);
+  if (!match) {
+    return null;
+  }
+  const [n, m] = match.map((k) => Number(k));
+  return [n, m];
+};
 
-  public state: IState = INITIAL_STATE;
-
-  public setStateAndRefetch = async (newState: Partial<IState>) => {
-    this.setState({ ...this.state, ...newState }, () => this.init());
-  };
-
-  public init = async () => {
-    const { user } = this.context;
-    if (user) {
-      const { search = '', group, range, page } = this.state;
-      const users = await searchUsers({ search, group, range, page }, user);
-      this.setState({ users, page: 1 });
-    }
-  };
-
-  public async componentDidMount() {
-    this.init();
+export const ProfileSearchProvider: FC = ({ children }) => {
+  const { user } = useContext(UserContext);
+  /** Should not be able to render this page without an authenticated user */
+  if (!user) {
+    return null;
   }
 
-  public setSearch = (search: string) => {
-    this.setStateAndRefetch({ search });
-  };
+  /** Store filter parameters in browser query */
+  const [querySearch, setSearch] = useQueryParam('search');
+  const [queryGroup, setQueryGroup] = useQueryParam('group');
+  const [queryRange, setQueryRange] = useQueryParam('range');
 
-  public setGroup = (newGroup: string) => {
-    const group = newGroup !== 'Alle grupper' ? newGroup : undefined;
-    this.setStateAndRefetch({ group });
-  };
+  const [profiles, setProfiles] = useState<IPublicProfile[]>([]);
+  /** Restrict possibility of calling nextPage until the first page of current query has been added to state. */
+  const [ready, setReady] = useState(false);
 
-  public setRange = (range: [number, number]) => {
-    this.setStateAndRefetch({ range });
-  };
-
-  public nextPage = () => {
-    const { page } = this.state;
-    this.setState({ page: page + 1 }, () => this.fetchNextPage());
-  };
-
-  public fetchNextPage = async () => {
-    const { user } = this.context;
-    if (user) {
-      const { search = '', group, range, page, users } = this.state;
-      const newUsers = await searchUsers({ search, group, range, page }, user);
-      this.setState({ users: [...users, ...newUsers] });
+  const search = querySearch || undefined;
+  const group = queryGroup || undefined;
+  const range = parseRange(queryRange || '') || [1, 6];
+  const setGroup = (newGroup: string) => {
+    if (newGroup.toLowerCase() === 'alle grupper') {
+      setQueryGroup(null);
+    } else {
+      setQueryGroup(newGroup);
     }
   };
+  const setRange = (newRange: [number, number]) => setQueryRange(JSON.stringify(newRange));
 
-  public render() {
-    const { setSearch, setGroup, setRange, nextPage } = this;
-    const value = { ...this.state, setSearch, setGroup, setRange, nextPage };
-    return <ProfileSearchContext.Provider value={value}>{this.props.children}</ProfileSearchContext.Provider>;
-  }
-}
+  /** Initialize fetch iterator. Needs to be renewed when parameters are changed, as 'page' is internal state */
+  const initialFetcher = useMemo(() => getProfilesIterator({ search, group, range }, user), []);
+  const [profilesFetcher, setProfilesFetcher] = useState(initialFetcher);
+
+  /** Reset list of profiles. Fetches first 'page' of results for the result */
+  const reset = async () => {
+    const fetcher = getProfilesIterator({ search, group, range }, user);
+    const { value: firstProfiles = [] } = await fetcher.next();
+    ReactDOM.unstable_batchedUpdates(() => {
+      setProfilesFetcher(fetcher);
+      setProfiles(firstProfiles);
+      setReady(true);
+    });
+  };
+
+  /** Call next page to iterate/yield naxt page of API results */
+  const nextPage = useMemo(
+    () => async () => {
+      const { value: nextProfiles } = await profilesFetcher.next();
+      if (nextProfiles && ready) {
+        setProfiles((current) => current.concat(nextProfiles));
+      }
+    },
+    [profilesFetcher]
+  );
+
+  /** Reset search results when any parameter is changed */
+  useEffect(() => {
+    reset();
+  }, [querySearch, queryGroup, queryRange]);
+
+  const value: IState = {
+    search,
+    setSearch,
+    group,
+    setGroup,
+    range,
+    setRange,
+    profiles,
+    nextPage,
+  };
+  return <ProfileSearchContext.Provider value={value}>{children}</ProfileSearchContext.Provider>;
+};
 
 export default ProfileSearchProvider;

@@ -11,25 +11,26 @@ export enum PrefetchKey {
   OFFLINES = 'OFFLINES',
 }
 
-export type Fetcher = () => Promise<any>;
+export type Fetcher = () => Promise<{}>;
 
 export default class PrefetchState {
-  public keys: string[] = [];
-  public fetchers: Array<Promise<any>> = [];
+  public keys: PrefetchKey[] = [];
+  public fetchers: Array<Promise<{}>> = [];
+  public values: Array<{}> = [];
 
-  public queue = (fetcher: Fetcher, key: string) => {
+  public queue = (fetcher: Fetcher, key: PrefetchKey) => {
     if (__SERVER__) {
       this.fetchers.push(fetcher());
       this.keys.push(key);
     }
   };
 
-  public get = (key: string) => {
+  public get = (key: PrefetchKey) => {
     const index = this.keys.indexOf(key);
-    return this.fetchers[index];
+    return this.values[index];
   };
 
-  public has = (key: string): boolean => {
+  public has = (key: PrefetchKey): boolean => {
     return this.keys.indexOf(key) >= 0;
   };
 
@@ -37,15 +38,15 @@ export default class PrefetchState {
     await Promise.all(this.fetchers);
     this.fetchers.map((fetcher, i) =>
       fetcher.then((value) => {
-        this.fetchers[i] = value;
+        this.values[i] = value;
       })
     );
   };
 
   public getData = () => {
-    const data: { [key: string]: any } = {};
+    const data: { [key: string]: {} } = {};
     for (let i = 0; i < this.keys.length; i++) {
-      data[this.keys[i]] = this.fetchers[i];
+      data[this.keys[i]] = this.values[i];
     }
     return data;
   };
@@ -56,8 +57,8 @@ export default class PrefetchState {
     }
     const data = JSON.parse(window.__PREFETCHED_STATE__);
     Object.keys(data).forEach((key) => {
-      this.keys.push(key);
-      this.fetchers.push(data[key]);
+      this.keys.push(key as PrefetchKey);
+      this.values.push(data[key]);
     });
   };
 }

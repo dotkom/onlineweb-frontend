@@ -1,10 +1,10 @@
 import React from 'react';
-import { getEventColor, INewEvent } from '../../models/Event';
+import { getEventColor, IEvent } from '../../models/Event';
 import AttendanceEvent from './AttendanceEvent';
 import CardHeader from './Card/CardHeader';
 import styles from './detail.less';
 
-const Registration = ({ event_type, attendance_event }: INewEvent) => {
+const Registration = ({ event_type, attendance_event }: IEvent) => {
   const color = getEventColor(event_type);
 
   const message = <p className={styles.attendanceMessage}>Dette er ikke et påmeldingsarrangement.</p>;

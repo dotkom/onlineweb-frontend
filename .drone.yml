@@ -1,23 +1,15 @@
-pipeline:
-  restore-cache:
-    image: drillster/drone-volume-cache
-    pull: true
-    when:
-      event: [push, pull_request, tag, deployment]
-    restore: true
-    mount:
-      - ./node_modules
-    volumes:
-      - /tmp/cache:/cache
+kind: pipeline
+name: default
 
-  setup:
+steps:
+  - name: setup
     image: node:carbon
     when:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn
 
-  build:
+  - name: build
     image: node:carbon
     group: testing
     when:
@@ -25,15 +17,15 @@ pipeline:
     commands:
       - yarn build:prod
 
-  test:
+  - name: test
     image: node:carbon
     group: testing
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      yarn test
+      - yarn test
 
-  compile-typescript:
+  - name: compile-typescript
     image: node:carbon
     group: testing
     when:
@@ -41,7 +33,7 @@ pipeline:
     commands:
       - yarn run tsc
 
-  lint-typescript:
+  - name: lint-typescript
     image: node:carbon
     group: testing
     when:
@@ -49,7 +41,7 @@ pipeline:
     commands:
       - yarn lint-ts
 
-  lint-less:
+  - name: lint-less
     image: node:carbon
     group: testing
     when:
@@ -57,7 +49,7 @@ pipeline:
     commands:
       - yarn lint-less
 
-  lint-prettier:
+  - name: lint-prettier
     image: node:carbon
     group: testing
     when:
@@ -65,30 +57,21 @@ pipeline:
     commands:
       - yarn lint-prettier
 
-  rebuild-cache:
-    image: drillster/drone-volume-cache
-    pull: true
-    when:
-      event: [push, pull_request, tag, deployment]
-    rebuild: true
-    mount:
-      - ./node_modules
-    volumes:
-      - /tmp/cache:/cache
-
-  deploy:
+  - name: deploy
     image: appleboy/drone-ssh
     pull: true
     secrets: [ssh_key]
-    host: nansen.online.ntnu.no
-    port: 22
-    username: root
-    key: ${SSH_KEY}
-    command_timeout: 600s
     when:
       event: push
       branch: master
       status: success
-    script:
-      - /srv/www/owf-staging/deploy.sh
+    settings:
+      host: nansen.online.ntnu.no
+      port: 22
+      username: root
+      key:
+        from_secret: ssh_key
+      command_timeout: 600s
+      script:
+        - /srv/www/owf-staging/deploy.sh
 

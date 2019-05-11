@@ -8,7 +8,7 @@ import { formatDeadline } from './JobDetails';
 // Accepts a list of locations and returns a comma-separated list of locations
 // with 'og' inserted before the last element, and 'Ikke spesifisert' if no
 // locations have been specified.
-export const formatLocations = (locations: any) => {
+export const formatLocations = (locations: string[]) => {
   if (locations.length >= 2) {
     // If we have more than 2 elements, return a comma-separated list.
     return `${locations.slice(0, -1).join(', ')} og ${locations[locations.length - 1]}`;
