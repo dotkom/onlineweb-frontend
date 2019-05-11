@@ -29,7 +29,9 @@ export const ArticleMeta = ({ article }: IProps) => {
         ) : null}
         <span>Tags </span>
         {tags.map((tag) => (
-          <span className={style.tags}>{tag}</span>
+          <span className={style.tags} key={tag}>
+            {tag}
+          </span>
         ))}
       </div>
     </div>

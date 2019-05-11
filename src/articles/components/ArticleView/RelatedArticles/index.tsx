@@ -49,7 +49,7 @@ export const RelatedArticles: FC<IProps> = ({ mainArticle }) => {
       {relatedArticles.map((article) => (
         <section key={article.id} className={style.relatedArticle}>
           <Link to={routes.detail + article.id}>
-            <ResponsiveImage className={style.relatedArticleImage} image={article.image} size="md" />
+            <ResponsiveImage className={style.relatedArticleImage} image={article.image} size="md" type="article" />
             <h3 className={style.relatedArticleHeading}>{article.heading}</h3>
           </Link>
         </section>

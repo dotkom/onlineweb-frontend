@@ -11,7 +11,7 @@ export interface IProps {
 
 export const ArticleImage: FC<IProps> = ({ image }) => (
   <section className={style.articleImage}>
-    <ResponsiveImage image={image} size="wide" />
+    <ResponsiveImage image={image} size="wide" type="article" />
     {image.photographer ? (
       <div>
         <span>Fotograf</span> {image.photographer}
