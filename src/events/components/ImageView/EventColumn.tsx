@@ -17,7 +17,7 @@ const EventColumn = ({ events, event_type }: IProps) => {
     <div className={style.eventColumn}>
       {events[0] ? (
         <>
-          <LargeEvent {...events[0]} />
+          <LargeEvent event={events[0]} />
           <SmallEventColumn events={events.slice(1, 4)} />
         </>
       ) : (

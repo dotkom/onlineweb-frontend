@@ -17,6 +17,62 @@ export interface IResponsiveImageSizes {
   xs: string;
 }
 
+export type ResponsiveImageTypes = 'article' | 'company' | 'event' | 'offline' | 'product';
+
+export type ResponsiveImageDimensions = {
+  [Type in ResponsiveImageTypes]: { [Size in keyof IResponsiveImageSizes]: [number, number] }
+};
+
+const DEFAULT_THUMB_SIZE = [200, 112] as [number, number];
+
+export const IMAGE_DIMENSIONS: ResponsiveImageDimensions = {
+  article: {
+    thumb: DEFAULT_THUMB_SIZE,
+    original: [Infinity, Infinity],
+    wide: [1280, 474],
+    lg: [1280, 474],
+    md: [720, 405],
+    sm: [864, 486],
+    xs: [640, 360],
+  },
+  company: {
+    thumb: DEFAULT_THUMB_SIZE,
+    original: [Infinity, Infinity],
+    wide: [720, 405],
+    lg: [720, 405],
+    md: [320, 180],
+    sm: [320, 180],
+    xs: [160, 90],
+  },
+  event: {
+    thumb: DEFAULT_THUMB_SIZE,
+    original: [Infinity, Infinity],
+    wide: [1280, 720],
+    lg: [1280, 720],
+    md: [720, 405],
+    sm: [720, 405],
+    xs: [640, 360],
+  },
+  offline: {
+    thumb: DEFAULT_THUMB_SIZE,
+    original: [Infinity, Infinity],
+    wide: [1280, 474],
+    lg: [1280, 474],
+    md: [720, 405],
+    sm: [864, 486],
+    xs: [640, 360],
+  },
+  product: {
+    thumb: DEFAULT_THUMB_SIZE,
+    original: [Infinity, Infinity],
+    wide: [520, 624],
+    lg: [520, 624],
+    md: [520, 624],
+    sm: [390, 468],
+    xs: [260, 312],
+  },
+};
+
 export const DEFAULT_EVENT_IMAGE: IResponsiveImage = {
   id: 95,
   name: 'Generisk arrangementsbilde',

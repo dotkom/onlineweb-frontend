@@ -12,7 +12,7 @@ const SmallArticle = ({ heading, image, ingress_short, id }: IArticle) => {
   return (
     <Link to={routes.detail + id}>
       <div className={classnames(style.articleContainer, style.smallArticle)}>
-        <ResponsiveImage image={image} size="xs" className={style.smallImage} />
+        <ResponsiveImage image={image} size="xs" className={style.smallImage} type="article" />
         <div>
           <h2>{heading}</h2>
           <p>{ingress_short}</p>
