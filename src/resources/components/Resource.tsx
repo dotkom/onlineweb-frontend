@@ -1,12 +1,20 @@
+import React, { FC } from 'react';
+
 import Markdown from 'common/components/Markdown';
-import React from 'react';
+import ResponsiveImage from 'common/components/ResponsiveImage';
+
 import { IResource } from '../models/Resource';
 import style from './resources.less';
 
-const Resource = ({ title, description, image }: IResource) => {
+export interface IProps {
+  resource: IResource;
+}
+
+const Resource: FC<IProps> = ({ resource }) => {
+  const { title, description, image } = resource;
   return (
     <div className={style.resource}>
-      <img src={image} alt={title} />
+      {image ? <ResponsiveImage image={image} type="resource" size="sm" /> : <img />}
       <div>
         <h3 className={style.resourceTitle}>{title}</h3>
         <Markdown source={description} />
