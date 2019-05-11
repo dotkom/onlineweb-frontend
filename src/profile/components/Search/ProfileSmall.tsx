@@ -5,9 +5,9 @@ import DEFAULT_USER_IMAGE from 'common/img/profile/user.png';
 import { IPublicProfile } from '../../models/User';
 import style from './search.less';
 
-class ProfileSmall extends React.Component<{ user: IPublicProfile }> {
+class ProfileSmall extends React.Component<{ profile: IPublicProfile }> {
   public render() {
-    const { first_name, last_name, phone_number, online_mail, image, email } = this.props.user;
+    const { first_name, last_name, phone_number, online_mail, image, email } = this.props.profile;
     const name = `${first_name} ${last_name}`;
     const imgSrc = image || DEFAULT_USER_IMAGE;
     const displayEmail = online_mail ? `${online_mail}@online.ntnu.no` : email;

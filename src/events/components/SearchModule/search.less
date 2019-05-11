@@ -1,0 +1,24 @@
+@import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+
+.grid {
+  display: grid;
+  align-items: end;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  width: 100%;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: auto;
+  }
+}
+
+.attendanceEvent {
+  text-align: right;
+  margin: auto;
+
+  > span {
+    margin-right: 10px;
+  }
+}

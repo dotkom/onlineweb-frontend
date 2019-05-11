@@ -2,6 +2,31 @@
 @import '~common/less/colors.less';
 @import '~common/less/constants.less';
 
+.articleImage {
+  position: relative;
+  margin-bottom: 1rem;
+
+  > img {
+    .owCard();
+    width: 100%;
+  }
+
+  > div {
+    padding: 0.5rem;
+    bottom: 0;
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: @darkGray;
+    margin-bottom: 2px;
+    border-radius: 0 3px;
+
+    > span {
+      font-weight: bold;
+    }
+  }
+}
+
 .byline {
   position: absolute;
   bottom: 0;
@@ -25,31 +50,6 @@
   .tags {
     font-style: italic;
     font-weight: normal;
-  }
-}
-
-.articleImage {
-  position: relative;
-  margin-bottom: 1rem;
-
-  > img {
-    .owCard();
-    width: 100%;
-  }
-
-  > div {
-    padding: 0.5rem;
-    bottom: 0;
-    position: absolute;
-    z-index: 3;
-    background-color: rgba(255, 255, 255, 0.6);
-    color: @darkGray;
-    margin-bottom: 2px;
-    border-radius: 0 3px;
-
-    > span {
-      font-weight: bold;
-    }
   }
 }
 

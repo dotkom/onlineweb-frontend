@@ -1,5 +1,6 @@
 import { FieldOfStudy } from './FieldOfStudy';
 import { IMedal } from './Medal';
+import { ISpecialPosition } from './SpecialPosition';
 
 export type Gender = 'male' | 'female';
 
@@ -18,7 +19,7 @@ interface IBaseProfile {
   github: string | null;
   linkedin: string | null;
   positions: IMedal[];
-  special_positions: any[];
+  special_positions: ISpecialPosition[];
   readonly field_of_study: FieldOfStudy;
   readonly started_date: string;
   readonly compiled: boolean;

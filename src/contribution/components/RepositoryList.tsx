@@ -9,10 +9,10 @@ export interface IRepositoryListState {
 }
 
 export default class RepositoryList extends Component<{}, IRepositoryListState> {
-  public readonly state = { repositories: [] } as IRepositoryListState;
+  public readonly state: IRepositoryListState = { repositories: [] };
 
   public async componentDidMount() {
-    const data: any = await getRepositories();
+    const data = await getRepositories();
     this.setState({ repositories: data.results });
   }
 

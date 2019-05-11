@@ -16,6 +16,5 @@ export const getArticles = async (args?: IArticleAPIParameters): Promise<IArticl
 };
 
 export const getArticle = async (id: number): Promise<IArticle> => {
-  const article: IArticle = await get(API_URL + id + '/', { format: 'json' });
-  return article;
+  return await get(API_URL + id + '/', { format: 'json' });
 };

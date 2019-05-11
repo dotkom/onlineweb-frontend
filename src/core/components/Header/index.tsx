@@ -1,7 +1,9 @@
-import { routes } from 'App';
 import classnames from 'classnames';
-import { Link } from 'core/components/Router';
 import React, { Component } from 'react';
+
+import { routes } from 'App';
+import { Link } from 'core/components/Router';
+
 import style from './header.less';
 import HeaderLogo from './HeaderLogo';
 import HeaderLogin from './Login';
@@ -19,35 +21,18 @@ class Header extends Component<IProps, IState> {
     isOpen: false,
   };
 
-  constructor(props: IProps) {
-    super(props);
+  public toggleMenu = () => this.setState(({ isOpen }) => ({ isOpen: !isOpen }));
 
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.closeMenu = this.closeMenu.bind(this);
-  }
-
-  public toggleMenu() {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    });
-  }
-
-  public closeMenu() {
-    this.setState({
-      isOpen: false,
-    });
-  }
+  public closeMenu = () => this.setState({ isOpen: false });
 
   public render() {
+    const { isOpen } = this.state;
     return (
       <header className={style.header}>
         <div className={style.grid}>
-          <MenuButton isOpen={this.state.isOpen} onClick={this.toggleMenu} />
+          <MenuButton isOpen={isOpen} onClick={this.toggleMenu} />
           <HeaderLogo onClick={this.closeMenu} />
-          <div
-            className={classnames(style.links, { [style.dropdownMode]: this.state.isOpen })}
-            onClick={this.closeMenu}
-          >
+          <div className={classnames(style.links, { [style.dropdownMode]: isOpen })} onClick={this.closeMenu}>
             <Link to={routes.profile} requireLogin>
               Profil
             </Link>

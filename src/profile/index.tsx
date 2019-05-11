@@ -38,12 +38,13 @@ const ProfileRouter = () => {
 };
 
 export interface IProfileProps<T = {}> {
-  params: qs.OutputParams;
+  params: qs.ParsedQuery;
   match: IMatch<T>;
   history: History;
 }
 
 interface IProfileRouteProps extends IRouteProps {
+  // tslint:disable-next-line no-any , they can be anything
   view: React.ComponentClass<any> | React.StatelessComponent<any>;
 }
 

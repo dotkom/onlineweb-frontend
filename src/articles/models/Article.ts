@@ -1,9 +1,9 @@
-import IImage, { DEFAULT_EVENT_IMAGE } from 'common/models/Image';
+import IResponsiveImage, { DEFAULT_EVENT_IMAGE } from 'common/models/ResponsiveImage';
 
 export interface IArticle {
   articleUrl: string;
   heading: string;
-  image: IImage;
+  image: IResponsiveImage;
   ingress: string;
   absolute_url: string;
   ingress_short: string;

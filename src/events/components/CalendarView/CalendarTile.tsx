@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import HoverCard from 'common/components/HoverCard';
 import { Link } from 'core/components/Router';
 import React from 'react';
-import { getEventColor, INewEvent } from '../../models/Event';
+import { getEventColor, IEvent } from '../../models/Event';
 import style from './calendar.less';
 import CalendarHoverCard from './CalendarHoverCard';
 
 export interface ITileProps {
-  events: INewEvent[];
+  events: IEvent[];
   active?: boolean;
   day: number;
 }
@@ -49,7 +49,7 @@ export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
   </>
 );
 
-export const CalendarEvent = (event: INewEvent) => (
+export const CalendarEvent = (event: IEvent) => (
   <Link to={`/events/${event.id}`}>
     <HoverCard card={<CalendarHoverCard {...event} />}>
       <p className={style.title} style={{ background: getEventColor(event.event_type) }}>

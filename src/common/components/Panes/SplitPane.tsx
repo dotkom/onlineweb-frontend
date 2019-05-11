@@ -1,6 +1,6 @@
-import React, { Props } from 'react';
+import React, { FC } from 'react';
 import style from './profileCommon.less';
 
-export const SplitPane = ({ children }: Props<any>) => <div className={style.splitPane}>{children}</div>;
+export const SplitPane: FC = ({ children }) => <div className={style.splitPane}>{children}</div>;
 
 export default SplitPane;

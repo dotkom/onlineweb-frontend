@@ -4,21 +4,25 @@ import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 import { Link } from 'core/components/Router';
 import { getListEvents } from 'events/api/listEvents';
+import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
 import { EventsRepo } from 'events/providers/EventsRepo';
-import { isOngoingOrFuture } from 'events/utils/isOngoing';
+import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
 
-import { IEventViewProps, INewEvent } from '../../models/Event';
+import { IEvent, IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
 
-export type IProps = IEventViewProps;
+export interface IProps extends IEventViewProps {
+  filtered: boolean;
+}
 
-const filterListEvents = (events: INewEvent[]) => {
+const filterListEvents = (events: IEvent[]) => {
   return events.filter((event) => isOngoingOrFuture(event)).slice(0, 7);
 };
 
-export const ListView = ({  }: IProps) => {
+export const ListView = ({ filtered }: IProps) => {
   const { eventList, updateEventList } = useContext(EventsRepo);
+  const filteredList = useDebouncedFilteredEventList();
 
   const prefetch = usePrefetch(PrefetchKey.EVENTS_LIST, async () => {
     const prefetchedEvents = await getListEvents();
@@ -32,7 +36,7 @@ export const ListView = ({  }: IProps) => {
     })();
   }, []);
 
-  const events = filterListEvents(eventList);
+  const events = filtered ? filteredList : filterListEvents(eventList);
 
   const displayEvents = events.length ? events : prefetch || [];
 

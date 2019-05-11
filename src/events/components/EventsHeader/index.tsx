@@ -1,54 +1,31 @@
-import classNames from 'classnames';
-import ToggleSwitch from 'common/components/ToggleSwitch';
 import React from 'react';
-import { EventView } from '../../models/Event';
 
-import CalendarViewIcon from './CalendarViewIcon';
+import ToggleSwitch from 'common/components/ToggleSwitch';
+
+import { EventView } from 'events/models/Event';
+import ChangeViewIconButton from './ChangeViewIconButton';
+
 import style from './eventsHeader.less';
-import ImageViewIcon from './ImageViewIcon';
-import ListViewIcon from './ListViewIcon';
 
 export interface IProps {
   toggleAccessible: () => void;
-  changeView: (view: EventView) => void;
+  changeView?: (view: EventView) => void;
   accessible: boolean;
-  view: EventView;
+  view?: EventView;
 }
 
 const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
   <div className={style.grid}>
     <h1>Arrangementer</h1>
-    <div className={style.choiceGrid}>
-      <div
-        className={classNames(style.choice, {
-          [style.choiceActive]: view === EventView.IMAGE,
-        })}
-        onClick={() => changeView(EventView.IMAGE)}
-        tabIndex={0}
-      >
-        <ImageViewIcon />
-      </div>
+    {changeView && view !== undefined ? (
+      <div className={style.choiceGrid}>
+        <ChangeViewIconButton viewType={EventView.IMAGE} changeView={changeView} view={view} />
 
-      <div
-        className={classNames(style.choice, {
-          [style.choiceActive]: view === EventView.LIST,
-        })}
-        onClick={() => changeView(EventView.LIST)}
-        tabIndex={0}
-      >
-        <ListViewIcon />
-      </div>
+        <ChangeViewIconButton viewType={EventView.LIST} changeView={changeView} view={view} />
 
-      <div
-        className={classNames(style.choice, {
-          [style.choiceActive]: view === EventView.CALENDAR,
-        })}
-        onClick={() => changeView(EventView.CALENDAR)}
-        tabIndex={0}
-      >
-        <CalendarViewIcon />
+        <ChangeViewIconButton viewType={EventView.CALENDAR} changeView={changeView} view={view} />
       </div>
-    </div>
+    ) : null}
 
     <span className={style.toggleAccessible}>
       <span className={style.toggleAccessibleDescription}>

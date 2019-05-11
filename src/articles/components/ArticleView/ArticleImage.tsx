@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
 
 import ResponsiveImage from 'common/components/ResponsiveImage';
-import IImage from 'common/models/Image';
+import IResponsiveImage from '../../../common/models/ResponsiveImage';
 
 import style from './articleView.less';
 
 export interface IProps {
-  image: IImage;
+  image: IResponsiveImage;
 }
 
 export const ArticleImage: FC<IProps> = ({ image }) => (
