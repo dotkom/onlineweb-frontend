@@ -10,7 +10,7 @@ const MainArticle = ({ heading, image, ingress, id }: IArticle) => {
   return (
     <Link to={routes.detail + id}>
       <div className={style.articleContainer}>
-        <ResponsiveImage className={style.largeImage} image={image} size="sm" />
+        <ResponsiveImage className={style.largeImage} image={image} size="sm" type="article" />
         <div>
           <h2>{heading}</h2>
           <p>{ingress}</p>

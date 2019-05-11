@@ -78,6 +78,10 @@ export const getEventColor = (n: number): string => {
   }
 };
 
+export const isCompanyEvent = (event_type: number, company_event: ICompanyEvent[]): boolean => {
+  return [EventTypeEnum.BEDPRES, EventTypeEnum.KURS].includes(event_type) && company_event.length === 1;
+};
+
 /* TODO: Replace with ICSS exports */
 export const EVENT_COLORS = ['#eb536e', '#127dbd', '#43b171', '#fdbd47', '#2ac6f9', '#e75e3b', '#b36bcd'];
 
