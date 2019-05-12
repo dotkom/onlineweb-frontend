@@ -44,22 +44,26 @@ export const RelatedArticles: FC<IProps> = ({ mainArticle }) => {
   }, [mainArticle]);
 
   return (
-    <aside className={style.relatedArticles}>
-      <Carousel values={relatedArticles} title="Relaterte artikler">
-        {(relatedArticlesRef) => (
-          <>
-            {relatedArticlesRef.map((article) => (
-              <RelatedArticle
-                key={article.value.id}
-                id={article.value.id}
-                image={article.value.image}
-                heading={article.value.heading}
-                scrollRef={article.ref}
-              />
-            ))}
-          </>
-        )}
-      </Carousel>
-    </aside>
+    <>
+      {relatedArticles.length > 0 && (
+        <aside className={style.relatedArticles}>
+          <Carousel values={relatedArticles} title="Relaterte artikler">
+            {(relatedArticlesRef) => (
+              <>
+                {relatedArticlesRef.map((article) => (
+                  <RelatedArticle
+                    key={article.value.id}
+                    id={article.value.id}
+                    image={article.value.image}
+                    heading={article.value.heading}
+                    scrollRef={article.ref}
+                  />
+                ))}
+              </>
+            )}
+          </Carousel>
+        </aside>
+      )}
+    </>
   );
 };
