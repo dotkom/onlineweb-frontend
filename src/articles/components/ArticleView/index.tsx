@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 import Markdown from 'common/components/Markdown';
-import { Pane } from 'common/components/Panes';
 import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 
 import { getArticle } from 'articles/api';
 import { mockArticle } from 'articles/models/Article';
+import ResponsiveImage from 'common/components/ResponsiveImage/index';
 
-import { ArticleHeader } from './ArticleHeader';
-import { ArticleImage } from './ArticleImage';
+import { ArticleByline } from './ArticleByline';
 import { ArticleMeta } from './ArticleMeta';
 import { ArticleVideo } from './ArticleVideo';
 import style from './articleView.less';
@@ -36,14 +35,26 @@ export const ArticleView = ({ articleId }: IProps) => {
 
   return (
     <div className={style.container}>
-      {article.video ? <ArticleVideo vimeoId={article.video} /> : <ArticleImage image={article.image} />}
       <article className={style.article}>
-        <ArticleHeader article={article} />
-        <Pane>
-          <Markdown source={article.content} />
-        </Pane>
+        {article.video ? (
+          <ArticleVideo vimeoId={article.video} />
+        ) : (
+          <ResponsiveImage image={article.image} size="lg" type="article" />
+        )}
+        <header className={style.articleHeader}>
+          <h1>{article.heading}</h1>
+        </header>
+        <div className={style.ingress}>
+          <hr />
+          <p>{article.ingress}</p>
+        </div>
+        <ArticleByline article={article} />
+        <Markdown
+          className={style.articleText}
+          source={article.content.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)}
+        />
+        <ArticleMeta article={article} />
       </article>
-      <ArticleMeta article={article} />
       <RelatedArticles mainArticle={article} />
     </div>
   );

@@ -19,7 +19,7 @@ export interface IArticle {
 
 export const mockArticle: IArticle = {
   articleUrl: '',
-  heading: 'ha',
+  heading: '',
   image: DEFAULT_EVENT_IMAGE,
   ingress: '',
   absolute_url: '',
