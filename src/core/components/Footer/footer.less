@@ -5,41 +5,45 @@
 
 .footer {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-  padding: 20px @paddingHorizontal;
-  box-sizing: border-box;
-  color: @darkGray;
+  align-items: center;
+  justify-content: center;
+  padding: @paddingHorizontal;
   border-top: 1px solid @lightGray;
-  max-width: @owDesktopMaxWidth - @paddingHorizontal * 2;
+  color: @darkGray;
   margin: 10px auto 0;
+  box-sizing: border-box;
   width: calc(100% - @paddingHorizontal * 2);
+  max-width: @owDesktopMaxWidth - @paddingHorizontal * 2;
 
   & > * {
-    margin: 5px;
+    margin: 5px 15px;
+  }
+}
+
+.social,
+.sponsor {
+  padding: 5px;
+  filter: brightness(0.4);
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(0.2);
+  }
+
+  img {
+    height: 32px;
   }
 }
 
 .social {
-  display: flex;
+  display: inline-block;
 
-  & > a {
-    padding: 5px;
-    margin-right: 10px;
-    transition: filter 0.2s;
-    filter: brightness(0.4);
-
-    &:last-child {
-      margin-right: 0;
-    }
-
-    &:hover {
-      filter: brightness(0.2);
-    }
-
-    img {
-      height: 32px;
-    }
+  &:not(:last-child) {
+    margin-right: 5px;
   }
+}
+
+.sponsor:hover {
+  filter: brightness(0.35) sepia(1) hue-rotate(124deg) saturate(500%);
 }

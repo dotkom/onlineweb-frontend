@@ -37,13 +37,13 @@ const SOCIAL: ISocialLink[] = [
 ];
 
 const SocialLink = ({ name, link, icon }: ISocialLink) => (
-  <a href={link}>
+  <a className={style.social} href={link}>
     <Img src={icon} alt={name} />
   </a>
 );
 
 const SocialLinks = () => (
-  <div className={style.social}>
+  <div>
     {SOCIAL.map((platform) => (
       <SocialLink key={platform.name} {...platform} />
     ))}
