@@ -15,11 +15,6 @@ const SOCIAL: ISocialLink[] = [
     icon: '/static/img/social/facebook.svg',
   },
   {
-    name: 'twitter',
-    link: 'http://twitter.com/Online_NTNU',
-    icon: '/static/img/social/twitter.svg',
-  },
-  {
     name: 'instagram',
     link: 'https://www.instagram.com/online_ntnu/',
     icon: '/static/img/social/instagram.svg',
