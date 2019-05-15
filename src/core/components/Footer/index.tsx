@@ -1,7 +1,7 @@
+import Img from 'common/components/Img';
 import React from 'react';
 import style from './footer.less';
 import SocialLinks from './SocialLinks';
-import Img from 'common/components/Img';
 
 const Footer = () => (
   <footer className={style.footer}>
