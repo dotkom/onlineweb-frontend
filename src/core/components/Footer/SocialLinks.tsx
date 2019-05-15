@@ -15,11 +15,6 @@ const SOCIAL: ISocialLink[] = [
     icon: '/static/img/social/facebook.svg',
   },
   {
-    name: 'twitter',
-    link: 'http://twitter.com/Online_NTNU',
-    icon: '/static/img/social/twitter.svg',
-  },
-  {
     name: 'instagram',
     link: 'https://www.instagram.com/online_ntnu/',
     icon: '/static/img/social/instagram.svg',
@@ -37,13 +32,13 @@ const SOCIAL: ISocialLink[] = [
 ];
 
 const SocialLink = ({ name, link, icon }: ISocialLink) => (
-  <a href={link}>
+  <a className={style.social} href={link}>
     <Img src={icon} alt={name} />
   </a>
 );
 
 const SocialLinks = () => (
-  <div className={style.social}>
+  <div>
     {SOCIAL.map((platform) => (
       <SocialLink key={platform.name} {...platform} />
     ))}
