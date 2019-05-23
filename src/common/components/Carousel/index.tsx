@@ -70,9 +70,9 @@ export function Carousel<T>({ children, values: inputValues, title = '' }: IProp
   return (
     <section className={style.container}>
       <div className={style.arrowContainer}>
-        {values.length > 2 && <CarouselArrow className={style.leftArrow} direction="left" onClick={scrollToPrevRef} />}
+        {values.length > 1 && <CarouselArrow className={style.leftArrow} direction="left" onClick={scrollToPrevRef} />}
         <Heading title={title} />
-        {values.length > 2 && (
+        {values.length > 1 && (
           <CarouselArrow className={style.rightArrow} direction="right" onClick={scrollToNextRef} />
         )}
       </div>
