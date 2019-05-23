@@ -1,7 +1,7 @@
+import ResponsiveImage from 'common/components/ResponsiveImage/index';
+import IResponsiveImage from 'common/models/ResponsiveImage';
+import { Link } from 'core/components/Router/Link';
 import React, { FC } from 'react';
-import ResponsiveImage from '../../../../common/components/ResponsiveImage/index';
-import IResponsiveImage from '../../../../common/models/ResponsiveImage';
-import { Link } from '../../../../core/components/Router/Link';
 import { routes } from '../../ArticlesRouter';
 
 import style from './relatedArticle.less';
