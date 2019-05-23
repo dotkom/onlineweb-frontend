@@ -4,8 +4,8 @@ import React from 'react';
 import ResponsiveImage from 'common/components/ResponsiveImage';
 import { Link } from 'core/components/Router';
 
+import { routes } from 'articles/components/ArticlesRouter';
 import { IArticle } from 'articles/models/Article';
-import { routes } from '../../../articles/components/ArticlesRouter';
 import style from './articles.less';
 
 const SmallArticle = ({ heading, image, ingress_short, id }: IArticle) => {
