@@ -151,7 +151,6 @@ const wrapHtml = (dom: string, prefetcher: PrefetchState, helmetContext: FilledC
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
         <meta http-equiv="Pragma" content="no-cache">
-        <title>Linjeforeningen Online</title>
         ${helmet.title.toString()}
         ${helmet.meta.toString()}
         <link rel="icon" type="image/png" href="/static/icon-256.png" />
