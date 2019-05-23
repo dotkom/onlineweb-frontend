@@ -13,7 +13,7 @@ import fs from 'fs';
 import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import { Helmet } from 'react-helmet';
+import { FilledContext, HelmetProvider } from 'react-helmet-async';
 import { StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 
@@ -83,21 +83,25 @@ app.get('/serviceworker.js', (_, res) => {
  */
 app.get('*', async (req, res) => {
   const prefetcher = new PrefetchState();
-
   /** Render first time to register all fetches that are needed for current route */
   const initPrefetch = initJSX(req.path, prefetcher, req.cookies);
-  renderToString(initPrefetch);
+  renderToString(initPrefetch.jsx);
 
   await prefetcher.fetchAll();
 
   /** Initialize and do the actual render which will be sent to the user */
-  const jsx = initJSX(req.path, prefetcher, req.cookies);
+  const { jsx, helmetContext } = initJSX(req.path, prefetcher, req.cookies);
   const reactDom = renderToString(jsx);
-  const HTML = wrapHtml(reactDom, prefetcher);
+  const HTML = wrapHtml(reactDom, prefetcher, helmetContext);
 
   /** Send the finished response to the client */
   res.send(HTML);
 });
+
+interface IInitJSX {
+  jsx: JSX.Element;
+  helmetContext: FilledContext;
+}
 
 /**
  * @summary This is where the magic happens.
@@ -106,17 +110,25 @@ app.get('*', async (req, res) => {
  * Other than that everything is rendered just like in the browser. The StaticRouter uses the
  * requested url to render the corrent corresponding view to the user.
  */
-const initJSX = (location: string, prefetcher: PrefetchState, cookies: { [name: string]: string }): JSX.Element => (
-  <StaticRouter location={location} context={{}}>
-    <Cookies cookies={cookies}>
-      <Prefetched prefetcher={prefetcher}>
-        <ContextWrapper>
-          <App />
-        </ContextWrapper>
-      </Prefetched>
-    </Cookies>
-  </StaticRouter>
-);
+const initJSX = (location: string, prefetcher: PrefetchState, cookies: { [name: string]: string }): IInitJSX => {
+  const helmetContext = {};
+  return {
+    jsx: (
+      <HelmetProvider context={helmetContext}>
+        <StaticRouter location={location} context={{}}>
+          <Cookies cookies={cookies}>
+            <Prefetched prefetcher={prefetcher}>
+              <ContextWrapper>
+                <App />
+              </ContextWrapper>
+            </Prefetched>
+          </Cookies>
+        </StaticRouter>
+      </HelmetProvider>
+    ),
+    helmetContext: helmetContext as FilledContext,
+  };
+};
 
 /**
  * @summary Wrap the React DOM in standard HTML.
@@ -125,10 +137,11 @@ const initJSX = (location: string, prefetcher: PrefetchState, cookies: { [name: 
  * This is rendered as a string in the DOM and serialized by the front-end when it loads.
  * @param {string} dom A string containing a pre-rendered React DOM.
  * @param {PrefetchState} prefetcher
+ * @param {FilledContext} helmetContext
  */
-const wrapHtml = (dom: string, prefetcher: PrefetchState) => {
+const wrapHtml = (dom: string, prefetcher: PrefetchState, helmetContext: FilledContext) => {
   const [scripts, stylesheets] = getBundles();
-  const helmet = Helmet.renderStatic();
+  const { helmet } = helmetContext;
 
   return `
     <!DOCTYPE html>
