@@ -13,6 +13,7 @@ import fs from 'fs';
 import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { Helmet } from 'react-helmet';
 import { StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 
@@ -123,23 +124,28 @@ const initJSX = (location: string, prefetcher: PrefetchState, cookies: { [name: 
  * Also sets the initial state for the providers that need an initial state for fast render.
  * This is rendered as a string in the DOM and serialized by the front-end when it loads.
  * @param {string} dom A string containing a pre-rendered React DOM.
+ * @param {PrefetchState} prefetcher
  */
 const wrapHtml = (dom: string, prefetcher: PrefetchState) => {
   const [scripts, stylesheets] = getBundles();
+  const helmet = Helmet.renderStatic();
+
   return `
     <!DOCTYPE html>
-    <html lang="nb">
+    <html lang="nb" ${helmet.htmlAttributes.toString()}>
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
         <meta http-equiv="Pragma" content="no-cache">
         <title>Linjeforeningen Online</title>
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
         <link rel="icon" type="image/png" href="/static/icon-256.png" />
         <link rel="manifest" href="/static/owf.webmanifest" />
         ${stylesheets.join('\n')}
       </head>
-      <body>
+      <body ${helmet.bodyAttributes.toString()}>
         <div id="root">${dom}</div>
         <script>
           window.__PREFETCHED_STATE__ = ${JSON.stringify(serialize(prefetcher.getData()))}
