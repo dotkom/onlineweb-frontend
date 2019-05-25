@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { useDecrement } from './useDecrement';
 
-const DEFULAT_TICK = 1000;
+const DEFAULT_TICK = 1000;
 
 const calculateOffset = (time: DateTime, tick: number): number => {
   const endTime = time.toMillis();
@@ -17,7 +17,7 @@ const calculateOffset = (time: DateTime, tick: number): number => {
  * @param tick How often the timer should update. Defaults to every second.
  * @returns Seconds remaining until the countdown is finished.
  */
-export const useCountDown = (endTime: DateTime, tick = DEFULAT_TICK): number => {
+export const useCountDown = (endTime: DateTime, tick = DEFAULT_TICK): number => {
   const duration = calculateOffset(endTime, tick);
   const [remaining, decrement] = useDecrement(duration);
   useEffect(() => {
