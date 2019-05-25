@@ -47,8 +47,6 @@ export const ToastProvider: FC = ({ children }) => {
     setMessages((allMessages) => [...allMessages, message]);
 
     const cancelMessage = () => removeMessage(message.id);
-
-    setTimeout(cancelMessage, message.duration);
     return cancelMessage;
   };
 
