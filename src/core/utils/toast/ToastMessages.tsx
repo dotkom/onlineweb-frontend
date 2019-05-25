@@ -4,7 +4,7 @@ import React, { FC, useEffect } from 'react';
 import cross from 'common/components/ToggleSwitch/cross.svg';
 import { useCountDown } from 'common/hooks/useCountDown';
 
-import { getToastColor, IToastMessage } from './models';
+import { IToastMessage } from './models';
 import style from './toast.less';
 import { useToast } from './useToast';
 
@@ -31,8 +31,6 @@ const Message: FC<IMessageProps> = ({ message, remove }) => {
   const rawCounter = useCountDown(DateTime.local().plus({ milliseconds: message.duration }), COUNTDOWN_TICK);
   const counter = Math.round(rawCounter);
 
-  const color = getToastColor(message.type);
-
   useEffect(() => {
     if (counter === 0) {
       remove();
@@ -42,14 +40,14 @@ const Message: FC<IMessageProps> = ({ message, remove }) => {
   return (
     <div className={style.messageContainer}>
       <div className={style.messageContent}>
-        <p style={{ color }}>{message.content}</p>
+        <p>{message.content}</p>
         <button className={style.cancelButton} onClick={remove}>
           <img src={cross} alt="cross" />
         </button>
       </div>
       <div className={style.countDownProgress} style={{ gridTemplateColumns: `repeat(${countDownSeconds}, 1fr)` }}>
         {[...Array(countDownSeconds)].map((_, i) =>
-          countDownSeconds - counter >= i ? <div key={i} style={{ background: '#fff' }} /> : <div key={i} />
+          countDownSeconds - counter >= i ? <div key={i} className={style.progressTick} /> : <div key={i} />
         )}
       </div>
     </div>
