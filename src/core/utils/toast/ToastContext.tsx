@@ -2,10 +2,15 @@ import React, { createContext, FC, useState } from 'react';
 
 import { DEFAULT_MESSAGE, IToastMessage } from './models';
 
+export interface IAddToastReturn {
+  message: IToastMessage;
+  cancelMessage: () => void;
+}
+
 export interface IToastContextState {
   messages: IToastMessage[];
   removeMessage: (id: number) => void;
-  addMessage: (message: Partial<IToastMessage>) => () => void;
+  addMessage: (message: Partial<IToastMessage>) => IAddToastReturn;
 }
 
 export const INITIAL_STATE: IToastContextState = {
@@ -47,7 +52,7 @@ export const ToastProvider: FC = ({ children }) => {
     setMessages((allMessages) => [...allMessages, message]);
 
     const cancelMessage = () => removeMessage(message.id);
-    return cancelMessage;
+    return { message, cancelMessage };
   };
 
   const value = { messages, removeMessage, addMessage };
