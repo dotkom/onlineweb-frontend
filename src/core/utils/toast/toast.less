@@ -9,7 +9,7 @@
   box-sizing: border-box;
   border: 8px solid transparent;
   display: grid;
-  gap: 0;
+  gap: 4px;
   width: 400px;
 
   @media screen and (max-width: @owMobileBreakpoint) {
@@ -21,18 +21,23 @@
   display: grid;
   gap: 0.5px;
   grid-template-columns: repeat(6, 1fr);
-  margin: 2px;
+  margin: 0 3px 3px;
 
   > div {
-    height: 1px;
+    height: 2px;
     width: 100%;
   }
 }
 
+.progressTick {
+  background: #fff;
+}
+
 .messageContainer {
+  .owCard();
   box-sizing: border-box;
   width: 100%;
-  background: #000;
+  background: @darkGray;
 }
 
 .messageContent {
@@ -42,6 +47,8 @@
   padding: 8px;
   color: #fff;
   box-sizing: border-box;
+  font-size: @owFontS;
+  font-weight: 600;
 }
 
 .cancelButton {
