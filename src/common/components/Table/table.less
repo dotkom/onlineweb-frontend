@@ -1,0 +1,56 @@
+@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+
+.container {
+  .owCard();
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
+
+  > table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+
+    > caption {
+      font-size: @owFontL;
+      margin: 10px;
+    }
+
+    > thead {
+      border-bottom: 0.5px solid #333;
+    }
+
+    > tbody {
+      th,
+      td {
+        padding: 10px 0;
+        width: 100%;
+      }
+      tr {
+        height: 100%;
+        margin: 10px;
+        min-height: 50px;
+
+        &:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+
+        &:nth-child(odd) {
+          background-color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.header {
+  padding: 16px 0;
+  word-break: break-word;
+  hyphens: auto;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    font-size: @owFontS;
+  }
+}
