@@ -1,24 +1,24 @@
 import React, { createContext, FC, useState } from 'react';
 
-import { DEFAULT_MESSAGE, IToastMessage } from './models';
+import { DEFAULT_SETTINGS, IToastMessage, IToastSettings } from './models';
 
 export interface IAddToastReturn {
   message: IToastMessage;
-  cancelMessage: () => void;
+  cancelToast: () => void;
 }
 
 export interface IToastContextState {
   messages: IToastMessage[];
-  removeMessage: (id: number) => void;
-  addMessage: (message: Partial<IToastMessage>) => IAddToastReturn;
+  removeToast: (id: number) => void;
+  createToast: (content: string, settings: IToastSettings) => IAddToastReturn;
 }
 
 export const INITIAL_STATE: IToastContextState = {
   messages: [],
-  addMessage: () => {
+  createToast: () => {
     throw new Error('Add Toast Message has been called before provider init');
   },
-  removeMessage: () => {
+  removeToast: () => {
     throw new Error('Remove Toast Message has been called before provider init');
   },
 };
@@ -32,7 +32,7 @@ export const ToastProvider: FC = ({ children }) => {
   const [messages, setMessages] = useState(INITIAL_STATE.messages);
 
   /** Removes a ToastMessage from the list if displayed messages if it exists */
-  const removeMessage = (id: number) => {
+  const removeToast = (id: number) => {
     setMessages((allMessages) => {
       const index = allMessages.findIndex((message) => message.id === id);
       if (index !== -1) {
@@ -45,16 +45,22 @@ export const ToastProvider: FC = ({ children }) => {
   };
 
   /** Adds a new ToastMessage to the list of messages */
-  const addMessage = (newMessage: Partial<IToastMessage>) => {
+  const createToast = (content: string, settings: IToastSettings) => {
+    const { duration = DEFAULT_SETTINGS.duration, type = DEFAULT_SETTINGS.type } = settings;
     /** Merge defaults with the new message */
-    const message = { ...DEFAULT_MESSAGE, ...newMessage, id: counter } as IToastMessage;
+    const message: IToastMessage = {
+      id: counter,
+      content,
+      duration,
+      type,
+    };
     counter++;
     setMessages((allMessages) => [...allMessages, message]);
 
-    const cancelMessage = () => removeMessage(message.id);
-    return { message, cancelMessage };
+    const cancelToast = () => removeToast(message.id);
+    return { message, cancelToast };
   };
 
-  const value = { messages, removeMessage, addMessage };
+  const value = { messages, removeToast, createToast };
   return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>;
 };
