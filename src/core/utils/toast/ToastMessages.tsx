@@ -1,19 +1,19 @@
 import { DateTime } from 'luxon';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useContext, useEffect } from 'react';
 
 import cross from 'common/components/ToggleSwitch/cross.svg';
 import { useCountDown } from 'common/hooks/useCountDown';
 
 import { IToastMessage } from './models';
 import style from './toast.less';
-import { useToast } from './useToast';
+import { ToastContext } from './ToastContext';
 
 export const ToastMessages: FC = () => {
-  const { messages, removeMessage } = useToast();
+  const { messages, removeToast } = useContext(ToastContext);
   return messages.length > 0 ? (
     <div className={style.toastContainer}>
       {messages.map((message) => (
-        <Message key={message.id} message={message} remove={() => removeMessage(message.id)} />
+        <Message key={message.id} message={message} remove={() => removeToast(message.id)} />
       ))}
     </div>
   ) : null;
