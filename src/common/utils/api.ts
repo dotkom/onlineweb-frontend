@@ -115,7 +115,7 @@ export interface IPutParams<T> {
   options?: IRequestOptions;
 }
 
-export const put = async <T>(putParams: IPutParams<Partial<T>>): Promise<T> => {
+export const put = async <T, K = Partial<T>>(putParams: IPutParams<K>): Promise<T> => {
   const { query, data, parameters = {}, options = {} } = putParams;
   const headers = {
     Accept: 'application/json',
@@ -123,5 +123,16 @@ export const put = async <T>(putParams: IPutParams<Partial<T>>): Promise<T> => {
   };
   const body = JSON.stringify(data);
   const opts = { ...options, method: 'PUT', body, headers };
+  return performRequest(query, parameters, opts);
+};
+
+export const patch = async <T, K = Partial<T>>(patchParams: IPutParams<K>): Promise<T> => {
+  const { query, data, parameters = {}, options = {} } = patchParams;
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  const body = JSON.stringify(data);
+  const opts = { ...options, method: 'PATCH', body, headers };
   return performRequest(query, parameters, opts);
 };
