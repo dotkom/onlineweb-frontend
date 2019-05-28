@@ -12,6 +12,10 @@ const BASE_CONFIG = {
   OWF_SSR: 'false',
   OWF_VAPID_PUBLIC_KEY: '',
   OWF_WEBPUSH_SERVER_URL: '',
+  STRIPE_PUBLIC_KEY_ARRKOM: null,
+  STRIPE_PUBLIC_KEY_FAGKOM: null,
+  STRIPE_PUBLIC_KEY_PROKOM: null,
+  STRIPE_PUBLIC_KEY_TRIKOM: null,
 }
 
 module.exports = {
