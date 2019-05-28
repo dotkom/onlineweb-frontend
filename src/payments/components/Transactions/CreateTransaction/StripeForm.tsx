@@ -12,7 +12,9 @@ import {
 
 import style from './createTransaction.less';
 
-const ABOUT_CREATE_TRANSACTION = md`## Legg til Saldo`;
+const ABOUT_CREATE_TRANSACTION = md`
+## Legg til Saldo
+`;
 
 export interface IProps extends ReactStripeElements.InjectedStripeProps {}
 
