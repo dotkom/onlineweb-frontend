@@ -1,6 +1,16 @@
 import { ReactStripeElements as Base } from 'react-stripe-elements';
 
 /**
+ * The Stripe script adds a global Stripe object to window when it loads.
+ */
+declare global {
+  // tslint:disable-next-line interface-name
+  interface Window {
+    Stripe?: (apiKey: string) => stripe.Stripe;
+  }
+}
+
+/**
  * Extend Stripe type definitions because they are not up to date with what we need.
  */
 
