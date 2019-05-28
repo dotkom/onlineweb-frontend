@@ -16,6 +16,18 @@ export const DEFAULT_MESSAGE: Partial<IToastMessage> = {
   type: DEFAULT_TYPE,
 };
 
+export interface IToastSettings {
+  overwrite: boolean;
+  type: ToastType;
+  duration: number;
+}
+
+export const DEFAULT_SETTINGS: IToastSettings = {
+  overwrite: false,
+  type: 'info',
+  duration: 6000,
+};
+
 export const getToastColor = (type: ToastType) => {
   switch (type) {
     /** Use event colors for now, since we dont have specific colors for this */

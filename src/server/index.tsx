@@ -146,6 +146,7 @@ const wrapHtml = (dom: string, prefetcher: PrefetchState) => {
         </script>
         ${scripts.join('\n')}
       </body>
+      <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
     </html>
   `;
 };
