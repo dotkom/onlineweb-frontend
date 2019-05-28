@@ -1,7 +1,10 @@
 import React, { FC } from 'react';
 
 import Check from 'common/components/Verification/Check';
+import Circle from 'common/components/Verification/Circle';
 import Cross from 'common/components/Verification/Cross';
+import Pause from 'common/components/Verification/Pause';
+import Square from 'common/components/Verification/Square';
 import { PaymentStatus } from 'payments/models/Payment';
 
 import style from './status.less';
@@ -24,13 +27,13 @@ export const getStatusDisplay = (status: PaymentStatus) => {
 export const getStatusIcon = (status: PaymentStatus) => {
   switch (status) {
     case 'pending':
-      return Cross;
+      return Pause;
     case 'succeeded':
-      return Check;
+      return Circle;
     case 'done':
       return Check;
     case 'refunded':
-      return Cross;
+      return Square;
     case 'removed':
       return Cross;
   }
