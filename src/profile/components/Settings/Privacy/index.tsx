@@ -25,8 +25,8 @@ const Privacy: FC = () => {
   const { user } = useContext(UserContext);
   const [options, setOptions] = useState<PrivacyOptions>(INITIAL_STATE);
 
-  const { addMessage: addSuccessMessage } = useToast({ overwrite: true, type: 'success', duration: 3000 });
-  const { addMessage: addErrorMessage } = useToast({ overwrite: true, type: 'error', duration: 3000 });
+  const [displaySuccess] = useToast({ overwrite: true, type: 'success', duration: 3000 });
+  const [displayError] = useToast({ overwrite: true, type: 'error', duration: 3000 });
 
   /** Fetch Privacy options from server and put into state. */
   const fetchInitial = async () => {
@@ -42,9 +42,9 @@ const Privacy: FC = () => {
       const serverOptions = await putPrivacyOptions(newOptions, user);
       if (serverOptions) {
         setOptions(serverOptions);
-        addSuccessMessage({ content: 'Innstillingen ble oppdatert.' });
+        displaySuccess('Innstillingen ble oppdatert.');
       } else {
-        addErrorMessage({ content: 'Det skjedde noe galt under uppdateringen av innstillingen.' });
+        displayError('Det skjedde noe galt under uppdateringen av innstillingen.');
       }
     }
   };
