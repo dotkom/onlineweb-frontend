@@ -15,7 +15,6 @@ declare global {
  */
 
 declare module 'react-stripe-elements' {
-
   export namespace ReactStripeElements {
     // tslint:disable-next-line interface-name
     interface StripeProps {
@@ -38,7 +37,7 @@ declare module 'react-stripe-elements' {
         line2?: string;
         postal_code?: number;
         state: string;
-      },
+      };
       email?: string;
       name?: string;
       phone?: string;
