@@ -11,9 +11,14 @@ import {
 } from 'payments/api/paymentTransaction';
 
 import style from './createTransaction.less';
+import { PaymentRequestButton } from './PaymentRequestButton';
 
 const ABOUT_CREATE_TRANSACTION = md`
 ## Legg til Saldo
+`;
+
+const ABOUT_PAYMENT_REQUEST = md`
+### Betal med Google/Apple Pay
 `;
 
 export interface IProps extends ReactStripeElements.InjectedStripeProps {}
@@ -34,6 +39,17 @@ export const Form: FC<IProps> = ({ stripe }) => {
     }
   };
 
+  const handlePaymentMethod = async (paymentMethod: {}) => {
+    if (stripe) {
+      const transactionResponse = await createTransaction(amount, paymentMethod);
+      handleResponse(transactionResponse);
+      if (transactionResponse.status === 'pending' && transactionResponse.transaction) {
+        const verifyResponse = await handleCardVerification(stripe, transactionResponse.transaction);
+        handleResponse(verifyResponse);
+      }
+    }
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!stripe) {
@@ -45,12 +61,7 @@ export const Form: FC<IProps> = ({ stripe }) => {
 
     handleResponse(methodResponse);
     if (methodResponse.status === 'success' && methodResponse.paymentMethod) {
-      const transactionResponse = await createTransaction(amount, methodResponse.paymentMethod);
-      handleResponse(transactionResponse);
-      if (transactionResponse.status === 'pending' && transactionResponse.transaction) {
-        const verifyResponse = await handleCardVerification(stripe, transactionResponse.transaction);
-        handleResponse(verifyResponse);
-      }
+      handlePaymentMethod(methodResponse.paymentMethod);
     }
     setProcessing(false);
   };
@@ -75,6 +86,15 @@ export const Form: FC<IProps> = ({ stripe }) => {
           </button>
         </div>
       </form>
+      {ABOUT_PAYMENT_REQUEST}
+      {stripe ? (
+        <PaymentRequestButton
+          stripe={stripe}
+          amount={amount}
+          label="Saldoinnskudd"
+          onPaymentMethod={handlePaymentMethod}
+        />
+      ) : null}
     </div>
   );
 };
