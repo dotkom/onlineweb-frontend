@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 
+import { DOMAIN } from 'common/constants/endpoints';
 import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 import { EventsRepo } from 'events/providers/EventsRepo';
@@ -32,7 +33,7 @@ export const DetailView = (props: IProps) => {
         <title>{event.title}</title>
         <meta property="og:title" content={event.title} />
         <meta property="og:description" content={event.ingress_short} />
-        <meta property="og:image" content={event.image ? event.image.thumb : undefined} />
+        <meta property="og:image" content={event.image ? DOMAIN + event.image.thumb : undefined} />
       </Helmet>
 
       <div>
