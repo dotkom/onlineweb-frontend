@@ -1,15 +1,18 @@
-import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
+import React, { FC, useContext, useEffect, useState } from 'react';
+
+import { UserContext } from 'authentication/providers/UserProvider';
 import { Pane } from 'common/components/Panes';
 import { getKeys } from 'common/utils/tsHacks';
-import React, { Component } from 'react';
-import { getPrivacyOptions, putPrivacyOptions } from '../../../api/privacy';
-import { IPrivacy } from '../../../models/Privacy';
+import { useToast } from 'core/utils/toast/useToast';
+import { getPrivacyOptions, putPrivacyOptions } from 'profile/api/privacy';
+import { IPrivacy } from 'profile/models/Privacy';
+
 import Info from './Info';
 import Option from './Option';
 
-export type IState = { [key in keyof IPrivacy]: boolean };
+export type PrivacyOptions = { [key in keyof IPrivacy]: boolean };
 
-const INITIAL_STATE: IState = {
+const INITIAL_STATE: PrivacyOptions = {
   expose_address: false,
   expose_email: false,
   expose_nickname: false,
@@ -18,47 +21,60 @@ const INITIAL_STATE: IState = {
   visible_as_attending_events: false,
 };
 
-class Privacy extends Component<{}, IState> {
-  public static contextType = UserContext;
-  public state: IState = INITIAL_STATE;
+const Privacy: FC = () => {
+  const { user } = useContext(UserContext);
+  const [options, setOptions] = useState<PrivacyOptions>(INITIAL_STATE);
 
-  /**
-   * @summary Fetch Privacy options from server and put into state.
-   */
-  public async componentDidMount() {
-    const { user }: IUserContext = this.context;
+  const [displaySuccess] = useToast({ overwrite: true, type: 'success', duration: 3000 });
+  const [displayError] = useToast({ overwrite: true, type: 'error', duration: 3000 });
+
+  /** Fetch Privacy options from server and put into state. */
+  const fetchInitial = async () => {
     if (user) {
-      const options = await getPrivacyOptions(user);
-      this.setState({ ...options });
+      const serverOptions = await getPrivacyOptions(user);
+      setOptions({ ...serverOptions });
     }
-  }
+  };
+
+  /** Saves/sends current options to server and updates state from server. */
+  const savePrivacyOptions = async (newOptions: PrivacyOptions) => {
+    if (user) {
+      const serverOptions = await putPrivacyOptions(newOptions, user);
+      if (serverOptions) {
+        setOptions(serverOptions);
+        displaySuccess('Innstillingen ble oppdatert.');
+      } else {
+        displayError('Det skjedde noe galt under uppdateringen av innstillingen.');
+      }
+    }
+  };
 
   /**
-   * @summary Toggles an option in state, sends it to server and updates state from server.
+   * @summary Toggles an option in state.
    * @param {keyof IPrivacy} key Key of the option to toggle.
    */
-  public togglePrivacyOption(key: keyof IPrivacy) {
-    const { user }: IUserContext = this.context;
+  const togglePrivacyOption = async (key: keyof IPrivacy) => {
     if (user) {
-      const option = this.state[key];
-      this.setState({ ...this.state, [key]: !option }, async () => {
-        const options = await putPrivacyOptions(this.state, user);
-        this.setState(options);
-      });
+      const option = options[key];
+      const newOptions: PrivacyOptions = { ...options, [key]: !option };
+      setOptions(newOptions);
+      savePrivacyOptions(newOptions);
     }
-  }
+  };
 
-  public render() {
-    const { state } = this;
-    return (
-      <Pane>
-        <Info />
-        {getKeys<IPrivacy>(state).map((key) => (
-          <Option key={key} option={key} value={state[key]} toggle={() => this.togglePrivacyOption(key)} />
-        ))}
-      </Pane>
-    );
-  }
-}
+  /** Fetch initial options on component mount */
+  useEffect(() => {
+    fetchInitial();
+  }, []);
+
+  return (
+    <Pane>
+      <Info />
+      {getKeys<IPrivacy>(options).map((key) => (
+        <Option key={key} option={key} value={options[key]} toggle={() => togglePrivacyOption(key)} />
+      ))}
+    </Pane>
+  );
+};
 
 export default Privacy;

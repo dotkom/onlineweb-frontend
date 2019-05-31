@@ -1,0 +1,78 @@
+@import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+
+.toastContainer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  border: 8px solid transparent;
+  display: grid;
+  gap: 4px;
+  width: 400px;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    width: 100vw;
+  }
+}
+
+.countDownProgress {
+  display: grid;
+  gap: 0.5px;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0 3px 3px;
+
+  > div {
+    height: 2px;
+    width: 100%;
+  }
+}
+
+.progressTick {
+  background: #fff;
+}
+
+.messageContainer {
+  .owCard();
+  box-sizing: border-box;
+  width: 100%;
+  background: @darkGray;
+}
+
+.messageContent {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: @owFontS;
+  font-weight: 600;
+  word-break: break-word;
+}
+
+.cancelButton {
+  color: #fff;
+  background: unset;
+
+  > img {
+    width: 14px;
+  }
+}
+
+.error {
+  background: @red;
+}
+
+.success {
+  background: @green;
+}
+
+.info {
+  background: @darkGray;
+}
+
+.warning {
+  background: @orange;
+}

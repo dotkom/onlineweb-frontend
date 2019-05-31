@@ -32,7 +32,7 @@ history.listen((location) => ReactGA.pageview(location.pathname));
 const prefetcher = new PrefetchState();
 prefetcher.serialize();
 
-const render = (RootComponent: React.ComponentClass<{}> | React.StatelessComponent<{}>) => {
+const render = (RootComponent: React.ComponentClass<{}> | React.FC<{}>) => {
   const initialCookies = cookies.getJSON();
   /** Define renderer to use, hydrate if SSR back-end is enabled, render if no back-end */
   const reactRender = __SSR__ ? ReactDOM.hydrate : ReactDOM.render;

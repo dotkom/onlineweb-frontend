@@ -7,7 +7,6 @@ import { Link } from 'core/components/Router';
 import style from './header.less';
 import HeaderLogo from './HeaderLogo';
 import HeaderLogin from './Login';
-import MainSponsor from './MainSponsor';
 import MenuButton from './MenuButton';
 
 export interface IProps {}
@@ -45,7 +44,6 @@ class Header extends Component<IProps, IState> {
             <Link to={routes.webshop}>Webshop</Link>
           </div>
           <HeaderLogin />
-          <MainSponsor />
         </div>
       </header>
     );
