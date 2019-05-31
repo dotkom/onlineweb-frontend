@@ -107,6 +107,7 @@
   "dependencies": {
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.14",
+    "@fortawesome/free-brands-svg-icons": "^5.8.2",
     "@fortawesome/free-regular-svg-icons": "^5.7.2",
     "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
@@ -114,7 +115,9 @@
     "@sentry/node": "^4.5.3",
     "@types/classnames": "^2.2.7",
     "@types/express-http-proxy": "^1.5.0",
+    "@types/react-helmet-async": "^1.0.0",
     "@types/react-select": "^2.0.17",
+    "@types/react-stripe-elements": "^1.1.10",
     "abortcontroller-polyfill": "^1.2.3",
     "assets-webpack-plugin": "^3.9.7",
     "babel-core": "7.0.0-bridge.0",
@@ -126,8 +129,10 @@
     "postcss-focus-visible": "^4.0.0",
     "react-day-picker": "^7.3.0",
     "react-ga": "^2.5.7",
+    "react-helmet-async": "^1.0.2",
     "react-loadable": "^5.5.0",
-    "react-select": "^2.4.2"
+    "react-select": "^2.4.2",
+    "react-stripe-elements": "^3.0.0"
   },
   "resolutions": {
     "@types/react": "^16.8.1"

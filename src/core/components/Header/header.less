@@ -4,7 +4,6 @@
 @headerHeight: 60px;
 @headerPaddingVertical: 10px;
 @contentHeight: @headerHeight - @headerPaddingVertical * 2;
-@sponsorTextHeight: 8px;
 
 .header {
   background: @darkBlue;
@@ -127,29 +126,6 @@
     max-height: calc(20px + 1.5vw);
     min-height: 23px;
   }
-}
-
-.sponsor {
-  height: @contentHeight;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.sponsorLogo {
-  margin-bottom: 4px;
-  max-height: calc(15px + 1.5vw);
-  min-height: 20px;
-  height: @contentHeight - @sponsorTextHeight - $margin-bottom;
-}
-
-.sponsorText {
-  text-transform: uppercase;
-  color: #fff;
-  font-size: @sponsorTextHeight;
-  text-align: center;
-  user-select: none;
-  line-height: 1;
 }
 
 .user {

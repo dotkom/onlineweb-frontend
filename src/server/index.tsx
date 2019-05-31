@@ -13,6 +13,7 @@ import fs from 'fs';
 import path from 'path';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { FilledContext } from 'react-helmet-async';
 import { StaticRouter } from 'react-router-dom';
 import serialize from 'serialize-javascript';
 
@@ -82,17 +83,17 @@ app.get('/serviceworker.js', (_, res) => {
  */
 app.get('*', async (req, res) => {
   const prefetcher = new PrefetchState();
-
+  const helmetContext = {};
   /** Render first time to register all fetches that are needed for current route */
-  const initPrefetch = initJSX(req.path, prefetcher, req.cookies);
+  const initPrefetch = initJSX(req.path, prefetcher, req.cookies, helmetContext);
   renderToString(initPrefetch);
 
   await prefetcher.fetchAll();
 
   /** Initialize and do the actual render which will be sent to the user */
-  const jsx = initJSX(req.path, prefetcher, req.cookies);
+  const jsx = initJSX(req.path, prefetcher, req.cookies, helmetContext);
   const reactDom = renderToString(jsx);
-  const HTML = wrapHtml(reactDom, prefetcher);
+  const HTML = wrapHtml(reactDom, prefetcher, helmetContext as FilledContext);
 
   /** Send the finished response to the client */
   res.send(HTML);
@@ -105,11 +106,16 @@ app.get('*', async (req, res) => {
  * Other than that everything is rendered just like in the browser. The StaticRouter uses the
  * requested url to render the corrent corresponding view to the user.
  */
-const initJSX = (location: string, prefetcher: PrefetchState, cookies: { [name: string]: string }): JSX.Element => (
+const initJSX = (
+  location: string,
+  prefetcher: PrefetchState,
+  cookies: { [name: string]: string },
+  helmetContext: {}
+) => (
   <StaticRouter location={location} context={{}}>
     <Cookies cookies={cookies}>
       <Prefetched prefetcher={prefetcher}>
-        <ContextWrapper>
+        <ContextWrapper helmetContext={helmetContext}>
           <App />
         </ContextWrapper>
       </Prefetched>
@@ -123,29 +129,34 @@ const initJSX = (location: string, prefetcher: PrefetchState, cookies: { [name: 
  * Also sets the initial state for the providers that need an initial state for fast render.
  * This is rendered as a string in the DOM and serialized by the front-end when it loads.
  * @param {string} dom A string containing a pre-rendered React DOM.
+ * @param {PrefetchState} prefetcher
+ * @param {FilledContext} helmetContext
  */
-const wrapHtml = (dom: string, prefetcher: PrefetchState) => {
+const wrapHtml = (dom: string, prefetcher: PrefetchState, helmetContext: FilledContext) => {
   const [scripts, stylesheets] = getBundles();
+  const { helmet } = helmetContext;
   return `
     <!DOCTYPE html>
-    <html lang="nb">
+    <html lang="nb" ${helmet.htmlAttributes.toString()}>
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Cache-control" content="no-cache, no-store, must-revalidate">
         <meta http-equiv="Pragma" content="no-cache">
-        <title>Linjeforeningen Online</title>
+        ${helmet.title.toString()}
+        ${helmet.meta.toString()}
         <link rel="icon" type="image/png" href="/static/icon-256.png" />
         <link rel="manifest" href="/static/owf.webmanifest" />
         ${stylesheets.join('\n')}
       </head>
-      <body>
+      <body ${helmet.bodyAttributes.toString()}>
         <div id="root">${dom}</div>
         <script>
           window.__PREFETCHED_STATE__ = ${JSON.stringify(serialize(prefetcher.getData()))}
         </script>
         ${scripts.join('\n')}
       </body>
+      <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
     </html>
   `;
 };
