@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 
 import FrontpageArticles from 'articles/providers/FrontpageArticles';
+import { ToastProvider } from 'core/utils/toast/ToastContext';
 import { EventsRepoProvider } from 'events/providers/EventsRepo';
 import { QueryParamsProviderWithRouter } from './QueryParams';
 
@@ -13,11 +14,13 @@ export interface IProps {
 
 const ContextWrapper = ({ children, helmetContext }: IProps) => (
   <QueryParamsProviderWithRouter>
-    <EventsRepoProvider>
-      <FrontpageArticles>
-        <HelmetProvider context={helmetContext}>{children}</HelmetProvider>
-      </FrontpageArticles>
-    </EventsRepoProvider>
+    <ToastProvider>
+      <EventsRepoProvider>
+        <FrontpageArticles>
+          <HelmetProvider context={helmetContext}>{children}</HelmetProvider>
+        </FrontpageArticles>
+      </EventsRepoProvider>
+    </ToastProvider>
   </QueryParamsProviderWithRouter>
 );
 
