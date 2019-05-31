@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 
 import Markdown from 'common/components/Markdown';
+import { DOMAIN } from 'common/constants/endpoints';
 import { usePrefetch } from 'common/hooks/usePrefetch';
 import { PrefetchKey } from 'common/utils/PrefetchState';
 
 import { getArticle } from 'articles/api';
 import { mockArticle } from 'articles/models/Article';
 import ResponsiveImage from 'common/components/ResponsiveImage/index';
+import { Helmet } from 'react-helmet-async';
 
 import { ArticleByline } from './ArticleByline';
 import { ArticleMeta } from './ArticleMeta';
@@ -35,6 +37,18 @@ export const ArticleView = ({ articleId }: IProps) => {
 
   return (
     <div className={style.container}>
+      <Helmet>
+        <meta property="og:title" content={article.heading} />
+        <meta property="og:description" content={article.ingress_short} />
+        <meta property="og:image" content={article.image ? DOMAIN + article.image.thumb : undefined} />
+        <meta property="og:article:published_time" content={article.published_date} />
+        <meta property="og:article:modified_time" content={article.changed_date} />
+        <meta property="og:article:author" content={article.authors} />
+        {article.tags.map((tag) => (
+          <meta property="og:article:tag" content={tag} key={tag} />
+        ))}
+      </Helmet>
+
       <article className={style.article}>
         {article.video ? (
           <ArticleVideo vimeoId={article.video} />
