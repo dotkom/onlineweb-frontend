@@ -1,3 +1,5 @@
+import { ReactStripeElements } from 'react-stripe-elements';
+
 import { getUser } from 'authentication/api';
 import { getAllPages, patch, post } from 'common/utils/api';
 import {
@@ -5,7 +7,6 @@ import {
   IPaymentTransaction,
   IUpdatePaymentTransaction,
 } from 'payments/models/PaymentTransaction';
-import { ReactStripeElements } from 'react-stripe-elements';
 
 const API_URL = '/api/v1/payment/transactions/';
 
