@@ -1,11 +1,13 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 
 import Spinner from 'common/components/Spinner';
 import { DataTable, DataTableHeaders, DataTableSorters } from 'common/components/Table/DataTable';
+import { useDispatch, useSelector } from 'core/redux/hooks';
 import { useToast } from 'core/utils/toast/useToast';
 import { getAllTransactions } from 'payments/api/paymentTransaction';
 import { PaymentStatus } from 'payments/models/Payment';
 import { IPaymentTransaction } from 'payments/models/PaymentTransaction';
+import { Type } from 'payments/reducers/transactions';
 
 import { Transaction } from './Transaction';
 import style from './transactions.less';
@@ -27,18 +29,24 @@ const tableSorters: DataTableSorters<typeof tableHeaders, IPaymentTransaction> =
 };
 
 export const Transactions: FC = () => {
-  const [ready, setReady] = useState(false);
-  const [transactions, setTransactions] = useState<IPaymentTransaction[]>([]);
   const [addMessage] = useToast({ type: 'error', duration: 10000 });
 
+  const dispatch = useDispatch();
+  const transactions = useSelector((state) => state.payments.transactions.transactions);
+  const fetching = useSelector((state) => state.payments.transactions.fetching);
+
   const fetchTransactions = async () => {
+    dispatch({ type: Type.SET_FETCHING, status: true });
     try {
       const data = await getAllTransactions();
-      setTransactions(data);
+      dispatch({
+        type: Type.SET_TRANSACTIONS,
+        transactions: data,
+      });
     } catch (err) {
       addMessage(String(err));
     }
-    setReady(true);
+    dispatch({ type: Type.SET_FETCHING, status: false });
   };
 
   useEffect(() => {
@@ -47,7 +55,9 @@ export const Transactions: FC = () => {
 
   return (
     <div className={style.transactionsContainer}>
-      {ready ? (
+      {transactions.length === 0 && fetching ? (
+        <Spinner />
+      ) : (
         <DataTable
           title="Innskudd"
           headers={tableHeaders}
@@ -57,8 +67,6 @@ export const Transactions: FC = () => {
         >
           {(items) => items.map((transaction) => <Transaction key={transaction.datetime} transaction={transaction} />)}
         </DataTable>
-      ) : (
-        <Spinner />
       )}
     </div>
   );
