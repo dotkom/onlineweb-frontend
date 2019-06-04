@@ -18,19 +18,21 @@
 }
 
 .countDownProgress {
-  display: grid;
-  gap: 0.5px;
-  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
   margin: 0 3px 3px;
+  box-sizing: border-box;
+  position: relative;
 
-  > div {
+  > .progressBar {
+    position: absolute;
+    top: -5px;
+    left: 0;
     height: 2px;
-    width: 100%;
+    background: #fff;
+    transition-duration: unset; /* Defined in the Component based on props */
+    transition-property: width;
+    transition-timing-function: ease-in;
   }
-}
-
-.progressTick {
-  background: #fff;
 }
 
 .messageContainer {
