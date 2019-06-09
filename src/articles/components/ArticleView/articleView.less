@@ -2,25 +2,6 @@
 @import '~common/less/colors.less';
 @import '~common/less/constants.less';
 
-.byline {
-  padding-left: 1rem;
-  margin-top: 1rem;
-  line-height: 1.5;
-
-  > span {
-    font-weight: bold;
-
-    &:not(:first-child)::before {
-      content: '\A';
-      white-space: pre;
-    }
-  }
-
-  > p {
-    display: inline-block;
-  }
-}
-
 .articleHeader {
   margin: 1rem 1rem 0;
 }
@@ -34,7 +15,7 @@
     border: 0;
   }
 
-  > p {
+  > div > p {
     font-weight: bold;
     font-style: italic;
   }
@@ -73,6 +54,37 @@
   margin: 1rem;
 }
 
+.byline {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 1rem;
+  line-height: 1.5;
+
+  > .bylineItem {
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &:last-child {
+      flex-basis: 190px; // ensure there are not two items on the bottom row
+    }
+
+    > span {
+      font-weight: bold;
+
+      &:not(:first-child)::before {
+        content: '\A';
+        white-space: pre;
+      }
+    }
+    > p {
+      display: inline-block;
+    }
+  }
+}
+
 .articleMeta {
   display: flex;
   border-top: 1px solid @gray;
@@ -91,25 +103,23 @@
       margin-left: 1rem;
     }
 
-    > span {
-      &.tags:not(:last-child)::after {
+    > span.tags {
+      &:not(:last-child)::after {
         content: ', ';
       }
 
-      &.lastChanged,
-      .tags {
+      .lastChanged {
         font-style: italic;
         font-weight: normal;
       }
-
-      &:not(.tags) {
-        font-weight: bold;
-      }
+    }
+    > span:not(.tags) {
+      font-weight: bold;
     }
   }
 }
 
-@media screen and (min-width: @owMobileBreakpoint) {
+@media screen and (min-width: @owTabletBreakpoint) {
   .container {
     display: grid;
     grid-template:

@@ -60,7 +60,7 @@ export const ArticleView = ({ articleId }: IProps) => {
         </header>
         <div className={style.ingress}>
           <hr />
-          <p>{article.ingress}</p>
+          <Markdown source={article.ingress.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)} />
         </div>
         <ArticleByline article={article} />
         <Markdown
