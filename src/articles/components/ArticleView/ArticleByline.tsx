@@ -17,16 +17,20 @@ export const ArticleByline = ({ article }: IProps) => {
   return (
     <div className={style.bylineContainer}>
       <div className={style.byline}>
-        <span>Skrevet av </span>
-        <p>{authors}</p>
+        <div className={style.bylineItem}>
+          <span>Skrevet av </span>
+          <p>{authors}</p>
+        </div>
         {photographer ? (
-          <>
+          <div className={style.bylineItem}>
             <span>Fotograf </span>
             <p>{photographer}</p>
-          </>
+          </div>
         ) : null}
-        <span>Publisert </span>
-        <time dateTime={published_date}>{pubDateTime.toLocaleString()}</time>
+        <div className={style.bylineItem}>
+          <span>Publisert </span>
+          <time dateTime={published_date}>{pubDateTime.toLocaleString()}</time>
+        </div>
       </div>
     </div>
   );
