@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import React, { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { getKeys } from 'common/utils/tsHacks';
@@ -81,7 +82,14 @@ export function DataTable<T extends {}, H extends {}>({
         <thead>
           <tr>
             {getKeys(headers).map((header) => (
-              <th key={header as string} scope="col" onClick={() => handleHeaderClick(header)}>
+              <th
+                key={header as string}
+                className={classnames({
+                  [style.selectedHeader]: header === selectedHeader,
+                })}
+                scope="col"
+                onClick={() => handleHeaderClick(header)}
+              >
                 <h3 className={style.header}>{headers[header]}</h3>
               </th>
             ))}
