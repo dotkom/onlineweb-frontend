@@ -1,0 +1,32 @@
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
+
+.hobbyCard {
+  .owCard();
+  padding: 12px;
+  background: #fff;
+  justify-self: center;
+  display: grid;
+  grid-template-rows: min-content min-content min-content max-content auto min-content;
+}
+
+.title {
+  margin: 10px 0 2px;
+  text-align: center;
+}
+
+.linksContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.link {
+  border-bottom: 0.5px solid @darkGray;
+  padding: 0 0 10px;
+  margin: 0 0 4px;
+  &:hover {
+    cursor: pointer;
+    border-bottom-width: 1px;
+  }
+}
