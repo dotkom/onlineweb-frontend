@@ -1,28 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 
 import { STRIPE_KEY_TRIKOM } from 'common/constants/stripe';
+import { useStripeInit } from 'payments/hooks/useStripeInit';
+
 import { StripeForm } from './StripeForm';
 
 export const CreateTransaction = () => {
-  const [stripe, setStripe] = useState<stripe.Stripe | null>(null);
-
-  const initStripe = () => {
-    if (window.Stripe) {
-      setStripe(window.Stripe(STRIPE_KEY_TRIKOM));
-    }
-  };
-
-  useEffect(() => {
-    if (window.Stripe) {
-      initStripe();
-    } else {
-      const script = document.querySelector('#stripe-js');
-      if (script) {
-        script.addEventListener('load', initStripe);
-      }
-    }
-  }, []);
+  const stripe = useStripeInit(STRIPE_KEY_TRIKOM);
 
   return (
     <StripeProvider stripe={stripe}>
