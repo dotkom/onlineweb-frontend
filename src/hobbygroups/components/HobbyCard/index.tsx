@@ -1,13 +1,10 @@
 import React, { FC } from 'react';
 
 import Markdown from 'common/components/Markdown';
+import ResponsiveImage from 'common/components/ResponsiveImage';
 import { IHobbyGroup } from 'hobbygroups/models/HobbyGroup';
 
 import style from './card.less';
-import { Divider } from './Divider';
-import { Image } from './Image';
-import { Links, ReadMore } from './Links';
-import { Title } from './Title';
 
 export interface IProps {
   hobby: IHobbyGroup;
@@ -16,14 +13,14 @@ export interface IProps {
 export const HobbyCard: FC<IProps> = ({ hobby }) => {
   return (
     <div className={style.hobbyCard}>
-      <Image image={hobby.image} />
-      <Title>{hobby.title}</Title>
-      <Divider />
+      <div className={style.imageContainer}>
+        {hobby.image ? <ResponsiveImage image={hobby.image} size="xs" type="hobby" /> : null}
+      </div>
+      <h2 className={style.title}>{hobby.title}</h2>
       <Markdown source={hobby.description} />
-      <Divider />
-      <Links>
-        <ReadMore link={hobby.read_more_link}>{`Les mer om ${hobby.title}`}</ReadMore>
-      </Links>
+      <p className={style.linksContainer}>
+        <a href={hobby.read_more_link} className={style.link}>{`Les mer om ${hobby.title}`}</a>
+      </p>
     </div>
   );
 };
