@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { getKeys } from 'common/utils/tsHacks';
 
@@ -46,7 +46,7 @@ export function DataTable<T extends {}, H extends {}>({
   /** Sort items by the selected sorting function, memoize since sorting can be expensive. */
   const sortedItems = useMemo(() => items.sort(sortFunction), [selectedHeader]);
   /** Order the list by acending or descending */
-  const orderedItems = reversedSort ? sortedItems.reverse() : sortedItems;
+  const orderedItems = reversedSort ? sortedItems.slice().reverse() : sortedItems;
   /** Cut down the displayed list as the last step, even a cut of list should be sorted. */
   const displayItems = displayAll ? orderedItems : orderedItems.slice(0, displayAmount);
 
@@ -82,15 +82,19 @@ export function DataTable<T extends {}, H extends {}>({
         <thead>
           <tr>
             {getKeys(headers).map((header) => (
-              <th
-                key={header as string}
-                className={classnames({
-                  [style.selectedHeader]: header === selectedHeader,
-                })}
-                scope="col"
-                onClick={() => handleHeaderClick(header)}
-              >
+              <th key={header as string} scope="col" onClick={() => handleHeaderClick(header)}>
                 <h3 className={style.header}>{headers[header]}</h3>
+                <div className={style.directionContainer}>
+                  {header === selectedHeader && !reversedSort ? <Triangle /> : null}
+                </div>
+                <div
+                  className={classnames(style.headerBorder, {
+                    [style.selectedHeader]: header === selectedHeader,
+                  })}
+                />
+                <div className={classnames(style.directionContainer, style.upsideDown)}>
+                  {header === selectedHeader && reversedSort ? <Triangle /> : null}
+                </div>
               </th>
             ))}
           </tr>
@@ -105,3 +109,11 @@ export function DataTable<T extends {}, H extends {}>({
     </div>
   );
 }
+
+const Triangle: FC = () => {
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 8 3">
+      <path d="M4 3L0 0L8 0L4 3Z" />
+    </svg>
+  );
+};

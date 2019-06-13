@@ -17,6 +17,7 @@ export const Table: FC<IProps> = ({ headers, title, children }) => {
             {headers.map((header) => (
               <th key={header} scope="col">
                 <h3 className={style.header}>{header}</h3>
+                <div className={style.headerBorder} />
               </th>
             ))}
           </tr>

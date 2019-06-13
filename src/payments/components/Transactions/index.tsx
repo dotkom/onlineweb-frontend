@@ -20,7 +20,7 @@ const tableHeaders: DataTableHeaders = {
 const STATUS_SORT_ORDER: PaymentStatus[] = ['pending', 'succeeded', 'done', 'refunded', 'removed'];
 
 const tableSorters: DataTableSorters<typeof tableHeaders, IPaymentTransaction> = {
-  datetime: (a, b) => Date.parse(a.datetime) - Date.parse(b.datetime),
+  datetime: (a, b) => Date.parse(b.datetime) - Date.parse(a.datetime),
   amount: (a, b) => b.amount - a.amount,
   used_stripe: (a, b) => Number(b.used_stripe) - Number(a.used_stripe),
   status: (a, b) => STATUS_SORT_ORDER.indexOf(b.status) - STATUS_SORT_ORDER.indexOf(a.status),
