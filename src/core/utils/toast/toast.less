@@ -2,31 +2,29 @@
 @import '~common/less/constants.less';
 @import '~common/less/colors.less';
 
+@toastWidth: 400px;
+
 .toastContainer {
   position: fixed;
   bottom: 0;
   left: 0;
-  box-sizing: border-box;
   border: 8px solid transparent;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 4px;
-  width: 400px;
+  width: @toastWidth;
 
-  @media screen and (max-width: @owMobileBreakpoint) {
+  @media screen and (max-width: @toastWidth) {
     width: 100vw;
   }
 }
 
 .countDownProgress {
   width: 100%;
-  margin: 0 3px 3px;
+  padding: 6px;
   box-sizing: border-box;
-  position: relative;
 
   > .progressBar {
-    position: absolute;
-    top: -5px;
-    left: 0;
     height: 2px;
     background: #fff;
     transition-duration: unset; /* Defined in the Component based on props */
@@ -38,6 +36,7 @@
 .messageContainer {
   .owCard();
   box-sizing: border-box;
+  height: 100%;
   width: 100%;
   background: @darkGray;
 }
@@ -45,8 +44,9 @@
 .messageContent {
   display: flex;
   justify-content: space-between;
+  height: unset;
   width: 100%;
-  padding: 8px;
+  padding: 8px 8px 0;
   color: #fff;
   box-sizing: border-box;
   font-size: @owFontS;
@@ -57,6 +57,7 @@
 .cancelButton {
   color: #fff;
   background: unset;
+  margin: 0 4px;
 
   > img {
     width: 14px;
