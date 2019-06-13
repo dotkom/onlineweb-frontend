@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-import ResponsiveImage from 'common/components/ResponsiveImage';
 import Markdown from 'common/components/Markdown';
+import ResponsiveImage from 'common/components/ResponsiveImage';
 import { IHobbyGroup } from 'hobbygroups/models/HobbyGroup';
 
 import style from './card.less';
