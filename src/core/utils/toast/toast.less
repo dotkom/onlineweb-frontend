@@ -8,13 +8,14 @@
   position: fixed;
   bottom: 0;
   left: 0;
+  box-sizing: border-box;
   border: 8px solid transparent;
   display: flex;
   flex-direction: column;
   gap: 4px;
   width: @toastWidth;
 
-  @media screen and (max-width: @toastWidth) {
+  @media screen and (max-width: @owMobileBreakpoint) {
     width: 100vw;
   }
 }
