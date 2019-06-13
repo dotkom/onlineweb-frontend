@@ -11,14 +11,14 @@ import { ToastContext } from './ToastContext';
 export const ToastMessages: FC = () => {
   const { messages, removeToast } = useContext(ToastContext);
   const transitions = useTransition(messages, (message) => message.id, {
-    from: { opacity: 0, transform: 'translate3d(-30px, 0, 0)', maxHeight: '0px' },
-    enter: { opacity: 1, transform: 'translate3d(0, 0, 0)', maxHeight: '500px' },
-    leave: { opacity: 0, transform: 'translate3d(-30px, 0, 0)', maxHeight: '0px' },
+    from: { opacity: 0, transform: 'translate3d(-30px, 0, 0)', maxHeight: '0%' },
+    enter: { opacity: 1, transform: 'translate3d(0, 0, 0)', maxHeight: '100%' },
+    leave: { opacity: 0, transform: 'translate3d(-30px, 0, 0)', maxHeight: '0%' },
   });
   return transitions.length > 0 ? (
     <div className={style.toastContainer}>
       {transitions.map(({ item, key, props }) => (
-        <animated.div key={key} style={{ ...props, transitionDuration: '100ms', height: '100%' }}>
+        <animated.div key={key} style={props}>
           <Message key={item.id} message={item} remove={() => removeToast(item.id)} />
         </animated.div>
       ))}
