@@ -18,10 +18,6 @@
       margin: 10px;
     }
 
-    > thead {
-      border-bottom: 0.5px solid #333;
-    }
-
     > tbody {
       th,
       td {
@@ -46,11 +42,49 @@
 }
 
 .header {
-  padding: 16px 0;
+  padding: 10px 0;
   word-break: break-word;
   hyphens: auto;
 
   @media screen and (max-width: @owMobileBreakpoint) {
     font-size: @owFontS;
   }
+}
+
+.headerBorder {
+  border-bottom: 0.5px solid #333;
+
+  &.selectedHeader {
+    border-bottom: 1.5px solid #333;
+  }
+}
+
+.directionContainer {
+  text-align: center;
+  height: 6px;
+  margin-bottom: -2px;
+
+  path {
+    fill: @darkGray;
+  }
+
+  &.upsideDown {
+    transform: rotate(180deg);
+    margin-top: -2px;
+  }
+}
+
+.toggleButton {
+  border-radius: 3px;
+  padding: 10px;
+  border: 2px solid @green;
+  color: @green;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bottomContent {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0 0;
 }
