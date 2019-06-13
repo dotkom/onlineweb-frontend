@@ -33,7 +33,7 @@
     height: @imageSize;
     border-radius: 50%;
     background: #fff;
-    transition: transform 0.25s ease-in;
+    transition: transform 0.25s;
   }
 
   &:hover {
@@ -45,8 +45,10 @@
 }
 
 .title {
-  margin: @padding 0;
+  padding: 15px 0;
   text-align: center;
+  border-bottom: 1px solid @lightGray;
+  margin-bottom: 15px;
 }
 
 .linksContainer {
@@ -56,5 +58,5 @@
 
 .link {
   display: inline-block;
-  margin-top: @padding;
+  margin-top: 15px;
 }
