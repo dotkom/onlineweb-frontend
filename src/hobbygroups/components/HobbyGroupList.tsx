@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+
 import { getHobbyGroups } from '../api';
-import style from '../less/hobbygroups.less';
 import { IHobbyGroup } from '../models/HobbyGroup';
-import HobbyGroup from './HobbyGroup';
+import { Hobbies } from './Hobbies';
 
 export interface IHobbyGroupListState {
   groups: IHobbyGroup[];
@@ -21,15 +21,8 @@ export default class HobbyGroupList extends Component<{}, IHobbyGroupListState> 
 
   public render() {
     const { groups } = this.state;
-    return (
-      <div className={style.container}>
-        {groups
-          .filter(filterHobbies)
-          .sort(sortHobbies)
-          .map((group) => (
-            <HobbyGroup key={group.title} hobby={group} />
-          ))}
-      </div>
-    );
+    const displayGroups = groups.filter(filterHobbies).sort(sortHobbies);
+
+    return <Hobbies hobbies={displayGroups} />;
   }
 }
