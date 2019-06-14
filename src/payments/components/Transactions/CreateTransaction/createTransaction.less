@@ -2,6 +2,8 @@
 @import '~common/less/mixins.less';
 @import '~common/less/constants.less';
 
+@import './input.less';
+
 .container {
   .owCard();
   width: 100%;
@@ -11,44 +13,22 @@
   gap: @owFontS;
 }
 
-.form {
-  width: 100%;
+.paymentMethods {
   display: grid;
-  grid-template-columns: 4fr 3fr;
   gap: @owFontS;
+  grid-template-columns: 3fr min-content 1fr;
 
   @media screen and (max-width: @owMobileBreakpoint) {
     grid-template-columns: 1fr;
   }
-
-  /* stylelint-disable selector-class-pattern */
-  input,
-  select,
-  :global(.StripeElement) {
-    .owBorderRadius();
-    padding: 10px;
-    border: 2px solid @offWhite;
-    background: transparent;
-  }
-  /* stylelint-enable */
 }
 
-.subForm {
-  width: 100%;
-  display: grid;
-  gap: @owFontS;
-  grid-template-columns: 2fr 1fr;
-}
+.paymentsDivider {
+  margin: 0 6px;
+  border-right: 0.5px solid @gray;
 
-.payButton {
-  .owBorderRadius();
-  background: @green;
-  color: #fff;
-  font-size: @owFontM;
-  font-weight: 400;
-  letter-spacing: 1px;
-
-  &:disabled {
-    background: @gray;
+  @media screen and (max-width: @owMobileBreakpoint) {
+    border-bottom: 0.5px solid @gray;
+    margin: 6px 0;
   }
 }

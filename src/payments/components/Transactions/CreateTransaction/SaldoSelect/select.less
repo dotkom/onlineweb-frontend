@@ -1,0 +1,12 @@
+@import '~common/less/constants.less';
+
+@import '../input.less';
+
+.amountSelect {
+  .inputStyleMixin();
+  max-width: 400px;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    max-width: 100%;
+  }
+}

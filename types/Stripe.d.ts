@@ -43,4 +43,52 @@ declare module 'react-stripe-elements' {
       phone?: string;
     };
   }
+
+  // tslint:disable-next-line interface-name
+  export interface Card {
+    brand: 'amex' | 'diners' | 'discover' | 'jcb' | 'mastercard' | 'unionpay' | 'visa' | 'unknown';
+  }
+
+  // tslint:disable-next-line interface-name
+  export interface BillingDetails {
+    address: {};
+    email: string | null;
+    name: string | null;
+    phone: string | null;
+  }
+
+  // tslint:disable-next-line interface-name
+  export interface PaymentMethod {
+    billing_details: BillingDetails
+    card: stripe.Card;
+    /* Number of seconds since epoch */
+    created: number;
+    /* Stripe Customer Object */
+    customer: {} | null;
+    id: string;
+    livemode: boolean;
+    metadata: {}
+    object: 'payment_method';
+    type: string;
+  }
+
+  type PaymentRequestStatus =
+    | 'success'
+    | 'fail'
+    | 'invalid_payer_name'
+    | 'invalid_payer_email'
+    | 'invalid_payer_phone'
+    | 'invalid_shipping_address'
+
+  // tslint:disable-next-line interface-name
+  export interface PaymentRequestEvent {
+    complete: (status: PaymentRequestStatus) => void;
+    methodName: string | null;
+    payerEmail: string | null;
+    payerName: string | null;
+    payerPhone: number | string | null;
+    paymentMethod: PaymentMethod
+    shippingAddress: string | null;
+    shippingOption: string | null;
+  }
 }
