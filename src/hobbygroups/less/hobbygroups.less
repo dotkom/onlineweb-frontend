@@ -1,55 +1,6 @@
 @import '~common/less/mixins.less';
 @import '~common/less/constants.less';
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-}
-
-.hobby {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  justify-items: center;
-
-  & img {
-    width: 11rem;
-    align-self: center;
-    z-index: 1;
-    .owCard();
-  }
-
-  & > div {
-    padding: 20px;
-    .owCard();
-  }
-}
-
-.hobbyTitle {
-  margin-bottom: 10px;
-}
-
-@media only screen and (max-width: @owDesktopMaxWidth) {
-  .container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-  .hobby {
-    grid-template-columns: 1fr;
-
-    & > div {
-      margin-top: 5px;
-      width: 40rem;
-    }
-  }
-}
-
-@media only screen and (max-width: @owMobileBreakpoint) {
-  .hobby > div {
-    width: 80%;
-  }
-}
-
 .intro {
   margin: 20px 0;
 
