@@ -25,8 +25,8 @@ const Privacy: FC = () => {
   const { user } = useContext(UserContext);
   const [options, setOptions] = useState<PrivacyOptions>(INITIAL_STATE);
 
-  const [displaySuccess] = useToast({ overwrite: true, type: 'success', duration: 3000 });
-  const [displayError] = useToast({ overwrite: true, type: 'error', duration: 3000 });
+  const [displaySuccess] = useToast({ overwrite: true, type: 'success' });
+  const [displayError] = useToast({ overwrite: true, type: 'error' });
 
   /** Fetch Privacy options from server and put into state. */
   const fetchInitial = async () => {

@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { useDecrement } from './useDecrement';
 
@@ -18,11 +18,11 @@ const calculateOffset = (time: DateTime, tick: number): number => {
  * @returns Seconds remaining until the countdown is finished.
  */
 export const useCountDown = (endTime: DateTime, tick = DEFAULT_TICK): number => {
-  const duration = calculateOffset(endTime, tick);
+  const duration = useMemo(() => calculateOffset(endTime, tick), [endTime.toMillis()]);
   const [remaining, decrement] = useDecrement(duration);
   useEffect(() => {
-    const interval = setInterval(decrement, tick);
-    const clear = () => clearInterval(interval);
+    const timeout = setTimeout(decrement, tick);
+    const clear = () => clearTimeout(timeout);
     return clear;
   }, [remaining]);
   return remaining;
