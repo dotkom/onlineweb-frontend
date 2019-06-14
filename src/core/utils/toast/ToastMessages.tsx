@@ -1,19 +1,26 @@
-import { DateTime } from 'luxon';
-import React, { FC, useContext, useEffect } from 'react';
+import React, { FC, useContext } from 'react';
+import { animated, useTransition } from 'react-spring';
 
 import cross from 'common/components/ToggleSwitch/cross.svg';
-import { useCountDown } from 'common/hooks/useCountDown';
 
 import { IToastMessage } from './models';
+import { Progress } from './Progress';
 import style from './toast.less';
 import { ToastContext } from './ToastContext';
 
 export const ToastMessages: FC = () => {
   const { messages, removeToast } = useContext(ToastContext);
-  return messages.length > 0 ? (
+  const transitions = useTransition(messages, (message) => message.id, {
+    from: { opacity: 0, transform: 'translate3d(-30px, 0, 0)', maxHeight: '0%' },
+    enter: { opacity: 1, transform: 'translate3d(0, 0, 0)', maxHeight: '100%' },
+    leave: { opacity: 0, transform: 'translate3d(-30px, 0, 0)', maxHeight: '0%' },
+  });
+  return transitions.length > 0 ? (
     <div className={style.toastContainer}>
-      {messages.map((message) => (
-        <Message key={message.id} message={message} remove={() => removeToast(message.id)} />
+      {transitions.map(({ item, key, props }) => (
+        <animated.div key={key} style={props}>
+          <Message key={item.id} message={item} remove={() => removeToast(item.id)} />
+        </animated.div>
       ))}
     </div>
   ) : null;
@@ -24,19 +31,7 @@ export interface IMessageProps {
   remove: () => void;
 }
 
-const COUNTDOWN_TICK = 200;
-
 const Message: FC<IMessageProps> = ({ message, remove }) => {
-  const countDownSeconds = message.duration / COUNTDOWN_TICK;
-  const rawCounter = useCountDown(DateTime.local().plus({ milliseconds: message.duration }), COUNTDOWN_TICK);
-  const counter = Math.round(rawCounter);
-
-  useEffect(() => {
-    if (counter === 0) {
-      remove();
-    }
-  }, [counter]);
-
   return (
     <div className={style.messageContainer}>
       <div className={style.messageContent}>
@@ -45,11 +40,7 @@ const Message: FC<IMessageProps> = ({ message, remove }) => {
           <img src={cross} alt="cross" />
         </button>
       </div>
-      <div className={style.countDownProgress} style={{ gridTemplateColumns: `repeat(${countDownSeconds}, 1fr)` }}>
-        {[...Array(countDownSeconds)].map((_, i) =>
-          countDownSeconds - counter >= i ? <div key={i} className={style.progressTick} /> : <div key={i} />
-        )}
-      </div>
+      <Progress duration={message.duration} onFinish={remove} />
     </div>
   );
 };
