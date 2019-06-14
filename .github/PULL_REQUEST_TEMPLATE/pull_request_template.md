@@ -8,7 +8,7 @@ assignees: ''
 ---
 
 ### Description of changes
-<!-- It is often obvious what changed by looking at the code, so it is more helpful to say _why_ it is necessary -->
+<!-- It is often obvious what changed by looking at the code, so it is more helpful to say _why_ it should be changed -->
 
 <details>
 <summary>Before</summary>
