@@ -42,6 +42,7 @@ app.use(cookieParser());
 
 app.use('/public', express.static('./dist'));
 app.use('/static', express.static('./static'));
+app.use('/.well-known', express.static('./src/server/.well-known'));
 
 /** Initialize analytics endpoints */
 withAnalytics(app);
