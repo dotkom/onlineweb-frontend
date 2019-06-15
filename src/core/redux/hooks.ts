@@ -1,4 +1,5 @@
 import {
+  TypedUseSelectorHook,
   useDispatch as useReduxDispatch,
   useSelector as useReduxSelector,
   useStore as useReduxStore,
@@ -12,10 +13,7 @@ import { Dispatch, State, Thunk } from './Store';
 
 export const useDispatch = (...args: Parameters<typeof useReduxDispatch>) => useReduxDispatch<Dispatch>(...args);
 
-export const useSelector = <TSelected>(
-  selector: (state: State) => TSelected,
-  equalityFn?: (left: TSelected, right: TSelected) => boolean
-) => useReduxSelector<State, TSelected>(selector, equalityFn);
+export const useSelector: TypedUseSelectorHook<State> = useReduxSelector;
 
 export const useStore = (...args: Parameters<typeof useReduxStore>) => useReduxStore(...args);
 
