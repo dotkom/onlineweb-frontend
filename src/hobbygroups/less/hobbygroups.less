@@ -1,35 +1,5 @@
 @import '~common/less/mixins.less';
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-}
-
-.hobby {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  .owCard();
-
-  & img {
-    width: 100%;
-  }
-
-  & > div {
-    margin: 20px;
-  }
-}
-
-.hobbyTitle {
-  margin-bottom: 10px;
-}
-
-@media only screen and (max-width: 1024px) {
-  .container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-}
+@import '~common/less/constants.less';
 
 .intro {
   margin: 20px 0;
