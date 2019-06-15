@@ -17,7 +17,7 @@ export interface IResponsiveImageSizes {
   xs: string;
 }
 
-export type ResponsiveImageTypes = 'article' | 'company' | 'event' | 'offline' | 'product';
+export type ResponsiveImageTypes = 'article' | 'company' | 'event' | 'offline' | 'product' | 'hobby' | 'resource';
 
 export type ResponsiveImageDimensions = {
   [Type in ResponsiveImageTypes]: { [Size in keyof IResponsiveImageSizes]: [number, number] }
@@ -70,6 +70,24 @@ export const IMAGE_DIMENSIONS: ResponsiveImageDimensions = {
     md: [520, 624],
     sm: [390, 468],
     xs: [260, 312],
+  },
+  resource: {
+    thumb: DEFAULT_THUMB_SIZE,
+    original: [Infinity, Infinity],
+    wide: [710, 710],
+    lg: [710, 710],
+    md: [710, 710],
+    sm: [540, 540],
+    xs: [360, 360],
+  },
+  hobby: {
+    thumb: DEFAULT_THUMB_SIZE,
+    original: [Infinity, Infinity],
+    wide: [710, 710],
+    lg: [710, 710],
+    md: [710, 710],
+    sm: [540, 540],
+    xs: [360, 360],
   },
 };
 

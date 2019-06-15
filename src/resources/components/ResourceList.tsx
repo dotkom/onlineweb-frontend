@@ -8,6 +8,9 @@ export interface IResourceListState {
   resources: IResource[];
 }
 
+const sortResources = (a: IResource, b: IResource) => (a.priority || 0) - (b.priority || 0);
+const filterResources = (resource: IResource) => resource.active;
+
 export default class ResourceList extends Component<{}, IResourceListState> {
   public readonly state = { resources: [] } as IResourceListState;
 
@@ -20,9 +23,12 @@ export default class ResourceList extends Component<{}, IResourceListState> {
     const { resources } = this.state;
     return (
       <div className={style.container}>
-        {resources.map((resource) => (
-          <Resource key={resource.title} {...resource} />
-        ))}
+        {resources
+          .filter(filterResources)
+          .sort(sortResources)
+          .map((resource) => (
+            <Resource key={resource.title} resource={resource} />
+          ))}
       </div>
     );
   }
