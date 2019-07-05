@@ -11,9 +11,9 @@ import CardFront from './CardFront';
 import EditCard from './EditCard';
 
 const INFO_TEXT = md`
-  # NTNU Adganskort
+  # NTNU Adgangskort
 
-  Adganskortet kan brukes til en rekke ting an Lineforeningen Online.
+  Adgangskortet kan brukes til en rekke ting an Lineforeningen Online.
   Dette inkluderer:
 
   - 1. Verifisering av identitet og oppmøte på arrangementer.
