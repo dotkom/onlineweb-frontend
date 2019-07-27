@@ -2,7 +2,7 @@ import { batch } from 'react-redux';
 import { Reducer } from 'redux';
 
 import { getUser } from 'authentication/api';
-import { Thunk } from 'core/redux/Store';
+import { Thunk } from 'core/redux/types';
 import { getOrders } from 'profile/api/orders';
 import { IOrderLine } from 'profile/models/Orders';
 
@@ -52,9 +52,9 @@ export interface ISetErrorsAction {
   errors?: IApiError<IOrderLine>;
 }
 
-export type Action = IFetchOrderLinesAction | ISetStatusAction | ISetOrderLinesAction | ISetErrorsAction;
+export type OrderLineAction = IFetchOrderLinesAction | ISetStatusAction | ISetOrderLinesAction | ISetErrorsAction;
 
-export const orderLinesReducer: Reducer<IOrderLinesState, Action> = (state = INITIAL_STATE, action) => {
+export const orderLinesReducer: Reducer<IOrderLinesState, OrderLineAction> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case Type.SET_STATUS:
       return {

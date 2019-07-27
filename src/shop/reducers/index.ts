@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 
-import { orderLinesReducer } from './orderLines';
+import { OrderLineAction, orderLinesReducer } from './orderLines';
+
+export type ShopAction = OrderLineAction;
 
 export const shopReducer = combineReducers({
   orderLines: orderLinesReducer,

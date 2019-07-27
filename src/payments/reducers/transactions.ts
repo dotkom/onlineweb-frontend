@@ -1,7 +1,7 @@
 import { batch } from 'react-redux';
 import { Reducer } from 'redux';
 
-import { Thunk } from 'core/redux/Store';
+import { Thunk } from 'core/redux/types';
 import { getAllTransactions } from 'payments/api/paymentTransaction';
 import { IPaymentTransaction } from 'payments/models/PaymentTransaction';
 
@@ -35,9 +35,9 @@ export interface ISetFetchingAction {
   status: boolean;
 }
 
-export type Action = ISetTransactionsAction | IFetchTransactionsAction | ISetFetchingAction;
+export type TransactionAction = ISetTransactionsAction | IFetchTransactionsAction | ISetFetchingAction;
 
-export const transactionsReducer: Reducer<ITransactionsState, Action> = (state = INITIAL_STATE, action) => {
+export const transactionsReducer: Reducer<ITransactionsState, TransactionAction> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case Type.SET_TRANSACTIONS:
       return {
