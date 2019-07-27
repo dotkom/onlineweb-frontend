@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
 
 import { md } from 'common/components/Markdown';
+import { useThunk } from 'core/redux/hooks';
 import { useToast } from 'core/utils/toast/useToast';
 import {
   createPaymentMethod,
@@ -9,6 +10,7 @@ import {
   handleCardVerification,
   IGenericReturn,
 } from 'payments/api/paymentTransaction';
+import { fetchTransactions } from 'payments/reducers/transactions';
 
 import { CardPayment } from './CardPayment';
 import style from './createTransaction.less';
@@ -26,6 +28,7 @@ export const Form: FC<IProps> = ({ stripe }) => {
   const [displayMessage] = useToast({ duration: 12000, overwrite: true });
   const [processing, setProcessing] = useState(false);
   const [amount, setAmount] = useState(DEFAULT_SALDO_VALUE);
+  const updateTransactions = useThunk(fetchTransactions());
 
   /** Handle payment statuses and display messages apropriatly to the user. */
   const handleResponse = ({ status, message }: IGenericReturn) => {
@@ -69,6 +72,7 @@ export const Form: FC<IProps> = ({ stripe }) => {
       handlePaymentMethod(methodResponse.paymentMethod);
     }
     setProcessing(false);
+    updateTransactions();
   };
 
   return (

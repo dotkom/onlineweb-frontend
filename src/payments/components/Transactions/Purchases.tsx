@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 
-import { getUser } from 'authentication/api';
 import Spinner from 'common/components/Spinner';
 import { DataTable, DataTableHeaders, DataTableSorters } from 'common/components/Table/DataTable';
+import { useSelector, useThunk } from 'core/redux/hooks';
 import { useToast } from 'core/utils/toast/useToast';
-import { getOrders } from 'profile/api/orders';
-import { IOrderLine } from 'profile/models/Orders';
+import { transformOrderData } from 'profile/api/orders';
+import { fetchOrderLines } from 'shop/reducers/orderLines';
 
 import { Paid } from '../Paid';
 import style from './transactions.less';
@@ -18,22 +18,6 @@ export interface IOrderData {
   date: DateTime;
   price: number;
 }
-
-const transformOrderData = (orderLines: IOrderLine[]): IOrderData[] => {
-  const orderData: IOrderData[] = [];
-  for (const orderLine of orderLines) {
-    for (const data of orderLine.orders) {
-      orderData.push({
-        amount: data.quantity,
-        date: DateTime.fromISO(orderLine.datetime),
-        paid: orderLine.paid,
-        price: data.price,
-        product: data.content_object.name,
-      });
-    }
-  }
-  return orderData;
-};
 
 const tableHeaders: DataTableHeaders = {
   product: 'Produkt',
@@ -52,29 +36,25 @@ const tableSorters: DataTableSorters<typeof tableHeaders, IOrderData> = {
 };
 
 export const Purchases: FC = () => {
-  const [ready, setReady] = useState(false);
-  const [orders, setOrders] = useState<IOrderData[]>([]);
   const [displayMessage] = useToast();
-
-  const fetchOrders = async () => {
-    try {
-      const user = await getUser();
-      const newOrders = await getOrders(user);
-      const orderData = transformOrderData(newOrders);
-      setOrders(orderData);
-    } catch (err) {
-      displayMessage('Det skjedde en feil under hentingen av ordre');
-    }
-    setReady(true);
-  };
+  const errors = useSelector((state) => state.shop.orderLines.errors);
+  const orders = useSelector((state) => transformOrderData(state.shop.orderLines.orderLines));
+  const status = useSelector((state) => state.shop.orderLines.status);
+  const init = useThunk(fetchOrderLines());
 
   useEffect(() => {
-    fetchOrders();
+    init();
   }, []);
+
+  useEffect(() => {
+    if (errors) {
+      displayMessage(String(errors));
+    }
+  }, [errors]);
 
   return (
     <div className={style.transactionsContainer}>
-      {ready ? (
+      {status === 'ready' ? (
         <DataTable
           headers={tableHeaders}
           title="Tidligere kjøp"
