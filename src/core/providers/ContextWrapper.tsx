@@ -6,6 +6,7 @@ import { EventsRepoProvider } from 'events/providers/EventsRepo';
 import { QueryParamsProviderWithRouter } from './QueryParams';
 
 import { HelmetProvider } from 'react-helmet-async';
+import { StoreProvider } from '../redux/Store';
 
 export interface IProps {
   children: ReactNode;
@@ -14,13 +15,15 @@ export interface IProps {
 
 const ContextWrapper = ({ children, helmetContext }: IProps) => (
   <QueryParamsProviderWithRouter>
-    <ToastProvider>
-      <EventsRepoProvider>
-        <FrontpageArticles>
-          <HelmetProvider context={helmetContext}>{children}</HelmetProvider>
-        </FrontpageArticles>
-      </EventsRepoProvider>
-    </ToastProvider>
+    <StoreProvider>
+      <ToastProvider>
+        <EventsRepoProvider>
+          <FrontpageArticles>
+            <HelmetProvider context={helmetContext}>{children}</HelmetProvider>
+          </FrontpageArticles>
+        </EventsRepoProvider>
+      </ToastProvider>
+    </StoreProvider>
   </QueryParamsProviderWithRouter>
 );
 
