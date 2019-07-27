@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 
-import { transactionsReducer } from './transactions';
+import { TransactionAction, transactionsReducer } from './transactions';
+
+export type PaymentAction = TransactionAction;
 
 export const paymentsReducer = combineReducers({
   transactions: transactionsReducer,
