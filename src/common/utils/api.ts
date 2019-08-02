@@ -126,7 +126,7 @@ export const put = async <T, K = Partial<T>>(putParams: IPutParams<K>): Promise<
   return performRequest(query, parameters, opts);
 };
 
-export const patch = async <T, K = Partial<T>>(patchParams: IPutParams<K>): Promise<T> => {
+export const patch = async <T, K>(patchParams: IPutParams<K>): Promise<T> => {
   const { query, data, parameters = {}, options = {} } = patchParams;
   const headers = {
     Accept: 'application/json',
@@ -134,5 +134,14 @@ export const patch = async <T, K = Partial<T>>(patchParams: IPutParams<K>): Prom
   };
   const body = JSON.stringify(data);
   const opts = { ...options, method: 'PATCH', body, headers };
+  return performRequest(query, parameters, opts);
+};
+
+export const del = async <T>(
+  query: string,
+  parameters: IQueryObject = {},
+  options: IRequestOptions = {}
+): Promise<T> => {
+  const opts = { ...options, method: 'DELETE' };
   return performRequest(query, parameters, opts);
 };
