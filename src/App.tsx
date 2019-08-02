@@ -12,6 +12,7 @@ import Core from './core';
 import HttpError from './core/components/errors/HttpError';
 import { Route } from './core/components/Router';
 import Frontpage from './frontpage';
+import { Groups } from './groups';
 import Hobbys from './hobbygroups';
 import { Payments } from './payments';
 import Resources from './resources';
@@ -24,6 +25,7 @@ export const routes = {
   home: '/',
   career: '/career',
   contribution: '/contribution',
+  groups: '/groups',
   hobbygroups: '/hobbygroups',
   resources: '/resources',
   wiki: '/wiki',
@@ -54,6 +56,7 @@ export const Client = () => (
       <Route path={routes.events} component={EventsRouter} />
       <Route path={routes.career} component={Career} />
       <Route path={routes.contribution} component={Contribution} />
+      <Route path={routes.groups} component={Groups} />
       <Route path={routes.hobbygroups} component={Hobbys} />
       <Route path={routes.resources} component={Resources} />
       <Route path={routes.profile} component={LoadableProfile} requireLogin />
