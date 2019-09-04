@@ -149,6 +149,7 @@ const wrapHtml = (dom: string, prefetcher: PrefetchState, helmetContext: FilledC
         <link rel="icon" type="image/png" href="/static/icon-256.png" />
         <link rel="manifest" href="/static/owf.webmanifest" />
         ${stylesheets.join('\n')}
+        <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
       </head>
       <body ${helmet.bodyAttributes.toString()}>
         <div id="root">${dom}</div>
@@ -157,7 +158,6 @@ const wrapHtml = (dom: string, prefetcher: PrefetchState, helmetContext: FilledC
         </script>
         ${scripts.join('\n')}
       </body>
-      <script id="stripe-js" src="https://js.stripe.com/v3/" async></script>
     </html>
   `;
 };
