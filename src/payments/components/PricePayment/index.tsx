@@ -40,7 +40,6 @@ export const PricePayment: FC<IProps> = ({ paymentId, priceId }) => {
     loadPrice();
   }, []);
 
-  console.log(fetching, price)
   if (fetching) {
     return <Spinner />;
   }
@@ -55,7 +54,7 @@ export const PricePayment: FC<IProps> = ({ paymentId, priceId }) => {
       <p>Total: {price.price} kr</p>
       <p>Description of price: {price.description}</p>
 
-      <CreatePaymentRelation />
+      <CreatePaymentRelation paymentId={paymentId} priceId={priceId} />
     </Page>
   );
 };
