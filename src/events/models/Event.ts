@@ -117,6 +117,19 @@ export interface ICompanyEvent {
   company: ICompany;
 }
 
+export interface IPaymentPrice {
+  id: number;
+  price: number;
+  description?: string;
+}
+
+export interface IPayment {
+  id: number;
+  payment_prices: IPaymentPrice[];
+  description?: string;
+  stripe_public_key: string;
+}
+
 export interface IAttendanceEvent {
   max_capacity: number; // Positive Integer
   waitlist: boolean;
@@ -130,9 +143,9 @@ export interface IAttendanceEvent {
   number_on_waitlist: number;
   rule_bundles: IRuleBundle[]; // ManyToMany
   extras: IExtra[]; // ManyToMany
-  // payments: [Payment] // GenericRelation
-
+  payments: IPayment[]; // GenericRelation
   attendees: IAttendee[];
+  is_attendee: boolean;
 }
 
 export interface IEvent {

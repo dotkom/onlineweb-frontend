@@ -1,25 +1,22 @@
-import React, { FC, useState } from 'react';
-import transactionStyles from 'payments/components/Transactions/CreateTransaction/createTransaction.less';
-import { CardPayment } from 'payments/components/Transactions/CreateTransaction/CardPayment';
-import { PaymentRequestButton } from 'payments/components/Transactions/CreateTransaction/PaymentRequestButton';
-import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
-import { useSelector } from 'core/redux/hooks';
-import { IPaymentPrice } from 'payments/models/Payment';
 import { useToast } from 'core/utils/toast/useToast';
+import { IPaymentPrice } from 'events/models/Event';
 import { createPaymentMethod, createTransaction, handleCardVerification } from 'payments/api/paymentRelation';
 import { IGenericReturn } from 'payments/api/paymentTransaction';
+import { CardPayment } from 'payments/components/Transactions/CreateTransaction/CardPayment';
+import transactionStyles from 'payments/components/Transactions/CreateTransaction/createTransaction.less';
+import { PaymentRequestButton } from 'payments/components/Transactions/CreateTransaction/PaymentRequestButton';
+import React, { FC, useState } from 'react';
+import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
 
 export interface IProps extends ReactStripeElements.InjectedStripeProps {
   paymentId: number;
-  priceId: number;
+  price: IPaymentPrice;
 }
 
-export const Form: FC<IProps> = ({ stripe, paymentId, priceId }) => {
+export const Form: FC<IProps> = ({ stripe, paymentId, price }) => {
   const [displayError] = useToast({ type: 'error', duration: 12000 });
   const [displayMessage] = useToast({ duration: 12000, overwrite: true });
   const [processing, setProcessing] = useState(false);
-  
-  const paymentPrice = useSelector((state) => state.payments.price.price) as IPaymentPrice;
 
   // Handle payment statuses and display messages apropriatly to the user.
   const handleResponse = ({ status, message }: IGenericReturn) => {
@@ -36,7 +33,7 @@ export const Form: FC<IProps> = ({ stripe, paymentId, priceId }) => {
    */
   const handlePaymentMethod = async (paymentMethod: {}): Promise<IGenericReturn['status']> => {
     if (stripe) {
-      const transactionResponse = await createTransaction(paymentId, priceId, paymentMethod);
+      const transactionResponse = await createTransaction(paymentId, price.id, paymentMethod);
       handleResponse(transactionResponse);
       if (transactionResponse.status === 'pending' && transactionResponse.transaction) {
         const verifyResponse = await handleCardVerification(stripe, transactionResponse.transaction);
@@ -73,7 +70,7 @@ export const Form: FC<IProps> = ({ stripe, paymentId, priceId }) => {
         {stripe && (
           <PaymentRequestButton
             stripe={stripe}
-            amount={paymentPrice.price}
+            amount={price.price}
             label="Betal"
             onPaymentMethod={handlePaymentMethod}
           />
