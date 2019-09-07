@@ -1,9 +1,9 @@
 // TODO: Might want to refactor paymentRelation and paymentTransaction, they're very similar...
-import { ReactStripeElements } from 'react-stripe-elements';
-import { IPaymentRelation, ICreatePaymentRelation, IUpdatePaymentRelation } from 'payments/models/PaymentRelation';
-import { IGenericReturn } from './paymentTransaction';
 import { getUser } from 'authentication/api';
-import { post, patch } from 'common/utils/api';
+import { patch, post } from 'common/utils/api';
+import { ICreatePaymentRelation, IPaymentRelation, IUpdatePaymentRelation } from 'payments/models/PaymentRelation';
+import { ReactStripeElements } from 'react-stripe-elements';
+import { IGenericReturn } from './paymentTransaction';
 
 const API_URL = '/api/v1/payment/relations/';
 
@@ -15,7 +15,7 @@ export const createPaymentMethod = async (
   stripe: ReactStripeElements.StripeProps
 ): Promise<ICreatePaymentMethodReturn> => {
   const user = await getUser();
-  
+
   if (!user) {
     return {
       status: 'error',
@@ -59,8 +59,16 @@ export interface ICreateRelationReturn extends IGenericReturn {
 }
 
 // tslint:disable-next-line no-any
-export const createTransaction = async (paymentId: number, priceId: number, paymentMethod: any): Promise<ICreateRelationReturn> => {
-  const transaction = await postTransaction({ payment_price: priceId, payment: paymentId, payment_method_id: paymentMethod.id });
+export const createTransaction = async (
+  paymentId: number,
+  priceId: number,
+  paymentMethod: any
+): Promise<ICreateRelationReturn> => {
+  const transaction = await postTransaction({
+    payment_price: priceId,
+    payment: paymentId,
+    payment_method_id: paymentMethod.id,
+  });
 
   if (transaction.status === 'done') {
     return {
@@ -98,7 +106,7 @@ export interface IHandleCardVerificationReturn extends IGenericReturn {
 
 export const handleCardVerification = async (
   stripe: ReactStripeElements.StripeProps,
-  relation: IPaymentRelation,
+  relation: IPaymentRelation
 ): Promise<IHandleCardVerificationReturn> => {
   // @ts-ignore Stripe types are not up to spec.
   const { paymentIntent, error } = await stripe.handleCardAction(transaction.payment_intent_secret);
