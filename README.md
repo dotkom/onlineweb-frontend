@@ -20,16 +20,33 @@ yarn dev
 yarn ssr:dev
 ```
 
+### Connecting to non-production Onlineweb4
+
 To connect to another instance of Onlineweb4 than the production environment, you will have to set an environment variable:
 ``` bash
 export OW4_ADDRESS='http://<ip-address>:<port>'
 ```
 
-To enable login/authentication, the following environment variables are needed:
+To enable login/authentication through our backend, you'll need a client ID locally. You can add a client in the OW4 Django admin site. Under the app "OpenID Connect Provider", add a new client to "Clients" with the following parameters:
+- **Name**: doesn't matter
+- **Client Type**: Public
+- **Response types**: id_token token (Implicit Flow)
+- **Redirect URIs**: http://localhost:8080/auth/callback
+- **JWT Algorithm**: RS256 (default)
+
+After you save the client, it will have generated a client ID, which you will use in the following environment variables:
+
 ``` bash
 export OW4_SSO_CLIENT_ID='<your-client-id>'
 export OW4_SSO_CALLBACK='http://localhost:8080/auth/callback'
 ```
+
+Finally, you'll want to generate an RSA key for authentication. The following command in OW4 will handle that:
+```bash
+docker-compose run --rm django python manage.py creatersakey
+```
+
+You should now be able to log in to OWF using OW4!
 
 ## Linting
 
