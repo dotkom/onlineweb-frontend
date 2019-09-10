@@ -1,10 +1,10 @@
+import { md } from 'common/components/Markdown';
 import { Page, Pane } from 'common/components/Panes';
 import Spinner from 'common/components/Spinner';
 import { getAttendanceEvent } from 'events/api/events';
 import { IPayment } from 'events/models/Event';
 import React, { FC, useEffect, useState } from 'react';
 import { Payment } from './Payment';
-import { md } from 'common/components/Markdown';
 
 interface IProps {
   eventId: number;
