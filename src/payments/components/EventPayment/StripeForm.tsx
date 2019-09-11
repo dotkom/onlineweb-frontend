@@ -12,11 +12,12 @@ import transactionStyles from 'payments/components/Transactions/CreateTransactio
 import { PaymentRequestButton } from 'payments/components/Transactions/CreateTransaction/PaymentRequestButton';
 
 export interface IProps extends ReactStripeElements.InjectedStripeProps {
+  setFinished: (finished: boolean) => void;
   paymentId: number;
   price: IPaymentPrice;
 }
 
-export const Form: FC<IProps> = ({ stripe, paymentId, price }) => {
+export const Form: FC<IProps> = ({ stripe, paymentId, price, setFinished }) => {
   const [displayError] = useToast({ type: 'error', duration: 12000 });
   const [displayMessage] = useToast({ duration: 12000, overwrite: true });
   const [processing, setProcessing] = useState(false);
@@ -27,6 +28,9 @@ export const Form: FC<IProps> = ({ stripe, paymentId, price }) => {
       displayError(message);
     } else if (status === 'success' || status === 'pending') {
       displayMessage(message);
+      if (status === 'success') {
+        setFinished(true);
+      }
     }
   };
 
@@ -66,19 +70,17 @@ export const Form: FC<IProps> = ({ stripe, paymentId, price }) => {
   };
 
   return (
-    <div className={transactionStyles.container}>
-      <div className={transactionStyles.paymentMethods}>
-        <CardPayment onSubmit={handleSubmit} processing={processing} />
-        <div className={transactionStyles.paymentsDivider} />
-        {stripe && (
-          <PaymentRequestButton
-            stripe={stripe}
-            amount={price.price}
-            label="Betal"
-            onPaymentMethod={handlePaymentMethod}
-          />
-        )}
-      </div>
+    <div className={transactionStyles.paymentMethods}>
+      <CardPayment onSubmit={handleSubmit} processing={processing} />
+      <div className={transactionStyles.paymentsDivider} />
+      {stripe && (
+        <PaymentRequestButton
+          stripe={stripe}
+          amount={price.price}
+          label="Betal"
+          onPaymentMethod={handlePaymentMethod}
+        />
+      )}
     </div>
   );
 };

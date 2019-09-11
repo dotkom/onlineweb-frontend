@@ -7,18 +7,19 @@ import { useStripeInit } from 'payments/hooks/useStripeInit';
 import { StripeForm } from './StripeForm';
 
 interface IProps {
+  setFinished: (finished: boolean) => void;
   stripeKey: string;
   paymentId: number;
   price: IPaymentPrice;
 }
 
-export const CreatePaymentRelation: FC<IProps> = ({ paymentId, price, stripeKey }) => {
-  const stripe = useStripeInit(stripeKey);
+export const CreatePaymentRelation: FC<IProps> = (props) => {
+  const stripe = useStripeInit(props.stripeKey);
 
   return (
     <StripeProvider stripe={stripe}>
       <Elements>
-        <StripeForm paymentId={paymentId} price={price} />
+        <StripeForm {...props} />
       </Elements>
     </StripeProvider>
   );
