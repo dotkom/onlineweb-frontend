@@ -1,7 +1,9 @@
+import React, { FC } from 'react';
+
+import { Elements, StripeProvider } from 'react-stripe-elements';
+
 import { IPaymentPrice } from 'events/models/Event';
 import { useStripeInit } from 'payments/hooks/useStripeInit';
-import React, { FC } from 'react';
-import { Elements, StripeProvider } from 'react-stripe-elements';
 import { StripeForm } from './StripeForm';
 
 interface IProps {

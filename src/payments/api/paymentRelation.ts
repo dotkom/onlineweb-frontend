@@ -1,11 +1,19 @@
-// TODO: Might want to refactor paymentRelation and paymentTransaction, they're very similar...
-import { getUser } from 'authentication/api';
-import { patch, post } from 'common/utils/api';
-import { ICreatePaymentRelation, IPaymentRelation, IUpdatePaymentRelation } from 'payments/models/PaymentRelation';
 import { ReactStripeElements } from 'react-stripe-elements';
+
+import { getUser } from 'authentication/api';
+import { getAllPages, patch, post } from 'common/utils/api';
+import { ICreatePaymentRelation, IPaymentRelation, IUpdatePaymentRelation } from 'payments/models/PaymentRelation';
 import { IGenericReturn } from './paymentTransaction';
 
+// TODO: Might want to refactor paymentRelation and paymentTransaction, they're very similar...
+
 const API_URL = '/api/v1/payment/relations/';
+
+export const getAllRelations = async () => {
+  const user = await getUser();
+  const data = await getAllPages<IPaymentRelation>(API_URL, { format: 'json' }, { user });
+  return data;
+};
 
 export interface ICreatePaymentMethodReturn extends IGenericReturn {
   paymentMethod?: IPaymentRelation;
@@ -48,7 +56,7 @@ export const createPaymentMethod = async (
 /**
  * Create a payment relation.
  */
-export const postTransaction = async (relation: ICreatePaymentRelation) => {
+export const postRelation = async (relation: ICreatePaymentRelation) => {
   const user = await getUser();
   const data = await post<IPaymentRelation>(API_URL, relation, { format: 'json' }, { user });
   return data;
@@ -58,13 +66,13 @@ export interface ICreateRelationReturn extends IGenericReturn {
   transaction?: IPaymentRelation;
 }
 
-// tslint:disable-next-line no-any
 export const createTransaction = async (
   paymentId: number,
   priceId: number,
+  // tslint:disable-next-line no-any
   paymentMethod: any
 ): Promise<ICreateRelationReturn> => {
-  const transaction = await postTransaction({
+  const transaction = await postRelation({
     payment_price: priceId,
     payment: paymentId,
     payment_method_id: paymentMethod.id,
