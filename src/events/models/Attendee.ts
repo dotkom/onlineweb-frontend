@@ -24,5 +24,5 @@ export interface IUserAttendee {
   attended: boolean;
   timestamp: IsoDateTime;
   show_as_attending_event: boolean;
-  paid: boolean;
+  has_paid: boolean;
 }

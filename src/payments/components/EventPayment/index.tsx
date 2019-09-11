@@ -18,7 +18,7 @@ interface IProps {
 const ABOUT_EVENT_PAYMENT = md`
   # Arrangementsbetaling
 
-  Dette er betalingssiden for arrangementer. Det skulle nok gjerne stått litt mer tekst her.
+  Velkommen til en beta-versjon av Onlines nye betalingsside! Dotkom minner om at de nye nettsidene til Online enda er under utvikling, og vi setter pris på all tilbakemelding du kan gi.
 `;
 
 export const EventPayment: FC<IProps> = ({ eventId }) => {
@@ -44,21 +44,18 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
     return <Spinner />;
   }
 
-  // Map both unattending and 404 to a 404 error page.
-  if (!attendanceEvent.is_attendee) {
+  // Map both unattending, non-priced, and 404 to a 404 error page.
+  if (!attendanceEvent.is_attendee || attendanceEvent.payments.length === 0) {
     return <HttpError code={404} />;
   }
 
   // Users can be manually registered as having paid.
-  const manuallyPaid = !!userAttendees.find((attendee) => attendee.paid);
+  const manuallyPaid = !!userAttendees.find((attendee) => attendee.has_paid);
 
   return (
     <Page>
       <Pane>{ABOUT_EVENT_PAYMENT}</Pane>
-
-      {attendanceEvent.payments.map((payment: IPayment) => (
-        <Payment payment={payment} key={payment.id} isPaid={manuallyPaid} />
-      ))}
+      <Payment payment={attendanceEvent.payments[0]} isPaid={manuallyPaid} />
     </Page>
   );
 };

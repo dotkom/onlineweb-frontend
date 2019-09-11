@@ -8,6 +8,8 @@ import { getAllRelations } from 'payments/api/paymentRelation';
 import { IPaymentRelation } from 'payments/models/PaymentRelation';
 import { CreatePaymentRelation } from './CreatePaymentRelation';
 
+import style from './payment.less';
+
 interface IProps {
   payment: IPayment;
   isPaid?: boolean;
@@ -25,6 +27,9 @@ export const Payment: FC<IProps> = ({ payment, isPaid }) => {
 
   useEffect(() => {
     loadPaymentRelations();
+    if (payment.payment_prices.length === 1) {
+      setSelectedPrice(payment.payment_prices[0].id);
+    }
   }, []);
 
   const selectedPriceObject = payment.payment_prices.find((price) => price.id === selectedPrice);
@@ -36,7 +41,7 @@ export const Payment: FC<IProps> = ({ payment, isPaid }) => {
   const paymentDone = isPaid || finished;
 
   const payments = payment.payment_prices.map((price) => (
-    <div key={price.id} onClick={() => setSelectedPrice(price.id)}>
+    <div key={price.id} onClick={() => setSelectedPrice(price.id)} className={style.price}>
       <input type="radio" value={price.id} checked={price.id === selectedPrice} readOnly />
       <label>
         {price.description}: {price.price} kr
@@ -52,20 +57,24 @@ export const Payment: FC<IProps> = ({ payment, isPaid }) => {
         {paymentDone ? (
           <p>Betalingen var vellykket.</p>
         ) : (
-          <>
+          <div>
             <form>{payments}</form>
-
-            {selectedPriceObject && (
-              <CreatePaymentRelation
-                paymentId={payment.id}
-                price={selectedPriceObject}
-                stripeKey={payment.stripe_public_key}
-                setFinished={setFinished}
-              />
+            {!selectedPriceObject && (
+              <div className={style.infobox}>Velg et alternativ for å gå videre til betaling.</div>
             )}
-          </>
+          </div>
         )}
       </Pane>
+      {!paymentDone && selectedPriceObject && (
+        <Pane>
+          <CreatePaymentRelation
+            paymentId={payment.id}
+            price={selectedPriceObject}
+            stripeKey={payment.stripe_public_key}
+            setFinished={setFinished}
+          />
+        </Pane>
+      )}
     </>
   );
 };
