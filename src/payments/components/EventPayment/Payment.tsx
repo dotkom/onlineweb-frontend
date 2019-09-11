@@ -9,6 +9,8 @@ import { getAllRelations, getEventUserAttendees } from 'payments/api/paymentRela
 import { IPaymentRelation } from 'payments/models/PaymentRelation';
 import { CreatePaymentRelation } from './CreatePaymentRelation';
 
+import style from './payment.less';
+
 interface IProps {
   eventId: number;
   payment: IPayment;
@@ -48,7 +50,7 @@ export const Payment: FC<IProps> = ({ payment, eventId }) => {
   // TODO: Handle payment finished, possibly redirect.
 
   const payments = payment.payment_prices.map((price) => (
-    <div key={price.id} onClick={() => setSelectedPrice(price.id)}>
+    <div key={price.id} onClick={() => setSelectedPrice(price.id)} className={style.price}>
       <input type="radio" value={price.id} checked={price.id === selectedPrice} readOnly />
       <label>
         {price.description}: {price.price} kr
@@ -60,22 +62,18 @@ export const Payment: FC<IProps> = ({ payment, eventId }) => {
     <>
       <Pane>
         <h2>{payment.description}</h2>
-        {isPaid ? (
-          <p>Betalingen var vellykket.</p>
-        ) : (
-          <>
-            <form>{payments}</form>
-            {selectedPriceObject && (
-              <CreatePaymentRelation
-                paymentId={payment.id}
-                price={selectedPriceObject}
-                stripeKey={payment.stripe_public_key}
-                setFinished={setFinished}
-              />
-            )}
-          </>
-        )}
+        {isPaid ? <p>Betalingen var vellykket.</p> : <form>{payments}</form>}
       </Pane>
+      {!isPaid && selectedPriceObject && (
+        <Pane>
+          <CreatePaymentRelation
+            paymentId={payment.id}
+            price={selectedPriceObject}
+            stripeKey={payment.stripe_public_key}
+            setFinished={setFinished}
+          />
+        </Pane>
+      )}
     </>
   );
 };
