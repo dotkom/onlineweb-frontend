@@ -62,7 +62,16 @@ export const Payment: FC<IProps> = ({ payment, eventId }) => {
     <>
       <Pane>
         <h2>{payment.description}</h2>
-        {isPaid ? <p>Betalingen var vellykket.</p> : <form>{payments}</form>}
+        {isPaid ? (
+          <p>Betalingen var vellykket.</p>
+        ) : (
+          <div>
+            <form>{payments}</form>
+            {!selectedPriceObject && (
+              <div className={style.infobox}>Velg et alternativ for å gå videre til betaling.</div>
+            )}
+          </div>
+        )}
       </Pane>
       {!isPaid && selectedPriceObject && (
         <Pane>

@@ -16,7 +16,7 @@ interface IProps {
 const ABOUT_EVENT_PAYMENT = md`
   # Arrangementsbetaling
 
-  Dette er betalingssiden for arrangementer. Det skulle nok gjerne stått litt mer tekst her.
+  Velkommen til en beta-versjon av Onlines nye betalingsside! Dotkom minner om at de nye nettsidene til Online enda er under utvikling, og vi setter pris på all tilbakemelding du kan gi.
 `;
 
 export const EventPayment: FC<IProps> = ({ eventId }) => {
