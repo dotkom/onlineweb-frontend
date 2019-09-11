@@ -3,19 +3,17 @@ import React, { FC, useEffect, useState } from 'react';
 import { Pane } from 'common/components/Panes';
 import Spinner from 'common/components/Spinner';
 
-import { IUserAttendee } from 'events/models/Attendee';
 import { IPayment } from 'events/models/Event';
-import { getAllRelations, getEventUserAttendees } from 'payments/api/paymentRelation';
+import { getAllRelations } from 'payments/api/paymentRelation';
 import { IPaymentRelation } from 'payments/models/PaymentRelation';
 import { CreatePaymentRelation } from './CreatePaymentRelation';
 
 interface IProps {
-  eventId: number;
   payment: IPayment;
+  isPaid?: boolean;
 }
 
-export const Payment: FC<IProps> = ({ payment, eventId }) => {
-  const [userAttendees, setUserAttendees] = useState<IUserAttendee[]>();
+export const Payment: FC<IProps> = ({ payment, isPaid }) => {
   const [paymentRelations, setPaymentRelations] = useState<IPaymentRelation[]>();
   const [selectedPrice, setSelectedPrice] = useState<number>();
   const [finished, setFinished] = useState(false);
@@ -25,27 +23,17 @@ export const Payment: FC<IProps> = ({ payment, eventId }) => {
     setPaymentRelations(relations);
   };
 
-  const loadUserAttendees = async () => {
-    const attendees = await getEventUserAttendees({ event: eventId });
-    setUserAttendees(attendees);
-  };
-
   useEffect(() => {
     loadPaymentRelations();
-    loadUserAttendees();
   }, []);
 
   const selectedPriceObject = payment.payment_prices.find((price) => price.id === selectedPrice);
 
-  if (!paymentRelations || !userAttendees) {
+  if (!paymentRelations) {
     return <Spinner />;
   }
 
-  const manuallyPaid = userAttendees.find((attendee) => attendee.paid);
-  const activeRelation = paymentRelations && paymentRelations.find((relation) => !relation.refunded);
-  const isPaid = manuallyPaid || activeRelation || finished;
-
-  // TODO: Handle payment finished, possibly redirect.
+  const paymentDone = isPaid || finished;
 
   const payments = payment.payment_prices.map((price) => (
     <div key={price.id} onClick={() => setSelectedPrice(price.id)}>
@@ -60,11 +48,13 @@ export const Payment: FC<IProps> = ({ payment, eventId }) => {
     <>
       <Pane>
         <h2>{payment.description}</h2>
-        {isPaid ? (
+
+        {paymentDone ? (
           <p>Betalingen var vellykket.</p>
         ) : (
           <>
             <form>{payments}</form>
+
             {selectedPriceObject && (
               <CreatePaymentRelation
                 paymentId={payment.id}
