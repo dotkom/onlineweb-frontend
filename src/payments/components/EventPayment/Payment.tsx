@@ -15,6 +15,7 @@ interface IProps {
 export const Payment: FC<IProps> = ({ payment }) => {
   const [paymentRelations, setPaymentRelations] = useState<IPaymentRelation[]>();
   const [selectedPrice, setSelectedPrice] = useState<number>();
+  const [finished, setFinished] = useState(false);
 
   const loadPaymentRelations = async () => {
     const relations = await getAllRelations();
@@ -31,7 +32,8 @@ export const Payment: FC<IProps> = ({ payment }) => {
     return <Spinner />;
   }
 
-  const isPaid = paymentRelations && paymentRelations.find((relation) => !relation.refunded);
+  // TODO: Handle case where user is manually enrolled.
+  const isPaid = finished || (paymentRelations && paymentRelations.find((relation) => !relation.refunded));
 
   // TODO: Handle payment finished, possibly redirect.
 
@@ -48,15 +50,22 @@ export const Payment: FC<IProps> = ({ payment }) => {
     <>
       <Pane>
         <h2>{payment.description}</h2>
-        {isPaid ? <p>Du har allerede betalt.</p> : <form>{payments}</form>}
+        {isPaid ? (
+          <p>Betalingen var vellykket.</p>
+        ) : (
+          <>
+            <form>{payments}</form>
+            {selectedPriceObject && (
+              <CreatePaymentRelation
+                paymentId={payment.id}
+                price={selectedPriceObject}
+                stripeKey={payment.stripe_public_key}
+                setFinished={setFinished}
+              />
+            )}
+          </>
+        )}
       </Pane>
-      {selectedPriceObject && (
-        <CreatePaymentRelation
-          paymentId={payment.id}
-          price={selectedPriceObject}
-          stripeKey={payment.stripe_public_key}
-        />
-      )}
     </>
   );
 };
