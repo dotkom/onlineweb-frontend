@@ -1,0 +1,42 @@
+@import '~common/less/mixins.less';
+
+@size: 20px;
+
+.price {
+  position: relative;
+  margin-top: 10px;
+}
+
+.price input {
+  visibility: hidden;
+}
+
+.price label {
+  display: block;
+  padding: 5px 5px 5px @size + 10px;
+  cursor: pointer;
+}
+
+.price label::before {
+  content: '';
+  background: #fff center/75%;
+  transition: background 0.2s ease-in;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
+}
+
+.price input,
+.price label::before {
+  position: absolute;
+  width: @size;
+  height: @size;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+}
+
+.price input:checked ~ label::before {
+  background: @blue
+    url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ")
+    center/75% no-repeat;
+}
