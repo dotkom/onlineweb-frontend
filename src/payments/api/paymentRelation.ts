@@ -1,13 +1,25 @@
 import { ReactStripeElements } from 'react-stripe-elements';
 
 import { getUser } from 'authentication/api';
-import { getAllPages, patch, post } from 'common/utils/api';
+import { getAllPages, IBaseAPIParameters, patch, post } from 'common/utils/api';
+import { IUserAttendee } from 'events/models/Attendee';
 import { ICreatePaymentRelation, IPaymentRelation, IUpdatePaymentRelation } from 'payments/models/PaymentRelation';
 import { IGenericReturn } from './paymentTransaction';
 
 // TODO: Might want to refactor paymentRelation and paymentTransaction, they're very similar...
 
 const API_URL = '/api/v1/payment/relations/';
+const USER_ATTENDEES_API_URL = '/api/v1/registration/user-attendees';
+
+export interface IUserAttendeeParameters extends IBaseAPIParameters {
+  event: number;
+}
+
+export const getEventUserAttendees = async (props: IUserAttendeeParameters) => {
+  const user = await getUser();
+  const data = await getAllPages<IUserAttendee>(USER_ATTENDEES_API_URL, { format: 'json', ...props }, { user });
+  return data;
+};
 
 export const getAllRelations = async () => {
   const user = await getUser();
