@@ -14,12 +14,14 @@ interface IProps {
 }
 
 export const CreatePaymentRelation: FC<IProps> = (props) => {
-  const stripe = useStripeInit(props.stripeKey);
+  const { stripeKey, ...rest } = props;
+
+  const stripe = useStripeInit(stripeKey);
 
   return (
     <StripeProvider stripe={stripe}>
       <Elements>
-        <StripeForm {...props} />
+        <StripeForm {...rest} />
       </Elements>
     </StripeProvider>
   );

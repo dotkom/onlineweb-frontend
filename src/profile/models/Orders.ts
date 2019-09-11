@@ -1,9 +1,14 @@
 import IResponsiveImage from 'common/models/ResponsiveImage';
+import { IPayment } from 'payments/models/Payment';
 
 export interface IOrderLine {
+  id: number;
   paid: boolean;
   datetime: string;
   orders: IOrder[];
+  stripe_id?: string;
+  subtotal: number;
+  payment: IPayment;
 }
 
 export interface IOrder {

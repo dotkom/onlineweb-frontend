@@ -6,8 +6,10 @@ import Spinner from 'common/components/Spinner';
 import HttpError from 'core/components/errors/HttpError';
 
 import { getAttendanceEvent } from 'events/api/events';
+import { IUserAttendee } from 'events/models/Attendee';
 import { IPayment } from 'events/models/Event';
-import { Payment } from './Payment';
+import { getEventUserAttendees } from 'payments/api/paymentRelation';
+import { Payment } from '../Payment';
 
 interface IProps {
   eventId: number;
@@ -20,6 +22,7 @@ const ABOUT_EVENT_PAYMENT = md`
 `;
 
 export const EventPayment: FC<IProps> = ({ eventId }) => {
+  const [userAttendees, setUserAttendees] = useState<IUserAttendee[]>();
   const [attendanceEvent, setAttendanceEvent] = useState();
 
   const loadAttendanceEvent = async () => {
@@ -27,11 +30,17 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
     setAttendanceEvent(event);
   };
 
+  const loadUserAttendees = async () => {
+    const attendees = await getEventUserAttendees({ event: eventId });
+    setUserAttendees(attendees);
+  };
+
   useEffect(() => {
     loadAttendanceEvent();
+    loadUserAttendees();
   }, []);
 
-  if (!attendanceEvent) {
+  if (!attendanceEvent || !userAttendees) {
     return <Spinner />;
   }
 
@@ -40,12 +49,15 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
     return <HttpError code={404} />;
   }
 
+  // Users can be manually registered as having paid.
+  const manuallyPaid = !!userAttendees.find((attendee) => attendee.paid);
+
   return (
     <Page>
       <Pane>{ABOUT_EVENT_PAYMENT}</Pane>
 
       {attendanceEvent.payments.map((payment: IPayment) => (
-        <Payment eventId={eventId} payment={payment} key={payment.id} />
+        <Payment payment={payment} key={payment.id} isPaid={manuallyPaid} />
       ))}
     </Page>
   );
