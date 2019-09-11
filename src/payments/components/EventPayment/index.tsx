@@ -45,7 +45,7 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
       <Pane>{ABOUT_EVENT_PAYMENT}</Pane>
 
       {attendanceEvent.payments.map((payment: IPayment) => (
-        <Payment payment={payment} key={payment.id} />
+        <Payment eventId={eventId} payment={payment} key={payment.id} />
       ))}
     </Page>
   );
