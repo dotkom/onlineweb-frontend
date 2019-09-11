@@ -1,12 +1,15 @@
+import React, { FC, useState } from 'react';
+
+import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
+
 import { useToast } from 'core/utils/toast/useToast';
+
 import { IPaymentPrice } from 'events/models/Event';
 import { createPaymentMethod, createTransaction, handleCardVerification } from 'payments/api/paymentRelation';
 import { IGenericReturn } from 'payments/api/paymentTransaction';
 import { CardPayment } from 'payments/components/Transactions/CreateTransaction/CardPayment';
 import transactionStyles from 'payments/components/Transactions/CreateTransaction/createTransaction.less';
 import { PaymentRequestButton } from 'payments/components/Transactions/CreateTransaction/PaymentRequestButton';
-import React, { FC, useState } from 'react';
-import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
 
 export interface IProps extends ReactStripeElements.InjectedStripeProps {
   paymentId: number;
