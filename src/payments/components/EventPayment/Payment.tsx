@@ -35,6 +35,9 @@ export const Payment: FC<IProps> = ({ payment, eventId }) => {
   useEffect(() => {
     loadPaymentRelations();
     loadUserAttendees();
+    if (payment.payment_prices.length === 1) {
+      setSelectedPrice(payment.payment_prices[0].id);
+    }
   }, []);
 
   const selectedPriceObject = payment.payment_prices.find((price) => price.id === selectedPrice);
