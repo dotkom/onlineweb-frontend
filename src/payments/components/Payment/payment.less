@@ -2,6 +2,43 @@
 
 @size: 20px;
 
+.order {
+  display: flex;
+  margin: 20px 0;
+}
+
+.image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 200px;
+  height: 112px;
+  border: 1px solid #ccc;
+  background: #eee;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.orderDetails {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px 0;
+  box-sizing: border-box;
+}
+
+.orderDetails h3 {
+  font-weight: bold;
+}
+
+.orderDetails > *:last-child {
+  margin-top: auto;
+}
+
+.subtotal span {
+  font-weight: bold;
+}
+
 .infobox {
   background: #fdf3ba;
   padding: 20px;
