@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import HttpError from 'core/components/errors/HttpError';
+
 import { Page, Pane } from 'common/components/Panes';
 import Spinner from 'common/components/Spinner';
 import { IOrderLine } from 'profile/models/Orders';
