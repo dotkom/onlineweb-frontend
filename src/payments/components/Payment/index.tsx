@@ -1,23 +1,30 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { Pane } from 'common/components/Panes';
+import { Page, Pane } from 'common/components/Panes';
 import Spinner from 'common/components/Spinner';
 
-import { IPayment } from 'events/models/Event';
+import { IPayment, IPaymentPrice } from 'events/models/Event';
 import { getAllRelations } from 'payments/api/paymentRelation';
 import { IPaymentRelation } from 'payments/models/PaymentRelation';
 import { CreatePaymentRelation } from './CreatePaymentRelation';
 
-import style from './payment.less';
+import { md } from 'common/components/Markdown';
 
 interface IProps {
   payment: IPayment;
+  price: IPaymentPrice;
+  showPayment: boolean;
   isPaid?: boolean;
 }
 
-export const Payment: FC<IProps> = ({ payment, isPaid }) => {
+const ABOUT_PAYMENT_PAGE = md`
+  # Betalingssiden
+
+  Velkommen til en beta-versjon av Onlines nye betalingsside! Dotkom minner om at de nye nettsidene til Online enda er under utvikling, og vi setter pris på all tilbakemelding du kan gi.
+`;
+
+export const Payment: FC<IProps> = ({ payment, price, showPayment, isPaid, children }) => {
   const [paymentRelations, setPaymentRelations] = useState<IPaymentRelation[]>();
-  const [selectedPrice, setSelectedPrice] = useState<number>();
   const [finished, setFinished] = useState(false);
 
   const loadPaymentRelations = async () => {
@@ -27,12 +34,7 @@ export const Payment: FC<IProps> = ({ payment, isPaid }) => {
 
   useEffect(() => {
     loadPaymentRelations();
-    if (payment.payment_prices.length === 1) {
-      setSelectedPrice(payment.payment_prices[0].id);
-    }
   }, []);
-
-  const selectedPriceObject = payment.payment_prices.find((price) => price.id === selectedPrice);
 
   if (!paymentRelations) {
     return <Spinner />;
@@ -40,40 +42,23 @@ export const Payment: FC<IProps> = ({ payment, isPaid }) => {
 
   const paymentDone = isPaid || finished;
 
-  const payments = payment.payment_prices.map((price) => (
-    <div key={price.id} onClick={() => setSelectedPrice(price.id)} className={style.price}>
-      <input type="radio" value={price.id} checked={price.id === selectedPrice} readOnly />
-      <label>
-        {price.description}: {price.price} kr
-      </label>
-    </div>
-  ));
-
   return (
-    <>
+    <Page>
+      <Pane>{ABOUT_PAYMENT_PAGE}</Pane>
       <Pane>
         <h2>{payment.description}</h2>
-        {paymentDone ? (
-          <p>Betalingen var vellykket.</p>
-        ) : (
-          <div>
-            <form>{payments}</form>
-            {!selectedPriceObject && (
-              <div className={style.infobox}>Velg et alternativ for å gå videre til betaling.</div>
-            )}
-          </div>
-        )}
+        {paymentDone ? <p>Betalingen var vellykket.</p> : <>{children}</>}
       </Pane>
-      {!paymentDone && selectedPriceObject && (
+      {showPayment && !paymentDone && (
         <Pane>
           <CreatePaymentRelation
             paymentId={payment.id}
-            price={selectedPriceObject}
+            price={price}
             stripeKey={payment.stripe_public_key}
             setFinished={setFinished}
           />
         </Pane>
       )}
-    </>
+    </Page>
   );
 };
