@@ -7,7 +7,6 @@ import HttpError from 'core/components/errors/HttpError';
 
 import { getAttendanceEvent } from 'events/api/events';
 import { IUserAttendee } from 'events/models/Attendee';
-import { IPayment } from 'events/models/Event';
 import { getEventUserAttendees } from 'payments/api/paymentRelation';
 import { Payment } from '../Payment';
 

@@ -9,7 +9,7 @@ import { WebshopPayment } from './components/WebshopPayment';
 const BASE_ROUTE = '/payments';
 
 export const routes = {
-  relation: BASE_ROUTE + '/event/:id',
+  relation: BASE_ROUTE + '/events/:id',
   webshop: BASE_ROUTE + '/webshop',
   wallet: BASE_ROUTE + '/wallet',
 };
