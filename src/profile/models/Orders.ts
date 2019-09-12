@@ -12,20 +12,26 @@ export interface IOrderLine {
 }
 
 export interface IOrder {
+  id: number;
   price: number;
   quantity: number;
-  content_object: IStoreItem;
+  size: ISize | null;
+  product: IProduct;
 }
 
-export interface IStoreItem {
+export interface ISize {
+  size: string;
+}
+
+export interface IProduct {
   name: string;
   price: number;
   description: string | null;
-  image: IResponsiveImage;
-  category: IStoreItemCategory;
+  images: IResponsiveImage[];
+  category: IProductCategory;
 }
 
-export interface IStoreItemCategory {
+export interface IProductCategory {
   pk: number;
   name: string;
 }
