@@ -53,7 +53,6 @@ export const Payment: FC<IProps> = ({ payment, isPaid }) => {
     <>
       <Pane>
         <h2>{payment.description}</h2>
-
         {paymentDone ? (
           <p>Betalingen var vellykket.</p>
         ) : (
