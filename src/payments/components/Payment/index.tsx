@@ -10,6 +10,8 @@ import { CreatePaymentRelation } from './CreatePaymentRelation';
 
 import { md } from 'common/components/Markdown';
 
+import style from '../Payment/payment.less';
+
 interface IProps {
   payment: IPayment;
   price: IPaymentPrice;
@@ -47,7 +49,7 @@ export const Payment: FC<IProps> = ({ payment, price, showPayment, isPaid, child
       <Pane>{ABOUT_PAYMENT_PAGE}</Pane>
       <Pane>
         <h2>{payment.description}</h2>
-        {paymentDone ? <p>Betalingen var vellykket.</p> : <>{children}</>}
+        {paymentDone ? <div className={style.success}>Betalingen var vellykket.</div> : <>{children}</>}
       </Pane>
       {showPayment && !paymentDone && (
         <Pane>
