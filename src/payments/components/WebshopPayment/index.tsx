@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { Page, Pane } from 'common/components/Panes';
 import Spinner from 'common/components/Spinner';
 import { IOrderLine } from 'profile/models/Orders';
 import { getOrderLines } from 'webshop/api';
@@ -26,10 +27,14 @@ export const WebshopPayment = () => {
     webshopPayment = <Spinner />;
   } else if (!latestOrderline || latestOrderline.orders.length === 0) {
     webshopPayment = (
-      <p>
-        Du har ingen varer i handlekurven din. Gå til <a href="https://online.ntnu.no/webshop">webshop</a> for å kjøpe
-        varer!
-      </p>
+      <Page>
+        <Pane>
+          <p>
+            Du har ingen varer i handlekurven din. Gå til <a href="https://online.ntnu.no/webshop">webshop</a> for å
+            kjøpe varer!
+          </p>
+        </Pane>
+      </Page>
     );
   } else if (latestOrderline) {
     const orders = latestOrderline.orders.map((order) => (
