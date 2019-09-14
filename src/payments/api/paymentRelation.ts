@@ -6,8 +6,6 @@ import { IUserAttendee } from 'events/models/Attendee';
 import { ICreatePaymentRelation, IPaymentRelation, IUpdatePaymentRelation } from 'payments/models/PaymentRelation';
 import { IGenericReturn } from './paymentTransaction';
 
-// TODO: Might want to refactor paymentRelation and paymentTransaction, they're very similar...
-
 const API_URL = '/api/v1/payment/relations/';
 const USER_ATTENDEES_API_URL = '/api/v1/registration/user-attendees';
 
@@ -75,31 +73,31 @@ export const postRelation = async (relation: ICreatePaymentRelation) => {
 };
 
 export interface ICreateRelationReturn extends IGenericReturn {
-  transaction?: IPaymentRelation;
+  relation?: IPaymentRelation;
 }
 
-export const createTransaction = async (
+export const createRelation = async (
   paymentId: number,
   priceId: number,
   // tslint:disable-next-line no-any
   paymentMethod: any
 ): Promise<ICreateRelationReturn> => {
-  const transaction = await postRelation({
+  const relation = await postRelation({
     payment_price: priceId,
     payment: paymentId,
     payment_method_id: paymentMethod.id,
   });
 
-  if (transaction.status === 'done') {
+  if (relation.status === 'done') {
     return {
       status: 'success',
       message: 'Betalingen var vellykket.',
     };
-  } else if (transaction.status === 'pending') {
+  } else if (relation.status === 'pending') {
     return {
       status: 'pending',
       message: 'Betalingen trenger videre behandling...',
-      transaction,
+      relation,
     };
   } else {
     return {
@@ -109,10 +107,10 @@ export const createTransaction = async (
   }
 };
 
-export const verifyPending = async (transactionId: number, relation: IUpdatePaymentRelation) => {
+export const verifyPending = async (relationId: number, relation: IUpdatePaymentRelation) => {
   const user = await getUser();
   const data = await patch<IPaymentRelation, IUpdatePaymentRelation>({
-    query: `${API_URL}${transactionId}/`,
+    query: `${API_URL}${relationId}/`,
     data: relation,
     parameters: { format: 'json' },
     options: { user },
@@ -121,7 +119,7 @@ export const verifyPending = async (transactionId: number, relation: IUpdatePaym
 };
 
 export interface IHandleCardVerificationReturn extends IGenericReturn {
-  transaction?: IPaymentRelation;
+  relation?: IPaymentRelation;
 }
 
 export const handleCardVerification = async (
@@ -129,7 +127,7 @@ export const handleCardVerification = async (
   relation: IPaymentRelation
 ): Promise<IHandleCardVerificationReturn> => {
   // @ts-ignore Stripe types are not up to spec.
-  const { paymentIntent, error } = await stripe.handleCardAction(transaction.payment_intent_secret);
+  const { paymentIntent, error } = await stripe.handleCardAction(relation.payment_intent_secret);
 
   if (error) {
     return {
@@ -144,7 +142,7 @@ export const handleCardVerification = async (
     return {
       status: 'success',
       message: 'Betalingen var vellykket',
-      transaction: verifiedRelation,
+      relation: verifiedRelation,
     };
   }
 

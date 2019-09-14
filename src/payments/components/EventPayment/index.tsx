@@ -23,9 +23,10 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
   const loadAttendanceEvent = async () => {
     const event = await getAttendanceEvent(eventId);
     setAttendanceEvent(event);
-    const tempPayment = event.payments[0];
-    if (tempPayment.payment_prices.length === 1) {
-      setSelectedPrice(tempPayment.payment_prices[0].id);
+
+    // Automatically select first payment if only one exists.
+    if (event.payments.length > 0 && event.payments[0].payment_prices.length === 1) {
+      setSelectedPrice(event.payments[0].payment_prices[0].id);
     }
   };
 
@@ -48,8 +49,8 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
     return <HttpError code={404} />;
   }
 
-  // Users can be manually registered as having paid.
-  const manuallyPaid = !!userAttendees.find((attendee) => attendee.has_paid);
+  // User has already paid for the event, or otherwise been marked as paid.
+  const isPaid = !!userAttendees.find((attendee) => attendee.has_paid);
 
   const payment = attendanceEvent.payments[0];
 
@@ -65,7 +66,7 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
   ));
 
   return (
-    <Payment payment={payment} price={selectedPriceObject} isPaid={manuallyPaid} showPayment={selectedPriceObject}>
+    <Payment payment={payment} price={selectedPriceObject} isPaid={isPaid} showPayment={selectedPriceObject}>
       <form>{payments}</form>
       {!selectedPriceObject && <div className={style.infobox}>Velg et alternativ for å gå videre til betaling.</div>}
     </Payment>

@@ -2,7 +2,8 @@ import IResponsiveImage, { DEFAULT_EVENT_IMAGE } from 'common/models/ResponsiveI
 import { ICompany } from 'core/models/Company';
 import { IExtra } from 'events/models/Extras';
 import { IRuleBundle } from 'events/models/RuleBundles';
-import { IAttendee } from './Attendee';
+import { IPayment } from 'payments/models/Payment';
+import { IUserAttendee } from './Attendee';
 
 export interface IEventViewProps {
   accessible: boolean;
@@ -117,19 +118,6 @@ export interface ICompanyEvent {
   company: ICompany;
 }
 
-export interface IPaymentPrice {
-  id: number;
-  price: number;
-  description?: string;
-}
-
-export interface IPayment {
-  id: number;
-  payment_prices: IPaymentPrice[];
-  description?: string;
-  stripe_public_key: string;
-}
-
 export interface IAttendanceEvent {
   max_capacity: number; // Positive Integer
   waitlist: boolean;
@@ -144,7 +132,7 @@ export interface IAttendanceEvent {
   rule_bundles: IRuleBundle[]; // ManyToMany
   extras: IExtra[]; // ManyToMany
   payments: IPayment[]; // GenericRelation
-  attendees: IAttendee[];
+  attendees: IUserAttendee[];
   is_attendee: boolean;
 }
 
