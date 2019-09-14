@@ -3,8 +3,8 @@ import React, { FC, useEffect, useState } from 'react';
 import { Page, Pane } from 'common/components/Panes';
 import Spinner from 'common/components/Spinner';
 
-import { IPayment, IPaymentPrice } from 'events/models/Event';
 import { getAllRelations } from 'payments/api/paymentRelation';
+import { IPayment, IPaymentPrice } from 'payments/models/Payment';
 import { IPaymentRelation } from 'payments/models/PaymentRelation';
 import { CreatePaymentRelation } from './CreatePaymentRelation';
 

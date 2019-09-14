@@ -4,12 +4,12 @@ import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
 
 import { useToast } from 'core/utils/toast/useToast';
 
-import { IPaymentPrice } from 'events/models/Event';
-import { createPaymentMethod, createTransaction, handleCardVerification } from 'payments/api/paymentRelation';
+import { createPaymentMethod, createRelation, handleCardVerification } from 'payments/api/paymentRelation';
 import { IGenericReturn } from 'payments/api/paymentTransaction';
 import { CardPayment } from 'payments/components/Transactions/CreateTransaction/CardPayment';
 import transactionStyles from 'payments/components/Transactions/CreateTransaction/createTransaction.less';
 import { PaymentRequestButton } from 'payments/components/Transactions/CreateTransaction/PaymentRequestButton';
+import { IPaymentPrice } from 'payments/models/Payment';
 
 export interface IProps extends ReactStripeElements.InjectedStripeProps {
   setFinished: (finished: boolean) => void;
@@ -22,7 +22,7 @@ export const Form: FC<IProps> = ({ stripe, paymentId, price, setFinished }) => {
   const [displayMessage] = useToast({ duration: 12000, overwrite: true });
   const [processing, setProcessing] = useState(false);
 
-  // Handle payment statuses and display messages apropriatly to the user.
+  // Handle payment statuses and display messages appropriately to the user.
   const handleResponse = ({ status, message }: IGenericReturn) => {
     if (status === 'error') {
       displayError(message);
@@ -40,14 +40,14 @@ export const Form: FC<IProps> = ({ stripe, paymentId, price, setFinished }) => {
    */
   const handlePaymentMethod = async (paymentMethod: {}): Promise<IGenericReturn['status']> => {
     if (stripe) {
-      const transactionResponse = await createTransaction(paymentId, price.id, paymentMethod);
-      handleResponse(transactionResponse);
-      if (transactionResponse.status === 'pending' && transactionResponse.transaction) {
-        const verifyResponse = await handleCardVerification(stripe, transactionResponse.transaction);
+      const response = await createRelation(paymentId, price.id, paymentMethod);
+      handleResponse(response);
+      if (response.status === 'pending' && response.relation) {
+        const verifyResponse = await handleCardVerification(stripe, response.relation);
         handleResponse(verifyResponse);
         return verifyResponse.status;
       } else {
-        return transactionResponse.status;
+        return response.status;
       }
     }
     return 'error';
