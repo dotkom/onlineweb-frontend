@@ -28,9 +28,6 @@ export const Form: FC<IProps> = ({ stripe, paymentId, price, setFinished }) => {
       displayError(message);
     } else if (status === 'success' || status === 'pending') {
       displayMessage(message);
-      if (status === 'success') {
-        setFinished(true);
-      }
     }
   };
 
@@ -64,7 +61,10 @@ export const Form: FC<IProps> = ({ stripe, paymentId, price, setFinished }) => {
     const methodResponse = await createPaymentMethod(stripe);
     handleResponse(methodResponse);
     if (methodResponse.status === 'success' && methodResponse.paymentMethod) {
-      handlePaymentMethod(methodResponse.paymentMethod);
+      const status = await handlePaymentMethod(methodResponse.paymentMethod);
+      if (status === 'success') {
+        setFinished(true);
+      }
     }
     setProcessing(false);
   };
