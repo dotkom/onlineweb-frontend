@@ -4,7 +4,7 @@ import { Reducer } from 'redux';
 import { getUser } from 'authentication/api';
 import { Thunk } from 'core/redux/types';
 import { getOrders } from 'profile/api/orders';
-import { IOrderLine } from 'profile/models/Orders';
+import { IOrderLine } from 'shop/models';
 
 export type OrderLinesStatus = 'fetching' | 'error' | 'ready';
 

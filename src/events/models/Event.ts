@@ -2,7 +2,8 @@ import IResponsiveImage, { DEFAULT_EVENT_IMAGE } from 'common/models/ResponsiveI
 import { ICompany } from 'core/models/Company';
 import { IExtra } from 'events/models/Extras';
 import { IRuleBundle } from 'events/models/RuleBundles';
-import { IAttendee } from './Attendee';
+import { IPayment } from 'payments/models/Payment';
+import { IUserAttendee } from './Attendee';
 
 export interface IEventViewProps {
   accessible: boolean;
@@ -130,9 +131,9 @@ export interface IAttendanceEvent {
   number_on_waitlist: number;
   rule_bundles: IRuleBundle[]; // ManyToMany
   extras: IExtra[]; // ManyToMany
-  // payments: [Payment] // GenericRelation
-
-  attendees: IAttendee[];
+  payments: IPayment[]; // GenericRelation
+  attendees: IUserAttendee[];
+  is_attendee: boolean;
 }
 
 export interface IEvent {

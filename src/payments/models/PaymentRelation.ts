@@ -1,6 +1,7 @@
 import { IPayment, IPaymentPrice, PaymentStatus } from './Payment';
 
 export interface IPaymentRelation {
+  id: number;
   payment: IPayment;
   payment_price: IPaymentPrice;
   datetime: string;
