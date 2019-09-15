@@ -3,6 +3,7 @@ import AuthProvider from 'authentication/providers/UserProvider';
 import Spinner from 'common/components/Spinner';
 import EventsRouter from 'events/components/EventsRouter';
 import { Settings as LuxonSettings } from 'luxon';
+import UserProfileProvider from 'profile/providers/UserProfile';
 import React from 'react';
 import Loadable from 'react-loadable';
 import { Switch } from 'react-router-dom';
@@ -15,7 +16,6 @@ import Frontpage from './frontpage';
 import Hobbys from './hobbygroups';
 import { PaymentsRouter } from './payments';
 import Resources from './resources';
-import UserProfileProvider from 'profile/providers/UserProfile';
 
 /** Luxon locale setting has to be the same as in the front-end */
 LuxonSettings.defaultLocale = 'nb';
