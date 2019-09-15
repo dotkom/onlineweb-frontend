@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import ResponsiveImage from 'common/components/ResponsiveImage';
 import Spinner from 'common/components/Spinner';
 import { getOrderLines } from 'webshop/api';
 import { IOrderLine } from 'webshop/models';
@@ -41,13 +42,13 @@ export const WebshopPayment = () => {
         {latestOrderline.orders.map((order) => (
           <div key={order.id} className={style.order}>
             {order.product.images.length ? (
-              <img src={order.product.images[0].thumb} alt={order.product.name} className={style.image} />
+              <ResponsiveImage image={order.product.images[0]} size="thumb" type="product" autoSize={false} />
             ) : (
               <div className={style.image}>Det har ikke blitt lagt til et bilde for dette produktet enda</div>
             )}
             <div className={style.orderDetails}>
               <h3>
-                {order.product.name} {order.size && <>({order.size})</>}
+                {order.product.name} {order.size && <>({order.size.size})</>}
               </h3>
               <p>{order.product.description}</p>
               <p>
