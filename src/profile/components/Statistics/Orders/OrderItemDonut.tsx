@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import { LIGHT_EVENT_COLORS } from 'events/models/Event';
-import { IOrder, IOrderLine } from 'profile/models/Orders';
+import { IOrder, IOrderLine } from 'shop/models';
 
 import style from './orders.less';
 

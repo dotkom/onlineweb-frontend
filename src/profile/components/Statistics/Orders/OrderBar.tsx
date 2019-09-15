@@ -1,8 +1,10 @@
 import { BarExtendedDatum, ResponsiveBar } from '@nivo/bar';
 import classNames from 'classnames';
-import { LIGHT_EVENT_COLORS } from 'events/models/Event';
-import { IOrder, IOrderLine } from 'profile/models/Orders';
 import React from 'react';
+
+import { LIGHT_EVENT_COLORS } from 'events/models/Event';
+import { IOrder, IOrderLine } from 'shop/models';
+
 import style from './orders.less';
 
 export interface IProps {

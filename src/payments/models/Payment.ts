@@ -6,7 +6,7 @@ export type PaymentType = 'cash' | 'stripe';
 export interface IPaymentPrice {
   id: number;
   price: number;
-  description: string;
+  description?: string;
 }
 
 export interface IPayment {
