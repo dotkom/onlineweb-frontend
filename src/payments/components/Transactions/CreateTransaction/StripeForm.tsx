@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState, useEffect } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
 
 import { md } from 'common/components/Markdown';
