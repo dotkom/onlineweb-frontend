@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 import Spinner from 'common/components/Spinner';
-import { IOrderLine } from 'profile/models/Orders';
 import { getOrderLines } from 'webshop/api';
+import { IOrderLine } from 'webshop/models';
+
 import { Payment } from '../Payment';
 import style from '../Payment/payment.less';
+import { CartError } from './CartError';
 import { EmptyCart } from './EmptyCart';
 
 export const WebshopPayment = () => {
@@ -27,6 +29,10 @@ export const WebshopPayment = () => {
 
   if (!latestOrderline || latestOrderline.orders.length === 0) {
     return <EmptyCart />;
+  }
+
+  if (!latestOrderline.payment) {
+    return <CartError />;
   }
 
   return (
