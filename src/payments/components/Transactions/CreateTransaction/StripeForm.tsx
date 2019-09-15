@@ -11,12 +11,11 @@ import {
   IGenericReturn,
 } from 'payments/api/paymentTransaction';
 import { fetchTransactions } from 'payments/reducers/transactions';
-
+import { UserProfileContext } from 'profile/providers/UserProfile';
 import { CardPayment } from './CardPayment';
 import style from './createTransaction.less';
 import { PaymentRequestButton } from './PaymentRequestButton';
 import { DEFAULT_SALDO_VALUE, SaldoSelect } from './SaldoSelect';
-import { UserProfileContext } from 'profile/providers/UserProfile';
 
 const ABOUT_CREATE_TRANSACTION = md`
 ## Legg til Saldo
