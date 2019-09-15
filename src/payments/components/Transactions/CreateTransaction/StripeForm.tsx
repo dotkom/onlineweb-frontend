@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState, useEffect } from 'react';
 import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
 
 import { md } from 'common/components/Markdown';
@@ -16,6 +16,7 @@ import { CardPayment } from './CardPayment';
 import style from './createTransaction.less';
 import { PaymentRequestButton } from './PaymentRequestButton';
 import { DEFAULT_SALDO_VALUE, SaldoSelect } from './SaldoSelect';
+import { UserProfileContext } from 'profile/providers/UserProfile';
 
 const ABOUT_CREATE_TRANSACTION = md`
 ## Legg til Saldo
@@ -29,6 +30,11 @@ export const Form: FC<IProps> = ({ stripe }) => {
   const [processing, setProcessing] = useState(false);
   const [amount, setAmount] = useState(DEFAULT_SALDO_VALUE);
   const updateTransactions = useThunk(fetchTransactions());
+  const { refetch, user } = useContext(UserProfileContext);
+
+  const USER_BALANCE = md`
+  # Saldo: ${String(!!user ? user.saldo : 0)} kr
+  `;
 
   /** Handle payment statuses and display messages apropriatly to the user. */
   const handleResponse = ({ status, message }: IGenericReturn) => {
@@ -73,12 +79,16 @@ export const Form: FC<IProps> = ({ stripe }) => {
     }
     setProcessing(false);
     updateTransactions();
+    refetch();
   };
 
   return (
     <div className={style.container}>
       {ABOUT_CREATE_TRANSACTION}
-      <SaldoSelect onChange={setAmount} selected={amount} />
+      <div className={style.balanceDisplay}>
+        <SaldoSelect onChange={setAmount} selected={amount} />
+        {USER_BALANCE}
+      </div>
       <div className={style.paymentMethods}>
         <CardPayment onSubmit={handleSubmit} processing={processing} />
         <div className={style.paymentsDivider} />

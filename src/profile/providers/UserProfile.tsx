@@ -40,6 +40,12 @@ export class UserProfileProvider extends React.Component<IProps, IState> {
     this.init();
   }
 
+  public componentDidUpdate() {
+    if (!this.state.user) {
+      this.init();
+    }
+  }
+
   public render() {
     const { refetch } = this;
     const value = { ...this.state, refetch };
