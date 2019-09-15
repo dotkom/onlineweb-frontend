@@ -1,8 +1,10 @@
 import { BarExtendedDatum, ResponsiveBar } from '@nivo/bar';
 import classNames from 'classnames';
-import { LIGHT_EVENT_COLORS } from 'events/models/Event';
-import { IOrder, IOrderLine } from 'profile/models/Orders';
 import React from 'react';
+
+import { LIGHT_EVENT_COLORS } from 'events/models/Event';
+import { IOrder, IOrderLine } from 'shop/models';
+
 import style from './orders.less';
 
 export interface IProps {
@@ -18,7 +20,7 @@ const Tooltip = ({ value, indexValue }: BarExtendedDatum) => (
 const OrderBar = ({ orderLines }: IProps) => {
   const orders: IOrder[] = orderLines.reduce<IOrder[]>((prev, curr) => [...prev, ...curr.orders], []);
   const items = orders.reduce<{ [name: string]: number }>((prev, curr) => {
-    const name = curr.product.name.replace('[Discontinued] ', '');
+    const name = curr.content_object.name.replace('[Discontinued] ', '');
     const prevValues = prev.hasOwnProperty(name) ? prev[name] + curr.quantity : 1;
     return { ...prev, [name]: prevValues };
   }, {});

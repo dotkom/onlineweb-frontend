@@ -1,6 +1,6 @@
 import { getUser } from 'authentication/api';
 import { getAllPages } from 'common/utils/api';
-import { IOrderLine } from 'profile/models/Orders';
+import { IOrderLine } from 'webshop/models';
 
 const ORDER_LINES_API_URL = '/api/v1/webshop/orderlines/';
 
