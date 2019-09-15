@@ -10,7 +10,6 @@ import { PublicProfile } from './components/Profile/PublicProfile';
 import Search from './components/Search';
 import Settings from './components/Settings';
 import Statistics from './components/Statistics';
-import UserProfileProvider from './providers/UserProfile';
 
 const BASE_ROUTE = '/profile';
 
