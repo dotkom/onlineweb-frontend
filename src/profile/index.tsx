@@ -24,16 +24,14 @@ export const routes = {
 
 const ProfileRouter = () => {
   return (
-    <UserProfileProvider>
-      <Switch>
-        <ProfileRoute exact path={routes.personal} view={UserProfile} />
-        <ProfileRoute path={routes.search} view={Search} />
-        <ProfileRoute path={routes.public + '/:id'} view={PublicProfileContainer} />
-        <ProfileRoute path={routes.settings} view={Settings} />
-        <ProfileRoute path={routes.statistics} view={Statistics} />
-        <Route path="*" render={() => <HttpError code={404} />} />
-      </Switch>
-    </UserProfileProvider>
+    <Switch>
+      <ProfileRoute exact path={routes.personal} view={UserProfile} />
+      <ProfileRoute path={routes.search} view={Search} />
+      <ProfileRoute path={routes.public + '/:id'} view={PublicProfileContainer} />
+      <ProfileRoute path={routes.settings} view={Settings} />
+      <ProfileRoute path={routes.statistics} view={Statistics} />
+      <Route path="*" render={() => <HttpError code={404} />} />
+    </Switch>
   );
 };
 

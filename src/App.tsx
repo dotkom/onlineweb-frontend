@@ -15,6 +15,7 @@ import Frontpage from './frontpage';
 import Hobbys from './hobbygroups';
 import { PaymentsRouter } from './payments';
 import Resources from './resources';
+import UserProfileProvider from 'profile/providers/UserProfile';
 
 /** Luxon locale setting has to be the same as in the front-end */
 LuxonSettings.defaultLocale = 'nb';
@@ -42,7 +43,9 @@ const LoadableProfile = Loadable({
 export const App = () => {
   return (
     <AuthProvider>
-      <Client />
+      <UserProfileProvider>
+        <Client />
+      </UserProfileProvider>
     </AuthProvider>
   );
 };
