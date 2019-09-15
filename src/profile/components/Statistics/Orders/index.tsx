@@ -4,7 +4,7 @@ import React, { FC, useEffect } from 'react';
 import CalendarChart from 'common/components/Charts/CalendarChart';
 import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
 import { useSelector, useThunk } from 'core/redux/hooks';
-import { IOrder } from 'profile/models/Orders';
+import { IOrder } from 'shop/models';
 import { fetchOrderLines } from 'shop/reducers/orderLines';
 
 import { AccountBalance } from './AccountBalance';

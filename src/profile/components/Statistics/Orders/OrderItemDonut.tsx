@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import React from 'react';
 
 import { LIGHT_EVENT_COLORS } from 'events/models/Event';
-import { IOrder, IOrderLine } from 'profile/models/Orders';
+import { IOrder, IOrderLine } from 'shop/models';
 
 import style from './orders.less';
 
@@ -15,7 +15,7 @@ const OrderItemDonut = ({ orderLines }: IProps) => {
   /** TODO: Allow flatMap */
   const orders: IOrder[] = orderLines.reduce<IOrder[]>((prev, curr) => [...prev, ...curr.orders], []);
   const categories = orders.reduce<{ [name: string]: number }>((prev, curr) => {
-    const { name } = curr.product.category;
+    const { name } = curr.content_object.category;
     const prevValues = prev.hasOwnProperty(name) ? prev[name] + curr.quantity : 1;
     return { ...prev, [name]: prevValues };
   }, {});

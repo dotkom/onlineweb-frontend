@@ -17,6 +17,7 @@ export interface IProps extends ImgHTMLAttributes<HTMLImageElement> {
   image: IResponsiveImage;
   size: ImageSize;
   type: ImageType;
+  autoSize?: boolean;
 }
 
 /**
@@ -65,12 +66,12 @@ const getOptimalImageSize = (type: ImageType, displayWidth: number, currentSize:
   return currentSize;
 };
 
-export const ResponsiveImage: FC<IProps> = ({ image, size, alt, type, ...props }) => {
+export const ResponsiveImage: FC<IProps> = ({ image, size, alt, type, autoSize = true, ...props }) => {
   const [responsiveSize, setResponsiveSize] = useState<ImageSize>(size);
   const [ref, boundingRect] = useBoundingRect<HTMLImageElement>();
 
   useEffect(() => {
-    if (boundingRect) {
+    if (boundingRect && autoSize) {
       /** Calculate real pixel size based on image size in the DOM */
       const width = boundingRect.width * window.devicePixelRatio;
       const optimalSize = getOptimalImageSize(type, width, size);
