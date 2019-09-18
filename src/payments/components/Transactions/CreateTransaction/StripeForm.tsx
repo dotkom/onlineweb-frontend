@@ -32,7 +32,7 @@ export const Form: FC<IProps> = ({ stripe }) => {
   const { refetch, user } = useContext(UserProfileContext);
 
   const USER_BALANCE = md`
-  # Saldo: ${String(!!user ? user.saldo : 0)} kr
+  # Saldo: **${String(!!user ? user.saldo : 0)} kr**
   `;
 
   /** Handle payment statuses and display messages apropriatly to the user. */
@@ -83,11 +83,9 @@ export const Form: FC<IProps> = ({ stripe }) => {
 
   return (
     <div className={style.container}>
+      {USER_BALANCE}
       {ABOUT_CREATE_TRANSACTION}
-      <div className={style.balanceDisplay}>
-        <SaldoSelect onChange={setAmount} selected={amount} />
-        {USER_BALANCE}
-      </div>
+      <SaldoSelect onChange={setAmount} selected={amount} />
       <div className={style.paymentMethods}>
         <CardPayment onSubmit={handleSubmit} processing={processing} />
         <div className={style.paymentsDivider} />
