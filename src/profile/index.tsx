@@ -10,7 +10,6 @@ import { PublicProfile } from './components/Profile/PublicProfile';
 import Search from './components/Search';
 import Settings from './components/Settings';
 import Statistics from './components/Statistics';
-import UserProfileProvider from './providers/UserProfile';
 
 const BASE_ROUTE = '/profile';
 
@@ -24,16 +23,14 @@ export const routes = {
 
 const ProfileRouter = () => {
   return (
-    <UserProfileProvider>
-      <Switch>
-        <ProfileRoute exact path={routes.personal} view={UserProfile} />
-        <ProfileRoute path={routes.search} view={Search} />
-        <ProfileRoute path={routes.public + '/:id'} view={PublicProfileContainer} />
-        <ProfileRoute path={routes.settings} view={Settings} />
-        <ProfileRoute path={routes.statistics} view={Statistics} />
-        <Route path="*" render={() => <HttpError code={404} />} />
-      </Switch>
-    </UserProfileProvider>
+    <Switch>
+      <ProfileRoute exact path={routes.personal} view={UserProfile} />
+      <ProfileRoute path={routes.search} view={Search} />
+      <ProfileRoute path={routes.public + '/:id'} view={PublicProfileContainer} />
+      <ProfileRoute path={routes.settings} view={Settings} />
+      <ProfileRoute path={routes.statistics} view={Statistics} />
+      <Route path="*" render={() => <HttpError code={404} />} />
+    </Switch>
   );
 };
 
