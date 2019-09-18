@@ -3,6 +3,7 @@ import AuthProvider from 'authentication/providers/UserProvider';
 import Spinner from 'common/components/Spinner';
 import EventsRouter from 'events/components/EventsRouter';
 import { Settings as LuxonSettings } from 'luxon';
+import UserProfileProvider from 'profile/providers/UserProfile';
 import React from 'react';
 import Loadable from 'react-loadable';
 import { Switch } from 'react-router-dom';
@@ -42,7 +43,9 @@ const LoadableProfile = Loadable({
 export const App = () => {
   return (
     <AuthProvider>
-      <Client />
+      <UserProfileProvider>
+        <Client />
+      </UserProfileProvider>
     </AuthProvider>
   );
 };
