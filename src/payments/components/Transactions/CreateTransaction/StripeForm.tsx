@@ -2,6 +2,7 @@ import React, { FC, useContext, useState } from 'react';
 import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
 
 import { md } from 'common/components/Markdown';
+import { StatusMessage } from 'common/components/StatusMessage';
 import { useThunk } from 'core/redux/hooks';
 import { useToast } from 'core/utils/toast/useToast';
 import {
@@ -28,6 +29,7 @@ export const Form: FC<IProps> = ({ stripe }) => {
   const [displayMessage] = useToast({ duration: 12000, overwrite: true });
   const [processing, setProcessing] = useState(false);
   const [amount, setAmount] = useState(DEFAULT_SALDO_VALUE);
+  const [finished, setFinished] = useState(false);
   const updateTransactions = useThunk(fetchTransactions());
   const { refetch, user } = useContext(UserProfileContext);
 
@@ -74,7 +76,10 @@ export const Form: FC<IProps> = ({ stripe }) => {
 
     handleResponse(methodResponse);
     if (methodResponse.status === 'success' && methodResponse.paymentMethod) {
-      handlePaymentMethod(methodResponse.paymentMethod);
+      const status = await handlePaymentMethod(methodResponse.paymentMethod);
+      if (status === 'success') {
+        setFinished(true);
+      }
     }
     setProcessing(false);
     updateTransactions();
@@ -84,20 +89,31 @@ export const Form: FC<IProps> = ({ stripe }) => {
   return (
     <div className={style.container}>
       {USER_BALANCE}
-      {ABOUT_CREATE_TRANSACTION}
-      <SaldoSelect onChange={setAmount} selected={amount} />
-      <div className={style.paymentMethods}>
-        <CardPayment onSubmit={handleSubmit} processing={processing} />
-        <div className={style.paymentsDivider} />
-        {stripe ? (
-          <PaymentRequestButton
-            stripe={stripe}
-            amount={amount}
-            label="Saldoinnskudd"
-            onPaymentMethod={handlePaymentMethod}
-          />
-        ) : null}
-      </div>
+      {finished ? (
+        <>
+          <StatusMessage type="success">Transaksjonen var vellykket.</StatusMessage>
+          <button className={style.button} onClick={() => setFinished(false)}>
+            Ny transaksjon
+          </button>
+        </>
+      ) : (
+        <>
+          {ABOUT_CREATE_TRANSACTION}
+          <SaldoSelect onChange={setAmount} selected={amount} />
+          <div className={style.paymentMethods}>
+            <CardPayment onSubmit={handleSubmit} processing={processing} />
+            <div className={style.paymentsDivider} />
+            {stripe ? (
+              <PaymentRequestButton
+                stripe={stripe}
+                amount={amount}
+                label="Saldoinnskudd"
+                onPaymentMethod={handlePaymentMethod}
+              />
+            ) : null}
+          </div>
+        </>
+      )}
     </div>
   );
 };
