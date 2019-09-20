@@ -7,7 +7,7 @@ import { ICreatePaymentRelation, IPaymentRelation, IUpdatePaymentRelation } from
 import { IGenericReturn } from './paymentTransaction';
 
 const API_URL = '/api/v1/payment/relations/';
-const USER_ATTENDEES_API_URL = '/api/v1/registration/user-attendees';
+const USER_ATTENDEES_API_URL = '/api/v1/registration/user-attendees/';
 
 export interface IUserAttendeeParameters extends IBaseAPIParameters {
   event: number;

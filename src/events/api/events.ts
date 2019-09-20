@@ -39,7 +39,11 @@ export const getEvent = async (id: number): Promise<IEvent> => {
 
 export const getAttendanceEvent = async (id: number): Promise<IAttendanceEvent> => {
   const user = await getUser();
-  const attendanceEvent = await get<IAttendanceEvent>(ATTENDANCE_EVENT_API_URL + id, { format: 'json' }, { user });
+  const attendanceEvent = await get<IAttendanceEvent>(
+    `${ATTENDANCE_EVENT_API_URL}${id}/`,
+    { format: 'json' },
+    { user }
+  );
   return attendanceEvent;
 };
 
