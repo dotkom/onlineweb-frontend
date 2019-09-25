@@ -7,10 +7,10 @@ import { getListEvents } from 'events/api/listEvents';
 import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
-
-import { IEvent, IEventViewProps } from '../../models/Event';
+import { EventTypeEnum, IEvent, IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
+import ListEventPlaceholder from './ListEventPlaceholder';
 
 export interface IProps extends IEventViewProps {
   filtered: boolean;
@@ -42,13 +42,21 @@ export const ListView = ({ filtered }: IProps) => {
 
   return (
     <>
-      <div className={style.grid}>
-        {displayEvents.map((event) => (
-          <Link to={`/events/${event.id}`} key={event.id}>
-            <ListEvent {...event} />
-          </Link>
-        ))}
-      </div>
+      {eventList[0] ? (
+        <div className={style.grid}>
+          {displayEvents.map((event) => (
+            <Link to={`/events/${event.id}`} key={event.id}>
+              <ListEvent {...event} />
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className={style.grid}>
+          <ListEventPlaceholder eventType={EventTypeEnum.BEDPRES} />
+          <ListEventPlaceholder eventType={EventTypeEnum.SOSIALT} />
+          <ListEventPlaceholder eventType={EventTypeEnum.KURS} />
+        </div>
+      )}
     </>
   );
 };

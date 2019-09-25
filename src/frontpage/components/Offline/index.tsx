@@ -7,6 +7,7 @@ import { getOfflines, getRemainingOfflines } from 'frontpage/api/offline';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 
 import OfflineCarousel from './OfflineCarousel';
+import OfflineCarouselPlaceholder from './OfflineCarouselPlaceholder';
 
 export interface IProps {}
 
@@ -44,9 +45,17 @@ export const Offline = ({  }: IProps) => {
   }, []);
 
   return (
-    <Carousel values={offlines} title="Offline">
-      {(offlineRefs) => <OfflineCarousel offlines={offlineRefs} />}
-    </Carousel>
+    <>
+      {offlines.length ? (
+        <Carousel values={offlines} title="Offline">
+          {(offlineRefs) => <OfflineCarousel offlines={offlineRefs} />}
+        </Carousel>
+      ) : (
+        <Carousel values={[1, 2, 3, 4, 5, 6, 7]} title="Offline">
+          {(numberRefs) => <OfflineCarouselPlaceholder offlines={numberRefs} />}
+        </Carousel>
+      )}
+    </>
   );
 };
 

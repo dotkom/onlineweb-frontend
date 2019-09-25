@@ -3,7 +3,9 @@ import Heading from 'common/components/Heading';
 import React, { Component } from 'react';
 import style from './articles.less';
 import MainArticle from './MainArticle';
+import MainArticlePlaceholder from './MainArticlePlaceholder';
 import SmallArticle from './SmallArticle';
+import SmallArticlePlaceholder from './SmallArticlePlaceholder';
 
 export interface IProps {}
 
@@ -42,7 +44,16 @@ class Articles extends Component<IProps, IState> {
                 ))}
               </div>
             </>
-          ) : null}
+          ) : (
+            <>
+              <MainArticlePlaceholder />
+              <div className={style.smallContainer}>
+                <SmallArticlePlaceholder />
+                <SmallArticlePlaceholder />
+                <SmallArticlePlaceholder />
+              </div>
+            </>
+          )}
         </div>
       </section>
     );

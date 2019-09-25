@@ -55,6 +55,14 @@
   .owCard();
 }
 
+.articlePlaceholder {
+  color: @gray;
+
+  & * {
+    width: 100%;
+  }
+}
+
 .smallImage {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -83,6 +91,7 @@
   .smallArticle {
     grid-template-columns: 1fr;
   }
+
   .smallImage {
     border-bottom-left-radius: 0;
     border-top-right-radius: 3px;
