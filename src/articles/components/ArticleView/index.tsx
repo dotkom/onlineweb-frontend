@@ -55,20 +55,25 @@ export const ArticleView = ({ articleId }: IProps) => {
         ) : (
           <ResponsiveImage image={article.image} size="lg" type="article" />
         )}
-        <header className={style.articleHeader}>
-          <h1>{article.heading}</h1>
-        </header>
-        <div className={style.ingress}>
-          <hr />
-          <Markdown source={article.ingress.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)} />
-        </div>
         <ArticleByline article={article} />
-        <Markdown
-          className={style.articleText}
-          source={article.content.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)}
-        />
+        <div className={style.articleMain}>
+          <header className={style.articleHeader}>
+            <h1>{article.heading}</h1>
+          </header>
+          <div className={style.ingress}>
+            <hr />
+            <Markdown source={article.ingress.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)} />
+          </div>
+
+          <Markdown
+            className={style.articleText}
+            source={article.content.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)}
+          />
+        </div>
+
         <ArticleMeta article={article} />
       </article>
+
       <RelatedArticles mainArticle={article} />
     </div>
   );
