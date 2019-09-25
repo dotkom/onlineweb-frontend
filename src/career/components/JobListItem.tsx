@@ -21,7 +21,7 @@ export const formatLocations = (locations: string[]) => {
   return 'Ikke spesifisert';
 };
 
-const JobListItem = ({ location, deadline, company, title, ingress, id, employment }: ICareerOpportunity) => (
+const JobListItem = ({ location, deadline, company, title, ingress, id, employment, featured }: ICareerOpportunity) => (
   <div className={style.job}>
     <Link to={`/career/${id}`}>
       <ResponsiveImage image={company.image} size="md" alt="Firmalogo" type="company" />
@@ -32,6 +32,7 @@ const JobListItem = ({ location, deadline, company, title, ingress, id, employme
           {company.name} - {title}
         </h2>
       </Link>
+      {featured && <p className={style.promoted}>Fremhevet plassering</p>}
 
       <p className={style.ingress}>{ingress}</p>
 

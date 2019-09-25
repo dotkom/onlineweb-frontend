@@ -61,14 +61,12 @@
   .owCard();
 
   & > a {
+    display: inline-flex;
+    align-items: center;
     width: 100%;
 
     & > img {
       width: 300px;
-      align-self: center;
-      justify-self: center;
-      vertical-align: middle;
-      margin: calc(50% - 150px);
     }
   }
 }
@@ -197,4 +195,8 @@
       margin: 0 calc(50% - 150px);
     }
   }
+}
+.promoted {
+  font-style: italic;
+  margin: 10px 0;
 }
