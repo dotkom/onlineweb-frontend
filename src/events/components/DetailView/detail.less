@@ -1,5 +1,6 @@
 @import '~common/less/constants.less';
 @import '~common/less/mixins.less';
+@import '~common/less/colors.less';
 
 .container {
   display: grid;
@@ -23,7 +24,7 @@
     width: 100%;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
-    border-right: 1px solid #b7b7b7;
+    border-right: 1px solid @gray;
   }
 
   @media screen and (max-width: @owTabletBreakpoint) {
@@ -32,7 +33,7 @@
       border-bottom-left-radius: 0;
       border-top-right-radius: 3px;
       border-right: none;
-      border-bottom: 1px solid #b7b7b7;
+      border-bottom: 1px solid @gray;
     }
   }
 }

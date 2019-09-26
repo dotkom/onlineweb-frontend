@@ -48,7 +48,7 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
 /**
  * @summary Simple fetch-API wrapper for HTTP GET
  * @param {string} query API endpoint URL
- * @returns {Promise<any>} API data
+ * @returns {Promise<T>} API data
  */
 export const get = async <T>(
   query: string,
