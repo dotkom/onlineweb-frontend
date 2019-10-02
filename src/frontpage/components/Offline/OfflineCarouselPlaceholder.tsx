@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 import { IRefObject } from 'common/hooks/useRefMap';
+import { DefaultEventImage } from 'events/components/DefaultEventImage';
 import React from 'react';
-import { DefaultEventImage } from '../../../events/components/DefaultEventImage';
 import style from './offline.less';
 
 export interface IProps {

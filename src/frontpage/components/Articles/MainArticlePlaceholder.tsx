@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 import React from 'react';
-import { DefaultEventImage } from '../../../events/components/DefaultEventImage';
+import { DefaultEventImage } from 'events/components/DefaultEventImage';
 import style from './articles.less';
 
 const MainArticlePlaceholder = () => {
