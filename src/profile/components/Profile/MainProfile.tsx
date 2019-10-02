@@ -34,7 +34,7 @@ export const MainProfile = () => {
             <MedalsView medals={profile.positions} />
           </Content>
         </Pane>
-        : <></>}
+        : null}
       <SplitPane>
         <ExternalLinks />
       </SplitPane>
