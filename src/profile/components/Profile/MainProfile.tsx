@@ -28,11 +28,13 @@ export const MainProfile = () => {
         <Study />
       </SplitPane>
       <Bio />
-      <Pane>
-        <Content title="Komitéverv">
-          <MedalsView medals={profile.positions} />
-        </Content>
-      </Pane>
+      {profile.positions.length > 0 ?
+        <Pane>
+          <Content title="Komitéverv">
+            <MedalsView medals={profile.positions} />
+          </Content>
+        </Pane>
+        : <></>}
       <SplitPane>
         <ExternalLinks />
       </SplitPane>
