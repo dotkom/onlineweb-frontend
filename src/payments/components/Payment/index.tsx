@@ -1,16 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
 
+import { md } from 'common/components/Markdown';
 import { Page, Pane } from 'common/components/Panes';
 import Spinner from 'common/components/Spinner';
+import { StatusMessage } from 'common/components/StatusMessage';
 
 import { getAllRelations } from 'payments/api/paymentRelation';
 import { IPayment, IPaymentPrice } from 'payments/models/Payment';
 import { IPaymentRelation } from 'payments/models/PaymentRelation';
 import { CreatePaymentRelation } from './CreatePaymentRelation';
-
-import { md } from 'common/components/Markdown';
-
-import style from '../Payment/payment.less';
 
 interface IProps {
   payment: IPayment;
@@ -49,7 +47,7 @@ export const Payment: FC<IProps> = ({ payment, price, showPayment, isPaid, child
       <Pane>{ABOUT_PAYMENT_PAGE}</Pane>
       <Pane>
         <h2>{payment.description}</h2>
-        {paymentDone ? <div className={style.success}>Betalingen var vellykket.</div> : <>{children}</>}
+        {paymentDone ? <StatusMessage type="success">Betalingen var vellykket.</StatusMessage> : <>{children}</>}
       </Pane>
       {showPayment && !paymentDone && (
         <Pane>
