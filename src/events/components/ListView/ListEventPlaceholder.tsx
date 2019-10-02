@@ -2,7 +2,7 @@ import { faCalendarAlt, faUser } from '@fortawesome/free-regular-svg-icons/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import React from 'react';
-import { EventTypeEnum, getEventColor, getEventType, IEvent, isCompanyEvent } from '../../models/Event';
+import { EventTypeEnum, getEventColor, getEventType } from '../../models/Event';
 import style from './list.less';
 
 interface IProps {
