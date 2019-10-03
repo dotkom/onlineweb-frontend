@@ -23,7 +23,7 @@ export interface ICarouselItemProps {
 
 const CarouselItem = ({ index, scrollRef }: ICarouselItemProps) => {
   return (
-    <div className={classnames(style.carouselItem, style.carouselItemPlaceholder)} ref={scrollRef}>
+    <div className={classnames(style.carouselItem)} ref={scrollRef}>
       <DefaultEventImage />
       <p>Tom utgave nr {index}</p>
     </div>

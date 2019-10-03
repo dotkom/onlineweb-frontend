@@ -5,7 +5,7 @@ import style from './articles.less';
 
 const SmallArticlePlaceholder = () => {
   return (
-    <div className={classnames(style.articleContainer, style.smallArticle, style.articlePlaceholder)}>
+    <div className={classnames(style.articleContainer, style.smallArticle)}>
       <DefaultEventImage />
       <div>
         <h2>Tom artikkel</h2>
