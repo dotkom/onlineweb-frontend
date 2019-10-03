@@ -106,6 +106,7 @@ export const mockEvent: IEvent = {
   location: '',
   slug: '',
   title: '',
+  organizer: 0,
 };
 
 export enum EventView {
@@ -152,4 +153,5 @@ export interface IEvent {
   location: string;
   slug: string;
   title: string;
+  organizer: number;
 }
