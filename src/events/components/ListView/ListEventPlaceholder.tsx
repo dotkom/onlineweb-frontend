@@ -14,7 +14,7 @@ const ListEventPlaceholder = (props: IProps) => {
   const eventType = getEventType(props.eventType);
 
   return (
-    <div className={classnames(style.gridRow, style.gridRowPlaceholder)}>
+    <div className={classnames(style.gridRow)}>
       <div className={style.eventTypeDiv}>
         <span style={{ background: eventColor }} />
         <p className={style.eventType} style={{ color: eventColor }}>
