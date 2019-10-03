@@ -28,13 +28,13 @@ export const MainProfile = () => {
         <Study />
       </SplitPane>
       <Bio />
-      {profile.positions.length > 0 ?
+      {profile.positions.length > 0 ? (
         <Pane>
           <Content title="Komitéverv">
             <MedalsView medals={profile.positions} />
           </Content>
         </Pane>
-        : <></>}
+      ) : null}
       <SplitPane>
         <ExternalLinks />
       </SplitPane>
