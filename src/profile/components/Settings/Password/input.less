@@ -1,0 +1,21 @@
+@import '~common/less/colors.less';
+
+@inputHeight: 42px;
+
+.editPasswordInput {
+  display: grid;
+  width: 100%;
+  height: 100%;
+
+  input,
+  button {
+    height: 100%;
+    width: 100%;
+  }
+
+  input {
+    box-sizing: border-box;
+    border: @offWhite solid 2px;
+    height: @inputHeight;
+  }
+}

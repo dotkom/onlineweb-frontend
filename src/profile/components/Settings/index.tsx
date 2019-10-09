@@ -13,6 +13,7 @@ import Penalties from './Penalties';
 import Privacy from './Privacy';
 import style from './settings.less';
 import SettingsInfo from './SettingsInfo';
+import Password from './Password';
 
 const BASE_ROUTE = '/profile/settings';
 
@@ -33,7 +34,7 @@ const Settings = (_: IProfileProps) => {
       <SettingsRoute path={routes.penalties} view={Penalties} />
       <SettingsRoute path={routes.privacy} view={Privacy} />
       <SettingsRoute path={routes.mail} view={Mails} />
-      <SettingsRoute path={routes.password} view={Privacy} />
+      <SettingsRoute path={routes.password} view={Password} />
       <SettingsRoute path={routes.accessCard} view={AccessCard} />
       <SettingsRoute path={routes.notifications} view={Notifications} />
       <Route path="*" render={() => <HttpError code={404} text="Undersiden du leter etter finnes ikke" />} />
