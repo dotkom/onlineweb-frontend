@@ -37,6 +37,8 @@ export const ArticleView = ({ articleId }: IProps) => {
 
   return (
     <div className={style.container}>
+      {/*
+      // @ts-ignore-next-line TS2604 */}
       <Helmet>
         <meta property="og:title" content={article.heading} />
         <meta property="og:description" content={article.ingress_short} />
@@ -48,7 +50,6 @@ export const ArticleView = ({ articleId }: IProps) => {
           <meta property="og:article:tag" content={tag} key={tag} />
         ))}
       </Helmet>
-
       <article className={style.article}>
         {article.video ? (
           <ArticleVideo vimeoId={article.video} />
@@ -73,7 +74,6 @@ export const ArticleView = ({ articleId }: IProps) => {
 
         <ArticleMeta article={article} />
       </article>
-
       <RelatedArticles mainArticle={article} />
     </div>
   );

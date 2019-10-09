@@ -7,10 +7,11 @@ import { ToastMessages } from './utils/toast/ToastMessages';
 
 const Core: FC = ({ children }) => (
   <>
+    {/*
+    // @ts-ignore-next-line TS2604 */}
     <Helmet>
       <title>Linjeforeningen Online</title>
     </Helmet>
-
     <Header />
     <main>{children}</main>
     <Footer />
