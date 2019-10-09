@@ -5,6 +5,7 @@ import { getUser } from 'authentication/api';
 import { Thunk } from 'core/redux/types';
 import { getOrders } from 'profile/api/orders';
 import { IOrderLine } from 'shop/models';
+import { IAuthUser } from '../../authentication/models/User';
 
 export type OrderLinesStatus = 'fetching' | 'error' | 'ready';
 
@@ -84,7 +85,7 @@ export const fetchOrderLines: Thunk = () => async (dispatch) => {
   dispatch({ type: Type.SET_STATUS, status: 'fetching' });
   try {
     const user = await getUser();
-    const orderLines = await getOrders(user);
+    const orderLines = await getOrders(user as IAuthUser);
     batch(() => {
       dispatch({ type: Type.SET_ORDER_LINES, orderLines });
       dispatch({ type: Type.SET_STATUS, status: 'ready' });
