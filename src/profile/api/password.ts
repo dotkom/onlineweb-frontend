@@ -1,12 +1,19 @@
-import { IAuthUser } from 'authentication/models/User';
 import { put } from 'common/utils/api';
-import { IChangePasswordData } from 'profile/models/Password';
+import { IChangePasswordData, IChangePasswordResponse } from 'profile/models/Password';
 import { getUser } from 'authentication/api';
 
-const API_URL = '/api/v1/users';
+const API_URL = '/api/v1/users/';
 
-export const putPasswords = async (data: IChangePasswordData) => {
-  const user = await getUser();
-  const response = await put<IChangePasswordData>({ query: API_URL + user.profile.sub, data, options: { user } });
-  return response;
+export const putPasswords = async (data: IChangePasswordData): Promise<IChangePasswordResponse | null> => {
+  try {
+    const user = await getUser();
+    const response = await put<IChangePasswordResponse, IChangePasswordData>({
+      query: API_URL + user.profile.sub + `/change_password`,
+      data,
+      options: { user },
+    });
+    return response;
+  } catch {
+    return null;
+  }
 };

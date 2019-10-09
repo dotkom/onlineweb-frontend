@@ -1,17 +1,22 @@
-import React from 'react';
-import Markdown from 'common/components/Markdown';
+import React, { FormEvent, FC } from 'react';
+import style from './input.less';
+import { ErrorMessage } from './ErrorMessage';
 
 interface IProps {
-  mdSource: string;
+  label: string;
   name: string;
+  requiredMessage?: string[];
+  required: boolean;
+  onChange: (event: FormEvent<HTMLInputElement>) => void;
 }
 
-const PasswordInput = ({ mdSource, name }: IProps) => {
+const PasswordInput: FC<IProps> = ({ label, name, requiredMessage, required, onChange }) => {
   return (
-    <>
-      <Markdown source={mdSource} />
-      <input type="password" name={name} id={'id_' + name} />
-    </>
+    <div className={style.passwordInput}>
+      <label htmlFor={name}>{label}</label>
+      <input type="password" name={name} required={required} onChange={onChange} minLength={8} />
+      <ErrorMessage errors={requiredMessage} />
+    </div>
   );
 };
 
