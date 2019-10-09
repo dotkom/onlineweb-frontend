@@ -1,8 +1,8 @@
 import React, { CSSProperties } from 'react';
 import Select from 'react-select';
-import makeAnimated from 'react-select/lib/animated';
-import { Styles } from 'react-select/lib/styles';
-import { ValueType } from 'react-select/lib/types';
+import makeAnimated from 'react-select/animated';
+import { Styles } from 'react-select/src/styles';
+import { ValueType } from 'react-select/src/types';
 
 import style from './select.less';
 
