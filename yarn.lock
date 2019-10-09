@@ -1443,6 +1443,21 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-helmet-async@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-helmet-async/-/react-helmet-async-1.0.1.tgz#29beab37b1a9a480bc57455435f5acd825e8c44c"
+  integrity sha512-ZtCdcSmNmtU/dlV2kJ3sVS52i9hMSo/w9iMYBmjdx4aHzNSIUSOZycFslyDRNbt0efwk3V56Bw51+vaYQ7zuXA==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-helmet" "*"
+
+"@types/react-helmet@*":
+  version "5.0.11"
+  resolved "https://registry.yarnpkg.com/@types/react-helmet/-/react-helmet-5.0.11.tgz#d2642af4658e7b97accb46ea8b00d6dc614c99fa"
+  integrity sha512-id9DjHp/+Cm+x3etN+EWs5OP76PPpz8jXw+iN9xcXltssF0KHNjAzlan///ASXegEewaItlw5FhFnoLxRUJQ9g==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-hot-loader@^4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@types/react-hot-loader/-/react-hot-loader-4.1.0.tgz#8e072b44331ad0182918228c5d2bf514646760de"
