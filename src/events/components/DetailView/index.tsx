@@ -29,13 +29,14 @@ export const DetailView = (props: IProps) => {
 
   return (
     <div className={style.container}>
+      {/*
+      // @ts-ignore-next-line TS2604 */}
       <Helmet>
         <title>{event.title}</title>
         <meta property="og:title" content={event.title} />
         <meta property="og:description" content={event.ingress_short} />
         <meta property="og:image" content={event.image ? DOMAIN + event.image.thumb : undefined} />
       </Helmet>
-
       <div>
         <ListEvent {...event} />
         <PictureCard {...event} />
