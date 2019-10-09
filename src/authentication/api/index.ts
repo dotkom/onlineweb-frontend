@@ -43,10 +43,9 @@ export const authCallback = async (): Promise<User | undefined> => {
 /**
  * @summary Returns user if logged in
  */
-export const getUser = async (): Promise<User> => {
+export const getUser = async (): Promise<User | undefined> => {
   const manager = new UserManager(settings);
-  const user = await manager.getUser();
-  return user;
+  return (await manager.getUser()) || undefined;
 };
 
 /**
