@@ -49,7 +49,7 @@ declare module 'react-stripe-elements' {
 
   // tslint:disable-next-line interface-name
   export interface PaymentMethod {
-    billing_details: BillingDetails
+    billing_details: BillingDetails;
     card: stripe.Card;
     /* Number of seconds since epoch */
     created: number;
@@ -57,7 +57,7 @@ declare module 'react-stripe-elements' {
     customer: {} | null;
     id: string;
     livemode: boolean;
-    metadata: {}
+    metadata: {};
     object: 'payment_method';
     type: string;
   }
@@ -68,7 +68,7 @@ declare module 'react-stripe-elements' {
     | 'invalid_payer_name'
     | 'invalid_payer_email'
     | 'invalid_payer_phone'
-    | 'invalid_shipping_address'
+    | 'invalid_shipping_address';
 
   // tslint:disable-next-line interface-name
   export interface PaymentRequestEvent {
@@ -77,7 +77,7 @@ declare module 'react-stripe-elements' {
     payerEmail: string | null;
     payerName: string | null;
     payerPhone: number | string | null;
-    paymentMethod: PaymentMethod
+    paymentMethod: PaymentMethod;
     shippingAddress: string | null;
     shippingOption: string | null;
   }

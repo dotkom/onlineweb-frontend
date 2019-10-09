@@ -20,7 +20,7 @@ export interface IResponsiveImageSizes {
 export type ResponsiveImageTypes = 'article' | 'company' | 'event' | 'offline' | 'product' | 'hobby' | 'resource';
 
 export type ResponsiveImageDimensions = {
-  [Type in ResponsiveImageTypes]: { [Size in keyof IResponsiveImageSizes]: [number, number] }
+  [Type in ResponsiveImageTypes]: { [Size in keyof IResponsiveImageSizes]: [number, number] };
 };
 
 const DEFAULT_THUMB_SIZE = [200, 112] as [number, number];
