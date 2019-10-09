@@ -9,7 +9,11 @@ import style from './list.less';
 const ListEvent = ({ title, event_start, attendance_event, event_type, company_event }: IEvent) => {
   const eventColor = getEventColor(event_type);
   const eventType = getEventType(event_type);
-  const eventDate = DateTime.fromISO(event_start).toFormat('dd.MM');
+  const eventDateTime = DateTime.fromISO(event_start);
+  const eventDate =
+    eventDateTime.year < new Date().getFullYear()
+      ? eventDateTime.toFormat('dd.MM.yyyy')
+      : eventDateTime.toFormat('dd.MM');
   const eventAttendees = getEventAttendees(attendance_event);
 
   return (
