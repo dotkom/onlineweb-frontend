@@ -13,6 +13,6 @@ declare global {
      * We don't actually care about the type this function returns, we'll leave that to the Redux Team.
      */
     // tslint:disable-next-line no-any
-    __REDUX_DEVTOOLS_EXTENSION__?: () => any; 
+    __REDUX_DEVTOOLS_EXTENSION__?: () => any;
   }
 }
