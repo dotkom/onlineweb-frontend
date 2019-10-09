@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ValueType } from 'react-select/lib/types';
+import { ValueType } from 'react-select/src/types';
 
 import { ISelectable, SelectMultiple } from 'common/components/Forms/SelectMultiple';
 import { DEFAULT_EVENT_TYPES_PARAM } from 'core/hooks/useQueryParamsState';

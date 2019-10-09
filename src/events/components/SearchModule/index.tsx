@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import React, { FC } from 'react';
-import { ValueType } from 'react-select/lib/types';
+import { ValueType } from 'react-select/src/types';
 
 import { DateRangeInput } from 'common/components/Forms/DateRangeInput';
 import { SearchInput } from 'common/components/Forms/SearchInput';
