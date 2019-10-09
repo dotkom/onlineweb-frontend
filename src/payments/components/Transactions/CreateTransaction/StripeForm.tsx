@@ -57,6 +57,7 @@ export const Form: FC<IProps> = ({ stripe }) => {
       if (transactionResponse.status === 'pending' && transactionResponse.transaction) {
         const verifyResponse = await handleCardVerification(stripe, transactionResponse.transaction);
         handleResponse(verifyResponse);
+        updateTransactions();
         return verifyResponse.status;
       } else {
         return transactionResponse.status;
