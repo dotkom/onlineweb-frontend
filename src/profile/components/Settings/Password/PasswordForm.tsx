@@ -1,9 +1,9 @@
-import React, { FormEvent, useState } from 'react';
-import style from './input.less';
-import PasswordInput from './PasswordInput';
 import { putPasswords } from 'profile/api/password';
 import { IChangePasswordData, IChangePasswordResponse } from 'profile/models/Password';
+import React, { FormEvent, useState } from 'react';
 import { ErrorMessage } from './ErrorMessage';
+import style from './input.less';
+import PasswordInput from './PasswordInput';
 
 const PasswordForm = () => {
   const [inputs, setInputs] = useState<IChangePasswordData>({
@@ -15,7 +15,7 @@ const PasswordForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    let response = await putPasswords(inputs);
+    const response = await putPasswords(inputs);
     if (response) {
       setErrors(response);
     }
