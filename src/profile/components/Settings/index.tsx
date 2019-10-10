@@ -9,11 +9,11 @@ import AccessCard from './AccessCard';
 import Mails from './Mails';
 import Menu from './Menu';
 import Notifications from './Notifications';
+import Password from './Password';
 import Penalties from './Penalties';
 import Privacy from './Privacy';
 import style from './settings.less';
 import SettingsInfo from './SettingsInfo';
-import Password from './Password';
 
 const BASE_ROUTE = '/profile/settings';
 

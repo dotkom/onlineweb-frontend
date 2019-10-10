@@ -1,6 +1,6 @@
+import { getUser } from 'authentication/api';
 import { put } from 'common/utils/api';
 import { IChangePasswordData, IChangePasswordResponse } from 'profile/models/Password';
-import { getUser } from 'authentication/api';
 
 const API_URL = '/api/v1/users/';
 

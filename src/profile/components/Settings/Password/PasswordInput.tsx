@@ -1,6 +1,6 @@
-import React, { FormEvent, FC } from 'react';
-import style from './input.less';
+import React, { FC, FormEvent } from 'react';
 import { ErrorMessage } from './ErrorMessage';
+import style from './input.less';
 
 interface IProps {
   label: string;
