@@ -4,6 +4,7 @@ import React, { FormEvent, useState } from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import style from './input.less';
 import PasswordInput from './PasswordInput';
+import SuccessMessage from './SuccessMessage';
 
 const PasswordForm = () => {
   const [inputs, setInputs] = useState<IChangePasswordData>({
@@ -12,6 +13,7 @@ const PasswordForm = () => {
     new_password_confirm: '',
   });
   const [errors, setErrors] = useState<IChangePasswordResponse>({});
+  const [isSubmitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -19,6 +21,7 @@ const PasswordForm = () => {
     if (response) {
       setErrors(response);
     }
+    setSubmitted(true);
   };
 
   const handleOnChange = (event: FormEvent<HTMLInputElement>) => {
@@ -54,6 +57,10 @@ const PasswordForm = () => {
         onChange={handleOnChange}
       />
       <ErrorMessage errors={errors.non_field_errors} />
+      <SuccessMessage
+        message="Your password has been successfully changed"
+        success={isSubmitted && Object.entries(errors).length === 0}
+      />
       <button type="submit" className={style.changePasswordButton}>
         Endre passord
       </button>
