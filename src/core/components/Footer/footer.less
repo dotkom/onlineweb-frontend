@@ -43,3 +43,32 @@
 .social:not(:last-child) {
   margin-right: 5px;
 }
+
+.sponsor:hover {
+  filter: brightness(0.35) sepia(1) hue-rotate(124deg) saturate(500%);
+}
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 10px auto 0;
+
+  div {
+    line-height: 120%;
+  }
+
+  div:nth-last-child(-n+2)::first-line {
+    font-weight: bold;
+  }
+
+  div+div {
+    padding-left: @paddingHorizontal * 2;
+  }
+
+  .icon {
+    margin-right: 4px;
+  }
+}
