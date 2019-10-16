@@ -40,6 +40,9 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
   };
   const requestOptions = { ...restOptions, headers };
   const response = await fetch(url, requestOptions);
+  if (response.status === 204) {
+    return null;
+  }
   const data = await response.json();
   setCache({ content: data, options: cacheOptions, url });
   return data;
