@@ -7,9 +7,15 @@ const ContactInfo = () => (
   <div className={style.contact}>
     <div>
       <FontAwesomeIcon icon={faBriefcase} fixedWidth className={style.icon} /> 992 548 045 (OrgNr) <br />
-      <FontAwesomeIcon icon={faEnvelope} fixedWidth className={style.icon} /> kontakt@online.ntu.no <br />
-      <FontAwesomeIcon icon={faFile} fixedWidth className={style.icon} /> okonomi@online.ntnu.no <br />
-      <FontAwesomeIcon icon={faMobileAlt} fixedWidth className={style.icon} /> 73 59 64 89
+      <a href="mailto:kontakt@online.ntu.no">
+        <FontAwesomeIcon icon={faEnvelope} fixedWidth className={style.icon} /> kontakt@online.ntu.no <br />
+      </a>
+      <a href="mailto:okonomi@online.ntnu.no">
+        <FontAwesomeIcon icon={faFile} fixedWidth className={style.icon} /> okonomi@online.ntnu.no <br />
+      </a>
+      <a href="tel:+4773596489">
+        <FontAwesomeIcon icon={faMobileAlt} fixedWidth className={style.icon} /> 73 59 64 89
+      </a>
     </div>
     <div>
       Besøksadresse: <br />
