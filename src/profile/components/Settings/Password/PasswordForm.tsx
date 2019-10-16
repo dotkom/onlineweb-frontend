@@ -58,7 +58,7 @@ const PasswordForm = () => {
       />
       <ErrorMessage errors={errors.non_field_errors} />
       <SuccessMessage
-        message="Your password has been successfully changed"
+        message="Passordet ditt har blitt endret!"
         success={isSubmitted && Object.entries(errors).length === 0}
       />
       <button type="submit" className={style.changePasswordButton}>
