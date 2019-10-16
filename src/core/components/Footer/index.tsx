@@ -1,5 +1,6 @@
 import Img from 'common/components/Img';
 import React from 'react';
+import ContactInfo from './ContactInfo';
 import style from './footer.less';
 import SocialLinks from './SocialLinks';
 
@@ -14,6 +15,7 @@ const Footer = () => (
       Ta kontakt med <a href="mailto:dotkom@online.ntnu.no">Utviklingsteamet</a>
     </p>
     <SocialLinks />
+    <ContactInfo />
   </footer>
 );
 
