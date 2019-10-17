@@ -1,4 +1,4 @@
-import { getCareerOpportunity } from 'career/api';
+import { retrieveCareerOpportunity } from 'career/api';
 import { ICareerOpportunity } from 'career/models/Career';
 import { CareerContext } from 'career/providers/CareerProvider';
 import HttpError from 'core/components/errors/HttpError';
@@ -23,8 +23,10 @@ class DetailView extends Component<IProps, IState> {
   public async componentDidMount() {
     window.scrollTo(0, 0);
     const id = parseInt(this.props.match.params.id, 10);
-    const job = await getCareerOpportunity(id);
-    this.setState({ job });
+    const response = await retrieveCareerOpportunity(id);
+    if (response.status === 'success') {
+      this.setState({ job: response.data });
+    }
   }
 
   public render() {

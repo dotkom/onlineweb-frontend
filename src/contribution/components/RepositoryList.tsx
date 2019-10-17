@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getRepositories } from '../api/repositories';
+import { listRepositories } from '../api/repositories';
 import Repository from '../components/Repository';
 import style from '../less/contribution.less';
 import { IRepository } from '../models/Repository';
@@ -12,8 +12,10 @@ export default class RepositoryList extends Component<{}, IRepositoryListState> 
   public readonly state: IRepositoryListState = { repositories: [] };
 
   public async componentDidMount() {
-    const data = await getRepositories();
-    this.setState({ repositories: data.results });
+    const response = await listRepositories({ page_size: 10 });
+    if (response.status === 'success') {
+      this.setState({ repositories: response.data.results });
+    }
   }
 
   public render() {
