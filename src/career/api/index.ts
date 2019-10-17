@@ -1,5 +1,5 @@
 import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
-import { get, IAPIData } from 'common/utils/api';
+import { listResource, retrieveResource } from 'common/resources';
 import { ICompany } from 'core/models/Company';
 
 const API_URL = '/api/v1/career/';
@@ -12,9 +12,14 @@ export type FilterJobs = [
   Array<ISelectable<ILocation>>
 ];
 
-export const getCareerOpportunities = async (): Promise<FilterJobs> => {
-  const { results } = await get<IAPIData<ICareerOpportunity>>(API_URL, { format: 'json' });
-  return configureFilters(results);
+export const listCareerOpportunities = listResource<ICareerOpportunity>(API_URL);
+
+export const getCareerOpportunities = async () => {
+  const response = await listCareerOpportunities();
+  if (response.status === 'success') {
+    return configureFilters(response.data.results);
+  }
+  return configureFilters([]);
 };
 
 /**
@@ -59,8 +64,4 @@ const removeDuplicates = (tag: TagTypes, i: number, all: TagTypes[]): boolean =>
   return all.map((arr) => arr.name).indexOf(tag.name) === i;
 };
 
-/** Fetch a single career opportunity */
-export const getCareerOpportunity = async (id: number): Promise<ICareerOpportunity> => {
-  const data: ICareerOpportunity = await get(API_URL + id, { format: 'json', mode: 'no-cors' });
-  return data;
-};
+export const retrieveCareerOpportunity = retrieveResource<ICareerOpportunity>(API_URL);
