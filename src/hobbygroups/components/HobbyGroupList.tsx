@@ -8,7 +8,7 @@ export interface IHobbyGroupListState {
   groups: IHobbyGroup[];
 }
 
-const sortHobbies = (a: IHobbyGroup, b: IHobbyGroup) => (a.priority || 0) - (b.priority || 0);
+const sortHobbies = (a: IHobbyGroup, b: IHobbyGroup) => (b.priority || 0) - (a.priority || 0);
 const filterHobbies = (group: IHobbyGroup) => group.active;
 
 export default class HobbyGroupList extends Component<{}, IHobbyGroupListState> {
