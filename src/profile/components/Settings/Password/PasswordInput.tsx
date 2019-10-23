@@ -1,23 +1,20 @@
-import React, { FC, FormEvent } from 'react';
+import React, { FC, InputHTMLAttributes } from 'react';
 import { ErrorMessage } from './ErrorMessage';
 import style from './input.less';
 
-interface IProps {
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  name: string;
   requiredMessage?: string[];
-  required: boolean;
-  onChange: (event: FormEvent<HTMLInputElement>) => void;
 }
 
-const PasswordInput: FC<IProps> = ({ label, name, requiredMessage, required, onChange }) => {
-  return (
-    <div className={style.passwordInput}>
-      <label htmlFor={name}>{label}</label>
-      <input type="password" name={name} required={required} onChange={onChange} minLength={8} />
-      <ErrorMessage errors={requiredMessage} />
-    </div>
-  );
-};
+const PasswordInput: FC<IProps> = ({ label, requiredMessage, ...props }) => (
+  <div className={style.passwordInput}>
+    <label>
+      {label}
+      <input {...props} type="password" minLength={8} />
+    </label>
+    <ErrorMessage errors={requiredMessage} />
+  </div>
+);
 
 export default PasswordInput;
