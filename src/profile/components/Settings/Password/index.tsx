@@ -42,6 +42,7 @@ const Password = () => {
           name="current_password"
           requiredMessage={errors.current_password}
           required
+          autoComplete="current-password"
           onChange={handleOnChange}
         />
         <PasswordInput
