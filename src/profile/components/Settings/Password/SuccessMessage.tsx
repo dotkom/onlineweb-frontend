@@ -6,8 +6,8 @@ interface IProps {
   message: string;
 }
 
-const SuccessMessage: FC<IProps> = ({ success, message }) => (
-  <>{success && <div className={style.successMessage}>{message}</div>}</>
-);
+const SuccessMessage: FC<IProps> = ({ success, message }) => {
+  return <>{success && <div className={style.successMessage}>{message}</div>}</>;
+};
 
 export default SuccessMessage;

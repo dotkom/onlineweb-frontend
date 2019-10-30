@@ -5,14 +5,16 @@ interface IProps {
   errors?: string[];
 }
 
-export const ErrorMessage: FC<IProps> = ({ errors }) => (
-  <>
-    {errors
-      ? errors.map((error) => (
-          <li className={style.errorMessage}>
-            <ol>{error}</ol>
-          </li>
-        ))
-      : null}
-  </>
-);
+export const ErrorMessage: FC<IProps> = ({ errors }) => {
+  return (
+    <>
+      {errors
+        ? errors.map((error) => (
+            <li className={style.errorMessage}>
+              <ol>{error}</ol>
+            </li>
+          ))
+        : null}
+    </>
+  );
+};
