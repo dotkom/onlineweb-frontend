@@ -7,14 +7,16 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   requiredMessage?: string[];
 }
 
-const PasswordInput: FC<IProps> = ({ label, requiredMessage, ...props }) => (
-  <div className={style.passwordInput}>
-    <label>
-      {label}
-      <input {...props} type="password" minLength={8} />
-    </label>
-    <ErrorMessage errors={requiredMessage} />
-  </div>
-);
+const PasswordInput: FC<IProps> = ({ label, requiredMessage, ...props }) => {
+  return (
+    <div className={style.passwordInput}>
+      <label>
+        {label}
+        <input {...props} type="password" minLength={8} />
+      </label>
+      <ErrorMessage errors={requiredMessage} />
+    </div>
+  );
+};
 
 export default PasswordInput;
