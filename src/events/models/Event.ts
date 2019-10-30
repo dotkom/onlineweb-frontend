@@ -1,5 +1,5 @@
 import IResponsiveImage, { DEFAULT_EVENT_IMAGE } from 'common/models/ResponsiveImage';
-import { ICompany } from 'core/models/Company';
+import { ICompany } from 'company/models/Company';
 import { IExtra } from 'events/models/Extras';
 import { IRuleBundle } from 'events/models/RuleBundles';
 import { IPayment } from 'payments/models/Payment';

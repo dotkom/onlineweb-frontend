@@ -9,6 +9,7 @@ import React from 'react';
 import Loadable from 'react-loadable';
 import { Switch } from 'react-router-dom';
 import Career from './career/';
+import CompanyRouter from './company/components/Router';
 import Contribution from './contribution';
 import Core from './core';
 import HttpError from './core/components/errors/HttpError';
@@ -35,6 +36,7 @@ export const routes = {
   authCallback: '/auth/callback',
   spinner: '/spinner',
   article: '/articles',
+  company: '/company',
 };
 
 const LoadableProfile = Loadable({
@@ -66,6 +68,7 @@ export const Client = () => (
       <Route path={routes.authCallback} component={AuthCallback} />
       <Route path={routes.spinner} component={Spinner} />
       <Route path={routes.payments} component={PaymentsRouter} requireLogin />
+      <Route path={routes.company} component={CompanyRouter} />
       <Route path="*" render={() => <HttpError code={404} />} />
     </Switch>
   </Core>

@@ -1,6 +1,6 @@
 import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
 import { get, IAPIData } from 'common/utils/api';
-import { ICompany } from 'core/models/Company';
+import { ICompany } from 'company/models/Company';
 
 const API_URL = '/api/v1/career/';
 
