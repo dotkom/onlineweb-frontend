@@ -2,27 +2,21 @@
 @import '~common/less/mixins.less';
 
 @edge-height: 20px;
+@colorIndicatorSize: 0.5rem;
 
 .eventGrid {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 20px;
+  margin: 0 -0.5rem;
 
-  & > a {
-    color: initial;
-
-    &:hover {
-      text-decoration: none;
-    }
+  & > .eventColumn {
+    padding: 0 0.5rem;
   }
 }
 
 @media (min-width: @owTabletBreakpoint + 1) {
   .eventGrid {
     grid-template-columns: 1fr 1fr 1fr;
-  }
-  .large {
-    max-height: 19rem;
   }
 }
 
@@ -31,14 +25,17 @@
   flex-direction: column;
 
   > a:not(:last-child) {
-    margin-bottom: 20px;
+    border-bottom: 1px solid @lightGray;
+  }
+
+  &:not(:last-child) {
+    border-right: 1px solid @lightGray;
   }
 }
 
 .large {
   display: flex;
   flex-direction: column;
-  .owCard();
 
   > img {
     width: 100%;
@@ -47,30 +44,17 @@
 
 .imageLargeType {
   position: relative;
-  padding: 7px 0;
+  padding: 0.5rem 0;
   color: #fff;
   text-align: center;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
   font-weight: 200;
   letter-spacing: 1px;
   font-size: 20px;
 }
 
-.largeContent {
-  position: relative;
-  display: grid;
-  grid-template-columns: 0.5fr 6fr 1fr 1fr 1fr 1fr;
-  border-top: 0.5px solid #b7b7b7;
-  padding-right: 10px;
-  min-height: 4rem;
-}
-
 .largeContent > span,
 .small > span {
-  width: 7px;
-  margin: 10px 0 10px 8px;
-  border-radius: 2px;
+  margin-right: @colorIndicatorSize / 2;
 }
 
 .largeContentEmpty {
@@ -83,17 +67,15 @@
   min-height: 4rem;
 }
 
-.small {
-  display: grid;
-  grid-template-columns: 0.5fr 6fr 1fr 1fr 1fr 1fr;
-  position: relative;
-  .owCard();
-  padding-right: 10px;
-  min-height: 4rem;
-}
-
 .largeContent,
 .small {
+  display: grid;
+  grid-template-columns: @colorIndicatorSize * 3 / 2 1fr 1.5rem 2.5rem 1.5rem 3.5rem;
+  min-height: 4rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  grid-gap: 0.25rem;
+
   > p {
     align-self: center;
     text-align: left;
@@ -103,13 +85,7 @@
 
 .icon {
   align-self: center;
-  margin-left: 10px;
-  font-weight: 600;
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.eventTitle {
-  margin-left: 5px;
+  text-align: right;
 }
 
 .suppText {
