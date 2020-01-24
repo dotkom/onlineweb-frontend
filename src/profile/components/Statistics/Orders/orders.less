@@ -5,11 +5,15 @@
   text-align: center;
   & > h2 {
     color: @gray;
+    margin-bottom: 1rem;
+
+    &:empty {
+      display: none;
+    }
   }
 
   & > p {
     color: @bedpres;
-    padding: 20px 0 0;
     font-size: 56px;
     font-weight: bolder;
   }
