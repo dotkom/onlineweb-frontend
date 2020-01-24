@@ -2,10 +2,12 @@
 @import '~common/less/mixins.less';
 @import '~common/less/colors.less';
 
+@gap: 1rem;
+
 .container {
   display: grid;
   grid-template-columns: 5fr 2fr;
-  grid-gap: 20px;
+  grid-gap: @gap;
 
   @media screen and (max-width: @owMobileBreakpoint) {
     grid-auto-flow: row;
@@ -18,20 +20,16 @@
   .owCard();
   display: grid;
   grid-template-columns: 2fr 1fr;
-  margin-top: 20px;
 
   img {
+    display: block;
     width: 100%;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border-right: 1px solid @gray;
+    border-right: 1px solid @lightGray;
   }
 
   @media screen and (max-width: @owTabletBreakpoint) {
     grid-template-columns: 1fr;
     img {
-      border-bottom-left-radius: 0;
-      border-top-right-radius: 3px;
       border-right: none;
       border-bottom: 1px solid @gray;
     }
@@ -112,5 +110,5 @@
 
 .pictureCard,
 .registration {
-  margin-bottom: 20px;
+  margin-bottom: @gap;
 }
