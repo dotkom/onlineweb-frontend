@@ -48,13 +48,13 @@
 .eventTypeDiv {
   height: 100%;
   display: grid;
-  grid-template-columns: 0.5rem 1fr;
+  grid-template-columns: @listBarWidth 1fr;
   grid-gap: 0.5rem;
 }
 
 .eventTypeDiv > span {
   width: @listBarWidth;
-  margin: @listBarWidth / 2 0;
+  margin: @listBarWidth 0;
 }
 
 .eventType {
@@ -79,6 +79,10 @@
   .eventType {
     top: 0;
     left: 1rem;
+
+    > span {
+      margin: @listBarWidth / 2 0;
+    }
   }
   .eventTitle {
     margin-top: 1.5rem;
