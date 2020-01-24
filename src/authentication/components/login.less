@@ -66,9 +66,16 @@
     }
 
     button {
+      color: #fff;
+      background: @blue;
       margin: 10px 0;
       padding: 6px 12px;
       cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: lighten(@blue, 10%);
+      }
     }
 
     .extra {
