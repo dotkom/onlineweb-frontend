@@ -8,7 +8,6 @@ import { EventsRepo } from 'events/providers/EventsRepo';
 
 import { getEvent } from 'events/api/events';
 import { mockEvent } from 'events/models/Event';
-import ListEvent from '../ListView/ListEvent';
 import Contact from './Contact';
 import style from './detail.less';
 import InfoBox from './InfoBox';
@@ -38,7 +37,6 @@ export const DetailView = (props: IProps) => {
         <meta property="og:image" content={event.image ? DOMAIN + event.image.thumb : undefined} />
       </Helmet>
       <div>
-        <ListEvent {...event} />
         <PictureCard {...event} />
         <InfoBox {...event} />
       </div>
