@@ -17,7 +17,7 @@ export interface IProps extends IEventViewProps {
 }
 
 const filterListEvents = (events: IEvent[]) => {
-  return events.filter((event) => isOngoingOrFuture(event)).slice(0, 7);
+  return events.filter((event) => isOngoingOrFuture(event)).slice(0, 18);
 };
 
 export const ListView = ({ filtered }: IProps) => {
