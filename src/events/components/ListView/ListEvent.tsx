@@ -25,7 +25,7 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
         </p>
       </div>
       <p className={style.eventTitle}>
-        {isCompanyEvent(event_type, company_event) ? company_event[0].company.name : title}
+        {title}
       </p>
       <div className={style.icon}>
         <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
