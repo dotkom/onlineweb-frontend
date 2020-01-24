@@ -8,15 +8,19 @@
   display: grid;
   grid-template-columns: 1fr;
   margin: 0 -0.5rem;
-
-  & > .eventColumn {
-    padding: 0 0.5rem;
-  }
 }
 
 @media (min-width: @owTabletBreakpoint + 1) {
   .eventGrid {
     grid-template-columns: 1fr 1fr 1fr;
+
+    & > .eventColumn {
+      padding: 0 0.5rem;
+    }
+
+    &:not(:last-child) {
+      border-right: 1px solid @lightGray;
+    }
   }
 }
 
@@ -26,10 +30,6 @@
 
   > a:not(:last-child) {
     border-bottom: 1px solid @lightGray;
-  }
-
-  &:not(:last-child) {
-    border-right: 1px solid @lightGray;
   }
 }
 
@@ -95,21 +95,17 @@
 /* Mobile CSS */
 
 @media (max-width: @owTabletBreakpoint) {
-  .eventTitle {
-    font-size: 20px;
-  }
   .small,
   .largeContent {
-    min-height: 5rem;
-    grid-template-columns: 0.3fr 4fr 0.1fr 1fr 0.1fr 1fr;
+    min-height: 3rem;
+    grid-template-columns: @colorIndicatorSize * 3 / 2 1fr 1.5rem 2.5rem 1.5rem 3.5rem;
   }
-  .icon {
-    font-size: 21px;
-    margin-left: 20px;
-  }
-  .small > p,
-  .largeContent > p {
-    font-size: 20px;
+  .eventColumn {
+    border: 1px solid @lightGray;
+
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
   }
   // Change size so that the cards aren't too big
   .eventGrid {
