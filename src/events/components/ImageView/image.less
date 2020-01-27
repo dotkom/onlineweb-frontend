@@ -28,8 +28,13 @@
   display: flex;
   flex-direction: column;
 
-  > a:not(:last-child) {
-    border-bottom: 1px solid @lightGray;
+  > a {
+    &:not(:last-child) {
+      border-bottom: 1px solid @lightGray;
+    }
+    &:hover {
+      outline: 1px solid @blue;
+    }
   }
 }
 
