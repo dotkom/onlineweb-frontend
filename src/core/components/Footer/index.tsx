@@ -5,8 +5,8 @@ import SocialLinks from './SocialLinks';
 
 const Footer = () => (
   <footer className={style.footer}>
-    <a href="http://www.knowit.no/" className={style.sponsor}>
-      <Img src="/static/img/knowit.svg" alt="Hovedsamarbeidspartner - Knowit" />
+    <a href="http://www.bekk.no/" className={style.sponsor}>
+      <Img src="/static/img/hsp-832576.svg" alt="Hovedsamarbeidspartner - Bekk" />
     </a>
     <p>
       Har du funnet en feil på nettsiden?
