@@ -28,11 +28,11 @@ const ListEvent = ({ title, event_start, attendance_event, event_type }: IEvent)
       <div className={style.icon}>
         <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
       </div>
-      <p className={style.suppText}> {eventDate} </p>
+      <p> {eventDate} </p>
       <div className={style.icon}>
         <FontAwesomeIcon icon={faUser} fixedWidth />
       </div>
-      <p className={style.suppText}> {eventAttendees} </p>
+      <p> {eventAttendees} </p>
     </div>
   );
 };
