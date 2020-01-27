@@ -17,30 +17,22 @@
   }
 }
 
-.smallContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: @grid-gap;
-  overflow: visible; // Changed because the box-shadow was clipping
-}
-
 .articleContainer {
   position: relative;
   height: 100%;
+  border: 1px solid transparent;
+  transition: border-color 0.1s;
+  box-sizing: border-box;
 
   & img {
+    display: block;
     width: 100%;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid @lightGray;
+    box-sizing: border-box;
   }
 
-  & .largeImage {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-  }
-
-  & > div {
-    padding: 16px;
+  > div {
+    padding: 1rem 0.5rem;
   }
 
   & h2 {
@@ -52,13 +44,23 @@
     }
   }
 
-  .owCard();
+  &:hover {
+    border-color: @blue;
+  }
+}
+
+.smallContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: @grid-gap;
+
+  .articleContainer > div {
+    padding: 0.5rem 1rem;
+  }
 }
 
 .smallImage {
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-
   @media screen and (max-width: @owDesktopMaxWidth) and (min-width: @owTabletBreakpoint) {
     height: 100%;
   }
@@ -66,7 +68,7 @@
 
 .smallArticle {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 20rem 1fr;
 }
 
 /* Mobile CSS */
@@ -74,37 +76,20 @@
 @media (max-width: 1024px) {
   .articles {
     margin: auto;
-    max-width: 60%;
+    max-width: 70%;
     margin-top: 20px;
   }
 }
 
 @media (max-width: 920px) {
   .smallArticle {
-    grid-template-columns: 1fr;
-  }
-  .smallImage {
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 3px;
+    grid-template-columns: 12rem 1fr;
   }
 }
 
 @media (max-width: 705px) {
   .articles {
-    width: 460px;
     max-width: none;
-  }
-}
-
-@media (max-width: 610px) {
-  .articles {
-    width: 425px;
-  }
-}
-
-@media (max-width: 485px) {
-  .articles {
-    width: 280px; // Because iPhone 5
   }
 }
 

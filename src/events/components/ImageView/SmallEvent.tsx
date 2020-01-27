@@ -11,9 +11,7 @@ const SmallEvent = ({ title, event_type, event_start, attendance_event, id, comp
   <Link to={`/events/${id}`}>
     <div className={style.small}>
       <span style={{ background: getEventColor(event_type) }} />
-      <p className={style.eventTitle}>
-        {isCompanyEvent(event_type, company_event) ? company_event[0].company.name : title}
-      </p>
+      <p>{isCompanyEvent(event_type, company_event) ? company_event[0].company.name : title}</p>
       <div className={style.icon}>
         <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
       </div>

@@ -26,9 +26,7 @@ const LargeEvent: FC<IProps> = ({ event }) => {
         <EventImage image={image} companyEvents={company_event} size="md" color={color} />
         <div className={style.largeContent}>
           <span style={{ background: color }} />
-          <p className={style.eventTitle}>
-            {isCompanyEvent(event_type, company_event) ? company_event[0].company.name : title}
-          </p>
+          <p>{isCompanyEvent(event_type, company_event) ? company_event[0].company.name : title}</p>
           <div className={style.icon}>
             <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
           </div>

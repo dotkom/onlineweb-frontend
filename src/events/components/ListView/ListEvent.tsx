@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
 import React from 'react';
-import { getEventColor, getEventType, IEvent, isCompanyEvent } from '../../models/Event';
+import { getEventColor, getEventType, IEvent } from '../../models/Event';
 import style from './list.less';
 
-const ListEvent = ({ title, event_start, attendance_event, event_type, company_event }: IEvent) => {
+const ListEvent = ({ title, event_start, attendance_event, event_type }: IEvent) => {
   const eventColor = getEventColor(event_type);
   const eventType = getEventType(event_type);
   const eventDateTime = DateTime.fromISO(event_start);
@@ -24,17 +24,15 @@ const ListEvent = ({ title, event_start, attendance_event, event_type, company_e
           {eventType}
         </p>
       </div>
-      <p className={style.eventTitle}>
-        {isCompanyEvent(event_type, company_event) ? company_event[0].company.name : title}
-      </p>
+      <p className={style.eventTitle}>{title}</p>
       <div className={style.icon}>
         <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
       </div>
-      <p className={style.suppText}> {eventDate} </p>
+      <p> {eventDate} </p>
       <div className={style.icon}>
         <FontAwesomeIcon icon={faUser} fixedWidth />
       </div>
-      <p className={style.suppText}> {eventAttendees} </p>
+      <p> {eventAttendees} </p>
     </div>
   );
 };

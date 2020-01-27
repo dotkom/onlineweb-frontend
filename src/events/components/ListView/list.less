@@ -6,15 +6,23 @@
 
 .grid {
   margin: auto;
-  display: grid;
-  grid-row-gap: 25px;
+  display: flex;
+  flex-direction: column;
   margin-top: 40px; // More spacing before the cards
 
   & > a {
     color: initial;
+    padding: 0.25rem;
+    border: 1px solid transparent;
+    transition: border-color 0.1s;
+
+    &:not(:first-child) {
+      border-top: 1px solid @lightGray;
+    }
 
     &:hover {
       text-decoration: none;
+      border-color: @blue;
     }
   }
 }
@@ -22,18 +30,14 @@
 .icon {
   align-self: center;
   text-align: right;
-  margin-right: 5px;
-  font-size: 20px;
+  margin-right: 0.25rem;
 }
 
 .gridRow {
   display: grid;
-  grid-template-columns: 3fr 4fr 1fr 0 3fr 1fr 0;
+  grid-template-columns: 16rem 2fr 2rem 6rem 2rem 6rem;
   position: relative;
-  .owCard();
-  padding-right: 10px;
   margin: auto;
-  min-height: 80px;
   color: @darkGray;
 
   > p {
@@ -43,67 +47,46 @@
 
 .eventTypeDiv {
   height: 100%;
-  padding: 0 10px;
   display: grid;
-  grid-template-columns: 1fr 9fr;
-  width: 180px;
+  grid-template-columns: @listBarWidth 1fr;
+  grid-gap: 0.5rem;
 }
 
 .eventTypeDiv > span {
   width: @listBarWidth;
-  margin: @listBarWidth @listBarWidth @listBarWidth 0;
-  border-radius: 2px;
+  margin: @listBarWidth 0;
 }
 
 .eventType {
   font-weight: 600;
   align-self: center;
-  font-size: 18px;
 }
 
 .eventTitle {
-  font-size: 20px;
-  padding-left: 10px;
   text-align: left;
-}
-
-.suppText {
-  font-size: 18px;
 }
 
 /* Mobile CSS */
 
 @media (max-width: @owMobileBreakpoint) {
   .gridRow {
-    min-height: 80px;
-    grid-template-columns: 5fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 5fr 1.5rem 3rem 1.5rem 3.5rem;
   }
   .eventTypeDiv,
   .eventType {
     position: absolute;
   }
   .eventType {
-    top: 5px;
-    left: 25px;
-  }
-  .eventTitle {
-    margin-top: 25px;
-    margin-left: 15px;
-  }
-}
+    top: 0;
+    left: 1rem;
 
-@media (max-width: 505px) {
-  .eventType {
-    font-size: 15px;
-  }
-  .icon {
-    font-size: 15px;
-  }
-  .suppText {
-    font-size: 12px;
+    > span {
+      margin: @listBarWidth / 2 0;
+    }
   }
   .eventTitle {
-    font-size: 17px;
+    margin-top: 1.5rem;
+    margin-left: 1rem;
   }
 }
 

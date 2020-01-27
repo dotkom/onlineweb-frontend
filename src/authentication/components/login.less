@@ -20,7 +20,6 @@
       top: calc(50% - @handleWidth);
       left: calc(50% - @handleWidth / 2);
       box-sizing: border-box;
-      border-radius: 2px;
       border: @handleBorderSize solid #fff;
       width: @handleWidth;
       height: @handleWidth;
@@ -34,7 +33,6 @@
       top: calc(50% - @lockHeight / 3);
       left: calc(50% - @lockWidth / 2);
       box-sizing: border-box;
-      border-radius: 1px;
       width: @lockWidth;
       height: @lockHeight;
       background-color: #fff;
@@ -68,9 +66,16 @@
     }
 
     button {
+      color: #fff;
+      background: @blue;
       margin: 10px 0;
       padding: 6px 12px;
       cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: lighten(@blue, 10%);
+      }
     }
 
     .extra {
