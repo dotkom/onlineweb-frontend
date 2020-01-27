@@ -29,7 +29,7 @@ const CarouselItem = ({ offline, scrollRef }: ICarouselItemProps) => {
 
   return (
     <div className={style.carouselItem} ref={scrollRef}>
-      <a href={offline.issue} >
+      <a href={offline.issue}>
         <img src={thumbnail} alt={offline.title} />
       </a>
     </div>
