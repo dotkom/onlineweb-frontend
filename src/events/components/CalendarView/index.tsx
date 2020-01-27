@@ -53,7 +53,7 @@ export const CalendarView = () => {
     : constructMonthMap(month, []);
 
   return (
-    <div className={style.gridWrapper}>
+    <div>
       <div className={style.menuGrid}>
         <MonthChanger direction="left" onClick={() => changeMonth(-1)} />
         <h3>{month.toFormat('MMMM yyyy')}</h3>
