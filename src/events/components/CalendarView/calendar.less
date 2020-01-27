@@ -22,9 +22,9 @@
 }
 
 .tile {
-  .owCard();
   overflow: hidden;
   height: 100px;
+  background: #fff;
 }
 
 .tileInactive {
@@ -47,18 +47,18 @@
 
   & > p:first-child {
     color: @gray;
+    margin-bottom: 0.25rem;
   }
 }
 
 .title {
-  padding: 5px;
+  padding: 0.125rem 0.25rem;
   margin-bottom: 10px;
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
-  border-radius: 3px;
 }
 
 .menuGrid {
@@ -75,9 +75,7 @@
 
   & > img {
     width: 100%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-bottom: 0.5px solid #b7b7b7;
+    border-bottom: 1px solid @lightGray;
   }
   > div {
     margin: 8px;
@@ -93,7 +91,9 @@
 
 @media (min-width: @owTabletBreakpoint) {
   .grid {
-    grid-gap: 3px;
+    grid-gap: 1px;
+    background: @lightGray;
+    border: 1px solid @lightGray;
   }
 
   .tile {
@@ -103,8 +103,9 @@
   }
 
   .tileContent {
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
     position: absolute;
-    padding: 8px;
+    padding: 0.25rem;
   }
 }

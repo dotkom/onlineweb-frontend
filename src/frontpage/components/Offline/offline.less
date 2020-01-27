@@ -3,7 +3,6 @@
 @import '~common/less/constants.less';
 
 .carouselItem {
-  .owCard();
   transition: 1s ease-in 0.2s;
   text-align: center;
   scroll-snap-align: start;
@@ -14,7 +13,8 @@
   }
 
   a {
-    color: @darkGray;
+    display: block;
+    overflow: hidden;
   }
 
   p {
@@ -25,6 +25,11 @@
     width: 100%;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 
   &:not(:last-child) {

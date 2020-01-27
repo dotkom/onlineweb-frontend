@@ -25,11 +25,11 @@ const ListEventPlaceholder = (props: IProps) => {
       <div className={style.icon}>
         <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
       </div>
-      <p className={style.suppText}>00.00</p>
+      <p>00.00</p>
       <div className={style.icon}>
         <FontAwesomeIcon icon={faUser} fixedWidth />
       </div>
-      <p className={style.suppText}> 0/0 </p>
+      <p> 0/0 </p>
     </div>
   );
 };

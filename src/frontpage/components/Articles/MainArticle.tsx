@@ -12,7 +12,7 @@ const MainArticle = ({ heading, image, ingress, id }: IArticle) => {
   return (
     <Link to={routes.detail + id}>
       <div className={style.articleContainer}>
-        <ResponsiveImage className={style.largeImage} image={image} size="sm" type="article" />
+        <ResponsiveImage image={image} size="sm" type="article" />
         <div>
           <h2>{heading}</h2>
           <Markdown source={ingress.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)} />
