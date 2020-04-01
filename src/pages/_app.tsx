@@ -18,6 +18,8 @@ import { initStore, State } from 'core/redux/Store';
 import UserProfileProvider from 'profile/providers/UserProfile';
 import { registerServiceWorker } from 'serviceworker/browser';
 
+import {GlobalStyle} from '@dotkomonline/design-system';
+
 /** Luxon locale setting has to be the same as in the front-end */
 LuxonSettings.defaultLocale = 'nb';
 
@@ -34,17 +36,20 @@ type Props = AppProps & ReduxWrapperAppProps<State>;
 const CustomApp = (appProps: Props): JSX.Element => {
   const { Component, pageProps, store } = appProps;
   return (
-    <Provider store={store}>
-      <ContextWrapper>
-        <AuthProvider>
-          <UserProfileProvider>
-            <Core>
-              <Component {...pageProps} />
-            </Core>
-          </UserProfileProvider>
-        </AuthProvider>
-      </ContextWrapper>
-    </Provider>
+    <>
+      <GlobalStyle />
+      <Provider store={store}>
+        <ContextWrapper>
+          <AuthProvider>
+            <UserProfileProvider>
+              <Core>
+                <Component {...pageProps} />
+              </Core>
+            </UserProfileProvider>
+          </AuthProvider>
+        </ContextWrapper>
+      </Provider>
+    </>
   );
 };
 
