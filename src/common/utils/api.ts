@@ -112,6 +112,25 @@ export const post = async <T>(
   return performRequest(query, parameters, opts);
 };
 
+/**
+ * @summary Simple fetch-API wrapper for HTTP DELETE
+ * @param {string} query
+ * @param {object} parameters
+ * @returns {Promise<any>}
+ */
+export const deleteR = async <T>(
+  query: string,
+  parameters: IQueryObject = {},
+  options: IRequestOptions = {}
+): Promise<T> => {
+  const headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  const opts = { ...options, method: 'DELETE', headers };
+  return performRequest(query, parameters, opts);
+};
+
 export interface IPutParams<T> {
   query: string;
   data: T;

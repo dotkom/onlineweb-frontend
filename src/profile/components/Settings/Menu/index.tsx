@@ -14,6 +14,8 @@ const Menu = () => (
     <Tab text="Personvern" {...appUrls.getProfileSettingsPrivacyUrl()} />
     <Tab text="Adgangskort (NTNU)" {...appUrls.getProfileSettingsAccessCardUrl()} />
     <Tab text="Notifikasjoner" {...appUrls.getProfileSettingsNotificationsUrl()} />
+    <Tab text="Apptilkoblinger" {...appUrls.getProfileAppConnectionsUrl()} />
+    <Tab text="Din data" {...appUrls.getProfileUserDataUrl()} />
   </div>
 );
 

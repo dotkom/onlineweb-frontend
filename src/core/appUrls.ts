@@ -24,7 +24,13 @@ export const getProfileSettingsNotificationsUrl = () => url`/profile/settings/no
 export const getProfileSettingsPasswordUrl = () => url`/profile/settings/password`;
 export const getProfileSettingsPenaltiesUrl = () => url`/profile/settings/penalties`;
 export const getProfileSettingsPrivacyUrl = () => url`/profile/settings/privacy`;
+export const getProfileAppConnectionsUrl = () => url`/profile/settings/apps`;
+export const getProfileUserDataUrl = () => url`/profile/settings/userdata`;
+
 export const getProfileStatisticsUrl = () => url`/profile/statistics`;
+
+
+
 export const getProfileStatisticsEventsUrl = () => url`/profile/statistics/events`;
 export const getProfileStatisticsOrdersUrl = () => url`/profile/statistics/orders`;
 export const getProfileSearchUrl = () => url`/profile/search`;
