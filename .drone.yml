@@ -11,6 +11,8 @@ steps:
         path: /cache
     settings:
       restore: true
+      mount:
+        - ./node_modules
 
   - name: setup
     image: node:carbon
@@ -76,6 +78,8 @@ steps:
         path: /cache
     settings:
       rebuild: true
+      mount:
+        - ./node_modules
      
   - name: deploy
     image: appleboy/drone-ssh
