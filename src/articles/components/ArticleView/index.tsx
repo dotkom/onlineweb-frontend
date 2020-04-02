@@ -8,7 +8,7 @@ import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getArticle } from 'articles/api';
 import { mockArticle } from 'articles/models/Article';
 import ResponsiveImage from 'common/components/ResponsiveImage/index';
-import { Helmet } from 'react-helmet-async';
+import Head from 'next/head';
 
 import { ArticleByline } from './ArticleByline';
 import { ArticleMeta } from './ArticleMeta';
@@ -37,9 +37,7 @@ export const ArticleView = ({ articleId }: IProps) => {
 
   return (
     <div className={style.container}>
-      {/*
-      // @ts-ignore-next-line TS2604 */}
-      <Helmet>
+      <Head>
         <meta property="og:title" content={article.heading} />
         <meta property="og:description" content={article.ingress_short} />
         <meta property="og:image" content={article.image ? DOMAIN + article.image.thumb : undefined} />
@@ -49,7 +47,7 @@ export const ArticleView = ({ articleId }: IProps) => {
         {article.tags.map((tag) => (
           <meta property="og:article:tag" content={tag} key={tag} />
         ))}
-      </Helmet>
+      </Head>
       <article className={style.article}>
         {article.video ? (
           <ArticleVideo vimeoId={article.video} />
