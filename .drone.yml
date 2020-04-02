@@ -9,8 +9,6 @@ steps:
     volumes:
       - name: cache
         path: /cache
-      - name: node_modules
-        path: ./node_modules
     settings:
       restore: true
 
@@ -76,8 +74,6 @@ steps:
     volumes:
       - name: cache
         path: /cache
-      - name: node_modules
-        path: ./node_modules
     settings:
       rebuild: true
      
@@ -101,7 +97,4 @@ steps:
 
 volumes:
   - name: cache
-    host:
-      path: /tmp/cache
-  - name: node_modules
     temp: {}
