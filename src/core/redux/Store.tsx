@@ -7,7 +7,8 @@ import { rootReducer } from './reducer';
 
 import { Action, State } from './types';
 
-const reduxDevToolsHook = window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (x: any) => x; // tslint:disable-line no-any
+const reduxDevToolsHook =
+  process.browser && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (x: any) => x; // tslint:disable-line no-any
 const thunkMiddleware = thunk as ThunkMiddleware<State, Action>;
 
 export const initStore = (initialState?: State) =>
