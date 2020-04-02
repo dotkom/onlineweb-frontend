@@ -1,5 +1,5 @@
+import Head from 'next/head';
 import React, { useContext } from 'react';
-import { Helmet } from 'react-helmet-async';
 
 import { DOMAIN } from 'common/constants/endpoints';
 import { usePrefetch } from 'common/hooks/usePrefetch';
@@ -28,14 +28,12 @@ export const DetailView = (props: IProps) => {
 
   return (
     <div className={style.container}>
-      {/*
-      // @ts-ignore-next-line TS2604 */}
-      <Helmet>
+      <Head>
         <title>{event.title}</title>
         <meta property="og:title" content={event.title} />
         <meta property="og:description" content={event.ingress_short} />
         <meta property="og:image" content={event.image ? DOMAIN + event.image.thumb : undefined} />
-      </Helmet>
+      </Head>
       <div>
         <PictureCard {...event} />
         <InfoBox {...event} />
