@@ -3,16 +3,21 @@ name: default
 
 steps:
   - name: restore-cache
-    image: drillster/drone-volume-cache
-    when:
-      event: [push, pull_request]
+    image: plugins/s3-cache
     volumes:
       - name: cache
         path: /cache
     settings:
       restore: true
+      pull: true
+      root:
+        from_secret: s3_bucket_name
+      access_key:
+        from_secret: s3_access_key
+      secret_key:
+        from_secret: s3_secret_key
       mount:
-        - ./node_modules
+        - node_modules
 
   - name: setup
     image: node:carbon
@@ -20,6 +25,8 @@ steps:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn
+    depends_on:
+      - restore-cache
 
   - name: build
     image: node:carbon
@@ -28,6 +35,8 @@ steps:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn build:prod
+    depends_on:
+      - setup
 
   - name: test
     image: node:carbon
@@ -36,6 +45,8 @@ steps:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn test
+    depends_on:
+      - setup
 
   - name: compile-typescript
     image: node:carbon
@@ -44,6 +55,8 @@ steps:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn run tsc
+    depends_on:
+      - setup
 
   - name: lint-typescript
     image: node:carbon
@@ -52,6 +65,8 @@ steps:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn lint-ts
+    depends_on:
+      - compile-typescript
 
   - name: lint-less
     image: node:carbon
@@ -60,6 +75,8 @@ steps:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn lint-less
+    depends_on:
+      - setup
 
   - name: lint-prettier
     image: node:carbon
@@ -68,19 +85,29 @@ steps:
       event: [push, pull_request, tag, deployment]
     commands:
       - yarn lint-prettier
+    depends_on:
+      - setup
 
   - name: rebuild-cache
-    image: drillster/drone-volume-cache
+    image: plugins/s3-cache
     when:
       event: [push, pull_request]
     volumes:
       - name: cache
         path: /cache
     settings:
+      pull: true
+      root: 
+        from_secret: s3_bucket_name
+      access_key:
+        from_secret: s3_access_key
+      secret_key:
+        from_secret: s3_secret_key
       rebuild: true
       mount:
-        - ./node_modules
-
+        - node_modules
+    depends_on: [ lint-prettier, lint-less, lint-typescript, test, build]
+     
   - name: deploy
     image: appleboy/drone-ssh
     pull: true
@@ -98,8 +125,9 @@ steps:
       command_timeout: 600s
       script:
         - /srv/www/owf-staging/deploy.sh
+    depends_on:
+       - rebuild-cache
 
 volumes:
   - name: cache
-    host:
-      path: /tmp/cache
+    temp: {}
