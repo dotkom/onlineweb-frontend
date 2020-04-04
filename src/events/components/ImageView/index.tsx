@@ -47,7 +47,7 @@ const isPopulated = (imageEvents: IState) => {
   return !!imageEvents.eventsLeft.length || !!imageEvents.eventsMiddle.length || !!imageEvents.eventsRight.length;
 };
 
-export const ImageView = ({  }: IProps) => {
+export const ImageView = ({}: IProps) => {
   const { eventList, updateEventList } = useContext(EventsRepo);
 
   const prefetch = usePrefetch(PrefetchKey.EVENTS_IMAGE, async () => {

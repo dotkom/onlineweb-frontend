@@ -4,7 +4,7 @@ import React from 'react';
 import style from './footer.less';
 
 const ContactInfo = () => (
-  < /*className={style.contact}*/>
+  <>
     <div>
       <p>Kontaktinformasjon:</p>
       <p>

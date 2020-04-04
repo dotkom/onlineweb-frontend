@@ -17,7 +17,7 @@ export interface IState {
   page: number;
 }
 
-export const Offline = ({  }: IProps) => {
+export const Offline = ({}: IProps) => {
   const prefetch = usePrefetch(PrefetchKey.OFFLINES, async () => {
     const { results } = await getOfflines(1);
     return results;
