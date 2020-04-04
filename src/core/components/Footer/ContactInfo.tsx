@@ -4,32 +4,41 @@ import React from 'react';
 import style from './footer.less';
 
 const ContactInfo = () => (
-  <div className={style.contact}>
+  < /*className={style.contact}*/>
     <div>
-      <FontAwesomeIcon icon={faBriefcase} fixedWidth className={style.icon} /> 992 548 045 (OrgNr) <br />
+      <p>Kontaktinformasjon:</p>
+      <p>
+        <FontAwesomeIcon icon={faBriefcase} fixedWidth className={style.icon} /> 992 548 045 (OrgNr)
+      </p>
       <a href="mailto:kontakt@online.ntu.no">
-        <FontAwesomeIcon icon={faEnvelope} fixedWidth className={style.icon} /> kontakt@online.ntu.no <br />
+        <p>
+          <FontAwesomeIcon icon={faEnvelope} fixedWidth className={style.icon} /> kontakt@online.ntu.no
+        </p>
       </a>
       <a href="mailto:okonomi@online.ntnu.no">
-        <FontAwesomeIcon icon={faFile} fixedWidth className={style.icon} /> okonomi@online.ntnu.no <br />
+        <p>
+          <FontAwesomeIcon icon={faFile} fixedWidth className={style.icon} /> okonomi@online.ntnu.no <br />
+        </p>
       </a>
       <a href="tel:+4773596489">
-        <FontAwesomeIcon icon={faMobileAlt} fixedWidth className={style.icon} /> 73 59 64 89
+        <p>
+          <FontAwesomeIcon icon={faMobileAlt} fixedWidth className={style.icon} /> 73 59 64 89
+        </p>
       </a>
     </div>
     <div>
-      Besøksadresse: <br />
-      A-blokka, A4-137 <br />
-      Høgskoleringen 5 <br />
-      NTNU Gløshaugen
+      <p>Besøksadresse: </p>
+      <p>A-blokka, A4-137</p>
+      <p>Høgskoleringen 5 </p>
+      <p>NTNU Gløshaugen</p>
     </div>
     <div>
-      Post og faktura: <br />
-      Online Linjeforening <br />
-      Sem Sælandsv. 9 <br />
-      7491 Trondheim
+      <p>Post og faktura: </p>
+      <p>Online Linjeforening </p>
+      <p>Sem Sælandsv. 9 </p>
+      <p>7491 Trondheim</p>
     </div>
-  </div>
+  </>
 );
 
 export default ContactInfo;

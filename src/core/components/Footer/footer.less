@@ -4,10 +4,10 @@
 @paddingHorizontal: 20px;
 
 .footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  /* 3 columns are calculated by (maxWidth - padding - margin) / 3).*/
+  grid-template-columns: repeat(auto-fill, minmax(auto, calc((@owDesktopMaxWidth - (@paddingHorizontal * 2 ) - 40px) / 3)));
+  grid-row-gap: 20px;
   padding: @paddingHorizontal;
   border-top: 1px solid @lightGray;
   color: @darkGray;
@@ -18,6 +18,10 @@
 
   & > * {
     margin: 5px 15px;
+  }
+
+  & > div > p:first-of-type {
+    font-weight: bold;
   }
 }
 
