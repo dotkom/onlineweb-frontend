@@ -26,7 +26,7 @@ steps:
     commands:
       - yarn
     depends_on:
-      - rebuild-cache
+      - restore-cache
 
   - name: build
     image: node:carbon
