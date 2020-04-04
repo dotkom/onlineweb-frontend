@@ -106,7 +106,7 @@ steps:
       rebuild: true
       mount:
         - node_modules
-      depends_on: [ lint-prettier, lint-less, lint-typescript, test, build]
+    depends_on: [ lint-prettier, lint-less, lint-typescript, test, build]
      
   - name: deploy
     image: appleboy/drone-ssh
