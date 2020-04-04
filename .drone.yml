@@ -130,7 +130,8 @@ steps:
       command_timeout: 600s
       script:
         - /srv/www/owf-staging/deploy.sh
-    depends_on: [ clone ]
+    depends_on:
+       - rebuild-cache
 
 volumes:
   - name: cache
