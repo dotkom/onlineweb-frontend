@@ -17,7 +17,7 @@ steps:
       secret_key:
         from_secret: s3_secret_key
       mount:
-        - ./node_modules
+        - node_modules
 
   - name: setup
     image: node:carbon
@@ -105,7 +105,7 @@ steps:
         from_secret: s3_secret_key
       rebuild: true
       mount:
-        - ./node_modules
+        - node_modules
       depends_on: [ lint-prettier, lint-less, lint-typescript, test, build]
      
   - name: deploy
