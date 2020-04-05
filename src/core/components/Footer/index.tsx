@@ -7,7 +7,7 @@ import SocialLinks from './SocialLinks';
 const Footer = () => (
   <footer className={style.footer}>
     <div className={style.footerContent}>
-      <a href="http://www.bekk.no/" className={style.sponsor}>
+      <a href="https://www.bekk.no/" className={style.sponsor}>
         <Img src="/static/img/hsp-832576.svg" alt="Hovedsamarbeidspartner - Bekk" />
       </a>
       <p>
