@@ -24,17 +24,17 @@ module.exports = withCss(
       return config;
     },
     env: {
-      OW4_ADDRESS: 'https://online.ntnu.no',
-      OW4_SSO_CLIENT_ID: '',
-      OW4_SSO_CALLBACK: 'http://localhost:3000/auth/callback',
-      OWF_SENTRY_DSN: '',
-      OWF_GOOGLE_ANALYTICS_KEY: '',
-      OWF_VAPID_PUBLIC_KEY: '',
-      OWF_WEBPUSH_SERVER_URL: '',
-      STRIPE_PUBLIC_KEY_ARRKOM: null,
-      STRIPE_PUBLIC_KEY_FAGKOM: null,
-      STRIPE_PUBLIC_KEY_PROKOM: null,
-      STRIPE_PUBLIC_KEY_TRIKOM: null,
+      OW4_ADDRESS: process.env.OW4_ADDRESS || 'https://online.ntnu.no',
+      OW4_SSO_CLIENT_ID: process.env.OW4_SSO_CLIENT_ID || '',
+      OW4_SSO_CALLBACK: process.env.OW4_SSO_CALLBACK || 'http://localhost:3000/auth/callback',
+      OWF_SENTRY_DSN: process.env.OWF_SENTRY_DSN || '',
+      OWF_GOOGLE_ANALYTICS_KEY: process.env.OWF_GOOGLE_ANALYTICS_KEY || '',
+      OWF_VAPID_PUBLIC_KEY: process.env.OWF_VAPID_PUBLIC_KEY || '',
+      OWF_WEBPUSH_SERVER_URL: process.env.OWF_WEBPUSH_SERVER_URL || '',
+      STRIPE_PUBLIC_KEY_ARRKOM: process.env.STRIPE_PUBLIC_KEY_ARRKOM || null,
+      STRIPE_PUBLIC_KEY_FAGKOM: process.env.STRIPE_PUBLIC_KEY_FAGKOM || null,
+      STRIPE_PUBLIC_KEY_PROKOM: process.env.STRIPE_PUBLIC_KEY_PROKOM || null,
+      STRIPE_PUBLIC_KEY_TRIKOM: process.env.STRIPE_PUBLIC_KEY_TRIKOM || null,
     },
   })
 );
