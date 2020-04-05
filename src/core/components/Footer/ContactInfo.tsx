@@ -5,12 +5,12 @@ import style from './footer.less';
 
 const ContactInfo = () => (
   <>
-    <div>
+    <address>
       <p>Besøksadresse: </p>
       <p>A-blokka, A4-137</p>
       <p>Høgskoleringen 5 </p>
       <p>NTNU Gløshaugen</p>
-    </div>
+    </address>
     <div>
       <p>Kontaktinformasjon:</p>
       <p>

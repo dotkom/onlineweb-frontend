@@ -17,6 +17,7 @@
 
   /* 3 columns are calculated by (maxWidth - padding - margin) / 3). */
   grid-template-columns: 1fr 1.3fr 1fr;
+  grid-row-gap: 35px;
   color: @darkGray;
   width: calc(70% - @paddingHorizontal * 2);
   margin: 10px auto 0;
@@ -30,9 +31,14 @@
     font-weight: bold;
   }
 
+  & > address > p:first-of-type {
+    font-weight: bold;
+  }
+
   @media (max-width: @owMobileBreakpoint) {
     grid-template-columns: 1fr;
     width: calc(100% - @paddingHorizontal * 2);
+    grid-row-gap: 15px;
   }
 }
 
