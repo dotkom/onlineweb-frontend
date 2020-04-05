@@ -9,6 +9,7 @@ import { getEventUserAttendees } from 'payments/api/paymentRelation';
 import { IPaymentPrice } from 'payments/models/Payment';
 import { Payment } from '../Payment';
 import style from '../Payment/payment.less';
+import { IAttendanceEvent } from 'events/models/Event';
 
 interface IProps {
   eventId: number;
@@ -18,7 +19,7 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
   const [userAttendees, setUserAttendees] = useState<IUserAttendee[]>();
   const [selectedPrice, setSelectedPrice] = useState<number>();
 
-  const [attendanceEvent, setAttendanceEvent] = useState();
+  const [attendanceEvent, setAttendanceEvent] = useState<IAttendanceEvent>();
 
   const loadAttendanceEvent = async () => {
     const event = await getAttendanceEvent(eventId);
