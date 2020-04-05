@@ -1,7 +1,6 @@
 import { faBriefcase, faEnvelope, faFile, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import style from './footer.less';
 
 const ContactInfo = () => (
   <>
