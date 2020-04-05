@@ -2,11 +2,8 @@ import Head from 'next/head';
 import React, { useContext } from 'react';
 
 import { DOMAIN } from 'common/constants/endpoints';
-import { usePrefetch } from 'common/hooks/usePrefetch';
-import { PrefetchKey } from 'common/utils/PrefetchState';
 import { EventsRepo } from 'events/providers/EventsRepo';
 
-import { getEvent } from 'events/api/events';
 import { mockEvent } from 'events/models/Event';
 import Contact from './Contact';
 import style from './detail.less';
@@ -22,9 +19,7 @@ export const DetailView = (props: IProps) => {
   const { eventMap } = useContext(EventsRepo);
   const eventId = parseInt(props.eventId, 10);
 
-  const prefetchEvent = usePrefetch(PrefetchKey.EVENT_SINGLE, async () => await getEvent(eventId));
-
-  const event = prefetchEvent && prefetchEvent.id === eventId ? prefetchEvent : eventMap.get(eventId) || mockEvent;
+  const event = eventMap.get(eventId) || mockEvent;
 
   return (
     <div className={style.container}>

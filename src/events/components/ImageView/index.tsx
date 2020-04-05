@@ -1,8 +1,6 @@
 import { DateTime } from 'luxon';
 import React, { useContext, useEffect, useMemo } from 'react';
 
-import { usePrefetch } from 'common/hooks/usePrefetch';
-import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getImageEvents } from 'events/api/imageEvents';
 import { EventTypeEnum, IEvent, IEventViewProps } from 'events/models/Event';
 import { EventsRepo } from 'events/providers/EventsRepo';
@@ -50,15 +48,6 @@ const isPopulated = (imageEvents: IState) => {
 export const ImageView = ({  }: IProps) => {
   const { eventList, updateEventList } = useContext(EventsRepo);
 
-  const prefetch = usePrefetch(PrefetchKey.EVENTS_IMAGE, async () => {
-    const [left, middle, right] = await getImageEvents();
-    return {
-      eventsLeft: left || [],
-      eventsMiddle: middle || [],
-      eventsRight: right || [],
-    };
-  });
-
   /** Fetch events to repo on mount */
   useEffect(() => {
     (async () => {
@@ -76,7 +65,7 @@ export const ImageView = ({  }: IProps) => {
     [eventList]
   );
 
-  const displayEvents = !isPopulated(imageEvents) ? prefetch || INITIAL_STATE : imageEvents;
+  const displayEvents = !isPopulated(imageEvents) ? INITIAL_STATE : imageEvents;
 
   return (
     <>
