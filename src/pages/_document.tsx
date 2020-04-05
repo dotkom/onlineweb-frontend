@@ -1,4 +1,4 @@
-import Document, { Head, Html, Main, NextScript, DocumentContext, DocumentInitialProps } from 'next/document';
+import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
 import { ComponentProps } from 'react';
 
 type DocumentProps = ComponentProps<typeof Document>;

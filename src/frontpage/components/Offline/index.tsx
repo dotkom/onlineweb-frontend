@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { Carousel } from 'common/components/Carousel';
-import { usePrefetch } from 'common/hooks/usePrefetch';
-import { PrefetchKey } from 'common/utils/PrefetchState';
 import { getOfflines, getRemainingOfflines } from 'frontpage/api/offline';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 
@@ -18,12 +16,7 @@ export interface IState {
 }
 
 export const Offline = ({  }: IProps) => {
-  const prefetch = usePrefetch(PrefetchKey.OFFLINES, async () => {
-    const { results } = await getOfflines(1);
-    return results;
-  });
-  const initialOfflines = prefetch && prefetch.length ? prefetch : [];
-  const [offlines, setOfflines] = useState(initialOfflines);
+  const [offlines, setOfflines] = useState<IOfflineIssue[]>([]);
 
   /** Get the first batch of Offlines for feast loading */
   const fetchInitial = async () => {
