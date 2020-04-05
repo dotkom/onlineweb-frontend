@@ -4,20 +4,41 @@
 @paddingHorizontal: 20px;
 
 .footer {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  padding: @paddingHorizontal;
   border-top: 1px solid @lightGray;
-  color: @darkGray;
-  margin: 10px auto 0;
+  padding: @paddingHorizontal;
   box-sizing: border-box;
+  margin: 10px auto 0;
   width: calc(100% - @paddingHorizontal * 2);
+  max-width: @owDesktopMaxWidth - @paddingHorizontal * 2;
+}
+
+.footerContent {
+  display: grid;
+
+  /* 3 columns are calculated by (maxWidth - padding - margin) / 3). */
+  grid-template-columns: 1fr 1.3fr 1fr;
+  grid-row-gap: 35px;
+  color: @darkGray;
+  width: calc(70% - @paddingHorizontal * 2);
+  margin: 10px auto 0;
   max-width: @owDesktopMaxWidth - @paddingHorizontal * 2;
 
   & > * {
     margin: 5px 15px;
+  }
+
+  & > div > p:first-of-type {
+    font-weight: bold;
+  }
+
+  & > address > p:first-of-type {
+    font-weight: bold;
+  }
+
+  @media (max-width: @owMobileBreakpoint) {
+    grid-template-columns: 1fr;
+    width: calc(100% - @paddingHorizontal * 2);
+    grid-row-gap: 15px;
   }
 }
 
@@ -42,4 +63,8 @@
 
 .social:not(:last-child) {
   margin-right: 5px;
+}
+
+.sponsor:hover {
+  filter: brightness(0.35) sepia(1) hue-rotate(124deg) saturate(500%);
 }
