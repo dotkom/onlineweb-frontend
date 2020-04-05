@@ -1,3 +1,4 @@
+// @ts-ignore
 describe('The Human Condition', () => {
   it('we are sane', () => {
     expect(true === true);
