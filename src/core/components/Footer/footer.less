@@ -4,20 +4,22 @@
 @paddingHorizontal: 20px;
 
 .footer {
+  border-top: 1px solid @lightGray;
+  padding: @paddingHorizontal;
+  box-sizing: border-box;
+  margin: 10px auto 0;
+  width: calc(100% - @paddingHorizontal * 2);
+  max-width: @owDesktopMaxWidth - @paddingHorizontal * 2;
+}
+
+.footerContent {
   display: grid;
 
   /* 3 columns are calculated by (maxWidth - padding - margin) / 3). */
-  grid-template-columns: repeat(
-    auto-fill,
-    minmax(auto, calc((@owDesktopMaxWidth - (@paddingHorizontal * 2) - 40px) / 3))
-  );
-  grid-row-gap: 20px;
-  padding: @paddingHorizontal;
-  border-top: 1px solid @lightGray;
+  grid-template-columns: 1fr 1.3fr 1fr;
   color: @darkGray;
+  width: calc(70% - @paddingHorizontal * 2);
   margin: 10px auto 0;
-  box-sizing: border-box;
-  width: calc(100% - @paddingHorizontal * 2);
   max-width: @owDesktopMaxWidth - @paddingHorizontal * 2;
 
   & > * {
@@ -27,6 +29,11 @@
   & > div > p:first-of-type {
     font-weight: bold;
   }
+
+  @media (max-width: @owMobileBreakpoint) {
+    grid-template-columns: 1fr;
+    width: calc(100% - @paddingHorizontal * 2);
+  } 
 }
 
 .social {

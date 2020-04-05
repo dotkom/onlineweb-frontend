@@ -6,6 +6,12 @@ import style from './footer.less';
 const ContactInfo = () => (
   <>
     <div>
+      <p>Besøksadresse: </p>
+      <p>A-blokka, A4-137</p>
+      <p>Høgskoleringen 5 </p>
+      <p>NTNU Gløshaugen</p>
+    </div>
+    <div>
       <p>Kontaktinformasjon:</p>
       <p>
         <FontAwesomeIcon icon={faBriefcase} fixedWidth className={style.icon} /> 992 548 045 (OrgNr)
@@ -25,12 +31,6 @@ const ContactInfo = () => (
           <FontAwesomeIcon icon={faMobileAlt} fixedWidth className={style.icon} /> 73 59 64 89
         </p>
       </a>
-    </div>
-    <div>
-      <p>Besøksadresse: </p>
-      <p>A-blokka, A4-137</p>
-      <p>Høgskoleringen 5 </p>
-      <p>NTNU Gløshaugen</p>
     </div>
     <div>
       <p>Post og faktura: </p>
