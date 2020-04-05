@@ -14,21 +14,21 @@ const ContactInfo = () => (
     <div>
       <p>Kontaktinformasjon:</p>
       <p>
-        <FontAwesomeIcon icon={faBriefcase} fixedWidth className={style.icon} /> 992 548 045 (OrgNr)
+        <FontAwesomeIcon icon={faBriefcase} fixedWidth /> 992 548 045 (OrgNr)
       </p>
       <a href="mailto:kontakt@online.ntu.no">
         <p>
-          <FontAwesomeIcon icon={faEnvelope} fixedWidth className={style.icon} /> kontakt@online.ntu.no
+          <FontAwesomeIcon icon={faEnvelope} fixedWidth /> kontakt@online.ntu.no
         </p>
       </a>
       <a href="mailto:okonomi@online.ntnu.no">
         <p>
-          <FontAwesomeIcon icon={faFile} fixedWidth className={style.icon} /> okonomi@online.ntnu.no <br />
+          <FontAwesomeIcon icon={faFile} fixedWidth /> okonomi@online.ntnu.no <br />
         </p>
       </a>
       <a href="tel:+4773596489">
         <p>
-          <FontAwesomeIcon icon={faMobileAlt} fixedWidth className={style.icon} /> 73 59 64 89
+          <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> 73 59 64 89
         </p>
       </a>
     </div>
