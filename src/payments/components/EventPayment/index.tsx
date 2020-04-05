@@ -5,11 +5,11 @@ import HttpError from 'core/components/errors/HttpError';
 
 import { getAttendanceEvent } from 'events/api/events';
 import { IUserAttendee } from 'events/models/Attendee';
+import { IAttendanceEvent } from 'events/models/Event';
 import { getEventUserAttendees } from 'payments/api/paymentRelation';
 import { IPaymentPrice } from 'payments/models/Payment';
 import { Payment } from '../Payment';
 import style from '../Payment/payment.less';
-import { IAttendanceEvent } from 'events/models/Event';
 
 interface IProps {
   eventId: number;
