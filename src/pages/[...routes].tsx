@@ -1,3 +1,3 @@
-import { MainEntry } from './_main'
+import { MainEntry } from './_main';
 
 export default MainEntry;

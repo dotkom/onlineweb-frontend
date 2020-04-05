@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import Markdown from 'common/components/Markdown';
 import { DOMAIN } from 'common/constants/endpoints';
-import { usePrefetch } from 'common/hooks/usePrefetch';
-import { PrefetchKey } from 'common/utils/PrefetchState';
 
 import { getArticle } from 'articles/api';
 import { mockArticle } from 'articles/models/Article';
@@ -21,10 +19,7 @@ export interface IProps {
 }
 
 export const ArticleView = ({ articleId }: IProps) => {
-  const prefetchArticle = usePrefetch(PrefetchKey.ARTICLE_SINGLE, async () => await getArticle(articleId));
-  const defaultArticle = prefetchArticle && prefetchArticle.id === articleId ? prefetchArticle : mockArticle;
-
-  const [article, setArticle] = useState(defaultArticle);
+  const [article, setArticle] = useState(mockArticle);
 
   useEffect(() => {
     const fetchArticle = async () => {
