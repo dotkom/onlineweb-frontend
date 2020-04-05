@@ -55,7 +55,7 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
 
   const payment = attendanceEvent.payments[0];
 
-  const selectedPriceObject = payment.payment_prices.find((price: IPaymentPrice) => price.id === selectedPrice);
+  const selectedPriceObject: IPaymentPrice | undefined = payment.payment_prices.find((price: IPaymentPrice) => price.id === selectedPrice);
 
   const payments = payment.payment_prices.map((price: IPaymentPrice) => (
     <div key={price.id} onClick={() => setSelectedPrice(price.id)} className={style.price}>
@@ -66,10 +66,11 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
     </div>
   ));
 
-  return (
-    <Payment payment={payment} price={selectedPriceObject} isPaid={isPaid} showPayment={selectedPriceObject}>
-      <form>{payments}</form>
-      {!selectedPriceObject && <div className={style.infobox}>Velg et alternativ for å gå videre til betaling.</div>}
-    </Payment>
-  );
+  return selectedPriceObject ? 
+    (
+      <Payment payment={payment} price={selectedPriceObject} isPaid={isPaid} showPayment={Boolean(selectedPriceObject)}>
+        <form>{payments}</form>
+      </Payment>
+    ) : 
+    <div className={style.infobox}>Velg et alternativ for å gå videre til betaling.</div>
 };
