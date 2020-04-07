@@ -1,5 +1,5 @@
 import Document, { DocumentContext, DocumentInitialProps, Head, Html, Main, NextScript } from 'next/document';
-import { ComponentProps } from 'react';
+import React, { ComponentProps } from 'react';
 
 type DocumentProps = ComponentProps<typeof Document>;
 

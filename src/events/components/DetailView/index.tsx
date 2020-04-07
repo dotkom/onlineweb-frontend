@@ -12,13 +12,11 @@ import PictureCard from './PictureCard';
 import Registration from './Registation';
 
 export interface IProps {
-  eventId: string;
+  eventId: number;
 }
 
-export const DetailView = (props: IProps) => {
+export const DetailView = ({ eventId }: IProps) => {
   const { eventMap } = useContext(EventsRepo);
-  const eventId = parseInt(props.eventId, 10);
-
   const event = eventMap.get(eventId) || mockEvent;
 
   return (

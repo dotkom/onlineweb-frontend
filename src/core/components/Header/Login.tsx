@@ -1,4 +1,3 @@
-import { routes } from 'App';
 import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
 import { UserContext } from 'authentication/providers/UserProvider';
