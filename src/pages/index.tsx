@@ -1,3 +1,9 @@
-import { MainEntry } from './_main';
+import React from 'react';
 
-export default MainEntry;
+import FrontPageComponent from 'frontpage';
+
+const FrontPage = () => {
+  return <FrontPageComponent />;
+};
+
+export default FrontPage;
