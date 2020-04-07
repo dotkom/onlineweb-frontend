@@ -47,11 +47,17 @@ const HeaderUser = (props: IHeaderUserProps) => (
     <div className={style.username}>{props.user.profile.preferred_username}</div>
     {props.isOpen && (
       <div className={style.userMenu} onClick={props.onClick}>
-        <Link to={routes.profile}>Min side: {props.user.profile.preferred_username}</Link>
-        <Link to={routes.home}>Kontakt oss</Link>
-        <Link to={routes.home}>Finn brukere</Link>
-        <Link to={routes.home} onClick={props.logout}>
-          Logg ut
+        <Link href="/profile">
+          <a>Min side: {props.user.profile.preferred_username}</a>
+        </Link>
+        <Link href="/">
+          <a>Kontakt oss</a>
+        </Link>
+        <Link href="/profile/search">
+          <a>Finn brukere</a>
+        </Link>
+        <Link href="/">
+          <a onClick={props.logout}>Logg ut</a>
         </Link>
       </div>
     )}

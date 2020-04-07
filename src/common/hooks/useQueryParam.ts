@@ -1,10 +1,10 @@
-import { useContext } from 'react';
-import { __RouterContext } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import qs from 'query-string';
 
 export const useQueryParam = (key: string): [string | null, (value: string | null) => void] => {
-  const { location, history } = useContext(__RouterContext);
-
-  const params = new URLSearchParams(location.search);
+  const router = useRouter();
+  const search = qs.stringify(router.query);
+  const params = new URLSearchParams(search);
   const value = params.get(key);
 
   const setValue = (newValue: string | null) => {
@@ -13,7 +13,7 @@ export const useQueryParam = (key: string): [string | null, (value: string | nul
     } else {
       params.delete(key);
     }
-    history.replace(`${location.pathname}?${params}`);
+    router.replace(`${location.pathname}?${params}`);
   };
 
   return [value, setValue];

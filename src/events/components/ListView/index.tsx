@@ -37,8 +37,10 @@ export const ListView = ({ filtered }: IProps) => {
     <>
       <div className={style.grid}>
         {displayEvents.map((event) => (
-          <Link to={`/events/${event.id}`} key={event.id}>
-            <ListEvent {...event} />
+          <Link href={`/events/${event.id}`} key={event.id}>
+            <a>
+              <ListEvent {...event} />
+            </a>
           </Link>
         ))}
       </div>

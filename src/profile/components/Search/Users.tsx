@@ -4,7 +4,6 @@ import { useIntersection } from 'common/hooks/useIntersection';
 import { Link } from 'core/components/Router';
 import { ProfileSearchContext } from 'profile/providers/SearchFilter';
 
-import { routes } from 'profile';
 import ProfileSmall from './ProfileSmall';
 import style from './search.less';
 
@@ -30,8 +29,10 @@ export const Users = () => {
       ) : (
         <div className={style.smallProfileGrid}>
           {profiles.map((profile) => (
-            <Link to={routes.public + `/${profile.id}`} key={profile.id}>
-              <ProfileSmall profile={profile} />
+            <Link href={`/profile/public/${profile.id}`} key={profile.id}>
+              <a>
+                <ProfileSmall profile={profile} />
+              </a>
             </Link>
           ))}
         </div>

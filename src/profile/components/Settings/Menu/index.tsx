@@ -1,21 +1,16 @@
 import React from 'react';
-import { routes } from '..';
 import style from './menu.less';
 import Tab from './Tab';
 
-export interface IProps {
-  path: string;
-}
-
-const Menu = ({ path }: IProps) => (
+const Menu = () => (
   <div className={style.menu}>
-    <Tab path={routes.main} active={path === routes.main} text="Informasjon" />
-    <Tab path={routes.mail} active={path === routes.mail} text="E-Post" />
-    <Tab path={routes.password} active={path === routes.password} text="Passord" />
-    <Tab path={routes.penalties} active={path === routes.penalties} text="Prikker og suspensjoner" />
-    <Tab path={routes.privacy} active={path === routes.privacy} text="Personvern" />
-    <Tab path={routes.accessCard} active={path === routes.accessCard} text="Adgangskort (NTNU)" />
-    <Tab path={routes.notifications} active={path === routes.notifications} text="Notifikasjoner" />
+    <Tab href="/profile/settings/" text="Informasjon" />
+    <Tab href="/profile/settings/mail" text="E-Post" />
+    <Tab href="/profile/settings/password" text="Passord" />
+    <Tab href="/profile/settings/penalties" text="Prikker og suspensjoner" />
+    <Tab href="/profile/settings/privacy" text="Personvern" />
+    <Tab href="/profile/settings/access-card" text="Adgangskort (NTNU)" />
+    <Tab href="/profile/settings/notifications" text="Notifikasjoner" />
   </div>
 );
 

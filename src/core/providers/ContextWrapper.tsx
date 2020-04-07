@@ -3,16 +3,16 @@ import React, { ReactNode } from 'react';
 import FrontpageArticles from 'articles/providers/FrontpageArticles';
 import { ToastProvider } from 'core/utils/toast/ToastContext';
 import { EventsRepoProvider } from 'events/providers/EventsRepo';
-import { QueryParamsProviderWithRouter } from './QueryParams';
 
 import { StoreProvider } from '../redux/Store';
+import { QueryParamsProvider } from './QueryParams';
 
 export interface IProps {
   children: ReactNode;
 }
 
 const ContextWrapper = ({ children }: IProps) => (
-  <QueryParamsProviderWithRouter>
+  <QueryParamsProvider>
     <StoreProvider>
       <ToastProvider>
         <EventsRepoProvider>
@@ -20,7 +20,7 @@ const ContextWrapper = ({ children }: IProps) => (
         </EventsRepoProvider>
       </ToastProvider>
     </StoreProvider>
-  </QueryParamsProviderWithRouter>
+  </QueryParamsProvider>
 );
 
 export default ContextWrapper;

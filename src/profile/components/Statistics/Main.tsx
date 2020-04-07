@@ -2,7 +2,6 @@ import Markdown from 'common/components/Markdown';
 import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
 import { Link } from 'core/components/Router';
 import React from 'react';
-import { routes } from './';
 import StringStat from './Events/StringStat';
 
 const ABOUT_STATISTICS = `
@@ -21,15 +20,19 @@ const Main = () => {
       </Pane>
       <SplitPane>
         <FourSplitPane>
-          <Link to={routes.orders}>
-            <Pane>
-              <StringStat name="" value="Kiosk" />
-            </Pane>
+          <Link href={`/profile/statistics/orders`}>
+            <a>
+              <Pane>
+                <StringStat name="" value="Kiosk" />
+              </Pane>
+            </a>
           </Link>
-          <Link to={routes.events}>
-            <Pane>
-              <StringStat name="" value="Arrangementer" />
-            </Pane>
+          <Link href={`/profile/statistics/events`}>
+            <a>
+              <Pane>
+                <StringStat name="" value="Arrangementer" />
+              </Pane>
+            </a>
           </Link>
         </FourSplitPane>
       </SplitPane>
