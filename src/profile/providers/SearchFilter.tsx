@@ -2,7 +2,6 @@ import React, { createContext, FC, useContext, useEffect, useMemo, useState } fr
 import ReactDOM from 'react-dom';
 
 import { UserContext } from 'authentication/providers/UserProvider';
-import { useQueryParam } from 'common/hooks/useQueryParam';
 import { getProfilesIterator } from 'profile/api/search';
 import { IPublicProfile } from 'profile/models/User';
 
@@ -36,15 +35,6 @@ const INITIAL_STATE: IState = {
 
 export const ProfileSearchContext = createContext(INITIAL_STATE);
 
-const parseRange = (rangeString: string): [number, number] | null => {
-  const match = rangeString.match(/^\[\d\,\d\]$/);
-  if (!match) {
-    return null;
-  }
-  const [n, m] = match.map((k) => Number(k));
-  return [n, m];
-};
-
 export const ProfileSearchProvider: FC = ({ children }) => {
   const { user } = useContext(UserContext);
   /** Should not be able to render this page without an authenticated user */
@@ -52,26 +42,13 @@ export const ProfileSearchProvider: FC = ({ children }) => {
     return null;
   }
 
-  /** Store filter parameters in browser query */
-  const [querySearch, setSearch] = useQueryParam('search');
-  const [queryGroup, setQueryGroup] = useQueryParam('group');
-  const [queryRange, setQueryRange] = useQueryParam('range');
+  const [search, setSearch] = useState<string | undefined>(undefined);
+  const [group, setGroup] = useState<string | undefined>(undefined);
+  const [range, setRange] = useState<[number, number]>([1, 6]);
 
   const [profiles, setProfiles] = useState<IPublicProfile[]>([]);
   /** Restrict possibility of calling nextPage until the first page of current query has been added to state. */
   const [ready, setReady] = useState(false);
-
-  const search = querySearch || undefined;
-  const group = queryGroup || undefined;
-  const range = parseRange(queryRange || '') || [1, 6];
-  const setGroup = (newGroup: string) => {
-    if (newGroup.toLowerCase() === 'alle grupper') {
-      setQueryGroup(null);
-    } else {
-      setQueryGroup(newGroup);
-    }
-  };
-  const setRange = (newRange: [number, number]) => setQueryRange(JSON.stringify(newRange));
 
   /** Initialize fetch iterator. Needs to be renewed when parameters are changed, as 'page' is internal state */
   const initialFetcher = useMemo(() => getProfilesIterator({ search, group, range }, user), []);
@@ -102,7 +79,7 @@ export const ProfileSearchProvider: FC = ({ children }) => {
   /** Reset search results when any parameter is changed */
   useEffect(() => {
     reset();
-  }, [querySearch, queryGroup, queryRange]);
+  }, [search, group, JSON.stringify(range)]);
 
   const value: IState = {
     search,

@@ -1,38 +1,37 @@
+import React from 'react';
+
 import classnames from 'classnames';
+import { useRouter } from 'next/router';
+
 import { Link } from 'core/components/Router';
-import React, { Component } from 'react';
-import Router from 'react-router-dom';
-import { routes } from '../index';
 import style from './mainMenu.less';
 
-export interface IProps {
-  match: Router.match<{}>;
-}
-
-class MainMenu extends Component<IProps, {}> {
-  public render() {
-    const { path } = this.props.match;
-    return (
-      <div className={style.menuGrid}>
-        <MenuElement text="Min Profil" link={routes.personal} active={path === routes.personal} />
-        <MenuElement text="Brukersøk" link={routes.search} active={path === routes.search} />
-        <MenuElement text="Innstillinger" link={routes.settings} active={path === routes.settings} />
-        <MenuElement text="Statistikk" link={routes.statistics} active={path === routes.statistics} />
-      </div>
-    );
-  }
-}
+const MainMenu = () => {
+  return (
+    <div className={style.menuGrid}>
+      <MenuElement text="Min Profil" href="/profile" />
+      <MenuElement text="Brukersøk" href="/profile/search" />
+      <MenuElement text="Innstillinger" href="/profile/settings" />
+      <MenuElement text="Statistikk" href="/profile/statistics" />
+    </div>
+  );
+};
 
 export interface IElementProps {
   text: string;
-  active: boolean;
-  link: string;
+  href: string;
 }
 
-export const MenuElement = ({ text, active, link }: IElementProps) => (
-  <Link to={link} className={classnames(style.menuElement, { [style.menuElementActive]: active })}>
-    <h1>{text}</h1>
-  </Link>
-);
+export const MenuElement = ({ text, href }: IElementProps) => {
+  const { pathname } = useRouter();
+  const isActive = pathname === href;
+  return (
+    <Link href={href}>
+      <a className={classnames(style.menuElement, { [style.menuElementActive]: isActive })}>
+        <h1>{text}</h1>
+      </a>
+    </Link>
+  );
+};
 
 export default MainMenu;

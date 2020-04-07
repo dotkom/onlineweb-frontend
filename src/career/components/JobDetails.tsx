@@ -26,12 +26,17 @@ const JobDetails = (props: ICareerOpportunity) => (
       <Markdown className={style.jobDescription} source={props.description} escapeHtml />
       <div>
         <div className={style.company}>
-          <Link className={style.companyImage} to={`/company/${props.company.id}`}>
-            <ResponsiveImage image={props.company.image} size="lg" alt={props.company.name} type="company" />
+          <Link href={`/company/${props.company.id}`}>
+            <a className={style.companyImage}>
+              <ResponsiveImage image={props.company.image} size="lg" alt={props.company.name} type="company" />
+            </a>
           </Link>
+
           <div className={style.companyDescriptionBox}>
-            <Link className={style.companyDescriptionTitle} to={`/company/${props.company.id}`}>
-              <h3>{props.company.name}</h3>
+            <Link href={`/company/${props.company.id}`}>
+              <a className={style.companyDescriptionTitle}>
+                <h3>{props.company.name}</h3>
+              </a>
             </Link>
             <Markdown className={style.companyDescriptionContent} source={props.company.short_description} escapeHtml />
           </div>

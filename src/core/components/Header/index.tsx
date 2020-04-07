@@ -1,7 +1,6 @@
 import classnames from 'classnames';
 import React, { Component } from 'react';
 
-import { routes } from 'App';
 import { Link } from 'core/components/Router';
 
 import style from './header.less';
@@ -32,16 +31,30 @@ class Header extends Component<IProps, IState> {
           <MenuButton isOpen={isOpen} onClick={this.toggleMenu} />
           <HeaderLogo onClick={this.closeMenu} />
           <div className={classnames(style.links, { [style.dropdownMode]: isOpen })} onClick={this.closeMenu}>
-            <Link to={routes.profile} requireLogin>
-              Profil
+            <Link href="/profile" requireLogin>
+              <a>Profil</a>
             </Link>
-            <Link to={routes.events}>Arkiv</Link>
-            <Link to={routes.career}>Karriere</Link>
-            <Link to={routes.resources}>Ressurser</Link>
-            <Link to={routes.contribution}>Bidra</Link>
-            <Link to={routes.hobbygroups}>Interessegrupper</Link>
-            <Link to={routes.wiki}>Wiki</Link>
-            <Link to={routes.webshop}>Webshop</Link>
+            <Link href="/events">
+              <a>Arkiv</a>
+            </Link>
+            <Link href="/career">
+              <a>Karriere</a>
+            </Link>
+            <Link href="/resources">
+              <a>Ressurser</a>
+            </Link>
+            <Link href="/contribution">
+              <a>Bidra</a>
+            </Link>
+            <Link href="/hobbygroups">
+              <a>Interessegrupper</a>
+            </Link>
+            <Link href="/wiki">
+              <a>Wiki</a>
+            </Link>
+            <Link href="/webshop">
+              <a>Webshop</a>
+            </Link>
           </div>
           <HeaderLogin />
         </div>
