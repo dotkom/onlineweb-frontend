@@ -74,7 +74,7 @@ export const ArticleView = ({ articleId }: IProps) => {
 
         <ArticleMeta article={article} />
       </article>
-      <RelatedArticles mainArticle={article} />
+      <RelatedArticles relatedToArticleId={articleId} />
     </div>
   );
 };
