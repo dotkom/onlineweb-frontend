@@ -1,7 +1,7 @@
 import { batch } from 'react-redux';
 import { Reducer } from 'redux';
 
-import { Thunk } from 'core/redux/types';
+import { Dispatch } from 'core/redux/Store';
 import { getAllTransactions } from 'payments/api/paymentTransaction';
 import { IPaymentTransaction } from 'payments/models/PaymentTransaction';
 
@@ -58,7 +58,7 @@ export const transactionsReducer: Reducer<ITransactionsState, TransactionAction>
   }
 };
 
-export const fetchTransactions: Thunk = () => async (dispatch) => {
+export const fetchTransactions = () => async (dispatch: Dispatch) => {
   dispatch({ type: Type.SET_FETCHING, status: true });
   try {
     const transactions = await getAllTransactions();
