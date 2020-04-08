@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import FrontpageArticles from 'articles/providers/FrontpageArticles';
 import { ToastProvider } from 'core/utils/toast/ToastContext';
 import { EventsRepoProvider } from 'events/providers/EventsRepo';
 
@@ -13,9 +12,7 @@ export interface IProps {
 const ContextWrapper = ({ children }: IProps) => (
   <QueryParamsProvider>
     <ToastProvider>
-      <EventsRepoProvider>
-        <FrontpageArticles>{children}</FrontpageArticles>
-      </EventsRepoProvider>
+      <EventsRepoProvider>{children}</EventsRepoProvider>
     </ToastProvider>
   </QueryParamsProvider>
 );

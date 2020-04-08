@@ -1,53 +1,30 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 
+import { articleSelectors, fetchRelatedArticles } from 'articles/slices/articles';
 import { Carousel } from 'common/components/Carousel';
-
-import { getArticles } from 'articles/api';
-import { IArticle } from 'articles/models/Article';
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import { State } from 'core/redux/Store';
 
 import style from '../articleView.less';
 import { RelatedArticle } from './RelatedArticle';
 
-export interface IProps {
-  mainArticle: IArticle;
+interface IProps {
+  relatedToArticleId: number;
 }
 
-export const RelatedArticles: FC<IProps> = ({ mainArticle }) => {
-  const [relatedArticles, setRelatedArticles] = useState<IArticle[]>([]);
-
-  const updateRelatedArticleList = (articles: IArticle[]) => {
-    const oldArticles = relatedArticles.filter((oldArticle) => {
-      const newArticleIds = articles.map((article) => article.id);
-      return !newArticleIds.includes(oldArticle.id);
-    });
-
-    const allArticles = oldArticles
-      .concat(articles)
-      .filter((article) => article.tags.some((articleTag) => mainArticle.tags.includes(articleTag)));
-
-    return allArticles
-      .filter((article, idx, final) => final.map((e) => e.id).indexOf(article.id) === idx)
-      .sort((a, b) => Date.parse(b.published_date) - Date.parse(a.published_date))
-      .filter((article) => article.id !== mainArticle.id);
-  };
+export const RelatedArticles: FC<IProps> = ({ relatedToArticleId }) => {
+  const dispatch = useDispatch();
+  const articles = useSelector(selectRelatedArticles(relatedToArticleId));
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      const relatedArticlePromises = mainArticle.tags.map(async (tag) => getArticles({ tags: tag }));
-      const newRelatedArticles = await Promise.all(relatedArticlePromises);
-      const updatedRelatedArticleList = updateRelatedArticleList(newRelatedArticles.flat());
-      setRelatedArticles(updatedRelatedArticleList);
-    };
-    if (mainArticle.tags.length !== 0) {
-      fetchArticles();
-    }
-  }, [mainArticle]);
+    dispatch(fetchRelatedArticles(relatedToArticleId));
+  }, [relatedToArticleId, dispatch]);
 
   return (
     <>
-      {relatedArticles.length > 0 && (
+      {articles.length > 0 && (
         <aside className={style.relatedArticles}>
-          <Carousel values={relatedArticles} title="Relaterte artikler">
+          <Carousel values={articles} title="Relaterte artikler">
             {(relatedArticlesRef) => (
               <>
                 {relatedArticlesRef.map((article) => (
@@ -66,4 +43,16 @@ export const RelatedArticles: FC<IProps> = ({ mainArticle }) => {
       )}
     </>
   );
+};
+
+const selectRelatedArticles = (relatedToId: number) => (state: State) => {
+  const mainArticle = articleSelectors.selectById(state, relatedToId);
+  const allArticles = articleSelectors.selectAll(state);
+  if (mainArticle) {
+    const relatedArticles = allArticles.filter((article) => {
+      return article.id !== relatedToId && article.tags.some((articleTag) => mainArticle.tags.includes(articleTag));
+    });
+    return relatedArticles;
+  }
+  return [];
 };
