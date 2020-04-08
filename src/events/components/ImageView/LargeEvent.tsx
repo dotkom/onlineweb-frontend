@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DateTime } from 'luxon';
 import React, { FC } from 'react';
 
+import { getEventUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 import { getEventColor, getEventType, IEvent, isCompanyEvent } from 'events/models/Event';
 import { getEventAttendees } from 'events/utils/attendee';
@@ -18,7 +19,7 @@ const LargeEvent: FC<IProps> = ({ event }) => {
   const { image, event_type, title, event_start, attendance_event, id, company_event } = event;
   const color = getEventColor(event_type);
   return (
-    <Link href={`/events/${id}`}>
+    <Link {...getEventUrl(id)}>
       <a>
         <div className={style.large}>
           <h2 className={style.imageLargeType} style={{ background: color }}>

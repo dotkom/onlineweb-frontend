@@ -1,9 +1,13 @@
 import { ICareerOpportunity } from 'career/models/Career';
-import ResponsiveImage from 'common/components/ResponsiveImage';
-import { Link } from 'core/components/Router';
 import React from 'react';
-import style from '../less/career.less';
+
+import ResponsiveImage from 'common/components/ResponsiveImage';
+import { getCareerOpportinityUrl } from 'core/appUrls';
+import { Link } from 'core/components/Router';
+
 import { formatDeadline } from './JobDetails';
+
+import style from '../less/career.less';
 
 // Accepts a list of locations and returns a comma-separated list of locations
 // with 'og' inserted before the last element, and 'Ikke spesifisert' if no
@@ -23,13 +27,13 @@ export const formatLocations = (locations: string[]) => {
 
 const JobListItem = ({ location, deadline, company, title, ingress, id, employment, featured }: ICareerOpportunity) => (
   <div className={style.job}>
-    <Link href={`/career/${id}`}>
+    <Link {...getCareerOpportinityUrl(id)}>
       <a>
         <ResponsiveImage image={company.image} size="md" alt="Firmalogo" type="company" />
       </a>
     </Link>
     <div className={style.jobInfo}>
-      <Link href={`/career/${id}`}>
+      <Link {...getCareerOpportinityUrl(id)}>
         <a>
           <h2 className={style.jobInfoTitle}>
             {company.name} - {title}
