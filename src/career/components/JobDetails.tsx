@@ -1,10 +1,13 @@
+import { DateTime } from 'luxon';
+import React from 'react';
+
 import { ICareerOpportunity } from 'career/models/Career';
 import Heading from 'common/components/Heading';
 import Markdown from 'common/components/Markdown';
 import ResponsiveImage from 'common/components/ResponsiveImage';
+import { getCompanyUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
-import { DateTime } from 'luxon';
-import React from 'react';
+
 import style from '../less/career.less';
 import { formatLocations } from './JobListItem';
 
@@ -26,14 +29,14 @@ const JobDetails = (props: ICareerOpportunity) => (
       <Markdown className={style.jobDescription} source={props.description} escapeHtml />
       <div>
         <div className={style.company}>
-          <Link href={`/company/${props.company.id}`}>
+          <Link {...getCompanyUrl(props.company.id)}>
             <a className={style.companyImage}>
               <ResponsiveImage image={props.company.image} size="lg" alt={props.company.name} type="company" />
             </a>
           </Link>
 
           <div className={style.companyDescriptionBox}>
-            <Link href={`/company/${props.company.id}`}>
+            <Link {...getCompanyUrl(props.company.id)}>
               <a className={style.companyDescriptionTitle}>
                 <h3>{props.company.name}</h3>
               </a>

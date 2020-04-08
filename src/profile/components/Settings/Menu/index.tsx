@@ -1,16 +1,19 @@
 import React from 'react';
+
+import * as appUrls from 'core/appUrls';
+
 import style from './menu.less';
 import Tab from './Tab';
 
 const Menu = () => (
   <div className={style.menu}>
-    <Tab href="/profile/settings/" text="Informasjon" />
-    <Tab href="/profile/settings/mail" text="E-Post" />
-    <Tab href="/profile/settings/password" text="Passord" />
-    <Tab href="/profile/settings/penalties" text="Prikker og suspensjoner" />
-    <Tab href="/profile/settings/privacy" text="Personvern" />
-    <Tab href="/profile/settings/access-card" text="Adgangskort (NTNU)" />
-    <Tab href="/profile/settings/notifications" text="Notifikasjoner" />
+    <Tab text="Informasjon" {...appUrls.getProfileSettingsUrl()} />
+    <Tab text="E-Post" {...appUrls.getProfileSettingsMailUrl()} />
+    <Tab text="Passord" {...appUrls.getProfileSettingsPasswordUrl()} />
+    <Tab text="Prikker og suspensjoner" {...appUrls.getProfileSettingsPenaltiesUrl()} />
+    <Tab text="Personvern" {...appUrls.getProfileSettingsPrivacyUrl()} />
+    <Tab text="Adgangskort (NTNU)" {...appUrls.getProfileSettingsAccessCardUrl()} />
+    <Tab text="Notifikasjoner" {...appUrls.getProfileSettingsNotificationsUrl()} />
   </div>
 );
 

@@ -1,6 +1,8 @@
 import classnames from 'classnames';
 import React, { Component } from 'react';
 
+import { DOMAIN } from 'common/constants/endpoints';
+import * as appUrls from 'core/appUrls';
 import { Link } from 'core/components/Router';
 
 import style from './header.less';
@@ -31,30 +33,26 @@ class Header extends Component<IProps, IState> {
           <MenuButton isOpen={isOpen} onClick={this.toggleMenu} />
           <HeaderLogo onClick={this.closeMenu} />
           <div className={classnames(style.links, { [style.dropdownMode]: isOpen })} onClick={this.closeMenu}>
-            <Link href="/profile" requireLogin>
+            <Link {...appUrls.getMyProfileUrl()} requireLogin>
               <a>Profil</a>
             </Link>
-            <Link href="/events">
-              <a>Arkiv</a>
+            <Link {...appUrls.getEventsUrl()}>
+              <a>Arrangementer</a>
             </Link>
-            <Link href="/career">
+            <Link {...appUrls.getCareerOpportunitiesUrl()}>
               <a>Karriere</a>
             </Link>
-            <Link href="/resources">
+            <Link {...appUrls.getResourcesUrl()}>
               <a>Ressurser</a>
             </Link>
-            <Link href="/contribution">
+            <Link {...appUrls.getContributionsUrl()}>
               <a>Bidra</a>
             </Link>
-            <Link href="/hobbygroups">
+            <Link {...appUrls.getHobbyGroupsUrl()}>
               <a>Interessegrupper</a>
             </Link>
-            <Link href="/wiki">
-              <a>Wiki</a>
-            </Link>
-            <Link href="/webshop">
-              <a>Webshop</a>
-            </Link>
+            <a href={`${DOMAIN}/wiki/`}>Wiki</a>
+            <a href={`${DOMAIN}/webshop/`}>Webshop</a>
           </div>
           <HeaderLogin />
         </div>

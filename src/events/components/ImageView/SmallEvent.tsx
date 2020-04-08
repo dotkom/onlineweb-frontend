@@ -1,14 +1,17 @@
 import { faCalendarAlt, faUser } from '@fortawesome/free-regular-svg-icons/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DateTime } from 'luxon';
+import React from 'react';
+
+import { getEventUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 import { getEventColor, IEvent, isCompanyEvent } from 'events/models/Event';
 import { getEventAttendees } from 'events/utils/attendee';
-import { DateTime } from 'luxon';
-import React from 'react';
+
 import style from './image.less';
 
 const SmallEvent = ({ title, event_type, event_start, attendance_event, id, company_event }: IEvent) => (
-  <Link href={`/events/${id}`}>
+  <Link {...getEventUrl(id)}>
     <a>
       <div className={style.small}>
         <span style={{ background: getEventColor(event_type) }} />

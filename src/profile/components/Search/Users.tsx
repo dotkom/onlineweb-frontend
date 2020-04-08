@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import { useIntersection } from 'common/hooks/useIntersection';
+import { getPublicProfileUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 import { ProfileSearchContext } from 'profile/providers/SearchFilter';
 
@@ -29,7 +30,7 @@ export const Users = () => {
       ) : (
         <div className={style.smallProfileGrid}>
           {profiles.map((profile) => (
-            <Link href={`/profile/public/${profile.id}`} key={profile.id}>
+            <Link key={profile.id} {...getPublicProfileUrl(profile.id)}>
               <a>
                 <ProfileSmall profile={profile} />
               </a>

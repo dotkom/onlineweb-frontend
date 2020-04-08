@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 
+import { getEventUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 import { getListEvents } from 'events/api/listEvents';
 import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
@@ -37,7 +38,7 @@ export const ListView = ({ filtered }: IProps) => {
     <>
       <div className={style.grid}>
         {displayEvents.map((event) => (
-          <Link href={`/events/${event.id}`} key={event.id}>
+          <Link {...getEventUrl(event.id)} key={event.id}>
             <a>
               <ListEvent {...event} />
             </a>
