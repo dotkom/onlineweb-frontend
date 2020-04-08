@@ -1,34 +1,41 @@
-import React, { useEffect, useState } from 'react';
-
-import Markdown from 'common/components/Markdown';
-import { DOMAIN } from 'common/constants/endpoints';
-
-import { getArticle } from 'articles/api';
-import { mockArticle } from 'articles/models/Article';
-import ResponsiveImage from 'common/components/ResponsiveImage/index';
 import Head from 'next/head';
+import React, { useEffect } from 'react';
+
+import { articleSelectors, fetchArticleById } from 'articles/slices/articles';
+import Markdown from 'common/components/Markdown';
+import ResponsiveImage from 'common/components/ResponsiveImage';
+import Spinner from 'common/components/Spinner';
+import { DOMAIN } from 'common/constants/endpoints';
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import NotFoundPage from 'pages/404';
 
 import { ArticleByline } from './ArticleByline';
 import { ArticleMeta } from './ArticleMeta';
 import { ArticleVideo } from './ArticleVideo';
-import style from './articleView.less';
 import { RelatedArticles } from './RelatedArticles';
+
+import style from './articleView.less';
 
 export interface IProps {
   articleId: number;
 }
 
 export const ArticleView = ({ articleId }: IProps) => {
-  const [article, setArticle] = useState(mockArticle);
+  const dispatch = useDispatch();
+  const article = useSelector((state) => articleSelectors.selectById(state, articleId));
+  const isPending = useSelector((state) => state.articles.loading === 'pending');
 
   useEffect(() => {
-    const fetchArticle = async () => {
-      const newArticle = await getArticle(articleId);
+    dispatch(fetchArticleById(articleId));
+  }, [articleId, dispatch]);
 
-      setArticle(newArticle);
-    };
-    fetchArticle();
-  }, [articleId]);
+  if (isPending && !article) {
+    return <Spinner />;
+  }
+
+  if (!article) {
+    return <NotFoundPage />;
+  }
 
   return (
     <div className={style.container}>
