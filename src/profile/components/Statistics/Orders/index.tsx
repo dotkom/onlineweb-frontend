@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react';
 
 import CalendarChart from 'common/components/Charts/CalendarChart';
 import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
-import { useSelector, useThunk } from 'core/redux/hooks';
+import { useDispatch, useSelector } from 'core/redux/hooks';
 import { IOrder } from 'shop/models';
 import { fetchOrderLines } from 'shop/reducers/orderLines';
 
@@ -15,8 +15,12 @@ import OrderItemDonut from './OrderItemDonut';
 export interface IProps {}
 
 export const Orders: FC<IProps> = () => {
+  const dispatch = useDispatch();
   const orderLines = useSelector((state) => state.shop.orderLines.orderLines);
-  const init = useThunk(fetchOrderLines());
+
+  const init = () => {
+    dispatch(fetchOrderLines());
+  };
 
   const orders = orderLines.reduce<IOrder[]>((prev, curr) => [...prev, ...curr.orders], []);
   const frequency = orderLines.map((line) => DateTime.fromISO(line.datetime)).sort();

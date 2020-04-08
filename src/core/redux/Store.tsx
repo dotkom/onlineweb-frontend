@@ -1,28 +1,22 @@
-import React, { FC } from 'react';
-import { Provider } from 'react-redux';
-import { applyMiddleware, compose, createStore } from 'redux';
-import thunk, { ThunkMiddleware } from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 
-import { rootReducer } from './reducer';
+import { articlesReducer } from 'articles/slices/articles';
+import { paymentsReducer } from 'payments/reducers';
+import { shopReducer } from 'shop/reducers';
 
-import { Action, State } from './types';
-
-const reduxDevToolsHook =
-  process.browser && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (x: any) => x; // tslint:disable-line no-any
-const thunkMiddleware = thunk as ThunkMiddleware<State, Action>;
-
-export const initStore = (initialState?: State) =>
-  createStore(
-    rootReducer,
-    initialState,
-    compose(
-      applyMiddleware(thunkMiddleware),
-      reduxDevToolsHook
-    )
-  );
+export const initStore = (initialState: {} = {}) => {
+  return configureStore({
+    preloadedState: initialState,
+    reducer: {
+      articles: articlesReducer,
+      payments: paymentsReducer,
+      shop: shopReducer,
+    },
+  });
+};
 
 export const store = initStore();
 
-export const StoreProvider: FC = (props) => {
-  return <Provider {...props} store={store} />;
-};
+export type State = ReturnType<typeof store.getState>;
+export type Dispatch = typeof store.dispatch;
+export type Store = typeof store;

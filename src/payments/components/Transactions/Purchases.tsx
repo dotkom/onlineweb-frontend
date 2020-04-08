@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react';
 
 import Spinner from 'common/components/Spinner';
 import { DataTable, DataTableHeaders, DataTableSorters } from 'common/components/Table/DataTable';
-import { useSelector, useThunk } from 'core/redux/hooks';
+import { useDispatch, useSelector } from 'core/redux/hooks';
 import { useToast } from 'core/utils/toast/useToast';
 import { transformOrderData } from 'profile/api/orders';
 import { fetchOrderLines } from 'shop/reducers/orderLines';
@@ -37,10 +37,14 @@ const tableSorters: DataTableSorters<typeof tableHeaders, IOrderData> = {
 
 export const Purchases: FC = () => {
   const [displayMessage] = useToast();
+  const dispatch = useDispatch();
   const errors = useSelector((state) => state.shop.orderLines.errors);
   const orders = useSelector((state) => transformOrderData(state.shop.orderLines.orderLines));
   const status = useSelector((state) => state.shop.orderLines.status);
-  const init = useThunk(fetchOrderLines());
+
+  const init = () => {
+    dispatch(fetchOrderLines());
+  };
 
   useEffect(() => {
     init();
