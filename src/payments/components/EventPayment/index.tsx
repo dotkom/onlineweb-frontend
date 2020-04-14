@@ -5,6 +5,7 @@ import HttpError from 'core/components/errors/HttpError';
 
 import { getAttendanceEvent } from 'events/api/events';
 import { IUserAttendee } from 'events/models/Attendee';
+import { IAttendanceEvent } from 'events/models/Event';
 import { getEventUserAttendees } from 'payments/api/paymentRelation';
 import { IPaymentPrice } from 'payments/models/Payment';
 import { Payment } from '../Payment';
@@ -18,7 +19,7 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
   const [userAttendees, setUserAttendees] = useState<IUserAttendee[]>();
   const [selectedPrice, setSelectedPrice] = useState<number>();
 
-  const [attendanceEvent, setAttendanceEvent] = useState();
+  const [attendanceEvent, setAttendanceEvent] = useState<IAttendanceEvent>();
 
   const loadAttendanceEvent = async () => {
     const event = await getAttendanceEvent(eventId);
@@ -54,7 +55,9 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
 
   const payment = attendanceEvent.payments[0];
 
-  const selectedPriceObject = payment.payment_prices.find((price: IPaymentPrice) => price.id === selectedPrice);
+  const selectedPriceObject: IPaymentPrice | undefined = payment.payment_prices.find(
+    (price: IPaymentPrice) => price.id === selectedPrice
+  );
 
   const payments = payment.payment_prices.map((price: IPaymentPrice) => (
     <div key={price.id} onClick={() => setSelectedPrice(price.id)} className={style.price}>
@@ -65,10 +68,11 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
     </div>
   ));
 
-  return (
-    <Payment payment={payment} price={selectedPriceObject} isPaid={isPaid} showPayment={selectedPriceObject}>
+  return selectedPriceObject ? (
+    <Payment payment={payment} price={selectedPriceObject} isPaid={isPaid} showPayment={Boolean(selectedPriceObject)}>
       <form>{payments}</form>
-      {!selectedPriceObject && <div className={style.infobox}>Velg et alternativ for å gå videre til betaling.</div>}
     </Payment>
+  ) : (
+    <div className={style.infobox}>Velg et alternativ for å gå videre til betaling.</div>
   );
 };

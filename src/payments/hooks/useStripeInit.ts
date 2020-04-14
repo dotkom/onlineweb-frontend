@@ -24,7 +24,7 @@ export const useStripeInit = (stripeKey: string, scriptId = DEFAULT_STRIPE_ELEME
   };
 
   useEffect(() => {
-    if (window.Stripe) {
+    if (typeof window.Stripe !== 'undefined') {
       /** Init Stripe directly if the async Stripe script is already loaded */
       initStripe(stripeKey);
     } else {

@@ -1,7 +1,6 @@
 import { faBriefcase, faEnvelope, faFile, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import style from './footer.less';
 
 const ContactInfo = () => (
   <>
@@ -14,21 +13,21 @@ const ContactInfo = () => (
     <div>
       <p>Kontaktinformasjon:</p>
       <p>
-        <FontAwesomeIcon icon={faBriefcase} fixedWidth className={style.icon} /> 992 548 045 (OrgNr)
+        <FontAwesomeIcon icon={faBriefcase} fixedWidth /> 992 548 045 (OrgNr)
       </p>
       <a href="mailto:kontakt@online.ntu.no">
         <p>
-          <FontAwesomeIcon icon={faEnvelope} fixedWidth className={style.icon} /> kontakt@online.ntu.no
+          <FontAwesomeIcon icon={faEnvelope} fixedWidth /> kontakt@online.ntu.no
         </p>
       </a>
       <a href="mailto:okonomi@online.ntnu.no">
         <p>
-          <FontAwesomeIcon icon={faFile} fixedWidth className={style.icon} /> okonomi@online.ntnu.no <br />
+          <FontAwesomeIcon icon={faFile} fixedWidth /> okonomi@online.ntnu.no <br />
         </p>
       </a>
       <a href="tel:+4795829020">
         <p>
-          <FontAwesomeIcon icon={faMobileAlt} fixedWidth className={style.icon} /> 95 82 90 20
+          <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> 95 82 90 20
         </p>
       </a>
     </div>
