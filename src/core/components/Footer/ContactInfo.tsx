@@ -25,9 +25,9 @@ const ContactInfo = () => (
           <FontAwesomeIcon icon={faFile} fixedWidth /> okonomi@online.ntnu.no <br />
         </p>
       </a>
-      <a href="tel:+4773596489">
+      <a href="tel:+4795829020">
         <p>
-          <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> 73 59 64 89
+          <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> 95 82 90 20
         </p>
       </a>
     </div>
