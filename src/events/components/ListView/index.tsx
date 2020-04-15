@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 
-import { usePrefetch } from 'common/hooks/usePrefetch';
-import { PrefetchKey } from 'common/utils/PrefetchState';
+import { getEventUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 import { getListEvents } from 'events/api/listEvents';
 import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
@@ -24,11 +23,6 @@ export const ListView = ({ filtered }: IProps) => {
   const { eventList, updateEventList } = useContext(EventsRepo);
   const filteredList = useDebouncedFilteredEventList();
 
-  const prefetch = usePrefetch(PrefetchKey.EVENTS_LIST, async () => {
-    const prefetchedEvents = await getListEvents();
-    return filterListEvents(prefetchedEvents);
-  });
-
   useEffect(() => {
     (async () => {
       const newEvents = await getListEvents();
@@ -38,14 +32,16 @@ export const ListView = ({ filtered }: IProps) => {
 
   const events = filtered ? filteredList : filterListEvents(eventList);
 
-  const displayEvents = events.length ? events : prefetch || [];
+  const displayEvents = events.length ? events : [];
 
   return (
     <>
       <div className={style.grid}>
         {displayEvents.map((event) => (
-          <Link to={`/events/${event.id}`} key={event.id}>
-            <ListEvent {...event} />
+          <Link {...getEventUrl(event.id)} key={event.id}>
+            <a>
+              <ListEvent {...event} />
+            </a>
           </Link>
         ))}
       </div>

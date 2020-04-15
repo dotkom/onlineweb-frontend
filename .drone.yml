@@ -20,7 +20,7 @@ steps:
         - node_modules
 
   - name: setup
-    image: node:carbon
+    image: node:13-alpine
     when:
       event: [push, pull_request, tag, deployment]
     commands:
@@ -29,17 +29,17 @@ steps:
       - restore-cache
 
   - name: build
-    image: node:carbon
+    image: node:13-alpine
     group: testing
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn build:prod
+      - yarn build
     depends_on:
       - setup
 
   - name: test
-    image: node:carbon
+    image: node:13-alpine
     group: testing
     when:
       event: [push, pull_request, tag, deployment]
@@ -49,7 +49,7 @@ steps:
       - setup
 
   - name: compile-typescript
-    image: node:carbon
+    image: node:13-alpine
     group: testing
     when:
       event: [push, pull_request, tag, deployment]
@@ -59,7 +59,7 @@ steps:
       - setup
 
   - name: lint-typescript
-    image: node:carbon
+    image: node:13-alpine
     group: testing
     when:
       event: [push, pull_request, tag, deployment]
@@ -69,7 +69,7 @@ steps:
       - compile-typescript
 
   - name: lint-less
-    image: node:carbon
+    image: node:13-alpine
     group: testing
     when:
       event: [push, pull_request, tag, deployment]
@@ -79,7 +79,7 @@ steps:
       - setup
 
   - name: lint-prettier
-    image: node:carbon
+    image: node:13-alpine
     group: testing
     when:
       event: [push, pull_request, tag, deployment]

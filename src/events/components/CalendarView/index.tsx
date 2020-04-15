@@ -2,9 +2,6 @@ import { DateTime, Interval } from 'luxon';
 import React, { useContext, useEffect, useState } from 'react';
 
 import { useMonth } from 'common/hooks/useMonth';
-import { usePrefetch } from 'common/hooks/usePrefetch';
-import { PrefetchKey } from 'common/utils/PrefetchState';
-import { getCalendarEvents } from 'events/api/calendarEvents';
 import { IEvent, IEventViewProps } from 'events/models/Event';
 import { EventsRepo } from 'events/providers/EventsRepo';
 import {
@@ -25,14 +22,6 @@ export const CalendarView = () => {
   const { fetchEventsByMonth, eventList } = useContext(EventsRepo);
   const [month, changeMonth] = useMonth();
   const [eventMonth, setEventMonth] = useState<IEvent[][]>([[]]);
-
-  const prefetch = usePrefetch(PrefetchKey.EVENTS_CALENDAR, async () => {
-    const data = await getCalendarEvents(month);
-    return {
-      eventMonth: constructMonthMap(month, data),
-      monthString: month.toFormat('yyyy-MM'),
-    };
-  });
 
   const firstWeekDay = getFirstWeekdayOfMonth(month);
   const lastDayPrevMonth = getPreviousMonthLength(month);
@@ -61,8 +50,6 @@ export const CalendarView = () => {
 
   const displayEventMonth = eventMonth.some((eventDay) => !!eventDay.length)
     ? eventMonth
-    : prefetch && prefetch.monthString === month.toFormat('yyyy-MM')
-    ? prefetch.eventMonth
     : constructMonthMap(month, []);
 
   return (
