@@ -11,6 +11,7 @@ class PrivateLink extends Component<LinkProps> {
   public render() {
     const { user }: IUserContext = this.context;
     const { href, ...props } = this.props;
+    // Render the href only if a user is logged in, else render a disabled link.
     if (user) {
       return <Link {...this.props} />;
     } else {
