@@ -6,3 +6,4 @@ dist
 .envrc
 .idea/
 *.log
+.next

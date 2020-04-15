@@ -1,34 +1,28 @@
-import React, { Component, ContextType } from 'react';
-import { Redirect, Switch } from 'react-router-dom';
+import { useRouter } from 'next/router';
+import { useCallback, useContext, useEffect } from 'react';
+
 import { authCallback } from '../api';
 import { UserContext } from '../providers/UserProvider';
 
 export interface IProps {}
 
-class AuthCallback extends Component<IProps> {
-  public static contextType = UserContext;
-  public context!: ContextType<typeof UserContext>;
+const AuthCallback = () => {
+  const auth = useContext(UserContext);
+  const router = useRouter();
 
-  public async componentDidMount() {
-    const auth = this.context;
-    const user = await authCallback();
-    if (user) {
-      auth.setUser(user);
+  const catchUser = useCallback(async () => {
+    const newUser = await authCallback();
+    if (newUser) {
+      auth.setUser(newUser);
+      router.push(newUser.state);
     }
-  }
+  }, [auth]);
 
-  public render() {
-    const { user } = this.context;
-    return (
-      <>
-        {user && user.state ? (
-          <Switch>
-            <Redirect to={user.state} />
-          </Switch>
-        ) : null}
-      </>
-    );
-  }
-}
+  useEffect(() => {
+    catchUser();
+  }, [catchUser]);
+
+  return null;
+};
 
 export default AuthCallback;

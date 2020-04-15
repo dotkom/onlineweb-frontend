@@ -1,11 +1,14 @@
 import PrivateLink from 'authentication/components/PrivateLink';
-import React from 'react';
-import { Link as DefaultLink, LinkProps } from 'react-router-dom';
+import DefaultLink from 'next/link';
+import React, { ComponentProps, FC, ReactNode } from 'react';
+
+type LinkProps = ComponentProps<typeof DefaultLink>;
 
 export interface ILinkProps extends LinkProps {
   requireLogin?: boolean;
+  children?: ReactNode;
 }
 
-export const Link = ({ requireLogin, ...props }: ILinkProps) => {
+export const Link: FC<ILinkProps> = ({ requireLogin, ...props }: ILinkProps) => {
   return requireLogin ? <PrivateLink {...props} /> : <DefaultLink {...props} />;
 };

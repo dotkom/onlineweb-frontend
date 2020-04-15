@@ -1,7 +1,10 @@
 import classNames from 'classnames';
-import HoverCard from 'common/components/HoverCard';
-import { Link } from 'core/components/Router';
 import React from 'react';
+
+import HoverCard from 'common/components/HoverCard';
+import { getEventUrl } from 'core/appUrls';
+import { Link } from 'core/components/Router';
+
 import { getEventColor, IEvent, isCompanyEvent } from '../../models/Event';
 import style from './calendar.less';
 import CalendarHoverCard from './CalendarHoverCard';
@@ -50,12 +53,14 @@ export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
 );
 
 export const CalendarEvent = (event: IEvent) => (
-  <Link to={`/events/${event.id}`}>
-    <HoverCard card={<CalendarHoverCard {...event} />}>
-      <p className={style.title} style={{ background: getEventColor(event.event_type) }}>
-        {isCompanyEvent(event.event_type, event.company_event) ? event.company_event[0].company.name : event.title}
-      </p>
-    </HoverCard>
+  <Link {...getEventUrl(event.id)}>
+    <a>
+      <HoverCard card={<CalendarHoverCard {...event} />}>
+        <p className={style.title} style={{ background: getEventColor(event.event_type) }}>
+          {isCompanyEvent(event.event_type, event.company_event) ? event.company_event[0].company.name : event.title}
+        </p>
+      </HoverCard>
+    </a>
   </Link>
 );
 

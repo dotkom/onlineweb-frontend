@@ -14,10 +14,7 @@ git clone <repo>
 
 yarn
 
-# To run with Webpack Dev Server:
 yarn dev
-# Or to run with SSR server (does not have hot-reloading)
-yarn ssr:dev
 ```
 
 ### Connecting to non-production Onlineweb4
@@ -31,14 +28,14 @@ To enable login/authentication through our backend, you'll need a client ID loca
 - **Name**: doesn't matter
 - **Client Type**: Public
 - **Response types**: id_token token (Implicit Flow)
-- **Redirect URIs**: http://localhost:8080/auth/callback
+- **Redirect URIs**: http://localhost:3000/auth/callback
 - **JWT Algorithm**: RS256 (default)
 
 After you save the client, it will have generated a client ID, which you will use in the following environment variables:
 
 ``` bash
 export OW4_SSO_CLIENT_ID='<your-client-id>'
-export OW4_SSO_CALLBACK='http://localhost:8080/auth/callback'
+export OW4_SSO_CALLBACK='http://localhost:3000/auth/callback'
 ```
 
 Finally, you'll want to generate an RSA key for authentication. The following command in OW4 will handle that:

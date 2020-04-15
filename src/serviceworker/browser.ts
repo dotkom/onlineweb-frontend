@@ -1,7 +1,7 @@
 /**
  * Wrapper for Service Workers.
  */
-const serviceWorker = navigator.serviceWorker;
+const serviceWorker = process.browser ? navigator.serviceWorker : ({} as ServiceWorkerContainer);
 
 /**
  * Verify browser support for Service Workers.

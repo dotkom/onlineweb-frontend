@@ -3,28 +3,24 @@ import React, { ReactNode } from 'react';
 import FrontpageArticles from 'articles/providers/FrontpageArticles';
 import { ToastProvider } from 'core/utils/toast/ToastContext';
 import { EventsRepoProvider } from 'events/providers/EventsRepo';
-import { QueryParamsProviderWithRouter } from './QueryParams';
 
-import { HelmetProvider } from 'react-helmet-async';
 import { StoreProvider } from '../redux/Store';
+import { QueryParamsProvider } from './QueryParams';
 
 export interface IProps {
   children: ReactNode;
-  helmetContext?: {};
 }
 
-const ContextWrapper = ({ children, helmetContext }: IProps) => (
-  <QueryParamsProviderWithRouter>
+const ContextWrapper = ({ children }: IProps) => (
+  <QueryParamsProvider>
     <StoreProvider>
       <ToastProvider>
         <EventsRepoProvider>
-          <FrontpageArticles>
-            <HelmetProvider context={helmetContext}>{children}</HelmetProvider>
-          </FrontpageArticles>
+          <FrontpageArticles>{children}</FrontpageArticles>
         </EventsRepoProvider>
       </ToastProvider>
     </StoreProvider>
-  </QueryParamsProviderWithRouter>
+  </QueryParamsProvider>
 );
 
 export default ContextWrapper;

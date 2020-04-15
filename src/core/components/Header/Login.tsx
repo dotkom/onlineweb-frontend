@@ -1,9 +1,11 @@
-import { routes } from 'App';
+import React, { Component, ContextType } from 'react';
+
 import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
 import { UserContext } from 'authentication/providers/UserProvider';
+import { getMyProfileUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
-import React, { Component, ContextType } from 'react';
+
 import style from './header.less';
 
 export interface IState {
@@ -47,11 +49,17 @@ const HeaderUser = (props: IHeaderUserProps) => (
     <div className={style.username}>{props.user.profile.preferred_username}</div>
     {props.isOpen && (
       <div className={style.userMenu} onClick={props.onClick}>
-        <Link to={routes.profile}>Min side: {props.user.profile.preferred_username}</Link>
-        <Link to={routes.home}>Kontakt oss</Link>
-        <Link to={routes.home}>Finn brukere</Link>
-        <Link to={routes.home} onClick={props.logout}>
-          Logg ut
+        <Link {...getMyProfileUrl()}>
+          <a>Min side: {props.user.profile.preferred_username}</a>
+        </Link>
+        <Link href="#">
+          <a>Kontakt oss</a>
+        </Link>
+        <Link {...getMyProfileUrl()}>
+          <a>Finn brukere</a>
+        </Link>
+        <Link href="#">
+          <a onClick={props.logout}>Logg ut</a>
         </Link>
       </div>
     )}
