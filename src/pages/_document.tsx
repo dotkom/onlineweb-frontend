@@ -12,7 +12,7 @@ const getInitialProps = async (ctx: DocumentContext): Promise<DocumentInitialPro
 
 const CustomDocument = ({  }: DocumentProps): JSX.Element => {
   return (
-    <Html>
+    <Html lang="nb-NO">
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
