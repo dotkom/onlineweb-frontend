@@ -44,6 +44,12 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
   if (response.status === 204) {
     return null;
   }
+  // encountered a http error, throw error
+  if(response.status > 399){
+    console.error(response);
+    throw response;
+  }
+
   const data = await response.json();
   setCache({ content: data, options: cacheOptions, url });
   return data;
@@ -74,20 +80,24 @@ export async function getAllPages<T>(
   options: IRequestOptions = {}
 ): Promise<T[]> {
   const { page = 1, page_size = 80 } = parameters;
-  /** Get the amount of objects to get in total by fetching a single object */
-  const { count }: IAPIData<T> = await get<IAPIData<T>>(query, { ...parameters, page, page_size: 1 }, options);
-  /** Prepare an array with an index for each page which will be fetched */
-  const pageNumber = Math.ceil(count / page_size);
-  const requestCount = [...Array(pageNumber)];
-  /** Initialize the fetches for all the pages at the same time */
-  const requests = requestCount.map((_, i) =>
-    get<IAPIData<T>>(query, { ...parameters, page: i + 1, page_size }, options)
-  );
-  /** Await all the fetches to a single array */
-  const data: Array<IAPIData<T>> = await Promise.all(requests);
-  /** Reduce all results to a single array for all objects in the resource */
-  const results = data.reduce<T[]>((res, d) => res.concat(d.results), []);
-  return results;
+  try {
+    /** Get the amount of objects to get in total by fetching a single object */
+    const { count }: IAPIData<T> = await get<IAPIData<T>>(query, { ...parameters, page, page_size: 1 }, options);
+    /** Prepare an array with an index for each page which will be fetched */
+    const pageNumber = Math.ceil(count / page_size);
+    const requestCount = [...Array(pageNumber)];
+    /** Initialize the fetches for all the pages at the same time */
+    const requests = requestCount.map((_, i) =>
+      get<IAPIData<T>>(query, { ...parameters, page: i + 1, page_size }, options)
+    );
+    /** Await all the fetches to a single array */
+    const data: Array<IAPIData<T>> = await Promise.all(requests);
+    /** Reduce all results to a single array for all objects in the resource */
+    const results = data.reduce<T[]>((res, d) => res.concat(d.results), []);
+    return results;
+  } catch(response){
+    return [];
+  }
 }
 
 /**
