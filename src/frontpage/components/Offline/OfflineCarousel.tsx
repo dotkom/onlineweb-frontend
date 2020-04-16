@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ResponsiveImage from 'common/components/ResponsiveImage';
 import { IRefObject } from 'common/hooks/useRefMap';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 
@@ -8,8 +9,6 @@ import style from './offline.less';
 export interface IProps {
   offlines: Array<IRefObject<IOfflineIssue, HTMLDivElement>>;
 }
-
-const IMAGE_SUFFIX = '.thumb.png';
 
 const OfflineCarousel = ({ offlines }: IProps) => (
   <>
@@ -25,12 +24,10 @@ export interface ICarouselItemProps {
 }
 
 const CarouselItem = ({ offline, scrollRef }: ICarouselItemProps) => {
-  const thumbnail = offline.issue + IMAGE_SUFFIX;
-
   return (
     <div className={style.carouselItem} ref={scrollRef}>
       <a href={offline.issue}>
-        <img src={thumbnail} alt={offline.title} />
+        <ResponsiveImage image={offline.image} size="xs" type="offline" />
       </a>
     </div>
   );
