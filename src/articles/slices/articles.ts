@@ -61,75 +61,51 @@ export const articlesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchArticlesList.pending, (state) => {
-      if (state.loading === 'idle') {
-        state.loading = 'pending';
-      }
+      state.loading = 'pending';
     });
     builder.addCase(fetchArticlesList.fulfilled, (state, action) => {
+      state.loading = 'idle';
       articlesAdapter.addMany(state, action.payload);
-      if (state.loading === 'pending') {
-        state.loading = 'idle';
-      }
     });
     builder.addCase(fetchArticlesList.rejected, (state, action) => {
-      if (state.loading === 'pending') {
-        state.loading = 'idle';
-        state.error = action.error;
-      }
+      state.loading = 'idle';
+      state.error = action.error;
     });
     builder.addCase(fetchArticleById.pending, (state) => {
-      if (state.loading === 'idle') {
-        state.loading = 'pending';
-      }
+      state.loading = 'pending';
     });
     builder.addCase(fetchArticleById.fulfilled, (state, action) => {
+      state.loading = 'idle';
       articlesAdapter.addOne(state, action.payload);
-      if (state.loading === 'pending') {
-        state.loading = 'idle';
-      }
     });
     builder.addCase(fetchArticleById.rejected, (state, action) => {
-      if (state.loading === 'pending') {
-        state.loading = 'idle';
-        state.error = action.error;
-      }
+      state.loading = 'idle';
+      state.error = action.error;
     });
     builder.addCase(fetchRelatedArticles.pending, (state) => {
-      if (state.loading === 'idle') {
-        state.loading = 'pending';
-      }
+      state.loading = 'pending';
     });
     builder.addCase(fetchRelatedArticles.fulfilled, (state, action) => {
+      state.loading = 'idle';
       articlesAdapter.addMany(state, action.payload);
-      if (state.loading === 'pending') {
-        state.loading = 'idle';
-      }
     });
     builder.addCase(fetchRelatedArticles.rejected, (state, action) => {
-      if (state.loading === 'pending') {
-        state.loading = 'idle';
-        state.error = action.error;
-      }
+      state.loading = 'idle';
+      state.error = action.error;
     });
     builder.addCase(fetchFrontPageArticles.pending, (state) => {
-      if (state.loading === 'idle') {
-        state.loading = 'pending';
-      }
+      state.loading = 'pending';
     });
     builder.addCase(fetchFrontPageArticles.fulfilled, (state, action) => {
+      state.loading = 'idle';
       const articles = action.payload;
       const articleIds = articles.map((article) => article.id);
       state.frontPageArticleIds = articleIds;
       articlesAdapter.addMany(state, action.payload);
-      if (state.loading === 'pending') {
-        state.loading = 'idle';
-      }
     });
     builder.addCase(fetchFrontPageArticles.rejected, (state, action) => {
-      if (state.loading === 'pending') {
-        state.loading = 'idle';
-        state.error = action.error;
-      }
+      state.loading = 'idle';
+      state.error = action.error;
     });
   },
 });
