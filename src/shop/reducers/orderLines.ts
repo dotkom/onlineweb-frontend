@@ -2,10 +2,10 @@ import { batch } from 'react-redux';
 import { Reducer } from 'redux';
 
 import { getUser } from 'authentication/api';
-import { Thunk } from 'core/redux/types';
+import { IAuthUser } from 'authentication/models/User';
+import { Dispatch } from 'core/redux/Store';
 import { getOrders } from 'profile/api/orders';
 import { IOrderLine } from 'shop/models';
-import { IAuthUser } from '../../authentication/models/User';
 
 export type OrderLinesStatus = 'fetching' | 'error' | 'ready';
 
@@ -81,7 +81,7 @@ export const orderLinesReducer: Reducer<IOrderLinesState, OrderLineAction> = (st
   }
 };
 
-export const fetchOrderLines: Thunk = () => async (dispatch) => {
+export const fetchOrderLines = () => async (dispatch: Dispatch) => {
   dispatch({ type: Type.SET_STATUS, status: 'fetching' });
   try {
     const user = await getUser();
