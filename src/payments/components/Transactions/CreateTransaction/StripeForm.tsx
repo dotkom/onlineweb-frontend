@@ -1,9 +1,9 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useCallback, useContext, useState } from 'react';
 import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
 
 import { md } from 'common/components/Markdown';
 import { StatusMessage } from 'common/components/StatusMessage';
-import { useThunk } from 'core/redux/hooks';
+import { useDispatch } from 'core/redux/hooks';
 import { useToast } from 'core/utils/toast/useToast';
 import {
   createPaymentMethod,
@@ -30,8 +30,12 @@ export const Form: FC<IProps> = ({ stripe }) => {
   const [processing, setProcessing] = useState(false);
   const [amount, setAmount] = useState(DEFAULT_SALDO_VALUE);
   const [finished, setFinished] = useState(false);
-  const updateTransactions = useThunk(fetchTransactions());
+  const dispatch = useDispatch();
   const { refetch, user } = useContext(UserProfileContext);
+
+  const updateTransactions = useCallback(() => {
+    dispatch(fetchTransactions());
+  }, [dispatch]);
 
   const USER_BALANCE = md`
   # Saldo: **${String(!!user ? user.saldo : 0)} kr**
