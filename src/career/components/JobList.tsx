@@ -1,22 +1,34 @@
-import { CareerContext } from 'career/providers/CareerProvider';
-import React, { Component, ContextType } from 'react';
+import React, { FC, memo } from 'react';
+import { shallowEqual } from 'react-redux';
+
+import { careerOpportunitySelectors } from 'career/slices/careerOpportunities';
+import { useSelector } from 'core/redux/hooks';
+import { State } from 'core/redux/Store';
+
 import style from '../less/career.less';
 import JobListItem from './JobListItem';
 
-class JobList extends Component<{}> {
-  public static contextType = CareerContext;
-  public context!: ContextType<typeof CareerContext>;
-
-  public render() {
-    const { jobs } = this.context;
-    return (
-      <div className={style.jobList}>
-        {jobs.map((job) => (
-          <JobListItem {...job} key={job.id} />
-        ))}
-      </div>
-    );
-  }
+interface IProps {
+  opportunityIds: number[];
 }
+
+const JobList: FC<IProps> = memo(({ opportunityIds }) => {
+  const filteredOpportunityIds = useSelector(selectCurrentylFilteredOpportunityIds(opportunityIds), shallowEqual);
+
+  return (
+    <div className={style.jobList}>
+      {filteredOpportunityIds.map((opportunityId) => (
+        <JobListItem key={opportunityId} opportunityId={opportunityId} />
+      ))}
+    </div>
+  );
+});
+
+const selectCurrentylFilteredOpportunityIds = (opportunityIds: number[]) => (state: State) => {
+  return careerOpportunitySelectors
+    .selectIds(state)
+    .map(Number)
+    .filter((opportunityId) => opportunityIds.some((id) => id === opportunityId));
+};
 
 export default JobList;

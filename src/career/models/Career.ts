@@ -26,9 +26,4 @@ export interface ILocation {
 
 export type JobType = 'Fastjobb' | 'Deltidsjobb' | 'Sommerjobb/internship' | 'Start-up' | 'Annet';
 
-export interface ISelectable<T> {
-  value: T;
-  selected: boolean;
-}
-
 export type TagTypes = ICompany | IEmployment | ILocation;
