@@ -2,15 +2,12 @@ import { DateTime } from 'luxon';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { QueryParams } from 'core/providers/QueryParams';
-import { getCalendarEvents } from 'events/api/calendarEvents';
-import { getAllEvents, getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
 import { EventTypeEnum, IEvent } from 'events/models/Event';
-import { EventsRepo } from 'events/providers/EventsRepo';
 import { isAfter, isBefore, isInDateRange } from '../utils/eventTimeUtils';
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import { eventSelectors, fetchEvents } from 'events/slices/events';
 
 export type EventMap = Map<number, IEvent>;
-
-const INITIAL_STATE: IEvent[] = [];
 
 const getTextFiltered = (search: string, eventList: IEvent[]) =>
   eventList.filter(
@@ -37,60 +34,9 @@ const getDateFiltered = (dateStart: DateTime, dateEnd: DateTime, eventList: IEve
 const getAttendanceEventFiltered = (attendanceEventsChecked: boolean, eventList: IEvent[]) =>
   !attendanceEventsChecked ? eventList.filter((event) => event.attendance_event) : eventList;
 
-/**
- * Contains the complete collection of events fetched for use in the application.
- * Aims to have a single source of events, to simplify the structure of state.
- */
-export const useEventsRepoState = () => {
-  const [eventList, setEventList] = useState(INITIAL_STATE);
-  const [eventMap, setEventMap] = useState<EventMap>(new Map());
-
-  /** Sync list of events with the map if the map is updated */
-  useEffect(() => {
-    const pairs = eventList.map<[number, IEvent]>((event) => [event.id, event]);
-    const newEventMap = new Map(pairs);
-    setEventMap(newEventMap);
-  }, [eventList]);
-
-  const updateEventList = (events: IEvent[]) => {
-    const oldEvents = eventList.filter((oldEvent) => {
-      const newEventIds = events.map((event) => event.id);
-      return !newEventIds.includes(oldEvent.id);
-    });
-    const allEvents = oldEvents.concat(events);
-    const sorted = allEvents.sort((a, b) => {
-      return Date.parse(a.event_start) - Date.parse(b.event_start);
-    });
-    setEventList(sorted);
-  };
-
-  const fetchEvent = async (id: number) => {
-    const event = await getEvent(id);
-    updateEventList([event]);
-  };
-
-  const fetchEvents = async (params?: IEventAPIParameters) => {
-    const events = await getEvents(params);
-    updateEventList(events);
-  };
-
-  const fetchEventsByMonth = async (month: DateTime) => {
-    const events = await getCalendarEvents(month);
-    updateEventList(events);
-  };
-
-  return {
-    fetchEvent,
-    fetchEvents,
-    fetchEventsByMonth,
-    eventMap,
-    eventList,
-    updateEventList,
-  };
-};
-
 const useFilteredEventList = () => {
-  const { eventList, updateEventList } = useContext(EventsRepo);
+  const dispatch = useDispatch();
+  const eventList = useSelector((state) => eventSelectors.selectAll(state))
   const searchContext = useContext(QueryParams);
   const { search, dateStart, dateEnd, eventTypes, nonAttendanceEventsChecked } = searchContext;
   const highestDate = useRef(dateEnd.minus(1));
@@ -115,8 +61,7 @@ const useFilteredEventList = () => {
         options = { event_start__gte: dateStart.toISODate(), event_end__lte: dateEnd.toISODate() };
     }
     if (Object.keys(options).length !== 0) {
-      const newEvents = await getAllEvents(options);
-      updateEventList(newEvents);
+      dispatch(fetchEvents(options));
     }
   };
 
