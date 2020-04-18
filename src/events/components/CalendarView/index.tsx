@@ -22,7 +22,6 @@ export type IProps = IEventViewProps;
 export const CalendarView = () => {
   const dispatch = useDispatch();
   const eventList = useSelector((state) => eventSelectors.selectAll(state));
-  // const { fetchEventsByMonth, eventList } = useContext(EventsRepo);
   const [month, changeMonth] = useMonth();
   const [eventMonth, setEventMonth] = useState<IEvent[][]>([[]]);
 
