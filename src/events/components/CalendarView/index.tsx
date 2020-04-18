@@ -11,18 +11,18 @@ import {
   getPreviousMonthLength,
 } from 'events/utils/calendarUtils';
 
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import { eventSelectors, fetchEventsByMonth } from 'events/slices/events';
 import style from './calendar.less';
 import CalendarTile, { CalendarFillerTiles, createDayList } from './CalendarTile';
 import { MonthChanger } from './MonthChanger';
-import { useDispatch, useSelector } from 'core/redux/hooks';
-import { eventSelectors, fetchEventsByMonth } from 'events/slices/events';
 
 export type IProps = IEventViewProps;
 
 export const CalendarView = () => {
   const dispatch = useDispatch();
-  const eventList = useSelector((state) => eventSelectors.selectAll(state))
-  //const { fetchEventsByMonth, eventList } = useContext(EventsRepo);
+  const eventList = useSelector((state) => eventSelectors.selectAll(state));
+  // const { fetchEventsByMonth, eventList } = useContext(EventsRepo);
   const [month, changeMonth] = useMonth();
   const [eventMonth, setEventMonth] = useState<IEvent[][]>([[]]);
 
