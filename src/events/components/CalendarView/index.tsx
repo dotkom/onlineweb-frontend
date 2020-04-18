@@ -1,9 +1,8 @@
 import { DateTime, Interval } from 'luxon';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useMonth } from 'common/hooks/useMonth';
 import { IEvent, IEventViewProps } from 'events/models/Event';
-import { EventsRepo } from 'events/providers/EventsRepo';
 import {
   constructMonthMap,
   getFirstDayOfMonth,
@@ -15,11 +14,15 @@ import {
 import style from './calendar.less';
 import CalendarTile, { CalendarFillerTiles, createDayList } from './CalendarTile';
 import { MonthChanger } from './MonthChanger';
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import { eventSelectors, fetchEventsByMonth } from 'events/slices/events';
 
 export type IProps = IEventViewProps;
 
 export const CalendarView = () => {
-  const { fetchEventsByMonth, eventList } = useContext(EventsRepo);
+  const dispatch = useDispatch();
+  const eventList = useSelector((state) => eventSelectors.selectAll(state))
+  //const { fetchEventsByMonth, eventList } = useContext(EventsRepo);
   const [month, changeMonth] = useMonth();
   const [eventMonth, setEventMonth] = useState<IEvent[][]>([[]]);
 
@@ -35,7 +38,7 @@ export const CalendarView = () => {
 
   /** Fetch events when the month is changed */
   useEffect(() => {
-    fetchEventsByMonth(month);
+    dispatch(fetchEventsByMonth(month));
   }, [month]);
 
   /** Update stored events when month or list of events is changed */

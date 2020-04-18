@@ -1,15 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { getEventUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
-import { getListEvents } from 'events/api/listEvents';
 import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
-import { EventsRepo } from 'events/providers/EventsRepo';
 import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
 
 import { IEvent, IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import { fetchEventList, eventSelectors } from 'events/slices/events';
 
 export interface IProps extends IEventViewProps {
   filtered: boolean;
@@ -20,14 +20,12 @@ const filterListEvents = (events: IEvent[]) => {
 };
 
 export const ListView = ({ filtered }: IProps) => {
-  const { eventList, updateEventList } = useContext(EventsRepo);
+  const dispatch = useDispatch();
+  const eventList = useSelector((state) => eventSelectors.selectAll(state));
   const filteredList = useDebouncedFilteredEventList();
 
   useEffect(() => {
-    (async () => {
-      const newEvents = await getListEvents();
-      updateEventList(newEvents);
-    })();
+    dispatch(fetchEventList());
   }, []);
 
   const events = filtered ? filteredList : filterListEvents(eventList);
