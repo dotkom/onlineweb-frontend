@@ -1,21 +1,33 @@
-import { ICareerOpportunity, IEmployment, ILocation, ISelectable, TagTypes } from 'career/models/Career';
+import { ICareerOpportunity, IEmployment, ILocation, TagTypes } from 'career/models/Career';
 import { listResource, retrieveResource } from 'common/resources';
+import { IQueryObject } from 'common/utils/queryString';
 import { ICompany } from 'core/models/Company';
 
 const API_URL = '/api/v1/career/';
 
 /** All selectable tags are wrapped in an ISelectable object */
-export type FilterJobs = [
-  ICareerOpportunity[],
-  Array<ISelectable<ICompany>>,
-  Array<ISelectable<IEmployment>>,
-  Array<ISelectable<ILocation>>
-];
+export type FilterJobs = [ICareerOpportunity[], ICompany[], IEmployment[], ILocation[]];
 
-export const listCareerOpportunities = listResource<ICareerOpportunity>(API_URL);
+interface IFilters extends IQueryObject {
+  query?: string;
+  location?: string;
+  location__in?: string | string[];
+  start__gte?: string;
+  start__lte?: string;
+  end__gte?: string;
+  end__lte?: string;
+  deadline__gte?: string;
+  deadline__lte?: string;
+  company?: number;
+  company__in?: number | number[];
+  employment?: number;
+  employment__in?: number | number[];
+}
 
-export const getCareerOpportunities = async () => {
-  const response = await listCareerOpportunities();
+export const listCareerOpportunities = listResource<ICareerOpportunity, IFilters>(API_URL);
+
+export const getCareerOpportunities = async (filters: IFilters = {}) => {
+  const response = await listCareerOpportunities(filters);
   if (response.status === 'success') {
     return configureFilters(response.data.results);
   }
@@ -27,36 +39,14 @@ export const getCareerOpportunities = async () => {
  * @description Creates the tags which are needed for filtering jobs in the list. All are:
  * - Mapped to the correct type.
  * - Filtered to remove duplicate values.
- * - Sorted so the representation will not change when the list if changed.
- * - Mapped to be wrapped in a selectable container, which marks if the tag has been selected.
  * @param {ICareerOpportunity[]} jobs Career opportunities fetched from the API.
  * @returns {FilterJobs} All the jobs, and the configured selectable tags.
  */
 const configureFilters = (jobs: ICareerOpportunity[]): FilterJobs => {
-  const companies = jobs
-    .map((job) => job.company)
-    .filter(removeDuplicates)
-    .sort(sortTags)
-    .map(addSelectable) as Array<ISelectable<ICompany>>;
-  const jobTypes = jobs
-    .map((job) => job.employment)
-    .filter(removeDuplicates)
-    .sort(sortTags)
-    .map(addSelectable) as Array<ISelectable<IEmployment>>;
-  const locations = jobs
-    .flatMap((job) => job.location)
-    .filter(removeDuplicates)
-    .sort(sortTags)
-    .map(addSelectable) as Array<ISelectable<ILocation>>;
+  const companies = jobs.map((job) => job.company).filter(removeDuplicates);
+  const jobTypes = jobs.map((job) => job.employment).filter(removeDuplicates);
+  const locations = jobs.flatMap((job) => job.location).filter(removeDuplicates);
   return [jobs, companies, jobTypes, locations];
-};
-
-/** Sorting expects a number, comparison returns a boolean. This makes Typescript happy */
-const sortTags = (a: TagTypes, b: TagTypes) => (a.name > b.name ? 1 : -1);
-
-/** Wrap a TagType in a selectable container */
-const addSelectable = (tag: TagTypes): ISelectable<TagTypes> => {
-  return { value: tag, selected: false };
 };
 
 /** Removes all duplicate TagType objects from a list of a given TagType */
