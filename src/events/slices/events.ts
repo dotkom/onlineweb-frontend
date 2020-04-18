@@ -1,8 +1,11 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, SerializedError } from '@reduxjs/toolkit';
 import { State } from 'core/redux/Store';
-import { getEvent, getEvents } from 'events/api/events';
+import { getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
 import { IEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
+import { getListEvents } from 'events/api/listEvents';
+import { getImageEvents } from 'events/api/imageEvents';
+import { getCalendarEvents } from 'events/api/calendarEvents';
 
 const eventsAdapter = createEntityAdapter<IEvent>({
   sortComparer: (eventA, eventB) => {
@@ -12,8 +15,8 @@ const eventsAdapter = createEntityAdapter<IEvent>({
 
 export const eventSelectors = eventsAdapter.getSelectors<State>((state) => state.events);
 
-export const fetchEventsList = createAsyncThunk('events/fetchList', async () => {
-  const events = await getEvents();
+export const fetchEvents = createAsyncThunk('events/fetchAll', async (options?: IEventAPIParameters) => {
+  const events = await getEvents(options);
   return events;
 });
 
@@ -21,6 +24,21 @@ export const fetchEventById = createAsyncThunk('events/fetchById', async (eventI
   const events = await getEvent(eventId);
   return events;
 });
+
+export const fetchEventList = createAsyncThunk('events/fetchList', async () => {
+  const events = await getListEvents();
+  return events;
+});
+
+export const fetchImageEvents = createAsyncThunk('events/fetchImageEvents', async () => {
+  const events = await getImageEvents();
+  return events; 
+})
+
+export const fetchEventsByMonth = createAsyncThunk('events/fetchByMonth', async (month: DateTime) => {
+  const events = await getCalendarEvents(month);
+  return events
+})
 
 interface IState {
   loading: 'idle' | 'pending';
@@ -39,14 +57,14 @@ export const eventsSlice = createSlice({
   initialState: eventsAdapter.getInitialState(INITIAL_STATE),
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchEventsList.pending, (state) => {
+    builder.addCase(fetchEvents.pending, (state) => {
       state.loading = 'pending';
     }),
-      builder.addCase(fetchEventsList.fulfilled, (state, action) => {
+      builder.addCase(fetchEvents.fulfilled, (state, action) => {
         state.loading = 'idle';
         eventsAdapter.addMany(state, action.payload);
       }),
-      builder.addCase(fetchEventsList.rejected, (state, action) => {
+      builder.addCase(fetchEvents.rejected, (state, action) => {
         state.loading = 'idle';
         state.error = action.error;
       }),
@@ -60,7 +78,40 @@ export const eventsSlice = createSlice({
       builder.addCase(fetchEventById.rejected, (state, action) => {
         state.loading = 'idle';
         state.error = action.error;
-      });
+      }),
+      builder.addCase(fetchEventList.pending, (state) => {
+        state.loading = 'pending';
+      }),
+      builder.addCase(fetchEventList.fulfilled, (state, action) => {
+        state.loading = 'idle';
+        eventsAdapter.addMany(state, action.payload);
+      }),
+      builder.addCase(fetchEventList.rejected, (state, action) => {
+        state.loading = 'idle';
+        state.error = action.error;
+      }),
+      builder.addCase(fetchImageEvents.pending, (state) => {
+        state.loading = 'idle';
+      }),
+      builder.addCase(fetchImageEvents.fulfilled, (state, action) => {
+        state.loading = 'idle';
+        eventsAdapter.addMany(state, action.payload);
+      }),
+      builder.addCase(fetchImageEvents.rejected, (state, action) => {
+        state.loading = 'idle';
+        state.error = action.error;
+      }),
+      builder.addCase(fetchEventsByMonth.pending, (state) => {
+        state.loading = 'idle';
+      }),
+      builder.addCase(fetchEventsByMonth.fulfilled, (state, action) => {
+        state.loading = 'idle';
+        eventsAdapter.addMany(state, action.payload);
+      }),
+      builder.addCase(fetchEventsByMonth.rejected, (state, action) => {
+        state.loading = 'idle';
+        state.error = action.error;
+      })
   },
 });
 
