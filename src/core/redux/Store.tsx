@@ -5,9 +5,9 @@ import { careerLocationsReducer } from 'career/slices/careerLocations';
 import { careerOpportunitiesReducer } from 'career/slices/careerOpportunities';
 import { jobTypesReducer } from 'career/slices/jobTypes';
 import { companiesReducer } from 'companies/slices/companies';
+import { eventsReducer } from 'events/slices/events';
 import { paymentsReducer } from 'payments/reducers';
 import { shopReducer } from 'shop/reducers';
-import { eventsReducer } from 'events/slices/events';
 
 export const initStore = (initialState: {} = {}) => {
   return configureStore({
@@ -20,7 +20,7 @@ export const initStore = (initialState: {} = {}) => {
       jobTypes: jobTypesReducer,
       payments: paymentsReducer,
       shop: shopReducer,
-      events: eventsReducer
+      events: eventsReducer,
     },
   });
 };
