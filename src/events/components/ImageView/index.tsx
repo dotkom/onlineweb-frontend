@@ -3,10 +3,10 @@ import React, { useEffect, useMemo } from 'react';
 
 import { EventTypeEnum, IEvent, IEventViewProps } from 'events/models/Event';
 
-import EventColumn from './EventColumn';
-import style from './image.less';
 import { useDispatch, useSelector } from 'core/redux/hooks';
 import { eventSelectors, fetchImageEvents } from 'events/slices/events';
+import EventColumn from './EventColumn';
+import style from './image.less';
 
 export type IProps = IEventViewProps;
 
@@ -48,7 +48,7 @@ const isPopulated = (imageEvents: IState) => {
 export const ImageView = ({  }: IProps) => {
   const dispatch = useDispatch();
   const eventList = useSelector((state) => eventSelectors.selectAll(state));
-  //const { eventList, updateEventList } = useContext(EventsRepo);
+  // const { eventList, updateEventList } = useContext(EventsRepo);
 
   /** Fetch events to repo on mount */
   useEffect(() => {

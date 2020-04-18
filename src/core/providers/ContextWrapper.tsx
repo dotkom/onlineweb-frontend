@@ -10,9 +10,7 @@ export interface IProps {
 
 const ContextWrapper = ({ children }: IProps) => (
   <QueryParamsProvider>
-    <ToastProvider>
-      {children}
-    </ToastProvider>
+    <ToastProvider>{children}</ToastProvider>
   </QueryParamsProvider>
 );
 

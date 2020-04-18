@@ -5,11 +5,11 @@ import { Link } from 'core/components/Router';
 import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
 import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
 
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import { eventSelectors, fetchEventList } from 'events/slices/events';
 import { IEvent, IEventViewProps } from '../../models/Event';
 import style from './list.less';
 import ListEvent from './ListEvent';
-import { useDispatch, useSelector } from 'core/redux/hooks';
-import { fetchEventList, eventSelectors } from 'events/slices/events';
 
 export interface IProps extends IEventViewProps {
   filtered: boolean;

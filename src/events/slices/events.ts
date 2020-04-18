@@ -1,11 +1,11 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, SerializedError } from '@reduxjs/toolkit';
 import { State } from 'core/redux/Store';
+import { getCalendarEvents } from 'events/api/calendarEvents';
 import { getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
+import { getImageEvents } from 'events/api/imageEvents';
+import { getListEvents } from 'events/api/listEvents';
 import { IEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
-import { getListEvents } from 'events/api/listEvents';
-import { getImageEvents } from 'events/api/imageEvents';
-import { getCalendarEvents } from 'events/api/calendarEvents';
 
 const eventsAdapter = createEntityAdapter<IEvent>({
   sortComparer: (eventA, eventB) => {
@@ -32,13 +32,13 @@ export const fetchEventList = createAsyncThunk('events/fetchList', async () => {
 
 export const fetchImageEvents = createAsyncThunk('events/fetchImageEvents', async () => {
   const events = await getImageEvents();
-  return events; 
-})
+  return events;
+});
 
 export const fetchEventsByMonth = createAsyncThunk('events/fetchByMonth', async (month: DateTime) => {
   const events = await getCalendarEvents(month);
-  return events
-})
+  return events;
+});
 
 interface IState {
   loading: 'idle' | 'pending';
@@ -111,7 +111,7 @@ export const eventsSlice = createSlice({
       builder.addCase(fetchEventsByMonth.rejected, (state, action) => {
         state.loading = 'idle';
         state.error = action.error;
-      })
+      });
   },
 });
 

@@ -2,10 +2,10 @@ import { DateTime } from 'luxon';
 import { useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { QueryParams } from 'core/providers/QueryParams';
-import { EventTypeEnum, IEvent } from 'events/models/Event';
-import { isAfter, isBefore, isInDateRange } from '../utils/eventTimeUtils';
 import { useDispatch, useSelector } from 'core/redux/hooks';
+import { EventTypeEnum, IEvent } from 'events/models/Event';
 import { eventSelectors, fetchEvents } from 'events/slices/events';
+import { isAfter, isBefore, isInDateRange } from '../utils/eventTimeUtils';
 
 export type EventMap = Map<number, IEvent>;
 
@@ -36,7 +36,7 @@ const getAttendanceEventFiltered = (attendanceEventsChecked: boolean, eventList:
 
 const useFilteredEventList = () => {
   const dispatch = useDispatch();
-  const eventList = useSelector((state) => eventSelectors.selectAll(state))
+  const eventList = useSelector((state) => eventSelectors.selectAll(state));
   const searchContext = useContext(QueryParams);
   const { search, dateStart, dateEnd, eventTypes, nonAttendanceEventsChecked } = searchContext;
   const highestDate = useRef(dateEnd.minus(1));
