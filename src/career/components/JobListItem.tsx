@@ -1,9 +1,10 @@
-import { ICareerOpportunity } from 'career/models/Career';
-import React from 'react';
+import React, { FC } from 'react';
 
+import { careerOpportunitySelectors } from 'career/slices/careerOpportunities';
 import ResponsiveImage from 'common/components/ResponsiveImage';
 import { getCareerOpportinityUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
+import { useSelector } from 'core/redux/hooks';
 
 import { formatDeadline } from './JobDetails';
 
@@ -25,32 +26,44 @@ export const formatLocations = (locations: string[]) => {
   return 'Ikke spesifisert';
 };
 
-const JobListItem = ({ location, deadline, company, title, ingress, id, employment, featured }: ICareerOpportunity) => (
-  <div className={style.job}>
-    <Link {...getCareerOpportinityUrl(id)}>
-      <a>
-        <ResponsiveImage image={company.image} size="md" alt="Firmalogo" type="company" />
-      </a>
-    </Link>
-    <div className={style.jobInfo}>
+interface IProps {
+  opportunityId: number;
+}
+
+const JobListItem: FC<IProps> = ({ opportunityId }) => {
+  const opportunity = useSelector((state) => careerOpportunitySelectors.selectById(state, opportunityId));
+  if (!opportunity) {
+    return null;
+  }
+
+  const { location, deadline, company, title, ingress, id, employment, featured } = opportunity;
+  return (
+    <div className={style.job}>
       <Link {...getCareerOpportinityUrl(id)}>
         <a>
-          <h2 className={style.jobInfoTitle}>
-            {company.name} - {title}
-          </h2>
+          <ResponsiveImage image={company.image} size="md" alt="Firmalogo" type="company" />
         </a>
       </Link>
-      {featured && <p className={style.promoted}>Fremhevet plassering</p>}
+      <div className={style.jobInfo}>
+        <Link {...getCareerOpportinityUrl(id)}>
+          <a>
+            <h2 className={style.jobInfoTitle}>
+              {company.name} - {title}
+            </h2>
+          </a>
+        </Link>
+        {featured && <p className={style.promoted}>Fremhevet plassering</p>}
 
-      <p className={style.ingress}>{ingress}</p>
+        <p className={style.ingress}>{ingress}</p>
 
-      <div className={style.jobMeta}>
-        <p>Type: {employment.name}</p>
-        <p>Sted: {formatLocations(location.map((loc) => loc.name))}</p>
-        <p>Frist: {formatDeadline(deadline)}</p>
+        <div className={style.jobMeta}>
+          <p>Type: {employment.name}</p>
+          <p>Sted: {formatLocations(location.map((loc) => loc.name))}</p>
+          <p>Frist: {formatDeadline(deadline)}</p>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default JobListItem;
