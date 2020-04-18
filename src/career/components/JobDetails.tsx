@@ -1,10 +1,12 @@
 import { DateTime } from 'luxon';
-import React from 'react';
+import Head from 'next/head';
+import React, { FC } from 'react';
 
 import { ICareerOpportunity } from 'career/models/Career';
 import Heading from 'common/components/Heading';
 import Markdown from 'common/components/Markdown';
 import ResponsiveImage from 'common/components/ResponsiveImage';
+import { DOMAIN } from 'common/constants/endpoints';
 import { getCompanyUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 
@@ -22,32 +24,57 @@ export const formatDeadline = (deadline: string): string => {
   return 'Ikke spesifisert';
 };
 
-const JobDetails = (props: ICareerOpportunity) => (
+interface IProps {
+  opportunity: ICareerOpportunity;
+}
+
+const JobDetails: FC<IProps> = ({ opportunity }) => (
   <div>
-    <Heading title={props.title} />
+    <Head>
+      <meta property="og:title" content={opportunity.title} />
+      <meta property="og:description" content={opportunity.ingress} />
+      <meta property="og:image" content={`${DOMAIN}${opportunity.company.image.sm}`} />
+      <meta property="og:article:published_time" content={opportunity.start} />
+      <meta property="og:article:expiration_time" content={opportunity.end} />
+      <meta property="og:article:tag" content={opportunity.company.name} />
+      <meta property="og:article:tag" content={opportunity.employment.name} />
+      {opportunity.location.map((location) => (
+        <meta property="og:article:tag" content={location.name} key={location.slug} />
+      ))}
+    </Head>
+    <Heading title={opportunity.title} />
     <div className={style.detail}>
-      <Markdown className={style.jobDescription} source={props.description} escapeHtml />
+      <Markdown className={style.jobDescription} source={opportunity.description} escapeHtml />
       <div>
         <div className={style.company}>
-          <Link {...getCompanyUrl(props.company.id)}>
+          <Link {...getCompanyUrl(opportunity.company.id)}>
             <a className={style.companyImage}>
-              <ResponsiveImage image={props.company.image} size="lg" alt={props.company.name} type="company" />
+              <ResponsiveImage
+                image={opportunity.company.image}
+                size="lg"
+                alt={opportunity.company.name}
+                type="company"
+              />
             </a>
           </Link>
 
           <div className={style.companyDescriptionBox}>
-            <Link {...getCompanyUrl(props.company.id)}>
+            <Link {...getCompanyUrl(opportunity.company.id)}>
               <a className={style.companyDescriptionTitle}>
-                <h3>{props.company.name}</h3>
+                <h3>{opportunity.company.name}</h3>
               </a>
             </Link>
-            <Markdown className={style.companyDescriptionContent} source={props.company.short_description} escapeHtml />
+            <Markdown
+              className={style.companyDescriptionContent}
+              source={opportunity.company.short_description}
+              escapeHtml
+            />
           </div>
           <div className={style.keyInfo}>
             <h3>Nøkkelinformasjon</h3>
-            <p>Type: {props.employment.name}</p>
-            <p>Sted: {formatLocations(props.location.map((loc) => loc.name))}</p>
-            <p>Frist: {formatDeadline(props.deadline)}</p>
+            <p>Type: {opportunity.employment.name}</p>
+            <p>Sted: {formatLocations(opportunity.location.map((loc) => loc.name))}</p>
+            <p>Frist: {formatDeadline(opportunity.deadline)}</p>
           </div>
         </div>
       </div>

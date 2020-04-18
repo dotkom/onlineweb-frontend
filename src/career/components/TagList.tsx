@@ -1,26 +1,34 @@
-import { ISelectable, TagTypes } from 'career/models/Career';
 import React from 'react';
+
 import style from '../less/career.less';
 import Tag from './Tag';
 
-export interface IProps {
-  handleChange: (_: string) => void;
-  heading: string;
-  tags: Array<ISelectable<TagTypes>>;
+interface ITag<T> {
+  id: T;
+  text: string;
 }
 
-const TagList = ({ tags, handleChange, heading }: IProps) => (
-  <div className={style.tagContainer}>
-    <h2>{heading}</h2>
-    {tags.map((tag) => (
-      <Tag
-        key={tag.value.name}
-        toggle={() => handleChange(tag.value.name)}
-        selected={tag.selected}
-        title={tag.value.name}
-      />
-    ))}
-  </div>
-);
+interface IProps<T> {
+  onToggle: (id: T) => void;
+  heading: string;
+  tags: Array<ITag<T>>;
+  selectedIds: T[];
+}
+
+function TagList<IdType extends string | number>({ tags, onToggle, heading, selectedIds }: IProps<IdType>) {
+  return (
+    <div className={style.tagContainer}>
+      <h2>{heading}</h2>
+      {tags.map((tag) => (
+        <Tag
+          key={tag.id}
+          onToggle={() => onToggle(tag.id)}
+          selected={selectedIds.some((id) => id === tag.id)}
+          title={tag.text}
+        />
+      ))}
+    </div>
+  );
+}
 
 export default TagList;

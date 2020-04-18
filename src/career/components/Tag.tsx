@@ -5,11 +5,11 @@ import style from '../less/career.less';
 export interface IProps {
   title: string;
   selected: boolean;
-  toggle: () => void;
+  onToggle: () => void;
 }
 
-const Tag = ({ selected, title, toggle }: IProps) => (
-  <button className={classNames({ [style.selected]: selected })} onClick={toggle}>
+const Tag = ({ selected, title, onToggle }: IProps) => (
+  <button className={classNames({ [style.selected]: selected })} onClick={onToggle}>
     {title}
   </button>
 );

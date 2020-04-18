@@ -1,51 +1,35 @@
-import { retrieveCareerOpportunity } from 'career/api';
-import { ICareerOpportunity } from 'career/models/Career';
-import { CareerContext } from 'career/providers/CareerProvider';
-import HttpError from 'core/components/errors/HttpError';
-import React, { Component, ContextType } from 'react';
-import InfoBox from '../components/JobDetails';
+import React, { FC, useEffect } from 'react';
 
-export interface IProps {
+import { careerOpportunitySelectors, fetchCareerOpportunityById } from 'career/slices/careerOpportunities';
+import Spinner from 'common/components/Spinner';
+import HttpError from 'core/components/errors/HttpError';
+import { useDispatch, useSelector } from 'core/redux/hooks';
+
+import JobDetails from '../components/JobDetails';
+
+interface IProps {
   opportunityId: number;
 }
 
-export interface IState {
-  job: ICareerOpportunity | undefined;
-}
+const DetailView: FC<IProps> = ({ opportunityId }) => {
+  const dispatch = useDispatch();
+  const opportunity = useSelector((state) => careerOpportunitySelectors.selectById(state, opportunityId));
+  const isPending = useSelector((state) => state.careerOpportunities.loading === 'pending');
 
-class DetailView extends Component<IProps, IState> {
-  public static contextType = CareerContext;
-  public context!: ContextType<typeof CareerContext>;
-  public state: IState = {
-    job: undefined,
-  };
-
-  public async componentDidMount() {
+  useEffect(() => {
     window.scrollTo(0, 0);
-    const id = this.props.opportunityId;
-    const response = await retrieveCareerOpportunity(id);
-    if (response.status === 'success') {
-      this.setState({ job: response.data });
-    }
+    dispatch(fetchCareerOpportunityById(opportunityId));
+  }, [opportunityId, dispatch]);
+
+  if (isPending && !opportunity) {
+    return <Spinner />;
   }
 
-  public render() {
-    const { job } = this.state;
-    const storedJob = this.findStoredJob();
-    return job ? (
-      <InfoBox {...job} />
-    ) : storedJob ? (
-      <InfoBox {...storedJob} />
-    ) : (
-      <HttpError code={404} text="Denne karrieremuligheten eksisterer ikke." />
-    );
+  if (!opportunity) {
+    return <HttpError code={404} text="Denne karrieremuligheten eksisterer ikke." />;
   }
 
-  private findStoredJob(): ICareerOpportunity | undefined {
-    const { jobs } = this.context;
-    const id = this.props.opportunityId;
-    return jobs.find((j) => j.id === id);
-  }
-}
+  return <JobDetails opportunity={opportunity} />;
+};
 
 export default DetailView;
