@@ -13,7 +13,7 @@ export const getImageEvents = async () => {
   ]);
 
   const allEventsList = await Promise.all([left, middle, right]);
-  return allEventsList;
+  return allEventsList.flat();
 };
 
 export const getTypeEvents = async (types: EventTypeEnum[]) => {
