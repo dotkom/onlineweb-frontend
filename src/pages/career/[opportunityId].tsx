@@ -1,19 +1,35 @@
-import { useRouter } from 'next/router';
+import { NextPage, NextPageContext } from 'next';
 import React from 'react';
 
 import DetailView from 'career/containers/DetailView';
-import CareerOpportunities from 'career/providers/CareerProvider';
 
-const CareerDetailPage = () => {
-  const router = useRouter();
-  const opportunityId = Number(router.query.opportunityId);
+import { careerOpportunitySelectors, fetchCareerOpportunityById } from 'career/slices/careerOpportunities';
+import { Store } from 'core/redux/Store';
+
+interface IContext extends NextPageContext {
+  store: Store;
+}
+
+interface IProps {
+  opportunityId: number;
+}
+
+const CareerDetailPage: NextPage<IProps> = ({ opportunityId }) => {
   return (
     <section>
-      <CareerOpportunities>
-        <DetailView opportunityId={opportunityId} />
-      </CareerOpportunities>
+      <DetailView opportunityId={opportunityId} />
     </section>
   );
+};
+
+CareerDetailPage.getInitialProps = async ({ query, store }: IContext) => {
+  const opportunityId = Number(query.opportunityId);
+  const isOpportunityInStore = Boolean(careerOpportunitySelectors.selectById(store.getState(), opportunityId));
+  const result = store.dispatch(fetchCareerOpportunityById(opportunityId));
+  if (!isOpportunityInStore) {
+    await result;
+  }
+  return { opportunityId };
 };
 
 export default CareerDetailPage;
