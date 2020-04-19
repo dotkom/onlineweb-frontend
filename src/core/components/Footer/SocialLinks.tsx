@@ -1,5 +1,5 @@
-import Img from 'common/components/Img';
 import React from 'react';
+
 import style from './footer.less';
 
 export interface ISocialLink {
@@ -12,28 +12,28 @@ const SOCIAL: ISocialLink[] = [
   {
     name: 'facebook',
     link: 'http://facebook.com/LinjeforeningenOnline',
-    icon: '/static/img/social/facebook.svg',
+    icon: '/img/social/facebook.svg',
   },
   {
     name: 'instagram',
     link: 'https://www.instagram.com/online_ntnu/',
-    icon: '/static/img/social/instagram.svg',
+    icon: '/img/social/instagram.svg',
   },
   {
     name: 'github',
     link: 'https://www.github.com/dotkom/',
-    icon: '/static/img/social/github.svg',
+    icon: '/img/social/github.svg',
   },
   {
     name: 'slack',
     link: 'https://onlinentnu.slack.com/',
-    icon: '/static/img/social/slack.svg',
+    icon: '/img/social/slack.svg',
   },
 ];
 
 const SocialLink = ({ name, link, icon }: ISocialLink) => (
   <a className={style.social} href={link}>
-    <Img src={icon} alt={name} />
+    <img src={icon} alt={name} />
   </a>
 );
 
