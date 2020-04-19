@@ -22,14 +22,14 @@ export const ManageApps = () => {
     client: undefined,
   });
 
-  const removeClientRequest = useAsync<unknown, Error>(() => {
+  const removeClientRequest = useAsync(() => {
     if (user && removeClientState.client_id !== -1) {
       return deleteClient(user, removeClientState.client_id);
     }
     return Promise.resolve(null);
   }, [user, removeClientState]);
 
-  const getClientsRequest = useAsync<IOidcClient[], Error>(async () => user ? await getMyClients(user) : [], [user, removeClientState]);
+  const getClientsRequest = useAsync(async () => user ? await getMyClients(user) : [], [user, removeClientState]);
 
   let managedApps: ReactNodeArray = [];
 
@@ -52,7 +52,7 @@ export const ManageApps = () => {
       );
     });
   } else if (getClientsRequest.status === 'rejected') {
-    managedApps = [<li key="error">Kunne ikke hente dine apper {getClientsRequest.error.message}</li>];
+    managedApps = [<li key="error">Kunne ikke hente dine apper {(getClientsRequest.error as Error).message}</li>];
   }
 
   return (
@@ -60,7 +60,7 @@ export const ManageApps = () => {
       {removeClientState.client ? (
         <Message status="success">Applikson slettet {removeClientState.client.name}</Message>
       ) : null}
-      {removeClientRequest.status === 'rejected' ? <Message status="error">{removeClientRequest.error.message}</Message> : null}
+      {removeClientRequest.status === 'rejected' ? <Message status="error">{(getClientsRequest.error as Error).message}</Message> : null}
       <ul className={style.grid}>{managedApps}</ul>
     </div>
   );

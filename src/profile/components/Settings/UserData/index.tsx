@@ -1,4 +1,4 @@
-import useAsync from 'common/hooks/useAsync';
+import {useAsyncDispatch} from 'common/hooks/useAsync';
 import React, { SyntheticEvent, useEffect, useRef } from 'react';
 
 import { Button, Card, TextField, Message } from '@dotkomonline/design-system';
@@ -18,32 +18,31 @@ const UserData = () => {
 
   
 
-  const [downloadUserDataState, setDownloadUserDataState] = React.useState(false);
   const [userCredentials, setUserCredentials] = React.useState<IUserCredentials>({ username: '', password: '' });
-  const [deleteUserState, setDeleteUserState] = React.useState(false);
-
+  
   const aRef = useRef<HTMLAnchorElement>(null);
   const [fileRef, setFileRef] = React.useState<null | string>(null);
-  const useDataRequest = useAsync<File | null, Error>(async () => {
-    if (downloadUserDataState && user) {
+  
+  const [userDataRequest, dispatchUserDataRequest] = useAsyncDispatch(async () => {
+    if (user) {
       return new File([JSON.stringify(await fetchUserData(user))], `${user.profile.preferred_username}.json`, {
         type: 'application/json',
       });
     }
-    return null;
-  }, [downloadUserDataState, user]);
-
-  const deleteUserRequest = useAsync<unknown, Error>(async () => {
-    if (deleteUserState && user) {
+    throw new Error("User not logged in");
+  });
+  
+  const [deleteUserRequest, dispatchDeleteUserRequest] = useAsyncDispatch(async () => {
+    if (user) {
       return await anonymizeUser(user, user.profile.sub, userCredentials.username, userCredentials.password);
     }
-    return null;
-  }, [deleteUserState]);
+    throw new Error("User not logged in");
+  });
   
 
   useEffect(() => {
-    if (useDataRequest.status === 'resolved') {
-      const ref = URL.createObjectURL(useDataRequest.result);
+    if (userDataRequest.status === 'resolved') {
+      const ref = URL.createObjectURL(userDataRequest.result);
       setFileRef(ref);
       return () => {
         URL.revokeObjectURL(ref);
@@ -51,7 +50,7 @@ const UserData = () => {
       };
     }
     return;
-  }, [useDataRequest]);
+  }, [userDataRequest]);
 
   useEffect(() => {
     if (aRef.current !== null) {
@@ -65,15 +64,15 @@ const UserData = () => {
     resolved: 'success',
     pending: 'primary',
     init: 'primary'
-  }[useDataRequest.status] as 'danger' | 'success' | 'primary';
+  }[userDataRequest.status] as 'danger' | 'success' | 'primary';
   
   return (
     <>
-      {useDataRequest.status === 'rejected' ? <Message status="error">{useDataRequest.error.message}</Message> : null}
-      {deleteUserRequest.status === 'rejected' ? <Message status="error">{deleteUserRequest.error.message}</Message> : null}
+      {userDataRequest.status === 'rejected' ? <Message status="error">{(userDataRequest.error as Error).message}</Message> : null}
+      {deleteUserRequest.status === 'rejected' ? <Message status="error">{(deleteUserRequest.error as Error).message}</Message> : null}
       <Card className={style.userDataCard}>
         <h1>Din data</h1>
-        <Button color={dlButtonColor} onClick={() => setDownloadUserDataState(true)}>
+        <Button color={dlButtonColor} onClick={dispatchUserDataRequest}>
           Last ned brukerdata
         </Button>
 
@@ -101,7 +100,7 @@ const UserData = () => {
           }
           placeholder="Passord"
         />
-        <Button color="danger" onClick={() => setDeleteUserState(true)}>
+        <Button color="danger" onClick={dispatchDeleteUserRequest}>
           Slett bruker
         </Button>
       </Card>

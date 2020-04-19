@@ -1,4 +1,4 @@
-import { DependencyList, Reducer, useEffect, useReducer } from 'react';
+import { DependencyList, Reducer, useEffect, useReducer, useCallback, useRef } from 'react';
 
 
 // Interface for each possible state with explicit values for each
@@ -74,12 +74,36 @@ const asyncReducer = <T, E>(state: IState<T, E>, action: IAction<T, E>): IState<
   return state;
 };
 
+type FuncSig<T> = (...args: any[]) => Promise<T>
+
+type Unpacked<T> = T extends (infer U)[]
+  ? U
+  : T extends (...args: any[]) => infer U
+  ? U
+  : T extends Promise<infer U>
+  ? U
+  : T;
 
 
-const useAsync = <T, E = unknown>(
-  func: () => Promise<T>,
+// automatically calls dispatch when dependencies have changed
+export const useAsync = <X extends FuncSig<any> = FuncSig<any>>(
+  func: X,
   deps?: DependencyList
-): IState<T, E> => {
+): IState<Unpacked<ReturnType<typeof func>>, unknown> => {
+  const [requestState, dispatch] = useAsyncDispatch<X>(func);
+  useEffect(dispatch, deps);
+  return requestState;
+}
+
+
+
+//<T extends (...args: any[]) => any>
+export const useAsyncDispatch = <X extends FuncSig<any> = FuncSig<any>>(
+  func: X
+): [IState<Unpacked<ReturnType<typeof func>>, unknown>, (...args: Parameters<typeof func>) => () => void] => {
+  type T = Unpacked<ReturnType<typeof func>>;
+  type E = unknown;
+  
   
   const initialState: IState<T, E> = {
     result: undefined,
@@ -88,29 +112,42 @@ const useAsync = <T, E = unknown>(
   };
 
   const [requestState, dispatch] = useReducer<Reducer<IState<T, E>, IAction<T, E>>>(asyncReducer, initialState);
-  useEffect(() => {
-    let canceled = false;
+  
+  // mutable object that keeps track of all requests
+  const inFlightTracker = useRef<{nextId: number, canceled: {[key: number]: boolean}}>({
+    nextId: 1,
+    canceled: {}
+  });
+
+  const doRequest = useCallback((...args: Parameters<typeof func>) => {
+    
+    let id = inFlightTracker.current.nextId += 1;
+    // cancel previous request
+    inFlightTracker.current.canceled[id-1] = true;
+    inFlightTracker.current.canceled[id] = false;
     dispatch({ type: 'pending' });
-    func()
+    func(...args)
       .then((res) => {
-        if (canceled) {
+        if (inFlightTracker.current.canceled[id]) {
           return;
         }
         dispatch({ type: 'resolved', value: res });
       })
       .catch((err) => {
-        if (canceled) {
+        if (inFlightTracker.current.canceled[id]) {
           return;
         }
         dispatch({ type: 'rejected', value: err });
       });
-        
+    
     return () => {
-      canceled = true;
-    };
-  }, deps);
+      inFlightTracker.current.canceled[id] = true;
+    }
+    
+  }, [func]);
 
-  return requestState;
+  return [requestState, doRequest];
 };
+
 
 export default useAsync;
