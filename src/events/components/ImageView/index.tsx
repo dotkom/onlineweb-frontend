@@ -1,10 +1,10 @@
 import { DateTime } from 'luxon';
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
-import { getImageEvents } from 'events/api/imageEvents';
 import { EventTypeEnum, IEvent, IEventViewProps } from 'events/models/Event';
-import { EventsRepo } from 'events/providers/EventsRepo';
 
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import { eventSelectors, fetchImageEvents } from 'events/slices/events';
 import EventColumn from './EventColumn';
 import style from './image.less';
 
@@ -46,14 +46,12 @@ const isPopulated = (imageEvents: IState) => {
 };
 
 export const ImageView = ({  }: IProps) => {
-  const { eventList, updateEventList } = useContext(EventsRepo);
+  const dispatch = useDispatch();
+  const eventList = useSelector((state) => eventSelectors.selectAll(state));
 
-  /** Fetch events to repo on mount */
+  /** Fetch events to store on mount */
   useEffect(() => {
-    (async () => {
-      const events = await getImageEvents();
-      updateEventList(events.flat());
-    })();
+    dispatch(fetchImageEvents());
   }, []);
 
   const imageEvents = useMemo(
