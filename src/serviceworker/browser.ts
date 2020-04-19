@@ -1,3 +1,5 @@
+import { __PROD__ } from 'common/constants/environment';
+
 /**
  * Wrapper for Service Workers.
  */
@@ -11,9 +13,10 @@ export const verifyServiceWorker = (): boolean => {
 };
 
 export const registerServiceWorker = async (): Promise<ServiceWorkerRegistration | undefined> => {
+  const shouldInstallServiceWorker = __PROD__;
   try {
-    if (verifyServiceWorker()) {
-      const registration = await serviceWorker.register('/serviceworker.js');
+    if (shouldInstallServiceWorker && verifyServiceWorker()) {
+      const registration = await serviceWorker.register('/js/serviceworker.js');
       return registration;
     } else {
       throw new Error('Could not register serviceWorker. Browser is not supported');
