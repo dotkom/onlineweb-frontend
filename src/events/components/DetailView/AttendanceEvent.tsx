@@ -86,7 +86,7 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
         <p>{event.waitlist ? event.number_on_waitlist : '-'}</p>
       </Block>
       <div>
-        {RECAPTCHA_KEY ? <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={(value) => updateRecaptcha(value)} /> : null}
+        {RECAPTCHA_KEY ? <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={(value) => setRecaptcha(value)} /> : null}
       </div>
     </div>
   );
