@@ -58,7 +58,7 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
   const registrationEnd = DateTime.fromISO(event.registration_end);
   const cancellationDeadline = DateTime.fromISO(event.unattend_deadline);
   // @ts-ignore
-  const [recaptcha, updateRecaptcha] = useState<string | null>();
+  const [recaptcha, setRecaptcha] = useState<string | null>();
 
   return (
     <div className={style.blockGrid}>
