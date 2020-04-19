@@ -1,11 +1,11 @@
 import { DateTime } from 'luxon';
 import React, { ReactChild, useState } from 'react';
 
+import ReCAPTCHA from 'react-google-recaptcha';
 import { IAttendanceEvent } from '../../models/Event';
 import Block from './Block';
 import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 interface IRuleBundleBox {
   children: ReactChild | ReactChild[];
@@ -58,7 +58,7 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
   const cancellationDeadline = DateTime.fromISO(event.unattend_deadline);
   const sitekey: string = process.env.RECAPTCHA_PUBLIC_KEY || '';
   // @ts-ignore
-  const [ recaptcha, updateRecaptcha ] = useState<string | null>();
+  const [recaptcha, updateRecaptcha] = useState<string | null>();
 
   return (
     <div className={style.blockGrid}>
