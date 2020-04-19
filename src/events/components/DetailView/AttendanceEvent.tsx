@@ -5,6 +5,7 @@ import { IAttendanceEvent } from '../../models/Event';
 import Block from './Block';
 import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 interface IRuleBundleBox {
   children: ReactChild | ReactChild[];
@@ -55,6 +56,10 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
   const registrationStart = DateTime.fromISO(event.registration_start);
   const registrationEnd = DateTime.fromISO(event.registration_end);
   const cancellationDeadline = DateTime.fromISO(event.unattend_deadline);
+  const sitekey: string = process.env.RECAPTCHA_PUBLIC_KEY || '';
+  const onChange = (value: any) => {
+    console.log('Captcha value:', value);
+  };
 
   return (
     <div className={style.blockGrid}>
@@ -81,6 +86,9 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
       <Block title="Venteliste">
         <p>{event.waitlist ? event.number_on_waitlist : '-'}</p>
       </Block>
+      <div>
+        <ReCAPTCHA sitekey={sitekey} onChange={onChange} />
+      </div>
     </div>
   );
 };
