@@ -1,5 +1,5 @@
 import { useAsyncDispatch } from 'common/hooks/useAsync';
-import React, { SyntheticEvent, useEffect, useRef } from 'react';
+import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
 
 import { Button, Card, Message, TextField } from '@dotkomonline/design-system';
 import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
@@ -13,13 +13,13 @@ interface IUserCredentials {
 }
 
 const UserData = () => {
-  const userContext = React.useContext<IUserContext>(UserContext);
+  const userContext = useContext<IUserContext>(UserContext);
   const user = userContext.user;
 
-  const [userCredentials, setUserCredentials] = React.useState<IUserCredentials>({ username: '', password: '' });
+  const [userCredentials, setUserCredentials] = useState<IUserCredentials>({ username: '', password: '' });
 
   const aRef = useRef<HTMLAnchorElement>(null);
-  const [fileRef, setFileRef] = React.useState<null | string>(null);
+  const [fileRef, setFileRef] = useState<null | string>(null);
 
   const [userDataRequest, dispatchUserDataRequest] = useAsyncDispatch(async () => {
     if (user) {
