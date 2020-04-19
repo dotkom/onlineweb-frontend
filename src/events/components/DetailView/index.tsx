@@ -20,7 +20,7 @@ export interface IProps {
 export const DetailView = ({ eventId }: IProps) => {
   const dispatch = useDispatch();
   const event = useSelector((state) => eventSelectors.selectById(state, eventId));
-  const isPending = useSelector((state) => state.articles.loading === 'pending');
+  const isPending = useSelector((state) => state.events.loading === 'pending');
 
   useEffect(() => {
     dispatch(fetchEventById(eventId));
