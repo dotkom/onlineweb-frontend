@@ -3,7 +3,7 @@ import React from 'react';
 import { Store } from 'core/redux/Store';
 import DetailView from 'events/components/DetailView';
 import { eventSelectors, fetchEventById } from 'events/slices/events';
-import { NextPageContext, NextPage } from 'next';
+import { NextPage, NextPageContext } from 'next';
 
 interface IContext extends NextPageContext {
   store: Store;
