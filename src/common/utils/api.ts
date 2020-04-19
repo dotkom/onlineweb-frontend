@@ -44,13 +44,26 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
   if (response.status === 204) {
     return null;
   }
-  // encountered a http error, throw error
-  if (response.status > 399) {
+
+  let data;
+  try {
+    data = await response.json();
+  } catch {
+    // could not decode response as json, throw entire reponse
     throw response;
   }
 
-  const data = await response.json();
-  setCache({ content: data, options: cacheOptions, url });
+  // don't cache error responses
+  if (response.status <= 399) {
+    setCache({ content: data, options: cacheOptions, url });
+  }
+
+  // 403 - Forbidden does not return any meaningful api data (oidc consent api requires that an error is thrown to show error message)
+  // 5xx - Gateway/Internal errors do not return any meaningful api data
+  if (response.status === 403 || response.status > 499) {
+    throw response;
+  }
+
   return data;
 };
 
