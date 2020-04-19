@@ -49,7 +49,7 @@ export const ImageView = ({  }: IProps) => {
   const dispatch = useDispatch();
   const eventList = useSelector((state) => eventSelectors.selectAll(state));
 
-  /** Fetch events to repo on mount */
+  /** Fetch events to store on mount */
   useEffect(() => {
     dispatch(fetchImageEvents());
   }, []);
