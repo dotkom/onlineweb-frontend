@@ -20,7 +20,7 @@ export const initStore = (initialState: {} = {}) => {
       events: eventsReducer,
       jobTypes: jobTypesReducer,
       payments: paymentsReducer,
-      shop: shopReducer
+      shop: shopReducer,
     },
   });
 };
