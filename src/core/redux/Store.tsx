@@ -17,10 +17,10 @@ export const initStore = (initialState: {} = {}) => {
       careerLocations: careerLocationsReducer,
       careerOpportunities: careerOpportunitiesReducer,
       companies: companiesReducer,
+      events: eventsReducer,
       jobTypes: jobTypesReducer,
       payments: paymentsReducer,
-      shop: shopReducer,
-      events: eventsReducer,
+      shop: shopReducer
     },
   });
 };
