@@ -1,14 +1,20 @@
-import Img from 'common/components/Img';
 import React from 'react';
+
 import ContactInfo from './ContactInfo';
 import style from './footer.less';
 import SocialLinks from './SocialLinks';
 
+const HSP = {
+  website: 'https://www.bekk.no/',
+  logo: '/img/bekk.svg',
+  description: 'Hovedsamarbeidspartner - Bekk',
+};
+
 const Footer = () => (
   <footer className={style.footer}>
     <div className={style.footerContent}>
-      <a href="https://www.bekk.no/" className={style.sponsor}>
-        <Img src="/static/img/hsp-832576.svg" alt="Hovedsamarbeidspartner - Bekk" />
+      <a href={HSP.website} className={style.sponsor}>
+        <img src={HSP.logo} alt={HSP.description} />
       </a>
       <p>
         Har du funnet en feil på nettsiden?
