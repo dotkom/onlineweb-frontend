@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
 import React, { ReactChild, useState } from 'react';
 
+import { RECAPTCHA_KEY } from 'common/constants/google';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { IAttendanceEvent } from '../../models/Event';
 import Block from './Block';
 import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
-import { RECAPTCHA_KEY } from 'common/constants/google';
 
 interface IRuleBundleBox {
   children: ReactChild | ReactChild[];
@@ -85,7 +85,9 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
       <Block title="Venteliste">
         <p>{event.waitlist ? event.number_on_waitlist : '-'}</p>
       </Block>
-      <div>{RECAPTCHA_KEY ? <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={(value) => updateRecaptcha(value)} /> : null}</div>
+      <div>
+        {RECAPTCHA_KEY ? <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={(value) => updateRecaptcha(value)} /> : null}
+      </div>
     </div>
   );
 };
