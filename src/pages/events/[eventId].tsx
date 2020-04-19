@@ -1,18 +1,19 @@
-import { useRouter } from 'next/router';
 import React from 'react';
 
 import { Store } from 'core/redux/Store';
 import DetailView from 'events/components/DetailView';
 import { eventSelectors, fetchEventById } from 'events/slices/events';
-import { NextPageContext } from 'next';
+import { NextPageContext, NextPage } from 'next';
 
 interface IContext extends NextPageContext {
   store: Store;
 }
 
-const EventDetailPage = () => {
-  const router = useRouter();
-  const eventId = Number(router.query.eventId);
+interface IProps {
+  eventId: number;
+}
+
+const EventDetailPage: NextPage<IProps> = ({ eventId }) => {
   return <DetailView eventId={eventId} />;
 };
 
