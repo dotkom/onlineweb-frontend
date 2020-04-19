@@ -18,8 +18,8 @@ export const fetchEvents = createAsyncThunk('events/fetchMultiple', async (optio
 });
 
 export const fetchEventById = createAsyncThunk('events/fetchById', async (eventId: number) => {
-  const events = await getEvent(eventId);
-  return events;
+  const event = await getEvent(eventId);
+  return event;
 });
 
 export const fetchEventList = createAsyncThunk('events/fetchList', async (_, { dispatch }) => {
@@ -52,8 +52,8 @@ export const fetchImageEvents = createAsyncThunk('events/fetchImageEvents', asyn
     EventTypeEnum.ANNET,
   ]);
   const responses = await Promise.all([left, right, middle]);
-  responses.forEach((payloadCallback) => unwrapResult(payloadCallback));
-  return responses;
+  const result = responses.map((payloadCallback) => unwrapResult(payloadCallback));
+  return result;
 });
 
 export const fetchEventsByMonth = createAsyncThunk('events/fetchByMonth', async (month: DateTime, { dispatch }) => {
