@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import 'react-day-picker/lib/style.css';
 
 import AuthProvider from 'authentication/providers/UserProvider';
+import { __CLIENT__, __PROD__ } from 'common/constants/environment';
 import { OWF_SENTRY_DSN } from 'common/constants/sentry';
 import Core from 'core';
 import ContextWrapper from 'core/providers/ContextWrapper';
@@ -20,7 +21,7 @@ import { registerServiceWorker } from 'serviceworker/browser';
 /** Luxon locale setting has to be the same as in the front-end */
 LuxonSettings.defaultLocale = 'nb';
 
-if (process.browser) {
+if (__CLIENT__ && __PROD__) {
   registerServiceWorker();
 }
 

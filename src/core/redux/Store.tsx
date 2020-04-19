@@ -5,6 +5,7 @@ import { careerLocationsReducer } from 'career/slices/careerLocations';
 import { careerOpportunitiesReducer } from 'career/slices/careerOpportunities';
 import { jobTypesReducer } from 'career/slices/jobTypes';
 import { companiesReducer } from 'companies/slices/companies';
+import { eventsReducer } from 'events/slices/events';
 import { paymentsReducer } from 'payments/reducers';
 import { shopReducer } from 'shop/reducers';
 
@@ -16,6 +17,7 @@ export const initStore = (initialState: {} = {}) => {
       careerLocations: careerLocationsReducer,
       careerOpportunities: careerOpportunitiesReducer,
       companies: companiesReducer,
+      events: eventsReducer,
       jobTypes: jobTypesReducer,
       payments: paymentsReducer,
       shop: shopReducer,
