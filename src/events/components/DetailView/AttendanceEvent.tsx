@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import React, { ReactChild } from 'react';
+import React, { ReactChild, useState } from 'react';
 
 import { IAttendanceEvent } from '../../models/Event';
 import Block from './Block';
@@ -57,9 +57,8 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
   const registrationEnd = DateTime.fromISO(event.registration_end);
   const cancellationDeadline = DateTime.fromISO(event.unattend_deadline);
   const sitekey: string = process.env.RECAPTCHA_PUBLIC_KEY || '';
-  const onChange = (value: any) => {
-    console.log('Captcha value:', value);
-  };
+  // @ts-ignore
+  const [ recaptcha, updateRecaptcha ] = useState<string | null>();
 
   return (
     <div className={style.blockGrid}>
@@ -86,7 +85,7 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
       <Block title="Venteliste">
         <p>{event.waitlist ? event.number_on_waitlist : '-'}</p>
       </Block>
-      <div>{sitekey ? <ReCAPTCHA sitekey={sitekey} onChange={onChange} /> : null}</div>
+      <div>{sitekey ? <ReCAPTCHA sitekey={sitekey} onChange={(value) => updateRecaptcha(value)} /> : null}</div>
     </div>
   );
 };
