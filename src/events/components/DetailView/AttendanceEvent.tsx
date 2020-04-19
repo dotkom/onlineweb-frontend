@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon';
-import React, { ReactChild } from 'react';
+import React, { ReactChild, useState } from 'react';
 
+import { RECAPTCHA_KEY } from 'common/constants/google';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { IAttendanceEvent } from '../../models/Event';
 import Block from './Block';
 import style from './detail.less';
@@ -55,6 +57,8 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
   const registrationStart = DateTime.fromISO(event.registration_start);
   const registrationEnd = DateTime.fromISO(event.registration_end);
   const cancellationDeadline = DateTime.fromISO(event.unattend_deadline);
+  // @ts-ignore
+  const [recaptcha, setRecaptcha] = useState<string | null>();
 
   return (
     <div className={style.blockGrid}>
@@ -81,6 +85,9 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
       <Block title="Venteliste">
         <p>{event.waitlist ? event.number_on_waitlist : '-'}</p>
       </Block>
+      <div>
+        {RECAPTCHA_KEY ? <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={(value) => setRecaptcha(value)} /> : null}
+      </div>
     </div>
   );
 };
