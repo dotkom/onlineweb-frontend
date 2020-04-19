@@ -48,7 +48,6 @@ const isPopulated = (imageEvents: IState) => {
 export const ImageView = ({  }: IProps) => {
   const dispatch = useDispatch();
   const eventList = useSelector((state) => eventSelectors.selectAll(state));
-  // const { eventList, updateEventList } = useContext(EventsRepo);
 
   /** Fetch events to repo on mount */
   useEffect(() => {
