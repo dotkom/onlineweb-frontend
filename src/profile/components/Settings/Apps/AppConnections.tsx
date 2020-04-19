@@ -10,7 +10,6 @@ import { IUserConsent } from 'oidc_clients/models/user_consent';
 
 import style from './apps.less';
 
-
 export const AppConnections = () => {
   const { user } = useContext<IUserContext>(UserContext);
 
@@ -18,17 +17,14 @@ export const AppConnections = () => {
     if (user) {
       await revokeuserConsent(user, consent.id);
       return {
-        client: consent.client
-      }
+        client: consent.client,
+      };
     }
-    throw new Error("User not logged in");
+    throw new Error('User not logged in');
   });
 
-
-
-  const consentRequest = useAsync(async () => user ? await getUserConsent(user) : [], [user]);
+  const consentRequest = useAsync(async () => (user ? await getUserConsent(user) : []), [user]);
   let consentedApps: ReactNodeArray = [];
-
 
   if (consentRequest.status === 'resolved') {
     consentedApps = consentRequest.result.map((consent: IUserConsent) => {
@@ -52,7 +48,9 @@ export const AppConnections = () => {
       {revokeRequest.status === 'resolved' ? (
         <Message status="success">Apptilkobling fjernet for {revokeRequest.result.client.name}</Message>
       ) : null}
-      {revokeRequest.status === 'rejected' ? <Message status="error">{(revokeRequest.error as Error).message}</Message> : null}
+      {revokeRequest.status === 'rejected' ? (
+        <Message status="error">{(revokeRequest.error as Error).message}</Message>
+      ) : null}
       <ul className={style.grid}>{consentedApps}</ul>
     </div>
   );

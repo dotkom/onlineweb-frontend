@@ -45,8 +45,7 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
     return null;
   }
   // encountered a http error, throw error
-  if(response.status > 399){
-    console.error(response);
+  if (response.status > 399) {
     throw response;
   }
 
@@ -95,7 +94,7 @@ export async function getAllPages<T>(
     /** Reduce all results to a single array for all objects in the resource */
     const results = data.reduce<T[]>((res, d) => res.concat(d.results), []);
     return results;
-  } catch(response){
+  } catch (response) {
     return [];
   }
 }

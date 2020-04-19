@@ -6,7 +6,6 @@ import { ManageApps } from './ManageApps';
 
 import style from './apps.less';
 
-
 const Apps = () => {
   return (
     <div className={style.apps}>

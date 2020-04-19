@@ -18,7 +18,7 @@ import { initStore, State } from 'core/redux/Store';
 import UserProfileProvider from 'profile/providers/UserProfile';
 import { registerServiceWorker } from 'serviceworker/browser';
 
-import {GlobalStyle} from '@dotkomonline/design-system';
+import { GlobalStyle } from '@dotkomonline/design-system';
 
 /** Luxon locale setting has to be the same as in the front-end */
 LuxonSettings.defaultLocale = 'nb';

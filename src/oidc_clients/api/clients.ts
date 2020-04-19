@@ -10,7 +10,7 @@ type ClientResponseType = { response_types: number[] } & Omit<IOidcClient, 'resp
 
 // fetches specific client
 export const getClient = async (id: number): Promise<IOidcClient> => {
-  try{
+  try {
     const client = await get<ClientResponseType>(API_BASE + 'clients/' + id);
     const responseTypes = await getResponseTypes();
     const newResponseTypes = client.response_types.flatMap((response_type) => {
@@ -20,7 +20,7 @@ export const getClient = async (id: number): Promise<IOidcClient> => {
 
     const newClient: IOidcClient = { ...client, response_types: newResponseTypes };
     return newClient;
-  } catch(response){
+  } catch (response) {
     throw new Error(`Kunne ikke hente klient: ${response.statusText}`);
   }
 };
@@ -43,7 +43,7 @@ export const getAllClients = async (): Promise<IOidcClient[]> => {
     }
 
     return newClients;
-  } catch(response) {
+  } catch (response) {
     throw new Error(`Kunne ikke hente apper: ${response.statusText}`);
   }
 };
@@ -71,7 +71,7 @@ export const getMyClients = async (user: IAuthUser): Promise<IOidcClient[]> => {
 export const deleteClient = async (user: IAuthUser, id: number): Promise<unknown> => {
   try {
     return await deleteR(`${API_BASE}clients/${id}`, undefined, { user });
-  } catch(response){
+  } catch (response) {
     throw new Error(`Kunne ikke slette app: ${response.statusText}`);
   }
 };
