@@ -1,9 +1,12 @@
 import { getUser } from 'authentication/api';
 import { IAuthUser } from 'authentication/models/User';
-import { get, getAllPages, IBaseAPIParameters, IAPIData } from 'common/utils/api';
-import { EventTypeEnum, IAttendanceEvent, IEvent } from '../models/Event';
+
+import { get, getAllPages, IBaseAPIParameters, IAPIData, post } from 'common/utils/api';
 import { listResource } from 'common/resources';
 import { IQueryObject } from 'common/utils/queryString';
+import { EventTypeEnum, IAttendanceEvent, IEvent } from '../models/Event';
+import { IExtra } from '../models/Extras';
+
 
 export interface IEventAPIParameters extends IQueryObject {
   event_start__gte?: string;
@@ -19,8 +22,17 @@ export interface IEventAPIParameters extends IQueryObject {
 
 const EVENTS_API_URL = '/api/v1/event/events/';
 const ATTENDANCE_EVENT_API_URL = '/api/v1/event/attendance-events/';
+const USER_ATTENDEES_API_URL =  '/register/';
+//const USER_UNATTENDEES_API_URL =  '/unregister/';
+const EVENT_PAYMENT_URL =  '/payment/';
+const EVENT_EXTRAS_URL = '/extras/'
+const EVENT_ATTENDEE_URL = '/attendee/'
+const EVENT_PUBLIC_ATTENDEES = '/public-attendees/'
 
 export const listEvents = listResource<IEvent, IEventAPIParameters>(EVENTS_API_URL);
+
+
+
 
 export const getEvents = async (args?: IEventAPIParameters & IBaseAPIParameters): Promise<IEvent[]> => {
   const data = await get<IAPIData<IEvent>>(EVENTS_API_URL, { format: 'json', ...args });
@@ -46,6 +58,90 @@ export const getAttendanceEvent = async (id: number): Promise<IAttendanceEvent> 
   );
   return attendanceEvent;
 };
+
+
+interface IAttendEventOptions {
+  allowPictures?: boolean,
+  showAsAttending?: boolean,
+  extras?: number[] // options id
+
+}
+
+export const getEventPayment = async (event_id: number): Promise<unknown> => {
+  
+  try{
+    const ret = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PAYMENT_URL}`);
+    return ret;
+  } catch(response){
+    throw new Error("Kunne ikke hente betalingsinformasjon for arrangementet!");
+  }
+}
+
+export const getEventExtras = async (event_id: number): Promise<IExtra[]> => {
+  
+  try{
+    const ret = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_EXTRAS_URL}`);
+    return ret;
+  } catch(response){
+    throw new Error("Kunne ikke hente valgmuligheter for arrangementet!");
+  }
+}
+
+export const getEventAttendee = async (event_id: number, user?: IAuthUser): Promise<unknown> => {
+  if(!user){
+    user = await getUser();
+  }
+
+  try{
+    const ret = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_ATTENDEE_URL}`, undefined, {user});
+    return ret;
+  } catch(response){
+    throw new Error("Kunne ikke hente valgmuligheter for arrangementet!");
+  }
+}
+
+export const userAttendEvent = async (event_id: number, captcha: string, options?: IAttendEventOptions, user?: IAuthUser): Promise<unknown> => {
+  if(!user){
+    user = await getUser();
+  }
+  
+  try{
+    const ret = await post(`${ATTENDANCE_EVENT_API_URL}${event_id}${USER_ATTENDEES_API_URL}`, {
+      show_as_attending_event: options?.showAsAttending,
+      allow_pictures: options?.allowPictures,
+      extras: options?.extras,
+      recaptcha: captcha
+    }, undefined, {user})
+    return ret;
+  } catch(response){
+    throw new Error("Kunne ikke melde brukeren på dette arrangementet!");
+  }
+}
+
+export const getPublicAttends = async (event_id: number): Promise<unknown> => {
+  try{
+    const ret = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PUBLIC_ATTENDEES}`)
+    return ret;
+  } catch(response){
+    throw new Error("Kunne hente påmeldingsliste!");
+  }
+}
+
+/* Requires PR #334
+export const userUnattendEvent = async (event_id: number, user?: IAuthUser): Promise<unknown> => {
+  if(!user){
+    user = await getUser();
+  }
+  
+  try{
+    const ret = await deleteR(`${ATTENDANCE_EVENT_API_URL}${event_id}${USER_UNATTENDEES_API_URL}`, undefined, {user})
+    return ret;
+  } catch(response){
+    throw new Error("Kunne ikke melde brukeren av dette arrangementet!");
+  }
+}
+*/
+
 
 export interface IControlledFetch<T> {
   controller: AbortController;
