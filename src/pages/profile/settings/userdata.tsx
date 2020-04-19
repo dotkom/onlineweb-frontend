@@ -4,7 +4,6 @@ import { ProfileWrapper } from 'profile';
 import { SettingsWrapper } from 'profile/components/Settings';
 import UserData from 'profile/components/Settings/UserData';
 
-
 const SettingsUserDataPage = () => {
   return (
     <ProfileWrapper>

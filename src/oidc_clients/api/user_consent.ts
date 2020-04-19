@@ -11,9 +11,9 @@ type ConsentResponseType = { client: number | IOidcClient } & Omit<IUserConsent,
 
 export const getUserConsent = async (user: IAuthUser) => {
   let consentResponse = [];
-  try{
+  try {
     consentResponse = await getAllPages<ConsentResponseType>(API_BASE + 'consent/', undefined, { user });
-  } catch(response){
+  } catch (response) {
     throw new Error(`Kunne ikke hente apptilganger: ${response.statusText}`);
   }
   const promises = consentResponse.map(async (consent) => {
@@ -27,7 +27,7 @@ export const getUserConsent = async (user: IAuthUser) => {
 export const revokeuserConsent = (user: IAuthUser, id: number) => {
   try {
     return deleteR(`${API_BASE}consent/${id}`, undefined, { user });
-  } catch(response) {
+  } catch (response) {
     throw new Error(`Kunne ikke trekke tilbake apptilgang: ${response.statusText}`);
   }
 };

@@ -1,24 +1,23 @@
-import { DependencyList, Reducer, useEffect, useReducer, useCallback, useRef } from 'react';
-
+import { DependencyList, Reducer, useCallback, useEffect, useReducer, useRef } from 'react';
 
 // Interface for each possible state with explicit values for each
 // Allows use to infer what type error and result is based on the value of state,
 // however this information is lost when destructuring the object: (const {result, error, status} = state)
 // https://github.com/microsoft/TypeScript/issues/27497
 
-interface IStateResolved<T>  {
+interface IStateResolved<T> {
   result: T;
-  error: undefined,
+  error: undefined;
   status: 'resolved';
 }
 
-interface IStateRejected<E>  {
-  result: undefined
+interface IStateRejected<E> {
+  result: undefined;
   error: E;
   status: 'rejected';
 }
 
-interface IStateInit  {
+interface IStateInit {
   result: undefined;
   error: undefined;
   status: 'init';
@@ -30,25 +29,23 @@ interface IStatePending {
   status: 'pending';
 }
 
-type IState<T,E> = IStateInit | IStatePending | IStateResolved<T> | IStateRejected<E>
+type IState<T, E> = IStateInit | IStatePending | IStateResolved<T> | IStateRejected<E>;
 
-
-interface IActionPending{
-  type: 'pending'
+interface IActionPending {
+  type: 'pending';
 }
 
-interface IActionResolved<T>{
-  type: 'resolved',
-  value: T
+interface IActionResolved<T> {
+  type: 'resolved';
+  value: T;
 }
 
-interface IActionRejected<E>{
-  type: 'rejected',
-  value: E
+interface IActionRejected<E> {
+  type: 'rejected';
+  value: E;
 }
 
-
-type IAction<T, E> = IActionPending | IActionResolved<T> | IActionRejected<E>
+type IAction<T, E> = IActionPending | IActionResolved<T> | IActionRejected<E>;
 
 const asyncReducer = <T, E>(state: IState<T, E>, action: IAction<T, E>): IState<T, E> => {
   switch (action.type) {
@@ -74,9 +71,15 @@ const asyncReducer = <T, E>(state: IState<T, E>, action: IAction<T, E>): IState<
   return state;
 };
 
-type FuncSig<T> = (...args: any[]) => Promise<T>
+// disable no any, in this case we don't lose any type safety by using any becasue typescript can infer the function type based on the input
+/* tslint:disable:no-any */
 
-type Unpacked<T> = T extends (infer U)[]
+// disable no shadowed variable. In order to find out what our return type should be we need to unpack the Promise<T> that the supplied function returns
+/* tslint:disable:no-shadowed-variable */
+type FuncSig<T> = (...args: any[]) => Promise<T>;
+
+// from: https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types
+type Unpacked<T> = T extends Array<infer U>
   ? U
   : T extends (...args: any[]) => infer U
   ? U
@@ -84,8 +87,8 @@ type Unpacked<T> = T extends (infer U)[]
   ? U
   : T;
 
-
 // automatically calls dispatch when dependencies have changed
+
 export const useAsync = <X extends FuncSig<any> = FuncSig<any>>(
   func: X,
   deps?: DependencyList
@@ -93,18 +96,15 @@ export const useAsync = <X extends FuncSig<any> = FuncSig<any>>(
   const [requestState, dispatch] = useAsyncDispatch<X>(func);
   useEffect(dispatch, deps);
   return requestState;
-}
+};
 
-
-
-//<T extends (...args: any[]) => any>
+// @ts-ignore
 export const useAsyncDispatch = <X extends FuncSig<any> = FuncSig<any>>(
   func: X
 ): [IState<Unpacked<ReturnType<typeof func>>, unknown>, (...args: Parameters<typeof func>) => () => void] => {
   type T = Unpacked<ReturnType<typeof func>>;
   type E = unknown;
-  
-  
+
   const initialState: IState<T, E> = {
     result: undefined,
     error: undefined,
@@ -112,42 +112,45 @@ export const useAsyncDispatch = <X extends FuncSig<any> = FuncSig<any>>(
   };
 
   const [requestState, dispatch] = useReducer<Reducer<IState<T, E>, IAction<T, E>>>(asyncReducer, initialState);
-  
+
   // mutable object that keeps track of all requests
-  const inFlightTracker = useRef<{nextId: number, canceled: {[key: number]: boolean}}>({
+  const inFlightTracker = useRef<{ nextId: number; canceled: { [key: number]: boolean } }>({
     nextId: 1,
-    canceled: {}
+    canceled: {},
   });
 
-  const doRequest = useCallback((...args: Parameters<typeof func>) => {
-    
-    let id = inFlightTracker.current.nextId += 1;
-    // cancel previous request
-    inFlightTracker.current.canceled[id-1] = true;
-    inFlightTracker.current.canceled[id] = false;
-    dispatch({ type: 'pending' });
-    func(...args)
-      .then((res) => {
-        if (inFlightTracker.current.canceled[id]) {
-          return;
-        }
-        dispatch({ type: 'resolved', value: res });
-      })
-      .catch((err) => {
-        if (inFlightTracker.current.canceled[id]) {
-          return;
-        }
-        dispatch({ type: 'rejected', value: err });
-      });
-    
-    return () => {
-      inFlightTracker.current.canceled[id] = true;
-    }
-    
-  }, [func]);
+  const doRequest = useCallback(
+    (...args: Parameters<typeof func>) => {
+      const id = (inFlightTracker.current.nextId += 1);
+      // cancel previous request
+      inFlightTracker.current.canceled[id - 1] = true;
+      inFlightTracker.current.canceled[id] = false;
+      dispatch({ type: 'pending' });
+      func(...args)
+        .then((res) => {
+          if (inFlightTracker.current.canceled[id]) {
+            return;
+          }
+          dispatch({ type: 'resolved', value: res });
+        })
+        .catch((err) => {
+          if (inFlightTracker.current.canceled[id]) {
+            return;
+          }
+          dispatch({ type: 'rejected', value: err });
+        });
+
+      return () => {
+        inFlightTracker.current.canceled[id] = true;
+      };
+    },
+    [func]
+  );
 
   return [requestState, doRequest];
 };
 
+/* tslint:enable:no-any */
+/* tslint:enable:no-shadowed-variable */
 
 export default useAsync;

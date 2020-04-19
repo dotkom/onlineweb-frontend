@@ -12,17 +12,16 @@ export const anonymizeUser = async (
 ) => {
   try {
     return await put({ query: `${API_URL}${id}/anonymize_user/`, data: { username, password }, options: { user } });
-  } catch(response) {
+  } catch (response) {
     throw new Error(`Kunne ikke slette bruker: ${response.statusText}`);
   }
 };
 
 // user = logged in user, id is id of user to fetch data from, default to self
 export const fetchUserData = async (user: IAuthUser, id: string = user.profile.sub) => {
-  try{
+  try {
     return await get(`${API_URL}${id}/dump-data/`, undefined, { user });
-  } catch(response) {
-    console.error(response);
+  } catch (response) {
     throw new Error(`Kunne ikke hente brukerdata: ${response.statusText}`);
   }
 };

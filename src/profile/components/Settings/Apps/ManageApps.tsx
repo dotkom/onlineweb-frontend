@@ -29,12 +29,16 @@ export const ManageApps = () => {
     return Promise.resolve(null);
   }, [user, removeClientState]);
 
-  const getClientsRequest = useAsync(async () => user ? await getMyClients(user) : [], [user, removeClientState]);
+  const getClientsRequest = useAsync(async () => (user ? await getMyClients(user) : []), [user, removeClientState]);
 
   let managedApps: ReactNodeArray = [];
 
   useEffect(() => {
-    if (removeClientState.client_id !== -1 && removeClientRequest.status === 'resolved' && getClientsRequest.status === 'resolved') {
+    if (
+      removeClientState.client_id !== -1 &&
+      removeClientRequest.status === 'resolved' &&
+      getClientsRequest.status === 'resolved'
+    ) {
       setRemoveClientState({ ...removeClientState, client_id: -1 });
     }
   }, [removeClientState, removeClientRequest, getClientsRequest.status]);
@@ -60,7 +64,9 @@ export const ManageApps = () => {
       {removeClientState.client ? (
         <Message status="success">Applikson slettet {removeClientState.client.name}</Message>
       ) : null}
-      {removeClientRequest.status === 'rejected' ? <Message status="error">{(getClientsRequest.error as Error).message}</Message> : null}
+      {removeClientRequest.status === 'rejected' ? (
+        <Message status="error">{(getClientsRequest.error as Error).message}</Message>
+      ) : null}
       <ul className={style.grid}>{managedApps}</ul>
     </div>
   );
