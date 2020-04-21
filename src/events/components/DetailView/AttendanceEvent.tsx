@@ -57,7 +57,9 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
   const registrationStart = DateTime.fromISO(event.registration_start);
   const registrationEnd = DateTime.fromISO(event.registration_end);
   const cancellationDeadline = DateTime.fromISO(event.unattend_deadline);
-  // TODO: Remove eslint-disable when using captcha response.
+  // TODO: Remove these lint disables when using captcha response.
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [recaptcha, setRecaptcha] = useState<string | null>();
 
