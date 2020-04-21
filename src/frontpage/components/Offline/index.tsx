@@ -6,8 +6,6 @@ import { IOfflineIssue } from 'frontpage/models/Offline';
 
 import OfflineCarousel from './OfflineCarousel';
 
-export interface IProps {}
-
 export interface IState {
   dataRemaining: boolean;
   offlines: IOfflineIssue[];
@@ -15,7 +13,7 @@ export interface IState {
   page: number;
 }
 
-export const Offline = ({  }: IProps) => {
+export const Offline = () => {
   const [offlines, setOfflines] = useState<IOfflineIssue[]>([]);
 
   /** Get the first batch of Offlines for feast loading */

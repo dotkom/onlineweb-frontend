@@ -22,7 +22,7 @@ const ABOUT_CREATE_TRANSACTION = md`
 ## Legg til Saldo
 `;
 
-export interface IProps extends ReactStripeElements.InjectedStripeProps {}
+export type IProps = ReactStripeElements.InjectedStripeProps;
 
 export const Form: FC<IProps> = ({ stripe }) => {
   const [displayError] = useToast({ type: 'error', duration: 12000 });

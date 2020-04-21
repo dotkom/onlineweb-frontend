@@ -23,7 +23,7 @@ export default class LanguageBar extends Component<IProps, { languages: IReposit
     let numLanguages: number = this.state.languages.length;
 
     // Determine total size of languages
-    let totalLanguageSize: number = 0;
+    let totalLanguageSize = 0;
     for (const language of this.state.languages) {
       totalLanguageSize += language.size;
     }

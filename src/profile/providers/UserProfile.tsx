@@ -4,8 +4,6 @@ import { UserContext } from 'authentication/providers/UserProvider';
 import { getProfile } from 'profile/api';
 import { IUserProfile } from 'profile/models/User';
 
-export interface IProps {}
-
 export interface IState {
   refetch: () => void;
   user?: IUserProfile;
@@ -19,7 +17,7 @@ const INITIAL_STATE: IState = {
 
 export const UserProfileContext = createContext(INITIAL_STATE);
 
-export class UserProfileProvider extends React.Component<IProps, IState> {
+export class UserProfileProvider extends React.Component<void, IState> {
   public static contextType = UserContext;
   public context!: ContextType<typeof UserContext>;
   public state: IState = INITIAL_STATE;
