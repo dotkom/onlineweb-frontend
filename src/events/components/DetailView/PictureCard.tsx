@@ -1,24 +1,31 @@
 import { DateTime } from 'luxon';
-import React from 'react';
-import { getEventColor, IEvent } from '../../models/Event';
+import React, { FC } from 'react';
+
+import { getEventColor, IEvent } from 'events/models/Event';
+
 import EventImage from '../EventImage';
 import Block from './Block';
 import CardHeader from './Card/CardHeader';
 import style from './detail.less';
 
-const PictureCard = ({ image, event_start, event_end, location, company_event, event_type }: IEvent) => {
-  const color = getEventColor(event_type);
+interface IProps {
+  event: IEvent;
+}
 
-  const startDate = DateTime.fromISO(event_start).toFormat('d. MMM');
-  const startTime = DateTime.fromISO(event_start).toFormat('HH:mm');
-  const endDate = DateTime.fromISO(event_end).toFormat('d. MMM');
-  const endTime = DateTime.fromISO(event_end).toFormat('HH:mm');
-  const weekday = DateTime.fromISO(event_start).weekdayLong;
+const PictureCard: FC<IProps> = ({ event }) => {
+  const { images, start_date, end_date, location, event_type } = event;
+
+  const color = getEventColor(event_type);
+  const startDate = DateTime.fromISO(start_date).toFormat('d. MMM');
+  const startTime = DateTime.fromISO(start_date).toFormat('HH:mm');
+  const endDate = DateTime.fromISO(end_date).toFormat('d. MMM');
+  const endTime = DateTime.fromISO(end_date).toFormat('HH:mm');
+  const weekday = DateTime.fromISO(start_date).weekdayLong;
 
   return (
     <div className={style.pictureCard}>
       <div>
-        <EventImage companyEvents={company_event} image={image} size="md" color={color} />
+        <EventImage images={images} size="md" color={color} />
       </div>
       <div className={style.attendance}>
         <CardHeader className={style.detailHeader} color={color}>

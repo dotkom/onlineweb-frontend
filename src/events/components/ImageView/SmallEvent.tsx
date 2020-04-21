@@ -5,25 +5,24 @@ import React from 'react';
 
 import { getEventUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
-import { getEventColor, IEvent, isCompanyEvent } from 'events/models/Event';
-import { getEventAttendees } from 'events/utils/attendee';
+import { getEventColor, IEvent } from 'events/models/Event';
 
 import style from './image.less';
 
-const SmallEvent = ({ title, event_type, event_start, attendance_event, id, company_event }: IEvent) => (
+const SmallEvent = ({ title, event_type, start_date, id }: IEvent) => (
   <Link {...getEventUrl(id)}>
     <a>
       <div className={style.small}>
         <span style={{ background: getEventColor(event_type) }} />
-        <p>{isCompanyEvent(event_type, company_event) ? company_event[0].company.name : title}</p>
+        <p>{title}</p>
         <div className={style.icon}>
           <FontAwesomeIcon icon={faCalendarAlt} fixedWidth />
         </div>
-        <p className={style.suppText}> {DateTime.fromISO(event_start).toFormat('dd.MM')} </p>
+        <p className={style.suppText}> {DateTime.fromISO(start_date).toFormat('dd.MM')} </p>
         <div className={style.icon}>
           <FontAwesomeIcon icon={faUser} fixedWidth />
         </div>
-        <p className={style.suppText}> {getEventAttendees(attendance_event)} </p>
+        <p className={style.suppText}>ALLE</p>
       </div>
     </a>
   </Link>
