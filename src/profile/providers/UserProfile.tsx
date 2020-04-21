@@ -17,7 +17,7 @@ const INITIAL_STATE: IState = {
 
 export const UserProfileContext = createContext(INITIAL_STATE);
 
-export class UserProfileProvider extends React.Component<void, IState> {
+export class UserProfileProvider extends React.Component<{}, IState> {
   public static contextType = UserContext;
   public context!: ContextType<typeof UserContext>;
   public state: IState = INITIAL_STATE;

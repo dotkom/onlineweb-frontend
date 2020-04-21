@@ -14,7 +14,7 @@ export interface IState {
   isOpen: boolean;
 }
 
-class Header extends Component<void, IState> {
+class Header extends Component<{}, IState> {
   public state: IState = {
     isOpen: false,
   };

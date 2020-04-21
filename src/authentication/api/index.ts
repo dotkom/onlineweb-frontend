@@ -1,6 +1,7 @@
 import { __CLIENT__ } from 'common/constants/environment';
 import { User, UserManager } from 'oidc-client';
 import settings from './settings';
+import { IAuthUser } from 'authentication/models/User';
 
 /**
  * @summary Basic wrapper for OIDC login.
@@ -29,7 +30,7 @@ export const authCallback = async (): Promise<User | undefined> => {
     if (__CLIENT__) {
       const manager = new UserManager(settings);
       const user = await manager.signinRedirectCallback();
-      return user;
+      return user as IAuthUser;
     } else {
       throw new Error('Auth Callback attempted from server side renderer');
     }
