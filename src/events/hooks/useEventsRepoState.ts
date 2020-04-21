@@ -15,8 +15,7 @@ const getTextFiltered = (search: string, eventList: IEvent[]) =>
       event.title.toLowerCase().includes(search) ||
       event.description.toLowerCase().includes(search) ||
       event.ingress.toLowerCase().includes(search) ||
-      event.location.toLowerCase().includes(search) ||
-      event.organizer_name.toLowerCase().includes(search)
+      event.location.toLowerCase().includes(search)
   );
 
 const getEventTypeFiltered = (eventTypes: EventTypeEnum[], eventList: IEvent[]) =>
@@ -32,7 +31,7 @@ const getDateFiltered = (dateStart: DateTime, dateEnd: DateTime, eventList: IEve
     : eventList;
 
 const getAttendanceEventFiltered = (attendanceEventsChecked: boolean, eventList: IEvent[]) =>
-  !attendanceEventsChecked ? eventList.filter((event) => event.attendance_event) : eventList;
+  !attendanceEventsChecked ? eventList.filter((event) => event.is_attendance_event) : eventList;
 
 const useFilteredEventList = () => {
   const dispatch = useDispatch();

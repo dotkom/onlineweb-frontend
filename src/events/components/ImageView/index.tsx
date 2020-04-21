@@ -14,7 +14,7 @@ const filterEventTypes = (events: IEvent[], types: EventTypeEnum[]) => {
   return events
     .filter((event) => types.includes(event.event_type))
     .filter((event) => {
-      return DateTime.fromISO(event.event_start) >= DateTime.local();
+      return DateTime.fromISO(event.start_date) >= DateTime.local();
     });
 };
 
