@@ -1,4 +1,3 @@
-// @ts-ignore
 describe('The Human Condition', () => {
   it('we are sane', () => {
     expect(true === true);
@@ -9,3 +8,7 @@ describe('The Human Condition', () => {
     }
   });
 });
+
+// Export nothing, which treats the test file as a module.
+// TODO: Remove when actually importing something to test
+export {};

@@ -22,16 +22,12 @@ export const handleReadOnlyResponse = async <InputData, OutputData>(
 
 export const handleResponse = async <InputData, OutputData>(
   response: Response
-): Promise<ResponseType<InputData, OutputData>> => {
+): Promise<ResponseType<InputData, OutputData | null>> => {
   if (response.ok) {
     if (response.status === 204) {
       return {
         status: 'success',
-        // Handle no-content responses as null.
-        // This is hind of dangerous, since null has to be defined as OutputData
-        // When the resouce is created.
-        // tslint:disable-next-line no-any
-        data: (null as any) as OutputData,
+        data: null,
       };
     } else {
       return {

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'core/redux/hooks';
 
 import style from '../less/career.less';
 
-const SearchBox = memo(() => {
+const SearchBox = () => {
   const dispatch = useDispatch();
   const query = useSelector((state) => state.careerOpportunities.filters.query);
 
@@ -22,6 +22,6 @@ const SearchBox = memo(() => {
       <input className={style.searchBox} type="search" value={query} onChange={setQuery} />
     </div>
   );
-});
+};
 
-export default SearchBox;
+export default memo(SearchBox);

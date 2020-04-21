@@ -45,7 +45,7 @@ const isPopulated = (imageEvents: IState) => {
   return !!imageEvents.eventsLeft.length || !!imageEvents.eventsMiddle.length || !!imageEvents.eventsRight.length;
 };
 
-export const ImageView = ({  }: IProps) => {
+export const ImageView = ({}: IProps) => {
   const dispatch = useDispatch();
   const eventList = useSelector((state) => eventSelectors.selectAll(state));
 

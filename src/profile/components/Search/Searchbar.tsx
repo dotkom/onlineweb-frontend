@@ -8,13 +8,11 @@ import DoubleSlider from './DoubleSlider';
 import Dropdown from './Dropdown';
 import style from './search.less';
 
-export interface IProps {}
-
 export interface IState {
   groups: string[];
 }
 
-class Searchbar extends Component<IProps, IState> {
+class Searchbar extends Component<void, IState> {
   public static contextType = ProfileSearchContext;
   public context!: ContextType<typeof ProfileSearchContext>;
 
