@@ -6,7 +6,7 @@ import { DateTime } from 'luxon';
 
 const eventsAdapter = createEntityAdapter<IEvent>({
   sortComparer: (eventA, eventB) => {
-    return Number(DateTime.fromISO(eventA.event_start) > DateTime.fromISO(eventB.event_start));
+    return Number(DateTime.fromISO(eventA.start_date) > DateTime.fromISO(eventB.start_date));
   },
 });
 
