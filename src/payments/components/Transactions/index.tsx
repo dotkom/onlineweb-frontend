@@ -32,8 +32,8 @@ export const Transactions: FC = () => {
   const [addMessage] = useToast({ type: 'error', duration: 10000 });
 
   const dispatch = useDispatch();
-  const transactions = useSelector((state) => state.payments.transactions.transactions);
-  const fetching = useSelector((state) => state.payments.transactions.fetching);
+  const transactions = useSelector((state) => state.transactions.transactions);
+  const fetching = useSelector((state) => state.transactions.fetching);
 
   const fetchTransactions = async () => {
     dispatch({ type: Type.SET_FETCHING, status: true });
