@@ -20,6 +20,7 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/no-use-before-define': 'off' // This rule prevents dispatch and selectors at top of component if using bottom-defined selector functions
   },
   settings: {
     react: {
