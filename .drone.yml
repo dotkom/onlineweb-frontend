@@ -64,7 +64,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn lint-ts
+      - yarn lint-ts-check
     depends_on:
       - compile-typescript
 
@@ -74,7 +74,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn lint-less
+      - yarn lint-less-check
     depends_on:
       - setup
 
@@ -84,7 +84,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn lint-prettier
+      - yarn format-check
     depends_on:
       - setup
 
