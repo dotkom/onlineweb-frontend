@@ -12,7 +12,7 @@ import NumberStat from './NumberStat';
 import OrderBar from './OrderBar';
 import OrderItemDonut from './OrderItemDonut';
 
-export const Orders: FC<void> = () => {
+export const Orders: FC = () => {
   const dispatch = useDispatch();
   const orderLines = useSelector((state) => state.shop.orderLines.orderLines);
 

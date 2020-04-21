@@ -12,7 +12,7 @@ export interface IState {
   groups: string[];
 }
 
-class Searchbar extends Component<void, IState> {
+class Searchbar extends Component<{}, IState> {
   public static contextType = ProfileSearchContext;
   public context!: ContextType<typeof ProfileSearchContext>;
 

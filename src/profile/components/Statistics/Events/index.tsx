@@ -14,7 +14,7 @@ export interface IState {
   events: IEvent[];
 }
 
-class Orders extends Component<void, IState> {
+class Orders extends Component<{}, IState> {
   public static contextType = UserContext;
   public state: IState = {
     events: [],
