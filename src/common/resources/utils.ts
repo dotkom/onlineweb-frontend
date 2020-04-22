@@ -10,7 +10,7 @@ export const handleReadOnlyResponse = async <InputData, OutputData>(
   if (response.ok) {
     return {
       status: 'success',
-      data: (await response.json()) as Readonly<OutputData>,
+      data: await response.json(),
     };
   } else {
     return {
