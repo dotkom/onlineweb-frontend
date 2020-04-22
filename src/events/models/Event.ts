@@ -1,5 +1,5 @@
 import { IUserName } from 'authentication/models/User';
-import IResponsiveImage, { DEFAULT_EVENT_IMAGE } from 'common/models/ResponsiveImage';
+import IResponsiveImage from 'common/models/ResponsiveImage';
 
 export interface IEventViewProps {
   accessible: boolean;
@@ -82,25 +82,6 @@ export const EVENT_COLORS = ['#eb536e', '#127dbd', '#43b171', '#fdbd47', '#2ac6f
    TODO: Replace with ICSS exports */
 export const LIGHT_EVENT_COLORS = ['#ef758b', '#4197ca', '#69c18d', '#fdca6c', '#55d1fa', '#ec7e62', '#c289d7'];
 
-export const mockEvent: IEvent = {
-  id: 0,
-  title: '',
-  slug: '',
-  ingress: '',
-  ingress_short: '',
-  description: '',
-  start_date: '',
-  end_date: '',
-  location: '',
-  event_type: 1,
-  event_type_display: 'Sosialt',
-  organizer: 1,
-  author: null,
-  images: [DEFAULT_EVENT_IMAGE],
-  companies: [],
-  is_attendance_event: false,
-};
-
 export enum EventView {
   IMAGE,
   LIST,
@@ -124,6 +105,8 @@ export interface IEvent {
   images: IResponsiveImage[];
   companies: number[];
   is_attendance_event: boolean;
+  max_capacity: number | null;
+  number_of_seats_taken: number | null;
 }
 
 export interface ISignupEligibility {
