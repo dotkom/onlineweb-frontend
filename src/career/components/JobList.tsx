@@ -12,7 +12,7 @@ interface IProps {
   opportunityIds: number[];
 }
 
-const JobList: FC<IProps> = memo(({ opportunityIds }) => {
+const JobList: FC<IProps> = ({ opportunityIds }) => {
   const filteredOpportunityIds = useSelector(selectCurrentylFilteredOpportunityIds(opportunityIds), shallowEqual);
 
   return (
@@ -22,7 +22,7 @@ const JobList: FC<IProps> = memo(({ opportunityIds }) => {
       ))}
     </div>
   );
-});
+};
 
 const selectCurrentylFilteredOpportunityIds = (opportunityIds: number[]) => (state: State) => {
   return careerOpportunitySelectors
@@ -31,4 +31,4 @@ const selectCurrentylFilteredOpportunityIds = (opportunityIds: number[]) => (sta
     .filter((opportunityId) => opportunityIds.some((id) => id === opportunityId));
 };
 
-export default JobList;
+export default memo(JobList);

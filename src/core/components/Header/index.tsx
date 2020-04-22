@@ -10,13 +10,11 @@ import HeaderLogo from './HeaderLogo';
 import HeaderLogin from './Login';
 import MenuButton from './MenuButton';
 
-export interface IProps {}
-
 export interface IState {
   isOpen: boolean;
 }
 
-class Header extends Component<IProps, IState> {
+class Header extends Component<{}, IState> {
   public state: IState = {
     isOpen: false,
   };

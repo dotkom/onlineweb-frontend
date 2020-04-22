@@ -10,13 +10,11 @@ import CompanyDonut, { countCompanies } from './CompanyDonut';
 import EventTypeDonut from './EventTypeDonut';
 import StringStat from './StringStat';
 
-export interface IProps {}
-
 export interface IState {
   events: IEvent[];
 }
 
-class Orders extends Component<IProps, IState> {
+class Orders extends Component<{}, IState> {
   public static contextType = UserContext;
   public state: IState = {
     events: [],

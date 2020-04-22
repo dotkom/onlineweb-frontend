@@ -4,8 +4,6 @@ import { useCallback, useContext, useEffect } from 'react';
 import { authCallback } from '../api';
 import { UserContext } from '../providers/UserProvider';
 
-export interface IProps {}
-
 const AuthCallback = () => {
   const auth = useContext(UserContext);
   const router = useRouter();

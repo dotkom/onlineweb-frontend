@@ -79,7 +79,7 @@ export interface ICreateRelationReturn extends IGenericReturn {
 export const createRelation = async (
   paymentId: number,
   priceId: number,
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   paymentMethod: any
 ): Promise<ICreateRelationReturn> => {
   const relation = await postRelation({
@@ -126,6 +126,7 @@ export const handleCardVerification = async (
   stripe: ReactStripeElements.StripeProps,
   relation: IPaymentRelation
 ): Promise<IHandleCardVerificationReturn> => {
+  // eslint-disable-next-line
   // @ts-ignore Stripe types are not up to spec.
   const { paymentIntent, error } = await stripe.handleCardAction(relation.payment_intent_secret);
 

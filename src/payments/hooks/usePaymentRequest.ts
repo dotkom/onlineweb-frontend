@@ -41,9 +41,11 @@ export const usePaymentRequest = (
   const paymentMethodListener = () => {
     if (paymentRequest) {
       /** Disable provious listener for previous versions of the payment request */
+      // eslint-disable-next-line
       // @ts-ignore | Outdated types for Stripe.
       paymentRequest.off('paymentmethod');
       /** Add listener for completed payments */
+      // eslint-disable-next-line
       // @ts-ignore | Outdated types for Stripe.
       paymentRequest.on('paymentmethod', async (event: PaymentRequestEvent) => {
         if (onPaymentMethod) {
@@ -73,7 +75,8 @@ export const usePaymentRequest = (
 
   useEffect(() => {
     if (paymentRequest) {
-      // @ts-ignore
+      // eslint-disable-next-line
+      // @ts-ignore | Outdated types for Stripe
       paymentRequest.update({
         total: {
           label,

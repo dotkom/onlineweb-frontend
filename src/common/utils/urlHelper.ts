@@ -1,5 +1,6 @@
-// tslint:disable-next-line no-any interface-over-type-literal
-type UrlQueryObject = { [key: string]: any };
+interface UrlQueryObject {
+  [key: string]: string | number;
+}
 
 /**
  * Create NextJS link urls with a tagged template literal.

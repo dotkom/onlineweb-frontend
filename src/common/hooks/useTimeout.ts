@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
  * @param {number} ms Milliseconds until the timeout finishes.
  * @returns {boolean} Wether the timeout has finished.
  */
-export const useTimeout = (ms: number = 0): boolean => {
+export const useTimeout = (ms = 0): boolean => {
   const [done, setDone] = useState(false);
 
   useEffect(() => {

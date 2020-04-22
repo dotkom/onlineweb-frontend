@@ -1,5 +1,4 @@
 import { DOMAIN } from '../constants/endpoints';
-import { __CLIENT__ } from '../constants/environment';
 import { IQueryObject, toQueryString } from './queryString';
 
 import { IAuthUser } from 'authentication/models/User';
@@ -26,6 +25,8 @@ export interface IBaseAPIParameters {
 
 const performRequest = async (query: string, parameters: IQueryObject = {}, options: IRequestOptions = {}) => {
   const queryString = toQueryString(parameters);
+  // User is pruned from the ..restOptions, which ESLint don't like if it is not being used by itself.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { cacheOptions, user, domain, ...restOptions } = options;
   const url = (domain || DOMAIN) + query + queryString;
   if (hasCache({ url, options: cacheOptions })) {

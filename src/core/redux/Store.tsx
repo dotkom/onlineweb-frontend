@@ -12,6 +12,7 @@ import { shopReducer } from 'shop/reducers';
 export const initStore = (initialState: {} = {}) => {
   return configureStore({
     preloadedState: initialState,
+    /* eslint sort-keys: "error" */
     reducer: {
       articles: articlesReducer,
       careerLocations: careerLocationsReducer,
@@ -22,6 +23,7 @@ export const initStore = (initialState: {} = {}) => {
       payments: paymentsReducer,
       shop: shopReducer,
     },
+    /* eeslint sort-keys: "off" */
   });
 };
 

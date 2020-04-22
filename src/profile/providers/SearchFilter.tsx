@@ -18,13 +18,13 @@ export interface IState {
 
 const INITIAL_STATE: IState = {
   range: [1, 6],
-  setSearch: (_) => {
+  setSearch: () => {
     throw new Error('setSearch method not overwritten');
   },
-  setGroup: (_) => {
+  setGroup: () => {
     throw new Error('setGroup method not overwritten');
   },
-  setRange: (_) => {
+  setRange: () => {
     throw new Error('setRange method not overwritten');
   },
   profiles: [],
