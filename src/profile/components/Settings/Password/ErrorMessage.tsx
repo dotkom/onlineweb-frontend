@@ -9,8 +9,8 @@ export const ErrorMessage: FC<IProps> = ({ errors }) => {
   return (
     <>
       {errors
-        ? errors.map((error) => (
-            <li className={style.errorMessage}>
+        ? errors.map((error, index) => (
+            <li key={`error${index}`} className={style.errorMessage}>
               <ol>{error}</ol>
             </li>
           ))

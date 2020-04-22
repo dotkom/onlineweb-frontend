@@ -10,7 +10,7 @@ export interface IUserContext {
 }
 
 const initialState: IUserContext = {
-  setUser: (_: IAuthUser) => new Error('setUser called before UserProvider is initialized'),
+  setUser: () => new Error('setUser called before UserProvider is initialized'),
   logout: () => new Error('logout called before UserProvider is initialized'),
 };
 

@@ -3,7 +3,7 @@ import { IOfflineIssue } from '../models/Offline';
 
 const API_URL = '/api/v1/offline/';
 
-export const getOfflines = async (page: number = 1) => {
+export const getOfflines = async (page = 1) => {
   return await get<IAPIData<IOfflineIssue>>(API_URL, { format: 'json', page });
 };
 

@@ -27,11 +27,12 @@ export const handleResponse = async <InputData, OutputData>(
     if (response.status === 204) {
       return {
         status: 'success',
+        // WARNING!
         // Handle no-content responses as null.
-        // This is hind of dangerous, since null has to be defined as OutputData
+        // This is kind of dangerous, since null has to be defined as OutputData
         // When the resouce is created.
-        // tslint:disable-next-line no-any
-        data: (null as any) as OutputData,
+        // TODO: Refactor and properly handle null.
+        data: (null as unknown) as OutputData,
       };
     } else {
       return {

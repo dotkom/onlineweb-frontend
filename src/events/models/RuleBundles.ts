@@ -1,16 +1,15 @@
 export interface IRuleBundle {
   id: number;
   description: string;
-  field_of_study_rules: IFieldOfStudyRule[];
-  grade_rules: IGradeRule[];
-  user_group_rules: IUserGroupRule[];
+  field_of_study_rules: FieldOfStudyRule[];
+  grade_rules: GradeRule[];
+  user_group_rules: UserGroupRule[];
   rule_strings: string[];
 }
 
-export interface IGradeRule {}
+export type GradeRule = number;
 
-export interface IUserGroupRule {}
+// Do we ever use this? What is the type?
+export type UserGroupRule = void;
 
-export interface IFieldOfStudyRule {
-  field_of_study: number; // Positive Integer
-}
+export type FieldOfStudyRule = number;

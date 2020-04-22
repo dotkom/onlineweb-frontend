@@ -12,9 +12,7 @@ import NumberStat from './NumberStat';
 import OrderBar from './OrderBar';
 import OrderItemDonut from './OrderItemDonut';
 
-export interface IProps {}
-
-export const Orders: FC<IProps> = () => {
+export const Orders: FC = () => {
   const dispatch = useDispatch();
   const orderLines = useSelector((state) => state.shop.orderLines.orderLines);
 
