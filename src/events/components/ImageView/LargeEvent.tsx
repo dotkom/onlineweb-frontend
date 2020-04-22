@@ -5,7 +5,9 @@ import React, { FC } from 'react';
 
 import { getEventUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
+import { useSelector } from 'core/redux/hooks';
 import { getEventColor, IEvent } from 'events/models/Event';
+import { selectEventCapacity } from 'events/selectors/event';
 
 import EventImage from '../EventImage';
 import style from './image.less';
@@ -16,6 +18,7 @@ export interface IProps {
 
 const LargeEvent: FC<IProps> = ({ event }) => {
   const { images, event_type, event_type_display, title, start_date, id } = event;
+  const capacity = useSelector(selectEventCapacity(id));
   const color = getEventColor(event_type);
   return (
     <Link {...getEventUrl(id)}>
@@ -35,8 +38,7 @@ const LargeEvent: FC<IProps> = ({ event }) => {
             <div className={style.icon}>
               <FontAwesomeIcon icon={faUser} fixedWidth />
             </div>
-            {/* TODO: add attendees display to main event thingy */}
-            <p className={style.suppText}>ALLE</p>
+            <p className={style.suppText}>{capacity}</p>
           </div>
         </div>
       </a>
