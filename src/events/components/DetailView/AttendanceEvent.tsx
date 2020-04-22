@@ -22,11 +22,13 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
   // TODO: Remove these lint disables when using captcha response.
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [recaptcha, setRecaptcha] = useState<string | null>();
   const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
-  // TODO: use for displaying to the user during signu
+  // TODO: use for displaying to the user during signup
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isEligibleForSignup = useSelector(selectIsEligibleForSignup(eventId), shallowEqual);
 
   if (!attendanceEvent) {
