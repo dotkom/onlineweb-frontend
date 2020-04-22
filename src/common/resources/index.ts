@@ -32,15 +32,12 @@ export const listResource = <OutputData, QueryParams extends IQueryObject = {}>(
     });
 
     const data = await handleReadOnlyResponse<never, IListResourceWrapper<OutputData>>(response);
-    if (data.status === 'success' && !data.data) {
-      throw new Error('Expected status 200 and response object, got 204.');
-    }
     return data;
   };
 };
 
 export const createResource = <InputData, OutputData>(url: string, options?: RequestInit) => {
-  return async (inputData: InputData): Promise<ResponseType<InputData, OutputData | null>> => {
+  return async (inputData: InputData): Promise<ResponseType<InputData, OutputData>> => {
     const response = await fetch(buildUrl(url), {
       method: 'POST',
       headers: await getHeaders(),
@@ -49,15 +46,12 @@ export const createResource = <InputData, OutputData>(url: string, options?: Req
     });
 
     const data = await handleResponse<InputData, OutputData>(response);
-    if (data.status === 'success' && data.data) {
-      throw new Error('Unexpected response object, expected 204 and no data.');
-    }
     return data;
   };
 };
 
 export const updateResource = <InputData, OutputData>(url: string, options?: RequestInit) => {
-  return async (id: number | string, inputData: InputData): Promise<ResponseType<InputData, OutputData | null>> => {
+  return async (id: number | string, inputData: InputData): Promise<ResponseType<InputData, OutputData>> => {
     const response = await fetch(`${buildUrl(url)}${id}/`, {
       method: 'PUT',
       headers: await getHeaders(),
@@ -79,9 +73,6 @@ export const destroyResource = (url: string, options?: RequestInit) => {
     });
 
     const data = await handleResponse<never, null>(response);
-    if (data.status === 'success' && data.data) {
-      throw new Error('Unexpected response object, expected 204 and no data.');
-    }
     return data;
   };
 };
