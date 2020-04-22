@@ -22,12 +22,17 @@ export const handleReadOnlyResponse = async <InputData, OutputData>(
 
 export const handleResponse = async <InputData, OutputData>(
   response: Response
-): Promise<ResponseType<InputData, OutputData | null>> => {
+): Promise<ResponseType<InputData, OutputData>> => {
   if (response.ok) {
     if (response.status === 204) {
       return {
         status: 'success',
-        data: null,
+        // WARNING!
+        // Handle no-content responses as null.
+        // This is kind of dangerous, since null has to be defined as OutputData
+        // When the resouce is created.
+        // TODO: Refactor and properly handle null.
+        data: (null as unknown) as OutputData,
       };
     } else {
       return {
