@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 
-import { useSelector } from 'core/redux/hooks';
+import { useDispatch, useSelector } from 'core/redux/hooks';
 import { State } from 'core/redux/Store';
-import { ruleBundleSelectors } from 'events/slices/ruleBundles';
+import { fetchRuleBundleById, ruleBundleSelectors } from 'events/slices/ruleBundles';
 
 import Block from './Block';
 import style from './detail.less';
@@ -16,7 +16,14 @@ interface IProps {
 
 export const RuleBundles: FC<IProps> = ({ bundleIds, guestAttendance }) => {
   const bundlesEnabled = bundleIds.length;
+  const dispatch = useDispatch();
   const ruleBundles = useSelector(selectRuleBundlesByIds(bundleIds));
+
+  useEffect(() => {
+    bundleIds.forEach((bundleId) => {
+      dispatch(fetchRuleBundleById(bundleId));
+    });
+  }, [String(bundleIds)]);
 
   // Sorting alphabetically on rule_bundle description or rule_string if needed
   // Multiple comparison cases as not all rule_bundles have a description
