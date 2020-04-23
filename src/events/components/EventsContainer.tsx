@@ -34,7 +34,7 @@ export const EventContainer = () => {
         accessible={accessible}
         view={eventView}
       />
-      <View accessible={accessible} filtered={false} />
+      <View accessible={accessible} />
     </section>
   );
 };

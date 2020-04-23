@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 
 import ToggleSwitch from 'common/components/ToggleSwitch';
 
@@ -7,34 +7,28 @@ import ChangeViewIconButton from './ChangeViewIconButton';
 
 import style from './eventsHeader.less';
 
-export interface IProps {
+interface IProps {
   toggleAccessible: () => void;
-  changeView?: (view: EventView) => void;
+  changeView: (view: EventView) => void;
   accessible: boolean;
-  view?: EventView;
+  view: EventView;
 }
 
-const EventsHeader = ({ toggleAccessible, changeView, accessible, view }: IProps) => (
-  <div className={style.grid}>
-    <h1>Arrangementer</h1>
-    {changeView && view !== undefined ? (
+const EventsHeader: FC<IProps> = ({ toggleAccessible, changeView, accessible, view }) => {
+  return (
+    <div className={style.grid}>
+      <h1>Arrangementer</h1>
       <div className={style.choiceGrid}>
         <ChangeViewIconButton viewType={EventView.IMAGE} changeView={changeView} view={view} />
-
         <ChangeViewIconButton viewType={EventView.LIST} changeView={changeView} view={view} />
-
         <ChangeViewIconButton viewType={EventView.CALENDAR} changeView={changeView} view={view} />
       </div>
-    ) : null}
-
-    <span className={style.toggleAccessible}>
-      <span className={style.toggleAccessibleDescription}>
-        {!accessible ? 'Kan delta?' : 'Viser arrangementer du kan delta på'}
+      <span className={style.toggleAccessible}>
+        <span className={style.toggleAccessibleDescription}>Vis kun arrangementer du kan delta på</span>
+        <ToggleSwitch checked={accessible} onChange={toggleAccessible} />
       </span>
-
-      <ToggleSwitch checked={accessible} onChange={toggleAccessible} />
-    </span>
-  </div>
-);
+    </div>
+  );
+};
 
 export default EventsHeader;
