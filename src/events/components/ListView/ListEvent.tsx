@@ -1,27 +1,34 @@
 import { faCalendarAlt, faUser } from '@fortawesome/free-regular-svg-icons/';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getEventAttendees } from 'events/utils/attendee';
 import { DateTime } from 'luxon';
-import React from 'react';
-import { getEventColor, getEventType, IEvent } from '../../models/Event';
+import React, { FC } from 'react';
+
+import { useSelector } from 'core/redux/hooks';
+import { selectEventCapacity } from 'events/selectors/event';
+
+import { getEventColor, IEvent } from '../../models/Event';
 import style from './list.less';
 
-const ListEvent = ({ title, event_start, attendance_event, event_type }: IEvent) => {
+interface IProps {
+  event: IEvent;
+}
+
+const ListEvent: FC<IProps> = ({ event }) => {
+  const { title, start_date, event_type, event_type_display } = event;
+  const capacity = useSelector(selectEventCapacity(event.id));
   const eventColor = getEventColor(event_type);
-  const eventType = getEventType(event_type);
-  const eventDateTime = DateTime.fromISO(event_start);
+  const eventDateTime = DateTime.fromISO(start_date);
   const eventDate =
     eventDateTime.year < new Date().getFullYear() || eventDateTime.year > new Date().getFullYear()
       ? eventDateTime.toFormat('dd.MM.yyyy')
       : eventDateTime.toFormat('dd.MM');
-  const eventAttendees = getEventAttendees(attendance_event);
 
   return (
     <div className={style.gridRow}>
       <div className={style.eventTypeDiv}>
         <span style={{ background: eventColor }} />
         <p className={style.eventType} style={{ color: eventColor }}>
-          {eventType}
+          {event_type_display}
         </p>
       </div>
       <p className={style.eventTitle}>{title}</p>
@@ -32,7 +39,7 @@ const ListEvent = ({ title, event_start, attendance_event, event_type }: IEvent)
       <div className={style.icon}>
         <FontAwesomeIcon icon={faUser} fixedWidth />
       </div>
-      <p> {eventAttendees} </p>
+      <p> {capacity} </p>
     </div>
   );
 };

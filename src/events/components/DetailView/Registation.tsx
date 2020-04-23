@@ -1,20 +1,23 @@
-import React from 'react';
-import { getEventColor, IEvent } from '../../models/Event';
+import React, { FC } from 'react';
+
+import { getEventColor, IEvent } from 'events/models/Event';
+
 import AttendanceEvent from './AttendanceEvent';
 import CardHeader from './Card/CardHeader';
 import styles from './detail.less';
 
-const Registration = ({ event_type, attendance_event }: IEvent) => {
-  const color = getEventColor(event_type);
+interface IProps {
+  event: IEvent;
+}
 
-  const message = <p className={styles.attendanceMessage}>Dette er ikke et påmeldingsarrangement.</p>;
-
+const Registration: FC<IProps> = ({ event }) => {
+  const color = getEventColor(event.event_type);
   return (
     <div className={styles.registration}>
       <CardHeader className={styles.detailHeader} color={color}>
         Påmelding
       </CardHeader>
-      {attendance_event ? <AttendanceEvent event={attendance_event} /> : message}
+      <AttendanceEvent eventId={event.id} />
     </div>
   );
 };

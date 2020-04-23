@@ -1,4 +1,4 @@
-import { User, Profile } from 'oidc-client';
+import { Profile, User } from 'oidc-client';
 
 export interface IAuthUser extends User {
   profile: IAuthProfile;
@@ -11,3 +11,10 @@ export interface IAuthUser extends User {
 export type IAuthProfile = NonNullable<Profile>;
 
 export const isOnlineUser = (user: User | IAuthUser): user is IAuthUser => user.hasOwnProperty('preferred_username');
+
+export interface IUserName {
+  id: number;
+  first_name: string;
+  last_name: string;
+  username: string;
+}

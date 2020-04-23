@@ -11,6 +11,10 @@ export interface IPaymentPrice {
 
 export interface IPayment {
   id: number;
+  object_id: number;
+  content_type: 'events.attendanceevent' | 'webshop.orderline';
+  payment_type: string;
+  payment_type_display: string;
   payment_prices: IPaymentPrice[];
   description: string;
   stripe_public_key: string;

@@ -1,18 +1,22 @@
-import { IsoDateTime } from 'common/models/Date';
+import { IUserName } from 'authentication/models/User';
 
-/** Restricted subset of user data fetched as attendee */
-export interface IAttendeeUser {
-  first_name: string;
-  last_name: string;
-}
-
-// Attendee from the registration attendee list endpoint.
-export interface IUserAttendee {
+export interface IAttendee {
   id: number;
   event: number;
-  user: IAttendeeUser;
+  user: IUserName;
   attended: boolean;
-  timestamp: IsoDateTime;
+  timestamp: string;
   show_as_attending_event: boolean;
+  allow_pictures: boolean;
+  paid: boolean;
   has_paid: boolean;
+  note: string;
+}
+
+export interface IPublicAttedee {
+  id: number;
+  is_visible: boolean;
+  full_name: string;
+  year_of_study: number;
+  field_of_study: string;
 }
