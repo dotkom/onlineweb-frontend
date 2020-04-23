@@ -6,7 +6,7 @@ import { DateTime, Interval } from 'luxon';
 
 const eventsAdapter = createEntityAdapter<IEvent>({
   sortComparer: (eventA, eventB) => {
-    return Number(DateTime.fromISO(eventA.start_date) > DateTime.fromISO(eventB.start_date));
+    return eventB.start_date.localeCompare(eventA.start_date);
   },
 });
 
@@ -91,6 +91,7 @@ export const filterEvents = createAsyncThunk('events/fitler', async (filters: Ev
       event_type: filters.eventTypes,
       page_size: pageSize,
       page,
+      ordering: '-event_start',
     })
   );
   return unwrapResult(response);

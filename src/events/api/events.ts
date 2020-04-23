@@ -14,6 +14,7 @@ export interface IEventAPIParameters extends IQueryObject {
   is_attendee?: 'True' | 'False';
   query?: string;
   attendance_event__isnull?: 'True' | 'False';
+  ordering?: string;
 }
 
 const EVENTS_API_URL = '/api/v1/event/events/';
