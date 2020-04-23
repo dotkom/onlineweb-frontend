@@ -1,9 +1,5 @@
-import IResponsiveImage, { DEFAULT_EVENT_IMAGE } from 'common/models/ResponsiveImage';
-import { ICompany } from 'core/models/Company';
-import { IExtra } from 'events/models/Extras';
-import { IRuleBundle } from 'events/models/RuleBundles';
-import { IPayment } from 'payments/models/Payment';
-import { IUserAttendee } from './Attendee';
+import { IUserName } from 'authentication/models/User';
+import IResponsiveImage from 'common/models/ResponsiveImage';
 
 export interface IEventViewProps {
   accessible: boolean;
@@ -79,10 +75,6 @@ export const getEventColor = (n: number): string => {
   }
 };
 
-export const isCompanyEvent = (event_type: number, company_event: ICompanyEvent[]): boolean => {
-  return [EventTypeEnum.BEDPRES, EventTypeEnum.KURS].includes(event_type) && company_event.length === 1;
-};
-
 /* TODO: Replace with ICSS exports */
 export const EVENT_COLORS = ['#eb536e', '#127dbd', '#43b171', '#fdbd47', '#2ac6f9', '#e75e3b', '#b36bcd'];
 
@@ -90,68 +82,62 @@ export const EVENT_COLORS = ['#eb536e', '#127dbd', '#43b171', '#fdbd47', '#2ac6f
    TODO: Replace with ICSS exports */
 export const LIGHT_EVENT_COLORS = ['#ef758b', '#4197ca', '#69c18d', '#fdca6c', '#55d1fa', '#ec7e62', '#c289d7'];
 
-export const mockEvent: IEvent = {
-  absolute_url: '',
-  attendance_event: null,
-  organizer_name: '',
-  company_event: [],
-  description: '',
-  event_end: '',
-  event_start: '',
-  event_type: 0,
-  id: 0,
-  image: DEFAULT_EVENT_IMAGE,
-  ingress: '',
-  ingress_short: '',
-  location: '',
-  slug: '',
-  title: '',
-  organizer: 0,
-};
-
 export enum EventView {
   IMAGE,
   LIST,
   CALENDAR,
 }
 
-export interface ICompanyEvent {
-  company: ICompany;
+export interface IEvent {
+  id: number;
+  title: string;
+  slug: string;
+  ingress: string;
+  ingress_short: string;
+  description: string;
+  start_date: string;
+  end_date: string;
+  location: string;
+  event_type: number;
+  event_type_display: string;
+  organizer: number;
+  author: IUserName | null;
+  images: IResponsiveImage[];
+  companies: number[];
+  is_attendance_event: boolean;
+  max_capacity: number | null;
+  number_of_seats_taken: number | null;
+}
+
+export interface ISignupEligibility {
+  status: boolean;
+  message: string;
+  status_code: number;
 }
 
 export interface IAttendanceEvent {
-  max_capacity: number; // Positive Integer
+  id: number;
+  max_capacity: number;
   waitlist: boolean;
   guest_attendance: boolean;
   registration_start: string;
-  unattend_deadline: string;
   registration_end: string;
-  number_of_seats_taken: number;
+  unattend_deadline: string;
   automatically_set_marks: boolean;
-  marks_has_been_set: boolean;
+  rule_bundles: number[];
   number_on_waitlist: number;
-  rule_bundles: IRuleBundle[]; // ManyToMany
-  extras: IExtra[]; // ManyToMany
-  payments: IPayment[]; // GenericRelation
-  attendees: IUserAttendee[];
+  number_of_seats_taken: number;
+  has_feedback: boolean;
+  has_extras: boolean;
+  has_reservation: boolean;
+  extras: number[];
+  payment: number | null;
+  feedback: number | null;
+  has_postponed_registration: boolean;
+  is_marked: boolean;
+  is_suspended: boolean;
+  is_eligible_for_signup: ISignupEligibility;
   is_attendee: boolean;
-}
-
-export interface IEvent {
-  absolute_url: string;
-  attendance_event: IAttendanceEvent | null;
-  company_event: ICompanyEvent[];
-  description: string;
-  organizer_name: string;
-  event_end: string;
-  event_start: string;
-  event_type: EventTypeEnum;
-  id: number;
-  image: IResponsiveImage | null;
-  ingress: string;
-  ingress_short: string;
-  location: string;
-  slug: string;
-  title: string;
-  organizer: number;
+  is_on_waitlist: boolean;
+  what_place_is_user_on_wait_list: number;
 }

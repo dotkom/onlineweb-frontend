@@ -1,67 +1,43 @@
 import { DateTime } from 'luxon';
-import React, { ReactChild, useState } from 'react';
+import React, { FC, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { shallowEqual } from 'react-redux';
 
 import { RECAPTCHA_KEY } from 'common/constants/google';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { IAttendanceEvent } from '../../models/Event';
+import { useSelector } from 'core/redux/hooks';
+import { State } from 'core/redux/Store';
+import { ISignupEligibility } from 'events/models/Event';
+import { attendanceEventSelectors } from 'events/slices/attendanceEvents';
+
 import Block from './Block';
 import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
+import { RuleBundles } from './RuleBundles';
 
-interface IRuleBundleBox {
-  children: ReactChild | ReactChild[];
+interface IProps {
+  eventId: number;
 }
 
-interface IAttendanceEventProps {
-  event: IAttendanceEvent;
-}
-
-const RuleBundleBox = ({ children }: IRuleBundleBox) => <span className={style.ruleBox}>{children}</span>;
-
-const RuleBundles = ({ event }: IAttendanceEventProps) => {
-  const bundlesEnabled = event.rule_bundles && event.rule_bundles.length;
-
-  // Sorting alphabetically on rule_bundle description or rule_string if needed
-  // Multiple comparison cases as not all rule_bundles have a description
-  const sortedBundles = event.rule_bundles.sort((ba, bb) => {
-    if (ba.description) {
-      if (bb.description) {
-        return ba.description.localeCompare(bb.description);
-      } else {
-        return ba.description.localeCompare(bb.rule_strings[0]);
-      }
-    } else if (bb.description) {
-      return ba.rule_strings[0].localeCompare(bb.description);
-    }
-    return ba.rule_strings[0].localeCompare(bb.rule_strings[0]);
-  });
-
-  return (
-    <Block title="Åpent for" className={style.fullBlock}>
-      <div className={style.ruleBoxes}>
-        {event.guest_attendance ? (
-          <RuleBundleBox>Alle</RuleBundleBox>
-        ) : bundlesEnabled ? (
-          sortedBundles.map((bundle) =>
-            bundle.rule_strings.map((rule_string) => <RuleBundleBox key={rule_string}>{rule_string}</RuleBundleBox>)
-          )
-        ) : (
-          <RuleBundleBox>Alle medlemmer</RuleBundleBox>
-        )}
-      </div>
-    </Block>
-  );
-};
-
-const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
-  const registrationStart = DateTime.fromISO(event.registration_start);
-  const registrationEnd = DateTime.fromISO(event.registration_end);
-  const cancellationDeadline = DateTime.fromISO(event.unattend_deadline);
+const AttendanceEvent: FC<IProps> = ({ eventId }) => {
   // TODO: Remove these lint disables when using captcha response.
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [recaptcha, setRecaptcha] = useState<string | null>();
+  const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
+  // TODO: use for displaying to the user during signup
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const isEligibleForSignup = useSelector(selectIsEligibleForSignup(eventId), shallowEqual);
+
+  if (!attendanceEvent) {
+    return <p className={style.attendanceMessage}>Dette er ikke et påmeldingsarrangement.</p>;
+  }
+
+  const registrationStart = DateTime.fromISO(attendanceEvent.registration_start);
+  const registrationEnd = DateTime.fromISO(attendanceEvent.registration_end);
+  const cancellationDeadline = DateTime.fromISO(attendanceEvent.unattend_deadline);
 
   return (
     <div className={style.blockGrid}>
@@ -77,22 +53,35 @@ const AttendanceEvent = ({ event }: IAttendanceEventProps) => {
         <EventCountDown endTime={cancellationDeadline} />
       </Block>
 
-      <RuleBundles event={event} />
+      <RuleBundles bundleIds={attendanceEvent.rule_bundles} guestAttendance={attendanceEvent.guest_attendance} />
 
       <Block title="Påmeldte">
         <p>
-          {event.number_of_seats_taken}/{event.max_capacity}
+          {attendanceEvent.number_of_seats_taken}/{attendanceEvent.max_capacity}
         </p>
       </Block>
 
       <Block title="Venteliste">
-        <p>{event.waitlist ? event.number_on_waitlist : '-'}</p>
+        <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
       <div>
         {RECAPTCHA_KEY ? <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={(value) => setRecaptcha(value)} /> : null}
       </div>
     </div>
   );
+};
+
+const selectIsEligibleForSignup = (eventId: number) => (state: State): ISignupEligibility => {
+  const attendanceEvent = attendanceEventSelectors.selectById(state, eventId);
+  if (attendanceEvent) {
+    return attendanceEvent.is_eligible_for_signup;
+  } else {
+    return {
+      status: false,
+      message: 'Dette er ikke et påmeldingsarrangement',
+      status_code: 404,
+    };
+  }
 };
 
 export default AttendanceEvent;

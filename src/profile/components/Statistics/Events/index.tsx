@@ -33,11 +33,11 @@ class Orders extends Component<{}, IState> {
     const companyPresentations = events.filter(({ event_type }) => event_type === 2);
     const courses = events.filter(({ event_type }) => event_type === 3);
     const social = events.filter(({ event_type }) => event_type === 1);
-    const companyEvents = events.filter(({ company_event }) => !!company_event.length);
+    const eventWithCompanyCount = events.filter((event) => event.companies.length > 0).length;
     const companyCount = countCompanies(events);
     const keys = Object.keys(companyCount);
     const favCompany = keys.reduce((maxKey, key) => (companyCount[key] > companyCount[maxKey] ? key : maxKey), keys[0]);
-    const dates = events.map((event) => DateTime.fromISO(event.event_start));
+    const dates = events.map((event) => DateTime.fromISO(event.start_date));
     return (
       <Page loading={events.length === 0}>
         <SplitPane>
@@ -58,7 +58,7 @@ class Orders extends Component<{}, IState> {
               <StringStat name="Favorittbedrift" value={favCompany} />
             </Pane>
             <Pane>
-              <NumberStat name="Antall bedriftsarrangementer" value={companyEvents.length} />
+              <NumberStat name="Antall bedriftsarrangementer" value={eventWithCompanyCount} />
             </Pane>
             <Pane>
               <NumberStat name="Antall Bedpres" value={companyPresentations.length} />

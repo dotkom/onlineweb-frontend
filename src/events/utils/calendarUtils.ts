@@ -98,7 +98,7 @@ export const constructMonthMap = (month: DateTime, events: IEvent[]): IEvent[][]
    */
   const map = [...Array(month.daysInMonth)].map(() => Array(0).fill([]));
   events.forEach((event) => {
-    const day = DateTime.fromISO(event.event_start).day - 1;
+    const day = DateTime.fromISO(event.start_date).day - 1;
     map[day].push(event);
   });
   return map;

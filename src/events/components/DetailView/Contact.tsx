@@ -1,22 +1,35 @@
-import { getOnlineGroup } from 'groups/api';
-import { IOnlineGroup } from 'groups/models/onlinegroup';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
+
+import { companySelectors, fetchCompanyById } from 'companies/slices/companies';
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import { State } from 'core/redux/Store';
+import { fetchOnlineGroupById, onlineGroupSelectors } from 'groups/slices/onlineGroups';
+
 import { getEventColor, IEvent } from '../../models/Event';
 import Block from './Block';
 import CardHeader from './Card/CardHeader';
 import style from './detail.less';
 
-const Contact = ({ event_type, organizer, company_event }: IEvent) => {
-  const [organizerGroup, setOrganizerGroup] = useState<IOnlineGroup | null>(null);
+interface IProps {
+  event: IEvent;
+}
+
+const Contact: FC<IProps> = ({ event }) => {
+  const { event_type, organizer: organizerId, companies: companyIds } = event;
+  const dispatch = useDispatch();
+  const organizer = useSelector((state) => onlineGroupSelectors.selectById(state, organizerId));
+  const companies = useSelector(selectCompaniesByIds(companyIds));
   const color = getEventColor(event_type);
-  const fetchOragnizer = async () => {
-    const group = await getOnlineGroup(organizer);
-    setOrganizerGroup(group);
-  };
 
   useEffect(() => {
-    fetchOragnizer();
-  }, [organizer]);
+    dispatch(fetchOnlineGroupById(organizerId));
+  }, [organizerId]);
+
+  useEffect(() => {
+    companyIds.forEach((companyId) => {
+      dispatch(fetchCompanyById(companyId));
+    });
+  }, [String(companyIds)]);
 
   return (
     <div className={style.contact}>
@@ -24,23 +37,29 @@ const Contact = ({ event_type, organizer, company_event }: IEvent) => {
         Kontakt
       </CardHeader>
       <Block title="Arrangør">
-        {organizerGroup ? (
+        {organizer ? (
           <>
-            <p>{organizerGroup.name_short}</p>
-            <a href={`mailto:${organizerGroup.email}`}>{organizerGroup.email}</a>
+            <p>{organizer.name_short}</p>
+            <a href={`mailto:${organizer.email}`}>{organizer.email}</a>
           </>
         ) : null}
       </Block>
 
-      {company_event && company_event.length > 0 && (
+      {companyIds.length > 0 && (
         <Block title="Medarrangør">
-          {company_event.map(({ company }) => (
+          {companies.map((company) => (
             <p key={company.id}>{company.name}</p>
           ))}
         </Block>
       )}
     </div>
   );
+};
+
+const selectCompaniesByIds = (companyIds: number[]) => (state: State) => {
+  return companySelectors
+    .selectAll(state)
+    .filter((company) => companyIds.some((companyId) => companyId === company.id));
 };
 
 export default Contact;

@@ -38,7 +38,7 @@ export const ListView = ({ filtered }: IProps) => {
         {displayEvents.map((event) => (
           <Link {...getEventUrl(event.id)} key={event.id}>
             <a>
-              <ListEvent {...event} />
+              <ListEvent event={event} />
             </a>
           </Link>
         ))}

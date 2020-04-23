@@ -45,7 +45,7 @@ export const CalendarView = () => {
     const firstDay = getFirstDayOfMonth(month);
     const lastDay = getLastDayOfMonth(month);
     const monthInterval = Interval.fromDateTimes(firstDay, lastDay);
-    const eventsInMonth = eventList.filter((event) => monthInterval.contains(DateTime.fromISO(event.event_start)));
+    const eventsInMonth = eventList.filter((event) => monthInterval.contains(DateTime.fromISO(event.start_date)));
     const eventMonthMap = constructMonthMap(month, eventsInMonth);
     setEventMonth(eventMonthMap);
   }, [month, eventList]);

@@ -2,12 +2,13 @@ import React, { FC, useEffect, useState } from 'react';
 
 import Spinner from 'common/components/Spinner';
 import HttpError from 'core/components/errors/HttpError';
-
-import { getAttendanceEvent } from 'events/api/events';
-import { IUserAttendee } from 'events/models/Attendee';
-import { IAttendanceEvent } from 'events/models/Event';
-import { getEventUserAttendees } from 'payments/api/paymentRelation';
+import { useDispatch, useSelector } from 'core/redux/hooks';
+import { State } from 'core/redux/Store';
+import { attendanceEventSelectors, fetchAttendanceEventById } from 'events/slices/attendanceEvents';
+import { attendeeSelectors, fetchAttendeeByEventId } from 'events/slices/attendees';
 import { IPaymentPrice } from 'payments/models/Payment';
+import { fetchPaymentEventById, paymentSelectors } from 'payments/slices/payments';
+
 import { Payment } from '../Payment';
 import style from '../Payment/payment.less';
 
@@ -16,52 +17,43 @@ interface IProps {
 }
 
 export const EventPayment: FC<IProps> = ({ eventId }) => {
-  const [userAttendees, setUserAttendees] = useState<IUserAttendee[]>();
-  const [selectedPrice, setSelectedPrice] = useState<number>();
+  const [selectedPriceId, setSelectedPriceId] = useState<number>();
 
-  const [attendanceEvent, setAttendanceEvent] = useState<IAttendanceEvent>();
-
-  const loadAttendanceEvent = async () => {
-    const event = await getAttendanceEvent(eventId);
-    setAttendanceEvent(event);
-
-    // Automatically select first payment if only one exists.
-    if (event.payments.length > 0 && event.payments[0].payment_prices.length === 1) {
-      setSelectedPrice(event.payments[0].payment_prices[0].id);
-    }
-  };
-
-  const loadUserAttendees = async () => {
-    const attendees = await getEventUserAttendees({ event: eventId });
-    setUserAttendees(attendees);
-  };
+  const dispatch = useDispatch();
+  const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
+  const attendee = useSelector(selectAttendeeByEventId(eventId));
+  const payment = useSelector(selectPaymentByEventId(eventId));
+  // User has already paid for the event, or otherwise been marked as paid.
+  const isPaid = attendee && attendee.has_paid;
 
   useEffect(() => {
-    loadAttendanceEvent();
-    loadUserAttendees();
+    dispatch(fetchAttendanceEventById(eventId));
+    dispatch(fetchAttendeeByEventId(eventId));
+    dispatch(fetchPaymentEventById(eventId));
+  }, [eventId]);
+
+  useEffect(() => {
+    if (payment && payment.payment_prices.length === 1) {
+      setSelectedPriceId(payment.payment_prices[0].id);
+    }
   }, []);
 
-  if (!attendanceEvent || !userAttendees) {
+  if (!attendanceEvent || !attendee || !payment) {
     return <Spinner />;
   }
 
   // Map both unattending, non-priced, and 404 to a 404 error page.
-  if (!attendanceEvent.is_attendee || attendanceEvent.payments.length === 0) {
+  if (!attendanceEvent.is_attendee || attendanceEvent.payment === null) {
     return <HttpError code={404} />;
   }
 
-  // User has already paid for the event, or otherwise been marked as paid.
-  const isPaid = !!userAttendees.find((attendee) => attendee.has_paid);
-
-  const payment = attendanceEvent.payments[0];
-
   const selectedPriceObject: IPaymentPrice | undefined = payment.payment_prices.find(
-    (price: IPaymentPrice) => price.id === selectedPrice
+    (price: IPaymentPrice) => price.id === selectedPriceId
   );
 
   const payments = payment.payment_prices.map((price: IPaymentPrice) => (
-    <div key={price.id} onClick={() => setSelectedPrice(price.id)} className={style.price}>
-      <input type="radio" value={price.id} checked={price.id === selectedPrice} readOnly />
+    <div key={price.id} onClick={() => setSelectedPriceId(price.id)} className={style.price}>
+      <input type="radio" value={price.id} checked={price.id === selectedPriceId} readOnly />
       <label>
         {price.description}: {price.price} kr
       </label>
@@ -75,4 +67,14 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
   ) : (
     <div className={style.infobox}>Velg et alternativ for å gå videre til betaling.</div>
   );
+};
+
+const selectAttendeeByEventId = (eventId: number) => (state: State) => {
+  return attendeeSelectors.selectAll(state).find((attendee) => attendee.event === eventId);
+};
+
+const selectPaymentByEventId = (eventId: number) => (state: State) => {
+  return paymentSelectors
+    .selectAll(state)
+    .find((payment) => payment.object_id === eventId && payment.content_type === 'events.attendanceevent');
 };

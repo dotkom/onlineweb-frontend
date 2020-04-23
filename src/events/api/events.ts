@@ -19,8 +19,8 @@ export interface IAPIData<T> {
   count: number;
 }
 
-const EVENTS_API_URL = '/api/v1/events/';
-const ATTENDANCE_EVENT_API_URL = '/api/v1/registration/attendance-events/';
+const EVENTS_API_URL = '/api/v1/event/events/';
+const ATTENDANCE_EVENT_API_URL = '/api/v1/event/attendance-events/';
 
 export const getEvents = async (args?: IEventAPIParameters): Promise<IEvent[]> => {
   const data = await get<IAPIData<IEvent>>(EVENTS_API_URL, { format: 'json', ...args });

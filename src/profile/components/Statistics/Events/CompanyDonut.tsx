@@ -15,9 +15,9 @@ export interface ICompanyCount {
  * @returns {ICompanyCount} E.g. { 'Company1': 3, 'Company2': 8 }
  */
 export function countCompanies(events: IEvent[]): ICompanyCount {
-  return events.reduce<ICompanyCount>((counted, { company_event }) => {
-    for (const { company } of company_event) {
-      counted[company.name] = counted[company.name] + 1 || 1;
+  return events.reduce<ICompanyCount>((counted, { companies }) => {
+    for (const companyId of companies) {
+      counted[companyId] = counted[companyId] + 1 || 1;
     }
     return counted;
   }, {});
