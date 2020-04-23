@@ -2,7 +2,7 @@ import { getUser } from 'authentication/api';
 import { get } from 'common/utils/api';
 import { IPayment } from 'payments/models/Payment';
 
-const getEventPaymentUrl = (eventId: number) => `/api/v1/event/attendance-event/${eventId}/payment/`;
+const getEventPaymentUrl = (eventId: number) => `/api/v1/event/attendance-events/${eventId}/payment/`;
 
 export const getPaymentForEvent = async (eventId: number) => {
   const user = await getUser();
