@@ -33,7 +33,7 @@ export const initStore = (initialState: {} = {}) => {
       shop: shopReducer,
       transactions: transactionsReducer,
     },
-    /* eeslint sort-keys: "off" */
+    /* eslint sort-keys: "off" */
   });
 };
 
