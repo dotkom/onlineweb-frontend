@@ -15,6 +15,7 @@ export interface IAttendee {
 
 export interface IPublicAttedee {
   id: number;
+  event: number;
   is_visible: boolean;
   full_name: string;
   year_of_study: number;
