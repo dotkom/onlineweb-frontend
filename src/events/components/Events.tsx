@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
+import React, { FC } from 'react';
 
-import EventsHeader from './EventsHeader';
-import ListView from './ListView';
+import Heading from 'common/components/Heading';
+
 import SearchModule from './SearchModule';
+import { SearchResults } from './SearchModule/SearchResults';
 
 import style from './less/eventsContainer.less';
 
-const Events = () => {
-  const [accessible, setAccessible] = useState(false);
-
-  const toggleAccessible = () => setAccessible(!accessible);
-
+const Events: FC = () => {
   return (
     <section className={style.section}>
-      <EventsHeader toggleAccessible={toggleAccessible} accessible={accessible} />
+      <Heading title="Arrangementer" />
       <SearchModule />
-      <ListView accessible={accessible} filtered={true} />
+      <SearchResults />
     </section>
   );
 };

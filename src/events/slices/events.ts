@@ -1,6 +1,6 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, SerializedError, unwrapResult } from '@reduxjs/toolkit';
 import { State } from 'core/redux/Store';
-import { getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
+import { getEvent, IEventAPIParameters, listEvents } from 'events/api/events';
 import { EventTypeEnum, IEvent } from 'events/models/Event';
 import { DateTime, Interval } from 'luxon';
 
@@ -13,8 +13,12 @@ const eventsAdapter = createEntityAdapter<IEvent>({
 export const eventSelectors = eventsAdapter.getSelectors<State>((state) => state.events);
 
 export const fetchEvents = createAsyncThunk('events/fetchMultiple', async (options?: IEventAPIParameters) => {
-  const events = await getEvents(options);
-  return events;
+  const response = await listEvents(options);
+  if (response.status === 'success') {
+    return response.data;
+  } else {
+    throw response.errors;
+  }
 });
 
 export const fetchEventById = createAsyncThunk('events/fetchById', async (eventId: number) => {
@@ -71,16 +75,57 @@ export const fetchEventsInInterval = createAsyncThunk(
   }
 );
 
+interface EventFilters {
+  query: string;
+  eventTypes: EventTypeEnum[];
+  showOnlyAttendanceEvents: boolean;
+}
+
+export const filterEvents = createAsyncThunk('events/fitler', async (filters: EventFilters, { dispatch, getState }) => {
+  const state = getState() as State;
+  const { pageSize, page } = state.events.search;
+  const response = await dispatch(
+    fetchEvents({
+      query: filters.query,
+      attendance_event__isnull: filters.showOnlyAttendanceEvents ? 'False' : undefined,
+      event_type: filters.eventTypes,
+      page_size: pageSize,
+      page,
+    })
+  );
+  return unwrapResult(response);
+});
+
+interface ISearch {
+  ids: number[];
+  page: number;
+  count: number;
+  pageSize: number;
+  requestId: string | null;
+  loading: 'idle' | 'pending';
+}
+
+const INITIAL_SEARCH_STATE: ISearch = {
+  ids: [],
+  page: 1,
+  count: 0,
+  pageSize: 30,
+  requestId: null,
+  loading: 'idle',
+};
+
 interface IState {
   loading: 'idle' | 'pending';
   error: SerializedError | null;
   entities: Record<number, IEvent>;
+  search: ISearch;
 }
 
 const INITIAL_STATE: IState = {
   loading: 'idle',
   error: null,
   entities: {},
+  search: INITIAL_SEARCH_STATE,
 };
 
 export const eventsSlice = createSlice({
@@ -93,7 +138,8 @@ export const eventsSlice = createSlice({
     }),
       builder.addCase(fetchEvents.fulfilled, (state, action) => {
         state.loading = 'idle';
-        eventsAdapter.addMany(state, action.payload);
+        const events = action.payload.results;
+        eventsAdapter.addMany(state, events);
       }),
       builder.addCase(fetchEvents.rejected, (state, action) => {
         state.loading = 'idle';
@@ -110,6 +156,23 @@ export const eventsSlice = createSlice({
         state.loading = 'idle';
         state.error = action.error;
       });
+    builder.addCase(filterEvents.pending, (state, action) => {
+      state.search.loading = 'pending';
+      state.search.requestId = action.meta.requestId;
+    });
+    builder.addCase(filterEvents.fulfilled, (state, action) => {
+      // We only care about the result of the latest search request, any others will only hinder performance.
+      if (state.search.requestId === action.meta.requestId) {
+        const { results, count } = action.payload;
+        state.search.loading = 'idle';
+        state.search.count = count;
+        state.search.ids = results.map((event) => event.id);
+      }
+    });
+    builder.addCase(filterEvents.rejected, (state, action) => {
+      state.search.loading = 'idle';
+      state.error = action.error;
+    });
   },
 });
 
