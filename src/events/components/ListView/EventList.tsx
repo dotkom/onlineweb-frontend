@@ -16,7 +16,6 @@ interface IProps {
 
 const EventListComponent: FC<IProps> = ({ eventIds }) => {
   const events = useSelector(selectEventsByIds(eventIds), shallowEqual);
-  console.log('rendering list');
 
   return (
     <div className={style.grid}>
