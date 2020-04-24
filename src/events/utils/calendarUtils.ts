@@ -1,29 +1,23 @@
-import { DateTime } from 'luxon';
-import { IEvent } from '../models/Event';
+import { DateTime, Interval } from 'luxon';
 
 export function getFirstDayOfMonth(date: DateTime) {
-  return date.minus({
-    days: date.day - 1,
-    hours: date.hour,
-    minutes: date.minute,
-    seconds: date.second,
-  });
+  return date.startOf('month');
 }
 
 export function getLastDayOfMonth(date: DateTime) {
-  return getFirstDayOfMonth(date).plus({
-    month: 1,
-    second: 10,
-  });
+  return date.endOf('month');
+}
+
+export function getFirstDayOfWeek(date: DateTime): DateTime {
+  return date.startOf('week');
+}
+
+export function getLastDayOfWeek(date: DateTime): DateTime {
+  return date.endOf('week');
 }
 
 export function getStartOfDay(date: DateTime = DateTime.local()) {
-  return date.minus({
-    hours: date.hour,
-    minutes: date.minute,
-    second: date.second,
-    milliseconds: date.millisecond,
-  });
+  return date.startOf('day');
 }
 
 /**
@@ -57,18 +51,17 @@ export function getPreviousMonthLength(date: DateTime) {
 
 /**
  * Shift a Date object with a given number of months.
- * @param {Date} date JavaScript Date object to be shifted.
+ * @param {DateTime} date JavaScript Date object to be shifted.
  * @param {number} amount The amount of which to shift the month of the Date object.
- * @returns {Date} Shifted Date object.
  */
-export function changeMonth(date: Date, amount: number) {
-  let dt = DateTime.fromJSDate(date);
+export function changeMonth(date: DateTime, amount: number): DateTime {
   if (amount > 0) {
-    dt = dt.plus({ months: amount });
+    return date.plus({ months: amount });
   } else if (amount < 0) {
-    dt = dt.minus({ months: Math.abs(amount) });
+    return date.minus({ months: Math.abs(amount) });
+  } else {
+    return date;
   }
-  return dt.toJSDate();
 }
 
 /**
@@ -81,25 +74,22 @@ export function getMonthAndYear(date: Date) {
   return dt.toFormat('MMMM yyyy');
 }
 
+export function getDatesInInterval(start: DateTime, end: DateTime): DateTime[] {
+  return Interval.fromDateTimes(start.startOf('day'), end.endOf('day'))
+    .splitBy({ days: 1 })
+    .map((d) => d.start);
+}
+
 /**
- * @summary Create the correct representation of the current month.
- * @description To easily display the events of the given month,
- * the month is represented as an Array of Arrays of Events.
- * The outer Array represents the ((day of the month) - 1) the event is on,
- * while the inner Array represents the events on that day.
- * @param {DateTime} month Current month.
- * @param {IEvent[]} events Events to inject into the month model.
- * @returns {IEvent[][]} Events represented in a month model.
+ * Get the first day of the week a month starts on.
  */
-export const constructMonthMap = (month: DateTime, events: IEvent[]): IEvent[][] => {
-  /**
-   * @summary Create an empty EventMonth.
-   * @description Create an array of length `daysInMonth`, containing empty arrays.
-   */
-  const map = [...Array(month.daysInMonth)].map(() => Array(0).fill([]));
-  events.forEach((event) => {
-    const day = DateTime.fromISO(event.start_date).day - 1;
-    map[day].push(event);
-  });
-  return map;
-};
+export function getFirstDayOfWeekForMonth(month: DateTime): DateTime {
+  return getFirstDayOfWeek(getFirstDayOfMonth(month));
+}
+
+/**
+ * Get the last day of the week a month ends on.
+ */
+export function getLastDayOfWeekForMonth(month: DateTime): DateTime {
+  return getLastDayOfWeek(getLastDayOfMonth(month));
+}

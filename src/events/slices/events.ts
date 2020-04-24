@@ -2,7 +2,7 @@ import { createAsyncThunk, createEntityAdapter, createSlice, SerializedError, un
 import { State } from 'core/redux/Store';
 import { getEvent, getEvents, IEventAPIParameters } from 'events/api/events';
 import { EventTypeEnum, IEvent } from 'events/models/Event';
-import { DateTime } from 'luxon';
+import { DateTime, Interval } from 'luxon';
 
 const eventsAdapter = createEntityAdapter<IEvent>({
   sortComparer: (eventA, eventB) => {
@@ -56,20 +56,20 @@ export const fetchImageEvents = createAsyncThunk('events/fetchImageEvents', asyn
   return result;
 });
 
-export const fetchEventsByMonth = createAsyncThunk('events/fetchByMonth', async (month: DateTime, { dispatch }) => {
-  const firstDayOfMonth = month.minus({ days: month.day - 1 });
-  const lastDayOfMonth = firstDayOfMonth.plus({ months: 1 }).minus({ days: 1 });
-
-  /** Set the query parameters of the fetch to the range, set page size large enough to get all */
-  const events = await dispatch(
-    fetchEvents({
-      event_start__gte: firstDayOfMonth.toISODate(),
-      event_start__lte: lastDayOfMonth.toISODate(),
-      page_size: 60,
-    })
-  );
-  return events;
-});
+export const fetchEventsInInterval = createAsyncThunk(
+  'events/fetchInInterval',
+  async (interval: Interval, { dispatch }) => {
+    /** Set the query parameters of the fetch to the range, set page size large enough to get all */
+    const events = await dispatch(
+      fetchEvents({
+        event_start__gte: interval.start.toISODate(),
+        event_start__lte: interval.end.toISODate(),
+        page_size: 60,
+      })
+    );
+    return events;
+  }
+);
 
 interface IState {
   loading: 'idle' | 'pending';

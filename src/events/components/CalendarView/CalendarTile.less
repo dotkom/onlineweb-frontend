@@ -1,0 +1,49 @@
+@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
+@import '~common/less/colors.less';
+
+.tile {
+  overflow: hidden;
+  height: 100px;
+  background: #fff;
+
+  &:hover {
+    outline: 1px solid @blue;
+  }
+
+  @media (min-width: @owTabletBreakpoint) {
+    height: inherit;
+    position: relative;
+    padding-bottom: 100%;
+  }
+}
+
+.tileInactive {
+  background: @offWhite;
+  box-shadow: none;
+}
+
+.tileContent {
+  padding: 0.25rem;
+
+  & > a {
+    color: initial;
+    display: block;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  & > p:first-child {
+    color: @gray;
+    margin-bottom: 0.25rem;
+  }
+
+  @media (min-width: @owTabletBreakpoint) {
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    padding: 0.25rem;
+  }
+}
