@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { DateTime } from 'luxon';
 import React, { FC } from 'react';
+import { shallowEqual } from 'react-redux';
 
 import { eventSelectors } from 'events/slices/events';
 import { useSelector } from 'core/redux/hooks';
@@ -15,7 +16,7 @@ interface IProps {
 }
 
 export const EventCalendarTile: FC<IProps> = ({ date, active }) => {
-  const events = useSelector(selectEventsForDate(date));
+  const eventIds = useSelector(selectEventIdsForDate(date), shallowEqual);
   return (
     <div
       className={classNames(style.tile, {
@@ -24,8 +25,8 @@ export const EventCalendarTile: FC<IProps> = ({ date, active }) => {
     >
       <div className={style.tileContent}>
         <p>{date.day}</p>
-        {events.map((event) => (
-          <CalendarEvent key={event.id} event={event} />
+        {eventIds.map((eventId) => (
+          <CalendarEvent key={eventId} eventId={eventId} />
         ))}
       </div>
     </div>
@@ -36,11 +37,12 @@ const isSameDate = (dateA: DateTime, dateB: DateTime): boolean => {
   return dateA.toISODate() === dateB.toISODate();
 };
 
-const selectEventsForDate = (date: DateTime) => (state: State) => {
+const selectEventIdsForDate = (date: DateTime) => (state: State): number[] => {
   return eventSelectors
     .selectAll(state)
     .filter((event) => isSameDate(date, DateTime.fromISO(event.start_date)))
-    .sort((eventA, eventB) => eventA.start_date.localeCompare(eventB.start_date));
+    .sort((eventA, eventB) => eventA.start_date.localeCompare(eventB.start_date))
+    .map((event) => event.id);
 };
 
 export default EventCalendarTile;
