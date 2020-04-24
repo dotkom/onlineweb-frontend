@@ -13,7 +13,7 @@ import { attendanceEventSelectors } from 'events/slices/attendanceEvents';
 import { eventSelectors } from 'events/slices/events';
 
 import EventImage from '../EventImage';
-import style from './calendar.less';
+import style from './CalendarHoverCard.less';
 
 interface IProps {
   eventId: number;

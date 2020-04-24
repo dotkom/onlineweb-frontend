@@ -1,0 +1,21 @@
+@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
+@import '~common/less/colors.less';
+
+.title {
+  padding: 0.125rem 0.25rem;
+  margin-bottom: 10px;
+  color: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: @owFontXS;
+
+  @media (min-width: @owMobileBreakpoint) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  @media (min-width: @owTabletBreakpoint) {
+    font-size: @owFontS;
+  }
+}

@@ -1,0 +1,18 @@
+@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
+@import '~common/less/colors.less';
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 1px;
+  background: @lightGray;
+  border: 1px solid @lightGray;
+}
+
+.menuGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  margin-bottom: 20px;
+}
