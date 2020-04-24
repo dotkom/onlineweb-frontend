@@ -63,7 +63,7 @@ export const fetchEventsInInterval = createAsyncThunk(
     const events = await dispatch(
       fetchEvents({
         event_start__gte: interval.start.toISODate(),
-        event_start__lte: interval.end.toISODate(),
+        event_start__lte: interval.end.plus({ days: 1 }).toISODate(),
         page_size: 60,
       })
     );
