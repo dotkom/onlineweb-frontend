@@ -1,0 +1,50 @@
+@import '~common/less/mixins.less';
+@import '~common/less/constants.less';
+
+.container {
+  width: 100%;
+  padding: 0.25rem;
+  border: 1px solid transparent;
+  transition: border-color 0.1s;
+  display: grid;
+  grid-template-columns: 8rem 2fr 4rem 6rem;
+  position: relative;
+  margin: auto;
+  color: @darkGray;
+
+  > p {
+    align-self: center;
+  }
+
+  &:not(:first-child) {
+    border-top: 1px solid @lightGray;
+  }
+
+  &:hover {
+    text-decoration: none;
+    border-color: @blue;
+  }
+
+  @media (max-width: @owMobileBreakpoint) {
+    grid-template-columns: 2.5rem 5fr 5rem 2rem;
+  }
+
+  @media (max-width: 320px) {
+    max-width: 17rem;
+  }
+}
+
+.icon {
+  align-self: center;
+  text-align: right;
+  margin-right: 0.25rem;
+}
+
+.count {
+  font-weight: 600;
+  align-self: center;
+}
+
+.name {
+  text-align: left;
+}

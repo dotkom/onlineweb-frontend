@@ -13,6 +13,7 @@ import { onlineGroupsReducer } from 'groups/slices/onlineGroups';
 import { transactionsReducer } from 'payments/reducers/transactions';
 import { paymentsReducer } from 'payments/slices/payments';
 import { shopReducer } from 'shop/reducers';
+import { publicAttendeesReducer } from 'events/slices/publicAttendees';
 
 export const initStore = (initialState: {} = {}) => {
   return configureStore({
@@ -29,6 +30,7 @@ export const initStore = (initialState: {} = {}) => {
       jobTypes: jobTypesReducer,
       onlineGroups: onlineGroupsReducer,
       payments: paymentsReducer,
+      publicAttendees: publicAttendeesReducer,
       ruleBundles: ruleBundlesReducer,
       shop: shopReducer,
       transactions: transactionsReducer,

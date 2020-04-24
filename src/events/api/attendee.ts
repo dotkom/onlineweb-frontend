@@ -3,7 +3,7 @@ import { IAttendee } from 'events/models/Attendee';
 
 import { getUser } from 'authentication/api';
 
-const getEventAttendeeUrl = (eventId: number) => `/api/v1/event/attendance-event/${eventId}/attendee/`;
+const getEventAttendeeUrl = (eventId: number) => `/api/v1/event/attendance-events/${eventId}/attendee/`;
 
 export const getAttendeeForEvent = async (eventId: number) => {
   const user = await getUser();
