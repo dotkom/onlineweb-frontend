@@ -1,29 +1,22 @@
 import classNames from 'classnames';
-import React from 'react';
+import { DateTime } from 'luxon';
+import React, { FC } from 'react';
+import { shallowEqual } from 'react-redux';
 
-import HoverCard from 'common/components/HoverCard';
-import { getEventUrl } from 'core/appUrls';
-import { Link } from 'core/components/Router';
+import { eventSelectors } from 'events/slices/events';
+import { useSelector } from 'core/redux/hooks';
+import { State } from 'core/redux/Store';
 
-import { getEventColor, IEvent } from '../../models/Event';
-import style from './calendar.less';
-import CalendarHoverCard from './CalendarHoverCard';
+import { CalendarEvent } from './CalendarEvent';
+import style from './CalendarTile.less';
 
-export interface ITileProps {
-  events: IEvent[];
-  active?: boolean;
-  day: number;
+interface IProps {
+  active: boolean;
+  date: DateTime;
 }
 
-export const createDayList = (amount: number, start: number): number[] => {
-  const l = [];
-  for (let i = 0; i < amount; i++) {
-    l.push(i + start + 1);
-  }
-  return l;
-};
-
-export const CalendarEventTile = ({ events, active = true, day }: ITileProps) => {
+export const EventCalendarTile: FC<IProps> = ({ date, active }) => {
+  const eventIds = useSelector(selectEventIdsForDate(date), shallowEqual);
   return (
     <div
       className={classNames(style.tile, {
@@ -31,37 +24,25 @@ export const CalendarEventTile = ({ events, active = true, day }: ITileProps) =>
       })}
     >
       <div className={style.tileContent}>
-        <p>{day}</p>
-        {events.map((event) => (
-          <CalendarEvent key={event.id} {...event} />
+        <p>{date.day}</p>
+        {eventIds.map((eventId) => (
+          <CalendarEvent key={eventId} eventId={eventId} />
         ))}
       </div>
     </div>
   );
 };
 
-export const CalendarFillerTiles = ({ days }: { days: number[] }) => (
-  <>
-    {days.map((day) => (
-      <div className={style.tile + ' ' + style.tileInactive} key={`filler-${day}`}>
-        <div className={style.tileContent}>
-          <p>{day}</p>
-        </div>
-      </div>
-    ))}
-  </>
-);
+const isSameDate = (dateA: DateTime, dateB: DateTime): boolean => {
+  return dateA.toISODate() === dateB.toISODate();
+};
 
-export const CalendarEvent = (event: IEvent) => (
-  <Link {...getEventUrl(event.id)}>
-    <a>
-      <HoverCard card={<CalendarHoverCard eventId={event.id} />}>
-        <p className={style.title} style={{ background: getEventColor(event.event_type) }}>
-          {event.title}
-        </p>
-      </HoverCard>
-    </a>
-  </Link>
-);
+const selectEventIdsForDate = (date: DateTime) => (state: State): number[] => {
+  return eventSelectors
+    .selectAll(state)
+    .filter((event) => isSameDate(date, DateTime.fromISO(event.start_date)))
+    .sort((eventA, eventB) => eventA.start_date.localeCompare(eventB.start_date))
+    .map((event) => event.id);
+};
 
-export default CalendarEventTile;
+export default EventCalendarTile;
