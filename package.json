@@ -106,7 +106,8 @@
     "@types/react": "^16.8.1"
   },
   "browserslist": [
-    "last 2 versions",
-    "> 5% in NO"
+    "> 1% in NO",
+    "not ie 11",
+    "not op_mini all"
   ]
 }
