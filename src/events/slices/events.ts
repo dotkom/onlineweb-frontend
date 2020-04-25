@@ -75,26 +75,43 @@ export const fetchEventsInInterval = createAsyncThunk(
   }
 );
 
+export const ATTENDANCE_FILTERS = {
+  SHOW_ALL: 'Alle',
+  WITH_ATTENDANCE: 'Bare med påmelding',
+  CAN_ATTEND: 'Bare der jeg kan delta',
+  IS_ATTENDING: 'Bare der jeg er deltaker',
+};
+
+export type AttendanceFilterType = keyof typeof ATTENDANCE_FILTERS;
+
 interface EventFilters {
   query: string;
   eventTypes: EventTypeEnum[];
-  showOnlyAttendanceEvents: boolean;
+  attendanceFilter: AttendanceFilterType;
+  page: number;
 }
 
 export const filterEvents = createAsyncThunk('events/fitler', async (filters: EventFilters, { dispatch, getState }) => {
   const state = getState() as State;
-  const { pageSize, page } = state.events.search;
+  const { pageSize } = state.events.search;
+  const { attendanceFilter, eventTypes, page, query } = filters;
+
   const response = await dispatch(
     fetchEvents({
-      query: filters.query,
-      attendance_event__isnull: filters.showOnlyAttendanceEvents ? 'False' : undefined,
-      event_type: filters.eventTypes,
-      page_size: pageSize,
+      query,
+      event_type: eventTypes,
+      attendance_event__isnull: attendanceFilter === 'WITH_ATTENDANCE' ? 'False' : undefined,
+      can_attend: attendanceFilter === 'CAN_ATTEND' ? 'True' : undefined,
+      is_attendee: attendanceFilter === 'IS_ATTENDING' ? 'True' : undefined,
       page,
+      page_size: pageSize,
       ordering: '-event_start',
     })
   );
-  return unwrapResult(response);
+  return {
+    ...unwrapResult(response),
+    page,
+  };
 });
 
 interface ISearch {
@@ -132,7 +149,14 @@ const INITIAL_STATE: IState = {
 export const eventsSlice = createSlice({
   name: 'events',
   initialState: eventsAdapter.getInitialState(INITIAL_STATE),
-  reducers: {},
+  reducers: {
+    nextEventPage(state) {
+      state.search.page++;
+    },
+    resetEventPage(state) {
+      state.search.page = 1;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchEvents.pending, (state) => {
       state.loading = 'pending';
@@ -164,10 +188,15 @@ export const eventsSlice = createSlice({
     builder.addCase(filterEvents.fulfilled, (state, action) => {
       // We only care about the result of the latest search request, any others will only hinder performance.
       if (state.search.requestId === action.meta.requestId) {
-        const { results, count } = action.payload;
+        const { results, count, page } = action.payload;
         state.search.loading = 'idle';
         state.search.count = count;
-        state.search.ids = results.map((event) => event.id);
+        const resultIds = results.map((event) => event.id);
+        if (page === 1) {
+          state.search.ids = resultIds;
+        } else {
+          state.search.ids = state.search.ids.concat(resultIds);
+        }
       }
     });
     builder.addCase(filterEvents.rejected, (state, action) => {
@@ -176,5 +205,7 @@ export const eventsSlice = createSlice({
     });
   },
 });
+
+export const { nextEventPage, resetEventPage } = eventsSlice.actions;
 
 export const eventsReducer = eventsSlice.reducer;
