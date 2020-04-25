@@ -9,17 +9,7 @@ import { isArrayEqual } from 'common/utils/equality';
 
 export const SearchResults: FC = () => {
   const eventIds = useSelector(selectSearchResultEventIds(), isArrayEqual());
-  const isPending = useSelector(selectIsSearchPending());
-  const count = useSelector(selectSearchCount());
-  return (
-    <>
-      <div>
-        <p>Antall resultater: {count}</p>
-        <p>{isPending && 'Søker...'}</p>
-      </div>
-      <EventList eventIds={eventIds} />
-    </>
-  );
+  return <EventList eventIds={eventIds} />;
 };
 
 const selectSearchResultEventIds = () => (state: State) => {
@@ -28,12 +18,4 @@ const selectSearchResultEventIds = () => (state: State) => {
     .selectIds(state)
     .map(Number)
     .filter((eventId) => resultIds.some((resultId) => resultId === eventId));
-};
-
-const selectIsSearchPending = () => (state: State) => {
-  return state.events.search.loading === 'pending';
-};
-
-const selectSearchCount = () => (state: State) => {
-  return state.events.search.count;
 };
