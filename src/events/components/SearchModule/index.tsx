@@ -8,7 +8,6 @@ import { filterEvents, AttendanceFilterType, ATTENDANCE_FILTERS, resetEventPage 
 
 import style from './search.less';
 import { SelectEventTypes } from './SelectEventTypes';
-import { NextPageObserver } from './NextPageObserver';
 
 const SearchModule: FC = () => {
   const dispatch = useDispatch();
@@ -41,7 +40,6 @@ const SearchModule: FC = () => {
           ))}
         </select>
       </div>
-      <NextPageObserver />
     </div>
   );
 };
