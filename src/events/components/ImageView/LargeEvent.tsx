@@ -11,12 +11,14 @@ import { selectEventCapacity } from 'events/selectors/event';
 
 import EventImage from '../EventImage';
 import style from './image.less';
+import { eventSelectors } from 'events/slices/events';
 
-export interface IProps {
-  event: IEvent;
+interface IProps {
+  eventId: number;
 }
 
-const LargeEvent: FC<IProps> = ({ event }) => {
+const LargeEvent: FC<IProps> = ({ eventId }) => {
+  const event = useSelector((state) => eventSelectors.selectById(state, eventId) as IEvent);
   const { images, event_type, event_type_display, title, start_date, id } = event;
   const capacity = useSelector(selectEventCapacity(id));
   const color = getEventColor(event_type);
