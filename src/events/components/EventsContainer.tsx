@@ -24,17 +24,10 @@ export const EventContainer = () => {
   const [eventView, setEventView] = useState<EventView>(EventView.IMAGE);
   const View = getView(eventView);
 
-  const [accessible, setAccessible] = useState(false);
-  const toggleAccessible = () => setAccessible(!accessible);
   return (
     <section className={style.section}>
-      <EventsHeader
-        changeView={setEventView}
-        toggleAccessible={toggleAccessible}
-        accessible={accessible}
-        view={eventView}
-      />
-      <View accessible={accessible} />
+      <EventsHeader changeView={setEventView} view={eventView} />
+      <View />
     </section>
   );
 };
