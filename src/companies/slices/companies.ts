@@ -1,7 +1,7 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
 
-import { retrieveCompany } from 'companies/api';
-import { ICompany } from 'core/models/Company';
+import { retrieveCompany, listCompanies } from 'companies/api';
+import { ICompany } from 'companies/models/Company';
 import { State } from 'core/redux/Store';
 
 const companiesAdapter = createEntityAdapter<ICompany>({
