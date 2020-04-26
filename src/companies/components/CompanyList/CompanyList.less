@@ -1,0 +1,34 @@
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
+
+@itemMinMax: minmax(min-content, 350px);
+
+.companiesContainer {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, @itemMinMax);
+  gap: 24px;
+
+  @media screen and (max-width: @owTabletBreakpoint) {
+    grid-template-columns: repeat(2, @itemMinMax);
+  }
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: repeat(1, @itemMinMax);
+  }
+}
+
+.intro {
+  margin: 20px 0;
+
+  p {
+    word-break: break-word;
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    margin-bottom: 10px;
+  }
+}
