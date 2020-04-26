@@ -13,6 +13,17 @@ const companiesAdapter = createEntityAdapter<ICompany>({
 
 export const companySelectors = companiesAdapter.getSelectors<State>((state) => state.companies);
 
+export const fetchCompanyList = createAsyncThunk('companies/fetchList', async () => {
+  const response = await listCompanies({
+    page_size: 12,
+  });
+  if (response.status === 'success') {
+    return response.data;
+  } else {
+    throw response.errors;
+  }
+});
+
 export const fetchCompanyById = createAsyncThunk('companies/fetchById', async (companyId: number) => {
   const response = await retrieveCompany(companyId);
   if (response.status === 'success') {
@@ -56,6 +67,18 @@ export const companiesSlice = createSlice({
       companiesAdapter.addOne(state, action.payload);
     });
     builder.addCase(fetchCompanyById.rejected, (state, action) => {
+      state.loading = 'idle';
+      state.error = action.error;
+    });
+    builder.addCase(fetchCompanyList.pending, (state) => {
+      state.loading = 'pending';
+    });
+    builder.addCase(fetchCompanyList.fulfilled, (state, action) => {
+      state.loading = 'idle';
+      const companies = action.payload.results;
+      companiesAdapter.addMany(state, companies);
+    });
+    builder.addCase(fetchCompanyList.rejected, (state, action) => {
       state.loading = 'idle';
       state.error = action.error;
     });
