@@ -1,22 +1,14 @@
 import { DateTime } from 'luxon';
-import React, { useEffect, useMemo } from 'react';
-
-import { EventTypeEnum, IEvent, IEventViewProps } from 'events/models/Event';
+import React, { useEffect, FC } from 'react';
+import { shallowEqual } from 'react-redux';
 
 import { useDispatch, useSelector } from 'core/redux/hooks';
+import { State } from 'core/redux/Store';
+import { EventTypeEnum } from 'events/models/Event';
 import { eventSelectors, fetchImageEvents } from 'events/slices/events';
+
 import EventColumn from './EventColumn';
 import style from './image.less';
-
-export type IProps = IEventViewProps;
-
-const filterEventTypes = (events: IEvent[], types: EventTypeEnum[]) => {
-  return events
-    .filter((event) => types.includes(event.event_type))
-    .filter((event) => {
-      return DateTime.fromISO(event.start_date) >= DateTime.local();
-    });
-};
 
 const LEFT = [EventTypeEnum.BEDPRES];
 const MIDDLE = [EventTypeEnum.KURS];
@@ -29,51 +21,37 @@ const RIGHT = [
   EventTypeEnum.KJELLEREN,
 ];
 
-export interface IState {
-  eventsLeft: IEvent[];
-  eventsMiddle: IEvent[];
-  eventsRight: IEvent[];
-}
-
-const INITIAL_STATE: IState = {
-  eventsLeft: [],
-  eventsMiddle: [],
-  eventsRight: [],
-};
-
-const isPopulated = (imageEvents: IState) => {
-  return !!imageEvents.eventsLeft.length || !!imageEvents.eventsMiddle.length || !!imageEvents.eventsRight.length;
-};
-
-export const ImageView = ({}: IProps) => {
+export const ImageView: FC = () => {
   const dispatch = useDispatch();
-  const eventList = useSelector((state) => eventSelectors.selectAll(state));
+  const leftEventIds = useSelector(selectFrontPageEventIdsOfTypes(LEFT), shallowEqual);
+  const middleEventIds = useSelector(selectFrontPageEventIdsOfTypes(MIDDLE), shallowEqual);
+  const rightEventIds = useSelector(selectFrontPageEventIdsOfTypes(RIGHT), shallowEqual);
 
   /** Fetch events to store on mount */
   useEffect(() => {
     dispatch(fetchImageEvents());
   }, []);
 
-  const imageEvents = useMemo(
-    () => ({
-      eventsLeft: filterEventTypes(eventList, LEFT),
-      eventsMiddle: filterEventTypes(eventList, MIDDLE),
-      eventsRight: filterEventTypes(eventList, RIGHT),
-    }),
-    [eventList]
-  );
-
-  const displayEvents = !isPopulated(imageEvents) ? INITIAL_STATE : imageEvents;
-
   return (
     <>
       <div className={style.eventGrid}>
-        <EventColumn events={displayEvents.eventsLeft} event_type={EventTypeEnum.BEDPRES} />
-        <EventColumn events={displayEvents.eventsMiddle} event_type={EventTypeEnum.KURS} />
-        <EventColumn events={displayEvents.eventsRight} event_type={EventTypeEnum.SOSIALT} />
+        <EventColumn eventIds={leftEventIds} eventType={EventTypeEnum.BEDPRES} />
+        <EventColumn eventIds={middleEventIds} eventType={EventTypeEnum.KURS} />
+        <EventColumn eventIds={rightEventIds} eventType={EventTypeEnum.SOSIALT} />
       </div>
     </>
   );
+};
+
+const selectFrontPageEventIdsOfTypes = (eventTypes: EventTypeEnum[]) => (state: State) => {
+  const now = DateTime.local();
+  return eventSelectors
+    .selectAll(state)
+    .filter((event) => eventTypes.some((eventType) => event.event_type === eventType))
+    .filter((event) => DateTime.fromISO(event.start_date) >= now)
+    .sort((eventA, eventB) => eventA.start_date.localeCompare(eventB.start_date))
+    .slice(0, 4)
+    .map((event) => event.id);
 };
 
 export default ImageView;
