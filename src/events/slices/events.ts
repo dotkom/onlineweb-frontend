@@ -30,7 +30,7 @@ export const fetchEventList = createAsyncThunk('events/fetchList', async (_, { d
   const response = await dispatch(
     fetchEvents({
       event_end__gte: DateTime.local().toISODate(),
-      page_size: 10,
+      page_size: 20,
     })
   );
   return unwrapResult(response);

@@ -1,10 +1,6 @@
 import { IUserName } from 'authentication/models/User';
 import IResponsiveImage from 'common/models/ResponsiveImage';
 
-export interface IEventViewProps {
-  accessible: boolean;
-}
-
 export enum EventTypeEnum {
   NONE,
   SOSIALT,
