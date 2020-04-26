@@ -72,10 +72,8 @@ const asyncReducer = <T, E>(state: IState<T, E>, action: IAction<T, E>): IState<
 };
 
 // disable no any, in this case we don't lose any type safety by using any becasue typescript can infer the function type based on the input
-/* tslint:disable:no-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-// disable no shadowed variable. In order to find out what our return type should be we need to unpack the Promise<T> that the supplied function returns
-/* tslint:disable:no-shadowed-variable */
 type FuncSig<T> = (...args: any[]) => Promise<T>;
 
 // from: https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-inference-in-conditional-types
@@ -98,7 +96,6 @@ export const useAsync = <X extends FuncSig<any> = FuncSig<any>>(
   return requestState;
 };
 
-// @ts-ignore
 export const useAsyncDispatch = <X extends FuncSig<any> = FuncSig<any>>(
   func: X
 ): [IState<Unpacked<ReturnType<typeof func>>, unknown>, (...args: Parameters<typeof func>) => () => void] => {
@@ -150,7 +147,6 @@ export const useAsyncDispatch = <X extends FuncSig<any> = FuncSig<any>>(
   return [requestState, doRequest];
 };
 
-/* tslint:enable:no-any */
-/* tslint:enable:no-shadowed-variable */
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export default useAsync;
