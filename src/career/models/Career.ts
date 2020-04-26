@@ -1,4 +1,4 @@
-import { ICompany } from 'core/models/Company';
+import { ICompany } from 'companies/models/Company';
 
 export interface ICareerOpportunity {
   id: number;

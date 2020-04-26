@@ -1,7 +1,7 @@
 import { ICareerOpportunity, IEmployment, ILocation, TagTypes } from 'career/models/Career';
 import { listResource, retrieveResource } from 'common/resources';
 import { IQueryObject } from 'common/utils/queryString';
-import { ICompany } from 'core/models/Company';
+import { ICompany } from 'companies/models/Company';
 
 const API_URL = '/api/v1/career/';
 
