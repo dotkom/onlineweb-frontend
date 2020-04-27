@@ -1,0 +1,13 @@
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
+
+.layout {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 3fr 1fr;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    grid-template-columns: 1fr;
+  }
+}
