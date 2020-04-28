@@ -53,15 +53,22 @@ export interface ISelectable<T, K> {
 }
 
 export interface IProps<T, K> {
-  onChange: (value: ValueType<ISelectable<T, K>>) => void;
+  onChange: (value: Array<ISelectable<T, K>>) => void;
   selected: Array<ISelectable<T, K>>;
   selectOptions: Array<ISelectable<T, K>>;
   placeholder: string;
   getColor: (data: T) => string;
 }
 
-export function SelectMultiple<T, K>({ selected, selectOptions, getColor, ...props }: IProps<T, K>) {
+export function SelectMultiple<T, K>({ selected, selectOptions, getColor, onChange, ...props }: IProps<T, K>) {
   const optionStyles = getOptionStyles(getColor);
+  const handleChange = (value: ValueType<ISelectable<T, K>>) => {
+    if (value instanceof Array) {
+      onChange(value);
+    } else {
+      onChange([]);
+    }
+  };
   return (
     <Select<ISelectable<T, K>>
       options={selectOptions}
@@ -71,6 +78,7 @@ export function SelectMultiple<T, K>({ selected, selectOptions, getColor, ...pro
       components={makeAnimated()}
       closeMenuOnSelect={false}
       className={style.eventType}
+      onChange={handleChange}
       {...props}
     />
   );

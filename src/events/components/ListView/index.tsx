@@ -1,50 +1,31 @@
-import React, { useEffect } from 'react';
-
-import { getEventUrl } from 'core/appUrls';
-import { Link } from 'core/components/Router';
-import { useDebouncedFilteredEventList } from 'events/hooks/useEventsRepoState';
-import { isOngoingOrFuture } from 'events/utils/eventTimeUtils';
+import React, { useEffect, FC } from 'react';
 
 import { useDispatch, useSelector } from 'core/redux/hooks';
 import { eventSelectors, fetchEventList } from 'events/slices/events';
-import { IEvent, IEventViewProps } from '../../models/Event';
-import style from './list.less';
-import ListEvent from './ListEvent';
 
-export interface IProps extends IEventViewProps {
-  filtered: boolean;
-}
+import { EventList } from './EventList';
+import { State } from 'core/redux/Store';
+import { DateTime } from 'luxon';
+import { shallowEqual } from 'react-redux';
 
-const filterListEvents = (events: IEvent[]) => {
-  return events.filter((event) => isOngoingOrFuture(event)).slice(0, 18);
-};
-
-export const ListView = ({ filtered }: IProps) => {
+export const ListView: FC = () => {
   const dispatch = useDispatch();
-  const eventList = useSelector((state) => eventSelectors.selectAll(state));
-  const filteredList = useDebouncedFilteredEventList();
+  const eventIds = useSelector(selectFutureEventIds(), shallowEqual);
 
   useEffect(() => {
     dispatch(fetchEventList());
   }, []);
 
-  const events = filtered ? filteredList : filterListEvents(eventList);
+  return <EventList eventIds={eventIds} />;
+};
 
-  const displayEvents = events.length ? events : [];
-
-  return (
-    <>
-      <div className={style.grid}>
-        {displayEvents.map((event) => (
-          <Link {...getEventUrl(event.id)} key={event.id}>
-            <a>
-              <ListEvent event={event} />
-            </a>
-          </Link>
-        ))}
-      </div>
-    </>
-  );
+const selectFutureEventIds = () => (state: State) => {
+  const now = DateTime.local();
+  const events = eventSelectors.selectAll(state);
+  return events
+    .filter((event) => DateTime.fromISO(event.start_date) > now)
+    .slice(0, 20)
+    .map((event) => event.id);
 };
 
 export default ListView;
