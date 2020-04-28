@@ -15,15 +15,15 @@ export const NextPageObserver: FC = () => {
   const [observer, ref] = useIntersection();
   const [renderCount, setRenderCount] = useState(0); // TODO: Implement inside useIntersection somehow.
 
-  const isSeachCompleted = totalCount === currentCount;
+  const isSearchCompleted = totalCount === currentCount;
 
   useEffect(() => {
-    if (observer && observer.isIntersecting && renderCount !== 0 && !isSeachCompleted && !isPending) {
+    if (observer && observer.isIntersecting && renderCount !== 0 && !isSearchCompleted && !isPending) {
       dispatch(nextEventPage());
     }
     // TODO: Figure out why this is needed, and implement it inside the hook.
     setRenderCount((current) => current + 1);
-  }, [dispatch, observer, isSeachCompleted, isPending]);
+  }, [dispatch, observer, isSearchCompleted, isPending]);
 
   return (
     <>
