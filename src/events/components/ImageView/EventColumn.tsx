@@ -1,27 +1,28 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-import { IEvent } from 'events/models/Event';
 import { EventTypeEnum } from '../../models/Event';
 import style from './image.less';
 import LargeEvent from './LargeEvent';
 import LargeEventPlaceholder from './LargeEventPlaceholder';
-import SmallEventColumn from './SmallEvent';
+import SmallEvent from './SmallEvent';
 
-export interface IProps {
-  events: IEvent[];
-  event_type: EventTypeEnum;
+interface IProps {
+  eventIds: number[];
+  eventType: EventTypeEnum;
 }
 
-const EventColumn = ({ events, event_type }: IProps) => {
+const EventColumn: FC<IProps> = ({ eventIds, eventType }: IProps) => {
   return (
     <div className={style.eventColumn}>
-      {events[0] ? (
+      {eventIds[0] ? (
         <>
-          <LargeEvent event={events[0]} />
-          <SmallEventColumn events={events.slice(1, 4)} />
+          <LargeEvent eventId={eventIds[0]} />
+          {eventIds.slice(1, 4).map((eventId) => (
+            <SmallEvent key={eventId} eventId={eventId} />
+          ))}
         </>
       ) : (
-        <LargeEventPlaceholder event_type={event_type} />
+        <LargeEventPlaceholder eventType={eventType} />
       )}
     </div>
   );

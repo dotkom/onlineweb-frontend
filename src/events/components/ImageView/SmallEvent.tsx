@@ -8,14 +8,16 @@ import { Link } from 'core/components/Router';
 import { useSelector } from 'core/redux/hooks';
 import { getEventColor, IEvent } from 'events/models/Event';
 import { selectEventCapacity } from 'events/selectors/event';
+import { eventSelectors } from 'events/slices/events';
 
 import style from './image.less';
 
 interface IProps {
-  event: IEvent;
+  eventId: number;
 }
 
-const SmallEvent: FC<IProps> = ({ event }) => {
+export const SmallEvent: FC<IProps> = ({ eventId }) => {
+  const event = useSelector((state) => eventSelectors.selectById(state, eventId) as IEvent);
   const capacity = useSelector(selectEventCapacity(event.id));
   return (
     <Link {...getEventUrl(event.id)}>
@@ -37,14 +39,4 @@ const SmallEvent: FC<IProps> = ({ event }) => {
   );
 };
 
-const SmallEventColumn = ({ events }: { events: IEvent[] }) => {
-  return (
-    <>
-      {events.map((event) => (
-        <SmallEvent key={event.id} event={event} />
-      ))}
-    </>
-  );
-};
-
-export default SmallEventColumn;
+export default SmallEvent;

@@ -1,28 +1,28 @@
 import { getUser } from 'authentication/api';
 import { IAuthUser } from 'authentication/models/User';
-import { get, getAllPages, IBaseAPIParameters } from 'common/utils/api';
+import { get, getAllPages, IBaseAPIParameters, IAPIData } from 'common/utils/api';
 import { EventTypeEnum, IAttendanceEvent, IEvent } from '../models/Event';
+import { listResource } from 'common/resources';
+import { IQueryObject } from 'common/utils/queryString';
 
-export interface IEventAPIParameters extends IBaseAPIParameters {
+export interface IEventAPIParameters extends IQueryObject {
   event_start__gte?: string;
   event_start__lte?: string;
   event_end__gte?: string;
   event_end__lte?: string;
   event_type?: EventTypeEnum[] | EventTypeEnum;
   is_attendee?: 'True' | 'False';
-}
-
-export interface IAPIData<T> {
-  results: T[];
-  next: string | null;
-  previous: string | null;
-  count: number;
+  query?: string;
+  attendance_event__isnull?: 'True' | 'False';
+  ordering?: string;
 }
 
 const EVENTS_API_URL = '/api/v1/event/events/';
 const ATTENDANCE_EVENT_API_URL = '/api/v1/event/attendance-events/';
 
-export const getEvents = async (args?: IEventAPIParameters): Promise<IEvent[]> => {
+export const listEvents = listResource<IEvent, IEventAPIParameters>(EVENTS_API_URL);
+
+export const getEvents = async (args?: IEventAPIParameters & IBaseAPIParameters): Promise<IEvent[]> => {
   const data = await get<IAPIData<IEvent>>(EVENTS_API_URL, { format: 'json', ...args });
   return data.results;
 };
