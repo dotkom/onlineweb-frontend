@@ -14,7 +14,7 @@ export type ImageSizes = IResponsiveImageSizes;
 export type ImageSize = keyof ImageSizes;
 
 export interface IProps extends ImgHTMLAttributes<HTMLImageElement> {
-  image: IResponsiveImage;
+  image?: IResponsiveImage;
   size: ImageSize;
   type: ImageType;
   autoSize?: boolean;
@@ -79,8 +79,8 @@ export const ResponsiveImage: FC<IProps> = ({ image, size, alt, type, autoSize =
     }
   }, [boundingRect]);
 
-  const defaultImage = image[responsiveSize];
-  const altText = alt || image.name;
+  const defaultImage = image ? image[responsiveSize] : '';
+  const altText = alt || image?.name;
 
   return <img {...props} ref={ref} src={DOMAIN + defaultImage} alt={altText} />;
 };
