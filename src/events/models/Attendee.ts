@@ -21,3 +21,9 @@ export interface IPublicAttedee {
   year_of_study: number;
   field_of_study: string;
 }
+
+export interface IAttendResponse {
+  allow_pictures: boolean;
+  show_as_attending_event: boolean;
+  note: string;
+}
