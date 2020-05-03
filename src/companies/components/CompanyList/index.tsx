@@ -1,10 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
 import Heading from 'common/components/Heading';
-import { State } from 'core/redux/Store';
-import { companySelectors, fetchCompanyList } from 'companies/slices/companies';
-import { useSelector, useDispatch } from 'core/redux/hooks';
-import { CompanyCard } from './CompanyCard';
+
+import { CompanyResults } from './CompanyResults';
+import { NextPageObserver } from './NextPageObserver';
+import { SearchBar } from './SearchBar';
 
 import style from './CompanyList.less';
 
@@ -20,26 +20,13 @@ const ABOUT_COMPANIES = md`
 `;
 
 export const CompanyList: FC = () => {
-  const dispatch = useDispatch();
-  const companyIds = useSelector(selectCompanyResultIds());
-
-  useEffect(() => {
-    dispatch(fetchCompanyList());
-  }, []);
-
   return (
     <section>
       <Heading title="Bedrifter" />
       <div className={style.intro}>{ABOUT_COMPANIES}</div>
-      <div className={style.companiesContainer}>
-        {companyIds.map((companyId) => (
-          <CompanyCard key={companyId} companyId={companyId} />
-        ))}
-      </div>
+      <SearchBar />
+      <CompanyResults />
+      <NextPageObserver />
     </section>
   );
-};
-
-const selectCompanyResultIds = () => (state: State) => {
-  return companySelectors.selectIds(state).map(Number);
 };
