@@ -6,8 +6,6 @@ import { listResource } from 'common/resources';
 import { IQueryObject } from 'common/utils/queryString';
 import { EventTypeEnum, IAttendanceEvent, IEvent } from '../models/Event';
 import { IExtra } from '../models/Extras';
-import { IPayment } from 'payments/models/Payment';
-import { IPublicAttedee } from 'events/models/Attendee';
 
 export interface IEventAPIParameters extends IQueryObject {
   event_start__gte?: string;
@@ -23,9 +21,7 @@ export interface IEventAPIParameters extends IQueryObject {
 
 const EVENTS_API_URL = '/api/v1/event/events/';
 const ATTENDANCE_EVENT_API_URL = '/api/v1/event/attendance-events/';
-const EVENT_PAYMENT_URL = '/payment/';
 const EVENT_EXTRAS_URL = '/extras/';
-const EVENT_PUBLIC_ATTENDEES = '/public-attendees/';
 
 export const listEvents = listResource<IEvent, IEventAPIParameters>(EVENTS_API_URL);
 
@@ -54,30 +50,12 @@ export const getAttendanceEvent = async (id: number): Promise<IAttendanceEvent> 
   return attendanceEvent;
 };
 
-export const getEventPayment = async (event_id: number): Promise<IPayment> => {
+export const getEventExtras = async (eventId: number): Promise<IExtra[]> => {
   try {
-    const ret = await get<IPayment>(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PAYMENT_URL}`);
-    return ret;
-  } catch (response) {
-    throw new Error('Kunne ikke hente betalingsinformasjon for arrangementet!');
-  }
-};
-
-export const getEventExtras = async (event_id: number): Promise<IExtra[]> => {
-  try {
-    const ret = await get<IExtra[]>(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_EXTRAS_URL}`);
+    const ret = await get<IExtra[]>(`${ATTENDANCE_EVENT_API_URL}${eventId}${EVENT_EXTRAS_URL}`);
     return ret;
   } catch (response) {
     throw new Error('Kunne ikke hente valgmuligheter for arrangementet!');
-  }
-};
-
-export const getPublicAttends = async (event_id: number): Promise<IPublicAttedee[]> => {
-  try {
-    const ret: IPublicAttedee[] = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PUBLIC_ATTENDEES}`);
-    return ret;
-  } catch (response) {
-    throw new Error('Kunne hente påmeldingsliste!');
   }
 };
 
