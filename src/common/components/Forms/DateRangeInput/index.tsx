@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import React, { FC, useRef } from 'react';
-import { DayPickerProps } from 'react-day-picker/types/props';
+import { DayPickerProps } from 'react-day-picker/types';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 
 import { FIRST_DAY_OF_WEEK, LOCALE, MONTHS, WEEKDAYS_LONG, WEEKDAYS_SHORT } from 'common/constants/intl';
