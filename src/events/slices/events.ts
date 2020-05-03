@@ -75,6 +75,20 @@ export const fetchEventsInInterval = createAsyncThunk(
   }
 );
 
+export const fetchEventsForCompany = createAsyncThunk(
+  'events/fetchForCompany',
+  async ({ companyId, endDate }: { companyId: number; endDate?: DateTime }, { dispatch }) => {
+    const events = await dispatch(
+      fetchEvents({
+        event_end__gte: endDate?.toISODate(),
+        companies: companyId,
+        page_size: 100,
+      })
+    );
+    return events;
+  }
+);
+
 export const ATTENDANCE_FILTERS = {
   SHOW_ALL: 'Alle',
   WITH_ATTENDANCE: 'Bare med påmelding',
