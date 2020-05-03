@@ -2,7 +2,7 @@ import { get, post, deleteR } from 'common/utils/api';
 
 import { getUser } from 'authentication/api';
 
-import { IAttendee, IAttendResponse } from 'events/models/Attendee';
+import { IAttendee } from 'events/models/Attendee';
 import { IAuthUser } from 'authentication/models/User';
 
 
@@ -25,13 +25,13 @@ export const getAttendeeForEvent = async (eventId: number): Promise<IAttendee> =
 
 
 
-export const userAttendEvent = async (event_id: number, captcha: string, options?: IAttendEventOptions, user?: IAuthUser): Promise<IAttendResponse> => {
+export const userAttendEvent = async (event_id: number, captcha: string, options?: IAttendEventOptions, user?: IAuthUser): Promise<IAttendee> => {
   if(!user){
     user = await getUser();
   }
   
   try{
-    const ret = await post<IAttendResponse>(getUserAttendUrl(event_id), {
+    const ret = await post<IAttendee>(getUserAttendUrl(event_id), {
       show_as_attending_event: options?.showAsAttending,
       allow_pictures: options?.allowPictures,
       extras: options?.extras,
