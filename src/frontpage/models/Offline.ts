@@ -6,5 +6,5 @@ export interface IOfflineIssue {
   issue: string;
   release_date: string;
   title: string;
-  image?: IResponsiveImage;
+  image: IResponsiveImage | null;
 }
