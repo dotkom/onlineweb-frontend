@@ -19,7 +19,7 @@ export const CareerOppotunity: FC<IProps> = ({ oppotunity }) => {
         <p className={style.name}>{oppotunity.employment.name}</p>
         <p className={style.count}>{oppotunity.title}</p>
         <p>{oppotunity.location.map((location) => location.name)}</p>
-        <p className={style.count}>{deadline}</p>
+        <p className={style.count}>{deadline || 'Ikke spesifisert'}</p>
       </a>
     </Link>
   );
