@@ -37,8 +37,12 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
   }
   const headers = {
     ...options.headers,
-    Authorization: options.user ? `Bearer ${options.user.access_token}` : '',
-  };
+  } as Record<string, string>;
+
+  if (options.user) {
+    headers['Authorization'] = `Bearer ${options.user.access_token}`;
+  }
+
   const requestOptions = { ...restOptions, headers };
   const response = await fetch(url, requestOptions);
   if (response.status === 204) {

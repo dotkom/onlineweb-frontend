@@ -11,7 +11,7 @@ type ClientResponseType = { response_types: number[] } & Omit<IOidcClient, 'resp
 // fetches specific client
 export const getClient = async (id: number): Promise<IOidcClient> => {
   try {
-    const client = await get<ClientResponseType>(API_BASE + 'clients/' + id);
+    const client = await get<ClientResponseType>(API_BASE + 'clients/' + id + '/');
     const responseTypes = await getResponseTypes();
     const newResponseTypes = client.response_types.flatMap((response_type) => {
       const responseType = responseTypes.get(response_type);
