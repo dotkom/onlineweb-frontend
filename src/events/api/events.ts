@@ -9,7 +9,6 @@ import { IExtra } from '../models/Extras';
 import { IPayment } from 'payments/models/Payment';
 import { IPublicAttedee } from 'events/models/Attendee';
 
-
 export interface IEventAPIParameters extends IQueryObject {
   event_start__gte?: string;
   event_start__lte?: string;
@@ -24,14 +23,11 @@ export interface IEventAPIParameters extends IQueryObject {
 
 const EVENTS_API_URL = '/api/v1/event/events/';
 const ATTENDANCE_EVENT_API_URL = '/api/v1/event/attendance-events/';
-const EVENT_PAYMENT_URL =  '/payment/';
-const EVENT_EXTRAS_URL = '/extras/'
-const EVENT_PUBLIC_ATTENDEES = '/public-attendees/'
+const EVENT_PAYMENT_URL = '/payment/';
+const EVENT_EXTRAS_URL = '/extras/';
+const EVENT_PUBLIC_ATTENDEES = '/public-attendees/';
 
 export const listEvents = listResource<IEvent, IEventAPIParameters>(EVENTS_API_URL);
-
-
-
 
 export const getEvents = async (args?: IEventAPIParameters & IBaseAPIParameters): Promise<IEvent[]> => {
   const data = await get<IAPIData<IEvent>>(EVENTS_API_URL, { format: 'json', ...args });
@@ -58,36 +54,32 @@ export const getAttendanceEvent = async (id: number): Promise<IAttendanceEvent> 
   return attendanceEvent;
 };
 
-
 export const getEventPayment = async (event_id: number): Promise<IPayment> => {
-  
-  try{
+  try {
     const ret = await get<IPayment>(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PAYMENT_URL}`);
     return ret;
-  } catch(response){
-    throw new Error("Kunne ikke hente betalingsinformasjon for arrangementet!");
+  } catch (response) {
+    throw new Error('Kunne ikke hente betalingsinformasjon for arrangementet!');
   }
-}
+};
 
 export const getEventExtras = async (event_id: number): Promise<IExtra[]> => {
-  
-  try{
+  try {
     const ret = await get<IExtra[]>(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_EXTRAS_URL}`);
     return ret;
-  } catch(response){
-    throw new Error("Kunne ikke hente valgmuligheter for arrangementet!");
+  } catch (response) {
+    throw new Error('Kunne ikke hente valgmuligheter for arrangementet!');
   }
-}
+};
 
 export const getPublicAttends = async (event_id: number): Promise<IPublicAttedee[]> => {
-  try{
-    const ret: IPublicAttedee[] = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PUBLIC_ATTENDEES}`)
+  try {
+    const ret: IPublicAttedee[] = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PUBLIC_ATTENDEES}`);
     return ret;
-  } catch(response){
-    throw new Error("Kunne hente påmeldingsliste!");
+  } catch (response) {
+    throw new Error('Kunne hente påmeldingsliste!');
   }
-}
-
+};
 
 export interface IControlledFetch<T> {
   controller: AbortController;
