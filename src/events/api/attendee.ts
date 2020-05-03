@@ -22,7 +22,7 @@ export const getAttendeeForEvent = async (eventId: number): Promise<IAttendee> =
 };
 
 export const userAttendEvent = async (
-  event_id: number,
+  eventId: number,
   captcha: string,
   options?: IAttendEventOptions,
   user?: IAuthUser
@@ -33,7 +33,7 @@ export const userAttendEvent = async (
 
   try {
     const ret = await post<IAttendee>(
-      getUserAttendUrl(event_id),
+      getUserAttendUrl(eventId),
       {
         show_as_attending_event: options?.showAsAttending,
         allow_pictures: options?.allowPictures,
@@ -49,13 +49,13 @@ export const userAttendEvent = async (
   }
 };
 
-export const userUnattendEvent = async (event_id: number, user?: IAuthUser): Promise<unknown> => {
+export const userUnattendEvent = async (eventId: number, user?: IAuthUser): Promise<unknown> => {
   if (!user) {
     user = await getUser();
   }
 
   try {
-    const ret = await deleteR(getUserUnAttendUrl(event_id), undefined, { user });
+    const ret = await deleteR(getUserUnAttendUrl(eventId), undefined, { user });
     return ret;
   } catch (response) {
     throw new Error('Kunne ikke melde brukeren av dette arrangementet!');
