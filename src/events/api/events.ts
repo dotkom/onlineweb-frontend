@@ -6,6 +6,8 @@ import { listResource } from 'common/resources';
 import { IQueryObject } from 'common/utils/queryString';
 import { EventTypeEnum, IAttendanceEvent, IEvent } from '../models/Event';
 import { IExtra } from '../models/Extras';
+import { IPayment } from 'payments/models/Payment';
+import { IPublicAttedee, IAttendee, IAttendResponse } from 'events/models/Attendee';
 
 
 export interface IEventAPIParameters extends IQueryObject {
@@ -67,10 +69,10 @@ interface IAttendEventOptions {
 
 }
 
-export const getEventPayment = async (event_id: number): Promise<unknown> => {
+export const getEventPayment = async (event_id: number): Promise<IPayment> => {
   
   try{
-    const ret = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PAYMENT_URL}`);
+    const ret = await get<IPayment>(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PAYMENT_URL}`);
     return ret;
   } catch(response){
     throw new Error("Kunne ikke hente betalingsinformasjon for arrangementet!");
@@ -80,33 +82,33 @@ export const getEventPayment = async (event_id: number): Promise<unknown> => {
 export const getEventExtras = async (event_id: number): Promise<IExtra[]> => {
   
   try{
-    const ret = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_EXTRAS_URL}`);
+    const ret = await get<IExtra[]>(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_EXTRAS_URL}`);
     return ret;
   } catch(response){
     throw new Error("Kunne ikke hente valgmuligheter for arrangementet!");
   }
 }
 
-export const getEventAttendee = async (event_id: number, user?: IAuthUser): Promise<unknown> => {
+export const getEventAttendee = async (event_id: number, user?: IAuthUser): Promise<IAttendee> => {
   if(!user){
     user = await getUser();
   }
 
   try{
-    const ret = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_ATTENDEE_URL}`, undefined, {user});
+    const ret = await get<IAttendee>(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_ATTENDEE_URL}`, undefined, {user});
     return ret;
   } catch(response){
     throw new Error("Kunne ikke hente valgmuligheter for arrangementet!");
   }
 }
 
-export const userAttendEvent = async (event_id: number, captcha: string, options?: IAttendEventOptions, user?: IAuthUser): Promise<unknown> => {
+export const userAttendEvent = async (event_id: number, captcha: string, options?: IAttendEventOptions, user?: IAuthUser): Promise<IAttendResponse> => {
   if(!user){
     user = await getUser();
   }
   
   try{
-    const ret = await post(`${ATTENDANCE_EVENT_API_URL}${event_id}${USER_ATTENDEES_API_URL}`, {
+    const ret = await post<IAttendResponse>(`${ATTENDANCE_EVENT_API_URL}${event_id}${USER_ATTENDEES_API_URL}`, {
       show_as_attending_event: options?.showAsAttending,
       allow_pictures: options?.allowPictures,
       extras: options?.extras,
@@ -118,9 +120,9 @@ export const userAttendEvent = async (event_id: number, captcha: string, options
   }
 }
 
-export const getPublicAttends = async (event_id: number): Promise<unknown> => {
+export const getPublicAttends = async (event_id: number): Promise<IPublicAttedee[]> => {
   try{
-    const ret = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PUBLIC_ATTENDEES}`)
+    const ret: IPublicAttedee[] = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PUBLIC_ATTENDEES}`)
     return ret;
   } catch(response){
     throw new Error("Kunne hente påmeldingsliste!");
