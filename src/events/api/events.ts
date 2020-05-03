@@ -1,13 +1,13 @@
 import { getUser } from 'authentication/api';
 import { IAuthUser } from 'authentication/models/User';
 
-import { get, getAllPages, IBaseAPIParameters, IAPIData, post } from 'common/utils/api';
+import { get, getAllPages, IBaseAPIParameters, IAPIData } from 'common/utils/api';
 import { listResource } from 'common/resources';
 import { IQueryObject } from 'common/utils/queryString';
 import { EventTypeEnum, IAttendanceEvent, IEvent } from '../models/Event';
 import { IExtra } from '../models/Extras';
 import { IPayment } from 'payments/models/Payment';
-import { IPublicAttedee, IAttendee, IAttendResponse } from 'events/models/Attendee';
+import { IPublicAttedee } from 'events/models/Attendee';
 
 
 export interface IEventAPIParameters extends IQueryObject {
@@ -24,11 +24,8 @@ export interface IEventAPIParameters extends IQueryObject {
 
 const EVENTS_API_URL = '/api/v1/event/events/';
 const ATTENDANCE_EVENT_API_URL = '/api/v1/event/attendance-events/';
-const USER_ATTENDEES_API_URL =  '/register/';
-//const USER_UNATTENDEES_API_URL =  '/unregister/';
 const EVENT_PAYMENT_URL =  '/payment/';
 const EVENT_EXTRAS_URL = '/extras/'
-const EVENT_ATTENDEE_URL = '/attendee/'
 const EVENT_PUBLIC_ATTENDEES = '/public-attendees/'
 
 export const listEvents = listResource<IEvent, IEventAPIParameters>(EVENTS_API_URL);
@@ -62,13 +59,6 @@ export const getAttendanceEvent = async (id: number): Promise<IAttendanceEvent> 
 };
 
 
-interface IAttendEventOptions {
-  allowPictures?: boolean,
-  showAsAttending?: boolean,
-  extras?: number[] // options id
-
-}
-
 export const getEventPayment = async (event_id: number): Promise<IPayment> => {
   
   try{
@@ -89,37 +79,6 @@ export const getEventExtras = async (event_id: number): Promise<IExtra[]> => {
   }
 }
 
-export const getEventAttendee = async (event_id: number, user?: IAuthUser): Promise<IAttendee> => {
-  if(!user){
-    user = await getUser();
-  }
-
-  try{
-    const ret = await get<IAttendee>(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_ATTENDEE_URL}`, undefined, {user});
-    return ret;
-  } catch(response){
-    throw new Error("Kunne ikke hente valgmuligheter for arrangementet!");
-  }
-}
-
-export const userAttendEvent = async (event_id: number, captcha: string, options?: IAttendEventOptions, user?: IAuthUser): Promise<IAttendResponse> => {
-  if(!user){
-    user = await getUser();
-  }
-  
-  try{
-    const ret = await post<IAttendResponse>(`${ATTENDANCE_EVENT_API_URL}${event_id}${USER_ATTENDEES_API_URL}`, {
-      show_as_attending_event: options?.showAsAttending,
-      allow_pictures: options?.allowPictures,
-      extras: options?.extras,
-      recaptcha: captcha
-    }, undefined, {user})
-    return ret;
-  } catch(response){
-    throw new Error("Kunne ikke melde brukeren på dette arrangementet!");
-  }
-}
-
 export const getPublicAttends = async (event_id: number): Promise<IPublicAttedee[]> => {
   try{
     const ret: IPublicAttedee[] = await get(`${ATTENDANCE_EVENT_API_URL}${event_id}${EVENT_PUBLIC_ATTENDEES}`)
@@ -128,21 +87,6 @@ export const getPublicAttends = async (event_id: number): Promise<IPublicAttedee
     throw new Error("Kunne hente påmeldingsliste!");
   }
 }
-
-/* Requires PR #334
-export const userUnattendEvent = async (event_id: number, user?: IAuthUser): Promise<unknown> => {
-  if(!user){
-    user = await getUser();
-  }
-  
-  try{
-    const ret = await deleteR(`${ATTENDANCE_EVENT_API_URL}${event_id}${USER_UNATTENDEES_API_URL}`, undefined, {user})
-    return ret;
-  } catch(response){
-    throw new Error("Kunne ikke melde brukeren av dette arrangementet!");
-  }
-}
-*/
 
 
 export interface IControlledFetch<T> {
