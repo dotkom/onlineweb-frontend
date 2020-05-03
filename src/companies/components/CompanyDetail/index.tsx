@@ -12,6 +12,7 @@ import style from './CompanyDetail.less';
 import { Description } from './Description';
 import { SideBar } from './SideBar';
 import { CompanyCareerOpportunities } from './CompanyCareerOpportunities';
+import { CompanyEvents } from './CompanyEvents';
 
 interface IProps {
   companyId: number;
@@ -53,6 +54,7 @@ export const CompanyDetail: FC<IProps> = ({ companyId }) => {
         </div>
         <SideBar company={company} />
       </div>
+      <CompanyEvents companyId={companyId} />
       <CompanyCareerOpportunities companyId={companyId} />
     </section>
   );
