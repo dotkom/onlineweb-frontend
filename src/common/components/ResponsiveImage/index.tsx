@@ -14,7 +14,7 @@ export type ImageSizes = IResponsiveImageSizes;
 export type ImageSize = keyof ImageSizes;
 
 export interface IProps extends ImgHTMLAttributes<HTMLImageElement> {
-  image?: IResponsiveImage;
+  image: IResponsiveImage | null;
   size: ImageSize;
   type: ImageType;
   autoSize?: boolean;
