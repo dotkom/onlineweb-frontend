@@ -21,4 +21,3 @@ export interface IPublicAttedee {
   year_of_study: number;
   field_of_study: string;
 }
-
