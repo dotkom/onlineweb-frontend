@@ -77,9 +77,9 @@ export const PageHeader = () => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const transition = useTransition(isMainMenuOpen, null, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
+    from: { transform: 'translateY(-130%)' },
+    enter: { transform: 'translateY(0%)' },
+    leave: { transform: 'translateY(-150%)' },
   });
 
   const toggleIsMainMenuOpen = () => {
@@ -102,52 +102,56 @@ export const PageHeader = () => {
     <>
       <header className={style.header}>
         <div className={style.main}>
-          <Link {...getFrontPageUrl()}>
-            <a onClick={closeMainMenu}>
-              <Logo width="150px" />
-            </a>
-          </Link>
-          <nav className={style.mainNavItems}>
-            <Link {...getEventsUrl()}>
-              <a className={style.navLink} onClick={closeMainMenu}>
-                Arrangementer
-              </a>
-            </Link>
+          <div className={style.mainContent}>
             <Link {...getFrontPageUrl()}>
-              <a className={style.navLink} onClick={closeMainMenu}>
-                Om Online
+              <a onClick={closeMainMenu}>
+                <Logo width="150px" />
               </a>
             </Link>
-          </nav>
-          <span className={style.buttons}>
-            <UserButton onClick={toggleIsUserMenuOpen} />
-            <Hamburger isOpen={isMainMenuOpen} onClick={toggleIsMainMenuOpen} />
-          </span>
+            <nav className={style.mainNavItems}>
+              <Link {...getEventsUrl()}>
+                <a className={style.navLink} onClick={closeMainMenu}>
+                  Arrangementer
+                </a>
+              </Link>
+              <Link {...getFrontPageUrl()}>
+                <a className={style.navLink} onClick={closeMainMenu}>
+                  Om Online
+                </a>
+              </Link>
+            </nav>
+            <span className={style.buttons}>
+              <UserButton onClick={toggleIsUserMenuOpen} />
+              <Hamburger isOpen={isMainMenuOpen} onClick={toggleIsMainMenuOpen} />
+            </span>
+          </div>
         </div>
         <div className={style.border} />
         {transition.slice(0, 2).map(
           ({ item, key, props }) =>
             item && (
-              <animated.nav key={key} style={props} className={style.navList} aria-hidden={!isMainMenuOpen}>
-                {LINKS.filter((link) => (link.shouldDisplay ? link.shouldDisplay(isLoggedIn, user) : true)).map(
-                  (link) =>
-                    link.mode === 'internal' ? (
-                      <Link key={link.as} href={link.href} as={link.as}>
-                        <p>
-                          <a className={style.navLink} onClick={closeMainMenu}>
+              <animated.div key={key} style={props} className={style.navList} aria-hidden={!isMainMenuOpen}>
+                <nav className={style.navListContent}>
+                  {LINKS.filter((link) => (link.shouldDisplay ? link.shouldDisplay(isLoggedIn, user) : true)).map(
+                    (link) =>
+                      link.mode === 'internal' ? (
+                        <Link key={link.as} href={link.href} as={link.as}>
+                          <p>
+                            <a className={style.navLink} onClick={closeMainMenu}>
+                              {link.title}
+                            </a>
+                          </p>
+                        </Link>
+                      ) : (
+                        <p key={link.href}>
+                          <a className={style.navLink} href={link.href} onClick={closeMainMenu}>
                             {link.title}
                           </a>
                         </p>
-                      </Link>
-                    ) : (
-                      <p key={link.href}>
-                        <a className={style.navLink} href={link.href} onClick={closeMainMenu}>
-                          {link.title}
-                        </a>
-                      </p>
-                    )
-                )}
-              </animated.nav>
+                      )
+                  )}
+                </nav>
+              </animated.div>
             )
         )}
         {isUserMenuOpen && <UserMenu onItemClick={closeUserMenu} />}

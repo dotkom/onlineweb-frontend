@@ -4,18 +4,31 @@
 
 .header {
   position: fixed;
-  z-index: 11;
   width: 100%;
+  z-index: 90;
+}
+
+.navLink {
+  .owLink();
+  font-size: 26px;
+  margin: 0 10px;
+  cursor: pointer;
 }
 
 .main {
-  z-index: 12;
+  position: relative;
+  z-index: 92;
+  width: 100%;
+  background: #fff;
+  color: @blue;
+}
+
+.mainContent {
   width: 100%;
   padding: 8px 16px;
   display: flex;
   max-width: 1200px;
   margin: auto;
-  background: #fff;
   justify-content: space-between;
 }
 
@@ -31,20 +44,32 @@
 }
 
 .border {
+  position: relative;
+  z-index: 92;
   width: 100%;
   border-bottom: 1px solid @blue;
 }
 
 .navList {
-  z-index: 10;
+  position: relative;
+  z-index: 91;
+  width: 100%;
+  background: @blue;
+  color: #fff;
+  border-bottom: 1px solid @blue;
+
+  .navLink {
+    color: #fff;
+  }
+}
+
+.navListContent {
   width: 100%;
   max-width: 1200px;
   padding: 8px 16px;
   margin: auto;
-  background: #fff;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border-bottom: 1px solid @blue;
 
   @media (max-width: @owTabletBreakpoint) {
     grid-template-columns: repeat(2, 1fr);
@@ -59,14 +84,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-}
-
-.navLink {
-  .owLink();
-  color: @blue;
-  font-size: 26px;
-  margin: 0 10px;
-  cursor: pointer;
 }
 
 .filler {
