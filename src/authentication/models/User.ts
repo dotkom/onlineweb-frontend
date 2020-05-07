@@ -4,11 +4,19 @@ export interface IAuthUser extends User {
   profile: IAuthProfile;
 }
 
+interface IOnlinewebScope {
+  field_of_study: string;
+  member: boolean;
+  rfid: string | null;
+  staff: boolean;
+  superuser: boolean;
+}
+
 /**
  * Profile informastion returned from authenticating with
  * OpenID Connect to Onlineweb4.
  */
-export type IAuthProfile = NonNullable<Profile>;
+export type IAuthProfile = NonNullable<Profile> & IOnlinewebScope;
 
 export const isOnlineUser = (user: User | IAuthUser): user is IAuthUser => user.hasOwnProperty('preferred_username');
 
