@@ -1,0 +1,33 @@
+@import '~common/less/mixins.less';
+@import '~common/less/colors.less';
+@import '~common/less/constants.less';
+
+.hamburger {
+  width: 40px;
+
+  &::after,
+  &::before,
+  div {
+    background-color: @blue;
+    border-radius: 3px;
+    content: '';
+    display: block;
+    height: 5px;
+    margin: 7px 0;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.open {
+  &::before {
+    transform: translateY(12px) rotate(135deg);
+  }
+
+  &::after {
+    transform: translateY(-12px) rotate(-135deg);
+  }
+
+  div {
+    transform: scale(0);
+  }
+}

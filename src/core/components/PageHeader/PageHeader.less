@@ -1,0 +1,74 @@
+@import '~common/less/mixins.less';
+@import '~common/less/colors.less';
+@import '~common/less/constants.less';
+
+.header {
+  position: fixed;
+  z-index: 11;
+  width: 100%;
+}
+
+.main {
+  z-index: 12;
+  width: 100%;
+  padding: 8px 16px;
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  background: #fff;
+  justify-content: space-between;
+}
+
+.mainNavItems {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+
+  @media (max-width: @owMobileBreakpoint) {
+    display: none;
+  }
+}
+
+.border {
+  width: 100%;
+  border-bottom: 1px solid @blue;
+}
+
+.navList {
+  z-index: 10;
+  width: 100%;
+  max-width: 1200px;
+  padding: 8px 16px;
+  margin: auto;
+  background: #fff;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid @blue;
+
+  @media (max-width: @owTabletBreakpoint) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: @owMobileBreakpoint) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.navLink {
+  .owLink();
+  color: @blue;
+  font-size: 26px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.filler {
+  height: 60px;
+}

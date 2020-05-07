@@ -1,0 +1,20 @@
+@import '~common/less/mixins.less';
+@import '~common/less/colors.less';
+@import '~common/less/constants.less';
+
+.userMenu {
+  background: #fff;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  border-bottom: 1px solid @blue;
+}
+
+.link {
+  .owLink();
+  color: @blue;
+  font-size: 26px;
+  margin: 0 10px;
+  cursor: pointer;
+}
