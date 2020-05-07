@@ -1,10 +1,9 @@
-import React, { ContextType, createContext } from 'react';
+import React, { createContext } from 'react';
 
-import { UserContext } from 'authentication/providers/UserProvider';
 import { getProfile } from 'profile/api';
 import { IUserProfile } from 'profile/models/User';
 
-export interface IState {
+interface IState {
   refetch: () => void;
   user?: IUserProfile;
 }
@@ -18,16 +17,11 @@ const INITIAL_STATE: IState = {
 export const UserProfileContext = createContext(INITIAL_STATE);
 
 export class UserProfileProvider extends React.Component<{}, IState> {
-  public static contextType = UserContext;
-  public context!: ContextType<typeof UserContext>;
   public state: IState = INITIAL_STATE;
 
   public init = async () => {
-    const auth = this.context;
-    if (auth.user) {
-      const user = await getProfile(auth.user);
-      this.setState({ user });
-    }
+    const user = await getProfile();
+    this.setState({ user });
   };
 
   public refetch = async () => {

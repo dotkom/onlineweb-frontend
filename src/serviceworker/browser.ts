@@ -9,7 +9,7 @@ const serviceWorker = __CLIENT__ ? navigator.serviceWorker : ({} as ServiceWorke
  * Verify browser support for Service Workers.
  */
 export const verifyServiceWorker = (): boolean => {
-  return 'serviceWorker' in navigator;
+  return __CLIENT__ && 'serviceWorker' in navigator;
 };
 
 export const registerServiceWorker = async (): Promise<ServiceWorkerRegistration | undefined> => {

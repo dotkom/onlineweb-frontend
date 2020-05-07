@@ -1,7 +1,8 @@
-import { Component } from 'react';
-import { IUserContext, UserContext } from '../providers/UserProvider';
+import React, { FC } from 'react';
+import { useSelector } from 'core/redux/hooks';
+import { selectIsLoggedIn } from 'authentication/selectors/authentication';
 
-export interface IProps {
+interface IProps {
   permissions?: string[];
 }
 
@@ -9,14 +10,9 @@ export interface IProps {
  * @summary Require authentication and authorization to render children.
  * @param {?string[]} permissions If specified, requires a set of permissions to render as well.
  */
-class RequireAuth extends Component<IProps> {
-  public static contextType = UserContext;
-
-  public render() {
-    const { user }: IUserContext = this.context;
-    const { children } = this.props;
-    return user ? children : null;
-  }
-}
+const RequireAuth: FC<IProps> = ({ children }) => {
+  const isLoggedIn = useSelector(selectIsLoggedIn());
+  return isLoggedIn ? <>{children}</> : null;
+};
 
 export default RequireAuth;

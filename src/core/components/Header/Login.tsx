@@ -1,21 +1,17 @@
-import React, { Component, ContextType } from 'react';
+import React, { Component } from 'react';
 
 import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
-import { UserContext } from 'authentication/providers/UserProvider';
 import { getMyProfileUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 
 import style from './header.less';
 
-export interface IState {
+interface IState {
   open: boolean;
 }
 
 class Login extends Component<{}, IState> {
-  public static contextType = UserContext;
-  public context!: ContextType<typeof UserContext>;
-
   public state: IState = {
     open: false,
   };
