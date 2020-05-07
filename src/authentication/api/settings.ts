@@ -15,6 +15,7 @@ const settings: UserManagerSettings = {
   response_type: 'id_token token',
   scope: 'openid profile onlineweb4',
   automaticSilentRenew: true,
+  filterProtocolClaims: true,
   loadUserInfo: true,
 };
 
