@@ -10,9 +10,13 @@
 
 .navLink {
   .owLink();
-  font-size: 26px;
+  font-size: 22px;
   margin: 0 10px;
   cursor: pointer;
+
+  @media (max-width: @owMobileBreakpoint) {
+    font-size: 26px;
+  }
 }
 
 .main {
