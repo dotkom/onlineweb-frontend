@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import React, { FC } from 'react';
 
 import HoverCard from 'common/components/HoverCard';
 import { getEventUrl } from 'core/appUrls';
+import { Link } from 'core/components/Router';
 import { getEventColor } from 'events/models/Event';
 
 import CalendarHoverCard from './CalendarHoverCard';
