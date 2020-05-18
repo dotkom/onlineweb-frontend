@@ -75,6 +75,20 @@ export const fetchEventsInInterval = createAsyncThunk(
   }
 );
 
+export const fetchEventsForCompany = createAsyncThunk(
+  'events/fetchForCompany',
+  async ({ companyId, endDate }: { companyId: number; endDate?: DateTime }, { dispatch }) => {
+    const events = await dispatch(
+      fetchEvents({
+        event_end__gte: endDate?.toISODate(),
+        companies: companyId,
+        page_size: 100,
+      })
+    );
+    return events;
+  }
+);
+
 export const ATTENDANCE_FILTERS = {
   SHOW_ALL: 'Alle',
   WITH_ATTENDANCE: 'Bare med påmelding',
@@ -160,27 +174,27 @@ export const eventsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchEvents.pending, (state) => {
       state.loading = 'pending';
-    }),
-      builder.addCase(fetchEvents.fulfilled, (state, action) => {
-        state.loading = 'idle';
-        const events = action.payload.results;
-        eventsAdapter.addMany(state, events);
-      }),
-      builder.addCase(fetchEvents.rejected, (state, action) => {
-        state.loading = 'idle';
-        state.error = action.error;
-      }),
-      builder.addCase(fetchEventById.pending, (state) => {
-        state.loading = 'pending';
-      }),
-      builder.addCase(fetchEventById.fulfilled, (state, action) => {
-        state.loading = 'idle';
-        eventsAdapter.addOne(state, action.payload);
-      }),
-      builder.addCase(fetchEventById.rejected, (state, action) => {
-        state.loading = 'idle';
-        state.error = action.error;
-      });
+    });
+    builder.addCase(fetchEvents.fulfilled, (state, action) => {
+      state.loading = 'idle';
+      const events = action.payload.results;
+      eventsAdapter.addMany(state, events);
+    });
+    builder.addCase(fetchEvents.rejected, (state, action) => {
+      state.loading = 'idle';
+      state.error = action.error;
+    });
+    builder.addCase(fetchEventById.pending, (state) => {
+      state.loading = 'pending';
+    });
+    builder.addCase(fetchEventById.fulfilled, (state, action) => {
+      state.loading = 'idle';
+      eventsAdapter.addOne(state, action.payload);
+    });
+    builder.addCase(fetchEventById.rejected, (state, action) => {
+      state.loading = 'idle';
+      state.error = action.error;
+    });
     builder.addCase(filterEvents.pending, (state, action) => {
       state.search.loading = 'pending';
       state.search.requestId = action.meta.requestId;

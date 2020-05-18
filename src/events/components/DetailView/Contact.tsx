@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 
 import { companySelectors, fetchCompanyById } from 'companies/slices/companies';
+import { Link } from 'core/components/Router';
 import { useDispatch, useSelector } from 'core/redux/hooks';
 import { State } from 'core/redux/Store';
 import { fetchOnlineGroupById, onlineGroupSelectors } from 'groups/slices/onlineGroups';
@@ -9,6 +10,7 @@ import { getEventColor, IEvent } from '../../models/Event';
 import Block from './Block';
 import CardHeader from './Card/CardHeader';
 import style from './detail.less';
+import { getCompanyUrl } from 'core/appUrls';
 
 interface IProps {
   event: IEvent;
@@ -48,7 +50,9 @@ const Contact: FC<IProps> = ({ event }) => {
       {companyIds.length > 0 && (
         <Block title="Medarrangør">
           {companies.map((company) => (
-            <p key={company.id}>{company.name}</p>
+            <Link key={company.id} {...getCompanyUrl(company.id)}>
+              <a>{company.name}</a>
+            </Link>
           ))}
         </Block>
       )}
