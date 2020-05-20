@@ -1,0 +1,94 @@
+@import '~common/less/mixins.less';
+@import '~common/less/colors.less';
+@import '~common/less/constants.less';
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 90;
+}
+
+.navLink {
+  .owLink();
+  font-size: 22px;
+  margin: 0 10px;
+  cursor: pointer;
+
+  @media (max-width: @owMobileBreakpoint) {
+    font-size: 26px;
+  }
+}
+
+.main {
+  position: relative;
+  z-index: 92;
+  width: 100%;
+  background: #fff;
+  color: @blue;
+}
+
+.mainContent {
+  width: 100%;
+  padding: 8px 16px;
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.mainNavItems {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  @media (max-width: @owMobileBreakpoint) {
+    display: none;
+  }
+}
+
+.border {
+  position: relative;
+  z-index: 92;
+  width: 100%;
+  border-bottom: 1px solid @blue;
+}
+
+.navList {
+  position: relative;
+  z-index: 91;
+  width: 100%;
+  background: @blue;
+  color: #fff;
+  border-bottom: 1px solid @blue;
+
+  .navLink {
+    color: #fff;
+  }
+}
+
+.navListContent {
+  width: 100%;
+  max-width: 1200px;
+  padding: 8px 16px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  @media (max-width: @owTabletBreakpoint) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: @owMobileBreakpoint) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.filler {
+  height: 60px;
+}

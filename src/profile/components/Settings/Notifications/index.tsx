@@ -1,4 +1,4 @@
-import React, { Component, ContextType } from 'react';
+import React, { Component } from 'react';
 
 import { md } from 'common/components/Markdown';
 import { Pane } from 'common/components/Panes';
@@ -14,7 +14,6 @@ import {
   verifyPushManager,
 } from 'common/utils/pushManager';
 
-import { UserContext } from 'authentication/providers/UserProvider';
 import { getAllChannels, getUserChannels, postUserChannels, subscribe, unsubscribe } from 'profile/api/notifications';
 import { verifyServiceWorker } from 'serviceworker/browser';
 
@@ -53,7 +52,7 @@ const ABOUT_NOTIFICATION_OPTIONS = md`
   Her kan du velge hvilke deler av nettsiden du ønsker å motta notifikasjoner.
 `;
 
-export interface IState {
+interface IState {
   channels: IChannel[];
   selectedChannels: string[];
   allowNotifications: boolean;
@@ -62,9 +61,6 @@ export interface IState {
 }
 
 class Notifications extends Component<{}, IState> {
-  public static contextType = UserContext;
-  public context!: ContextType<typeof UserContext>;
-
   public state: IState = {
     allowNotifications: resolveNotificationPermission(),
     channels: [],
@@ -78,20 +74,14 @@ class Notifications extends Component<{}, IState> {
   }
 
   public getAllChannels = async () => {
-    const { user } = this.context;
-    if (user) {
-      const channels = await getAllChannels(user);
-      this.setState({ channels });
-    }
+    const channels = await getAllChannels();
+    this.setState({ channels });
   };
 
   public getUserChannels = async () => {
-    const { user } = this.context;
-    if (user) {
-      const channels = await getUserChannels(user);
-      const selectedChannels = channels.map((channel) => channel.name);
-      this.setState({ selectedChannels });
-    }
+    const channels = await getUserChannels();
+    const selectedChannels = channels.map((channel) => channel.name);
+    this.setState({ selectedChannels });
   };
 
   public toggleChannel = (channelName: string) => {
@@ -103,13 +93,10 @@ class Notifications extends Component<{}, IState> {
   };
 
   public updateChannels = async () => {
-    const { user } = this.context;
     const { selectedChannels } = this.state;
-    if (user) {
-      const channels = await postUserChannels(selectedChannels, user);
-      const selected = channels.map((channel) => channel.name);
-      this.setState({ selectedChannels: selected });
-    }
+    const channels = await postUserChannels(selectedChannels);
+    const selected = channels.map((channel) => channel.name);
+    this.setState({ selectedChannels: selected });
   };
 
   public toggleGlobalNotifications = async () => {
@@ -130,15 +117,14 @@ class Notifications extends Component<{}, IState> {
 
     const { user } = this.context;
     if (user && subscription) {
-      await subscribe(subscription, user);
+      await subscribe(subscription);
     }
   };
 
   public unsubscribe = async () => {
-    const { user } = this.context;
     const sub = await getNotificationSubscription();
-    if (user && sub) {
-      await unsubscribe(sub, user);
+    if (sub) {
+      await unsubscribe(sub);
       const removed = await removeNotificationSubscription();
       if (removed) {
         this.setState({ subscription: undefined });

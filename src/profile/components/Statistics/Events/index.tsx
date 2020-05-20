@@ -1,4 +1,3 @@
-import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
 import CalendarChart from 'common/components/Charts/CalendarChart';
 import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
 import { getAllEvents } from 'events/api/events';
@@ -15,17 +14,13 @@ export interface IState {
 }
 
 class Orders extends Component<{}, IState> {
-  public static contextType = UserContext;
   public state: IState = {
     events: [],
   };
 
   public async componentDidMount() {
-    const { user }: IUserContext = this.context;
-    if (user) {
-      const events = await getAllEvents({ is_attendee: 'True' }, user);
-      this.setState({ events });
-    }
+    const events = await getAllEvents({ is_attendee: 'True' });
+    this.setState({ events });
   }
 
   public render() {

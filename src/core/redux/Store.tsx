@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { articlesReducer } from 'articles/slices/articles';
+import { authenticationReducer } from 'authentication/slices/authentication';
 import { careerLocationsReducer } from 'career/slices/careerLocations';
 import { careerOpportunitiesReducer } from 'career/slices/careerOpportunities';
 import { jobTypesReducer } from 'career/slices/jobTypes';
@@ -8,12 +9,12 @@ import { companiesReducer } from 'companies/slices/companies';
 import { attendanceEventsReducer } from 'events/slices/attendanceEvents';
 import { attendeesReducer } from 'events/slices/attendees';
 import { eventsReducer } from 'events/slices/events';
+import { publicAttendeesReducer } from 'events/slices/publicAttendees';
 import { ruleBundlesReducer } from 'events/slices/ruleBundles';
 import { onlineGroupsReducer } from 'groups/slices/onlineGroups';
 import { transactionsReducer } from 'payments/reducers/transactions';
 import { paymentsReducer } from 'payments/slices/payments';
 import { shopReducer } from 'shop/reducers';
-import { publicAttendeesReducer } from 'events/slices/publicAttendees';
 
 export const initStore = (initialState: {} = {}) => {
   return configureStore({
@@ -23,6 +24,7 @@ export const initStore = (initialState: {} = {}) => {
       articles: articlesReducer,
       attendanceEvents: attendanceEventsReducer,
       attendees: attendeesReducer,
+      authentication: authenticationReducer,
       careerLocations: careerLocationsReducer,
       careerOpportunities: careerOpportunitiesReducer,
       companies: companiesReducer,

@@ -37,7 +37,6 @@ After you save the client, it will have generated a client ID, which you will us
 
 ```bash
 export OW4_SSO_CLIENT_ID='<your-client-id>'
-export OW4_SSO_CALLBACK='http://localhost:8080/auth/callback'
 ```
 
 Finally, you'll want to generate an RSA key for authentication. The following command in OW4 will handle that:

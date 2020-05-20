@@ -1,11 +1,10 @@
-import React, { createContext, FC, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, FC, useEffect, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-import { UserContext } from 'authentication/providers/UserProvider';
 import { getProfilesIterator } from 'profile/api/search';
 import { IPublicProfile } from 'profile/models/User';
 
-export interface IState {
+interface IState {
   search?: string;
   group?: string;
   range: [number, number];
@@ -36,12 +35,6 @@ const INITIAL_STATE: IState = {
 export const ProfileSearchContext = createContext(INITIAL_STATE);
 
 export const ProfileSearchProvider: FC = ({ children }) => {
-  const { user } = useContext(UserContext);
-  /** Should not be able to render this page without an authenticated user */
-  if (!user) {
-    return null;
-  }
-
   const [search, setSearch] = useState<string | undefined>(undefined);
   const [group, setGroup] = useState<string | undefined>(undefined);
   const [range, setRange] = useState<[number, number]>([1, 6]);
@@ -51,12 +44,12 @@ export const ProfileSearchProvider: FC = ({ children }) => {
   const [ready, setReady] = useState(false);
 
   /** Initialize fetch iterator. Needs to be renewed when parameters are changed, as 'page' is internal state */
-  const initialFetcher = useMemo(() => getProfilesIterator({ search, group, range }, user), []);
+  const initialFetcher = useMemo(() => getProfilesIterator({ search, group, range }), []);
   const [profilesFetcher, setProfilesFetcher] = useState(initialFetcher);
 
   /** Reset list of profiles. Fetches first 'page' of results for the result */
   const reset = async () => {
-    const fetcher = getProfilesIterator({ search, group, range }, user);
+    const fetcher = getProfilesIterator({ search, group, range });
     const { value: firstProfiles = [] } = await fetcher.next();
     ReactDOM.unstable_batchedUpdates(() => {
       setProfilesFetcher(fetcher);

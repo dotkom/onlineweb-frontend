@@ -2,11 +2,13 @@
  * Wrapper for browser notifications.
  */
 
+import { __CLIENT__ } from 'common/constants/environment';
+
 /**
  * Verify browser support for Notifications.
  */
 export const verifyNotification = (): boolean => {
-  return 'Notification' in window;
+  return __CLIENT__ && 'Notification' in window;
 };
 
 /**

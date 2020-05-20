@@ -12,6 +12,7 @@ export const getContributionsUrl = () => url`/contribution`;
 export const getEventUrl = (eventId: number) => url`/events/${{ eventId }}`;
 export const getEventsUrl = () => url`/events`;
 export const getHobbyGroupsUrl = () => url`/hobbygroups`;
+export const getOfflinesUrl = () => url`/offlines`;
 export const getPaymentEventUrl = (eventId: number) => url`/payments/${{ eventId }}`;
 export const getPaymentWalletUrl = () => url`/payments/wallet`;
 export const getPaymentWebshopUrl = () => url`/payments/webshop`;

@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 
 import 'react-day-picker/lib/style.css';
 
-import AuthProvider from 'authentication/providers/UserProvider';
 import { __CLIENT__, __PROD__ } from 'common/constants/environment';
 import { OWF_SENTRY_DSN } from 'common/constants/sentry';
 import Core from 'core';
@@ -40,13 +39,11 @@ const CustomApp = (appProps: Props): JSX.Element => {
       <GlobalStyle />
       <Provider store={store}>
         <ContextWrapper>
-          <AuthProvider>
-            <UserProfileProvider>
-              <Core>
-                <Component {...pageProps} />
-              </Core>
-            </UserProfileProvider>
-          </AuthProvider>
+          <UserProfileProvider>
+            <Core>
+              <Component {...pageProps} />
+            </Core>
+          </UserProfileProvider>
         </ContextWrapper>
       </Provider>
     </>

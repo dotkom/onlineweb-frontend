@@ -1,8 +1,8 @@
 import { get, getAllPages } from 'common/utils/api';
-import { IAuthUser } from '../../authentication/models/User';
 import { deleteR } from '../../common/utils/api';
 import { IOidcClient } from '../models/client';
 import { IResponseType } from '../models/responsetype';
+import { getUser } from 'authentication/api';
 const API_BASE = '/api/v1/oidc/';
 
 // api for geting oidc client information and for creating new oidc clients
@@ -60,16 +60,18 @@ export const getResponseTypes = async (): Promise<Map<number, IResponseType>> =>
 };
 
 // fetch clients owned by me
-export const getMyClients = async (user: IAuthUser): Promise<IOidcClient[]> => {
+export const getMyClients = async (): Promise<IOidcClient[]> => {
+  const user = await getUser();
   const clients = await getAllClients();
   const filtered = clients.filter((client) => {
-    return client.owner && client.owner.username === user.profile.preferred_username;
+    return client.owner && client.owner.username === user?.profile.preferred_username;
   });
   return filtered;
 };
 
-export const deleteClient = async (user: IAuthUser, id: number): Promise<unknown> => {
+export const deleteClient = async (id: number): Promise<unknown> => {
   try {
+    const user = await getUser();
     return await deleteR(`${API_BASE}clients/${id}`, undefined, { user });
   } catch (response) {
     throw new Error(`Kunne ikke slette app: ${response.statusText}`);
