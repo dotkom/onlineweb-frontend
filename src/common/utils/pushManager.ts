@@ -1,13 +1,14 @@
-import { VAPID_PUBLIC_KEY } from 'common/constants/vapid';
+import { VAPID_SERVER_KEY } from 'common/constants/vapid';
 import { getServiceWorker } from 'serviceworker/browser';
 
 import { urlBase64ToUint8Array } from './arrayBuffer';
+import { __CLIENT__ } from 'common/constants/environment';
 
 /**
  * Verify browser support for Push Manager.
  */
 export const verifyPushManager = (): boolean => {
-  return 'PushManager' in window;
+  return __CLIENT__ && 'PushManager' in window;
 };
 
 const DEFAULT_ERROR = 'Not gikk galt under registreringen, ta kontakt med Dotkom.';
@@ -32,10 +33,10 @@ export const registerPushManager = async (): Promise<IStatus> => {
         if (subscription) {
           return { subscription, message: NOTIFICATIONS_REGISTERED };
         } else {
-          const vapidArrayBuffer = urlBase64ToUint8Array(VAPID_PUBLIC_KEY);
+          const applicationServerKey = urlBase64ToUint8Array(VAPID_SERVER_KEY);
           const newSubscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: vapidArrayBuffer,
+            applicationServerKey,
           });
           return { subscription: newSubscription, message: NEW_REGISTRATION };
         }
