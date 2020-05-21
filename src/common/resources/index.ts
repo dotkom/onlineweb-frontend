@@ -80,6 +80,16 @@ export const destroyResource = (url: string, options?: RequestInit) => {
 /**
  * A partial update follows the same API as an update with the exception of taking a partial of the InputData and using the `PATCH` method instead of `PUT`.
  */
-export const partialUpdateResource = <InputData, OutputData>([url, options, ...args]: Parameters<
-  typeof updateResource
->) => updateResource<Partial<InputData>, OutputData>(url, { ...options, method: 'PATCH' }, ...args);
+export const partialUpdateResource = <InputData, OutputData>(url: string, options?: RequestInit) => {
+  return async (id: number | string, inputData: Partial<InputData>): Promise<ResponseType<InputData, OutputData>> => {
+    const response = await fetch(`${buildUrl(url)}${id}/`, {
+      method: 'PATCH',
+      headers: await getHeaders(),
+      body: JSON.stringify(inputData),
+      ...options,
+    });
+
+    const data = await handleResponse<InputData, OutputData>(response);
+    return data;
+  };
+};
