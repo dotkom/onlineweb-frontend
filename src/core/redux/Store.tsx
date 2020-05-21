@@ -14,6 +14,10 @@ import { transactionsReducer } from 'payments/reducers/transactions';
 import { paymentsReducer } from 'payments/slices/payments';
 import { shopReducer } from 'shop/reducers';
 import { publicAttendeesReducer } from 'events/slices/publicAttendees';
+import { notificationMessagesReducer } from 'notifications/slices/notifications';
+import { notificationPermissionsReducer } from 'notifications/slices/permissions';
+import { notificationSubscriptionsReducer } from 'notifications/slices/subscriptions';
+import { notificationUserPermissionsReducer } from 'notifications/slices/userPermissions';
 
 export const initStore = (initialState: {} = {}) => {
   return configureStore({
@@ -28,6 +32,10 @@ export const initStore = (initialState: {} = {}) => {
       companies: companiesReducer,
       events: eventsReducer,
       jobTypes: jobTypesReducer,
+      notificationMessages: notificationMessagesReducer,
+      notificationPermissions: notificationPermissionsReducer,
+      notificationSubscriptions: notificationSubscriptionsReducer,
+      notificationUserPermissions: notificationUserPermissionsReducer,
       onlineGroups: onlineGroupsReducer,
       payments: paymentsReducer,
       publicAttendees: publicAttendeesReducer,
