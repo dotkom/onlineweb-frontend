@@ -15,7 +15,7 @@ import { shallowEqual } from 'react-redux';
 import {
   toggleDevicePermission,
   registerDeviceForPushNotifications,
-  unregisterDeviceFromPushNotfications,
+  unregisterDeviceFromPushNotifications,
   resolveCurrentDeviceSubscription,
 } from 'notifications/slices/subscriptions';
 import { Permissions } from './Permissions';
@@ -31,9 +31,9 @@ const ABOUT_NOTIFICATIONS = md`
 `;
 
 const ABOUT_BROWSER_SUPPORT = md`
-  ### Nettlesersøtte
+  ### Nettleserstøtte
 
-  _Pushvarsler støttes foreløpig ikke på iPhone og iPad, fordi Apple har valgt å ikke implementere det._
+  _Pushvarsler støttes foreløpig ikke på iPhone og iPad fra Apple._
 
   Hvis ikke følgende funksjonalitet er tilgjengelig kan det hjelpe å oppdatere nettleseren din.
 `;
@@ -51,7 +51,7 @@ const Notifications = () => {
   const allowNotifications = useSelector((state) => state.notificationSubscriptions.allowNotifications);
   const [notificationsSupported] = useState(verifyNotification());
   const [pushManagerSupported] = useState(verifyPushManager());
-  const [serviceWorkerSUpported] = useState(verifyServiceWorker());
+  const [serviceWorkerSupported] = useState(verifyServiceWorker());
 
   const dispatchToggleDevicePermission = () => {
     dispatch(toggleDevicePermission());
@@ -61,19 +61,19 @@ const Notifications = () => {
     dispatch(registerDeviceForPushNotifications());
   };
 
-  const disaptchUnsubscribe = () => {
-    dispatch(unregisterDeviceFromPushNotfications());
+  const dispatchUnsubscribe = () => {
+    dispatch(unregisterDeviceFromPushNotifications());
   };
 
   const dispatchResolveCurrentSubscription = useCallback(() => {
     dispatch(resolveCurrentDeviceSubscription());
   }, [dispatch]);
 
-  const dispatcFetchPermissions = useCallback(() => {
+  const dispatchFetchPermissions = useCallback(() => {
     dispatch(fetchPermissions());
   }, [dispatch]);
 
-  const dispatcFetchUserPermissions = useCallback(() => {
+  const dispatchFetchUserPermissions = useCallback(() => {
     dispatch(fetchUserPermissions());
   }, [dispatch]);
 
@@ -82,12 +82,12 @@ const Notifications = () => {
   }, [dispatchResolveCurrentSubscription]);
 
   useEffect(() => {
-    dispatcFetchPermissions();
-  }, [dispatcFetchPermissions]);
+    dispatchFetchPermissions();
+  }, [dispatchFetchPermissions]);
 
   useEffect(() => {
-    dispatcFetchUserPermissions();
-  }, [dispatcFetchUserPermissions]);
+    dispatchFetchUserPermissions();
+  }, [dispatchFetchUserPermissions]);
 
   return (
     <>
@@ -99,7 +99,7 @@ const Notifications = () => {
             <>
               <BrowserSupport name="Notification" value={notificationsSupported} />
               <BrowserSupport name="PushManager" value={pushManagerSupported} />
-              <BrowserSupport name="ServiceWorker" value={serviceWorkerSUpported} />
+              <BrowserSupport name="ServiceWorker" value={serviceWorkerSupported} />
             </>
           )}
         </div>
@@ -118,7 +118,7 @@ const Notifications = () => {
             description="Registrer denne enheten for å motta pushvarsler"
             name="subscription"
             value={!!deviceSubscription}
-            toggle={!!deviceSubscription ? disaptchUnsubscribe : dispatchSubscribe}
+            toggle={!!deviceSubscription ? dispatchUnsubscribe : dispatchSubscribe}
           />
         </div>
       </Pane>
