@@ -12,7 +12,7 @@ const ABOUT_NOTIFICATION_OPTIONS = md`
   ### Tillatelser
 
   Du kan velge å motta varsler av hver type på enten e-post eller som pushvarsel.
-  _Enkelte verdier er ikke mulig å velge, og enkelte kan ikke velges bort_
+  _Enkelte verdier er ikke mulig å velge, og enkelte kan ikke velges bort._
 `;
 
 export const Permissions = () => {

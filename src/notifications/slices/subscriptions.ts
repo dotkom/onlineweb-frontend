@@ -50,8 +50,8 @@ const transformDeviceSubscription = (subscription: PushSubscription): IDeviceSub
   const subscriptionJson = subscription.toJSON();
   const deviceSubscription = {
     endpoint: subscriptionJson.endpoint,
-    auth: subscriptionJson?.keys?.auth,
-    p256dh: subscriptionJson?.keys?.p256dh,
+    auth: subscriptionJson.keys?.auth,
+    p256dh: subscriptionJson.keys?.p256dh,
   } as IDeviceSubscription;
   return deviceSubscription;
 };
@@ -76,7 +76,7 @@ export const registerDeviceForPushNotifications = createAsyncThunk(
   }
 );
 
-export const unregisterDeviceFromPushNotfications = createAsyncThunk(
+export const unregisterDeviceFromPushNotifications = createAsyncThunk(
   'notificationSubscriptions/unregisterDevice',
   async (_, { getState }) => {
     const state = getState() as State;
@@ -185,13 +185,13 @@ const subscriptionsSlice = createSlice({
       state.loading = 'idle';
       state.error = action.error;
     });
-    builder.addCase(unregisterDeviceFromPushNotfications.fulfilled, (state, action) => {
+    builder.addCase(unregisterDeviceFromPushNotifications.fulfilled, (state, action) => {
       const subscriptionId = action.payload;
       if (subscriptionId) {
         subscriptionsAdapter.removeOne(state, subscriptionId);
       }
     });
-    builder.addCase(unregisterDeviceFromPushNotfications.rejected, (state, action) => {
+    builder.addCase(unregisterDeviceFromPushNotifications.rejected, (state, action) => {
       state.error = action.error;
     });
     builder.addCase(toggleDevicePermission.fulfilled, (state, action) => {
