@@ -1,0 +1,209 @@
+@import '~common/less/mixins.less';
+@import '~common/less/colors.less';
+@import '~common/less/constants.less';
+
+.articleHeader {
+  padding: 1rem 1rem 0;
+}
+
+.ingress {
+  padding: 0 1rem;
+
+  > hr {
+    background-color: #ee7810;
+    height: 2px;
+    border: 0;
+  }
+
+  > div > p {
+    font-weight: bold;
+    font-style: italic;
+  }
+}
+
+.container {
+  width: 100%;
+}
+
+.articleVideo {
+  position: relative;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  margin-bottom: 1rem;
+
+  iframe,
+  object,
+  embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.article {
+  > img {
+    width: 100%;
+  }
+
+  h2 {
+    font-size: 19px;
+    margin: 15px 0;
+  }
+
+  p {
+    margin: 15px 0;
+  }
+}
+
+.articleText {
+  padding: 1rem;
+}
+
+.byline {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 4.5rem;
+  line-height: 1.5;
+
+  > .bylineItem {
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &:last-child {
+      flex-basis: 190px; // ensure there are not two items on the bottom row
+    }
+
+    > span {
+      font-weight: bold;
+
+      &:not(:first-child)::before {
+        content: '\A';
+        white-space: pre;
+      }
+    }
+    > p {
+      display: inline-block;
+    }
+  }
+}
+
+.articleMeta {
+  display: flex;
+  border-top: 1px solid @gray;
+  position: relative;
+  justify-content: space-between;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  line-height: 1.5;
+
+  > div {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    &:not(:first-child) {
+      text-align: right;
+      padding-left: 1rem;
+    }
+
+    > span.tags {
+      &:not(:last-child)::after {
+        content: ', ';
+      }
+
+      .lastChanged {
+        font-style: italic;
+        font-weight: normal;
+      }
+    }
+    > span:not(.tags) {
+      font-weight: bold;
+    }
+  }
+}
+
+@media screen and (max-width: @owTabletBreakpoint - 1) {
+  .article {
+    .owCard();
+  }
+
+  .byline {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (min-width: @owTabletBreakpoint) {
+  .article {
+    grid-area: article;
+    display: grid;
+    grid-template:
+      'articleImage .' auto
+      'articleMain byline'
+      'articleMeta .' auto / 3fr 1fr;
+
+    > img,
+    .articleVideo {
+      grid-area: articleImage;
+      margin-bottom: 0;
+      .owCard();
+    }
+  }
+
+  .articleMain {
+    .owCard();
+    margin-top: 1rem;
+    grid-area: articleMain;
+    width: 100%;
+  }
+
+  .articleText {
+    grid-area: articleText;
+    margin: 0;
+  }
+
+  .articleHeader {
+    grid-area: title;
+
+  }
+
+  .ingress {
+    grid-area: ingress;
+
+    p {
+      margin-left: 0px;
+      margin-right: 0px;
+      font-weight: bold;
+      font-style: italic;
+
+    }
+  }
+
+  .relatedArticles {
+    grid-area: relatedArticles;
+  }
+
+  .articleMeta {
+    grid-area: articleMeta;
+    margin: 1rem 0;
+
+    div {
+      margin-bottom: 0;
+    }
+  }
+
+  .bylineContainer {
+    grid-area: byline;
+    position: relative;
+    width: 100%;
+    margin-left: 1rem;
+
+    .byline {
+      border-left: 1px solid @gray;
+      padding-left: 0.5rem;
+    }
+  }
+}
