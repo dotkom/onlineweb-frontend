@@ -1,9 +1,11 @@
 import { getUser } from 'authentication/api';
 import { IAuthUser } from 'authentication/models/User';
+
 import { get, getAllPages, IBaseAPIParameters, IAPIData } from 'common/utils/api';
-import { EventTypeEnum, IAttendanceEvent, IEvent } from '../models/Event';
 import { listResource } from 'common/resources';
 import { IQueryObject } from 'common/utils/queryString';
+import { EventTypeEnum, IAttendanceEvent, IEvent } from '../models/Event';
+import { IExtra } from '../models/Extras';
 
 export interface IEventAPIParameters extends IQueryObject {
   event_start__gte?: string;
@@ -19,6 +21,7 @@ export interface IEventAPIParameters extends IQueryObject {
 
 const EVENTS_API_URL = '/api/v1/event/events/';
 const ATTENDANCE_EVENT_API_URL = '/api/v1/event/attendance-events/';
+const EVENT_EXTRAS_URL = '/extras/';
 
 export const listEvents = listResource<IEvent, IEventAPIParameters>(EVENTS_API_URL);
 
@@ -45,6 +48,15 @@ export const getAttendanceEvent = async (id: number): Promise<IAttendanceEvent> 
     { user }
   );
   return attendanceEvent;
+};
+
+export const getEventExtras = async (eventId: number): Promise<IExtra[]> => {
+  try {
+    const ret = await get<IExtra[]>(`${ATTENDANCE_EVENT_API_URL}${eventId}${EVENT_EXTRAS_URL}`);
+    return ret;
+  } catch (response) {
+    throw new Error('Kunne ikke hente valgmuligheter for arrangementet!');
+  }
 };
 
 export interface IControlledFetch<T> {
