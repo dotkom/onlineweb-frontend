@@ -35,10 +35,8 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
   }, [eventId]);
 
   useEffect(() => {
-    console.log(payment);
     if (payment && payment.payment_prices.length === 1) {
       setSelectedPriceId(payment.payment_prices[0].id);
-      console.log(selectedPriceId);
     }
   }, [payment]);
 
@@ -67,7 +65,6 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
       </label>
     </div>
   ));
-  console.log(payment);
 
   return selectedPriceObject ? (
     <Payment payment={payment} price={selectedPriceObject} isPaid={isPaid} showPayment={Boolean(selectedPriceObject)}>
