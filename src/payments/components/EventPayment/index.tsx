@@ -36,7 +36,7 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
     if (payment && payment.payment_prices.length === 1) {
       setSelectedPriceId(payment.payment_prices[0].id);
     }
-  }, []);
+  }, [payment]);
 
   if (!attendanceEvent || !attendee || !payment) {
     return <Spinner />;
