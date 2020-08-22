@@ -67,6 +67,7 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
       </label>
     </div>
   ));
+  console.log(payment);
 
   return selectedPriceObject ? (
     <Payment payment={payment} price={selectedPriceObject} isPaid={isPaid} showPayment={Boolean(selectedPriceObject)}>
