@@ -35,8 +35,10 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
   }, [eventId]);
 
   useEffect(() => {
+    console.log(payment);
     if (payment && payment.payment_prices.length === 1) {
       setSelectedPriceId(payment.payment_prices[0].id);
+      console.log(selectedPriceId);
     }
   }, [payment]);
 
