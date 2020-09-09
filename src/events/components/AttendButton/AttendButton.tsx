@@ -11,25 +11,6 @@ interface IAttendButtonProps {
   unattendDeadline: DateTime;
 }
 
-interface ISignUpButtonProps {
-  toggleModal: () => void;
-}
-
-const signOffButton = () => {
-  return (
-    <div>
-    </div>
-  )
-}
-
-const registrationOngoing = (registrationStart: DateTime, registrationEnd: DateTime) => (
-  DateTime.local() < registrationEnd && DateTime.local() > registrationStart // is fine
-);
-
-const canUnattend = (unattendDeadline: DateTime, attending: boolean) => (
-  DateTime.local() < unattendDeadline && attending
-)
-
 const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const {
     eventId,
