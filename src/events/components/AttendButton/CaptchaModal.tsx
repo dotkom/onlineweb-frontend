@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Modal } from '@dotkomonline/design-system';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { RECAPTCHA_KEY } from 'common/constants/google';

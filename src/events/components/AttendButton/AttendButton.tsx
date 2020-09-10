@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Button from 'core/components/errors/NotAuthenticated/Button';
 import CaptchaModal from './CaptchaModal';
 import { DateTime } from 'luxon';
