@@ -1,9 +1,7 @@
 import { DateTime } from 'luxon';
-import React, { FC, useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import React, { FC } from 'react';
 import { shallowEqual } from 'react-redux';
 
-import { RECAPTCHA_KEY } from 'common/constants/google';
 import { useSelector } from 'core/redux/hooks';
 import { State } from 'core/redux/Store';
 import { ISignupEligibility } from 'events/models/Event';
@@ -13,6 +11,7 @@ import Block from './Block';
 import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
+import AttendButton from '../AttendButton/AttendButton';
 
 interface IProps {
   eventId: number;
@@ -23,7 +22,6 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [recaptcha, setRecaptcha] = useState<string | null>();
   const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
   // TODO: use for displaying to the user during signup
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
@@ -64,9 +62,12 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       <Block title="Venteliste">
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
-      <div>
-        {RECAPTCHA_KEY ? <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={(value) => setRecaptcha(value)} /> : null}
-      </div>
+      <AttendButton
+        eventId={eventId}
+        registrationStart={registrationStart}
+        registrationEnd={registrationEnd}
+        unattendDeadline={cancellationDeadline}
+      />
     </div>
   );
 };
