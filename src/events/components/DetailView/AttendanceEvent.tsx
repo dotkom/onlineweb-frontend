@@ -2,7 +2,7 @@ import { DateTime } from 'luxon';
 import React, { FC, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { shallowEqual } from 'react-redux';
-import {  Modal, Button } from '@dotkomonline/design-system';
+import { Modal, Button } from '@dotkomonline/design-system';
 
 import { RECAPTCHA_KEY } from 'common/constants/google';
 import { useSelector } from 'core/redux/hooks';
@@ -15,7 +15,6 @@ import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
 import AttendButton from '../AttendButton/AttendButton';
-
 
 interface IProps {
   eventId: number;
