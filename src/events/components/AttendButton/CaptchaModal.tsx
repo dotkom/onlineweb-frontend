@@ -1,7 +1,7 @@
-import { FC } from "react";
-import { Modal } from "@dotkomonline/design-system";
-import ReCAPTCHA from "react-google-recaptcha";
-import { RECAPTCHA_KEY } from "common/constants/google";
+import { FC } from 'react';
+import { Modal } from '@dotkomonline/design-system';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { RECAPTCHA_KEY } from 'common/constants/google';
 
 interface ICaptchaModalProps {
   showModal: boolean;
@@ -18,7 +18,7 @@ const CaptchaModal: FC<ICaptchaModalProps> = (props: ICaptchaModalProps) => {
       toggleModal();
     }
     //TODO Do something with unvalid token?
-  }
+  };
 
   if (!showModal) return null;
 
@@ -28,6 +28,6 @@ const CaptchaModal: FC<ICaptchaModalProps> = (props: ICaptchaModalProps) => {
       <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={validCaptcha} />
     </Modal>
   );
-}
+};
 
 export default CaptchaModal;
