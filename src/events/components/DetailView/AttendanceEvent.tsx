@@ -1,10 +1,7 @@
 import { DateTime } from 'luxon';
-import React, { FC, useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+import React, { FC } from 'react';
 import { shallowEqual } from 'react-redux';
-import { Modal, Button } from '@dotkomonline/design-system';
 
-import { RECAPTCHA_KEY } from 'common/constants/google';
 import { useSelector } from 'core/redux/hooks';
 import { State } from 'core/redux/Store';
 import { ISignupEligibility } from 'events/models/Event';
