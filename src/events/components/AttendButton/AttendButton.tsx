@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from "react";
 import Button from "core/components/errors/NotAuthenticated/Button";
 import CaptchaModal from "./CaptchaModal";
 import { DateTime } from "luxon";
-import { getAttendeeForEvent } from "events/api/attendee";
+import { getAttendeeForEvent, userAttendEvent } from "events/api/attendee";
 
 interface IAttendButtonProps {
   eventId: number
@@ -19,7 +19,6 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
     unattendDeadline,
    } = props;
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [recaptcha, setRecaptcha] = useState<string | null>();
   const [attending, setAttending] = useState<boolean>(false); // Fetch is attending
   const currentTime = DateTime.local(); // Check if this works
 
@@ -32,9 +31,9 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   }, [eventId])
 
   const signUp = (token: string | null) => {
-    setRecaptcha(token);
     if (token) {
-      setAttending(true); //TODO do api call
+      setAttending(true); 
+      userAttendEvent(eventId, token);
     }
   }
   const toggleModal = () => setShowModal(!showModal);
@@ -52,7 +51,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
       {modal}
     </div>
   );
-  if (currentTime > unattendDeadline || !attending) return 'cant unattend'; // cant unattend
+  if (currentTime > unattendDeadline || !attending) return <p>cant unattend</p>; // cant unattend
   return null;
 
 }
