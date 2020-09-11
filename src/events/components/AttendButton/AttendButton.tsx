@@ -1,57 +1,60 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState } from 'react';
 import Button from 'core/components/errors/NotAuthenticated/Button';
 import CaptchaModal from './CaptchaModal';
 import { DateTime } from 'luxon';
-import { getAttendeeForEvent, userAttendEvent } from 'events/api/attendee';
 import { ISignupEligibility } from 'events/models/Event';
+import { useDispatch } from 'core/redux/hooks';
+import { setAttendeeByEventId } from 'events/slices/attendees';
 
 interface IAttendButtonProps {
-  canAttend: ISignupEligibility;
+  canAttend: ISignupEligibility | null;
   eventId: number;
+  isAttendee: boolean;
+  isOnWaitList: boolean;
+  waitListNumber: number;
   registrationStart: DateTime;
   registrationEnd: DateTime;
   unattendDeadline: DateTime;
 }
 
 const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
-  const { canAttend, eventId, registrationStart, unattendDeadline } = props;
+  const dispatch = useDispatch();
+  const { canAttend, eventId, unattendDeadline, isAttendee, isOnWaitList, waitListNumber } = props;
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [attending, setAttending] = useState<boolean>(false); // Fetch is attending
   const currentTime = DateTime.local(); // Check if this works
-
-  useEffect(() => {
-    const fetchAttending = async () => {
-      const attendingFetch = await getAttendeeForEvent(eventId);
-      setAttending(attendingFetch.attended);
-    };
-    fetchAttending();
-  }, [eventId]);
 
   const signUp = (token: string | null) => {
     if (token) {
-      setAttending(true);
-      userAttendEvent(eventId, token);
+      dispatch(setAttendeeByEventId({eventId, captcha: token}));
     }
   };
   const toggleModal = () => setShowModal(!showModal);
-  const signOff = () => setAttending(false); //TODO add do api call
+  const signOff = () => null; //TODO add do api call
 
   const modal = <CaptchaModal showModal={showModal} toggleModal={toggleModal} setRecaptcha={signUp} />;
 
-  if (currentTime < unattendDeadline && attending)
+  if (!canAttend) return <p>Du må være logget inn for å se din status.</p>;
+  if (currentTime < unattendDeadline && isAttendee)
   return (
     // can unattend
     <Button onClick={signOff}>Meld meg av</Button>
     );
+  if(isOnWaitList) {
+    return (
+      <div>
+        <p>{`Du er nummer ${waitListNumber} på venteliste.`}</p>
+        <Button onClick={signOff}>Meld meg av venteliste</Button>
+      </div>);
+  }
+  if (!canAttend.status && isAttendee) return <p>{`${canAttend.message} Avmeldingsfristen har utløpt.`}</p>;
   if (!canAttend.status) return <p>{canAttend.message}</p>; // cant attend, no buttons
-  if (currentTime > registrationStart)
+  if (canAttend.status)
     return (
       <div>
         <Button onClick={toggleModal}>Meld meg på</Button>
         {modal}
       </div>
     );
-  if (currentTime > unattendDeadline || !attending) return <p>cant unattend</p>; // cant unattend
   return null;
 };
 
