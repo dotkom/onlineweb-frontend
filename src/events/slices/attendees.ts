@@ -33,10 +33,8 @@ export const setAttendeeByEventId = createAsyncThunk(
 export const removeAttendeeByEventId = createAsyncThunk(
   'attendees/removeByEventId',
   async (eventId: number, { dispatch }) => {
-    const ret = await userUnattendEvent(eventId);
-    if (ret) {
-      dispatch(fetchAttendanceEventById(eventId));
-    }
+    await userUnattendEvent(eventId);
+    dispatch(fetchAttendanceEventById(eventId));
   }
 );
 

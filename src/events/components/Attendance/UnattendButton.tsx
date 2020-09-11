@@ -16,14 +16,14 @@ const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitLis
   if (!isOnWaitList) {
     return (
       <div>
-        <Button onClick={signOff}>Meld meg av.</Button>
+        <Button onClick={signOff}>Meld meg av</Button>
       </div>
     );
   }
   return (
     <div>
       <p>{`Du er nummer ${waitListNumber} på venteliste.`}</p>
-      <Button onClick={signOff}>Meld meg av venteliste</Button>
+      <Button onClick={signOff}>Meld meg av</Button>
     </div>
   );
 };

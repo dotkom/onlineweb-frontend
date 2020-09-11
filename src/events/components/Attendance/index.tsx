@@ -18,7 +18,7 @@ const Attendance: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   // The canAttend-object is null if the user is not logged in, else it will always be present.
   if (!canAttend) return <p>Du må være logget inn for å se din status.</p>;
 
-  if (currentTime < unattendDeadline && is_attendee) {
+  if ((currentTime < unattendDeadline && is_attendee) || is_on_waitlist) {
     return (
       <UnattendButton eventId={id} isOnWaitList={is_on_waitlist} waitListNumber={what_place_is_user_on_wait_list} />
     );
