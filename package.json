@@ -1,6 +1,6 @@
 {
   "name": "onlineweb-frontend",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "src/index.tsx",
   "repository": "git@github.com:dotkom/onlineweb-frontend.git",
   "author": "dotkom@online.ntnu.no",
@@ -63,7 +63,7 @@
     "typescript": "3.8.3"
   },
   "dependencies": {
-    "@dotkomonline/design-system": "^0.14.0",
+    "@dotkomonline/design-system": "^0.16.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.14",
     "@fortawesome/free-brands-svg-icons": "^5.8.2",
     "@fortawesome/free-regular-svg-icons": "^5.7.2",
