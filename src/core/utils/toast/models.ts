@@ -1,8 +1,8 @@
-export type ToastType = 'info' | 'success' | 'warning' | 'error';
+export type ToastType = 'info' | 'success' | 'warning' | 'error' | 'basic';
 
 export interface IToastMessage {
   id: number;
-  content: string;
+  content: string | JSX.Element;
   /** milliseconds */
   duration: number;
   type: ToastType;
@@ -26,18 +26,4 @@ export const DEFAULT_SETTINGS: IToastSettings = {
   overwrite: false,
   type: 'info',
   duration: 6000,
-};
-
-export const getToastColor = (type: ToastType) => {
-  switch (type) {
-    /** Use event colors for now, since we dont have specific colors for this */
-    case 'error':
-      return '#eb536e';
-    case 'warning':
-      return '#faa21b';
-    case 'success':
-      return '#43b171';
-    case 'info':
-      return '#fff';
-  }
 };

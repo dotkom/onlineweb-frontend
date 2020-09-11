@@ -8,7 +8,10 @@ import { ToastContext } from './ToastContext';
  * To use multiple settings, use multiple instances of the hook in a single component.
  */
 
-export type AddToast = (content: string, messageSettings?: Partial<IToastSettings>) => [IToastMessage, () => void];
+export type AddToast = (
+  content: string | JSX.Element,
+  messageSettings?: Partial<IToastSettings>
+) => [IToastMessage, () => void];
 export type CancelToast = () => void;
 
 /**
