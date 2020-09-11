@@ -10,7 +10,7 @@ export interface IAddToastReturn {
 export interface IToastContextState {
   messages: IToastMessage[];
   removeToast: (id: number) => void;
-  createToast: (content: string, settings: IToastSettings) => IAddToastReturn;
+  createToast: (content: string | JSX.Element, settings: IToastSettings) => IAddToastReturn;
 }
 
 export const INITIAL_STATE: IToastContextState = {
@@ -45,7 +45,7 @@ export const ToastProvider: FC = ({ children }) => {
   };
 
   /** Adds a new ToastMessage to the list of messages */
-  const createToast = (content: string, settings: IToastSettings) => {
+  const createToast = (content: string | JSX.Element, settings: IToastSettings) => {
     const { duration = DEFAULT_SETTINGS.duration, type = DEFAULT_SETTINGS.type } = settings;
     /** Merge defaults with the new message */
     const message: IToastMessage = {

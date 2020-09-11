@@ -1,8 +1,8 @@
-export type ToastType = 'info' | 'success' | 'warning' | 'error';
+export type ToastType = 'info' | 'success' | 'warning' | 'error' | 'basic';
 
 export interface IToastMessage {
   id: number;
-  content: string;
+  content: string | JSX.Element;
   /** milliseconds */
   duration: number;
   type: ToastType;
