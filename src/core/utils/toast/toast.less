@@ -56,6 +56,7 @@
 }
 
 .cancelButton {
+  cursor: pointer;
   color: #fff;
   background: unset;
   margin: 0 4px;
@@ -79,4 +80,21 @@
 
 .warning {
   background: @orange;
+}
+
+.basic {
+  background: white;
+  position: relative;
+  p {
+    color: black;
+  }
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    img {
+      background-color: black;
+      padding: 2px 2px 1px 2px;
+    }
+  }
 }
