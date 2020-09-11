@@ -63,6 +63,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
       <AttendButton
+        canAttend={isEligibleForSignup}
         eventId={eventId}
         registrationStart={registrationStart}
         registrationEnd={registrationEnd}
