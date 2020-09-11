@@ -33,11 +33,11 @@ export interface IMessageProps {
 }
 
 const Message: FC<IMessageProps> = ({ message, remove, type }) => {
-  console.log(type);
+  const messageContent = typeof message.content === 'string' ? <p>{message.content}</p> : <div>{message.content}</div>;
   return (
-    <div className={`${style.messageContainer} ${style.[type]}`}>
+    <div className={`${style.messageContainer} ${style[type]}`}>
       <div className={style.messageContent}>
-        <p>{message.content}</p>
+        {messageContent}
         <button className={style.cancelButton} onClick={remove}>
           <img src={cross} alt="cross" />
         </button>
