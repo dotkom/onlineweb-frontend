@@ -33,7 +33,8 @@ const ToastOld: React.FC = () => {
     // This should be inside of the useEffect
     // With NextJs the window element may be null.
     const showToast = window.localStorage.getItem(SHOW_TOAST);
-    if (showToast === 'true' || showToast === undefined) { // Blame Johannes
+    // Blame Johannes
+    if (showToast === 'true' || showToast === undefined) {
       displayMessage(<Message />);
     }
   }, []);

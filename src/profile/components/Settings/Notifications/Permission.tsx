@@ -18,13 +18,13 @@ export const Permission: FC<IProps> = ({ permissionId }) => {
   const allowEmail = permission.force_email || userPermission?.allow_email || permission.default_value_email;
   const allowPush = permission.force_push || userPermission?.allow_push || permission.default_value_push;
 
-  const handleEmailClick = (value: boolean) => {
+  const handleEmailClick = (value: boolean | undefined) => {
     if (userPermission) {
       dispatch(fetchUpdateUserPermission({ userPermissionId: userPermission.id, updateData: { allow_email: value } }));
     }
   };
 
-  const handlePushClick = (value: boolean) => {
+  const handlePushClick = (value: boolean | undefined) => {
     if (userPermission) {
       dispatch(fetchUpdateUserPermission({ userPermissionId: userPermission.id, updateData: { allow_push: value } }));
     }
