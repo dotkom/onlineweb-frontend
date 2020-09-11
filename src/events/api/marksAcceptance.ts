@@ -9,8 +9,8 @@ interface IMarkAcceptance {
   accepted_date: DateTime;
 }
 
-export const getHasMarkAccepted = async (): Promise<boolean> => {
+export const getMarksAcceptance = async (): Promise<IMarkAcceptance[]> => {
   const user = await getUser();
   const markAcceptance = await get<IAPIData<IMarkAcceptance>>(MARK_ACCEPTANCE_URL, { format: 'json' }, { user });
-  return markAcceptance.results.length > 0;
+  return markAcceptance.results;
 };
