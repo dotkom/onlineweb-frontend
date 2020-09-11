@@ -19,14 +19,13 @@ export const fetchAttendeeByEventId = createAsyncThunk('attendees/fetchByEventId
   return attendee;
 });
 
-export const setAttendeeByEventId = createAsyncThunk('attendees/setByEventId', async (
-  props: {eventId: number, captcha: string, user?: IAuthUser},
-  { dispatch }
-  ) => {
+export const setAttendeeByEventId = createAsyncThunk(
+  'attendees/setByEventId',
+  async (props: { eventId: number; captcha: string; user?: IAuthUser }, { dispatch }) => {
     const { eventId, captcha, user } = props;
     const ret = await userAttendEvent(eventId, captcha, undefined, user);
     if (ret) {
-      dispatch(fetchAttendanceEventById(eventId))
+      dispatch(fetchAttendanceEventById(eventId));
     }
   }
 );
