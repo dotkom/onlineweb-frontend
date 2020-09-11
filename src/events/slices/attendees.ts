@@ -1,7 +1,7 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, SerializedError } from '@reduxjs/toolkit';
 
 import { State } from 'core/redux/Store';
-import { getAttendeeForEvent, userAttendEvent } from 'events/api/attendee';
+import { getAttendeeForEvent, userAttendEvent, userUnattendEvent } from 'events/api/attendee';
 import { IAttendee } from 'events/models/Attendee';
 import { IAuthUser } from 'authentication/models/User';
 import { fetchAttendanceEventById } from './attendanceEvents';
@@ -24,6 +24,16 @@ export const setAttendeeByEventId = createAsyncThunk(
   async (props: { eventId: number; captcha: string; user?: IAuthUser }, { dispatch }) => {
     const { eventId, captcha, user } = props;
     const ret = await userAttendEvent(eventId, captcha, undefined, user);
+    if (ret) {
+      dispatch(fetchAttendanceEventById(eventId));
+    }
+  }
+);
+
+export const removeAttendeeByEventId = createAsyncThunk(
+  'attendees/removeByEventId',
+  async (eventId: number, { dispatch }) => {
+    const ret = await userUnattendEvent(eventId);
     if (ret) {
       dispatch(fetchAttendanceEventById(eventId));
     }

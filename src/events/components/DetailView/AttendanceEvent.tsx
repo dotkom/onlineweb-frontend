@@ -11,17 +11,13 @@ import Block from './Block';
 import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
-import AttendButton from '../AttendButton/AttendButton';
+import Attendance from '../Attendance';
 
 interface IProps {
   eventId: number;
 }
 
 const AttendanceEvent: FC<IProps> = ({ eventId }) => {
-  // TODO: Remove these lint disables when using captcha response.
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
   const isEligibleForSignup = useSelector(selectIsEligibleForSignup(eventId), shallowEqual);
 
@@ -58,16 +54,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       <Block title="Venteliste">
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
-      <AttendButton
-        canAttend={isEligibleForSignup}
-        eventId={eventId}
-        isAttendee={attendanceEvent.is_attendee}
-        isOnWaitList={attendanceEvent.is_on_waitlist}
-        waitListNumber={attendanceEvent.number_on_waitlist}
-        registrationStart={registrationStart}
-        registrationEnd={registrationEnd}
-        unattendDeadline={cancellationDeadline}
-      />
+      <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
     </div>
   );
 };
