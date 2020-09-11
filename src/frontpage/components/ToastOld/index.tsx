@@ -6,10 +6,7 @@ import { Checkbox } from '@dotkomonline/design-system';
 const SHOW_TOAST = 'showOldOWToast';
 
 const Message: React.FC = () => {
-  const saveDoNotShow = (isChecked?: boolean) => {
-    console.log(isChecked);
-    window.localStorage.setItem(SHOW_TOAST, isChecked ? 'true' : 'false');
-  };
+  const saveDoNotShow = (isChecked?: boolean) => window.localStorage.setItem(SHOW_TOAST, isChecked ? 'true' : 'false');
 
   return (
     <div>
@@ -34,7 +31,7 @@ const ToastOld: React.FC = () => {
     // With NextJs the window element may be null.
     const showToast = window.localStorage.getItem(SHOW_TOAST);
     // Blame Johannes
-    if (showToast === 'true' || showToast === undefined) {
+    if (showToast === 'true' || !showToast) {
       displayMessage(<Message />);
     }
   }, []);
