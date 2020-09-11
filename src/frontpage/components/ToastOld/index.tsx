@@ -25,7 +25,7 @@ const Message: React.FC = () => {
 };
 
 const ToastOld: React.FC = () => {
-  const [displayMessage] = useToast({ type: 'basic', overwrite: true, duration: 1000 * 60 * 60 });
+  const [displayMessage] = useToast({ type: 'basic', overwrite: true, duration: 1000 * 60 });
   useEffect(() => {
     // This should be inside of the useEffect
     // With NextJs the window element may be null.
