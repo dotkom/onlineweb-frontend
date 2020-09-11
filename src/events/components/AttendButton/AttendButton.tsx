@@ -21,6 +21,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
     const fetchAttending = async () => {
       const attendingFetch = await getAttendeeForEvent(eventId);
       setAttending(attendingFetch.attended);
+      window.location.reload()
     };
     fetchAttending();
   }, [eventId]);
