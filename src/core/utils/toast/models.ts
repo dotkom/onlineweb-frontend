@@ -27,17 +27,3 @@ export const DEFAULT_SETTINGS: IToastSettings = {
   type: 'info',
   duration: 6000,
 };
-
-export const getToastColor = (type: ToastType) => {
-  switch (type) {
-    /** Use event colors for now, since we dont have specific colors for this */
-    case 'error':
-      return '#eb536e';
-    case 'warning':
-      return '#faa21b';
-    case 'success':
-      return '#43b171';
-    case 'info':
-      return '#fff';
-  }
-};
