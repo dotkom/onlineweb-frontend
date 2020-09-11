@@ -21,7 +21,6 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
     const fetchAttending = async () => {
       const attendingFetch = await getAttendeeForEvent(eventId);
       setAttending(attendingFetch.attended);
-      window.location.reload();
     };
     fetchAttending();
   }, [eventId]);
@@ -30,6 +29,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
     if (token) {
       setAttending(true);
       userAttendEvent(eventId, token);
+      window.location.reload(); // TODO Proper reload, if this is too quick it might not catch attendance.
     }
   };
   const toggleModal = () => setShowModal(!showModal);
