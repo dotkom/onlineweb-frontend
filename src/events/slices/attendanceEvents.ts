@@ -40,7 +40,7 @@ export const attendanceEventsSlice = createSlice({
     });
     builder.addCase(fetchAttendanceEventById.fulfilled, (state, action) => {
       state.loading = 'idle';
-      attendanceEventsAdapter.addOne(state, action.payload);
+      attendanceEventsAdapter.upsertOne(state, action.payload);
     });
     builder.addCase(fetchAttendanceEventById.rejected, (state, action) => {
       state.loading = 'idle';
