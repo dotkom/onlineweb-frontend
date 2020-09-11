@@ -23,10 +23,6 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
-  // TODO: use for displaying to the user during signup
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isEligibleForSignup = useSelector(selectIsEligibleForSignup(eventId), shallowEqual);
 
   if (!attendanceEvent) {
@@ -65,6 +61,9 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       <AttendButton
         canAttend={isEligibleForSignup}
         eventId={eventId}
+        isAttendee={attendanceEvent.is_attendee}
+        isOnWaitList={attendanceEvent.is_on_waitlist}
+        waitListNumber={attendanceEvent.number_on_waitlist}
         registrationStart={registrationStart}
         registrationEnd={registrationEnd}
         unattendDeadline={cancellationDeadline}
