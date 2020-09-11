@@ -52,6 +52,9 @@ const HeaderUser = (props: IHeaderUserProps) => (
         <Link {...getMyProfileUrl()}>
           <a>Min side: {props.user.profile.preferred_username}</a>
         </Link>
+        <Link href="/dashboard">
+          <a>Dashboard</a>
+        </Link>
         <Link href="#">
           <a>Kontakt oss</a>
         </Link>
