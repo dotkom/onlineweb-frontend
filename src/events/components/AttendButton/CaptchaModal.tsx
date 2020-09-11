@@ -5,8 +5,8 @@ import { RECAPTCHA_KEY } from 'common/constants/google';
 
 interface ICaptchaModalProps {
   showModal: boolean;
-  header: string;
-  text: string;
+  header?: string;
+  text?: string;
   toggleModal: () => void;
   setRecaptcha: (token: string | null) => void;
 }
