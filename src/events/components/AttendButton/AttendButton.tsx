@@ -25,7 +25,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
 
   const signUp = (token: string | null) => {
     if (token) {
-      dispatch(setAttendeeByEventId({eventId, captcha: token}));
+      dispatch(setAttendeeByEventId({ eventId, captcha: token }));
     }
   };
   const toggleModal = () => setShowModal(!showModal);
@@ -35,16 +35,17 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
 
   if (!canAttend) return <p>Du må være logget inn for å se din status.</p>;
   if (currentTime < unattendDeadline && isAttendee)
-  return (
-    // can unattend
-    <Button onClick={signOff}>Meld meg av</Button>
+    return (
+      // can unattend
+      <Button onClick={signOff}>Meld meg av</Button>
     );
-  if(isOnWaitList) {
+  if (isOnWaitList) {
     return (
       <div>
         <p>{`Du er nummer ${waitListNumber} på venteliste.`}</p>
         <Button onClick={signOff}>Meld meg av venteliste</Button>
-      </div>);
+      </div>
+    );
   }
   if (!canAttend.status && isAttendee) return <p>{`${canAttend.message} Avmeldingsfristen har utløpt.`}</p>;
   if (!canAttend.status) return <p>{canAttend.message}</p>; // cant attend, no buttons
