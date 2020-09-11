@@ -1,6 +1,6 @@
 {
   "name": "onlineweb-frontend",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "src/index.tsx",
   "repository": "git@github.com:dotkom/onlineweb-frontend.git",
   "author": "dotkom@online.ntnu.no",
