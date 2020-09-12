@@ -31,7 +31,7 @@ module.exports = withBundleAnalyzer(
       env: {
         OW4_ADDRESS: process.env.OW4_ADDRESS || 'https://online.ntnu.no',
         OW4_SSO_CLIENT_ID: process.env.OW4_SSO_CLIENT_ID || '',
-        OW4_SSO_CALLBACK: process.env.OW4_SSO_CALLBACK || 'http://localhost:8080/auth/callback',
+        OW4_SSO_CALLBACK: process.env.OW4_SSO_CALLBACK || 'http://localhost:8080/authentication/callback',
         OWF_SENTRY_DSN: process.env.OWF_SENTRY_DSN || '',
         OWF_GOOGLE_ANALYTICS_KEY: process.env.OWF_GOOGLE_ANALYTICS_KEY || '',
         OWF_VAPID_SERVER_KEY: process.env.OWF_VAPID_SERVER_KEY || '',

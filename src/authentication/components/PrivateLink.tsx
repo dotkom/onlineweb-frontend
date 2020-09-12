@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { Component, ComponentProps } from 'react';
 import { IUserContext, UserContext } from '../providers/UserProvider';
-// import style from './link.less';
+import { getLoginPageUrl } from 'core/appUrls';
 
 type LinkProps = ComponentProps<typeof Link>;
 
@@ -17,7 +17,8 @@ class PrivateLink extends Component<LinkProps> {
     if (user) {
       return <Link {...this.props} />;
     } else {
-      return <Link {...props} href="#" />;
+      const loginPage = getLoginPageUrl();
+      return <Link {...props} href={loginPage.href} />;
     }
   }
 }
