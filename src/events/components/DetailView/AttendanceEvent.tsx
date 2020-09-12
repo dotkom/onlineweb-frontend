@@ -12,6 +12,8 @@ import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
 import Attendance from '../Attendance';
+import { attendeeSelectors } from 'events/slices/attendees';
+import EventPaymentBlock from './EventPaymentBlock';
 
 interface IProps {
   eventId: number;
@@ -19,6 +21,9 @@ interface IProps {
 
 const AttendanceEvent: FC<IProps> = ({ eventId }) => {
   const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
+  const attendee = useSelector((state) => attendeeSelectors.selectAll(state)).find(
+    (attendee) => attendee.event === eventId
+  );
   const isEligibleForSignup = useSelector(selectIsEligibleForSignup(eventId), shallowEqual);
 
   if (!attendanceEvent) {
@@ -55,6 +60,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
       <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
+      {attendanceEvent.payment && <EventPaymentBlock hasPaid={attendee?.has_paid} eventId={eventId} />}
     </div>
   );
 };
