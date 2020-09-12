@@ -17,7 +17,7 @@ const Message: React.FC = () => {
       </p>
       <p>
         Oppdager du noen feil, mangler, eller ønsker, send mail til dotkom@online.ntnu.no eller lag et issue på{' '}
-        <a href="https://github.com/dotkom/onlinewb-frontend">Github</a>
+        <a href="https://github.com/dotkom/onlineweb-frontend">Github</a>
       </p>
       <Checkbox onChange={saveDoNotShow} label="Ikke vis denne meldingen igjen" />
     </div>
