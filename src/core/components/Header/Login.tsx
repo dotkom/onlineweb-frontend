@@ -14,7 +14,7 @@ export interface IState {
 
 interface IProps {
   menuIsOpen?: boolean;
-  closeMenu?: () => void; 
+  closeMenu?: () => void;
 }
 
 class Login extends Component<IProps, IState> {
@@ -26,7 +26,7 @@ class Login extends Component<IProps, IState> {
   };
 
   public toggleDropdown = () => {
-    if(this.props.menuIsOpen && this.props.closeMenu) {
+    if (this.props.menuIsOpen && this.props.closeMenu) {
       this.props.closeMenu();
     }
     this.setState({
