@@ -12,7 +12,12 @@ export interface IState {
   open: boolean;
 }
 
-class Login extends Component<{}, IState> {
+interface IProps {
+  menuIsOpen?: boolean;
+  closeMenu?: () => void;
+}
+
+class Login extends Component<IProps, IState> {
   public static contextType = UserContext;
   public context!: ContextType<typeof UserContext>;
 
@@ -21,6 +26,9 @@ class Login extends Component<{}, IState> {
   };
 
   public toggleDropdown = () => {
+    if (this.props.menuIsOpen && this.props.closeMenu) {
+      this.props.closeMenu();
+    }
     this.setState({
       open: !this.state.open,
     });
