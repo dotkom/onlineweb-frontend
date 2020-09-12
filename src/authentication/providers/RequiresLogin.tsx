@@ -2,7 +2,6 @@ import React from 'react';
 import Spinner from 'common/components/Spinner';
 import { getUser } from 'authentication/api';
 import { useEffect, useState } from 'react';
-import { Link } from 'core/components/Router';
 import LoginPage from 'pages/login';
 
 const RequiresLogin: React.FC = (props) => {
