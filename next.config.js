@@ -6,6 +6,16 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const redirects = async () => {
+  return [
+    {
+      source: '/events/:eventId/:slug',
+      destination: '/events/:eventId',
+      permanent: true,
+    },
+  ];
+};
+
 module.exports = withBundleAnalyzer(
   withCss(
     withLess({
@@ -41,6 +51,7 @@ module.exports = withBundleAnalyzer(
         STRIPE_PUBLIC_KEY_TRIKOM: process.env.STRIPE_PUBLIC_KEY_TRIKOM || null,
         RECAPTCHA_PUBLIC_KEY: process.env.RECAPTCHA_PUBLIC_KEY || '',
       },
+      redirects,
     })
   )
 );
