@@ -2,6 +2,8 @@ import React from 'react';
 import Spinner from 'common/components/Spinner';
 import { getUser } from 'authentication/api';
 import { useEffect, useState } from 'react';
+import { Link } from 'core/components/Router';
+import LoginPage from 'pages/login';
 
 const RequiresLogin: React.FC = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,7 +24,7 @@ const RequiresLogin: React.FC = (props) => {
   }, []);
 
   if (isLoadingUser) return <Spinner />;
-  if (!isLoggedIn) return <p>Du må være logget inn for å se denne siden.</p>;
+  if (!isLoggedIn) return <LoginPage />;
   return <>{props.children}</>;
 };
 
