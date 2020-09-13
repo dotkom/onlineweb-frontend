@@ -15,7 +15,7 @@ const EventPaymentBlock: FC<IProps> = ({ hasPaid, eventId }) => {
       {hasPaid ? (
         <p>Du har betalt</p>
       ) : (
-        <Link requireLogin={false} {...getPaymentEventUrl(eventId)}>
+        <Link requireLogin={true} {...getPaymentEventUrl(eventId)}>
           <Button color="secondary">Gå til betaling</Button>
         </Link>
       )}

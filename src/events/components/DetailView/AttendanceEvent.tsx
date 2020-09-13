@@ -40,6 +40,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
   const registrationEnd = DateTime.fromISO(attendanceEvent.registration_end);
   const cancellationDeadline = DateTime.fromISO(attendanceEvent.unattend_deadline);
   const showPayment = !attendanceEvent.is_on_waitlist && attendanceEvent.is_attendee && attendanceEvent.payment != null;
+
   return (
     <div className={style.blockGrid}>
       <Block title="Påmeldingsstart">
