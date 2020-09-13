@@ -21,6 +21,7 @@ export interface IEventAPIParameters extends IQueryObject {
 
 const EVENTS_API_URL = '/api/v1/event/events/';
 const ATTENDANCE_EVENT_API_URL = '/api/v1/event/attendance-events/';
+const EVENT_EXTRAS_DESCRIPTION_URL = '/api/v1/event/extras/';
 const EVENT_EXTRAS_URL = '/extras/';
 
 export const listEvents = listResource<IEvent, IEventAPIParameters>(EVENTS_API_URL);
@@ -52,10 +53,19 @@ export const getAttendanceEvent = async (id: number): Promise<IAttendanceEvent> 
 
 export const getEventExtras = async (eventId: number): Promise<IExtra[]> => {
   try {
-    const ret = await get<IExtra[]>(`${ATTENDANCE_EVENT_API_URL}${eventId}${EVENT_EXTRAS_URL}`);
+    const ret = await get<IExtra[]>(`${ATTENDANCE_EVENT_API_URL}${eventId}${EVENT_EXTRAS_URL}/`);
     return ret;
   } catch (response) {
     throw new Error('Kunne ikke hente valgmuligheter for arrangementet!');
+  }
+};
+
+export const getExtraDescription = async (extraId: number): Promise<IExtra> => {
+  try {
+    const ret = await get<IExtra>(`${EVENT_EXTRAS_DESCRIPTION_URL}${extraId}`, { format: 'json' });
+    return ret;
+  } catch (response) {
+    throw new Error('Kunne ikke hente navn på extra!');
   }
 };
 
