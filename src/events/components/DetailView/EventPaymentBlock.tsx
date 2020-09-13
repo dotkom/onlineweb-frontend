@@ -13,11 +13,11 @@ const EventPaymentBlock: FC<IProps> = ({ hasPaid, eventId }) => {
   return (
     <div className={`${style.eventPayment} ${style.fullBlock}`}>
       {hasPaid ? (
-        <Link requireLogin={false} href={getPaymentEventUrl(eventId)}>
+        <p>Du har betalt</p>
+      ) : (
+        <Link requireLogin={false} {...getPaymentEventUrl(eventId)}>
           <Button color="secondary">Gå til betaling</Button>
         </Link>
-      ) : (
-        <p>Du har betalt</p>
       )}
     </div>
   );
