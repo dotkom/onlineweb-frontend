@@ -15,6 +15,7 @@ import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
 
 import { Select } from '@dotkomonline/design-system';
+import { getExtraDescription } from 'events/api/events';
 
 interface IProps {
   eventId: number;
@@ -66,10 +67,18 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       <Block title="Venteliste">
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
-      <div>
-        { attendanceEvent.has_extras ? <Select>{attendanceEvent.extras.map(extra => <option>{extra}</option>)}</Select> : null}
+      <Block title="Extras">
+        {attendanceEvent.has_extras ? (
+          <Select>
+            {attendanceEvent.extras.map((extra) =>
+              getExtraDescription(extra)
+                .then((res) => res.choice)
+                .then((option) => (option ? <option>{option}</option> : null))
+            )}
+          </Select>
+        ) : null}
         {RECAPTCHA_KEY ? <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={(value) => setRecaptcha(value)} /> : null}
-      </div>
+      </Block>
     </div>
   );
 };
