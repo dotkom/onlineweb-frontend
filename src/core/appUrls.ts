@@ -14,7 +14,7 @@ export const getEventsUrl = () => url`/events`;
 export const getHobbyGroupsUrl = () => url`/hobbygroups`;
 export const getLoginPageUrl = () => url`/login`;
 export const getMyProfileUrl = () => url`/profile`;
-export const getPaymentEventUrl = (eventId: number) => url`/payments/${{ eventId }}`;
+export const getPaymentEventUrl = (eventId: number) => url`/payments/events/${{ eventId }}`;
 export const getPaymentWalletUrl = () => url`/payments/wallet`;
 export const getPaymentWebshopUrl = () => url`/payments/webshop`;
 export const getPublicProfileUrl = (userId: number) => url`/profile/public/${{ userId }}`;
