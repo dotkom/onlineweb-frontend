@@ -22,10 +22,10 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const modal = <CaptchaModal showModal={showModal} toggleModal={toggleModal} setRecaptcha={signUp} />;
 
   return (
-    <div>
+    <>
       <Button onClick={toggleModal}>Meld meg på</Button>
       {modal}
-    </div>
+    </>
   );
 };
 
