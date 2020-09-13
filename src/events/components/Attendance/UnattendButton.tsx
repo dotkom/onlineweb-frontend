@@ -14,11 +14,7 @@ const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitLis
   const signOff = () => dispatch(removeAttendeeByEventId(eventId));
 
   if (!isOnWaitList) {
-    return (
-      <>
-        <Button onClick={signOff}>Meld meg av</Button>
-      </>
-    );
+    return <Button onClick={signOff}>Meld meg av</Button>;
   }
   return (
     <>
