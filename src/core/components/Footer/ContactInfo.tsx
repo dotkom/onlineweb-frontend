@@ -17,7 +17,7 @@ const ContactInfo = () => (
       </p>
       <a href="mailto:kontakt@online.ntu.no">
         <p>
-          <FontAwesomeIcon icon={faEnvelope} fixedWidth /> kontakt@online.ntu.no
+          <FontAwesomeIcon icon={faEnvelope} fixedWidth /> kontakt@online.ntnu.no
         </p>
       </a>
       <a href="mailto:okonomi@online.ntnu.no">
