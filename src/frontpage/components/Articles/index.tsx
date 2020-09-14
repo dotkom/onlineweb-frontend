@@ -24,11 +24,11 @@ const Articles = () => {
         {articleIds.length ? (
           <>
             <MainArticle articleId={articleIds[0]} />
-            <span className={style.smallContainer}>
+            <article className={style.smallContainer}>
               {articleIds.slice(1, 4).map((articleId) => (
                 <SmallArticle key={articleId} articleId={articleId} />
               ))}
-            </span>
+            </article>
           </>
         ) : null}
       </div>
