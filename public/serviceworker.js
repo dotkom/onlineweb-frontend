@@ -7,7 +7,7 @@ sw.addEventListener('install', () => {
 });
 
 // Cleanup unwanted caches
-self.addEventListener('activate', (event) => {
+sw.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
