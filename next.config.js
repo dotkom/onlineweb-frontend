@@ -18,6 +18,11 @@ const redirects = async () => {
       destination: '/articles/:articleId',
       permanent: true,
     },
+    {
+      source: '/careeropportunity/:careerId/',
+      destination: '/career/:careerId',
+      permanent: true,
+    },
   ];
 };
 
