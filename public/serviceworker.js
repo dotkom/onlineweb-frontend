@@ -1,12 +1,43 @@
 const sw = self;
+const cacheName = 'owf-cache';
+const cachesToKeep = [cacheName];
 
-sw.addEventListener('install', (event) => {
-  event.waitUntil(caches.open('base-cache').then((cache) => cache.add('/')));
+sw.addEventListener('install', () => {
+  self.skipWaiting(); // Ensures that any new, waiting eventlistener becomes the active one.
 });
 
+// Cleanup unwanted caches
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (!cachesToKeep.includes(cache)) {
+            return caches.delete(cache);
+          }
+        })
+      );
+    })
+  );
+});
+
+// Respond to fetches with a network then cache strategy.
 sw.addEventListener('fetch', (event) => {
-  event.respondWith(caches.match(event.request).then((response) => response || fetch(event.request)));
+  event.respondWith(networkThenCache(event));
 });
+
+// Network then cache strategy responds from the network if possible, while updating the cache.
+// If network is unreachable it returns from cache.
+const networkThenCache = (event) => {
+  const networkFetch = fetch(event.request);
+  event.waitUntil(
+    networkFetch.then((response) => {
+      const responseClone = response.clone();
+      caches.open(cacheName).then((cache) => cache.put(event.request, responseClone));
+    })
+  );
+  return networkFetch.catch(() => caches.match(event.request));
+};
 
 const displayNotification = async (event) => {
   /** Cancel if notifications are not supported or not granted access */
