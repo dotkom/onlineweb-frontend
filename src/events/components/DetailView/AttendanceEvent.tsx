@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
-import React, { FC } from 'react';
-import { shallowEqual } from 'react-redux';
+import React, { FC, useEffect } from 'react';
+import { shallowEqual, useDispatch } from 'react-redux';
 
 import { useSelector } from 'core/redux/hooks';
 import { State } from 'core/redux/Store';
@@ -12,13 +12,24 @@ import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
 import Attendance from '../Attendance';
+import { attendeeSelectors, fetchAttendeeByEventId } from 'events/slices/attendees';
+import EventPaymentBlock from './EventPaymentBlock';
 
 interface IProps {
   eventId: number;
 }
 
 const AttendanceEvent: FC<IProps> = ({ eventId }) => {
+  const dispatch = useDispatch();
   const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
+  const attendee = useSelector((state) => attendeeSelectors.selectAll(state)).find(
+    (attendee) => attendee.event === eventId
+  );
+
+  useEffect(() => {
+    dispatch(fetchAttendeeByEventId(eventId));
+  }, [eventId]);
+
   const isEligibleForSignup = useSelector(selectIsEligibleForSignup(eventId), shallowEqual);
 
   if (!attendanceEvent) {
@@ -28,6 +39,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
   const registrationStart = DateTime.fromISO(attendanceEvent.registration_start);
   const registrationEnd = DateTime.fromISO(attendanceEvent.registration_end);
   const cancellationDeadline = DateTime.fromISO(attendanceEvent.unattend_deadline);
+  const showPayment = !attendanceEvent.is_on_waitlist && attendanceEvent.is_attendee && attendanceEvent.payment != null;
 
   return (
     <div className={style.blockGrid}>
@@ -54,7 +66,10 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       <Block title="Venteliste">
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
-      <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
+      <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
+        <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
+      </div>
+      {showPayment && <EventPaymentBlock hasPaid={attendee?.has_paid} eventId={eventId} />}
     </div>
   );
 };
