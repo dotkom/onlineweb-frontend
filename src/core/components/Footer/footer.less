@@ -35,6 +35,18 @@
     font-weight: bold;
   }
 
+  & > .mainSponsor {
+    margin-top: 15px;
+  }
+
+  & > .mainSponsor > .hsp {
+    display: block;
+    color: @darkGray;
+    font-size: 12.5px;
+    opacity: 0.3;
+    position: relative;
+  }
+
   @media (max-width: @owMobileBreakpoint) {
     grid-template-columns: 1fr;
     width: calc(100% - @paddingHorizontal * 2);
@@ -48,7 +60,6 @@
 
 .social,
 .sponsor {
-  padding: 5px;
   filter: brightness(0.4);
   transition: filter 0.2s;
 

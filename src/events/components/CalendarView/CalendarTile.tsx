@@ -1,8 +1,7 @@
 import classNames from 'classnames';
-import { DateTime } from 'luxon';
 import React, { FC } from 'react';
 import { shallowEqual } from 'react-redux';
-
+import { DateTime } from 'luxon';
 import { eventSelectors } from 'events/slices/events';
 import { useSelector } from 'core/redux/hooks';
 import { State } from 'core/redux/Store';
@@ -17,6 +16,7 @@ interface IProps {
 
 export const EventCalendarTile: FC<IProps> = ({ date, active }) => {
   const eventIds = useSelector(selectEventIdsForDate(date), shallowEqual);
+  console.log(date);
   return (
     <div
       className={classNames(style.tile, {
@@ -24,7 +24,13 @@ export const EventCalendarTile: FC<IProps> = ({ date, active }) => {
       })}
     >
       <div className={style.tileContent}>
-        <p>{date.day}</p>
+        <p>
+          {isSameDate(date, DateTime.local()) ? (
+            <span className={classNames(style.tileToday)}>{date.day}</span>
+          ) : (
+            date.day
+          )}
+        </p>
         {eventIds.map((eventId) => (
           <CalendarEvent key={eventId} eventId={eventId} />
         ))}

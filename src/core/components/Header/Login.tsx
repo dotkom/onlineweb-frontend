@@ -3,7 +3,7 @@ import React, { Component, ContextType } from 'react';
 import LoginView from 'authentication/components/Login';
 import { IAuthUser } from 'authentication/models/User';
 import { UserContext } from 'authentication/providers/UserProvider';
-import { getMyProfileUrl } from 'core/appUrls';
+import { getMyProfileUrl, getPaymentWalletUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 
 import style from './header.less';
@@ -12,7 +12,12 @@ export interface IState {
   open: boolean;
 }
 
-class Login extends Component<{}, IState> {
+interface IProps {
+  menuIsOpen?: boolean;
+  closeMenu?: () => void;
+}
+
+class Login extends Component<IProps, IState> {
   public static contextType = UserContext;
   public context!: ContextType<typeof UserContext>;
 
@@ -21,6 +26,9 @@ class Login extends Component<{}, IState> {
   };
 
   public toggleDropdown = () => {
+    if (this.props.menuIsOpen && this.props.closeMenu) {
+      this.props.closeMenu();
+    }
     this.setState({
       open: !this.state.open,
     });
@@ -51,6 +59,12 @@ const HeaderUser = (props: IHeaderUserProps) => (
       <div className={style.userMenu} onClick={props.onClick}>
         <Link {...getMyProfileUrl()}>
           <a>Min side: {props.user.profile.preferred_username}</a>
+        </Link>
+        <Link href="/dashboard">
+          <a>Dashboard</a>
+        </Link>
+        <Link {...getPaymentWalletUrl()}>
+          <a>Saldo</a>
         </Link>
         <Link href="#">
           <a>Kontakt oss</a>
