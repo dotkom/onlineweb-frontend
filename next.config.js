@@ -13,6 +13,11 @@ const redirects = async () => {
       destination: '/events/:eventId',
       permanent: true,
     },
+    {
+      source: '/article/:eventId/:slug',
+      destination: '/articles/:eventId',
+      permanent: true,
+    },
   ];
 };
 
