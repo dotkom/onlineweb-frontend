@@ -3,7 +3,7 @@ const cacheName = 'owf-cache';
 const cachesToKeep = [cacheName];
 
 sw.addEventListener('install', () => {
-  self.skipWaiting(); // Ensures that any new, waiting eventlistener becomes the active one.
+  sw.skipWaiting(); // Ensures that any new, waiting eventlistener becomes the active one.
 });
 
 // Cleanup unwanted caches
@@ -41,12 +41,12 @@ const networkThenCache = (event) => {
 
 const displayNotification = async (event) => {
   /** Cancel if notifications are not supported or not granted access */
-  if (!(self.Notification && self.Notification.permission === 'granted')) {
+  if (!(sw.Notification && sw.Notification.permission === 'granted')) {
     return;
   }
 
   const { title, ...noti } = event.data.json();
-  await self.registration.showNotification(title, noti);
+  await sw.registration.showNotification(title, noti);
 
   return;
 };
