@@ -14,8 +14,8 @@ const redirects = async () => {
       permanent: true,
     },
     {
-      source: '/article/:eventId/:slug',
-      destination: '/articles/:eventId',
+      source: '/article/:articleId/:slug',
+      destination: '/articles/:articleId',
       permanent: true,
     },
   ];
