@@ -19,7 +19,7 @@ const redirects = async () => {
       permanent: true,
     },
     {
-      source: '/careeropportunity/:careerId/',
+      source: '/careeropportunity/:careerId',
       destination: '/career/:careerId',
       permanent: true,
     },
