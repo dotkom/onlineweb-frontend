@@ -14,8 +14,12 @@ const LoginView = (props: ILoginViewProps) => (
     {props.isOpen && (
       <div className={style.loginMenu}>
         <Button onClick={logIn}>Logg inn</Button>
-          <Button as='a' href='/auth/register/'>Registrer</Button>
-          <Button as='a' href='/auth/recover/'>Glemt passord</Button>
+        <Button as="a" href="/auth/register/">
+          Registrer
+        </Button>
+        <Button as="a" href="/auth/recover/">
+          Glemt passord
+        </Button>
       </div>
     )}
   </div>
