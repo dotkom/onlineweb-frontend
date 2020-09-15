@@ -2,6 +2,7 @@ import IResponsiveImage from 'common/models/ResponsiveImage';
 import { IPayment } from 'payments/models/Payment';
 
 export interface ISize {
+  id: number;
   size: string;
   description: string | null;
   stock: number | null;
