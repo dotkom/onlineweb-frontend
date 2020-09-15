@@ -49,6 +49,7 @@
     width: 225px;
     display: grid;
     grid-template-rows: 2fr;
+    grid-gap: 8px;
     line-height: 30px;
     padding: 8px 16px;
     background-color: #fff;
@@ -78,6 +79,9 @@
       padding: 6px 12px;
       cursor: pointer;
       transition: background 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       &:hover {
         background: lighten(@blue, 10%);
