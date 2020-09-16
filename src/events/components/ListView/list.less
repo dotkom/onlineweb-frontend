@@ -70,7 +70,15 @@
 
 @media (max-width: @owMobileBreakpoint) {
   .gridRow {
-    grid-template-columns: 5fr 1.5rem 3rem 1.5rem 3.5rem;
+    grid-template-columns: 3fr 0.5fr 1fr;
+    grid-template-rows: 1fr auto;
+
+    & > p:first-of-type {
+      grid-row: 1 / span 2;
+    }
+  }
+  .icon {
+    grid-column-start: 2;
   }
   .eventTypeDiv,
   .eventType {
