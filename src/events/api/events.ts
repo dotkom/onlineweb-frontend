@@ -60,12 +60,12 @@ export const getEventExtras = async (eventId: number): Promise<IExtra[]> => {
   }
 };
 
-export const getExtraDescription = async (extraId: number): Promise<IExtra> => {
+export const getExtraInformation = async (extraId: number): Promise<IExtra> => {
   try {
     const ret = await get<IExtra>(`${EVENT_EXTRAS_DESCRIPTION_URL}${extraId}`, { format: 'json' });
     return ret;
   } catch (response) {
-    throw new Error('Kunne ikke hente navn på extra!');
+    throw new Error('Kunne ikke hente informasjon om extra!');
   }
 };
 

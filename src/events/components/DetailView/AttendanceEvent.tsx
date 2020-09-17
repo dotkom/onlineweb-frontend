@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { shallowEqual } from 'react-redux';
 
@@ -15,7 +15,8 @@ import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
 
 import { Select } from '@dotkomonline/design-system';
-import { getExtraDescription } from 'events/api/events';
+import { getExtraInformation } from 'events/api/events';
+import { IExtra } from 'events/models/Extras';
 
 interface IProps {
   eventId: number;
@@ -41,6 +42,16 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
   const registrationStart = DateTime.fromISO(attendanceEvent.registration_start);
   const registrationEnd = DateTime.fromISO(attendanceEvent.registration_end);
   const cancellationDeadline = DateTime.fromISO(attendanceEvent.unattend_deadline);
+
+  const [extras, setExtras] = useState<IExtra[]>([]);
+
+  useEffect(() => {
+    if (attendanceEvent.has_extras) {
+      attendanceEvent.extras.forEach((extraID) => {
+        getExtraInformation(extraID).then((res) => setExtras((prevExtras) => [...prevExtras, res]));
+      });
+    }
+  }, []);
 
   return (
     <div className={style.blockGrid}>
@@ -70,11 +81,9 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       <Block title="Extras">
         {attendanceEvent.has_extras ? (
           <Select>
-            {attendanceEvent.extras.map((extra) =>
-              getExtraDescription(extra)
-                .then((res) => res.choice)
-                .then((option) => (option ? <option>{option}</option> : null))
-            )}
+            {extras.map((extra) => (
+              <option key={extra.id}>{extra.choice}</option>
+            ))}
           </Select>
         ) : null}
         {RECAPTCHA_KEY ? <ReCAPTCHA sitekey={RECAPTCHA_KEY} onChange={(value) => setRecaptcha(value)} /> : null}
