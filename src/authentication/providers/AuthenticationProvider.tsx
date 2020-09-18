@@ -6,12 +6,11 @@ import { USER_MANAGER } from 'authentication/api';
 import { User } from 'oidc-client';
 import { IAuthUser } from 'authentication/models/User';
 
-type JSON<T> = string & {__JSON__: T};
+type JSON<T> = string & { __JSON__: T };
 declare const JSON: {
   parse: <T>(str: JSON<T>) => T;
   stringify: <T>(obj: T) => JSON<T>;
 };
-
 
 // This component registers listeners for all authentication/user-related events which adds the events to the Redux store.
 const AuthenticationProviderComponent: FC = ({ children }) => {
