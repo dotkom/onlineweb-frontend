@@ -48,7 +48,6 @@ class EditCard extends Component<IProps, IState> {
     const { emCode, valid } = this.state;
     if (valid && emCode) {
       const rfid = toggleEMandRFID(emCode);
-      // TODO: Give more feedback to the user
       const profile = await putProfile({ rfid });
       this.setState({ registered: profile.rfid === rfid });
       refetchProfile();
