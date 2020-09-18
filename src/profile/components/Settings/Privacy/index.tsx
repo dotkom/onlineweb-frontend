@@ -1,6 +1,5 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
-import { UserContext } from 'authentication/providers/UserProvider';
 import { Pane } from 'common/components/Panes';
 import { getKeys } from 'common/utils/tsHacks';
 import { useToast } from 'core/utils/toast/useToast';
@@ -22,7 +21,6 @@ const INITIAL_STATE: PrivacyOptions = {
 };
 
 const Privacy: FC = () => {
-  const { user } = useContext(UserContext);
   const [options, setOptions] = useState<PrivacyOptions>(INITIAL_STATE);
 
   const [displaySuccess] = useToast({ overwrite: true, type: 'success' });
@@ -30,22 +28,18 @@ const Privacy: FC = () => {
 
   /** Fetch Privacy options from server and put into state. */
   const fetchInitial = async () => {
-    if (user) {
-      const serverOptions = await getPrivacyOptions(user);
-      setOptions({ ...serverOptions });
-    }
+    const serverOptions = await getPrivacyOptions();
+    setOptions({ ...serverOptions });
   };
 
   /** Saves/sends current options to server and updates state from server. */
   const savePrivacyOptions = async (newOptions: PrivacyOptions) => {
-    if (user) {
-      const serverOptions = await putPrivacyOptions(newOptions, user);
-      if (serverOptions) {
-        setOptions(serverOptions);
-        displaySuccess('Innstillingen ble oppdatert.');
-      } else {
-        displayError('Det skjedde noe galt under uppdateringen av innstillingen.');
-      }
+    const serverOptions = await putPrivacyOptions(newOptions);
+    if (serverOptions) {
+      setOptions(serverOptions);
+      displaySuccess('Innstillingen ble oppdatert.');
+    } else {
+      displayError('Det skjedde noe galt under uppdateringen av innstillingen.');
     }
   };
 
@@ -54,12 +48,10 @@ const Privacy: FC = () => {
    * @param {keyof IPrivacy} key Key of the option to toggle.
    */
   const togglePrivacyOption = async (key: keyof IPrivacy) => {
-    if (user) {
-      const option = options[key];
-      const newOptions: PrivacyOptions = { ...options, [key]: !option };
-      setOptions(newOptions);
-      savePrivacyOptions(newOptions);
-    }
+    const option = options[key];
+    const newOptions: PrivacyOptions = { ...options, [key]: !option };
+    setOptions(newOptions);
+    savePrivacyOptions(newOptions);
   };
 
   /** Fetch initial options on component mount */

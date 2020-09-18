@@ -1,5 +1,4 @@
 import { getUser } from 'authentication/api';
-import { IAuthUser } from 'authentication/models/User';
 
 import { get, getAllPages, IBaseAPIParameters, IAPIData } from 'common/utils/api';
 import { listResource } from 'common/resources';
@@ -30,7 +29,8 @@ export const getEvents = async (args?: IEventAPIParameters & IBaseAPIParameters)
   return data.results;
 };
 
-export const getAllEvents = async (args: IEventAPIParameters, user?: IAuthUser): Promise<IEvent[]> => {
+export const getAllEvents = async (args: IEventAPIParameters): Promise<IEvent[]> => {
+  const user = await getUser();
   const data = await getAllPages<IEvent>(EVENTS_API_URL, { format: 'json', page_size: 80, ...args }, { user });
   return data;
 };

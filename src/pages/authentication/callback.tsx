@@ -1,9 +1,9 @@
 import React from 'react';
 
-import AuthCallback from 'authentication/components/AuthCallback';
+import { AuthenticationCallback } from 'authentication/components/AuthenticationCallback';
 
 const AuthCallbackPage = () => {
-  return <AuthCallback />;
+  return <AuthenticationCallback />;
 };
 
 export default AuthCallbackPage;
