@@ -1,7 +1,6 @@
-import React, { ReactNodeArray, useContext, useEffect, useState } from 'react';
+import React, { ReactNodeArray, useEffect, useState } from 'react';
 
 import { Message } from '@dotkomonline/design-system';
-import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
 import useAsync from 'common/hooks/useAsync';
 import { deleteClient, getMyClients } from 'oidc_clients/api/clients';
 import OidcClient from 'oidc_clients/components/OidcClient/index';
@@ -15,21 +14,19 @@ interface IRemoveState {
 }
 
 export const ManageApps = () => {
-  const { user } = useContext<IUserContext>(UserContext);
-
   const [removeClientState, setRemoveClientState] = useState<IRemoveState>({
     client_id: -1,
     client: undefined,
   });
 
   const removeClientRequest = useAsync(() => {
-    if (user && removeClientState.client_id !== -1) {
-      return deleteClient(user, removeClientState.client_id);
+    if (removeClientState.client_id !== -1) {
+      return deleteClient(removeClientState.client_id);
     }
     return Promise.resolve(null);
-  }, [user, removeClientState]);
+  }, [removeClientState]);
 
-  const getClientsRequest = useAsync(async () => (user ? await getMyClients(user) : []), [user, removeClientState]);
+  const getClientsRequest = useAsync(async () => await getMyClients(), [removeClientState]);
 
   let managedApps: ReactNodeArray = [];
 

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useContext } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 
 import Spinner from 'common/components/Spinner';
 import HttpError from 'core/components/errors/HttpError';
@@ -11,7 +11,6 @@ import { fetchPaymentEventById, paymentSelectors } from 'payments/slices/payment
 
 import { Payment } from '../Payment';
 import style from '../Payment/payment.less';
-import { UserContext } from 'authentication/providers/UserProvider';
 
 interface IProps {
   eventId: number;
@@ -26,7 +25,6 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
   const payment = useSelector(selectPaymentByEventId(eventId));
   // User has already paid for the event, or otherwise been marked as paid.
   const isPaid = attendee && attendee.has_paid;
-  const { user } = useContext(UserContext);
 
   useEffect(() => {
     dispatch(fetchAttendanceEventById(eventId));
@@ -39,10 +37,6 @@ export const EventPayment: FC<IProps> = ({ eventId }) => {
       setSelectedPriceId(payment.payment_prices[0].id);
     }
   }, [payment]);
-
-  if (!user) {
-    return <div className={style.infobox}>Venligst login med brukeren din</div>;
-  }
 
   if (!attendanceEvent || !attendee || !payment) {
     return <Spinner />;

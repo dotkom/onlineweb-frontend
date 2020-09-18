@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { articlesReducer } from 'articles/slices/articles';
+import { authenticationReducer } from 'authentication/slices/authentication';
 import { careerLocationsReducer } from 'career/slices/careerLocations';
 import { careerOpportunitiesReducer } from 'career/slices/careerOpportunities';
 import { jobTypesReducer } from 'career/slices/jobTypes';
@@ -27,6 +28,7 @@ export const initStore = (initialState: {} = {}) => {
       articles: articlesReducer,
       attendanceEvents: attendanceEventsReducer,
       attendees: attendeesReducer,
+      authentication: authenticationReducer,
       careerLocations: careerLocationsReducer,
       careerOpportunities: careerOpportunitiesReducer,
       companies: companiesReducer,
