@@ -1,17 +1,18 @@
 // api for fetching user clients
-import { IAuthUser } from 'authentication/models/User';
 import { deleteR, getAllPages } from 'common/utils/api';
 import { IOidcClient } from 'oidc_clients/models/client';
 import { IUserConsent } from '../models/user_consent';
 import { getClient } from './clients';
+import { getUser } from 'authentication/api';
 
 const API_BASE = '/api/v1/oidc/';
 
 type ConsentResponseType = { client: number | IOidcClient } & Omit<IUserConsent, 'client'>;
 
-export const getUserConsent = async (user: IAuthUser) => {
+export const getUserConsent = async () => {
   let consentResponse = [];
   try {
+    const user = await getUser();
     consentResponse = await getAllPages<ConsentResponseType>(API_BASE + 'consent/', undefined, { user });
   } catch (response) {
     throw new Error(`Kunne ikke hente apptilganger: ${response.statusText}`);
@@ -24,9 +25,10 @@ export const getUserConsent = async (user: IAuthUser) => {
   return await Promise.all(promises);
 };
 
-export const revokeuserConsent = (user: IAuthUser, id: number) => {
+export const revokeuserConsent = async (id: number) => {
   try {
-    return deleteR(`${API_BASE}consent/${id}`, undefined, { user });
+    const user = await getUser();
+    return await deleteR(`${API_BASE}consent/${id}`, undefined, { user });
   } catch (response) {
     throw new Error(`Kunne ikke trekke tilbake apptilgang: ${response.statusText}`);
   }

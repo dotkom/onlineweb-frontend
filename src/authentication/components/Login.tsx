@@ -1,6 +1,7 @@
 import React from 'react';
 import { logIn } from '../api';
 import style from './login.less';
+import { Button } from '@dotkomonline/design-system';
 
 interface ILoginViewProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -12,11 +13,13 @@ const LoginView = (props: ILoginViewProps) => (
     <button className={style.dropdownButton} onClick={props.onClick} title="Logg inn" />
     {props.isOpen && (
       <div className={style.loginMenu}>
-        <button onClick={logIn}>Logg inn</button>
-        <div className={style.extra}>
-          <button>Registrer</button>
-          <button>Glemt passord</button>
-        </div>
+        <Button onClick={logIn}>Logg inn</Button>
+        <Button as="a" href="/auth/register/">
+          Registrer
+        </Button>
+        <Button as="a" href="/auth/recover/">
+          Glemt passord
+        </Button>
       </div>
     )}
   </div>

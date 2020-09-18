@@ -52,7 +52,7 @@ class Header extends Component<{}, IState> {
             <a href={`${DOMAIN}/wiki/`}>Wiki</a>
             <a href={`${DOMAIN}/webshop/`}>Webshop</a>
           </div>
-          <HeaderLogin />
+          <HeaderLogin menuIsOpen={isOpen} closeMenu={this.closeMenu} />
         </div>
       </header>
     );

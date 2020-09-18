@@ -47,11 +47,16 @@
     border-top: none;
     right: 0;
     width: 225px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 2fr;
+    grid-gap: 8px;
     line-height: 30px;
     padding: 8px 16px;
     background-color: #fff;
+
+    :first-child {
+      grid-column: 1 / span 2;
+    }
 
     label {
       font-weight: bold;
@@ -65,13 +70,19 @@
       margin-bottom: 10px;
     }
 
-    button {
-      color: #fff;
-      background: @blue;
+    a {
+      text-align: center;
+    }
+
+    button,
+    a {
       margin: 10px 0;
       padding: 6px 12px;
       cursor: pointer;
       transition: background 0.2s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       &:hover {
         background: lighten(@blue, 10%);

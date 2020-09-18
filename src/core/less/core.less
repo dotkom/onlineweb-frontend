@@ -24,6 +24,11 @@ body {
 body {
   color: @darkGray;
   font-family: 'Source Sans Pro', sans-serif;
+
+  // Very specific for a specific case https://github.com/IdentityModel/oidc-client-js/pull/1204
+  > iframe[src^='https://online.ntnu.no/openid/authorize'] {
+    display: block !important;
+  }
 }
 
 main {
