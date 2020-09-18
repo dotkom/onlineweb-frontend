@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { Wallet } from 'payments/components/Wallet';
-import { UserContext } from 'authentication/providers/UserProvider';
+import { useSelector } from 'core/redux/hooks';
+import { selectIsLoggedIn } from 'authentication/selectors/authentication';
 
 const PaymentWalletPage = () => {
-  const { user } = useContext(UserContext);
+  const isLoggedIn = useSelector(selectIsLoggedIn());
   /** Should not be able to render this page without an authenticated user */
-  if (!user) {
+  if (!isLoggedIn) {
     return <p>Du må logge inn med brukeren din</p>;
   }
 

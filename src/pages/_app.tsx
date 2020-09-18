@@ -40,13 +40,11 @@ const CustomApp = (appProps: Props): JSX.Element => {
       <GlobalStyle />
       <Provider store={store}>
         <ContextWrapper>
-          <AuthProvider>
-            <UserProfileProvider>
-              <Core>
-                <Component {...pageProps} />
-              </Core>
-            </UserProfileProvider>
-          </AuthProvider>
+          <UserProfileProvider>
+            <Core>
+              <Component {...pageProps} />
+            </Core>
+          </UserProfileProvider>
         </ContextWrapper>
       </Provider>
     </>
