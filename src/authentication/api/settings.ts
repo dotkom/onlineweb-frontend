@@ -7,9 +7,11 @@ const settings: UserManagerSettings = {
   redirect_uri: process.env.OW4_SSO_CALLBACK || '',
   post_logout_redirect_uri: DOMAIN + '/',
   response_type: 'id_token token',
-  scope: 'openid profile',
+  scope: 'openid profile onlineweb4',
+  automaticSilentRenew: true,
   filterProtocolClaims: true,
   loadUserInfo: true,
+  silent_redirect_uri: process.env.OW4_SSO_CALLBACK || '',
 };
 
 export default settings;
