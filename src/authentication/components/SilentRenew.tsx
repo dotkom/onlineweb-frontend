@@ -16,20 +16,18 @@ declare const JSON: {
 
 export const SilentRenewComponent: FC = () => {
   const dispatch = useDispatch();
-  const loadCurrentUser = useCallback(async () => {
+  const loadCurrentUser = async () => {
     if (USER_MANAGER) {
       try {
         const user = await USER_MANAGER.getUser();
-        console.log('SilentRenew dispatched SignIn')
-        dispatch(authenticationActions.userSignIn(JSON.stringify(user as IAuthUser)));
-        USER_MANAGER.signinSilent().catch((err) => {
-          console.error(err);
-        });
-      } catch (err) {
+        if (user) dispatch(authenticationActions.userSignIn(JSON.stringify(user as IAuthUser)));
+        else USER_MANAGER.signinSilent()
+      }
+      catch (err) {
         console.error(err);
       }
     }
-  }, [dispatch]);
+  }
 
   useIsomorphicLayoutEffect(() => {
     loadCurrentUser();

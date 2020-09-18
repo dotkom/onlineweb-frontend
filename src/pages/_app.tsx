@@ -9,7 +9,6 @@ import { Provider } from 'react-redux';
 
 import 'react-day-picker/lib/style.css';
 
-import AuthProvider from 'authentication/providers/UserProvider';
 import { __CLIENT__, __PROD__ } from 'common/constants/environment';
 import { OWF_SENTRY_DSN } from 'common/constants/sentry';
 import Core from 'core';

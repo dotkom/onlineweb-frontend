@@ -1,11 +1,12 @@
 import { useAsyncDispatch } from 'common/hooks/useAsync';
-import React, { SyntheticEvent, useContext, useEffect, useRef, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import { Button, Card, Message, TextField } from '@dotkomonline/design-system';
-import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
 import { anonymizeUser, fetchUserData } from 'profile/api/gdpr';
 
 import style from './userdata.less';
+import { useSelector } from 'core/redux/hooks';
+import { selectUserName } from 'authentication/selectors/authentication';
 
 interface IUserCredentials {
   username: string;
@@ -13,8 +14,7 @@ interface IUserCredentials {
 }
 
 const UserData = () => {
-  const userContext = useContext<IUserContext>(UserContext);
-  const user = userContext.user;
+  const username = useSelector(selectUserName());
 
   const [userCredentials, setUserCredentials] = useState<IUserCredentials>({ username: '', password: '' });
 
@@ -22,19 +22,14 @@ const UserData = () => {
   const [fileRef, setFileRef] = useState<null | string>(null);
 
   const [userDataRequest, dispatchUserDataRequest] = useAsyncDispatch(async () => {
-    if (user) {
-      return new File([JSON.stringify(await fetchUserData(user))], `${user.profile.preferred_username}.json`, {
-        type: 'application/json',
-      });
-    }
+    return new File([JSON.stringify(await fetchUserData())], `${username}.json`, {
+      type: 'application/json',
+    });
     throw new Error('User not logged in');
   });
 
   const [deleteUserRequest, dispatchDeleteUserRequest] = useAsyncDispatch(async () => {
-    if (user) {
-      return await anonymizeUser(user, user.profile.sub, userCredentials.username, userCredentials.password);
-    }
-    throw new Error('User not logged in');
+    return await anonymizeUser(userCredentials.username, userCredentials.password);
   });
 
   useEffect(() => {

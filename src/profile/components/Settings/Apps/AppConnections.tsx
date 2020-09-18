@@ -1,7 +1,6 @@
-import React, { ReactNodeArray, useContext } from 'react';
+import React, { ReactNodeArray } from 'react';
 
 import { Message } from '@dotkomonline/design-system';
-import { IUserContext, UserContext } from 'authentication/providers/UserProvider';
 import useAsync, { useAsyncDispatch } from 'common/hooks/useAsync';
 import { getUserConsent } from 'oidc_clients/api/user_consent';
 import { revokeuserConsent } from 'oidc_clients/api/user_consent';
@@ -11,19 +10,14 @@ import { IUserConsent } from 'oidc_clients/models/user_consent';
 import style from './apps.less';
 
 export const AppConnections = () => {
-  const { user } = useContext<IUserContext>(UserContext);
-
   const [revokeRequest, dispatchRevokeRequest] = useAsyncDispatch(async (consent: IUserConsent) => {
-    if (user) {
-      await revokeuserConsent(user, consent.id);
-      return {
-        client: consent.client,
-      };
-    }
-    throw new Error('User not logged in');
+    await revokeuserConsent(consent.id);
+    return {
+      client: consent.client,
+    };
   });
 
-  const consentRequest = useAsync(async () => (user ? await getUserConsent(user) : []), [user]);
+  const consentRequest = useAsync(async () => await getUserConsent(), []);
   let consentedApps: ReactNodeArray = [];
 
   if (consentRequest.status === 'resolved') {
