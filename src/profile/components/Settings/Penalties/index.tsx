@@ -1,6 +1,5 @@
-import React, { Component, ContextType } from 'react';
+import React, { Component } from 'react';
 
-import { UserContext } from 'authentication/providers/UserProvider';
 import { Pane } from 'common/components/Panes';
 import { getMarks, getSuspensions } from 'profile/api/penalties';
 import { IMark, ISuspension } from 'profile/models/Penalty';
@@ -22,9 +21,6 @@ export interface IState {
  * @description Connects to API-endpoint to fetch data.
  */
 class Marks extends Component<{}, IState> {
-  public static contextType = UserContext;
-  public context!: ContextType<typeof UserContext>;
-
   public state: IState = {
     loaded: false,
     marks: [],
@@ -36,12 +32,9 @@ class Marks extends Component<{}, IState> {
   }
 
   public init = async () => {
-    const { user } = this.context;
-    if (user) {
-      const marks = await getMarks(user);
-      const suspensions = await getSuspensions(user);
-      this.setState({ marks, suspensions, loaded: true });
-    }
+    const marks = await getMarks();
+    const suspensions = await getSuspensions();
+    this.setState({ marks, suspensions, loaded: true });
   };
 
   public render() {

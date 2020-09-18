@@ -76,7 +76,7 @@ export const articlesSlice = createSlice({
     });
     builder.addCase(fetchArticleById.fulfilled, (state, action) => {
       state.loading = 'idle';
-      articlesAdapter.addOne(state, action.payload);
+      articlesAdapter.upsertOne(state, action.payload);
     });
     builder.addCase(fetchArticleById.rejected, (state, action) => {
       state.loading = 'idle';
@@ -87,7 +87,7 @@ export const articlesSlice = createSlice({
     });
     builder.addCase(fetchRelatedArticles.fulfilled, (state, action) => {
       state.loading = 'idle';
-      articlesAdapter.addMany(state, action.payload);
+      articlesAdapter.upsertMany(state, action.payload);
     });
     builder.addCase(fetchRelatedArticles.rejected, (state, action) => {
       state.loading = 'idle';
