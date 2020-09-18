@@ -12,6 +12,7 @@ const settings: UserManagerSettings = {
   filterProtocolClaims: true,
   loadUserInfo: true,
   silent_redirect_uri: process.env.OW4_SSO_CALLBACK || '',
+  revokeAccessTokenOnSignout: true,
 };
 
 export default settings;
