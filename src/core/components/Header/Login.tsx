@@ -8,7 +8,6 @@ import style from './header.less';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectUserName } from 'authentication/selectors/authentication';
 
-
 interface IProps {
   menuIsOpen?: boolean;
   closeMenu?: () => void;
@@ -25,12 +24,12 @@ const Login: React.FC<IProps> = (props) => {
     setIsOpen(!isOpen);
   };
 
-    return isLoggedIn ? (
-      <HeaderUser logout={logOut} onClick={toggleDropdown} isOpen={isOpen} />
-    ) : (
-      <LoginView onClick={toggleDropdown} isOpen={isOpen} />
-    );
-}
+  return isLoggedIn ? (
+    <HeaderUser logout={logOut} onClick={toggleDropdown} isOpen={isOpen} />
+  ) : (
+    <LoginView onClick={toggleDropdown} isOpen={isOpen} />
+  );
+};
 
 interface IHeaderUserProps {
   logout: () => void;

@@ -8,7 +8,7 @@ import { IAuthUser } from 'authentication/models/User';
 
 const useIsomorphicLayoutEffect = __CLIENT__ ? useLayoutEffect : useEffect;
 
-type JSON<T> = string & {__JSON__: T};
+type JSON<T> = string & { __JSON__: T };
 declare const JSON: {
   parse: <T>(str: JSON<T>) => T;
   stringify: <T>(obj: T) => JSON<T>;
@@ -21,13 +21,12 @@ export const SilentRenewComponent: FC = () => {
       try {
         const user = await USER_MANAGER.getUser();
         if (user) dispatch(authenticationActions.userSignIn(JSON.stringify(user as IAuthUser)));
-        else USER_MANAGER.signinSilent()
-      }
-      catch (err) {
+        else USER_MANAGER.signinSilent();
+      } catch (err) {
         console.error(err);
       }
     }
-  }
+  };
 
   useIsomorphicLayoutEffect(() => {
     loadCurrentUser();

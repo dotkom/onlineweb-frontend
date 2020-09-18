@@ -3,7 +3,7 @@ import { createSlice, SerializedError, PayloadAction } from '@reduxjs/toolkit';
 import { IAuthUser, IAuthProfile } from 'authentication/models/User';
 
 // https://github.com/microsoft/TypeScript/issues/27930
-type JSON<T> = string & {__JSON__: T};
+type JSON<T> = string & { __JSON__: T };
 declare const JSON: {
   parse: <T>(str: JSON<T>) => T;
   stringify: <T>(obj: T) => JSON<T>;
