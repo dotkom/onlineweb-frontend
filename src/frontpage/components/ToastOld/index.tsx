@@ -1,5 +1,5 @@
 // @ts-nocheck;
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useToast } from 'core/utils/toast/useToast';
 import { Checkbox } from '@dotkomonline/design-system';
 
@@ -26,13 +26,15 @@ const Message: React.FC = () => {
 
 const ToastOld: React.FC = () => {
   const [displayMessage] = useToast({ type: 'basic', overwrite: true, duration: 1000 * 60 });
+  const [hasBeenShown, sethasBeenShown] = useState(false);
   useEffect(() => {
     // This should be inside of the useEffect
     // With NextJs the window element may be null.
     const showToast = window.localStorage.getItem(SHOW_TOAST);
     // Blame Johannes
-    if (showToast === 'true' || !showToast) {
+    if (showToast === 'true' || !showToast || !hasBeenShown) {
       displayMessage(<Message />);
+      sethasBeenShown(true);
     }
   }, []);
   return null;
