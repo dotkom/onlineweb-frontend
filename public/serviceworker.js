@@ -30,12 +30,15 @@ sw.addEventListener('fetch', (event) => {
 // If network is unreachable it returns from cache.
 const networkThenCache = (event) => {
   const networkFetch = fetch(event.request);
-  event.waitUntil(
-    networkFetch.then((response) => {
-      const responseClone = response.clone();
-      caches.open(cacheName).then((cache) => cache.put(event.request, responseClone));
-    })
-  );
+
+  if (event.request === 'GET') {
+    event.waitUntil(
+      networkFetch.then((response) => {
+        const responseClone = response.clone();
+        caches.open(cacheName).then((cache) => cache.put(event.request, responseClone));
+      })
+    );
+  }
   return networkFetch.catch(() => caches.match(event.request));
 };
 
