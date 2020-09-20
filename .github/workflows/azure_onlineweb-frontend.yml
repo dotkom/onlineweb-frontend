@@ -31,8 +31,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "12.x"
-      - name: Prepeare deployment folder
-        run: mkdir -p deployment_build
 
       - name: npm install
         run: npm install
@@ -40,19 +38,15 @@ jobs:
       - name: NPM build
         run: npm run build
 
-      - name: Upload package.json
+      - name: Prepeare deployment folder
+        run: |
+          mkdir -p deployment_build
+          mv package.json deployment_build
+          mv .next deployment_build/.next
       - uses: actions/upload-artifact@v2
         with:
           name: deployment_build
-          path: package.json
-
-      - name: Move build files
-        run: mv .next deployment_build
-      - name: Upload build files
-        uses: actions/upload-artifact@v2
-        with:
-          name: deployment_build
-          path: deployment_build/.next
+          path: deployment_build
 
       - name: "Deploy to Azure Web App"
         uses: azure/webapps-deploy@v2
