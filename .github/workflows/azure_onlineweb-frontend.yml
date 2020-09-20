@@ -37,16 +37,22 @@ jobs:
       - name: npm install
         run: npm install
 
-      - name: Build
+      - name: NPM build
         run: npm run build
-      - uses: actions/upload-artifact@v2
-        with:
-          name: deployment_build
-          path: .next
+
+      - name: Upload package.json
       - uses: actions/upload-artifact@v2
         with:
           name: deployment_build
           path: package.json
+
+      - name: Move build files
+        run: mv .next deployment_build
+      - name: Upload build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: deployment_build
+          path: deployment_build/.next
 
       - name: "Deploy to Azure Web App"
         uses: azure/webapps-deploy@v2
