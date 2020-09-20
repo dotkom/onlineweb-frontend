@@ -54,7 +54,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - npm run run tsc
+      - npm run tsc
     depends_on:
       - setup
 
