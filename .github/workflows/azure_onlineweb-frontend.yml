@@ -47,11 +47,3 @@ jobs:
         with:
           name: deployment_build
           path: deployment_build
-
-      - name: "Deploy to Azure Web App"
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: "onlineweb-frontend"
-          slot-name: "production"
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_e04e52940ded45e3afdf32dfab711104 }}
-          package: deployment_build
