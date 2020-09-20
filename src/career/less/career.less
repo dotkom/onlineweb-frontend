@@ -19,10 +19,12 @@
   padding: 10px;
   margin: 10px 0;
   width: 100%;
+  border-radius: 5px;
 }
 
 .jobInfo {
   width: 100%;
+  border-radius: '5px';
 }
 
 .jobInfoTitle {
@@ -58,6 +60,7 @@
   grid-gap: 20px;
   grid-template-columns: 1fr 2fr;
   padding: 20px;
+  border-radius: 5px;
   .owCard();
 
   & > a {
@@ -67,6 +70,7 @@
 
     & > img {
       width: 300px;
+      border-radius: 5px;
     }
   }
 }
@@ -88,6 +92,7 @@
   margin-bottom: 20px;
   grid-area: filter;
   color: #fff;
+  border-radius: 5px;
 
   button {
     background: darken(@lightBlue, 10%);
@@ -114,6 +119,7 @@
     margin-right: 5px;
     margin-bottom: 5px;
     width: auto;
+    border-radius: 5px;
 
     &:hover {
       background: darken(@lightBlue, 15%);
@@ -204,4 +210,8 @@
 
 .applyButton {
   width: 100%;
+}
+
+.resetBtn {
+  border-radius: 5px;
 }

@@ -50,7 +50,9 @@ const FilterList: FC = () => {
         <TagList heading="Bedrifter" tags={companies} selectedIds={selectedCompanyIds} onToggle={toggleCompany} />
         <TagList heading="Typer" tags={jobTypes} selectedIds={selectedJobTypeIds} onToggle={toggleJobType} />
         <TagList heading="Sted" tags={locations} selectedIds={selectedLocationIds} onToggle={toggleLocation} />
-        <button onClick={onReset}>Reset</button>
+        <button onClick={onReset} class={style.resetBtn}>
+          Reset
+        </button>
       </div>
     </div>
   );
