@@ -1,7 +1,9 @@
-import React, { createContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
 import { getProfile } from 'profile/api';
 import { IUserProfile } from 'profile/models/User';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from 'authentication/selectors/authentication';
 
 interface IState {
   refetch: () => void;
@@ -16,33 +18,25 @@ const INITIAL_STATE: IState = {
 
 export const UserProfileContext = createContext(INITIAL_STATE);
 
-export class UserProfileProvider extends React.Component<{}, IState> {
-  public state: IState = INITIAL_STATE;
+export const UserProfileProvider: React.FC = (props) => {
+  const isLoggedIn = useSelector(selectIsLoggedIn());
+  const [userProfile, setUserProfile] = useState<IUserProfile | undefined>(undefined);
 
-  public init = async () => {
+  const init = async () => {
     const user = await getProfile();
-    this.setState({ user });
+    setUserProfile(user);
   };
 
-  public refetch = async () => {
-    await this.init();
+  const refetch = async () => {
+    await init();
   };
 
-  public async componentDidMount() {
-    this.init();
-  }
+  useEffect(() => {
+    init();
+  }, [isLoggedIn]);
 
-  public componentDidUpdate() {
-    if (!this.state.user) {
-      this.init();
-    }
-  }
-
-  public render() {
-    const { refetch } = this;
-    const value = { ...this.state, refetch };
-    return <UserProfileContext.Provider value={value}>{this.props.children}</UserProfileContext.Provider>;
-  }
-}
+  const value = { user: userProfile, refetch };
+  return <UserProfileContext.Provider value={value}>{props.children}</UserProfileContext.Provider>;
+};
 
 export default UserProfileProvider;

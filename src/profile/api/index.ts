@@ -8,10 +8,12 @@ const API_URL = '/api/v1/profile/';
 /**
  *
  */
-export const getProfile = async (): Promise<IUserProfile> => {
+export const getProfile = async (): Promise<IUserProfile | undefined> => {
   const user = await getUser();
-  const data = await get<IUserProfile>(API_URL, { format: 'json' }, { user });
-  return data;
+  if (user) {
+    return await get<IUserProfile>(API_URL, { format: 'json' }, { user });
+  }
+  return undefined;
 };
 
 export type PartialProfile = Partial<IUserProfile>;
