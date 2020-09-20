@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Button } from '@dotkomonline/design-system';
 import { Link } from 'core/components/Router';
-import style from './detail.less';
+import style from '../DetailView/detail.less';
 import { getPaymentEventUrl } from 'core/appUrls';
 
 interface IProps {
