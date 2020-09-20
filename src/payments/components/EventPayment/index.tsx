@@ -73,7 +73,7 @@ const selectAttendeeByEventId = (eventId: number) => (state: State) => {
   return attendeeSelectors.selectAll(state).find((attendee) => attendee.event === eventId);
 };
 
-const selectPaymentByEventId = (eventId: number) => (state: State) => {
+export const selectPaymentByEventId = (eventId: number) => (state: State) => {
   return paymentSelectors
     .selectAll(state)
     .find((payment) => payment.object_id === eventId && payment.content_type === 'events.attendanceevent');
