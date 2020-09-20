@@ -12,9 +12,9 @@ Other tasks, such as administration of website content, and general information 
 
 git clone <repo>
 
-yarn
+npm run
 
-yarn dev
+npm run dev
 ```
 
 ### Connecting to non-production Onlineweb4
@@ -50,7 +50,7 @@ You should now be able to log in to OWF using OW4!
 
 ## Linting
 
-Builds will fail if our requirements for code style is not met. To ensure that you adhere to our code guidelines, we recommend you run linting tools locally before pushing your code. Running `yarn lint` and `yarn lint-less` will run our lints. Look to package.json for more specific commands.
+Builds will fail if our requirements for code style is not met. To ensure that you adhere to our code guidelines, we recommend you run linting tools locally before pushing your code. Running `npm run lint` and `npm run lint-less` will run our lints. Look to package.json for more specific commands.
 
 Running linters manually at every change can be quite inefficient, which is why we recommend using editors that support linting your code as you go. For TypeScript, we use [TSLint](https://palantir.github.io/tslint/), with editor plugins available [here](https://palantir.github.io/tslint/usage/third-party-tools/). Correspondingly, we use [stylelint](https://stylelint.io) for our stylesheets, with editor plugins available [here](https://github.com/stylelint/stylelint/blob/master/docs/user-guide/complementary-tools.md#editor-plugins).
 
