@@ -13,6 +13,8 @@ import { Link } from 'core/components/Router';
 import style from '../less/career.less';
 import { formatLocations } from './JobListItem';
 
+import { Button } from '@dotkomonline/design-system';
+
 /**
  * @summary formats the deadline from ISO format to Date Month Year
  * @return the formated deadline as a string or the string "Ikke spesifisert" if deadline is null
@@ -75,6 +77,13 @@ const JobDetails: FC<IProps> = ({ opportunity }) => (
             <p>Type: {opportunity.employment.name}</p>
             <p>Sted: {formatLocations(opportunity.location.map((loc) => loc.name))}</p>
             <p>Frist: {formatDeadline(opportunity.deadline)}</p>
+          </div>
+          <div>
+            <Link href={opportunity.application_link}>
+              <Button className={style.applyButton} color="success">
+                Søk her!
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

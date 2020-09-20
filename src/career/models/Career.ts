@@ -12,6 +12,7 @@ export interface ICareerOpportunity {
   deadline: string;
   employment: IEmployment;
   location: ILocation[];
+  application_link: string;
 }
 
 export interface IEmployment {
