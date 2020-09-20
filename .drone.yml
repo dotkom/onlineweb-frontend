@@ -24,7 +24,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn
+      - npm run
     depends_on:
       - restore-cache
 
@@ -34,7 +34,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn build
+      - npm run build
     depends_on:
       - setup
 
@@ -44,7 +44,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn test
+      - npm run test
     depends_on:
       - setup
 
@@ -54,7 +54,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn run tsc
+      - npm run run tsc
     depends_on:
       - setup
 
@@ -64,7 +64,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn lint-ts-check
+      - npm run lint-ts-check
     depends_on:
       - compile-typescript
 
@@ -74,7 +74,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn lint-less-check
+      - npm run lint-less-check
     depends_on:
       - setup
 
@@ -84,7 +84,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - yarn format-check
+      - npm run format-check
     depends_on:
       - setup
 
