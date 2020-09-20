@@ -13,40 +13,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master
-      
-    - name: Cache node modules
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-node-modules
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+      - uses: actions/checkout@master
 
-    - name: Set up Node.js version
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
-    - name: npm install
-      run: npm install
-      
-    - name: Build
-      run: npm run build 
-    - name: Prepeare deployment folder
-      run: mkdir -p ./deployment_build
-    - name: Move build files and package.json
-      run: |
-        mv package.json deployment_build/
-        mv .next deployment_build/
-    - name: 'Deploy to Azure Web App'
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: 'onlineweb-frontend'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e04e52940ded45e3afdf32dfab711104 }}
-        package: deployment_build
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Prepeare deployment folder
+        run: mkdir -p deployment_build
+
+      - name: npm install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: deployment_build
+          path: .next
+      - uses: actions/upload-artifact@v2
+        with:
+          name: deployment_build
+          path: package.json
+
+      - name: "Deploy to Azure Web App"
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "onlineweb-frontend"
+          slot-name: "production"
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_e04e52940ded45e3afdf32dfab711104 }}
+          package: deployment_build
