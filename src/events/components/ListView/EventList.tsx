@@ -12,11 +12,14 @@ import { shallowEqual } from 'react-redux';
 
 interface IProps {
   eventIds: number[];
+  sortOrder?: 'ASC' | 'DESC';
 }
 
-const EventListComponent: FC<IProps> = ({ eventIds }) => {
+const EventListComponent: FC<IProps> = ({ eventIds, sortOrder = 'ASC' }) => {
   const events = useSelector(selectEventsByIds(eventIds), shallowEqual);
-
+  if (sortOrder == 'DESC') {
+    events.reverse();
+  }
   return (
     <div className={style.grid}>
       {events.map((event) => (
