@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'onlineweb-frontend'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_dea53beb7e164c5db24838a897b81288 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e04e52940ded45e3afdf32dfab711104 }}
         package: .
