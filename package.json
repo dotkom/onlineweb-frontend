@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port ${PORT:-3000}",
     "format": "prettier --write 'src/**/*.{ts,tsx,less}'",
     "format-check": "prettier --check 'src/**/*.{ts,tsx,less}'",
     "lint": "npm run lint-ts && npm run lint-less && npm run format",
@@ -20,7 +20,8 @@
     "lint-ts-check": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
     "lint-less-check": "stylelint src/**/*.less",
     "test": "jest --env=jsdom",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "postinstall": "next build"
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.3.0",
