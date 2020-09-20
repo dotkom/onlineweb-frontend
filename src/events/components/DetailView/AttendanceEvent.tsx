@@ -13,7 +13,8 @@ import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
 import Attendance from '../Attendance';
 import { attendeeSelectors, fetchAttendeeByEventId } from 'events/slices/attendees';
-import EventPaymentBlock from './EventPaymentBlock';
+import EventPaymentBlock from '../EventPayment/EventPaymentBlock';
+import EventPrice from '../EventPayment/EventPrice';
 
 interface IProps {
   eventId: number;
@@ -39,7 +40,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
   const registrationStart = DateTime.fromISO(attendanceEvent.registration_start);
   const registrationEnd = DateTime.fromISO(attendanceEvent.registration_end);
   const cancellationDeadline = DateTime.fromISO(attendanceEvent.unattend_deadline);
-  const showPayment = !attendanceEvent.is_on_waitlist && attendanceEvent.is_attendee && attendanceEvent.payment != null;
+  const showPayment = !attendanceEvent.is_on_waitlist && attendanceEvent.is_attendee && attendanceEvent.payment;
 
   return (
     <div className={style.blockGrid}>
@@ -69,6 +70,11 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
         <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
       </div>
+      {attendanceEvent.payment && (
+        <Block title="Pris" className={`${style.fullBlock} ${style.priceBlock}`}>
+          <EventPrice eventId={eventId} />
+        </Block>
+      )}
       {showPayment && <EventPaymentBlock hasPaid={attendee?.has_paid} eventId={eventId} />}
     </div>
   );
