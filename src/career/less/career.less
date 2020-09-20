@@ -43,7 +43,7 @@
   grid-template-columns: repeat(3, 1fr);
   font-size: @owFontXS;
 
-  &>p {
+  & > p {
     color: @gray;
   }
 }
@@ -60,12 +60,12 @@
   padding: 20px;
   .owCard();
 
-  &>a {
+  & > a {
     display: inline-flex;
     align-items: center;
     width: 100%;
 
-    &>img {
+    & > img {
       width: 300px;
     }
   }
@@ -178,7 +178,7 @@
 @media only screen and (max-width: 1024px) {
   .topGrid {
     grid-template-columns: auto;
-    grid-template-areas: 'filter''jobs';
+    grid-template-areas: 'filter' 'jobs';
   }
 
   .detail {
@@ -189,7 +189,7 @@
     grid-template: none;
     align-items: center;
 
-    &>a>img {
+    & > a > img {
       align-self: center;
       justify-self: center;
       margin: 0 calc(50% - 150px);
