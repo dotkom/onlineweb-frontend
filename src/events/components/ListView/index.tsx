@@ -16,7 +16,7 @@ export const ListView: FC = () => {
     dispatch(fetchEventList());
   }, []);
 
-  return <EventList eventIds={eventIds} />;
+  return <EventList eventIds={eventIds} sortOrder="DESC" />;
 };
 
 const selectFutureEventIds = () => (state: State) => {
