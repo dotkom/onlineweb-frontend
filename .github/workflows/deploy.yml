@@ -21,7 +21,7 @@ jobs:
         uses: docker/setup-buildx-action@v1
       - uses: azure/docker-login@v1
         with:
-          login-server: dotkomazure.azurecr.io
+          login-server: ${{ secrets.CONTAINER_REGISTRY }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
@@ -32,10 +32,10 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: dotkomazure.azurecr.io/onlineweb-frontend:latest
+          tags: ${{ secrets.CONTAINER_REGISTRY }}/onlineweb-frontend:latest
       - uses: azure/webapps-deploy@v2
         with:
           app-name: "onlineweb-frontend"
           slot-name: "production"
           publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-          images: "dotkomazure.azurecr.io/onlineweb-frontend:latest"
+          images: "${{ secrets.CONTAINER_REGISTRY }}/onlineweb-frontend:latest"
