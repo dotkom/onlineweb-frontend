@@ -38,6 +38,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ steps.login-ecr.outputs.registry }}/onlineweb-frontend:latest
-
-      - name: Image digest
-        run: echo ${{ steps.docker_build.outputs.digest }}
+      - uses: azure/webapps-deploy@v2
+        with:
+          app-name: "onlineweb-frontend"
+          publish-profile: ${{ secrets.azureWebAppPublishProfile }}
+          images: "${{ steps.login-ecr.outputs.registry }}/onlineweb-frontend:latest"
