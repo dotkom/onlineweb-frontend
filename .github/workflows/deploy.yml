@@ -38,7 +38,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.CONTAINER_REGISTRY }}/onlineweb-frontend:latest
-          with: |
+          secrets: |
             ${{ secrets.BUILD_SECRETS }}
 
       # Start deployment
