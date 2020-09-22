@@ -1,5 +1,5 @@
 # Stage 1: Building the code
-FROM mhart/alpine-node AS builder
+FROM node:14.11.0-alpine AS builder
 ENV WORKDIR=/srv/app
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -16,7 +16,7 @@ RUN npm install --production
 
 
 # Stage 2: And then copy over node_modules, etc from that stage to the smaller base image
-FROM mhart/alpine-node:base as production
+FROM node:14.11.0-alpine as production
 LABEL maintainer="dotkom@online.ntnu.no"
 
 ENV WORKDIR=/srv/app
