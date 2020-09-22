@@ -13,7 +13,7 @@ interface IProps {
 const EventsHeader: FC<IProps> = ({ changeView, view }) => {
   return (
     <div className={style.grid}>
-      <h1>Arrangementer 2: Electric Bogaloo</h1>
+      <h1>Arrangementer</h1>
       <div className={style.choiceGrid}>
         <ChangeViewIconButton viewType={EventView.IMAGE} changeView={changeView} view={view} />
         <ChangeViewIconButton viewType={EventView.LIST} changeView={changeView} view={view} />
