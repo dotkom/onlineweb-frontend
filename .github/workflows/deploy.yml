@@ -2,10 +2,10 @@ name: Continuous Deployment
 
 on:
   push:
-    branches: 
+    branches:
       - azure
- # release:
-   # types: [published, edited]
+  # release:
+  # types: [published, edited]
 
 jobs:
   deploy:
@@ -28,13 +28,12 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build, tag, and push image to Amazon ECR
+      - name: Build and push to ECR
+        id: docker_build
+        uses: docker/build-push-action@v2
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: onlineweb-frontend
-          IMAGE_TAG: latest
-        run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-
-          
+        with:
+          push: true
+          tags: $ECR_REGISTRY/$ECR_REPOSITORY:latest
