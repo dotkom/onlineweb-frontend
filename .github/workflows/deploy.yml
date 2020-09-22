@@ -20,6 +20,13 @@ jobs:
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
       # Login
       - name: Login to Azure Container Registry
@@ -38,8 +45,9 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.CONTAINER_REGISTRY }}/onlineweb-frontend:latest
-          secrets: |
-            ${{ secrets.BUILD_SECRETS }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+          secrets: ${{ secrets.BUILD_SECRETS }}
 
       # Start deployment
       - name: Deploy webapp
