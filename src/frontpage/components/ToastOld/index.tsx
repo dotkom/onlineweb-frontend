@@ -3,10 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useToast } from 'core/utils/toast/useToast';
 import { Checkbox } from '@dotkomonline/design-system';
 
+
 const SHOW_TOAST = 'showOldOWToast';
 
 const Message: React.FC = () => {
-  const saveDoNotShow = (isChecked?: boolean) => window.localStorage.setItem(SHOW_TOAST, isChecked ? 'true' : 'false');
+  const saveDoNotShow = (isChecked?: boolean) => {
+    console.log(isChecked);
+    window.localStorage.setItem(SHOW_TOAST, isChecked ? 'true' : 'false');
+  };
 
   return (
     <div>
@@ -19,7 +23,7 @@ const Message: React.FC = () => {
         Oppdager du noen feil, mangler, eller ønsker, send mail til dotkom@online.ntnu.no eller lag et issue på{' '}
         <a href="https://github.com/dotkom/onlineweb-frontend">Github</a>
       </p>
-      <Checkbox onChange={saveDoNotShow} label="Ikke vis denne meldingen igjen" />
+      <Checkbox onChange={(checked) => saveDoNotShow(checked)} label="Ikke vis denne meldingen igjen" />
     </div>
   );
 };
