@@ -19,28 +19,23 @@ jobs:
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - uses: azure/docker-login@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+          login-server: dotkomazure.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 
-      - name: Build and push to ECR
+      - name: Build and push to Azure Container Registry
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ steps.login-ecr.outputs.registry }}/onlineweb-frontend:latest
+          tags: dotkom.azurecr.io/onlineweb-frontend:latest
       - uses: azure/webapps-deploy@v2
         with:
           app-name: "onlineweb-frontend"
           slot-name: "production"
           publish-profile: ${{ secrets.azureWebAppPublishProfile }}
-          images: "${{ steps.login-ecr.outputs.registry }}/onlineweb-frontend:latest"
+          images: "dotkomazure.azurecr.io/onlineweb-frontend:latest"
