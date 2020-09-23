@@ -23,7 +23,6 @@ const getView = (view?: EventView): typeof ListView | typeof CalendarView | type
 export const EventContainer = () => {
   const [eventView, setEventView] = useState<EventView>(EventView.IMAGE);
   const View = getView(eventView);
-  console.log(process.env.OW4_SSO_CLIENT_ID);
 
   return (
     <section className={style.section}>
