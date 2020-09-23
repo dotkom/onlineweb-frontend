@@ -35,6 +35,6 @@ export const getUser = async (): Promise<IAuthUser | undefined> => {
 
 export const logOut = async () => {
   if (USER_MANAGER) {
-    await USER_MANAGER.removeUser();
+    await USER_MANAGER.signoutRedirect();
   }
 };
