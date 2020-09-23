@@ -54,7 +54,7 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
     data = await response.json();
   } catch {
     // could not decode response as json, throw entire reponse
-    throw response;
+    throw new Error(`FetchError: ${response}`);
   }
 
   // don't cache error responses
@@ -65,9 +65,8 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
   // 403 - Forbidden does not return any meaningful api data (oidc consent api requires that an error is thrown to show error message)
   // 5xx - Gateway/Internal errors do not return any meaningful api data
   if (response.status === 403 || response.status > 499) {
-    throw response;
+    throw new Error(`FetchError: ${JSON.stringify(response)}`);
   }
-
   return data;
 };
 
@@ -96,24 +95,20 @@ export async function getAllPages<T>(
   options: IRequestOptions = {}
 ): Promise<T[]> {
   const { page = 1, page_size = 80 } = parameters;
-  try {
-    /** Get the amount of objects to get in total by fetching a single object */
-    const { count }: IAPIData<T> = await get<IAPIData<T>>(query, { ...parameters, page, page_size: 1 }, options);
-    /** Prepare an array with an index for each page which will be fetched */
-    const pageNumber = Math.ceil(count / page_size);
-    const requestCount = [...Array(pageNumber)];
-    /** Initialize the fetches for all the pages at the same time */
-    const requests = requestCount.map((_, i) =>
-      get<IAPIData<T>>(query, { ...parameters, page: i + 1, page_size }, options)
-    );
-    /** Await all the fetches to a single array */
-    const data: Array<IAPIData<T>> = await Promise.all(requests);
-    /** Reduce all results to a single array for all objects in the resource */
-    const results = data.reduce<T[]>((res, d) => res.concat(d.results), []);
-    return results;
-  } catch (response) {
-    return [];
-  }
+  /** Get the amount of objects to get in total by fetching a single object */
+  const { count }: IAPIData<T> = await get<IAPIData<T>>(query, { ...parameters, page, page_size: 1 }, options);
+  /** Prepare an array with an index for each page which will be fetched */
+  const pageNumber = Math.ceil(count / page_size);
+  const requestCount = [...Array(pageNumber)];
+  /** Initialize the fetches for all the pages at the same time */
+  const requests = requestCount.map((_, i) =>
+    get<IAPIData<T>>(query, { ...parameters, page: i + 1, page_size }, options)
+  );
+  /** Await all the fetches to a single array */
+  const data: Array<IAPIData<T>> = await Promise.all(requests);
+  /** Reduce all results to a single array for all objects in the resource */
+  const results = data.reduce<T[]>((res, d) => res.concat(d.results), []);
+  return results;
 }
 
 /**
