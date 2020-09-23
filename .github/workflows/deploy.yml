@@ -47,7 +47,8 @@ jobs:
           tags: ${{ secrets.CONTAINER_REGISTRY }}/onlineweb-frontend:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
-          secrets: ${{ secrets.BUILD_SECRETS }}
+          build-args: |
+            ${{ secrets.BUILD_ARGS }}
 
       # Start deployment
       - name: Deploy webapp
