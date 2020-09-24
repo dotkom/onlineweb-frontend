@@ -17,12 +17,15 @@ interface ISuccessResponse<Output> extends IResponse {
  * An error response should indicate 'error'.
  * Error messages should only return the details of the error.
  */
-interface IErrorResponse extends IResponse {
+export interface IErrorResponse extends IResponse {
   status: 'error';
   errors: {
     detail: string;
   };
 }
+
+export const isErrorResponse = (obj: unknown): obj is IErrorResponse =>
+  typeof obj === 'object' && obj !== null && obj.hasOwnProperty('errors') && obj.hasOwnProperty('status');
 
 /**
  * Django Rest Framework adds a spesific field for 'Bad request' responses with validation errors.

@@ -5,6 +5,7 @@ import { listResource } from 'common/resources';
 import { IQueryObject } from 'common/utils/queryString';
 import { EventTypeEnum, IAttendanceEvent, IEvent } from '../models/Event';
 import { IExtra } from '../models/Extras';
+import { IErrorResponse } from 'common/resources/types';
 
 export interface IEventAPIParameters extends IQueryObject {
   event_start__gte?: string;
@@ -35,8 +36,8 @@ export const getAllEvents = async (args: IEventAPIParameters): Promise<IEvent[]>
   return data;
 };
 
-export const getEvent = async (id: number): Promise<IEvent> => {
-  const event = await get<IEvent>(EVENTS_API_URL + id + '/', { format: 'json' });
+export const getEvent = async (id: number): Promise<IEvent | IErrorResponse> => {
+  const event = await get<IEvent | IErrorResponse>(EVENTS_API_URL + id + '/', { format: 'json' });
   return event;
 };
 
