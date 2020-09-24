@@ -1,5 +1,6 @@
 import { IUserName } from 'authentication/models/User';
 import IResponsiveImage from 'common/models/ResponsiveImage';
+import { IExtra } from './Extras';
 
 export enum EventTypeEnum {
   NONE,
@@ -126,7 +127,7 @@ export interface IAttendanceEvent {
   has_feedback: boolean;
   has_extras: boolean;
   has_reservation: boolean;
-  extras: number[];
+  extras: IExtra[];
   payment: number | null;
   feedback: number | null;
   has_postponed_registration: boolean;

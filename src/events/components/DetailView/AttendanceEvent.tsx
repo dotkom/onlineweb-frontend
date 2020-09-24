@@ -15,6 +15,8 @@ import Attendance from '../Attendance';
 import { attendeeSelectors, fetchAttendeeByEventId } from 'events/slices/attendees';
 import EventPaymentBlock from '../EventPayment/EventPaymentBlock';
 import EventPrice from '../EventPayment/EventPrice';
+import { Select } from '@dotkomonline/design-system';
+import { IExtra } from '../../models/Extras';
 
 interface IProps {
   eventId: number;
@@ -67,6 +69,15 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       <Block title="Venteliste">
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
+      {attendanceEvent.has_extras && attendanceEvent.is_attendee && (
+        <Block title="Ekstras">
+          <Select>
+            {attendanceEvent.extras.map((extra: IExtra) => (
+              <option key={extra.id}>{extra.choice}</option>
+            ))}
+          </Select>
+        </Block>
+      )}
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
         <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
       </div>
