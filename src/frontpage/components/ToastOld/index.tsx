@@ -1,12 +1,15 @@
 // @ts-nocheck;
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useToast } from 'core/utils/toast/useToast';
 import { Checkbox } from '@dotkomonline/design-system';
 
-const SHOW_TOAST = 'showOldOWToast';
+const HIDE_TOAST = 'hideOldOWToast';
+const SESSION_HIDE_TOAST = 'hideToastForSession';
 
 const Message: React.FC = () => {
-  const saveDoNotShow = (isChecked?: boolean) => window.localStorage.setItem(SHOW_TOAST, isChecked ? 'true' : 'false');
+  const saveDoNotShow = (isChecked?: boolean) => {
+    window.localStorage.setItem(HIDE_TOAST, isChecked ? 'true' : 'false');
+  };
 
   return (
     <div>
@@ -19,22 +22,24 @@ const Message: React.FC = () => {
         Oppdager du noen feil, mangler, eller ønsker, send mail til dotkom@online.ntnu.no eller lag et issue på{' '}
         <a href="https://github.com/dotkom/onlineweb-frontend">Github</a>
       </p>
-      <Checkbox onChange={saveDoNotShow} label="Ikke vis denne meldingen igjen" />
+      <Checkbox onChange={(checked) => saveDoNotShow(checked)} label="Ikke vis denne meldingen igjen" />
     </div>
   );
 };
 
 const ToastOld: React.FC = () => {
   const [displayMessage] = useToast({ type: 'basic', overwrite: true, duration: 1000 * 60 });
-  const [hasBeenShown, sethasBeenShown] = useState(false);
   useEffect(() => {
     // This should be inside of the useEffect
     // With NextJs the window element may be null.
-    const showToast = window.localStorage.getItem(SHOW_TOAST);
+
+    const permanentlyHiddenToast = window.localStorage.getItem(HIDE_TOAST) === 'true';
+    const sessionHiddenToast = window.sessionStorage.getItem(SESSION_HIDE_TOAST) === 'true';
+
     // Blame Johannes
-    if (showToast === 'true' || !showToast || !hasBeenShown) {
+    if (!permanentlyHiddenToast && !sessionHiddenToast) {
       displayMessage(<Message />);
-      sethasBeenShown(true);
+      window.sessionStorage.setItem(SESSION_HIDE_TOAST, 'true');
     }
   }, []);
   return null;
