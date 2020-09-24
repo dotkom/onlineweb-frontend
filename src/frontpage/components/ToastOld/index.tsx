@@ -5,6 +5,7 @@ import { Checkbox } from '@dotkomonline/design-system';
 
 
 const HIDE_TOAST = 'hideOldOWToast';
+const SESSION_HIDE_TOAST = 'hideToastForSession'
 
 const Message: React.FC = () => {
   const saveDoNotShow = (isChecked?: boolean) => {
@@ -32,10 +33,14 @@ const ToastOld: React.FC = () => {
   useEffect(() => {
     // This should be inside of the useEffect
     // With NextJs the window element may be null.
-    const showToast = window.localStorage.getItem(HIDE_TOAST);
+
+    const permanentlyHiddenToast = window.localStorage.getItem(HIDE_TOAST) === 'true'
+    const sessionHiddenToast = window.sessionStorage.getItem(SESSION_HIDE_TOAST) === 'true'
+
     // Blame Johannes
-    if (showToast != 'true') {
+    if (!permanentlyHiddenToast && !sessionHiddenToast) {
       displayMessage(<Message />);
+      window.sessionStorage.setItem(SESSION_HIDE_TOAST, 'true')
     }
   }, []);
   return null;
