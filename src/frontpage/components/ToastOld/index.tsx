@@ -4,12 +4,11 @@ import { useToast } from 'core/utils/toast/useToast';
 import { Checkbox } from '@dotkomonline/design-system';
 
 
-const SHOW_TOAST = 'showOldOWToast';
+const HIDE_TOAST = 'hideOldOWToast';
 
 const Message: React.FC = () => {
   const saveDoNotShow = (isChecked?: boolean) => {
-    console.log(isChecked);
-    window.localStorage.setItem(SHOW_TOAST, isChecked ? 'true' : 'false');
+    window.localStorage.setItem(HIDE_TOAST, isChecked ? 'true' : 'false');
   };
 
   return (
@@ -30,15 +29,13 @@ const Message: React.FC = () => {
 
 const ToastOld: React.FC = () => {
   const [displayMessage] = useToast({ type: 'basic', overwrite: true, duration: 1000 * 60 });
-  const [hasBeenShown, sethasBeenShown] = useState(false);
   useEffect(() => {
     // This should be inside of the useEffect
     // With NextJs the window element may be null.
-    const showToast = window.localStorage.getItem(SHOW_TOAST);
+    const showToast = window.localStorage.getItem(HIDE_TOAST);
     // Blame Johannes
-    if (showToast === 'true' || !showToast || !hasBeenShown) {
+    if (showToast != 'true') {
       displayMessage(<Message />);
-      sethasBeenShown(true);
     }
   }, []);
   return null;
