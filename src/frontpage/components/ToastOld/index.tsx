@@ -1,5 +1,5 @@
 // @ts-nocheck;
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useToast } from 'core/utils/toast/useToast';
 import { Checkbox } from '@dotkomonline/design-system';
 
