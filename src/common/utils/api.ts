@@ -98,6 +98,9 @@ export async function getAllPages<T>(
   /** Get the amount of objects to get in total by fetching a single object */
   const { count }: IAPIData<T> = await get<IAPIData<T>>(query, { ...parameters, page, page_size: 1 }, options);
   /** Prepare an array with an index for each page which will be fetched */
+  if (!count) {
+    return [];
+  }
   const pageNumber = Math.ceil(count / page_size);
   const requestCount = [...Array(pageNumber)];
   /** Initialize the fetches for all the pages at the same time */
