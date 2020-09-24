@@ -3,9 +3,8 @@ import React, { useEffect } from 'react';
 import { useToast } from 'core/utils/toast/useToast';
 import { Checkbox } from '@dotkomonline/design-system';
 
-
 const HIDE_TOAST = 'hideOldOWToast';
-const SESSION_HIDE_TOAST = 'hideToastForSession'
+const SESSION_HIDE_TOAST = 'hideToastForSession';
 
 const Message: React.FC = () => {
   const saveDoNotShow = (isChecked?: boolean) => {
@@ -34,13 +33,13 @@ const ToastOld: React.FC = () => {
     // This should be inside of the useEffect
     // With NextJs the window element may be null.
 
-    const permanentlyHiddenToast = window.localStorage.getItem(HIDE_TOAST) === 'true'
-    const sessionHiddenToast = window.sessionStorage.getItem(SESSION_HIDE_TOAST) === 'true'
+    const permanentlyHiddenToast = window.localStorage.getItem(HIDE_TOAST) === 'true';
+    const sessionHiddenToast = window.sessionStorage.getItem(SESSION_HIDE_TOAST) === 'true';
 
     // Blame Johannes
     if (!permanentlyHiddenToast && !sessionHiddenToast) {
       displayMessage(<Message />);
-      window.sessionStorage.setItem(SESSION_HIDE_TOAST, 'true')
+      window.sessionStorage.setItem(SESSION_HIDE_TOAST, 'true');
     }
   }, []);
   return null;
