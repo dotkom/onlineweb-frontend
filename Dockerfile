@@ -33,6 +33,12 @@ RUN npm install --production
 
 # Stage 2: And then copy over node_modules, etc from that stage to the smaller base image
 FROM node:14.11.0-alpine as production
+RUN apk add openssh \
+    && echo "root:Docker!" | chpasswd 
+COPY sshd_config /etc/ssh/
+EXPOSE 80 2222
+
+
 LABEL maintainer="dotkom@online.ntnu.no"
 
 ENV WORKDIR=/srv/app
@@ -48,4 +54,4 @@ COPY --from=builder $WORKDIR/node_modules ./node_modules
 
 EXPOSE 3000
 
-CMD ["node_modules/.bin/next", "start"]
+CMD ["/usr/sbin/sshd && node_modules/.bin/next start"]
