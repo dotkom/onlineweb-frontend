@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import Spinner from 'common/components/Spinner';
 import { DOMAIN } from 'common/constants/endpoints';
