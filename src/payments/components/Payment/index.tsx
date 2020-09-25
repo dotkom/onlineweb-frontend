@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { md } from 'common/components/Markdown';
 import { Page, Pane } from 'common/components/Panes';
 import Spinner from 'common/components/Spinner';
 import { StatusMessage } from 'common/components/StatusMessage';
