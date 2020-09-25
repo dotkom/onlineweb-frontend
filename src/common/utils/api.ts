@@ -51,7 +51,11 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
   try {
     data = await response.json();
   } catch {
-    throw new Error(`Expected data from ${url} to be JSON. Attempt to turn the body into JSON resulted in ${JSON.stringify(response.body)}`);
+    throw new Error(
+      `Expected data from ${url} to be JSON. Attempt to turn the body into JSON resulted in ${JSON.stringify(
+        response.body
+      )}`
+    );
   }
 
   // don't cache error responses
@@ -76,7 +80,7 @@ export const get = async <T>(
   query: string,
   parameters: IQueryObject = {},
   options: IRequestOptions = {}
-): Promise<T> =>  {
+): Promise<T> => {
   // const request = makeRequest(query, parameters, options);
   return performRequest(query, parameters, options);
 };
