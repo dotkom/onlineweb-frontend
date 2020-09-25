@@ -1,12 +1,11 @@
-# This is a basic workflow to help you get started with Actions
-
+# This is a workflow to notify sentry of new releases
 name: Sentry-release
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+# Controls when the action will run. Triggers the workflow on successfull deploys
 on:
-  deployment:
-      types: [published]
+  deployment_status:
+    branches: 
+      - master
 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -19,6 +18,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - name: Create a Sentry.io release
+      if: github.event.status == "success"
       uses: tclindner/sentry-releases-action@v1.2.0
       env:
         SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
