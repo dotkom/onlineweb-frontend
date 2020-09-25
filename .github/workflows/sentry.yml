@@ -27,4 +27,7 @@ jobs:
       with:
         tagName: ${{ github.sha }}
         environment: production
+        
+    - name: inspect event
+      run: echo '${{ github.event }}'
 
