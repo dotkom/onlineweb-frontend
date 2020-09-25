@@ -25,8 +25,6 @@ export interface IBaseAPIParameters {
 
 const performRequest = async (query: string, parameters: IQueryObject = {}, options: IRequestOptions = {}) => {
   const queryString = toQueryString(parameters);
-  // User is pruned from the ..restOptions, which ESLint don't like if it is not being used by itself.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { cacheOptions, user, domain, ...restOptions } = options;
   const url = (domain || DOMAIN) + query + queryString;
   if (hasCache({ url, options: cacheOptions })) {
@@ -53,8 +51,7 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
   try {
     data = await response.json();
   } catch {
-    // could not decode response as json, throw entire reponse
-    throw new Error(`FetchError: ${response}`);
+    throw new Error(`Expected data from ${url} to be JSON. Attempt to turn the body into JSON resulted in ${JSON.stringify(response.body)}`);
   }
 
   // don't cache error responses
@@ -64,8 +61,8 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
 
   // 403 - Forbidden does not return any meaningful api data (oidc consent api requires that an error is thrown to show error message)
   // 5xx - Gateway/Internal errors do not return any meaningful api data
-  if (response.status === 403 || response.status > 499) {
-    throw new Error(`FetchError: ${JSON.stringify(response)}`);
+  if (response.status === 403 || response.status === 404 || response.status > 499) {
+    throw new Error(`FetchError: ${response.status} for ${url}`);
   }
   return data;
 };
@@ -79,7 +76,7 @@ export const get = async <T>(
   query: string,
   parameters: IQueryObject = {},
   options: IRequestOptions = {}
-): Promise<T> => {
+): Promise<T> =>  {
   // const request = makeRequest(query, parameters, options);
   return performRequest(query, parameters, options);
 };
@@ -93,10 +90,10 @@ export async function getAllPages<T>(
   query: string,
   parameters: IBaseAPIParameters = {},
   options: IRequestOptions = {}
-): Promise<T[]> {
+) {
   const { page = 1, page_size = 80 } = parameters;
   /** Get the amount of objects to get in total by fetching a single object */
-  const { count }: IAPIData<T> = await get<IAPIData<T>>(query, { ...parameters, page, page_size: 1 }, options);
+  const { count } = await get<IAPIData<T>>(query, { ...parameters, page, page_size: 1 }, options);
   /** Prepare an array with an index for each page which will be fetched */
   if (!count) {
     return [];
