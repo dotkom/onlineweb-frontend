@@ -37,7 +37,7 @@ export const getAllEvents = async (args: IEventAPIParameters): Promise<IEvent[]>
 
 export const getEvent = async (id: number): Promise<IEvent> => {
   const user = await getUser();
-  const event = await get<IEvent>(EVENTS_API_URL + id + '/', { format: 'json' }, { user })
+  const event = await get<IEvent>(EVENTS_API_URL + id + '/', { format: 'json' }, { user });
   return event;
 };
 
