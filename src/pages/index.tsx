@@ -1,13 +1,9 @@
-import { NextPage, NextPageContext } from 'next';
+import { NextPage } from 'next';
 import React from 'react';
 
 import { fetchFrontPageArticles } from 'articles/slices/articles';
-import { Store } from 'core/redux/Store';
+import { wrapper } from 'core/redux/Store';
 import FrontPageComponent from 'frontpage';
-
-interface IContext extends NextPageContext {
-  store: Store;
-}
 
 const FrontPage: NextPage = () => {
   return <FrontPageComponent />;
@@ -15,7 +11,7 @@ const FrontPage: NextPage = () => {
 
 export default FrontPage;
 
-FrontPage.getInitialProps = async ({ store }: IContext) => {
+export const getServerSideProps = wrapper.getServerSideProps(async ({ store }) => {
   const state = store.getState();
   const isFrontPageArticlesPopulated = Boolean(state.articles.frontPageArticleIds.length);
   const articlesResult = store.dispatch(fetchFrontPageArticles());
@@ -23,4 +19,4 @@ FrontPage.getInitialProps = async ({ store }: IContext) => {
     await articlesResult;
   }
   return {};
-};
+});
