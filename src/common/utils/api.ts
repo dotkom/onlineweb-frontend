@@ -37,7 +37,7 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
     ...options.headers,
   } as Record<string, string>;
 
-  if (options.user) {
+  if (options.user && options.user.access_token) {
     headers['Authorization'] = `Bearer ${options.user.access_token}`;
   }
 
