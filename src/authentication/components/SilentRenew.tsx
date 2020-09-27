@@ -20,7 +20,15 @@ export const SilentRenewComponent: FC = () => {
     if (USER_MANAGER) {
       const user = await USER_MANAGER.getUser();
       if (user) dispatch(authenticationActions.userSignIn(JSON.stringify(user as IAuthUser)));
-      else USER_MANAGER.signinSilent();
+      else try {
+        USER_MANAGER.signinSilent();
+      } catch {
+        /*
+         User Manager throws "frame window timed out" or "Authorization Server requires End-User Interaction".
+         If that is the case, the user will have to manually log in when the token expires.
+         That is handled by the AuthenticationProvider and that is why the error is ignored here.
+        */
+      }
     }
   };
 
