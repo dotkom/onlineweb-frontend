@@ -2,8 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 
 import { getProfile } from 'profile/api';
 import { IUserProfile } from 'profile/models/User';
-import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from 'authentication/selectors/authentication';
+import { useSession } from 'next-auth/client';
 
 interface IState {
   refetch: () => void;
@@ -19,7 +18,7 @@ const INITIAL_STATE: IState = {
 export const UserProfileContext = createContext(INITIAL_STATE);
 
 export const UserProfileProvider: React.FC = (props) => {
-  const isLoggedIn = useSelector(selectIsLoggedIn());
+  const [session] = useSession();
   const [userProfile, setUserProfile] = useState<IUserProfile | undefined>(undefined);
 
   const init = async () => {
@@ -33,7 +32,7 @@ export const UserProfileProvider: React.FC = (props) => {
 
   useEffect(() => {
     init();
-  }, [isLoggedIn]);
+  }, [session]);
 
   const value = { user: userProfile, refetch };
   return <UserProfileContext.Provider value={value}>{props.children}</UserProfileContext.Provider>;

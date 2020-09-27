@@ -9,12 +9,11 @@ import { Payment } from '../Payment';
 import style from '../Payment/payment.less';
 import { CartError } from './CartError';
 import { EmptyCart } from './EmptyCart';
-import { selectIsLoggedIn } from 'authentication/selectors/authentication';
-import { useSelector } from 'core/redux/hooks';
+import { useSession } from 'next-auth/client';
 
 export const WebshopPayment = () => {
   const [orderLines, setOrderLines] = useState<IOrderLine[]>();
-  const isLoggedIn = useSelector(selectIsLoggedIn());
+  const [session] = useSession();
 
   const loadOrderLines = async () => {
     const data = await getOrderLines();
@@ -23,7 +22,7 @@ export const WebshopPayment = () => {
 
   useEffect(() => {
     loadOrderLines();
-  }, [isLoggedIn]);
+  }, [session]);
 
   if (!orderLines) {
     return <Spinner />;
