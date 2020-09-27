@@ -11,12 +11,7 @@ import { signIn, signOut, getSession } from 'next-auth/client';
 export const USER_MANAGER = __CLIENT__ ? new UserManager(settings) : null;
 
 export const logIn = async () => {
-  return await signIn()
-  if (USER_MANAGER) {
-    const user = await USER_MANAGER.signinRedirect({ data: window.location.pathname });
-    return user;
-  }
-  return null;
+  return await signIn('onlineweb4');
 };
 
 /**
@@ -25,11 +20,6 @@ export const logIn = async () => {
 export const getUser = async (): Promise<IAuthUser | undefined> => {
   const session = await getSession();
   return session?.user as unknown as IAuthUser;
-  if (USER_MANAGER) {
-    const user = (await USER_MANAGER.getUser()) as IAuthUser | null;
-    return user || undefined;
-  }
-  return undefined;
 };
 
 /**
@@ -38,7 +28,4 @@ export const getUser = async (): Promise<IAuthUser | undefined> => {
 
 export const logOut = async () => {
   return await signOut();
-  if (USER_MANAGER) {
-    await USER_MANAGER.signoutRedirect();
-  }
 };
