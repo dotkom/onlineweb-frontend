@@ -5,7 +5,7 @@ import { Settings as LuxonSettings } from 'luxon';
 import withRedux, { ReduxWrapperAppProps } from 'next-redux-wrapper';
 import DefaultApp, { AppProps } from 'next/app';
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
 
 import 'react-day-picker/lib/style.css';
 
@@ -16,6 +16,7 @@ import ContextWrapper from 'core/providers/ContextWrapper';
 import { initStore, State } from 'core/redux/Store';
 import UserProfileProvider from 'profile/providers/UserProfile';
 import { registerServiceWorker } from 'serviceworker/browser';
+import { Provider as SessionProvider } from 'next-auth/client';
 
 import { GlobalStyle } from '@dotkomonline/design-system';
 
@@ -37,15 +38,17 @@ const CustomApp = (appProps: Props): JSX.Element => {
   return (
     <>
       <GlobalStyle />
-      <Provider store={store}>
-        <ContextWrapper>
-          <UserProfileProvider>
-            <Core>
-              <Component {...pageProps} />
-            </Core>
-          </UserProfileProvider>
-        </ContextWrapper>
-      </Provider>
+      <ReduxProvider store={store}>
+        <SessionProvider session={pageProps.session}>
+          <ContextWrapper>
+            <UserProfileProvider>
+              <Core>
+                <Component {...pageProps} />
+              </Core>
+            </UserProfileProvider>
+          </ContextWrapper>
+        </SessionProvider>
+      </ReduxProvider>
     </>
   );
 };

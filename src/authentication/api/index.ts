@@ -2,7 +2,7 @@ import { __CLIENT__ } from 'common/constants/environment';
 import { UserManager } from 'oidc-client';
 import settings from './settings';
 import { IAuthUser } from 'authentication/models/User';
-import { signIn, signOut, useSession, session } from 'next-auth/client';
+import { signIn, signOut, getSession } from 'next-auth/client';
 /**
  * @summary Basic wrapper for OIDC login.
  * Redirects the user to the authentication page defined in settings.
@@ -23,8 +23,8 @@ export const logIn = async () => {
  * @summary Returns user if logged in
  */
 export const getUser = async (): Promise<IAuthUser | undefined> => {
-  const [session, loading] = useSession();
-  return session.user as unknown as IAuthUser;
+  const session = await getSession();
+  return session?.user as unknown as IAuthUser;
   if (USER_MANAGER) {
     const user = (await USER_MANAGER.getUser()) as IAuthUser | null;
     return user || undefined;
