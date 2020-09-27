@@ -5,11 +5,11 @@ import { Profile } from 'oidc-client';
 const options = {
     providers: [
         {
-            id: 'Onlineweb4',
+            id: 'onlineweb4',
             name: 'Onlineweb4',
             type: 'oauth',
             version: '2.0',
-            scope: 'openid onlineweb4',
+            scope: 'openid profile onlineweb4',
             params: { 
                 grant_type: 'authorization_code',
             },
@@ -20,8 +20,14 @@ const options = {
             profile: (profile: Profile) => {
                 console.log("profile", profile);
                 // https://next-auth.js.org/configuration/options#jwt-helpers
+                /*
+                    Dette funker jo råbra, ikke sjekket om man faktisk får useren i frontend, men den logges her korrekt.
+                    Problemet akkurat nå er at man får "Missing or invalid provider account" med oauth_callback_handler_error. 
+                */
                 return {
+                    ...profile,
                     id: profile.sub,
+                    image: profile.picture,
                 }
             },
             clientId: process.env.OW4_SSO_CLIENT_ID,
