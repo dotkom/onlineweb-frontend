@@ -5,8 +5,8 @@ import { getMyProfileUrl, getPaymentWalletUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 
 import style from './header.less';
-import { useSelector } from 'react-redux';
-import { selectIsLoggedIn, selectUserName } from 'authentication/selectors/authentication';
+import { useSession } from 'next-auth/client';
+import { IAuthUser } from 'authentication/models/User';
 
 interface IProps {
   menuIsOpen?: boolean;
@@ -15,7 +15,7 @@ interface IProps {
 
 const Login: React.FC<IProps> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const isLoggedIn = useSelector(selectIsLoggedIn());
+  const [session] = useSession();
 
   const toggleDropdown = () => {
     if (props.menuIsOpen && props.closeMenu) {
@@ -24,7 +24,7 @@ const Login: React.FC<IProps> = (props) => {
     setIsOpen(!isOpen);
   };
 
-  return isLoggedIn ? (
+  return session ? (
     <HeaderUser logout={logOut} onClick={toggleDropdown} isOpen={isOpen} />
   ) : (
     <LoginView onClick={toggleDropdown} isOpen={isOpen} />
@@ -38,7 +38,8 @@ interface IHeaderUserProps {
 }
 
 const HeaderUser = (props: IHeaderUserProps) => {
-  const username = useSelector(selectUserName());
+  const [session] = useSession();
+  const username = ((session?.user as unknown) as IAuthUser).profile.preferred_username;
   return (
     <div className={style.user}>
       <button onClick={props.onClick} className={style.dropdownButton} />

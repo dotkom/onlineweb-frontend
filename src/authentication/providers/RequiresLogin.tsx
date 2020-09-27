@@ -1,12 +1,13 @@
 import React from 'react';
 import LoginPage from 'pages/login';
-import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from 'authentication/selectors/authentication';
+import { useSession } from 'next-auth/client';
+import Spinner from 'common/components/Spinner';
 
 const RequiresLogin: React.FC = (props) => {
-  const isLoggedIn = useSelector(selectIsLoggedIn());
+  const [session, loading] = useSession();
 
-  if (!isLoggedIn) return <LoginPage />;
+  if (loading) return <Spinner />;
+  if (!session) return <LoginPage />;
   return <>{props.children}</>;
 };
 
