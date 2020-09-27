@@ -15,7 +15,7 @@ interface IUserCredentials {
 
 const UserData = () => {
   const [session] = useSession();
-  const username = (session?.user as unknown as IAuthUser).profile.preferred_username;
+  const username = ((session?.user as unknown) as IAuthUser).profile.preferred_username;
   const [userCredentials, setUserCredentials] = useState<IUserCredentials>({ username: '', password: '' });
 
   const aRef = useRef<HTMLAnchorElement>(null);

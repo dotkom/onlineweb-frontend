@@ -38,7 +38,7 @@ const options = {
       if (account && account.accessToken) {
         token.accessToken = account.accessToken;
       }
-      return Promise.resolve({ ...token, ...profile} );
+      return Promise.resolve({ ...token, ...profile });
     },
   },
   providers: [

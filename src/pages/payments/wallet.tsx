@@ -8,8 +8,7 @@ const PaymentWalletPage = () => {
     <RequiresLogin>
       <Wallet />
     </RequiresLogin>
-  )
-  ;
+  );
 };
 
 export default PaymentWalletPage;
