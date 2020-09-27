@@ -1,8 +1,7 @@
 import NextAuth from 'next-auth';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Session } from 'next-auth';
-import { Profile } from 'oidc-client';
-import { IAuthUser } from 'authentication/models/User';
+import { IAuthProfile, IAuthUser } from 'authentication/models/User';
+import { SessionBase } from 'next-auth/_utils';
 
 interface Token {
   name?: string;
@@ -24,11 +23,10 @@ interface Account {
 
 const options = {
   callbacks: {
-    session: async (session: Session, token: Token) => {
+    session: async (session: SessionBase, token: Token) => {
       const { iat, exp, accessToken, ...rest } = token;
       if (token.accessToken) {
-        // NextAuth's types does not like adding a key.
-        // and the session-type used in options does not match the session type which is actually used in "next-auth/client"; 
+        // TODO: Rewrite accessToken to access_token everywhere.
         (session as any).user.access_token = token.accessToken;
       } else {
         (session as any).user.access_token = undefined;
@@ -57,7 +55,7 @@ const options = {
       requestTokenUrl: '"https://online.ntnu.no/openid/authorize',
       authorizationUrl: 'https://online.ntnu.no/openid/authorize?response_type=code',
       profileUrl: 'https://online.ntnu.no/openid/userinfo',
-      profile: (profile: Profile) => {
+      profile: (profile: IAuthProfile) => {
         return {
           ...profile,
           id: profile.sub,

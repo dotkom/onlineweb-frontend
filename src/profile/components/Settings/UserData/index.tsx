@@ -5,8 +5,8 @@ import { Button, Card, Message, TextField } from '@dotkomonline/design-system';
 import { anonymizeUser, fetchUserData } from 'profile/api/gdpr';
 
 import style from './userdata.less';
-import { useSelector } from 'core/redux/hooks';
-import { selectUserName } from 'authentication/selectors/authentication';
+import { useSession } from 'next-auth/client';
+import { IAuthUser } from 'authentication/models/User';
 
 interface IUserCredentials {
   username: string;
@@ -14,8 +14,8 @@ interface IUserCredentials {
 }
 
 const UserData = () => {
-  const username = useSelector(selectUserName());
-
+  const [session] = useSession();
+  const username = (session?.user as unknown as IAuthUser).profile.preferred_username;
   const [userCredentials, setUserCredentials] = useState<IUserCredentials>({ username: '', password: '' });
 
   const aRef = useRef<HTMLAnchorElement>(null);
@@ -25,7 +25,6 @@ const UserData = () => {
     return new File([JSON.stringify(await fetchUserData())], `${username}.json`, {
       type: 'application/json',
     });
-    throw new Error('User not logged in');
   });
 
   const [deleteUserRequest, dispatchDeleteUserRequest] = useAsyncDispatch(async () => {

@@ -39,7 +39,7 @@ interface IHeaderUserProps {
 
 const HeaderUser = (props: IHeaderUserProps) => {
   const [session] = useSession();
-  const username = (session.user as unknown as IAuthUser).profile.preferred_username;
+  const username = (session?.user as unknown as IAuthUser).profile.preferred_username;
   return (
     <div className={style.user}>
       <button onClick={props.onClick} className={style.dropdownButton} />
