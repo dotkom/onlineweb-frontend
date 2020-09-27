@@ -19,7 +19,7 @@ export const logIn = async () => {
  */
 export const getUser = async (): Promise<IAuthUser | undefined> => {
   const session = await getSession();
-  return session?.user as unknown as IAuthUser;
+  return (session?.user as unknown) as IAuthUser;
 };
 
 /**
