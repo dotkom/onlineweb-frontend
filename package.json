@@ -49,7 +49,6 @@
     "less": "^3.9.0",
     "luxon": "^1.11.1",
     "multirange": "^2.0.0",
-    "oidc-client": "^1.6.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.16.4",
     "query-string": "^6.2.0",
