@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Session } from 'next-auth';
 import { Profile } from 'oidc-client';
+import { IAuthUser } from 'authentication/models/User';
 
 interface Token {
   name?: string;
@@ -24,18 +25,22 @@ interface Account {
 const options = {
   callbacks: {
     session: async (session: Session, token: Token) => {
+      const { iat, exp, accessToken, ...rest } = token;
       if (token.accessToken) {
         // NextAuth's types does not like adding a key.
         // and the session-type used in options does not match the session type which is actually used in "next-auth/client"; 
-        ((session as any).user as any).access_token = token.accessToken;
+        (session as any).user.access_token = token.accessToken;
+      } else {
+        (session as any).user.access_token = undefined;
       }
+      (session as any).user.profile = rest;
       return Promise.resolve(session);
     },
-    jwt: async (token: Token, _: Token, account: Account) => {
+    jwt: async (token: Token, _: Token, account: Account, profile: IAuthUser) => {
       if (account && account.accessToken) {
         token.accessToken = account.accessToken;
       }
-      return Promise.resolve(token);
+      return Promise.resolve({ ...token, ...profile} );
     },
   },
   providers: [
