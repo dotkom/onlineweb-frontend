@@ -1,46 +1,14 @@
-import React, { FC, useEffect, useState } from 'react';
-
-import { useDispatch, useSelector } from 'core/redux/hooks';
-import { selectPublicAttendeesForEventId } from 'events/selectors/publicAttendee';
-import { fetchPublicAttendeesByEventId } from 'events/slices/publicAttendees';
-
-import { Attendee } from './Attendee';
-import style from './PublicAttendees.less';
-import { IPublicAttendee } from 'events/models/Attendee';
-import { Button, Modal } from '@dotkomonline/design-system';
-
+import { ISignupEligibility } from 'events/models/Event';
+import React, { FC } from 'react';
+import ParticipantsButton from './ParticipantsButton';
 interface IProps {
   eventId: number;
   isAttending: boolean;
+  canAttend: ISignupEligibility | null;
 }
 
-const attendeeList = (attendees: IPublicAttendee[]) => (
-  <div className={style.grid}>
-    {attendees.map((attendee, index) => (
-      <Attendee key={attendee.id} attendee={attendee} count={index + 1} />
-    ))}
-  </div>
-);
-
-export const PublicAttendees: FC<IProps> = ({ eventId, isAttending }) => {
-  const dispatch = useDispatch();
-  const attendees = useSelector(selectPublicAttendeesForEventId(eventId));
-  const [showModal, setShowModal] = useState(false);
-
-  const toggleModal = () => setShowModal(!showModal);
-
-  useEffect(() => {
-    dispatch(fetchPublicAttendeesByEventId(eventId));
-  }, [eventId]);
-
-  if (!isAttending) return null;
-
-  return (
-    <>
-      <Button onClick={toggleModal}>Vis påmeldte</Button>
-      <Modal open={showModal} onClose={toggleModal}>
-        {attendeeList(attendees)}
-      </Modal>
-    </>
-  );
+export const PublicAttendees: FC<IProps> = ({ eventId, isAttending, canAttend }) => {
+  if (!canAttend) return null; // The user is not logged in
+  if (!isAttending && !canAttend.status) return null; // The user is not attending, or the user is not allowed to attend the event
+  return <ParticipantsButton eventId={eventId} />;
 };
