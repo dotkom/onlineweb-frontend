@@ -29,5 +29,7 @@ jobs:
         environment: production
         
     - name: inspect event
-      run: echo '${{ github.event }}'
+      env:
+          GITHUB_CONTEXT: ${{ toJson(github.event) }}
+      run: echo '$GITHUB_CONTEXT'
 
