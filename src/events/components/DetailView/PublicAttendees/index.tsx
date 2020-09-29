@@ -11,6 +11,7 @@ import { Button, Modal } from '@dotkomonline/design-system';
 
 interface IProps {
   eventId: number;
+  isAttending: boolean;
 }
 
 const attendeeList = (attendees: IPublicAttendee[]) => (
@@ -21,7 +22,7 @@ const attendeeList = (attendees: IPublicAttendee[]) => (
   </div>
 );
 
-export const PublicAttendees: FC<IProps> = ({ eventId }) => {
+export const PublicAttendees: FC<IProps> = ({ eventId, isAttending }) => {
   const dispatch = useDispatch();
   const attendees = useSelector(selectPublicAttendeesForEventId(eventId));
   const [showModal, setShowModal] = useState(false);
@@ -31,6 +32,8 @@ export const PublicAttendees: FC<IProps> = ({ eventId }) => {
   useEffect(() => {
     dispatch(fetchPublicAttendeesByEventId(eventId));
   }, [eventId]);
+
+  if (!isAttending) return null;
 
   return (
     <>
