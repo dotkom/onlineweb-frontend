@@ -3,13 +3,13 @@ import { faUserFriends } from '@fortawesome/free-solid-svg-icons/faUserFriends';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { FC } from 'react';
 
-import { IPublicAttedee } from 'events/models/Attendee';
+import { IPublicAttendee } from 'events/models/Attendee';
 
 import style from './Attendee.less';
 
 interface IProps {
   count: number;
-  attendee: IPublicAttedee;
+  attendee: IPublicAttendee;
 }
 
 export const Attendee: FC<IProps> = ({ attendee, count }) => {
