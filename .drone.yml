@@ -24,7 +24,7 @@ steps:
     when:
       event: [push, pull_request, tag, deployment]
     commands:
-      - npm i
+      - npm ci
     depends_on:
       - restore-cache
 
