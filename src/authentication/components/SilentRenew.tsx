@@ -29,7 +29,9 @@ export const SilentRenewComponent: FC = () => {
          If that is the case, the user will have to manually log in when the token expires.
          That is handled by the AuthenticationProvider and that is why the error is ignored here.
         */
-          console.warn('Automatic token refresh stopped by browser or authorization server. You need to manually login when your session expires.');
+          console.warn(
+            'Automatic token refresh stopped by browser or authorization server. You need to manually login when your session expires.'
+          );
         }
     }
   };
