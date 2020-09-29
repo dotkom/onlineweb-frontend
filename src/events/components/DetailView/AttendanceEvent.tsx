@@ -15,6 +15,7 @@ import Attendance from '../Attendance';
 import { attendeeSelectors, fetchAttendeeByEventId } from 'events/slices/attendees';
 import EventPaymentBlock from '../EventPayment/EventPaymentBlock';
 import EventPrice from '../EventPayment/EventPrice';
+import { PublicAttendees } from './PublicAttendees';
 
 interface IProps {
   eventId: number;
@@ -69,6 +70,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       </Block>
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
         <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
+        <PublicAttendees isAttendting={attendanceEvent.is_attendee} eventId={eventId} />
       </div>
       {attendanceEvent.payment && (
         <Block title="Pris" className={`${style.fullBlock} ${style.priceBlock}`}>
