@@ -70,7 +70,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       </Block>
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
         <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
-        <PublicAttendees isAttendting={attendanceEvent.is_attendee} eventId={eventId} />
+        <PublicAttendees isAttending={attendanceEvent.is_attendee} eventId={eventId} />
       </div>
       {attendanceEvent.payment && (
         <Block title="Pris" className={`${style.fullBlock} ${style.priceBlock}`}>
