@@ -31,11 +31,18 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test
-      - name: Lint
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          npm run tsc
-          npm run lint-ts-check
-          npm run lint-less-check
-          npm run format-check
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          # Enable linters
+          eslint: true
+          eslint_dir: src/
+          eslint_extensions: js,jsx,ts,tsx
+          prettier: true
+          prettier_dir: src/
+          prettier_args: "--check"
+          prettier_extensions: ts,tsx,less
+          stylelint: true
+          stylelint_dir: src/
+          stylelint_extensions: less
