@@ -1,6 +1,8 @@
 import Head from 'next/head';
-import React, { useEffect } from 'react';
-
+import { ArticleByline } from './ArticleByline';
+import { ArticleMeta } from './ArticleMeta';
+import { ArticleVideo } from './ArticleVideo';
+import { RelatedArticles } from './RelatedArticles';
 import { articleSelectors, fetchArticleById } from 'articles/slices/articles';
 import Markdown from 'common/components/Markdown';
 import ResponsiveImage from 'common/components/ResponsiveImage';
@@ -8,12 +10,7 @@ import Spinner from 'common/components/Spinner';
 import { DOMAIN } from 'common/constants/endpoints';
 import { useDispatch, useSelector } from 'core/redux/hooks';
 import NotFoundPage from 'pages/404';
-
-import { ArticleByline } from './ArticleByline';
-import { ArticleMeta } from './ArticleMeta';
-import { ArticleVideo } from './ArticleVideo';
-import { RelatedArticles } from './RelatedArticles';
-
+import React, { useEffect } from 'react';
 import style from './articleView.less';
 
 export interface IProps {
@@ -29,9 +26,9 @@ export const ArticleView = ({ articleId }: IProps) => {
     dispatch(fetchArticleById(articleId));
   }, [articleId, dispatch]);
 
-  if (isPending && !article) {
-    return <Spinner />;
-  }
+    if (isPending && !article) {
+      return <Spinner />;
+   }
 
   if (!article) {
     return <NotFoundPage />;
