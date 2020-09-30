@@ -31,11 +31,11 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test
-      - name: Compile typescript
-        run: npm run tsc
-      - name: Lint typescript
-        run: npm run lint-ts-check
-      - name: Lint less
-        run: npm run lint-less-check
-      - name: Lint format
-        run: npm run format-check
+      - name: Lint
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run tsc
+          npm run lint-ts-check
+          npm run lint-less-check
+          npm run format-check
