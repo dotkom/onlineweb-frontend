@@ -78,13 +78,17 @@ const JobDetails: FC<IProps> = ({ opportunity }) => (
             <p>Sted: {formatLocations(opportunity.location.map((loc) => loc.name))}</p>
             <p>Frist: {formatDeadline(opportunity.deadline)}</p>
           </div>
-          <div>
-            <Link href={opportunity.application_link}>
-              <Button className={style.applyButton} color="success">
-                Søk her!
-              </Button>
-            </Link>
-          </div>
+          {opportunity.application_link ? (
+            <div>
+              <Link href={opportunity.application_link}>
+                <Button className={style.applyButton} color="success">
+                  Søk her!
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
