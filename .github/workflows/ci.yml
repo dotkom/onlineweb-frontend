@@ -1,0 +1,41 @@
+name: Continious Integration
+
+on:
+  push:
+    branches-ignore: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm run test
+      - name: Compile typescript
+        run: npm run tsc
+      - name: Lint typescript
+        run: npm run lint-ts-check
+      - name: Lint less
+        run: npm run lint-less-check
+      - name: Lint format
+        run: npm run format-check
