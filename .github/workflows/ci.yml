@@ -34,14 +34,16 @@ jobs:
         uses: wearerequired/lint-action@v1
         with:
           github_token: ${{ secrets.github_token }}
-          # Enable linters
+          # Eslint
           eslint: true
           eslint_dir: src/
           eslint_extensions: js,jsx,ts,tsx
+          # Prettier
           prettier: true
           prettier_dir: src/
           prettier_args: "--check"
           prettier_extensions: ts,tsx,less
+          # Stylelint
           stylelint: true
           stylelint_dir: src/
           stylelint_extensions: less
