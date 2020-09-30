@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - azure
+  workflow_dispatch:
   # release:
   # types: [published, edited]
 
