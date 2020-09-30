@@ -41,7 +41,6 @@ jobs:
           # Prettier
           prettier: true
           prettier_dir: src/
-          prettier_args: "--check"
           prettier_extensions: ts,tsx,less
           # Stylelint
           stylelint: true
