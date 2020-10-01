@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
-import Button from 'core/components/errors/NotAuthenticated/Button';
 import CaptchaModal from './CaptchaModal';
 import { useDispatch } from 'core/redux/hooks';
 import { setAttendeeByEventId } from 'events/slices/attendees';
+import { Button } from '@dotkomonline/design-system';
 
 interface IAttendButtonProps {
   eventId: number;

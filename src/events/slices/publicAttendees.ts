@@ -1,10 +1,10 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, SerializedError } from '@reduxjs/toolkit';
 
 import { State } from 'core/redux/Store';
-import { IPublicAttedee } from 'events/models/Attendee';
+import { IPublicAttendee } from 'events/models/Attendee';
 import { getPublicAttendeesForEvent } from 'events/api/publicAttendee';
 
-const publicAttendeesAdapter = createEntityAdapter<IPublicAttedee>({
+const publicAttendeesAdapter = createEntityAdapter<IPublicAttendee>({
   sortComparer: (attendeeA, attendeeB) => {
     return attendeeA.id - attendeeB.id;
   },
@@ -23,7 +23,7 @@ export const fetchPublicAttendeesByEventId = createAsyncThunk(
 interface IState {
   loading: 'idle' | 'pending';
   error: SerializedError | null;
-  entities: Record<number, IPublicAttedee>;
+  entities: Record<number, IPublicAttendee>;
 }
 
 const INITIAL_STATE: IState = {
