@@ -26,9 +26,9 @@ export const ArticleView = ({ articleId }: IProps) => {
     dispatch(fetchArticleById(articleId));
   }, [articleId, dispatch]);
 
-    if (isPending && !article) {
-      return <Spinner />;
-   }
+  if (isPending && !article) {
+    return <Spinner />;
+  }
 
   if (!article) {
     return <NotFoundPage />;
