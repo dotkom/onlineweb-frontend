@@ -35,7 +35,14 @@ jobs:
           eslint: true
           eslint_dir: src/
           eslint_extensions: js,jsx,ts,tsx
+          # Prettier
+          prettier: true
+          prettier_dir: src/
           # Stylelint
           stylelint: true
           stylelint_dir: src/
           stylelint_extensions: less
+      - name: Typescript compile
+        run: npm run tsc
+        with:
+          github_token: ${{ secrets.github_token }}
