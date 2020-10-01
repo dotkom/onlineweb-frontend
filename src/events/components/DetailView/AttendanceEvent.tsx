@@ -15,7 +15,7 @@ import Attendance from '../Attendance';
 import { attendeeSelectors, fetchAttendeeByEventId } from 'events/slices/attendees';
 import EventPaymentBlock from '../EventPayment/EventPaymentBlock';
 import EventPrice from '../EventPayment/EventPrice';
-import { PublicAttendees } from './PublicAttendeesModal/PublicAttendeesWrapper';
+import PublicAttendeesWrapper from './PublicAttendeesModal/PublicAttendeesWrapper';
 import ParticipantsButton from './PublicAttendeesModal/ParticipantsButton';
 
 interface IProps {
@@ -72,9 +72,9 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
       </Block>
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
         <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
-        <PublicAttendees isAttending={attendanceEvent.is_attendee} canAttend={isEligibleForSignup}>
+        <PublicAttendeesWrapper isAttending={attendanceEvent.is_attendee} canAttend={isEligibleForSignup}>
           <ParticipantsButton eventTitle={eventTitle} eventId={eventId} />
-        </PublicAttendees>
+        </PublicAttendeesWrapper>
       </div>
       {attendanceEvent.payment && (
         <Block title="Pris" className={`${style.fullBlock} ${style.priceBlock}`}>
