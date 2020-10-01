@@ -1,16 +1,21 @@
 import React from 'react';
 import { IMail } from '../../../models/Mail';
 import style from './mail.less';
+import { Icon } from '@dotkomonline/design-system';
 
-export interface IProps extends IMail {
-  toggle: () => void;
-}
-
-const Mail = ({ email, primary, toggle }: IProps) => (
-  <div className={style.mail} onClick={toggle} tabIndex={0}>
-    <input name="radio" type="radio" checked={primary} readOnly />
-    <label>{email}</label>
-  </div>
-);
+const Mail = ({ email, primary, verified }: IMail) => {
+  return (
+    <li className={style.mail} tabIndex={0}>
+      <h4 title={`Denne mailen er ${!verified ? 'ikke ' : ''}verifisert`}>
+        {email}
+        {verified ? <Icon name="verified" /> : null}
+        {primary ? <span className={style.primary}> - Primær</span> : null}
+      </h4>
+      <button>
+        <Icon name="delete" />
+      </button>
+    </li>
+  );
+};
 
 export default Mail;
