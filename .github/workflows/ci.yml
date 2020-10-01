@@ -44,5 +44,3 @@ jobs:
           stylelint_extensions: less
       - name: Typescript compile
         run: npm run tsc
-        with:
-          github_token: ${{ secrets.github_token }}
