@@ -1,8 +1,6 @@
 import Head from 'next/head';
-import { ArticleByline } from './ArticleByline';
-import { ArticleMeta } from './ArticleMeta';
-import { ArticleVideo } from './ArticleVideo';
-import { RelatedArticles } from './RelatedArticles';
+import React, { useEffect } from 'react';
+
 import { articleSelectors, fetchArticleById } from 'articles/slices/articles';
 import Markdown from 'common/components/Markdown';
 import ResponsiveImage from 'common/components/ResponsiveImage';
@@ -10,7 +8,12 @@ import Spinner from 'common/components/Spinner';
 import { DOMAIN } from 'common/constants/endpoints';
 import { useDispatch, useSelector } from 'core/redux/hooks';
 import NotFoundPage from 'pages/404';
-import React, { useEffect } from 'react';
+
+import { ArticleByline } from './ArticleByline';
+import { ArticleMeta } from './ArticleMeta';
+import { ArticleVideo } from './ArticleVideo';
+import { RelatedArticles } from './RelatedArticles';
+
 import style from './articleView.less';
 
 export interface IProps {
