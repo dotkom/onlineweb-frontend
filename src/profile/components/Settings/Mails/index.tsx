@@ -1,38 +1,43 @@
 import { Pane } from 'common/components/Panes';
-import React, { Component } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { getMails, patchMails } from '../../../api/mail';
 import { IMail } from '../../../models/Mail';
 import Mail from './Mail';
+import { Spinner } from '@dotkomonline/design-system';
 
 export interface IState {
   addresses: IMail[];
 }
 
-class Mails extends Component<{}, IState> {
-  public state: IState = { addresses: [] };
+const Mails: FC = () => {
+  const [mails, setMails] = useState<IMail[]>();
+  const [primaryMail, setPrimaryMail] = useState<IMail>();
 
-  public async componentDidMount() {
-    let addresses = await getMails();
-    addresses = addresses.sort((a, b) => Number(a.primary) - Number(b.primary)).reverse();
-    this.setState({ addresses });
-  }
+  useEffect(() => {
+    const fetchMails = async () => {
+      let mails = await getMails();
+      mails = mails.sort((a, b) => Number(a.primary) - Number(b.primary)).reverse();
+      setMails(mails);
+      setPrimaryMail(mails.find((mail) => mail.primary));
+    };
+    fetchMails();
+  }, [primaryMail]);
 
-  public async togglePrimary(address: IMail) {
+  const togglePrimary = async (address: IMail) => {
     await patchMails(address.id, { primary: true });
-    const addresses = await getMails();
-    this.setState({ addresses });
-  }
+    const mails = await getMails();
+    setMails(mails);
+  };
 
-  public render() {
-    const { addresses } = this.state;
-    return (
-      <Pane>
-        {addresses.map((addr) => (
-          <Mail {...addr} toggle={() => this.togglePrimary(addr)} key={addr.email} />
-        ))}
-      </Pane>
-    );
-  }
-}
+  return (
+    <Pane>
+      {mails ? (
+        mails.map((mail) => <Mail {...mail} toggle={() => togglePrimary(mail)} key={mail.email} />)
+      ) : (
+        <Spinner />
+      )}
+    </Pane>
+  );
+};
 
 export default Mails;
