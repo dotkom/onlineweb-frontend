@@ -17,7 +17,7 @@ const Registration: FC<IProps> = ({ event }) => {
       <CardHeader className={styles.detailHeader} color={color}>
         Påmelding
       </CardHeader>
-      <AttendanceEvent eventId={event.id} />
+      <AttendanceEvent eventId={event.id} eventTitle={event.title} />
     </div>
   );
 };

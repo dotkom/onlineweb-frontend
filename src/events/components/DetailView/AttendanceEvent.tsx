@@ -19,9 +19,10 @@ import { PublicAttendees } from './PublicAttendees';
 
 interface IProps {
   eventId: number;
+  eventTitle: string;
 }
 
-const AttendanceEvent: FC<IProps> = ({ eventId }) => {
+const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle}) => {
   const dispatch = useDispatch();
   const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
   const attendee = useSelector((state) => attendeeSelectors.selectAll(state)).find(
@@ -70,7 +71,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId }) => {
       </Block>
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
         <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
-        <PublicAttendees eventId={eventId} isAttending={attendanceEvent.is_attendee} canAttend={isEligibleForSignup} />
+        <PublicAttendees eventTitle={eventTitle} eventId={eventId} isAttending={attendanceEvent.is_attendee} canAttend={isEligibleForSignup} />
       </div>
       {attendanceEvent.payment && (
         <Block title="Pris" className={`${style.fullBlock} ${style.priceBlock}`}>

@@ -9,6 +9,7 @@ import style from './PublicAttendees.less';
 
 interface IProps {
   eventId: number;
+  eventTitle: string;
 }
 
 interface IAttendeeListProps {
@@ -23,7 +24,7 @@ const AttendeeList: FC<IAttendeeListProps> = ({ attendees }) => (
   </div>
 );
 
-export const ParticipantsButton: FC<IProps> = ({ eventId }) => {
+export const ParticipantsButton: FC<IProps> = ({ eventId, eventTitle }) => {
   const dispatch = useDispatch();
   const attendees = useSelector(selectPublicAttendeesForEventId(eventId));
   const [showModal, setShowModal] = useState(false);
@@ -38,6 +39,7 @@ export const ParticipantsButton: FC<IProps> = ({ eventId }) => {
     <>
       <Button onClick={toggleModal}>Vis påmeldte</Button>
       <Modal open={showModal} onClose={toggleModal}>
+        <h1>Påmeldingliste for {eventTitle}</h1>
         <AttendeeList attendees={attendees} />
       </Modal>
     </>
