@@ -27,6 +27,8 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test
+      - name: Typescript compile
+        run: npm run tsc
       - name: Run linters
         uses: wearerequired/lint-action@v1
         with:
@@ -42,5 +44,3 @@ jobs:
           stylelint: true
           stylelint_dir: src/
           stylelint_extensions: less
-      - name: Typescript compile
-        run: npm run tsc
