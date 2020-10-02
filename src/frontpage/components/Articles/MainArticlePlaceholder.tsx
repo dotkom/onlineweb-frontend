@@ -1,12 +1,12 @@
+import { CompactLogo } from '@dotkomonline/design-system';
 import classnames from 'classnames';
-import { DefaultEventImage } from 'events/components/DefaultEventImage';
 import React from 'react';
 import style from './articles.less';
 
 const MainArticlePlaceholder = () => {
   return (
     <div className={classnames(style.articleContainer)}>
-      <DefaultEventImage />
+      <CompactLogo />
       <div>
         <h2>Tom artikkel</h2>
         <p>Vi er tom for artikler.</p>
