@@ -2,6 +2,7 @@ import { CompactLogo } from '@dotkomonline/design-system';
 import ResponsiveImage from 'common/components/ResponsiveImage';
 import IResponsiveImage, { IResponsiveImageSizes } from 'common/models/ResponsiveImage';
 import React, { FC, ImgHTMLAttributes } from 'react';
+import style from './eventImage.less';
 
 export interface IProps extends ImgHTMLAttributes<HTMLImageElement> {
   images: IResponsiveImage[];
@@ -15,7 +16,9 @@ const EventImage: FC<IProps> = ({ images, color, ...props }) => {
   return img ? (
     <ResponsiveImage image={img} type="event" {...props} />
   ) : (
-    <CompactLogo primaryColor={color} secondaryColor={color} />
+    <div className={style.image}>
+      <CompactLogo width="40%" primaryColor={color} secondaryColor={color} />
+    </div>
   );
 };
 
