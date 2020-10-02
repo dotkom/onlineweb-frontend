@@ -1,6 +1,6 @@
+import { CompactLogo } from '@dotkomonline/design-system';
 import classnames from 'classnames';
 import { IRefObject } from 'common/hooks/useRefMap';
-import { DefaultEventImage } from 'events/components/DefaultEventImage';
 import React from 'react';
 import style from './offline.less';
 
@@ -24,7 +24,7 @@ export interface ICarouselItemProps {
 const CarouselItem = ({ index, scrollRef }: ICarouselItemProps) => {
   return (
     <div className={classnames(style.carouselItem)} ref={scrollRef}>
-      <DefaultEventImage />
+      <CompactLogo />
       <p>Tom utgave nr {index}</p>
     </div>
   );
