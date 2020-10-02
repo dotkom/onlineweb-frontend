@@ -1,4 +1,4 @@
-import { CompactLogo, Logo } from '@dotkomonline/design-system';
+import { CompactLogo } from '@dotkomonline/design-system';
 import ResponsiveImage from 'common/components/ResponsiveImage';
 import IResponsiveImage, { IResponsiveImageSizes } from 'common/models/ResponsiveImage';
 import React, { FC, ImgHTMLAttributes } from 'react';
