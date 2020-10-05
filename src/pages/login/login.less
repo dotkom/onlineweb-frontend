@@ -6,7 +6,7 @@
   grid-template-columns: 2fr;
   grid-column-gap: 5px;
 
-  > .loginButton {
+  & :first-child {
     grid-column: 1 / span 2;
     grid-row: 1;
     display: block;
@@ -16,5 +16,6 @@
   > * {
     width: 100%;
     margin: auto;
+    text-align: center;
   }
 }
