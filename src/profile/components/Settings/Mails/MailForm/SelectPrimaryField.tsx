@@ -3,7 +3,6 @@ import { Button } from '@dotkomonline/design-system';
 import style from './form.less';
 import { IMail } from 'profile/models/Mail';
 import Select, { ValueType } from 'react-select';
-import { getOptionValue } from 'react-select/src/builtins';
 
 interface IProps {
   mails: IMail[];
@@ -41,6 +40,7 @@ const SelectPrimaryField: FC<IProps> = ({ mails, onSubmit }) => {
 
   return (
     <>
+      <label className={style.selectLabel}>Primær epost</label>
       <div className={style.inputContainer}>
         <Select<IOption>
           options={options}
