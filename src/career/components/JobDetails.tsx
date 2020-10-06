@@ -13,7 +13,6 @@ import { Link } from 'core/components/Router';
 import style from '../less/career.less';
 import { formatLocations } from './JobListItem';
 
-import { Button } from '@dotkomonline/design-system';
 import ApplyButton from './ApplyButton';
 
 /**
