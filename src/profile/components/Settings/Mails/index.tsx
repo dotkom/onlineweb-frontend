@@ -41,18 +41,15 @@ const Mails: FC = () => {
         <Card className={style.mailCard}>
           <ul>
             {mails.map((mail) => (
-              <Mail {...mail} key={mail.email} />
+              <Mail {...mail} key={mail.email} callback={fetchMails} />
             ))}
           </ul>
         </Card>
+        <SelectPrimaryField mails={mails} onSubmit={saveNewPrimaryMail} />
       </Pane>
       <Pane>
         <Markdown>{ADD_MAIL_INFO}</Markdown>
         <AddMailField />
-      </Pane>
-      <Pane>
-        <Markdown>{PRIMARY_MAIL_INFO}</Markdown>
-        <SelectPrimaryField mails={mails} onSubmit={saveNewPrimaryMail} />
       </Pane>
     </>
   );
