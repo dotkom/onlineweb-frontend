@@ -6,7 +6,7 @@ const AddMailField: FC = () => {
   return (
     <>
       <div className={style.inputContainer}>
-        <TextField className={style.textField} placeholder="Epostadresse" />
+        <TextField label="Legg til ny e-post" className={style.textField} placeholder="Epostadresse" />
         <Button variant="outline">Legg til</Button>
       </div>
     </>
