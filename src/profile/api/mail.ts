@@ -1,5 +1,5 @@
 import { getUser } from 'authentication/api';
-import { get, IAPIData, patch } from 'common/utils/api';
+import { get, IAPIData, patch, deleteR } from 'common/utils/api';
 
 import { IMail } from '../models/Mail';
 
@@ -23,4 +23,14 @@ export const patchMails = async (addressId: number, data: Partial<IMail>): Promi
   });
 
   return response;
+};
+
+export const deleteMail = async (mailId: number) => {
+  const user = await getUser();
+  try {
+    const ret = await deleteR(`${API_URL}/${mailId}`, undefined, { user });
+    return ret;
+  } catch (err) {
+    throw new Error(`Kunne ikke slette mail ${err.statusText}`);
+  }
 };
