@@ -11,8 +11,8 @@ const MainMenu = () => {
     <div className={style.menuGrid}>
       <MenuElement text="Min Profil" {...getMyProfileUrl()} />
       <MenuElement text="Brukersøk" {...getProfileSearchUrl()} />
-      <MenuElement text="Innstillinger" {...getProfileSettingsUrl()} />
-      <MenuElement text="Statistikk" {...getProfileStatisticsUrl()} />
+      <MenuElement text="Innstillinger" containsSubpages {...getProfileSettingsUrl()} />
+      <MenuElement text="Statistikk" containsSubpages {...getProfileStatisticsUrl()} />
     </div>
   );
 };
@@ -21,11 +21,12 @@ export interface IElementProps {
   text: string;
   href: string;
   as?: string;
+  containsSubpages?: boolean;
 }
 
-export const MenuElement = ({ text, href, as }: IElementProps) => {
+export const MenuElement = ({ text, href, as, containsSubpages }: IElementProps) => {
   const { pathname } = useRouter();
-  const isActive = pathname === href;
+  const isActive = containsSubpages ? pathname.includes(href) : pathname === href;
   return (
     <Link href={href} as={as}>
       <a className={classnames(style.menuElement, { [style.menuElementActive]: isActive })}>
