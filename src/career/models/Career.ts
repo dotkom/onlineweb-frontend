@@ -13,6 +13,7 @@ export interface ICareerOpportunity {
   employment: IEmployment;
   location: ILocation[];
   application_link: string;
+  application_email: string;
 }
 
 export interface IEmployment {
