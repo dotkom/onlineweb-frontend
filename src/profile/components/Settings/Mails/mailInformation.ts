@@ -9,6 +9,5 @@ Her kan du legge til nye eposter. Husk å verifisere mailen etter å ha lagt til
 `;
 
 export const PRIMARY_MAIL_INFO = `
-### Primær e-post
-Her kan du sette primærmailen din. Etter at du har valgt en ny primæradresse kan det ta opptil én time før endringen er registert i alle mailinglister, mens adresse for andre varsler og gjenoppretning oppdateres umiddelbart.
+Din primær e-post har blitt endret. Det ta opptil én time før endringen er registert i alle mailinglister, mens adresse for andre varsler og gjenoppretning oppdateres umiddelbart.
 `;
