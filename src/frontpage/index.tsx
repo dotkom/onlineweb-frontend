@@ -8,8 +8,6 @@ const Frontpage = () => (
   <>
     <ToastOld />
     <EventsContainer />
-    <Articles />
-    <Offline />
   </>
 );
 

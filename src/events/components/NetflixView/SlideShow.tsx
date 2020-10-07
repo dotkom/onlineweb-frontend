@@ -1,6 +1,4 @@
-import React, { FC } from 'react';
-
-import { EventTypeEnum } from '../../models/Event';
+import React, { FC, useContext } from 'react';
 import style from './image.less';
 import LargeEvent from './LargeEvent';
 
