@@ -1,5 +1,5 @@
 import React, { FC, useContext } from 'react';
-import style from './image.less';
+import style from './netflixView.less';
 import LargeEvent from './LargeEvent';
 
 interface IProps {

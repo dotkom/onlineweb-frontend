@@ -7,7 +7,7 @@ import { State } from 'core/redux/Store';
 import { eventSelectors, fetchImageEvents } from 'events/slices/events';
 
 import SlideShow from './SlideShow';
-import style from './image.less';
+import style from './netflixView.less';
 import BigAssHero from './BigAssHero';
 
 const HoveredEventContextDefaultValue = {

@@ -7,7 +7,7 @@ import { getEventColor, IEvent } from 'events/models/Event';
 import { selectEventCapacity } from 'events/selectors/event';
 
 import EventImage from '../EventImage';
-import style from './image.less';
+import style from './netflixView.less';
 import { eventSelectors } from 'events/slices/events';
 import { HoveredEventContext } from '.';
 
