@@ -20,7 +20,7 @@ const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitLis
       await dispatch(removeAttendeeByEventId(eventId)).then(unwrapResult);
       addToast('Du har blitt meldt av arrangementet');
     } catch (err) {
-      addToast('Noe gikk galt under avmeldelse av arrangementet, prøv igjen senere', { type: 'error' });
+      addToast(`Noe gikk galt under avmeldelse, ERROR: ${err.message}`, { type: 'error' });
     }
   };
 
