@@ -4,6 +4,7 @@ import { useDispatch } from 'core/redux/hooks';
 import { setAttendeeByEventId } from 'events/slices/attendees';
 import { Button } from '@dotkomonline/design-system';
 import { useToast } from 'core/utils/toast/useToast';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 interface IAttendButtonProps {
   eventId: number;
@@ -13,16 +14,14 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const dispatch = useDispatch();
   const { eventId } = props;
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [addToast, cancelCurrentToast] = useToast({ type: 'basic', duration: 5000 });
+  const [addToast] = useToast({ type: 'success', duration: 5000 });
 
   const signUp = async (token: string | null) => {
     if (token) {
-      addToast('Melder deg på arrangementet...', { type: 'basic' });
-      const res = await dispatch(setAttendeeByEventId({ eventId, captcha: token }));
-      cancelCurrentToast();
-      if (!res.error) {
-        addToast('Du har blitt meldt på arrangementet', { type: 'success' });
-      } else {
+      try {
+        await dispatch(setAttendeeByEventId({ eventId, captcha: token })).then(unwrapResult);
+        addToast('Du har blitt meldt på arrangementet');
+      } catch (err) {
         addToast('Noe gikk galt under påmeldelse av arrangement', { type: 'error' });
       }
     }

@@ -3,6 +3,7 @@ import { useDispatch } from 'core/redux/hooks';
 import { removeAttendeeByEventId } from 'events/slices/attendees';
 import { Button } from '@dotkomonline/design-system';
 import { useToast } from 'core/utils/toast/useToast';
+import { unwrapResult } from '@reduxjs/toolkit';
 
 interface IAttendButtonProps {
   eventId: number;
@@ -12,14 +13,12 @@ interface IAttendButtonProps {
 
 const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitListNumber }) => {
   const dispatch = useDispatch();
-  const [addToast, cancelCurrentToast] = useToast({ type: 'basic', duration: 5000 });
+  const [addToast] = useToast({ type: 'success', duration: 5000 });
   const signOff = async () => {
-    addToast('Melder deg av arrangementet...');
-    const res = await dispatch(removeAttendeeByEventId(eventId));
-    cancelCurrentToast();
-    if (!res.error) {
-      addToast('Du har blitt meldt av arrangementet', { type: 'success' });
-    } else {
+    try {
+      await dispatch(removeAttendeeByEventId(eventId)).then(unwrapResult);
+      addToast('Du har blitt meldt av arrangementet');
+    } catch (err) {
       addToast('Noe gikk galt under avmeldelse av arrangementet, prøv igjen senere', { type: 'error' });
     }
   };
