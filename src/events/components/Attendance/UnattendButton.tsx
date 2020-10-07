@@ -12,19 +12,24 @@ interface IAttendButtonProps {
 
 const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitListNumber }) => {
   const dispatch = useDispatch();
-  const [addMessage] = useToast({ type: 'success', duration: 5000 });
+  const [addToast, cancelCurrentToast] = useToast({ type: 'basic', duration: 5000 });
   const signOff = async () => {
-    await dispatch(removeAttendeeByEventId(eventId));
-    addMessage('Du har blitt meldt av arrangementet');
+    addToast('Melder deg av arrangementet...');
+    const res = await dispatch(removeAttendeeByEventId(eventId));
+    cancelCurrentToast();
+    if (!res.error) {
+      addToast('Du har blitt meldt av arrangementet', { type: 'success' });
+    } else {
+      addToast('Noe gikk galt under avmeldelse av arrangementet, prøv igjen senere', { type: 'error' });
+    }
   };
 
-  if (!isOnWaitList) {
-    return <Button onClick={signOff}>Meld meg av</Button>;
-  }
   return (
     <>
-      <p>{`Du er nummer ${waitListNumber} på venteliste.`}</p>
-      <Button onClick={signOff}>Meld meg av</Button>
+      {isOnWaitList ? <p>{`Du er nummer ${waitListNumber} på venteliste.`}</p> : null}
+      <Button color="secondary" onClick={signOff}>
+        Meld meg av
+      </Button>
     </>
   );
 };

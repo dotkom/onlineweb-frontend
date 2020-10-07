@@ -13,12 +13,18 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const dispatch = useDispatch();
   const { eventId } = props;
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [addMessage] = useToast({ type: 'success', duration: 5000 });
+  const [addToast, cancelCurrentToast] = useToast({ type: 'basic', duration: 5000 });
 
   const signUp = async (token: string | null) => {
     if (token) {
-      await dispatch(setAttendeeByEventId({ eventId, captcha: token }));
-      addMessage('Du har blitt meldt på arrangementet');
+      addToast('Melder deg på arrangementet...', { type: 'basic' });
+      const res = await dispatch(setAttendeeByEventId({ eventId, captcha: token }));
+      cancelCurrentToast();
+      if (!res.error) {
+        addToast('Du har blitt meldt på arrangementet', { type: 'success' });
+      } else {
+        addToast('Noe gikk galt under påmeldelse av arrangement', { type: 'error' });
+      }
     }
   };
   const toggleModal = () => setShowModal(!showModal);
