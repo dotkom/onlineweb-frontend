@@ -5,6 +5,7 @@ import { setAttendeeByEventId } from 'events/slices/attendees';
 import { Button } from '@dotkomonline/design-system';
 import { useToast } from 'core/utils/toast/useToast';
 import { unwrapResult } from '@reduxjs/toolkit';
+import style from './attendance.less';
 
 interface IAttendButtonProps {
   eventId: number;
@@ -31,7 +32,9 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
 
   return (
     <>
-      <Button onClick={toggleModal}>Meld meg på</Button>
+      <Button color="success" onClick={toggleModal} className={style.button}>
+        Meld meg på
+      </Button>
       {modal}
     </>
   );

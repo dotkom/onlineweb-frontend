@@ -4,6 +4,7 @@ import { removeAttendeeByEventId } from 'events/slices/attendees';
 import { Button } from '@dotkomonline/design-system';
 import { useToast } from 'core/utils/toast/useToast';
 import { unwrapResult } from '@reduxjs/toolkit';
+import style from './attendance.less';
 
 interface IAttendButtonProps {
   eventId: number;
@@ -26,7 +27,7 @@ const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitLis
   return (
     <>
       {isOnWaitList ? <p>{`Du er nummer ${waitListNumber} på venteliste.`}</p> : null}
-      <Button color="secondary" onClick={signOff}>
+      <Button color="danger" onClick={signOff} className={style.button}>
         Meld meg av
       </Button>
     </>
