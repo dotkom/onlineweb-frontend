@@ -6,11 +6,12 @@ import EventsHeader from './EventsHeader';
 import ImageView from './ImageView';
 import style from './less/eventsContainer.less';
 import ListView from './ListView';
+import NetflixView from './NetflixView'
 
 const getView = (view?: EventView): typeof ListView | typeof CalendarView | typeof ImageView => {
   switch (view) {
     case EventView.IMAGE:
-      return ImageView;
+      return NetflixView;
     case EventView.LIST:
       return ListView;
     case EventView.CALENDAR:
