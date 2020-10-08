@@ -6,11 +6,25 @@ It is a self contained front-end for the main pages of Linjeforeningen Online.
 The main aim of the project is to serve as a hub for Online members.
 Other tasks, such as administration of website content, and general information for new student, companies or others will be spun out as their own projects entirely.
 
+## Prerequisites  
+
+```
+node  
+yarn  
+```
+
 ## How to run
 
 ```bash
 
 git clone <repo>
+
+Recommended:  
+yarn  
+
+yarn dev  
+
+or  
 
 npm run
 
