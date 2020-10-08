@@ -19,8 +19,9 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
 
   const signUp = async (token: string | null) => {
     if (token) {
+      const action = await dispatch(setAttendeeByEventId({ eventId, captcha: token }));
       try {
-        await dispatch(setAttendeeByEventId({ eventId, captcha: token })).then(unwrapResult);
+        unwrapResult(action);
         addToast('Du har blitt meldt på arrangementet');
       } catch (err) {
         addToast(`Noe gikk galt under påmeldelse av arrangement, ERROR: ${err.message}`, { type: 'error' });
