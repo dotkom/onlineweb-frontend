@@ -41,9 +41,24 @@
 
 
 .hero {
-  height: 75vh;
+  height: 50vh;
  div > img {
     object-fit: cover;
     width: 100%;
   }
 }
+
+.imageContainer { 
+  position: relative;
+  
+  img > {
+    height: 50vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+}
+

@@ -1,28 +1,57 @@
-import React, { FC, useContext } from 'react';
-
-import { useSelector } from 'core/redux/hooks';
-import { getEventColor, IEvent } from 'events/models/Event';
-
+import React, { FC, useContext, useEffect, useState } from 'react';
 import EventImage from '../EventImage';
 import style from './netflixView.less';
-import { eventSelectors } from 'events/slices/events';
 import { HoveredEventContext } from '.';
+import { IEvent } from 'events/models/Event';
 
 
-const BigAssHero: FC<IProps> = () => {
-  const { hoveredEventId } = useContext(HoveredEventContext)
-  const event = useSelector((state) => eventSelectors.selectById(state, hoveredEventId) as IEvent);
-  if (event) {
-    const { images, event_type, event_type_display, title, start_date, id } = event;
-    return (
-      <div className={style.hero}>
-        <div style={{ backgroundColor: getEventColor(event_type), height: "100%" }}>
-          <EventImage images={images} size={"original"}></EventImage>
-        </div>
+const withFading = (Faded: FC, duration: number, key: number) => {
+  const inEffect = `
+    @keyframes react-fade-in {
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  `;
+
+  return (
+    <div key={key}>
+      <style children={inEffect} />
+      <div style={{
+        animationDuration: `${duration}s`,
+        animationIterationCount: 1,
+        animationName: "react-fade-in",
+        animationTimingFunction: 'ease-in'
+      }}
+      ><Faded /></div>
+    </div>
+  )
+
+}
+
+
+type EventImageInstance = React.ReactNode
+
+const BigAssHero: FC = () => {
+  const { hoveredEvent } = useContext(HoveredEventContext)
+  const [imageComponents, setImageComponents] = useState([] as EventImageInstance[])
+
+  useEffect(() => {
+    if (hoveredEvent) {
+      const { images, event_type, event_type_display, title, start_date, id } = hoveredEvent
+      const newImageComponents = [...imageComponents, withFading(() => <EventImage key={id} className={style.HeroImage} images={images} size={"original"} />, 2, id)]
+      if(newImageComponents.length > 3){
+        newImageComponents.shift()
+      }
+      setImageComponents(newImageComponents)
+    }
+  }, [hoveredEvent])
+
+  return (
+    <div className={style.hero}>
+      <div className={style.imageContainer}>
+        {imageComponents}
       </div>
-    );
-  }
-  return <></>
-};
+    </div>)
+}
 
 export default BigAssHero;
