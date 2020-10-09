@@ -41,6 +41,10 @@ const CustomDocument = ({}: DocumentProps): JSX.Element => {
         <link rel="icon" type="image/png" href="/img/icons/icon-256.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
         <script id="stripe-js" src="https://js.stripe.com/v3/" async />
+        <link
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Source+Serif+Pro|Source+Code+Pro|Material+Icons+Outlined"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />
