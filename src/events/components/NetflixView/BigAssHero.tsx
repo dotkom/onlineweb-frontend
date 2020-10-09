@@ -17,7 +17,7 @@ const BigAssHero: FC<IProps> = () => {
     return (
       <div className={style.hero}>
         <div style={{ backgroundColor: getEventColor(event_type), height: "100%" }}>
-          <p>{title}</p>
+          <EventImage images={images} size={"original"}></EventImage>
         </div>
       </div>
     );
