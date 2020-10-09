@@ -5,7 +5,7 @@ import { HoveredEventContext } from '.';
 import { IEvent } from 'events/models/Event';
 
 
-const withFading = (Faded: FC, duration: number, key: number) => {
+const withFading = (Faded: FC, duration: number) => {
   const inEffect = `
     @keyframes react-fade-in {
       0%   { opacity: 0; }
@@ -14,7 +14,7 @@ const withFading = (Faded: FC, duration: number, key: number) => {
   `;
 
   return (
-    <div key={key}>
+    <div key={Math.random()}>
       <style children={inEffect} />
       <div style={{
         animationDuration: `${duration}s`,
@@ -38,8 +38,8 @@ const BigAssHero: FC = () => {
   useEffect(() => {
     if (hoveredEvent) {
       const { images, event_type, event_type_display, title, start_date, id } = hoveredEvent
-      const newImageComponents = [...imageComponents, withFading(() => <EventImage key={id} className={style.HeroImage} images={images} size={"original"} />, 2, id)]
-      if(newImageComponents.length > 3){
+      const newImageComponents = [...imageComponents, withFading(() => <EventImage className={style.HeroImage} images={images} size={"original"} />, 0.4)]
+      if (newImageComponents.length > 3) {
         newImageComponents.shift()
       }
       setImageComponents(newImageComponents)
