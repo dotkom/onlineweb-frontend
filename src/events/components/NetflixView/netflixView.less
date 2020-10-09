@@ -1,22 +1,23 @@
 @import '~common/less/constants.less';
 @import '~common/less/mixins.less';
 
-@edge-height: 20px;
+@edge-height       : 20px;
 @colorIndicatorSize: 0.5rem;
 
 
-.slider{
-  > div > ul  {
-  display: flex;
-  flex-direction: row;
+.slider {
+  >div>ul {
+    display       : flex;
+    flex-direction: row;
   }
 
 }
+
 .slideshow:hover .large {
   transform: translateX(-10%);
 }
 
-.large:hover ~ .large {
+.large:hover~.large {
   transform: translateX(10%);
 }
 
@@ -24,34 +25,49 @@
   transform: scale(1.2) !important;
 }
 
-.sliderWrapper{
+.sliderWrapper {
   position: relative;
 }
 
-.buttonBack{
-  position: absolute;
-  left: 30px;
-  top:150px;
-  background-color: rgba(0,0,0,0);
+.buttonBack {
+  position        : absolute;
+  left            : 30px;
+  top             : 150px;
+  background-color: rgba(0, 0, 0, 0);
+  cursor          : pointer;
 }
-.buttonNext{
-  position: absolute;
-  right: 30px;
-  top:150px;
-  background-color: rgba(0,0,0,0);
+
+.buttonNext {
+  position        : absolute;
+  right           : 30px;
+  top             : 150px;
+  background-color: rgba(0, 0, 0, 0);
+  cursor          : pointer;
 }
+
+.buttonNext:hover,
+.buttonBack:hover {
+  transform: scale(1.10);
+}
+
+.buttonNext:active,
+.buttonBack:active {
+  transform: scale(1.25);
+}
+
 
 
 .large {
-  display: flex;
+  display       : flex;
   flex-direction: column;
-  flex: 0 0 9.7%;
-  text-align: center;
-  margin: 0 2px;
-  transition: transform 300ms ease 100ms;
+  flex          : 0 0 9.7%;
+  text-align    : center;
+  margin        : 0 2px;
+  transition    : transform 300ms ease 100ms;
 
-  div > img, > div > div > svg{
-    width: 400px;
+  div>img,
+  >div>div>svg {
+    width : 400px;
     height: 300px;
   }
 }
@@ -62,23 +78,23 @@
 
 .hero {
   height: 50vh;
- div > img {
+
+  div>img {
     object-fit: cover;
-    width: 100%;
+    width     : 100%;
   }
 }
 
-.imageContainer { 
+.imageContainer {
   position: relative;
-  
-  img > {
-    height: 50vh;
-    width: 100%;
+
+  img> {
+    height  : 50vh;
+    width   : 100%;
     position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
+    top     : 0;
+    left    : 0;
+    z-index : -1;
   }
 
 }
-

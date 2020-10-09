@@ -20,9 +20,10 @@ const SlideShow: FC<IProps> = ({ eventIds }: IProps) => {
 
       <CarouselProvider
         visibleSlides={5}
-        naturalSlideWidth={400}
+        naturalSlideWidth={500}
         naturalSlideHeight={400}
         totalSlides={eventIds.length}
+        step={5}
       >
         <div className={style.sliderWrapper}>
           <Slider className={style.slider}>
