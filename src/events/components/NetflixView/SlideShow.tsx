@@ -3,6 +3,10 @@ import style from './netflixView.less';
 import LargeEvent from './LargeEvent';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
+import CarouselArrow from 'common/components/Carousel/CarouselArrow';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight';
 
 interface IProps {
   eventIds: number[];
@@ -28,8 +32,12 @@ const SlideShow: FC<IProps> = ({ eventIds }: IProps) => {
               </Slide>
             ))}
           </Slider>
-          <ButtonBack className={style.buttonBack}>Back</ButtonBack>
-          <ButtonNext className={style.buttonNext}>Next</ButtonNext>
+          <ButtonBack className={style.buttonBack}>
+            <FontAwesomeIcon icon={faArrowLeft} size="3x" />
+          </ButtonBack>
+            <ButtonNext className={style.buttonNext}>
+              <FontAwesomeIcon icon={faArrowRight} size="3x" />
+            </ButtonNext>
         </div>
       </CarouselProvider>
     </div>
