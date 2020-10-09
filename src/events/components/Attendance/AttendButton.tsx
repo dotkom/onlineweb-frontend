@@ -3,6 +3,9 @@ import CaptchaModal from './CaptchaModal';
 import { useDispatch } from 'core/redux/hooks';
 import { setAttendeeByEventId } from 'events/slices/attendees';
 import { Button } from '@dotkomonline/design-system';
+import { useToast } from 'core/utils/toast/useToast';
+import { unwrapResult } from '@reduxjs/toolkit';
+import style from './attendance.less';
 
 interface IAttendButtonProps {
   eventId: number;
@@ -12,10 +15,17 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const dispatch = useDispatch();
   const { eventId } = props;
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [addToast] = useToast({ type: 'success', duration: 5000 });
 
-  const signUp = (token: string | null) => {
+  const signUp = async (token: string | null) => {
     if (token) {
-      dispatch(setAttendeeByEventId({ eventId, captcha: token }));
+      const action = await dispatch(setAttendeeByEventId({ eventId, captcha: token }));
+      try {
+        unwrapResult(action);
+        addToast('Du har blitt meldt på arrangementet');
+      } catch (err) {
+        addToast(`Noe gikk galt under påmeldelse av arrangement, ERROR: ${err.message}`, { type: 'error' });
+      }
     }
   };
   const toggleModal = () => setShowModal(!showModal);
@@ -23,7 +33,9 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
 
   return (
     <>
-      <Button onClick={toggleModal}>Meld meg på</Button>
+      <Button color="success" onClick={toggleModal} className={style.button}>
+        Meld meg på
+      </Button>
       {modal}
     </>
   );
