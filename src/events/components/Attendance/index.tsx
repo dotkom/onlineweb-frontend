@@ -16,7 +16,7 @@ const Attendance: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const currentTime = DateTime.local();
 
   // The canAttend-object is null if the user is not logged in, else it will always be present.
-  if (!canAttend) return <p style={{ textTransform: 'none' }}>Du må være logget inn for å se din status.</p>;
+  if (!canAttend) return <p>Du må være logget inn for å se din status.</p>;
 
   if ((currentTime < unattendDeadline && is_attendee) || is_on_waitlist) {
     return (
