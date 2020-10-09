@@ -93,6 +93,7 @@
     "next": "^9.5.3",
     "next-redux-wrapper": "^5.0.0",
     "postcss-focus-visible": "^4.0.0",
+    "pure-react-carousel": "^1.27.5",
     "react-day-picker": "^7.3.0",
     "react-ga": "^2.5.7",
     "react-google-recaptcha": "^2.0.1",

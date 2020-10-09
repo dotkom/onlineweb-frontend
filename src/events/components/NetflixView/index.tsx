@@ -50,7 +50,6 @@ const selectFrontPageEventIds = () => (state: State) => {
     .selectAll(state)
     .filter((event) => DateTime.fromISO(event.start_date) >= now)
     .sort((eventA, eventB) => eventA.start_date.localeCompare(eventB.start_date))
-    .slice(0, 30)
     .map((event) => event.id);
 };
 

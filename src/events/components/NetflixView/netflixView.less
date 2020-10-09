@@ -5,12 +5,14 @@
 @colorIndicatorSize: 0.5rem;
 
 
-.slideshow {
+.slider{
+  > div > ul  {
   display: flex;
-  padding: 0 55px;
-}
+  flex-direction: row;
+  }
 
-.slideshow:hover .large {
+}
+/*.slideshow:hover .large {
   transform: translateX(-25%);
 }
 
@@ -20,7 +22,23 @@
 
 .large:hover {
   transform: scale(1.5) !important;
+}*/
+
+.sliderWrapper{
+  position: relative;
 }
+
+.buttonBack{
+  position: absolute;
+  left: 30px;
+  top:150px;
+}
+.buttonNext{
+  position: absolute;
+  right: 30px;
+  top:150px;
+}
+
 
 .large {
   display: flex;
