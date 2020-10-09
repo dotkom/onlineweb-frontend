@@ -18,4 +18,4 @@ export const selectUserName = () => (state: State): string => {
 
 export const selectIsStaff = () => (state: State): boolean => {
   return state.authentication.user?.staff || false;
-}
+};
