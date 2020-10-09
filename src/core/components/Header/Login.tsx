@@ -6,7 +6,7 @@ import { Link } from 'core/components/Router';
 
 import style from './header.less';
 import { useSelector } from 'react-redux';
-import { selectIsLoggedIn, selectUserName } from 'authentication/selectors/authentication';
+import { selectIsLoggedIn, selectIsStaff, selectUserName } from 'authentication/selectors/authentication';
 
 interface IProps {
   menuIsOpen?: boolean;
@@ -39,6 +39,8 @@ interface IHeaderUserProps {
 
 const HeaderUser = (props: IHeaderUserProps) => {
   const username = useSelector(selectUserName());
+  const isStaff = useSelector(selectIsStaff());
+
   return (
     <div className={style.user}>
       <button onClick={props.onClick} className={style.dropdownButton} />
@@ -48,9 +50,16 @@ const HeaderUser = (props: IHeaderUserProps) => {
           <Link {...getMyProfileUrl()}>
             <a>Min side: {username}</a>
           </Link>
-          <Link href="/dashboard">
-            <a>Dashboard</a>
-          </Link>
+          {isStaff && (
+            <>
+              <Link href="/admin">
+                <a>Adminpanel</a>
+              </Link>
+              <Link href="/dashboard">
+                <a>Dashboard</a>
+              </Link>
+            </>
+          )}
           <Link {...getPaymentWalletUrl()}>
             <a>Saldo</a>
           </Link>
