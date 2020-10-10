@@ -35,12 +35,15 @@ const CustomDocument = ({}: DocumentProps): JSX.Element => {
     <Html lang="nb-NO">
       <Head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Cache-control" content="no-cache, no-store, must-revalidate" />
         <meta httpEquiv="Pragma" content="no-cache" />
         <link rel="icon" type="image/png" href="/img/icons/icon-256.png" />
         <link rel="manifest" href="/manifest.webmanifest" />
         <script id="stripe-js" src="https://js.stripe.com/v3/" async />
+        <link
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700|Source+Serif+Pro|Source+Code+Pro|Material+Icons+Outlined"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />
