@@ -8,7 +8,7 @@ import NumberStat from '../Orders/NumberStat';
 import CompanyDonut, { countCompanies } from './CompanyDonut';
 import EventTypeDonut from './EventTypeDonut';
 import StringStat from './StringStat';
-import style from './events.less'
+import style from './events.less';
 
 export interface IState {
   events: IEvent[];
@@ -49,10 +49,12 @@ class Orders extends Component<{}, IState> {
           <Pane>{events.length && <EventTypeDonut events={events} />}</Pane>
         </SplitPane>
         <SplitPane>
-          <Pane className={eventWithCompanyCount ? "": style.noCompanyString}>{eventWithCompanyCount ? <CompanyDonut events={events} /> : noCompanyString}</Pane>
+          <Pane className={eventWithCompanyCount ? '' : style.noCompanyString}>
+            {eventWithCompanyCount ? <CompanyDonut events={events} /> : noCompanyString}
+          </Pane>
           <FourSplitPane>
             <Pane>
-              <StringStat name="Favorittbedrift" value={favCompany || "Ingen"} />
+              <StringStat name="Favorittbedrift" value={favCompany || 'Ingen'} />
             </Pane>
             <Pane>
               <NumberStat name="Antall bedriftsarrangementer" value={eventWithCompanyCount} />
