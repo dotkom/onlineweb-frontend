@@ -46,24 +46,32 @@ export const getEventType = (n: number): EventType => {
   }
 };
 
-export const getEventColor = (n: number): string => {
+export const getEventColor = (n: number | string): string => {
   switch (n) {
     case 0:
       return '#828282';
+    case 'Sosialt':
     case 1:
       return '#43B171';
+    case 'Bedriftspresentasjon':
     case 2:
       return '#EB536E';
+    case 'Kurs':
     case 3:
       return '#127DBD';
+    case 'Utflukt':
     case 4:
       return '#FDBD47';
+    case 'Ekskursjon':
     case 5:
       return '#2AC6F9';
+    case 'Internt':
     case 6:
       return '#E75E3B';
+    case 'Annet':
     case 7:
       return '#B36BCD';
+    case 'Kjelleren':
     case 8:
       return '#E75E3B';
     default:
