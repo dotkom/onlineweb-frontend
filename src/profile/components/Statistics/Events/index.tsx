@@ -8,6 +8,7 @@ import NumberStat from '../Orders/NumberStat';
 import CompanyDonut, { countCompanies } from './CompanyDonut';
 import EventTypeDonut from './EventTypeDonut';
 import StringStat from './StringStat';
+import style from './events.less'
 
 export interface IState {
   events: IEvent[];
@@ -33,6 +34,7 @@ class Orders extends Component<{}, IState> {
     const keys = Object.keys(companyCount);
     const favCompany = keys.reduce((maxKey, key) => (companyCount[key] > companyCount[maxKey] ? key : maxKey), keys[0]);
     const dates = events.map((event) => DateTime.fromISO(event.start_date));
+    const noCompanyString = <p>Du har ikke vært på et bedriftsarrangement ennå</p>;
     return (
       <Page loading={events.length === 0}>
         <SplitPane>
@@ -47,10 +49,10 @@ class Orders extends Component<{}, IState> {
           <Pane>{events.length && <EventTypeDonut events={events} />}</Pane>
         </SplitPane>
         <SplitPane>
-          <Pane>{events.length && <CompanyDonut events={events} />}</Pane>
+          <Pane className={eventWithCompanyCount ? "": style.noCompanyString}>{eventWithCompanyCount ? <CompanyDonut events={events} /> : noCompanyString}</Pane>
           <FourSplitPane>
             <Pane>
-              <StringStat name="Favorittbedrift" value={favCompany} />
+              <StringStat name="Favorittbedrift" value={favCompany || "Ingen"} />
             </Pane>
             <Pane>
               <NumberStat name="Antall bedriftsarrangementer" value={eventWithCompanyCount} />
