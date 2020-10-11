@@ -8,10 +8,7 @@ export interface IProps {
 }
 
 const getColor = ({ label }: PieDatum): string => {
-  if (typeof label === 'number') {
-    return getEventColor(label);
-  }
-  return 'gray';
+  return getEventColor(label); 
 };
 
 export interface ITypeCount {
@@ -30,7 +27,7 @@ function countEventTypes(events: IEvent[]): ITypeCount {
 
 const createPieDatum = (count: ITypeCount) => {
   return Object.keys(count).map((key) => ({
-    label: Number(key),
+    label: getEventType(Number(key)),
     value: count[key],
     id: getEventType(Number(key)),
   }));
