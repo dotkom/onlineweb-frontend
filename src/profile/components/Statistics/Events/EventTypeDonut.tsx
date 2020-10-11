@@ -8,7 +8,7 @@ export interface IProps {
 }
 
 const getColor = ({ label }: PieDatum): string => {
-  return getEventColor(label); 
+  return getEventColor(label);
 };
 
 export interface ITypeCount {
