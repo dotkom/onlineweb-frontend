@@ -23,12 +23,12 @@ const MARGINS = {
   dayBorderWidth: 2,
 };
 
-const LEGENDS: CalendarLegend[] = [
+const LEGENDS = (itemCount: number): CalendarLegend[] => [
   {
     anchor: 'bottom-right',
     direction: 'row',
     translateY: 36,
-    itemCount: 4,
+    itemCount,
     itemWidth: 34,
     itemHeight: 36,
     itemDirection: 'top-to-bottom',
@@ -49,6 +49,13 @@ const CalendarChart = ({ frequency, header }: IProps) => {
     return { ...prev, [key]: prev[key] + 1 || 1 };
   });
   const values: CalendarDatum[] = Object.keys(inter2).map((key) => ({ day: key, value: inter2[key] }));
+
+  const itemCount =
+    Math.max.apply(
+      Math,
+      values.map((calenderDatum) => calenderDatum.value)
+    ) - 1;
+
   return (
     <div className={classnames(style.centerChart, style.calendarChart)}>
       <h1>{header}</h1>
@@ -56,7 +63,7 @@ const CalendarChart = ({ frequency, header }: IProps) => {
         from={first.toISODate()}
         to={last.toISODate()}
         data={values}
-        legends={LEGENDS}
+        legends={LEGENDS(itemCount)}
         {...COLORS}
         {...MARGINS}
       />
