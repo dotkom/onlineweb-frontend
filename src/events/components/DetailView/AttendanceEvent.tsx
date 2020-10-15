@@ -47,15 +47,15 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
 
   return (
     <div className={style.blockGrid}>
-      <Block title="Påmeldingsstart">
+      <Block title="Påmeldingsstart" className={style.attendanceInformation}>
         <EventCountDown endTime={registrationStart} />
       </Block>
 
-      <Block title="Påmeldingslutt">
+      <Block title="Påmeldingsslutt" className={style.attendanceInformation}>
         <EventCountDown endTime={registrationEnd} />
       </Block>
 
-      <Block title="Avmeldingsfrist">
+      <Block title="Avmeldingsfrist" className={style.attendanceInformation}>
         <EventCountDown endTime={cancellationDeadline} />
       </Block>
 

@@ -39,7 +39,7 @@ export const ParticipantsButton: FC<IProps> = ({ eventId, eventTitle }) => {
     <>
       <Button onClick={toggleModal}>Vis påmeldte</Button>
       <Modal open={showModal} onClose={toggleModal}>
-        <h1>Påmeldingliste for {eventTitle}</h1>
+        <h1>Påmeldingsliste for {eventTitle}</h1>
         <AttendeeList attendees={attendees} />
       </Modal>
     </>
