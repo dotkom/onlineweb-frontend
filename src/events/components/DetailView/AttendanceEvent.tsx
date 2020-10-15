@@ -51,7 +51,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
         <EventCountDown endTime={registrationStart} />
       </Block>
 
-      <Block title="Påmeldingslutt" className={style.attendanceInformation}>
+      <Block title="Påmeldingsslutt" className={style.attendanceInformation}>
         <EventCountDown endTime={registrationEnd} />
       </Block>
 
