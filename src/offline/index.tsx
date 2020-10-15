@@ -8,7 +8,7 @@ import Spinner from 'common/components/Spinner';
 export const Offline: React.FC = () => {
   const [offlines, setOfflines] = useState<IOfflineIssue[]>([]);
 
-  /** Get the first batch of Offlines for feast loading */
+  /** Get the first batch of Offlines for fast loading */
   const fetchInitial = async () => {
     const { results } = await getOfflines(1);
     setOfflines(results);

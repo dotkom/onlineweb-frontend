@@ -16,7 +16,7 @@ export interface IState {
 export const Offline = () => {
   const [offlines, setOfflines] = useState<IOfflineIssue[]>([]);
 
-  /** Get the first batch of Offlines for feast loading */
+  /** Get the first batch of Offlines for fast loading */
   const fetchInitial = async () => {
     const { results } = await getOfflines(1);
     setOfflines(results);
