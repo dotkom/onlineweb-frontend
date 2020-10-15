@@ -50,11 +50,7 @@ const CalendarChart = ({ frequency, header }: IProps) => {
   });
   const values: CalendarDatum[] = Object.keys(inter2).map((key) => ({ day: key, value: inter2[key] }));
 
-  const itemCount =
-    Math.max.apply(
-      Math,
-      values.map((calenderDatum) => calenderDatum.value)
-    ) - 1;
+  const itemCount = Math.max(...values.map((calenderDatum) => calenderDatum.value)) - 1;
 
   return (
     <div className={classnames(style.centerChart, style.calendarChart)}>
