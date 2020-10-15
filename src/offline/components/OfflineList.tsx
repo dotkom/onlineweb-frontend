@@ -1,3 +1,4 @@
+import React from 'react';
 import ResponsiveImage from 'common/components/ResponsiveImage';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 import { DateTime } from 'luxon';
@@ -21,10 +22,10 @@ const OfflineList: React.FC<Props> = ({ offlines = [] }) => {
   const offlinesAsSections = Object.entries(offlinesPerYear)
     .reverse()
     .map(([year, offlines]) => (
-      <section>
+      <section key={year}>
         <h3>{year}</h3>
         {offlines.map((offline) => (
-          <a href={offline.issue} className={style.offline}>
+          <a href={offline.issue} className={style.offline} key={offline.release_date}>
             <ResponsiveImage image={offline.image} size="xs" type="offline" />
           </a>
         ))}
