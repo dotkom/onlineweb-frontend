@@ -16,7 +16,7 @@ export const getMails = async (): Promise<IMail[]> => {
 export const patchMails = async (addressId: number, data: Partial<IMail>): Promise<IMail> => {
   const user = await getUser();
   const response = await patch<IMail, Partial<IMail>>({
-    query: `${API_URL}/${addressId}/`,
+    query: `${API_URL}${addressId}/`,
     data,
     parameters: { format: 'json' },
     options: { user },
@@ -28,7 +28,7 @@ export const patchMails = async (addressId: number, data: Partial<IMail>): Promi
 export const deleteMail = async (mailId: number) => {
   const user = await getUser();
   try {
-    const ret = await deleteR(`${API_URL}/${mailId}`, undefined, { user });
+    const ret = await deleteR(`${API_URL}${mailId}`, undefined, { user });
     return ret;
   } catch (err) {
     throw new Error(`Kunne ikke slette mail ${err.statusText}`);
