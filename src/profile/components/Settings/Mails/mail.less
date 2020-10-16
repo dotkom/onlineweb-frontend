@@ -1,43 +1,43 @@
 @import '~common/less/mixins.less';
 
+.mailCard {
+  width: 100%;
+  border-radius: 5px;
+  margin: 1rem 0;
+}
+
 .mail {
-  display: block;
-  position: relative;
-  background: @offWhite;
-  margin-top: 3%;
-
-  .owOutline();
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.2rem;
+  border-bottom: 1px solid @lightGray;
+  padding: 7px 0;
+  margin: 0.3rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.mail input {
-  visibility: hidden;
+.primary {
+  color: #22863a;
 }
 
-.mail label {
-  display: block;
-  padding: 20px 30px;
+.mail > button {
+  font-size: 1.4rem;
+  color: #ed8484;
+  background: none;
+  border: none;
   cursor: pointer;
 }
 
-.mail input,
-.mail label::before {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translate(-100%, -50%);
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+.mail:last-child {
+  border: none;
 }
 
-.mail label::before {
-  content: '';
-  transition: background-color 0.2s ease-in;
-  .owCard();
+.infoText {
+  font-size: 1rem;
 }
 
-.mail input:checked ~ label::before {
-  background: @blue
-    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ")
-    center/75% no-repeat;
+.info {
+  --font-size-md: 1.1rem;
 }

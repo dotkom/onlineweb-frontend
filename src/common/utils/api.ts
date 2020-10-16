@@ -41,7 +41,7 @@ const performRequest = async (query: string, parameters: IQueryObject = {}, opti
     headers['Authorization'] = `Bearer ${options.user.access_token}`;
   }
 
-  const requestOptions = { ...restOptions, headers };
+  const requestOptions = { ...restOptions, headers, credentials: 'omit' as RequestCredentials };
   const response = await fetch(url, requestOptions);
   if (response.status === 204) {
     return null;

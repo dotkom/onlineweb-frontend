@@ -1,5 +1,5 @@
 import { getUser } from 'authentication/api';
-import { get, IAPIData, patch } from 'common/utils/api';
+import { get, IAPIData, patch, deleteR, post } from 'common/utils/api';
 
 import { IMail } from '../models/Mail';
 
@@ -16,11 +16,31 @@ export const getMails = async (): Promise<IMail[]> => {
 export const patchMails = async (addressId: number, data: Partial<IMail>): Promise<IMail> => {
   const user = await getUser();
   const response = await patch<IMail, Partial<IMail>>({
-    query: `${API_URL}/${addressId}/`,
+    query: `${API_URL}${addressId}/`,
     data,
     parameters: { format: 'json' },
     options: { user },
   });
 
   return response;
+};
+
+export const deleteMail = async (mailId: number) => {
+  const user = await getUser();
+  try {
+    const ret = await deleteR(`${API_URL}${mailId}`, undefined, { user });
+    return ret;
+  } catch (err) {
+    throw new Error(`Kunne ikke slette mail ${err.statusText}`);
+  }
+};
+
+export const postMail = async (mail: Partial<IMail>) => {
+  const user = await getUser();
+  try {
+    const res = await post<IMail>(API_URL, mail, undefined, { user });
+    return res;
+  } catch (err) {
+    throw new Error(`Kunne ikke legge til ny mail ${err.statusText}`);
+  }
 };
