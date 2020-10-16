@@ -22,7 +22,7 @@ const AddMailField: FC<IProps> = ({ onSubmit }) => {
         <TextField
           label="Legg til ny e-post"
           className={style.textField}
-          placeholder="Epostadresse"
+          placeholder="E-postadresse"
           onChange={handleChange}
           value={input}
         />

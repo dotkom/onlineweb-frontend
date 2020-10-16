@@ -16,7 +16,7 @@ export interface IState {
 
 const Mails: FC = () => {
   const [mails, setMails] = useState<IMail[]>();
-  const [addMessage] = useToast({ type: 'success', duration: 15000 });
+  const [addMessage, cancelToast] = useToast({ type: 'success', duration: 15000 });
 
   const fetchMails = async () => {
     const mails = await getMails();
@@ -28,14 +28,24 @@ const Mails: FC = () => {
   }, []);
 
   const saveNewPrimaryMail = async (mail: IMail) => {
-    await patchMails(mail.id, { primary: true });
-    addMessage(PRIMARY_MAIL_INFO);
-    fetchMails();
+    try {
+      await patchMails(mail.id, { primary: true });
+      addMessage(PRIMARY_MAIL_INFO);
+      fetchMails();
+    } catch (_) {
+      cancelToast();
+      addMessage('En feil skjedde: Vi kunne ikke lagre din nye primær-epost');
+    }
   };
 
   const addNewMail = async (mail: Partial<IMail>) => {
-    await postMail(mail);
-    fetchMails();
+    try {
+      await postMail(mail);
+      fetchMails();
+    } catch (_) {
+      cancelToast();
+      addMessage('En feil skjedde: Vi kunne ikke legge til din nye mail');
+    }
   };
 
   if (!mails) {
