@@ -41,7 +41,7 @@ const SelectPrimaryField: FC<IProps> = ({ mails, onSubmit }) => {
   return (
     <div className={style.inputContainer}>
       <div>
-        <label className={style.selectLabel}>Primær epost</label>
+        <label className={style.selectLabel}>Primærepost</label>
         <Select<IOption>
           options={options}
           defaultValue={selected}
