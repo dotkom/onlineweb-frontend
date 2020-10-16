@@ -1,6 +1,6 @@
 import { Pane } from 'common/components/Panes';
 import React, { FC, useEffect, useState } from 'react';
-import { getMails, patchMails } from '../../../api/mail';
+import { getMails, patchMails, postMail } from '../../../api/mail';
 import { IMail } from '../../../models/Mail';
 import Mail from './Mail';
 import { Spinner, Card, Markdown } from '@dotkomonline/design-system';
@@ -33,6 +33,11 @@ const Mails: FC = () => {
     fetchMails();
   };
 
+  const addNewMail = async (mail: Partial<IMail>) => {
+    await postMail(mail);
+    fetchMails();
+  };
+
   if (!mails) {
     return <Spinner />;
   }
@@ -48,8 +53,10 @@ const Mails: FC = () => {
             ))}
           </ul>
         </Card>
-        <SelectPrimaryField mails={mails} onSubmit={saveNewPrimaryMail} />
-        <AddMailField />
+        <div>
+          <SelectPrimaryField mails={mails} onSubmit={saveNewPrimaryMail} />
+          <AddMailField onSubmit={addNewMail} />
+        </div>
       </Pane>
     </>
   );
