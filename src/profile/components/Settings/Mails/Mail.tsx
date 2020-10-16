@@ -10,9 +10,12 @@ interface IProps extends IMail {
 }
 const Mail = ({ email, primary, verified, id, callback }: IProps) => {
   const [confirm, setConfirm] = useState(false);
-  const [addMessage] = useToast({ type: 'info', duration: 5000 });
+  const [addMessage, cancelToast] = useToast({ type: 'info', duration: 5000 });
   const handleClick = async () => {
-    if (confirm) {
+    if (primary) {
+      cancelToast();
+      addMessage('Du kan ikke slette primær mailen din, venligst velg en annen mail først', { type: 'error' });
+    } else if (confirm) {
       await deleteMail(id);
       addMessage(`Mailen: "${email}" har blitt slettet`);
       callback();
