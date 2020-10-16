@@ -28,6 +28,7 @@ export const getProfileSettingsPenaltiesUrl = () => url`/profile/settings/penalt
 export const getProfileSettingsPrivacyUrl = () => url`/profile/settings/privacy`;
 export const getProfileAppConnectionsUrl = () => url`/profile/settings/apps`;
 export const getProfileUserDataUrl = () => url`/profile/settings/userdata`;
+export const getProfileMembershipUrl = () => url`/profile/settings/membership`;
 export const getProfileStatisticsUrl = () => url`/profile/statistics`;
 export const getProfileStatisticsEventsUrl = () => url`/profile/statistics/events`;
 export const getProfileStatisticsOrdersUrl = () => url`/profile/statistics/orders`;
