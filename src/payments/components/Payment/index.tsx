@@ -1,6 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
 
-import { md } from 'common/components/Markdown';
 import { Page, Pane } from 'common/components/Panes';
 import Spinner from 'common/components/Spinner';
 import { StatusMessage } from 'common/components/StatusMessage';
@@ -16,12 +15,6 @@ interface IProps {
   showPayment: boolean;
   isPaid?: boolean;
 }
-
-const ABOUT_PAYMENT_PAGE = md`
-  # Betalingssiden
-
-  Velkommen til en beta-versjon av Onlines nye betalingsside! Dotkom minner om at de nye nettsidene til Online enda er under utvikling, og vi setter pris på all tilbakemelding du kan gi.
-`;
 
 export const Payment: FC<IProps> = ({ payment, price, showPayment, isPaid, children }) => {
   const [paymentRelations, setPaymentRelations] = useState<IPaymentRelation[]>();
@@ -44,7 +37,6 @@ export const Payment: FC<IProps> = ({ payment, price, showPayment, isPaid, child
 
   return (
     <Page>
-      <Pane>{ABOUT_PAYMENT_PAGE}</Pane>
       <Pane>
         <h2>{payment.description}</h2>
         {paymentDone ? <StatusMessage type="success">Betalingen var vellykket.</StatusMessage> : <>{children}</>}

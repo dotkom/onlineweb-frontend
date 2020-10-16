@@ -183,7 +183,7 @@ export const eventsSlice = createSlice({
     builder.addCase(fetchEvents.fulfilled, (state, action) => {
       state.loading = 'idle';
       const events = action.payload.results;
-      eventsAdapter.addMany(state, events);
+      eventsAdapter.upsertMany(state, events);
     });
     builder.addCase(fetchEvents.rejected, (state, action) => {
       state.loading = 'idle';
@@ -194,7 +194,7 @@ export const eventsSlice = createSlice({
     });
     builder.addCase(fetchEventById.fulfilled, (state, action) => {
       state.loading = 'idle';
-      eventsAdapter.addOne(state, action.payload);
+      eventsAdapter.upsertOne(state, action.payload);
     });
     builder.addCase(fetchEventById.rejected, (state, action) => {
       state.loading = 'idle';

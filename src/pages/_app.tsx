@@ -18,6 +18,7 @@ import UserProfileProvider from 'profile/providers/UserProfile';
 import { registerServiceWorker } from 'serviceworker/browser';
 
 import { GlobalStyle } from '@dotkomonline/design-system';
+import Head from 'next/head';
 
 /** Luxon locale setting has to be the same as in the front-end */
 LuxonSettings.defaultLocale = 'nb';
@@ -37,6 +38,9 @@ const CustomApp = (appProps: Props): JSX.Element => {
   return (
     <>
       <GlobalStyle />
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <Provider store={store}>
         <ContextWrapper>
           <UserProfileProvider>

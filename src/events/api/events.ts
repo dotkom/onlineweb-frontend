@@ -36,8 +36,9 @@ export const getAllEvents = async (args: IEventAPIParameters): Promise<IEvent[]>
   return data;
 };
 
-export const getEvent = async (id: number): Promise<IEvent | IErrorResponse> => {
-  const event = await get<IEvent | IErrorResponse>(EVENTS_API_URL + id + '/', { format: 'json' });
+export const getEvent = async (id: number): Promise<IEvent> => {
+  const user = await getUser();
+  const event = await get<IEvent>(EVENTS_API_URL + id + '/', { format: 'json' }, { user });
   return event;
 };
 

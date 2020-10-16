@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon';
 import React from 'react';
+import style from './detail.less';
 
 import { CountDown } from 'common/components/Counter/CountDown';
 import { useDateTimeout } from 'common/hooks/useTimeout';
@@ -20,7 +21,7 @@ export const EventCountDown = ({ startOffset = OFFSET, endTime }: IProps) => {
 
   if (started && !finished) {
     return (
-      <p>
+      <p className={style.capitalized}>
         <CountDown endTime={endTime} />
       </p>
     );

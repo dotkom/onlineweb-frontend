@@ -2,11 +2,11 @@ import { DateTime } from 'luxon';
 import React, { FC } from 'react';
 
 import { getEventColor, IEvent } from 'events/models/Event';
+import style from './detail.less';
 
 import EventImage from '../EventImage';
 import Block from './Block';
 import CardHeader from './Card/CardHeader';
-import style from './detail.less';
 
 interface IProps {
   event: IEvent;
@@ -39,8 +39,8 @@ const PictureCard: FC<IProps> = ({ event }) => {
           </Block>
 
           <Block title="Sluttid">
-            <p>{endDate}</p>
-            <p>{endTime}</p>
+            <p className={style.capitalized}>{endDate}</p>
+            <p className={style.capitalized}>{endTime}</p>
           </Block>
 
           <Block title="Sted">
@@ -48,7 +48,7 @@ const PictureCard: FC<IProps> = ({ event }) => {
           </Block>
 
           <Block title="Ukedag">
-            <p>{weekday}</p>
+            <p className={style.capitalized}>{weekday}</p>
           </Block>
         </div>
       </div>

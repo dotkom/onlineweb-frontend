@@ -7,3 +7,4 @@ dist
 .idea/
 *.log
 .next
+.DS_Store

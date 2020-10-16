@@ -1,0 +1,35 @@
+# This is a workflow to notify sentry of new releases
+name: Sentry-release
+
+# Controls when the action will run. Triggers the workflow on successfull deploys
+on:
+  deployment_status:
+    branches: 
+      - master
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  create-sentry-release:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    - name: Create a Sentry.io release
+      if: github.event.status == 'success'
+      uses: tclindner/sentry-releases-action@v1.2.0
+      env:
+        SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+        SENTRY_ORG: dotkom
+        SENTRY_PROJECT: onlineweb-frontend
+      with:
+        tagName: ${{ github.sha }}
+        environment: production
+        
+    - name: inspect event
+      env:
+          GITHUB_CONTEXT: ${{ toJson(github.event) }}
+      run: echo '$GITHUB_CONTEXT'
+

@@ -13,7 +13,7 @@ export interface IAttendee {
   note: string;
 }
 
-export interface IPublicAttedee {
+export interface IPublicAttendee {
   id: number;
   event: number;
   is_visible: boolean;
