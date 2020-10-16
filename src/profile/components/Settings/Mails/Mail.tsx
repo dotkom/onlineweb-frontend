@@ -14,7 +14,7 @@ const Mail = ({ email, primary, verified, id, callback }: IProps) => {
   const handleClick = async () => {
     if (primary) {
       cancelToast();
-      addMessage('Du kan ikke slette primær mailen din, venligst velg en annen mail først', { type: 'error' });
+      addMessage('Du kan ikke slette primær-mailen din, venligst velg en annen mail først', { type: 'error' });
     } else if (confirm) {
       try {
         await deleteMail(id);
