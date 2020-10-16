@@ -1,5 +1,5 @@
 import { getUser } from 'authentication/api';
-import { get, IAPIData, patch, deleteR } from 'common/utils/api';
+import { get, IAPIData, patch, deleteR, post } from 'common/utils/api';
 
 import { IMail } from '../models/Mail';
 
@@ -32,5 +32,15 @@ export const deleteMail = async (mailId: number) => {
     return ret;
   } catch (err) {
     throw new Error(`Kunne ikke slette mail ${err.statusText}`);
+  }
+};
+
+export const postMail = async (mail: Partial<IMail>) => {
+  const user = await getUser();
+  try {
+    const res = await post<IMail>(API_URL, mail, undefined, { user });
+    return res;
+  } catch (err) {
+    throw new Error(`Kunne ikke legge til ny mail ${err.statusText}`);
   }
 };
