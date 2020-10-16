@@ -12,6 +12,7 @@ const Menu = () => (
     <Tab text="Passord" {...appUrls.getProfileSettingsPasswordUrl()} />
     <Tab text="Prikker og suspensjoner" {...appUrls.getProfileSettingsPenaltiesUrl()} />
     <Tab text="Personvern" {...appUrls.getProfileSettingsPrivacyUrl()} />
+    <Tab text="Medlemskap" {...appUrls.getProfileMembershipUrl()} />
     <Tab text="Adgangskort (NTNU)" {...appUrls.getProfileSettingsAccessCardUrl()} />
     <Tab text="Varsler" {...appUrls.getProfileSettingsNotificationsUrl()} />
     <Tab text="Apptilkoblinger" {...appUrls.getProfileAppConnectionsUrl()} />
