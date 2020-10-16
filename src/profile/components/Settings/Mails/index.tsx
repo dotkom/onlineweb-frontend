@@ -5,7 +5,7 @@ import { IMail } from '../../../models/Mail';
 import Mail from './Mail';
 import { Spinner, Card, Markdown } from '@dotkomonline/design-system';
 import style from './mail.less';
-import { MAIL_INFO, ADD_MAIL_INFO, PRIMARY_MAIL_INFO } from './mailInformation';
+import { MAIL_INFO, PRIMARY_MAIL_INFO } from './mailInformation';
 import AddMailField from './MailForm/AddMailField';
 import SelectPrimaryField from './MailForm/SelectPrimaryField';
 import { useToast } from 'core/utils/toast/useToast';
