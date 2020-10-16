@@ -23,7 +23,7 @@ const Mail = ({ email, primary, verified, id, callback }: IProps) => {
       } catch (err) {
         cancelToast();
         addMessage('Kunne ikke slette mailen din', { type: 'error' });
-        throw new Error(err);
+        throw err;
       }
     } else {
       setConfirm(true);

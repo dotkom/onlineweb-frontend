@@ -36,7 +36,7 @@ const Mails: FC = () => {
       cancelToast();
       addMessage('En feil skjedde: Vi kunne ikke lagre din nye primær-epost');
       // This throw is for Sentry to catchup
-      throw new Error(err);
+      throw err;
     }
   };
 
@@ -47,7 +47,7 @@ const Mails: FC = () => {
     } catch (err) {
       cancelToast();
       addMessage('En feil skjedde: Vi kunne ikke legge til din nye mail');
-      throw new Error(err);
+      throw err;
     }
   };
 
