@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { Carousel } from 'common/components/Carousel';
 import { getOfflines, getRemainingOfflines } from 'frontpage/api/offline';
 import { IOfflineIssue } from 'frontpage/models/Offline';
+import OfflineList from './components/OfflineList';
+import Spinner from 'common/components/Spinner';
 
-import OfflineCarousel from './OfflineCarousel';
-
-export interface IState {
-  dataRemaining: boolean;
-  offlines: IOfflineIssue[];
-  index: number;
-  page: number;
-}
-
-export const Offline = () => {
+export const Offline: React.FC = () => {
   const [offlines, setOfflines] = useState<IOfflineIssue[]>([]);
 
   /** Get the first batch of Offlines for fast loading */
@@ -33,12 +25,7 @@ export const Offline = () => {
   useEffect(() => {
     fetchInitial();
   }, []);
-
-  return (
-    <Carousel values={offlines} title="Offline">
-      {(offlineRefs) => <OfflineCarousel offlines={offlineRefs} />}
-    </Carousel>
-  );
+  return offlines.length ? <OfflineList offlines={offlines} /> : <Spinner />;
 };
 
 export default Offline;

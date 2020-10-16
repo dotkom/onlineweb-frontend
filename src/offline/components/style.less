@@ -1,0 +1,20 @@
+@import '~common/less/constants.less';
+
+.offline {
+  margin: 0 5px;
+  width: 200px;
+  overflow: hidden;
+  display: inline-block;
+
+  @media screen and (max-width: @owMobileBreakpoint) {
+    width: 150px;
+  }
+
+  > img {
+    transition: transform 0.5s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
