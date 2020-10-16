@@ -9,9 +9,6 @@ const ABOUT_PROFILE_MEMBERSHIP = `
   For å søke medlemskap, bruk knappen under
 `;
 
-
-const MembersInfo = () => (
-    <Markdown source={ABOUT_PROFILE_MEMBERSHIP} />
-);
+const MembersInfo = () => <Markdown source={ABOUT_PROFILE_MEMBERSHIP} />;
 
 export default MembersInfo;
