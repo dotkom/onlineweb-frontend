@@ -16,9 +16,14 @@ const Mail = ({ email, primary, verified, id, callback }: IProps) => {
       cancelToast();
       addMessage('Du kan ikke slette primær mailen din, venligst velg en annen mail først', { type: 'error' });
     } else if (confirm) {
-      await deleteMail(id);
-      addMessage(`Mailen: "${email}" har blitt slettet`);
-      callback();
+      try {
+        await deleteMail(id);
+        addMessage(`Mailen: "${email}" har blitt slettet`);
+        callback();
+      } catch (_) {
+        cancelToast();
+        addMessage('Kunne ikke slette mailen din', { type: 'error' });
+      }
     } else {
       setConfirm(true);
     }
