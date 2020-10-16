@@ -20,9 +20,10 @@ const Mail = ({ email, primary, verified, id, callback }: IProps) => {
         await deleteMail(id);
         addMessage(`Mailen: "${email}" har blitt slettet`);
         callback();
-      } catch (_) {
+      } catch (err) {
         cancelToast();
         addMessage('Kunne ikke slette mailen din', { type: 'error' });
+        throw new Error(err);
       }
     } else {
       setConfirm(true);

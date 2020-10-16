@@ -32,9 +32,11 @@ const Mails: FC = () => {
       await patchMails(mail.id, { primary: true });
       addMessage(PRIMARY_MAIL_INFO);
       fetchMails();
-    } catch (_) {
+    } catch (err) {
       cancelToast();
       addMessage('En feil skjedde: Vi kunne ikke lagre din nye primær-epost');
+      // This throw is for Sentry to catchup
+      throw new Error(err);
     }
   };
 
@@ -42,9 +44,10 @@ const Mails: FC = () => {
     try {
       await postMail(mail);
       fetchMails();
-    } catch (_) {
+    } catch (err) {
       cancelToast();
       addMessage('En feil skjedde: Vi kunne ikke legge til din nye mail');
+      throw new Error(err);
     }
   };
 
