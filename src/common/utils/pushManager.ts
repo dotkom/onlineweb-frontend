@@ -47,7 +47,6 @@ export const registerPushManager = async (): Promise<IStatus> => {
       return { message: MISSING_PUSH_MANAGER };
     }
   } catch (err) {
-    /* tslint:disable-next-line no-console */
     console.error(err);
     return { message: DEFAULT_ERROR };
   }
@@ -59,7 +58,6 @@ export const getNotificationSubscription = async (): Promise<PushSubscription | 
     const subscription = await registration.pushManager.getSubscription();
     return subscription;
   } catch (err) {
-    /* tslint:disable-next-line no-console */
     console.error(err);
     return null;
   }
@@ -73,7 +71,6 @@ export const removeNotificationSubscription = async () => {
       return await subscription.unsubscribe();
     }
   } catch (err) {
-    /* tslint:disable-next-line no-console */
     console.error(err);
   }
   return false;

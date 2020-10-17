@@ -59,7 +59,6 @@ export const setCache = ({ url, options = DEFAULT_OPTIONS, content }: ISetCache)
       CACHE.set(url, cache);
     }
   } catch (err) {
-    /* tslint:disable-next-line no-console */
     console.error(err);
   }
 };
