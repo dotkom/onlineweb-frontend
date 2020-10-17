@@ -2,7 +2,10 @@ ports:
   - port: 8080
     onOpen: open-preview
 tasks:
-  - init: npm install
+  - init: |
+      npm install && 
+      gp env OW4_SSO_CALLBACK=https://8080-${GITPOD_WORKSPACE_ID}.gitpod.io && 
+      gp env OW4_SSO_CLIENT_ID=181001
     command: npm run dev
 github:
   prebuilds:
