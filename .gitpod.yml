@@ -6,7 +6,8 @@ tasks:
       npm install && 
       gp env OW4_SSO_CALLBACK=https://8080-${GITPOD_WORKSPACE_ID}.gitpod.io && 
       gp env OW4_SSO_CLIENT_ID=181001
-    command: npm run dev
+    command: eval $(gp env -e) && npm run dev
+    openMode: split-right
 github:
   prebuilds:
     addComment: true
