@@ -7,7 +7,6 @@ import style from './table.less';
 
 export type SortFunction<T> = (a: T, b: T) => number;
 
-// tslint:disable-next-line interface-over-type-literal
 export type DataTableHeaders = { [key: string]: string };
 export type DataTableSorters<H, T> = { [HeaderKey in keyof H]?: SortFunction<T> };
 

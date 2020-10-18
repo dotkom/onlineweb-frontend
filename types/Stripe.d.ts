@@ -6,18 +6,15 @@ import { ReactStripeElements as Base } from 'react-stripe-elements';
 
 declare module 'react-stripe-elements' {
   export namespace ReactStripeElements {
-    // tslint:disable-next-line interface-name
     interface StripeProps {
       paymentRequest: stripe.Stripe['paymentRequest'];
       createSource(sourceData?: Base.SourceOptions): Promise<Base.SourceResponse>;
       createToken(options?: Base.TokenOptions): Promise<Base.PatchedTokenResponse>;
       // The stripe codebase basically uses 'any', these methods are hard to type...
-      // tslint:disable-next-line no-any
       createPaymentMethod(paymentMethodType: string, elementOrData?: any, maybeData?: MaybeData): Promise<any>;
     }
   }
 
-  // tslint:disable-next-line interface-name
   export interface MaybeData {
     billing_details?: {
       address?: {
@@ -34,12 +31,10 @@ declare module 'react-stripe-elements' {
     };
   }
 
-  // tslint:disable-next-line interface-name
   export interface Card {
     brand: 'amex' | 'diners' | 'discover' | 'jcb' | 'mastercard' | 'unionpay' | 'visa' | 'unknown';
   }
 
-  // tslint:disable-next-line interface-name
   export interface BillingDetails {
     address: {};
     email: string | null;
@@ -47,7 +42,6 @@ declare module 'react-stripe-elements' {
     phone: string | null;
   }
 
-  // tslint:disable-next-line interface-name
   export interface PaymentMethod {
     billing_details: BillingDetails;
     card: stripe.Card;
@@ -70,7 +64,6 @@ declare module 'react-stripe-elements' {
     | 'invalid_payer_phone'
     | 'invalid_shipping_address';
 
-  // tslint:disable-next-line interface-name
   export interface PaymentRequestEvent {
     complete: (status: PaymentRequestStatus) => void;
     methodName: string | null;

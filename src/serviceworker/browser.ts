@@ -21,7 +21,6 @@ export const registerServiceWorker = async (): Promise<ServiceWorkerRegistration
       throw new Error('Could not register serviceWorker. Browser is not supported');
     }
   } catch (err) {
-    // tslint:disable-next-line no-console
     console.error(err);
     return;
   }
