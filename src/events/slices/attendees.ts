@@ -1,7 +1,7 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, SerializedError } from '@reduxjs/toolkit';
 
 import { State } from 'core/redux/Store';
-import { getAttendeeForEvent, userAttendEvent, userUnattendEvent } from 'events/api/attendee';
+import { getAttendeeForEvent, userAttendEvent, userUnattendEvent, changeUserExtra } from 'events/api/attendee';
 import { IAttendee } from 'events/models/Attendee';
 import { IAuthUser } from 'authentication/models/User';
 import { fetchAttendanceEventById } from './attendanceEvents';
@@ -18,6 +18,15 @@ export const fetchAttendeeByEventId = createAsyncThunk('attendees/fetchByEventId
   const attendee = await getAttendeeForEvent(eventId);
   return attendee;
 });
+
+export const patchAttendee = createAsyncThunk(
+  'attendees/patchAttendee',
+  async (props: { attendeeId: number; extras: number }) => {
+    const { attendeeId, extras } = props;
+    const attendee = await changeUserExtra(attendeeId, extras);
+    return attendee;
+  }
+);
 
 export const setAttendeeByEventId = createAsyncThunk(
   'attendees/setByEventId',
@@ -63,6 +72,18 @@ export const attendeesSlice = createSlice({
       attendeesAdapter.addOne(state, action.payload);
     });
     builder.addCase(fetchAttendeeByEventId.rejected, (state, action) => {
+      state.loading = 'idle';
+      state.error = action.error;
+    });
+
+    builder.addCase(patchAttendee.pending, (state) => {
+      state.loading = 'pending';
+    });
+    builder.addCase(patchAttendee.fulfilled, (state, action) => {
+      state.loading = 'idle';
+      attendeesAdapter.upsertOne(state, action);
+    });
+    builder.addCase(patchAttendee.rejected, (state, action) => {
       state.loading = 'idle';
       state.error = action.error;
     });

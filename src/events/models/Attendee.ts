@@ -11,6 +11,7 @@ export interface IAttendee {
   paid: boolean;
   has_paid: boolean;
   note: string;
+  extras: number | null;
 }
 
 export interface IPublicAttendee {
