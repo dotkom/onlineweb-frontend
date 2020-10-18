@@ -12,13 +12,14 @@ import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
 import Attendance from '../Attendance';
-import { attendeeSelectors, fetchAttendeeByEventId } from 'events/slices/attendees';
+import { attendeeSelectors, fetchAttendeeByEventId, patchAttendee } from 'events/slices/attendees';
 import EventPaymentBlock from '../EventPayment/EventPaymentBlock';
 import EventPrice from '../EventPayment/EventPrice';
 import { Select } from '@dotkomonline/design-system';
 import { IExtra } from '../../models/Extras';
 import PublicAttendeesWrapper from './PublicAttendeesModal/PublicAttendeesWrapper';
 import ParticipantsButton from './PublicAttendeesModal/ParticipantsButton';
+import { changeUserExtra } from 'events/api/attendee';
 
 interface IProps {
   eventId: number;
@@ -75,8 +76,26 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
       {attendanceEvent.has_extras && attendanceEvent.is_attendee && (
         <Block title="Ekstras">
           <Select>
+            <option
+              key={-1}
+              value={-1}
+              onClick={(e: React.MouseEvent<HTMLOptionElement, MouseEvent>) =>
+                dispatch(patchAttendee({ attendeeId: attendee!.id, extras: Number(e.currentTarget.value) }))
+              }
+            >
+              Velg ekstra
+            </option>
             {attendanceEvent.extras.map((extra: IExtra) => (
-              <option key={extra.id}>{extra.choice}</option>
+              <option
+                key={extra.id}
+                value={extra.id}
+                selected={extra.id == attendee!.extras}
+                onClick={(e: React.MouseEvent<HTMLOptionElement, MouseEvent>) =>
+                  dispatch(patchAttendee({ attendeeId: attendee!.id, extras: Number(e.currentTarget.value) }))
+                } // we know attendee exists because _isAttendee
+              >
+                {extra.id == attendee!.extras && 'Valgt ekstra:'} {extra.choice}
+              </option>
             ))}
           </Select>
         </Block>
