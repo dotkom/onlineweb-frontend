@@ -19,7 +19,6 @@ import { Select } from '@dotkomonline/design-system';
 import { IExtra } from '../../models/Extras';
 import PublicAttendeesWrapper from './PublicAttendeesModal/PublicAttendeesWrapper';
 import ParticipantsButton from './PublicAttendeesModal/ParticipantsButton';
-import { changeUserExtra } from 'events/api/attendee';
 
 interface IProps {
   eventId: number;
