@@ -72,14 +72,14 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
       <Block title="Venteliste">
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
-      {attendanceEvent.has_extras && attendanceEvent.is_attendee && (
+      {attendanceEvent.has_extras && attendanceEvent.is_attendee && attendee && (
         <Block title="Ekstras">
           <Select>
             <option
               key={-1}
               value={-1}
               onClick={(e: React.MouseEvent<HTMLOptionElement, MouseEvent>) =>
-                dispatch(patchAttendee({ attendeeId: attendee!.id, extras: Number(e.currentTarget.value) }))
+                dispatch(patchAttendee({ attendeeId: attendee.id, extras: Number(e.currentTarget.value) }))
               }
             >
               Velg ekstra
@@ -88,12 +88,12 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
               <option
                 key={extra.id}
                 value={extra.id}
-                selected={extra.id == attendee!.extras}
+                selected={extra.id == attendee.extras}
                 onClick={(e: React.MouseEvent<HTMLOptionElement, MouseEvent>) =>
-                  dispatch(patchAttendee({ attendeeId: attendee!.id, extras: Number(e.currentTarget.value) }))
-                } // we know attendee exists because _isAttendee
+                  dispatch(patchAttendee({ attendeeId: attendee.id, extras: Number(e.currentTarget.value) }))
+                }
               >
-                {extra.id == attendee!.extras && 'Valgt ekstra:'} {extra.choice}
+                {extra.id == attendee.extras && 'Valgt ekstra:'} {extra.choice}
               </option>
             ))}
           </Select>
