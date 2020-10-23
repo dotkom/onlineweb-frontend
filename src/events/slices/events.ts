@@ -3,7 +3,6 @@ import { State } from 'core/redux/Store';
 import { getEvent, IEventAPIParameters, listEvents } from 'events/api/events';
 import { EventTypeEnum, IEvent } from 'events/models/Event';
 import { DateTime, Interval } from 'luxon';
-import { isErrorResponse } from 'common/resources/types';
 
 const eventsAdapter = createEntityAdapter<IEvent>({
   sortComparer: (eventA, eventB) => {
@@ -25,9 +24,6 @@ export const fetchEvents = createAsyncThunk('events/fetchMultiple', async (optio
 export const fetchEventById = createAsyncThunk('events/fetchById', async (eventId: number) => {
   const event = await getEvent(eventId);
 
-  if (isErrorResponse(event)) {
-    throw event.errors;
-  }
   return event;
 });
 
