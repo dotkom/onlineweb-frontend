@@ -23,6 +23,7 @@ export const fetchEvents = createAsyncThunk('events/fetchMultiple', async (optio
 
 export const fetchEventById = createAsyncThunk('events/fetchById', async (eventId: number) => {
   const event = await getEvent(eventId);
+
   return event;
 });
 

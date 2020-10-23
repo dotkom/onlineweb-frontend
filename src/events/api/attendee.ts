@@ -1,4 +1,4 @@
-import { get, post, deleteR } from 'common/utils/api';
+import { get, post, deleteR, patch } from 'common/utils/api';
 
 import { getUser } from 'authentication/api';
 
@@ -8,11 +8,13 @@ import { IAuthUser } from 'authentication/models/User';
 const getEventAttendeeUrl = (eventId: number) => `/api/v1/event/attendance-events/${eventId}/attendee/`;
 const getUserAttendUrl = (eventId: number) => `/api/v1/event/attendance-events/${eventId}/register/`;
 const getUserUnAttendUrl = (eventId: number) => `/api/v1/event/attendance-events/${eventId}/unregister/`;
+const patchUserExtraUrl = (attendeeId: number) => `/api/v1/event/attendees/${attendeeId}/change/`;
 
 interface IAttendEventOptions {
   allowPictures?: boolean;
   showAsAttending?: boolean;
-  extras?: number[]; // options id
+  extras?: number | null;
+  note?: string;
 }
 
 export const getAttendeeForEvent = async (eventId: number): Promise<IAttendee> => {
@@ -59,5 +61,20 @@ export const userUnattendEvent = async (eventId: number, user?: IAuthUser): Prom
     return ret;
   } catch (response) {
     throw new Error('Kunne ikke melde brukeren av dette arrangementet!');
+  }
+};
+
+export const changeUserExtra = async (attendeeId: number, extras: number) => {
+  const user = await getUser();
+
+  try {
+    const ret = await patch<IAttendee>({
+      query: patchUserExtraUrl(attendeeId),
+      data: { extras: extras == -1 ? null : extras },
+      options: { user },
+    });
+    return ret;
+  } catch (res) {
+    throw new Error('Fikk ikke registrert ekstra på bruker!');
   }
 };

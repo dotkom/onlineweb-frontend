@@ -12,9 +12,11 @@ import style from './detail.less';
 import { EventCountDown } from './EventCountDown';
 import { RuleBundles } from './RuleBundles';
 import Attendance from '../Attendance';
-import { attendeeSelectors, fetchAttendeeByEventId } from 'events/slices/attendees';
+import { attendeeSelectors, fetchAttendeeByEventId, patchAttendee } from 'events/slices/attendees';
 import EventPaymentBlock from '../EventPayment/EventPaymentBlock';
 import EventPrice from '../EventPayment/EventPrice';
+import { Select } from '@dotkomonline/design-system';
+import { IExtra } from '../../models/Extras';
 import PublicAttendeesWrapper from './PublicAttendeesModal/PublicAttendeesWrapper';
 import ParticipantsButton from './PublicAttendeesModal/ParticipantsButton';
 
@@ -70,6 +72,33 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
       <Block title="Venteliste">
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
+      {attendanceEvent.has_extras && attendanceEvent.is_attendee && attendee && (
+        <Block title="Ekstras">
+          <Select>
+            <option
+              key={-1}
+              value={-1}
+              onClick={(e: React.MouseEvent<HTMLOptionElement, MouseEvent>) =>
+                dispatch(patchAttendee({ attendeeId: attendee.id, extras: Number(e.currentTarget.value) }))
+              }
+            >
+              Velg ekstra
+            </option>
+            {attendanceEvent.extras.map((extra: IExtra) => (
+              <option
+                key={extra.id}
+                value={extra.id}
+                selected={extra.id == attendee.extras}
+                onClick={(e: React.MouseEvent<HTMLOptionElement, MouseEvent>) =>
+                  dispatch(patchAttendee({ attendeeId: attendee.id, extras: Number(e.currentTarget.value) }))
+                }
+              >
+                {extra.id == attendee.extras && 'Valgt ekstra:'} {extra.choice}
+              </option>
+            ))}
+          </Select>
+        </Block>
+      )}
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
         <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
         <PublicAttendeesWrapper isAttending={attendanceEvent.is_attendee} canAttend={isEligibleForSignup}>
