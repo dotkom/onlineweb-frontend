@@ -2,10 +2,8 @@ import { Markdown } from '@dotkomonline/design-system';
 import { useEffect, useState } from 'react';
 import ActivateButton from './ActivateButton';
 import { SUBSCRIPTION_INFO, OPPORTUNITIES_INFO } from '../mailInformation';
-import { getProfile, putProfile } from 'profile/api';
-import { useToast } from 'core/utils/toast/useToast';
+import { getProfile } from 'profile/api';
 import { Pane } from 'common/components/Panes';
-import { IUserProfile } from 'profile/models/User';
 
 const EmailSubscription = () => {
   const [infoSubscribed, setInfoSubscribed] = useState(false);
