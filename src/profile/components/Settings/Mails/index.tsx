@@ -9,6 +9,7 @@ import { MAIL_INFO, PRIMARY_MAIL_INFO } from './mailInformation';
 import AddMailField from './MailForm/AddMailField';
 import SelectPrimaryField from './MailForm/SelectPrimaryField';
 import { useToast } from 'core/utils/toast/useToast';
+import EmailSubscription from './EmailSubscription';
 
 export interface IState {
   addresses: IMail[];
@@ -71,6 +72,7 @@ const Mails: FC = () => {
           <AddMailField onSubmit={addNewMail} />
         </div>
       </Pane>
+      <EmailSubscription />
     </>
   );
 };
