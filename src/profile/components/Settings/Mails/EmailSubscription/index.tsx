@@ -1,5 +1,4 @@
 import { Markdown } from '@dotkomonline/design-system';
-import { Button } from '@dotkomonline/design-system';
 import { useEffect, useState } from 'react';
 import ActivateButton from './ActivateButton';
 import { SUBSCRIPTION_INFO, OPPORTUNITIES_INFO } from '../mailInformation';
