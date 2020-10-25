@@ -18,6 +18,7 @@ const INITIAL_STATE: PrivacyOptions = {
   expose_phone_number: false,
   visible_for_other_users: false,
   visible_as_attending_events: false,
+  allow_pictures: false,
 };
 
 const Privacy: FC = () => {
