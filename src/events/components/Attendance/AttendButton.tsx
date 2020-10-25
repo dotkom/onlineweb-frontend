@@ -9,11 +9,12 @@ import style from './attendance.less';
 
 interface IAttendButtonProps {
   eventId: number;
+  isEventFull: boolean;
 }
 
 const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const dispatch = useDispatch();
-  const { eventId } = props;
+  const { eventId, isEventFull } = props;
   const [showModal, setShowModal] = useState<boolean>(false);
   const [addToast] = useToast({ type: 'success', duration: 5000 });
 
@@ -34,7 +35,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   return (
     <>
       <Button color="success" onClick={toggleModal} className={style.button}>
-        Meld meg på
+        Meld meg på {isEventFull ? 'venteliste' : null}
       </Button>
       {modal}
     </>
