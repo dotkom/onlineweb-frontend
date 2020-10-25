@@ -34,7 +34,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
 
   return (
     <>
-      <Button color="success" onClick={toggleModal} className={style.button}>
+      <Button color={isEventFull ? 'secondary' : 'success'} onClick={toggleModal} className={style.button}>
         Meld meg på {isEventFull ? 'venteliste' : null}
       </Button>
       {modal}
