@@ -12,7 +12,14 @@ interface IAttendButtonProps {
 
 const Attendance: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const { canAttend, event, unattendDeadline } = props;
-  const { id, is_attendee, is_on_waitlist, what_place_is_user_on_wait_list } = event;
+  const {
+    id,
+    is_attendee,
+    is_on_waitlist,
+    what_place_is_user_on_wait_list,
+    max_capacity,
+    number_of_seats_taken,
+  } = event;
   const currentTime = DateTime.local();
 
   // The canAttend-object is null if the user is not logged in, else it will always be present.
@@ -31,7 +38,7 @@ const Attendance: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   if (!canAttend.status) return <p>{canAttend.message}</p>;
 
   // Base-case: The user is logged in and can attend!
-  return <AttendButton eventId={id} />;
+  return <AttendButton eventId={id} isEventFull={max_capacity <= number_of_seats_taken} />;
 };
 
 export default Attendance;
