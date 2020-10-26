@@ -30,14 +30,22 @@ const Privacy: FC = () => {
   /** Fetch Privacy options from server and put into state. */
   const fetchInitial = async () => {
     const serverOptions = await getPrivacyOptions();
-    setOptions({ ...serverOptions });
+    setOptions({
+      ...serverOptions,
+      visible_as_attending_events: !!serverOptions.visible_as_attending_events,
+      allow_pictures: !!serverOptions.allow_pictures,
+    });
   };
 
   /** Saves/sends current options to server and updates state from server. */
   const savePrivacyOptions = async (newOptions: PrivacyOptions) => {
-    const serverOptions = await putPrivacyOptions(newOptions);
+    const serverOptions = await putPrivacyOptions({ ...newOptions });
     if (serverOptions) {
-      setOptions(serverOptions);
+      setOptions({
+        ...serverOptions,
+        visible_as_attending_events: !!serverOptions.visible_as_attending_events,
+        allow_pictures: !!serverOptions.allow_pictures,
+      });
       displaySuccess('Innstillingen ble oppdatert.');
     } else {
       displayError('Det skjedde noe galt under uppdateringen av innstillingen.');
