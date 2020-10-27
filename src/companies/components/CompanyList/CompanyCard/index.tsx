@@ -21,7 +21,7 @@ export const CompanyCard: FC<IProps> = ({ companyId }) => {
     <Link {...getCompanyUrl(companyId)}>
       <a className={style.companyCard}>
         <div className={style.imageContainer}>
-          <ResponsiveImage image={company.image} size="sm" type="company" />
+          <ResponsiveImage image={company.image} />
         </div>
         <h2 className={style.title}>{company.name}</h2>
         <Markdown source={company.short_description} />

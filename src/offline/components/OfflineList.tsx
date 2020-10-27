@@ -26,7 +26,7 @@ const OfflineList: React.FC<Props> = ({ offlines = [] }) => {
         <h3>{year}</h3>
         {offlines.map((offline) => (
           <a href={offline.issue} className={style.offline} key={offline.release_date}>
-            <ResponsiveImage image={offline.image} size="xs" type="offline" />
+            <ResponsiveImage image={offline.image} />
           </a>
         ))}
       </section>

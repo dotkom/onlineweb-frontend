@@ -62,6 +62,13 @@ module.exports = withBundleAnalyzer(
         RECAPTCHA_PUBLIC_KEY: process.env.RECAPTCHA_PUBLIC_KEY || '',
       },
       redirects,
+      images: {
+        deviceSizes: [320, 420, 768, 1024, 1200],
+        iconSizes: [],
+        domains: ['online.ntnu.no'],
+        path: '/_next/image',
+        loader: 'default',
+      },
     })
   )
 );

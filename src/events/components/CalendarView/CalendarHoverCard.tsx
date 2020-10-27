@@ -26,7 +26,7 @@ const CalendarHoverCard: FC<IProps> = ({ eventId }) => {
   const eventStart = DateTime.fromISO(start_date).toFormat('d MMM HH:mm');
   return (
     <div className={style.hoverCard}>
-      <EventImage images={images} size="sm" />
+      <EventImage images={images} />
       <div>
         <h3>{title}</h3>
         <InfoTag icon={MapMarked} content={location} />

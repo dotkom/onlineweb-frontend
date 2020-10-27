@@ -18,7 +18,7 @@ export const RelatedArticle: FC<IProps> = ({ id, heading, image, scrollRef }) =>
   <section key={id} className={style.relatedArticle} ref={scrollRef}>
     <Link {...getArticleUrl(id)}>
       <a>
-        <ResponsiveImage className={style.relatedArticleImage} image={image} size="md" type="article" />
+        <ResponsiveImage className={style.relatedArticleImage} image={image} />
         <h3 className={style.relatedArticleHeading}>{heading}</h3>
       </a>
     </Link>

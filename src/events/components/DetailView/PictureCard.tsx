@@ -25,7 +25,7 @@ const PictureCard: FC<IProps> = ({ event }) => {
   return (
     <div className={style.pictureCard}>
       <div>
-        <EventImage images={images} size="md" color={color} />
+        <EventImage images={images} color={color} />
       </div>
       <div className={style.attendance}>
         <CardHeader className={style.detailHeader} color={color}>

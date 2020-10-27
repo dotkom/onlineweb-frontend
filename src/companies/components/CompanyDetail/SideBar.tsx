@@ -16,7 +16,7 @@ interface IProps {
 export const SideBar: FC<IProps> = ({ company }) => {
   return (
     <div className={style.container}>
-      <ResponsiveImage image={company.image} size="sm" type="company" />
+      <ResponsiveImage image={company.image} />
       <div>
         <Icon icon={faGlobeEurope} fixedWidth />
         <a href={company.site}>{company.site}</a>

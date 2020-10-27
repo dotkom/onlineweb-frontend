@@ -13,9 +13,7 @@ export interface IProps {
 export const HobbyCard: FC<IProps> = ({ hobby }) => {
   return (
     <div className={style.hobbyCard}>
-      <div className={style.imageContainer}>
-        {hobby.image ? <ResponsiveImage image={hobby.image} size="xs" type="hobby" /> : null}
-      </div>
+      <div className={style.imageContainer}>{hobby.image ? <ResponsiveImage image={hobby.image} /> : null}</div>
       <h2 className={style.title}>{hobby.title}</h2>
       <Markdown source={hobby.description} />
       <p className={style.linksContainer}>

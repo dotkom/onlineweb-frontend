@@ -27,7 +27,7 @@ const CarouselItem = ({ offline, scrollRef }: ICarouselItemProps) => {
   return (
     <div className={style.carouselItem} ref={scrollRef}>
       <a href={offline.issue}>
-        <ResponsiveImage image={offline.image} alt={offline.description} size="xs" type="offline" />
+        <ResponsiveImage image={offline.image} alt={offline.description} />
       </a>
     </div>
   );

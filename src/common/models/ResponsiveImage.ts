@@ -5,6 +5,7 @@ export default interface IResponsiveImage extends IResponsiveImageSizes {
   description: string;
   tags: string[];
   photographer: string;
+  preset: ResponsiveImageTypes;
 }
 
 export interface IResponsiveImageSizes {
@@ -17,7 +18,15 @@ export interface IResponsiveImageSizes {
   xs: string;
 }
 
-export type ResponsiveImageTypes = 'article' | 'company' | 'event' | 'offline' | 'product' | 'hobby' | 'resource';
+export type ResponsiveImageTypes =
+  | 'article'
+  | 'company'
+  | 'event'
+  | 'offline'
+  | 'product'
+  | 'hobby'
+  | 'resource'
+  | 'group';
 
 export type ResponsiveImageDimensions = {
   [Type in ResponsiveImageTypes]: { [Size in keyof IResponsiveImageSizes]: [number, number] };
@@ -89,6 +98,15 @@ export const IMAGE_DIMENSIONS: ResponsiveImageDimensions = {
     sm: [540, 540],
     xs: [360, 360],
   },
+  group: {
+    thumb: DEFAULT_THUMB_SIZE,
+    original: [Infinity, Infinity],
+    wide: [710, 710],
+    lg: [710, 710],
+    md: [710, 710],
+    sm: [540, 540],
+    xs: [360, 360],
+  },
 };
 
 export const DEFAULT_EVENT_IMAGE: IResponsiveImage = {
@@ -105,4 +123,5 @@ export const DEFAULT_EVENT_IMAGE: IResponsiveImage = {
   xs: '/media/images/responsive/xs/86b20aca-4368-4b3a-8f10-707c747eb03f.png',
   tags: ['arrangement', 'bilde', 'generisk'],
   photographer: '',
+  preset: 'event',
 };
