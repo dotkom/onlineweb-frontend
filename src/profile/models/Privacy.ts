@@ -15,5 +15,5 @@ export const translations: { [Key in keyof IPrivacy]: string } = {
   expose_phone_number: 'Vis telefonnummer i brukerprofil',
   expose_address: 'Vis adresse i brukerprofil',
   visible_as_attending_events: 'Synlig på offentlige påmeldinglister',
-  allow_pictures: 'Tillate bilder at bilder av deg på offentlige arrangementer kan legges ut',
+  allow_pictures: 'Tillate at bilder av deg på offentlige arrangementer kan legges ut',
 };
