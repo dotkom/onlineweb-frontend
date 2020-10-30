@@ -5,6 +5,7 @@ import { getAttendeeForEvent, userAttendEvent, userUnattendEvent, changeUserExtr
 import { IAttendee } from 'events/models/Attendee';
 import { IAuthUser } from 'authentication/models/User';
 import { fetchAttendanceEventById } from './attendanceEvents';
+import { getPrivacyOptions } from 'profile/api/privacy';
 
 const attendeesAdapter = createEntityAdapter<IAttendee>({
   sortComparer: (attendeeA, attendeeB) => {
@@ -32,7 +33,13 @@ export const setAttendeeByEventId = createAsyncThunk(
   'attendees/setByEventId',
   async (props: { eventId: number; captcha: string; user?: IAuthUser }, { dispatch }) => {
     const { eventId, captcha, user } = props;
-    const ret = await userAttendEvent(eventId, captcha, undefined, user);
+    const { allow_pictures, visible_as_attending_events } = await getPrivacyOptions();
+    const ret = await userAttendEvent(
+      eventId,
+      captcha,
+      { allowPictures: !!allow_pictures, showAsAttending: !!visible_as_attending_events },
+      user
+    );
     if (ret) {
       dispatch(fetchAttendanceEventById(eventId));
     }
