@@ -17,4 +17,4 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.DEPLOY_KEY }}
           script: source ${{ secrets.DEPLOY_SCRIPT_LOCATION }}
-          timout: 600s
+          timeout: 600s
