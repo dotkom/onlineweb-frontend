@@ -41,7 +41,7 @@ const JobListItem: FC<IProps> = ({ opportunityId }) => {
     <div className={style.job}>
       <Link {...getCareerOpportinityUrl(id)}>
         <a>
-          <ResponsiveImage image={company.image} size="md" alt="Firmalogo" type="company" />
+          <ResponsiveImage image={company.image} alt="Firmalogo" />
         </a>
       </Link>
       <div className={style.jobInfo}>

@@ -29,7 +29,7 @@ const LargeEvent: FC<IProps> = ({ eventId }) => {
           <h2 className={style.imageLargeType} style={{ background: color }}>
             {event_type_display}
           </h2>
-          <EventImage images={images} size="md" color={color} />
+          <EventImage images={images} color={color} />
           <div className={style.largeContent}>
             <span style={{ background: color }} />
             <p>{title}</p>

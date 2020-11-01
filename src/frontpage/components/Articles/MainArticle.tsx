@@ -21,7 +21,7 @@ const MainArticle: FC<IProps> = ({ articleId }) => {
     <Link {...getArticleUrl(articleId)}>
       <a>
         <div className={style.articleContainer}>
-          <ResponsiveImage image={article.image} size="sm" type="article" />
+          <ResponsiveImage image={article.image} />
           <div>
             <h2>{article.heading}</h2>
             <Markdown source={article.ingress.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)} />

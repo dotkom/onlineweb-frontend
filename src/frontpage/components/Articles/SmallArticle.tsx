@@ -20,7 +20,7 @@ const SmallArticle: FC<IProps> = ({ articleId }) => {
     <Link {...getArticleUrl(articleId)}>
       <a>
         <div className={classnames(style.articleContainer, style.smallArticle)}>
-          <ResponsiveImage image={article.image} size="xs" className={style.smallImage} type="article" />
+          <ResponsiveImage image={article.image} className={style.smallImage} />
           <div>
             <h2>{article.heading}</h2>
             <p>{article.ingress_short}</p>

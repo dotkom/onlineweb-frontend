@@ -1,1 +1,2 @@
 *.lock binary -diff
+package-lock.json binary -diff

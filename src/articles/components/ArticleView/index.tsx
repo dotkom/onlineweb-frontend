@@ -51,11 +51,7 @@ export const ArticleView = ({ articleId }: IProps) => {
         ))}
       </Head>
       <article className={style.article}>
-        {article.video ? (
-          <ArticleVideo vimeoId={article.video} />
-        ) : (
-          <ResponsiveImage image={article.image} size="lg" type="article" />
-        )}
+        {article.video ? <ArticleVideo vimeoId={article.video} /> : <ResponsiveImage image={article.image} />}
         <ArticleByline article={article} />
         <div className={style.articleMain}>
           <header className={style.articleHeader}>

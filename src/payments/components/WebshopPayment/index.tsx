@@ -45,7 +45,7 @@ export const WebshopPayment = () => {
         {latestOrderline.orders.map((order) => (
           <div key={order.id} className={style.order}>
             {order.product.images.length ? (
-              <ResponsiveImage image={order.product.images[0]} size="thumb" type="product" autoSize={false} />
+              <ResponsiveImage image={order.product.images[0]} />
             ) : (
               <div className={style.image}>Det har ikke blitt lagt til et bilde for dette produktet enda</div>
             )}

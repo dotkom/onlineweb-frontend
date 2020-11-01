@@ -51,12 +51,7 @@ const JobDetails: FC<IProps> = ({ opportunity }) => (
         <div className={style.company}>
           <Link {...getCompanyUrl(opportunity.company.id)}>
             <a className={style.companyImage}>
-              <ResponsiveImage
-                image={opportunity.company.image}
-                size="lg"
-                alt={opportunity.company.name}
-                type="company"
-              />
+              <ResponsiveImage image={opportunity.company.image} alt={opportunity.company.name} />
             </a>
           </Link>
 
