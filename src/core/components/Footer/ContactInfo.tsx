@@ -15,7 +15,7 @@ const ContactInfo = () => (
       <p>
         <FontAwesomeIcon icon={faBriefcase} fixedWidth /> 992 548 045 (OrgNr)
       </p>
-      <a href="mailto:kontakt@online.ntun.no">
+      <a href="mailto:kontakt@online.ntnu.no">
         <p>
           <FontAwesomeIcon icon={faEnvelope} fixedWidth /> kontakt@online.ntnu.no
         </p>
