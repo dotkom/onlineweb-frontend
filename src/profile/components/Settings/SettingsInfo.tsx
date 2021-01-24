@@ -1,3 +1,4 @@
+import React from 'react';
 import Markdown from 'common/components/Markdown';
 import { Pane } from 'common/components/Panes';
 import { getProfile } from 'profile/api';
