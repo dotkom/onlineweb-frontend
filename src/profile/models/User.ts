@@ -34,6 +34,8 @@ interface IBaseProfile {
  */
 interface IProfilePrivate {
   address: string | null;
+  zip_code: string | null;
+  city: string | null;
   email: string;
   nickname: string | null;
   phone_number: string | null;

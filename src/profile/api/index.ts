@@ -1,6 +1,7 @@
 import { get, put } from 'common/utils/api';
 import { IUserProfile } from '../models/User';
 import { getUser } from 'authentication/api';
+import { getCity } from './address';
 
 /** Base URL for the profile API */
 const API_URL = '/api/v1/profile/';
@@ -11,7 +12,12 @@ const API_URL = '/api/v1/profile/';
 export const getProfile = async (): Promise<IUserProfile | undefined> => {
   const user = await getUser();
   if (user) {
-    return await get<IUserProfile>(API_URL, { format: 'json' }, { user });
+    const profile = await get<IUserProfile>(API_URL, { format: 'json' }, { user });
+    if (profile.zip_code) {
+      const postal = await getCity(profile.zip_code);
+      return { ...profile, city: postal.result };
+    }
+    return profile;
   }
   return undefined;
 };
