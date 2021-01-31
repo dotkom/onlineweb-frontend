@@ -9,6 +9,7 @@ import { IMembershipApplication } from 'profile/models/Membership';
 import { IUserProfile } from 'profile/models/User';
 import { getProfile } from 'profile/api';
 import MembershipPanel from './MembershipPanel';
+import ManualSubmission from './ManualSubmission';
 
 const ABOUT_PROFILE_MEMBERSHIP = `
   # Medlemskap
@@ -21,6 +22,7 @@ const ABOUT_PROFILE_MEMBERSHIP = `
 const Membership = () => {
   const [membershipApplication, setMembershipApplication] = useState<IMembershipApplication | undefined>(undefined);
   const [profile, setProfile] = useState<IUserProfile | undefined>(undefined);
+  const [manualSubmission, setManualSubmission] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchedMembership = async () => {
@@ -43,13 +45,20 @@ const Membership = () => {
         <Markdown source={ABOUT_PROFILE_MEMBERSHIP} />
 
         <div className={style.buttons}>
-          <Link href="https://old.online.ntnu.no/profile/membership/" passHref={true}>
+          <Link href="https://old.online.ntnu.no/dataporten/study/" passHref={true}>
             <Button color="success">Søk medlemskap automatisk gjennom Dataporten</Button>
           </Link>
-          <p className={style.bold}>Eller</p>
-          <Link href="https://old.online.ntnu.no/profile/membership/" passHref={true}>
-            <Button color="secondary">Søk medlemskap med manuell godkjenning</Button>
-          </Link>
+
+          {!manualSubmission ? (
+            <>
+              <p className={style.bold}>Eller</p>
+              <Button color="secondary" onClick={() => setManualSubmission(() => !manualSubmission)}>
+                Søk medlemskap med manuell godkjenning
+              </Button>
+            </>
+          ) : (
+            <ManualSubmission />
+          )}
           <p className={style.bold}>
             NB! Godkjente og avslåtte søknader havner nederst på siden, sjekk her før du sender inn nye søknader!
           </p>
