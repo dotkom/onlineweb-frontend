@@ -11,9 +11,34 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: @grid-gap;
-
   @media screen and (max-width: @owTabletBreakpoint) {
     grid-template-columns: 1fr;
+  }
+}
+
+.articleBody {
+  overflow: hidden;
+  position: relative;
+  /* 1.5em per line */
+  max-height: 15em;
+  text-align: justify;
+  padding-right: 1em;
+
+  &::before {
+    content: '...';
+    position: absolute;
+    right: 0.1em;
+    bottom: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white;
   }
 }
 

@@ -24,7 +24,9 @@ const MainArticle: FC<IProps> = ({ articleId }) => {
           <ResponsiveImage image={article.image} />
           <div>
             <h2>{article.heading}</h2>
-            <Markdown source={article.ingress.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)} />
+            <div className={style.articleBody}>
+              <Markdown source={article.ingress.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)} />
+            </div>
           </div>
         </div>
       </a>
