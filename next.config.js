@@ -19,6 +19,11 @@ const redirects = async () => {
       permanent: true,
     },
     {
+      source: '/careeropportunity',
+      destination: '/career',
+      permanent: true,
+    },
+    {
       source: '/careeropportunity/:careerId',
       destination: '/career/:careerId',
       permanent: true,
