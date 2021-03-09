@@ -27,7 +27,7 @@ const ContactInfo = () => (
       </a>
       <a href="tel:+4741164609">
         <p>
-          <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> 95 82 90 20
+          <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> 41 16 46 09
         </p>
       </a>
     </div>
