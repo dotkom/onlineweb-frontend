@@ -22,7 +22,7 @@ const ActivateButton: FC<IProps> = ({ activated, callback, name }) => {
       await putProfile(settings);
       callback();
       cancelToast();
-      addMessage(`Du har blit meldt ${status} ${name}-lista.`);
+      addMessage(`Du har blitt meldt ${status} ${name}-lista.`);
     } catch (e) {
       cancelToast();
       addMessage(`Vi klart ikke å melde deg ${status}`);
