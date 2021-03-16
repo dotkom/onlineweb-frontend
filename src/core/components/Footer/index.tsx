@@ -23,6 +23,9 @@ const Footer = () => (
         Har du funnet en feil på nettsiden?
         <br />
         Ta kontakt med <a href="mailto:dotkom@online.ntnu.no">Utviklingsteamet</a>
+        <br />
+        <br />
+        <a href="mailto:test@gmail.com">Ta kontakt med SiIFra</a>
       </p>
       <SocialLinks />
       <ContactInfo />
