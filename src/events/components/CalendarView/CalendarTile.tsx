@@ -16,7 +16,6 @@ interface IProps {
 
 export const EventCalendarTile: FC<IProps> = ({ date, active }) => {
   const eventIds = useSelector(selectEventIdsForDate(date), shallowEqual);
-  console.log(date);
   return (
     <div
       className={classNames(style.tile, {
