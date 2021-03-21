@@ -71,7 +71,7 @@ const JobDetails: FC<IProps> = ({ opportunity }) => (
             <h3>Nøkkelinformasjon</h3>
             <p>Type: {opportunity.employment.name}</p>
             <p>Sted: {formatLocations(opportunity.location.map((loc) => loc.name))}</p>
-            <p>Frist: {formatDeadline(opportunity.deadline)}</p>
+            <p>Frist:{opportunity.deadline_asap ? 'Snarest' : formatDeadline(opportunity.deadline)}</p>
           </div>
           <ApplyButton
             application_link={opportunity.application_link}
