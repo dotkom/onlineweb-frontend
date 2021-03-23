@@ -46,6 +46,24 @@
     opacity: 0.3;
     position: relative;
   }
+  
+  & > p > a{
+    background-image: linear-gradient(#333333,#333333);
+    background-size: 0 1px;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s, color 0.5s;
+
+    &:hover {
+      background-position: 0 100%;
+      background-size: 100% 1px;
+      transition: background-size 0.5s, color 0.5s;
+    }
+
+    &::after{
+      height: 0;
+    }
+  }
 
   @media (max-width: @owMobileBreakpoint) {
     grid-template-columns: 1fr;
