@@ -47,6 +47,24 @@
     position: relative;
   }
 
+  & > p > a {
+    background-image: linear-gradient(@darkGray, @darkGray);
+    background-size: 0 1px;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s, color 0.5s;
+
+    &:hover {
+      background-position: 0 100%;
+      background-size: 100% 1px;
+      transition: background-size 0.5s, color 0.5s;
+    }
+
+    &::after {
+      height: 0;
+    }
+  }
+
   @media (max-width: @owMobileBreakpoint) {
     grid-template-columns: 1fr;
     width: calc(100% - @paddingHorizontal * 2);
