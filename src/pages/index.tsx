@@ -1,26 +1,34 @@
-import { NextPage, NextPageContext } from 'next';
-import React from 'react';
-
-import { fetchFrontPageArticles } from 'articles/slices/articles';
-import { Store } from 'core/redux/Store';
 import FrontPageComponent from 'frontpage';
+import { Article } from 'frontpage/components/Articles';
+import { GetStaticProps, NextPage } from 'next';
+import React from 'react';
+import Parser from 'rss-parser';
 
-interface IContext extends NextPageContext {
-  store: Store;
+interface IProps {
+  articles: Article[];
 }
 
-const FrontPage: NextPage = () => {
-  return <FrontPageComponent />;
+const Frontpage: NextPage<IProps> = (props) => {
+  return <FrontPageComponent {...props} />;
 };
 
-export default FrontPage;
+export default Frontpage;
 
-FrontPage.getInitialProps = async ({ store }: IContext) => {
-  const state = store.getState();
-  const isFrontPageArticlesPopulated = Boolean(state.articles.frontPageArticleIds.length);
-  const articlesResult = store.dispatch(fetchFrontPageArticles());
-  if (!isFrontPageArticlesPopulated) {
-    await articlesResult;
+const parser: Parser<{}, Article> = new Parser({
+  customFields: {
+    item: [['media:thumbnail', 'thumbnail']],
+  },
+});
+
+export const getStaticProps: GetStaticProps<IProps> = async (_context) => {
+  try {
+    const articles = (await parser.parseURL('https://dotkom.github.io/articles/feed.xml')).items;
+    return {
+      props: { articles },
+    };
+  } catch {
+    return {
+      props: { articles: [] },
+    };
   }
-  return {};
 };

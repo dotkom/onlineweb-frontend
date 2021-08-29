@@ -1,32 +1,40 @@
-import React, { useEffect } from 'react';
-import { shallowEqual } from 'react-redux';
+import React, { FC } from 'react';
+import { Item } from 'rss-parser';
 
-import { fetchFrontPageArticles } from 'articles/slices/articles';
 import Heading from 'common/components/Heading';
-import { useDispatch, useSelector } from 'core/redux/hooks';
 
 import style from './articles.less';
 import MainArticle from './MainArticle';
 import SmallArticle from './SmallArticle';
 
-const Articles = () => {
-  const dispatch = useDispatch();
-  const articleIds = useSelector((state) => state.articles.frontPageArticleIds, shallowEqual);
+export interface Article extends Item {
+  id: string;
+  thumbnail: {
+    $: { url: string };
+  };
+  'media:thumbnail': string;
+  'media:content': string;
+  content: string;
+  link: string;
+  pubDate: string;
+}
 
-  useEffect(() => {
-    dispatch(fetchFrontPageArticles());
-  }, []);
+interface IProps {
+  articles: Article[];
+}
 
+const Articles: FC<IProps> = (props) => {
+  const { articles } = props;
   return (
     <section className={style.articles}>
       <Heading title="Artikler" />
       <div className={style.container}>
-        {articleIds.length ? (
+        {articles.length ? (
           <>
-            <MainArticle articleId={articleIds[0]} />
+            <MainArticle article={articles[0]} />
             <article className={style.smallContainer}>
-              {articleIds.slice(1, 4).map((articleId) => (
-                <SmallArticle key={articleId} articleId={articleId} />
+              {articles.slice(1, 4).map((article) => (
+                <SmallArticle key={article.id} article={article} />
               ))}
             </article>
           </>

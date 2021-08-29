@@ -1,16 +1,22 @@
 import EventsContainer from 'events/components/EventsContainer';
-import React from 'react';
-import Articles from './components/Articles';
+import React, { FC } from 'react';
+import Articles, { Article } from './components/Articles';
 import Offline from './components/Offline';
 import ToastOld from './components/ToastOld';
 
-const Frontpage = () => (
-  <>
-    <ToastOld />
-    <EventsContainer />
-    <Articles />
-    <Offline />
-  </>
-);
+interface IProps {
+  articles: Article[];
+}
+
+const Frontpage: FC<IProps> = (props) => {
+  return (
+    <>
+      <ToastOld />
+      <EventsContainer />
+      <Articles {...props} />
+      <Offline />
+    </>
+  );
+};
 
 export default Frontpage;

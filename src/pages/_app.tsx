@@ -3,7 +3,7 @@ import 'core/polyfills';
 import * as Sentry from '@sentry/browser';
 import { Settings as LuxonSettings } from 'luxon';
 import withRedux, { ReduxWrapperAppProps } from 'next-redux-wrapper';
-import DefaultApp, { AppProps } from 'next/app';
+import { AppContext, AppProps } from 'next/app';
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -54,6 +54,13 @@ const CustomApp = (appProps: Props): JSX.Element => {
   );
 };
 
-CustomApp.getInitialProps = DefaultApp.getInitialProps;
+CustomApp.getInitialProps = async (appContext: AppContext) => {
+  // calls page's `getInitialProps` and fills `appProps.pageProps`
+  let pageProps = {};
+  if (appContext.Component.getInitialProps) {
+    pageProps = await appContext.Component.getInitialProps(appContext.ctx);
+  }
+  return { ...pageProps };
+};
 
 export default withRedux(initStore)(CustomApp);
