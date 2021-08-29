@@ -25,10 +25,12 @@ export const getStaticProps: GetStaticProps<IProps> = async (_context) => {
     const articles = (await parser.parseURL('https://dotkom.github.io/articles/feed.xml')).items;
     return {
       props: { articles },
+      revalidate: 60,
     };
   } catch {
     return {
       props: { articles: [] },
+      revalidate: 60,
     };
   }
 };
