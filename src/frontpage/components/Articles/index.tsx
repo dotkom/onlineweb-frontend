@@ -23,8 +23,7 @@ interface IProps {
   articles: Article[];
 }
 
-const Articles: FC<IProps> = (props) => {
-  const { articles } = props;
+const Articles: FC<IProps> = ({ articles }) => {
   return (
     <section className={style.articles}>
       <Heading title="Artikler" />
