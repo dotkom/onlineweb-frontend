@@ -70,3 +70,5 @@ You could also install the [prettier extension](https://marketplace.visualstudio
 ```
 
 This will enable prettier to auto-format on save for less and typescriptreact (.tsx files), and make sure that the stylelint linter is ran instead of the built-in validators
+
+Martine
