@@ -1,31 +1,28 @@
 import React, { FC } from 'react';
-import { shallowEqual } from 'react-redux';
 
-import { articleSelectors } from 'articles/slices/articles';
 import Markdown from 'common/components/Markdown';
-import ResponsiveImage from 'common/components/ResponsiveImage';
-import { getArticleUrl } from 'core/appUrls';
+import NextImage from 'next/image';
 import { Link } from 'core/components/Router';
-import { useSelector } from 'core/redux/hooks';
+import cx from 'classnames';
 
+import { Article } from './index';
 import style from './articles.less';
+import imageStyle from 'common/components/ResponsiveImage/ResponsiveImage.less';
 
 interface IProps {
-  articleId: number;
+  article: Article;
 }
 
-const MainArticle: FC<IProps> = ({ articleId }) => {
-  const article = useSelector((state) => articleSelectors.selectById(state, articleId), shallowEqual);
-
+const MainArticle: FC<IProps> = ({ article }) => {
   return article ? (
-    <Link {...getArticleUrl(articleId)}>
+    <Link href={article.link} as={article.link}>
       <a>
         <div className={style.articleContainer}>
-          <ResponsiveImage image={article.image} />
+          <NextImage src={article.thumbnail.$.url} className={cx(style.smallImage, imageStyle.imageSize)} unsized />
           <div>
-            <h2>{article.heading}</h2>
+            <h2>{article.title}</h2>
             <div className={style.articleBody}>
-              <Markdown source={article.ingress.replace(/#[^\s#]/g, (match) => `# ${match.slice(-1)}`)} />
+              <Markdown source={article.summary} />
             </div>
           </div>
         </div>

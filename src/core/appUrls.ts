@@ -1,7 +1,6 @@
 import url from 'common/utils/urlHelper';
 
 export const getFrontPageUrl = () => url`/`;
-export const getArticleUrl = (articleId: number) => url`/articles/${{ articleId }}`;
 export const getArticlesUrl = () => url`/articles`;
 export const getAuthCallbackUrl = () => url`/auth/callback`;
 export const getCareerOpportinityUrl = (opportunityId: number) => url`/career/${{ opportunityId }}`;

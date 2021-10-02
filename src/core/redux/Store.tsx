@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { articlesReducer } from 'articles/slices/articles';
 import { authenticationReducer } from 'authentication/slices/authentication';
 import { careerLocationsReducer } from 'career/slices/careerLocations';
 import { careerOpportunitiesReducer } from 'career/slices/careerOpportunities';
@@ -25,7 +24,6 @@ export const initStore = (initialState: {} = {}) => {
     preloadedState: initialState,
     /* eslint sort-keys: "error" */
     reducer: {
-      articles: articlesReducer,
       attendanceEvents: attendanceEventsReducer,
       attendees: attendeesReducer,
       authentication: authenticationReducer,
