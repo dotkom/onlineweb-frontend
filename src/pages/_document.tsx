@@ -11,6 +11,8 @@ const getInitialProps = async (ctx: DocumentContext): Promise<DocumentInitialPro
   try {
     ctx.renderPage = () => {
       return originalRenderPage({
+        // TODO: Remove before merging. Only used for local development.
+        // eslint-disable-next-line react/display-name
         enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
       });
     };
