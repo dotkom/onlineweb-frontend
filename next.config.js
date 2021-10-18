@@ -70,7 +70,7 @@ module.exports = withBundleAnalyzer(
       images: {
         deviceSizes: [320, 420, 768, 1024, 1200],
         iconSizes: [],
-        domains: ['online.ntnu.no'],
+        domains: ['online.ntnu.no', 'onlineweb4.s3.amazonaws.com'],
         path: '/_next/image',
         loader: 'default',
       },
