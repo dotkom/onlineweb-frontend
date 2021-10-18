@@ -1,4 +1,4 @@
-import { DOMAIN } from '../constants/endpoints';
+import { API_BASE_URL } from '../constants/endpoints';
 import { IQueryObject, toQueryString } from './queryString';
 
 import { IAuthUser } from 'authentication/models/User';
@@ -26,7 +26,7 @@ export interface IBaseAPIParameters {
 const performRequest = async (query: string, parameters: IQueryObject = {}, options: IRequestOptions = {}) => {
   const queryString = toQueryString(parameters);
   const { cacheOptions, user, domain, ...restOptions } = options;
-  const url = (domain || DOMAIN) + query + queryString;
+  const url = (domain || API_BASE_URL) + query + queryString;
   if (hasCache({ url, options: cacheOptions })) {
     const { cache } = getCache({ url, options: cacheOptions });
     if (cache) {

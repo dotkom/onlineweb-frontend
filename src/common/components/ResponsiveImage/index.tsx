@@ -2,7 +2,7 @@ import React, { FC, ComponentProps } from 'react';
 import NextImage from 'next/image';
 import cx from 'classnames';
 
-import { DOMAIN } from 'common/constants/endpoints';
+import { MEDIA_BASE_URL } from 'common/constants/endpoints';
 import IResponsiveImage, { IResponsiveImageSizes, ResponsiveImageTypes } from 'common/models/ResponsiveImage';
 
 import styles from './ResponsiveImage.less';
@@ -21,7 +21,7 @@ export const ResponsiveImage: FC<Props> = ({ image, alt, className, ...props }) 
   return (
     <NextImage
       {...props}
-      src={DOMAIN + defaultImage}
+      src={MEDIA_BASE_URL + defaultImage}
       alt={altText}
       unsized
       className={cx(className, styles.imageSize)}

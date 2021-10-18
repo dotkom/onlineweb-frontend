@@ -41,6 +41,7 @@ module.exports = withBundleAnalyzer(
         } else {
           config.resolve.plugins = [new TsconfigPathsPlugin()];
         }
+        config.optimization.minimize = true;
         config.module.rules.push({
           test: /\.(eot|woff|woff2|ttf|svg|png|jpg|jpeg|gif)$/,
           use: {
@@ -55,6 +56,10 @@ module.exports = withBundleAnalyzer(
       },
       env: {
         OW4_ADDRESS: process.env.OW4_ADDRESS || 'https://online.ntnu.no',
+        OW4_MEDIA_HOST: process.env.OW4_MEDIA_HOST || 'online.ntnu.no',
+        OW4_MEDIA_PROTO: process.env.OW4_MEDIA_PROTO || 'https',
+        OW4_API_HOST: process.env.OW4_API_HOST || 'online.ntnu.no',
+        OW4_API_PROTO: process.env.OW4_API_PROTO || 'https',
         OW4_SSO_CLIENT_ID: process.env.OW4_SSO_CLIENT_ID || '',
         OW4_SSO_CALLBACK: process.env.OW4_SSO_CALLBACK || 'http://localhost:8080/authentication/callback',
         OWF_SENTRY_DSN: process.env.OWF_SENTRY_DSN || '',
@@ -70,7 +75,7 @@ module.exports = withBundleAnalyzer(
       images: {
         deviceSizes: [320, 420, 768, 1024, 1200],
         iconSizes: [],
-        domains: ['online.ntnu.no', 'onlineweb4.s3.amazonaws.com'],
+        domains: ['online.ntnu.no', process.env.OW4_MEDIA_HOST || ''],
         path: '/_next/image',
         loader: 'default',
       },
