@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 import { Button } from '@dotkomonline/design-system';
 import style from './attendance.less';
-import ConfirmModal from './ConfirmModal';
+import SignOffModal from './SignOffModal';
 
 interface IAttendButtonProps {
   eventId: number;
@@ -13,7 +13,7 @@ const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitLis
   const [showModal, setShowModal] = useState<boolean>(false);
   const toggleModal = () => setShowModal(!showModal);
   const modal = (
-    <ConfirmModal
+    <SignOffModal
       showModal={showModal}
       text={'Er du sikker på av du vil melde deg av?'}
       toggleModal={toggleModal}
