@@ -13,8 +13,8 @@ const SalesBox: FC<SaleBoxProps> = ({ title, salePoints }) => {
     <div className={styles.boxContent}>
       <h1>{title}</h1>
       <ul className={styles.salePoints}>
-        {salePoints.map((point) => (
-          <li className={styles.point}>
+        {salePoints.map((point, i) => (
+          <li key={`${point}-${i}`} className={styles.point}>
             <FontAwesomeIcon icon={faCheck} />
             {point}
           </li>
