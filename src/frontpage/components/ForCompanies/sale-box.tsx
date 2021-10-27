@@ -10,9 +10,9 @@ interface SaleBoxProps {
 
 const SalesBox: FC<SaleBoxProps> = ({ title, salePoints }) => {
   return (
-    <div className={styles.box_content}>
+    <div className={styles.boxContent}>
       <h1>{title}</h1>
-      <ul className={styles.sale_points}>
+      <ul className={styles.salePoints}>
         {salePoints.map((point) => (
           <li className={styles.point}>
             <FontAwesomeIcon icon={faCheck} />
