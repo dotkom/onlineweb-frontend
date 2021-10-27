@@ -1,0 +1,33 @@
+@import '~common/less/colors.less';
+
+.box_content {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  margin: 0 1em;
+  border-radius: 5px;
+
+  h1 {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    font-size: large;
+    width: 100%;
+    background-color: @blue;
+    color: #fff;
+    text-align: center;
+    padding: 0.4em 2em;
+  }
+  background-color: #d6eaff;
+}
+
+.sale_points {
+  padding: 1em;
+  svg {
+    color: @orange;
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
+  li {
+    margin-bottom: 0.5em;
+  }
+}
