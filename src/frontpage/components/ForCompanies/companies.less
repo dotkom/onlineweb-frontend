@@ -1,0 +1,30 @@
+@import '~common/less/constants.less';
+
+.container {
+  display: flex;
+  margin-top: 5em;
+  flex-direction: column;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  @media screen and (max-width: @owTabletBreakpoint) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.boxes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: min-content;
+  @media screen and (max-width: @owTabletBreakpoint) {
+    display: flex;
+    flex-direction: column;
+    div {
+      margin-bottom: 2em;
+    }
+  }
+}
