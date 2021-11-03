@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Page, Pane } from 'common/components/Panes';
 
-const WEBSHOP_URL = `${process.env.OW4_ADDRESS}/webshop`;
+const WEBSHOP_URL = `${process.env.OW4_SCHEME}://${process.env.OW4_HOST}/webshop`;
 
 export const EmptyCart = () => (
   <Page>
