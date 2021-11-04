@@ -43,8 +43,6 @@ RUN npm run build
 FROM node:lts-alpine AS runner
 WORKDIR /app
 
-
-
 RUN apk add --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing vips \
   && addgroup -g 1001 -S nodejs \
   && adduser -S nextjs -u 1001

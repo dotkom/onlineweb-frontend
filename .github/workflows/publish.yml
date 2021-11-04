@@ -1,0 +1,62 @@
+name: publish
+
+on:
+  push:
+    branches:
+      - 'master'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Import Secrets
+        uses: hashicorp/vault-action@v2.3.1
+        with:
+          url: https://vault.online.ntnu.no:8200
+          token: ${{ secrets.VaultToken }}
+          secrets: |
+              secret/data/owf/env ow4_host | OW4_HOST ;
+              secret/data/owf/env ow4_sso_client_id | OW4_SSO_CLIENT_ID ;
+              secret/data/owf/env ow4_sso_callback | OW4_SSO_CALLBACK ;
+              secret/data/owf/env owf_sentry_dsn | OWF_SENTRY_DSN ;
+              secret/data/owf/env owf_google_analytics_key | OWF_GOOGLE_ANALYTICS_KEY ;
+              secret/data/owf/env owf_vapid_server_key | OWF_VAPID_SERVER_KEY ;
+              secret/data/owf/env stripe_public_key_arrkom | STRIPE_PUBLIC_KEY_ARRKOM ;
+              secret/data/owf/env stripe_public_key_fagkom | STRIPE_PUBLIC_KEY_FAGKOM ;
+              secret/data/owf/env stripe_public_key_prokom | STRIPE_PUBLIC_KEY_PROKOM ;
+              secret/data/owf/env stripe_public_key_trikom | STRIPE_PUBLIC_KEY_TRIKOM ;
+              secret/data/owf/env recaptcha_public_key | RECAPTCHA_PUBLIC_KEY 
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          registry: docker-registry.online.ntnu.no
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push nginx
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: docker-registry.online.ntnu.no/onlineweb-frontend:latest,docker-registry.online.ntnu.no/onlineweb-frontend:${GITHUB_SHA}
+          build-args:
+            - OW4_SCHEME: https
+            - OW4_HOST: ${env.OW4_HOST}
+            - OW4_SSO_CLIENT_ID: ${env.OW4_SSO_CLIENT_ID}
+            - OW4_SSO_CALLBACK: ${env.OW4_SSO_CALLBACK}
+            - OWF_SENTRY_DSN: ${env.OWF_SENTRY_DSN}
+            - OWF_GOOGLE_ANALYTICS_KEY: ${env.OWF_GOOGLE_ANALYTICS_KEY}
+            - OWF_VAPID_SERVER_KEY: ${env.OWF_VAPID_SERVER_KEY}
+            - STRIPE_PUBLIC_KEY_ARRKOM: ${env.STRIPE_PUBLIC_KEY_ARRKOM}
+            - STRIPE_PUBLIC_KEY_FAGKOM: ${env.STRIPE_PUBLIC_KEY_FAGKOM}
+            - STRIPE_PUBLIC_KEY_PROKOM: ${env.STRIPE_PUBLIC_KEY_PROKOM}
+            - STRIPE_PUBLIC_KEY_TRIKOM: ${env.STRIPE_PUBLIC_KEY_TRIKOM}
+            - RECAPTCHA_PUBLIC_KEY: ${env.RECAPTCHA_PUBLIC_KEY}
