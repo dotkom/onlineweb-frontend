@@ -23,6 +23,13 @@ class Header extends Component<{}, IState> {
 
   public closeMenu = () => this.setState({ isOpen: false });
 
+  public scrollToForCompanies = () => {
+    const element = document.getElementById('forCompaniesContainer');
+    if (element !== null) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   public render() {
     const { isOpen } = this.state;
     return (
@@ -51,6 +58,7 @@ class Header extends Component<{}, IState> {
             </Link>
             <a href={`${DOMAIN}/wiki/`}>Wiki</a>
             <a href={`${DOMAIN}/webshop/`}>Webshop</a>
+            <a onClick={this.scrollToForCompanies}>For bedrifter</a>
           </div>
           <HeaderLogin menuIsOpen={isOpen} closeMenu={this.closeMenu} />
         </div>
