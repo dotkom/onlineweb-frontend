@@ -29,7 +29,7 @@ const ACADEMIC = ['Kurs', 'Workshop'];
 
 const ForCompanies: FC = () => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="forCompanies">
       <Heading title="Bedrifter" />
       <div className={styles.content}>
         <Markdown source={COMPANY_TEXT} />
