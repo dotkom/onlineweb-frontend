@@ -34,7 +34,7 @@ const ContactInfo = () => (
     <div>
       <p>Post og faktura: </p>
       <p>Online Linjeforening </p>
-      <p>Sem Sælandsv. 9 </p>
+      <p>Sem Sælands vei 9 </p>
       <p>7491 Trondheim</p>
     </div>
   </>
