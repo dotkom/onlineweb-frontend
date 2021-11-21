@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ResponsiveImage from 'common/components/ResponsiveImage';
 import { IRefObject } from 'common/hooks/useRefMap';
+import NextImage from 'next/image';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 
 import style from './offline.less';
@@ -13,7 +13,7 @@ export interface IProps {
 const OfflineCarousel = ({ offlines }: IProps) => (
   <>
     {offlines.map((offline) => (
-      <CarouselItem key={offline.value.id} offline={offline.value} scrollRef={offline.ref} />
+      <CarouselItem key={offline.value._id} offline={offline.value} scrollRef={offline.ref} />
     ))}
   </>
 );
@@ -27,7 +27,7 @@ const CarouselItem = ({ offline, scrollRef }: ICarouselItemProps) => {
   return (
     <div className={style.carouselItem} ref={scrollRef}>
       <a href={offline.issue}>
-        <ResponsiveImage image={offline.image} alt={offline.description} />
+        <NextImage src={offline.image.url} alt={offline.image.title} unsized />
       </a>
     </div>
   );

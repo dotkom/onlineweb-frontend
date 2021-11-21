@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Carousel } from 'common/components/Carousel';
-import { getOfflines, getRemainingOfflines } from 'frontpage/api/offline';
 import { IOfflineIssue } from 'frontpage/models/Offline';
 
 import OfflineCarousel from './OfflineCarousel';
+import { FC } from 'react';
 
 export interface IState {
   dataRemaining: boolean;
@@ -13,29 +13,13 @@ export interface IState {
   page: number;
 }
 
-export const Offline = () => {
-  const [offlines, setOfflines] = useState<IOfflineIssue[]>([]);
+interface OfflineProps {
+  issues: IOfflineIssue[];
+}
 
-  /** Get the first batch of Offlines for fast loading */
-  const fetchInitial = async () => {
-    const { results } = await getOfflines(1);
-    setOfflines(results);
-    fetchRemaining();
-  };
-
-  /** Get all the remaining Offlines to fill out the list */
-  const fetchRemaining = async () => {
-    const remaining = await getRemainingOfflines();
-    setOfflines(remaining);
-  };
-
-  /** Fetch offlines on first mount */
-  useEffect(() => {
-    fetchInitial();
-  }, []);
-
+export const Offline: FC<OfflineProps> = ({ issues }) => {
   return (
-    <Carousel values={offlines} title="Offline">
+    <Carousel values={issues} title="Offline">
       {(offlineRefs) => <OfflineCarousel offlines={offlineRefs} />}
     </Carousel>
   );

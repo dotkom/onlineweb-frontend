@@ -1,10 +1,11 @@
-import IResponsiveImage from 'common/models/ResponsiveImage';
-
+interface Image {
+  title: string;
+  url: string;
+}
 export interface IOfflineIssue {
-  description: string;
-  id: number;
+  _id: number;
   issue: string;
   release_date: string;
   title: string;
-  image: IResponsiveImage | null;
+  image: Image;
 }

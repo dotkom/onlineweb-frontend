@@ -70,7 +70,7 @@ module.exports = withBundleAnalyzer(
       images: {
         deviceSizes: [320, 420, 768, 1024, 1200],
         iconSizes: [],
-        domains: ['online.ntnu.no', 'dev.online.ntnu.no', 'old.online.ntnu.no', 'api.online.ntnu.no'],
+        domains: ['online.ntnu.no', 'dev.online.ntnu.no', 'old.online.ntnu.no', 'api.online.ntnu.no', 'cdn.sanity.io'],
         path: '/_next/image',
         loader: 'default',
       },
