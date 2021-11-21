@@ -54,7 +54,7 @@ module.exports = withBundleAnalyzer(
         return config;
       },
       env: {
-        OW4_ADDRESS: process.env.OW4_ADDRESS || 'https://online.ntnu.no',
+        OW4_ADDRESS: process.env.OW4_ADDRESS || 'https://old.online.ntnu.no',
         OW4_SSO_CLIENT_ID: process.env.OW4_SSO_CLIENT_ID || '',
         OW4_SSO_CALLBACK: process.env.OW4_SSO_CALLBACK || 'http://localhost:8080/authentication/callback',
         OWF_SENTRY_DSN: process.env.OWF_SENTRY_DSN || '',
@@ -70,7 +70,14 @@ module.exports = withBundleAnalyzer(
       images: {
         deviceSizes: [320, 420, 768, 1024, 1200],
         iconSizes: [],
-        domains: ['online.ntnu.no', 'dev.online.ntnu.no', 'old.online.ntnu.no', 'api.online.ntnu.no', 'cdn.sanity.io'],
+        domains: [
+          'online.ntnu.no',
+          'dev.online.ntnu.no',
+          'old.online.ntnu.no',
+          'api.online.ntnu.no',
+          'cdn.sanity.io',
+          'onlineweb4-prod.s3.eu-north-1.amazonaws.com',
+        ],
         path: '/_next/image',
         loader: 'default',
       },
