@@ -29,18 +29,9 @@ const redirects = async () => {
       permanent: true,
     },
     {
-      source: '/admin',
-      destination: 'https://old.online.ntnu.no/admin',
-      permanent: true,
-    },
-    {
-      source: '/dashboard',
-      destination: 'https://old.online.ntnu.no/dashboard',
-      permanent: true,
-    },
-    {
-      source: '/contact',
-      destination: 'https://old.online.ntnu.no/contact',
+      source:
+        '/:prefix(wiki|dashboard|sso|feedback|auth|api/v1|admin|openid|redwine|resourcecenter|webshop|gallery|jsreverse|shop|dataporten|profile/api_plain_user_search|splash|contact)/:path*',
+      destination: 'https://old.online.ntnu.no/:prefix/:path*',
       permanent: true,
     },
     {
