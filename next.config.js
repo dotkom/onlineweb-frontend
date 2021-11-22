@@ -28,6 +28,26 @@ const redirects = async () => {
       destination: '/career/:careerId',
       permanent: true,
     },
+    {
+      source: '/admin',
+      destination: 'https://old.online.ntnu.no/admin',
+      permanent: true,
+    },
+    {
+      source: '/dashboard',
+      destination: 'https://old.online.ntnu.no/dashboard',
+      permanent: true,
+    },
+    {
+      source: '/contact',
+      destination: 'https://old.online.ntnu.no/contact',
+      permanent: true,
+    },
+    {
+      source: '/wiki/:path*',
+      destination: 'https://old.online.ntnu.no/wiki/:path*',
+      permanent: true,
+    },
   ];
 };
 
