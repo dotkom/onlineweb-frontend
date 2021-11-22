@@ -43,6 +43,11 @@ const redirects = async () => {
       destination: 'https://old.online.ntnu.no/contact',
       permanent: true,
     },
+    {
+      source: '/wiki/:path*',
+      destination: 'https://old.online.ntnu.no/wiki/:path*',
+      permanent: true,
+    },
   ];
 };
 
