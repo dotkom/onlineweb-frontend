@@ -63,7 +63,7 @@ const HeaderUser = (props: IHeaderUserProps) => {
           <Link {...getPaymentWalletUrl()}>
             <a>Saldo</a>
           </Link>
-          <Link href="#">
+          <Link href="/contact">
             <a>Kontakt oss</a>
           </Link>
           <Link {...getMyProfileUrl()}>
