@@ -25,7 +25,7 @@ const Login: React.FC<IProps> = (props) => {
   };
 
   return (
-    <div>
+    <div className={style.menuContainer}>
       {isLoggedIn ? (
         <HeaderUser logout={logOut} onClick={toggleDropdown} isOpen={isOpen} />
       ) : (
