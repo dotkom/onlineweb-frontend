@@ -24,11 +24,25 @@ const Login: React.FC<IProps> = (props) => {
     setIsOpen(!isOpen);
   };
 
-  return <>{isLoggedIn ? (
-    <HeaderUser logout={logOut} onClick={toggleDropdown} isOpen={isOpen} />
-  ) : (
-    <LoginView onClick={toggleDropdown} isOpen={isOpen} />
-  )}<Link href={"https://docs.google.com/forms/d/e/1FAIpQLScvjEqVsiRIYnVqCNqbH_-nmYk3Ux6la8a7KZzsY3sJDbW-iA/viewform"} passHref><a target="_blank" rel="noreferrer"><div className={style.user}><button className={style.debugButton}>!</button></div></a></Link></>;
+  return (
+    <div>
+      {isLoggedIn ? (
+        <HeaderUser logout={logOut} onClick={toggleDropdown} isOpen={isOpen} />
+      ) : (
+        <LoginView onClick={toggleDropdown} isOpen={isOpen} />
+      )}
+      <Link
+        href={'https://docs.google.com/forms/d/e/1FAIpQLScvjEqVsiRIYnVqCNqbH_-nmYk3Ux6la8a7KZzsY3sJDbW-iA/viewform'}
+        passHref
+      >
+        <a target="_blank" rel="noreferrer">
+          <div className={style.user}>
+            <button className={style.debugButton}>!</button>
+          </div>
+        </a>
+      </Link>
+    </div>
+  );
 };
 
 interface IHeaderUserProps {
