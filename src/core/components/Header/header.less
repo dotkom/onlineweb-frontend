@@ -128,6 +128,10 @@
   }
 }
 
+.menuContainer {
+  display: flex;
+}
+
 .user {
   position: relative;
   display: flex;
@@ -135,6 +139,40 @@
   height: 60px;
   margin: -10px 20px -10px 0;
   flex: 0 1 auto;
+
+  > .debugButton {
+    width: 50px;
+    height: 100%;
+    background-color: #e1742878;
+    position: relative;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.7rem;
+    font-weight: bold;
+
+    &::after {
+      position: absolute;
+      display: none;
+      content: 'Opplevd noe ugreit?';
+      height: 50px;
+      width: 100px;
+      border-radius: 9px;
+      top: 65px;
+      font-size: 13px;
+      padding: 5px;
+      left: -25px;
+      text-align: center;
+      background: #000000ba;
+      color: #fff;
+      font-weight: normal;
+    }
+
+    &:hover {
+      &::after {
+        display: block;
+      }
+    }
+  }
 
   > .dropdownButton {
     width: 50px;
