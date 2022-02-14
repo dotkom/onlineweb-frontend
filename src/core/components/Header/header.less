@@ -259,3 +259,24 @@
     }
   }
 }
+
+.bekk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 150px;
+}
+
+.bekkLogo {
+  width: 100px;
+  height: 40px;
+
+  @media (max-width: @owDesktopMaxWidth) {
+    display: none;
+  }
+
+  @media (max-width: @owTabletBreakpoint) {
+    display: unset;
+  }
+}
