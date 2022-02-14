@@ -26,11 +26,6 @@ const Login: React.FC<IProps> = (props) => {
 
   return (
     <div className={style.menuContainer}>
-      {isLoggedIn ? (
-        <HeaderUser logout={logOut} onClick={toggleDropdown} isOpen={isOpen} />
-      ) : (
-        <LoginView onClick={toggleDropdown} isOpen={isOpen} />
-      )}
       <Link
         href={'https://docs.google.com/forms/d/e/1FAIpQLScvjEqVsiRIYnVqCNqbH_-nmYk3Ux6la8a7KZzsY3sJDbW-iA/viewform'}
         passHref
@@ -39,6 +34,16 @@ const Login: React.FC<IProps> = (props) => {
           <div className={style.user}>
             <button className={style.debugButton}>!</button>
           </div>
+        </a>
+      </Link>
+      {isLoggedIn ? (
+        <HeaderUser logout={logOut} onClick={toggleDropdown} isOpen={isOpen} />
+      ) : (
+        <LoginView onClick={toggleDropdown} isOpen={isOpen} />
+      )}
+      <Link href={'https://www.bekk.no/'}>
+        <a className={style.bekk}>
+          <img className={style.bekkLogo} src="/img/bekk.svg" alt="Online" />
         </a>
       </Link>
     </div>
