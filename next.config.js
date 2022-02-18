@@ -39,6 +39,11 @@ const redirects = async () => {
       destination: 'https://old.online.ntnu.no/wiki/:path*',
       permanent: true,
     },
+    {
+      source: '/company',
+      destination: 'https://new.online.ntnu.no/company',
+      permanent: true,
+    },
   ];
 };
 
