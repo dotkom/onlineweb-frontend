@@ -2,6 +2,7 @@
  * Formats a string like the python .format with default fallback
  * @description
  * Format a string with variables and resolves the string to a default value if one of the variables are null/undefined.
+ * String cannot include a {
  * @example
  * fmt('Navn: {0} {1}', 'Fornavn', 'Etternavn')) => 'Navn: Fornavn Etternavn'
  * fmt('Navn: {0} {1}', 'Fornavn', undefined)) => 'Ikke tilgjengelig'
