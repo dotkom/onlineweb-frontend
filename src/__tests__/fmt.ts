@@ -7,3 +7,4 @@ test('Two string arguments', () => expect(fmt('{0} {1}', 'Henrik', 'Skog')).toBe
 test('String and number argument in reverse order', () => expect(fmt('{1} {0}', 'Henrik', 123)).toBe('123 Henrik'));
 test('Undefined argument', () => expect(fmt('{0} {1}', 'Henrik', undefined)).toBe(DEFAULT));
 test('Null argument', () => expect(fmt('{0} {1}', 'Henrik', null)).toBe(DEFAULT));
+test('Badly formatted formatstring', () => expect(() => fmt('{0} {1', 'Henrik', 'Skog')).toThrow());
