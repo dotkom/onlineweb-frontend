@@ -14,6 +14,8 @@ const fmt = (frmtStr: string, ...args: (string | number | undefined | null)[]): 
   let strIdx = 0;
   while (strIdx < frmtStr.length) {
     if (frmtStr[strIdx] == '{') {
+      //validate
+      if (frmtStr[strIdx + 2] != '}') throw new Error('A "{" is missing a matching "}"');
       // Concatting a number to a string returns string in js
       res += args[Number(frmtStr[strIdx + 1])];
       strIdx += 3;
