@@ -49,6 +49,9 @@ class Header extends Component<{}, IState> {
             <Link {...appUrls.getHobbyGroupsUrl()}>
               <a>Interessegrupper</a>
             </Link>
+            <Link {...appUrls.getForCompaniesUrl()}>
+              <a>For bedrifter</a>
+            </Link>
             <a href={`${DOMAIN}/wiki/`}>Wiki</a>
             <a href={`${DOMAIN}/webshop/`}>Webshop</a>
           </div>
