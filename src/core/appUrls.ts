@@ -34,3 +34,4 @@ export const getProfileStatisticsEventsUrl = () => url`/profile/statistics/event
 export const getProfileStatisticsOrdersUrl = () => url`/profile/statistics/orders`;
 export const getProfileSearchUrl = () => url`/profile/search`;
 export const getResourcesUrl = () => url`/resources`;
+export const getForCompaniesUrl = () => 'https://new.online.ntnu.no/company';

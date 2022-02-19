@@ -51,6 +51,7 @@ class Header extends Component<{}, IState> {
             </Link>
             <a href={`${DOMAIN}/wiki/`}>Wiki</a>
             <a href={`${DOMAIN}/webshop/`}>Webshop</a>
+            <a href={appUrls.getForCompaniesUrl()}>For bedrifter</a>
           </div>
           <HeaderLogin menuIsOpen={isOpen} closeMenu={this.closeMenu} />
         </div>
