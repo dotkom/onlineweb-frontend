@@ -7,7 +7,7 @@
  * fmt('Navn: {0} {1}', 'Fornavn', undefined)) => 'Ikke tilgjengelig'
  */
 const fmt = (frmtStr: string, ...args: (string | number | undefined | null)[]): string => {
-  if (args.filter((el) => el == undefined || el == null).length) return 'Ikke tilgjengelig';
+  if (args.filter((el) => el == null).length) return 'Ikke tilgjengelig';
 
   let res = '';
   let strIdx = 0;
