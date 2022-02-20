@@ -18,7 +18,7 @@ const fmt = (frmtStr: string, ...args: (string | number | undefined | null)[]): 
     if (frmtStr[strIdx] == '{') {
       //validate
       if (frmtStr[strIdx + 2] != '}') throw new Error('A "{" is missing a matching "}"');
-      if (typeof frmtStr[strIdx + 1] != 'number') throw new Error('Badly formatted format string');
+      if (isNaN(parseFloat(frmtStr[strIdx + 1]))) throw new Error('Badly formatted format string');
 
       // Concatting a number to a string returns string in js
       res += args[Number(frmtStr[strIdx + 1])];
