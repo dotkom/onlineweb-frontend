@@ -43,17 +43,10 @@ class Header extends Component<{}, IState> {
             <Link {...appUrls.getResourcesUrl()}>
               <a>Ressurser</a>
             </Link>
-            <Link {...appUrls.getContributionsUrl()}>
-              <a>Bidra</a>
-            </Link>
-            <Link {...appUrls.getHobbyGroupsUrl()}>
-              <a>Interessegrupper</a>
-            </Link>
+            <a href={`${DOMAIN}/wiki/`}>Wiki</a>
             <Link {...appUrls.getForCompaniesUrl()}>
               <a>For bedrifter</a>
             </Link>
-            <a href={`${DOMAIN}/wiki/`}>Wiki</a>
-            <a href={`${DOMAIN}/webshop/`}>Webshop</a>
           </div>
           <HeaderLogin menuIsOpen={isOpen} closeMenu={this.closeMenu} />
         </div>
