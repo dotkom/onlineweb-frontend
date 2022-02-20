@@ -8,3 +8,4 @@ test('String and number argument in reverse order', () => expect(fmt('{1} {0}', 
 test('Undefined argument', () => expect(fmt('{0} {1}', 'Henrik', undefined)).toBe(DEFAULT));
 test('Null argument', () => expect(fmt('{0} {1}', 'Henrik', null)).toBe(DEFAULT));
 test('Badly formatted formatstring', () => expect(() => fmt('{0} {1', 'Henrik', 'Skog')).toThrow());
+test('Badly formatted formatstring', () => expect(() => fmt('{x} {1', 'Henrik', 'Skog')).toThrow());
