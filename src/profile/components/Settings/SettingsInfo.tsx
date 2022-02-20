@@ -5,6 +5,7 @@ import { getProfile } from 'profile/api';
 import { IUserProfile } from 'profile/models/User';
 import { useEffect, useState } from 'react';
 import KeyValue from '../Profile/KeyValue';
+import fmt from 'profile/utils/stringFormat';
 
 const MAIN_INFO_TEXT = `
   # Innstillinger
@@ -30,9 +31,9 @@ const SettingsInfo = () => {
       <Markdown source={MAIN_INFO_TEXT} />
       {profile ? (
         <>
-          <KeyValue k="Navn" v={`${profile.first_name} ${profile.last_name}`} bold />
-          <KeyValue k="Klassetrinn" v={`${profile.year}. klasse`} bold />
-          <KeyValue k="Adresse" v={`${profile.address}, ${profile.zip_code} ${profile.city}`} bold />
+          <KeyValue k="Navn" v={fmt('{0} {1}', profile.first_name, profile.last_name)} bold />
+          <KeyValue k="Klassetrinn" v={fmt('{0}. klasse', profile.year)} bold />
+          <KeyValue k="Adresse" v={fmt('{0} {1} {2}', profile.address, profile.zip_code, profile.city)} bold />
           <KeyValue k="Telefon" v={profile.phone_number} bold />
           <KeyValue k="Kallenavn" v={profile.nickname} bold />
           <KeyValue k="NTNU-brukernavn" v={profile.ntnu_username} bold />
