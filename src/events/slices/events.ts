@@ -44,7 +44,6 @@ export const fetchImageEvents = createAsyncThunk('events/fetchImageEvents', asyn
         event_end__gte: new Date().toISOString(),
         event_type: types,
         page_size: 4,
-        ordering: '+event_start',
       })
     );
   };
