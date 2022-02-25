@@ -35,6 +35,10 @@ export const ParticipantsButton: FC<IProps> = ({ eventId, eventTitle }) => {
     dispatch(fetchPublicAttendeesByEventId(eventId));
   }, [eventId]);
 
+  useEffect(() => {
+    document.body.style.overflowY = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
+
   return (
     <>
       <Button onClick={toggleModal}>Vis påmeldte</Button>
