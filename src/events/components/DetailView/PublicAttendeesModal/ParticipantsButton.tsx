@@ -37,7 +37,7 @@ export const ParticipantsButton: FC<IProps> = ({ eventId, eventTitle }) => {
 
   // disables background scrolling when the modal is open
   useEffect(() => {
-    document.body.style.overflowY = showModal ? 'hidden' : 'auto';
+    document.body.style.overflow = showModal ? 'hidden' : 'auto';
   }, [showModal]);
 
   return (
