@@ -35,6 +35,11 @@ export const ParticipantsButton: FC<IProps> = ({ eventId, eventTitle }) => {
     dispatch(fetchPublicAttendeesByEventId(eventId));
   }, [eventId]);
 
+  // disables background scrolling when the modal is open
+  useEffect(() => {
+    document.body.style.overflow = showModal ? 'hidden' : 'auto';
+  }, [showModal]);
+
   return (
     <>
       <Button onClick={toggleModal}>Vis påmeldte</Button>
