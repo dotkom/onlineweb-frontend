@@ -47,8 +47,6 @@ const selectFrontPageEventIdsOfTypes = (eventTypes: EventTypeEnum[]) => (state: 
   const now = new Date();
   now.setHours(0, 0, 0, 0);
 
-  console.log(now);
-
   return eventSelectors
     .selectAll(state)
     .filter((event) => eventTypes.some((eventType) => event.event_type === eventType))
