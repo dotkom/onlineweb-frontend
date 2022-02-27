@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import React, { useEffect, FC } from 'react';
 import { shallowEqual } from 'react-redux';
 
