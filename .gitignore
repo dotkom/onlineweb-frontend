@@ -8,3 +8,4 @@ dist
 *.log
 .next
 .DS_Store
+.dccache
