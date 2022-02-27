@@ -41,7 +41,7 @@ export const fetchImageEvents = createAsyncThunk('events/fetchImageEvents', asyn
   const getTypeEvents = async (types: EventTypeEnum[]) => {
     return await dispatch(
       fetchEvents({
-        event_end__gte: new Date().toISOString(),
+        event_end__gte: DateTime.local().toISODate(),
         event_type: types,
         page_size: 4,
       })

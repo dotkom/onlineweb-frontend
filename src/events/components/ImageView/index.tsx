@@ -44,11 +44,15 @@ export const ImageView: FC = () => {
 };
 
 const selectFrontPageEventIdsOfTypes = (eventTypes: EventTypeEnum[]) => (state: State) => {
-  const now = DateTime.local();
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+
+  console.log(now);
+
   return eventSelectors
     .selectAll(state)
     .filter((event) => eventTypes.some((eventType) => event.event_type === eventType))
-    .filter((event) => DateTime.fromISO(event.start_date) >= now)
+    .filter((event) => new Date(event.start_date) >= now)
     .sort((eventA, eventB) => eventA.start_date.localeCompare(eventB.start_date))
     .slice(0, 4)
     .map((event) => event.id);
