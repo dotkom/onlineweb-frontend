@@ -37,10 +37,10 @@ export const Orders: FC = () => {
         <Pane>{orderLines.length && <OrderItemDonut orderLines={orderLines} />}</Pane>
         <FourSplitPane>
           <Pane>
-            <NumberStat name="Antall Kjøp" value={totalOrderLines} />
+            <NumberStat name="Antall kjøp" value={totalOrderLines} />
           </Pane>
           <Pane>
-            <NumberStat name="Antall Enheter" value={totalItems} />
+            <NumberStat name="Antall enheter" value={totalItems} />
           </Pane>
           <Pane>
             <AccountBalance />
