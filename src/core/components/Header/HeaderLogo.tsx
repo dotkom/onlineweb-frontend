@@ -13,7 +13,7 @@ const HeaderLogo = (props: IProps) => {
   return (
     <Link {...getFrontPageUrl()}>
       <a className={style.logo} {...props}>
-        <img src="/img/abakus_logo_white.png" alt="Online" />
+        <img src="/img/online_logo.svg" alt="Online" />
       </a>
     </Link>
   );
