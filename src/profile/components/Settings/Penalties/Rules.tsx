@@ -10,11 +10,11 @@ const RULES = md`
   ### Prikk?
 
   Det at du har aktive prikker innebærer at du vil måtte vente 24 timer etter ordinær påmeldingsstart for å melde
-  deg på et arrangement. Hver prikk varer i 30 dager, dersom du får ny prikk og du allerede har en aktiv prikk blir
-  de nye 30 dagene lagt til på slutten av virkeperioden til eksisterende prikk(er).
+  deg på et arrangement. Hver prikk varer i 20 dager, dersom du får ny prikk og du allerede har en aktiv prikk blir
+  de nye 20 dagene lagt til på slutten av virkeperioden til eksisterende prikk(er).
 
   Varigheten til prikker er fryst i ferier. Disse er definert fra 1. desember til 15. januar og 1. juni til 15.
-  august. Dersom en prikk gis 15. mai vil altså denne prikken utløpe 30. august.
+  august. Dersom en prikk gis 15. mai vil altså denne prikken utløpe 20. august.
 
   Grunnen til at vi deler ut prikker er å sørge for at medlemmer følger reglene.
 
