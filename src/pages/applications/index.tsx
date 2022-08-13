@@ -1,0 +1,51 @@
+import ResponsiveImage from 'common/components/ResponsiveImage';
+import { getOnlineGroups } from 'groups/api';
+import { IOnlineGroup } from 'groups/models/onlinegroup';
+import React, { useEffect, useState } from 'react';
+
+import style from '../../applications/committee.less';
+
+const Committees: React.FC = () => {
+  const [committees, setCommittees] = useState<IOnlineGroup[]>([]);
+
+  useEffect(() => {
+    console.log('Running');
+    getOnlineGroups().then((groups: IOnlineGroup[]) => {
+      const CommitteeList: IOnlineGroup[] = [];
+      for (let i = 0; i < groups.length; i++) {
+        if (
+          groups[i].group_type == 'committee' &&
+          !['Hovedstyret', 'Komitéledere', 'Onlines Fond', 'Pangsjonistkomiteen'].includes(groups[i].name_long)
+        ) {
+          CommitteeList.push(groups[i]);
+        }
+      }
+      setCommittees(CommitteeList);
+    });
+  }, []);
+  return (
+    <div>
+      <div className={style.bigBoldLetters}>Velkommen til Onlines komiteer!</div>
+      <div className={style.intro}>
+        Komitémedlemmene våre får Online til å gå rundt, og arbeider for at alle informatikkstudenter skal ha en flott
+        studiehverdag. <a href="https://forms.gle/anRH21N3LYPtqCDUA">Her</a> kan du søke om å bli en av oss!
+      </div>
+      {committees.map((com) => {
+        return (
+          <div key={com.name_short} className={style.hobbyCard}>
+            <div className={style.imageContainer}>{com.image ? <ResponsiveImage image={com.image} /> : null}</div>
+            <div className={style.title}>{com.name_long}</div>
+            <div>{com.description_long != '' ? com.description_long : com.application_description}</div>
+          </div>
+        );
+      })}
+      <div className={style.applyButton}>
+        <a className={style.apply} href="https://forms.gle/anRH21N3LYPtqCDUA">
+          Trykk her for å sende inn en søknad!
+        </a>
+      </div>
+    </div>
+  );
+};
+
+export default Committees;

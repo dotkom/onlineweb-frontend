@@ -6,6 +6,7 @@ export interface IOnlineGroup {
   name_long: string;
   description_long: string;
   description_short: string;
+  application_description: string;
   email: string;
   created: string;
   group_type: string;
