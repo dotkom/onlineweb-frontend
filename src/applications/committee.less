@@ -1,0 +1,86 @@
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
+
+@imageSize: 200px;
+@padding: 20px;
+@outerCircle: @imageSize / 2 + @padding;
+
+.apply {
+  background-color: rgb(47, 111, 170);
+  color: white;
+  font-size: large;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.applyButton {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: -120px;
+}
+
+.bigBoldLetters {
+  font-size: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.hobbyCard {
+  .owCard();
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: @outerCircle 0 200px 0;
+  padding: @outerCircle @padding @padding;
+  background: radial-gradient(circle @outerCircle at top center, transparent 99%, #fff 100%, #fff 0);
+}
+
+.imageContainer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  left: 50%;
+  padding: @padding;
+  border-radius: 50%;
+  border: 2px solid @lightGray;
+  transition: border-color 0.25s;
+  transform: translate(-50%, -50%);
+
+  img {
+    width: @imageSize;
+    height: @imageSize;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 0.25s;
+  }
+
+  &:hover {
+    border-color: @blue;
+    img {
+      transform: scale(1.1667);
+    }
+  }
+}
+
+.intro {
+  position: relative;
+  text-align: center;
+  font-size: large;
+  margin-bottom: 200px;
+  a {
+    color: blue;
+  }
+}
+
+.title {
+  padding: 15px 0;
+  text-align: center;
+  border-bottom: 1px solid @lightGray;
+  margin-bottom: 15px;
+  font-size: large;
+  font-weight: bold;
+}
