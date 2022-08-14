@@ -24,11 +24,12 @@ const Committees: React.FC = () => {
     });
   }, []);
   return (
-    <div>
+    <div className={style.container}>
       <div className={style.bigBoldLetters}>Velkommen til Onlines komiteer!</div>
       <div className={style.intro}>
         Komitémedlemmene våre får Online til å gå rundt, og arbeider for at alle informatikkstudenter skal ha en flott
-        studiehverdag. <a href="https://forms.gle/anRH21N3LYPtqCDUA">Her</a> kan du søke om å bli en av oss!
+        studiehverdag.
+        <br /> <a href="https://forms.gle/anRH21N3LYPtqCDUA">Her</a> kan du søke om å bli en av oss!
       </div>
       {committees.map((com) => {
         return (

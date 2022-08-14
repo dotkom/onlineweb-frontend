@@ -24,8 +24,12 @@
 
 .bigBoldLetters {
   font-size: 50px;
-  text-align: center;
   font-weight: bold;
+}
+
+.container {
+  text-align: center;
+  width: 90vw;
 }
 
 .hobbyCard {
@@ -33,9 +37,10 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  margin: @outerCircle 0 200px 0;
+  margin: 50px 0 200px 0;
   padding: @outerCircle @padding @padding;
   background: radial-gradient(circle @outerCircle at top center, transparent 99%, #fff 100%, #fff 0);
+  text-align: left;
 }
 
 .imageContainer {
@@ -68,7 +73,6 @@
 
 .intro {
   position: relative;
-  text-align: center;
   font-size: large;
   margin-bottom: 200px;
   a {
@@ -83,4 +87,20 @@
   margin-bottom: 15px;
   font-size: large;
   font-weight: bold;
+}
+
+@media only screen and (min-width: 800px) {
+  .hobbyCard {
+    width: 45%;
+    display: inline-flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    min-height: 550px;
+  }
+}
+
+@media only screen and (min-width: 1330px) {
+  .hobbyCard {
+    width: 30%;
+  }
 }
