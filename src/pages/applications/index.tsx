@@ -14,8 +14,9 @@ const Committees: React.FC = () => {
       const CommitteeList: IOnlineGroup[] = [];
       for (let i = 0; i < groups.length; i++) {
         if (
-          groups[i].group_type == 'committee' &&
-          !['Hovedstyret', 'Komitéledere', 'Onlines Fond', 'Pangsjonistkomiteen'].includes(groups[i].name_long)
+          (groups[i].group_type == 'committee' &&
+            !['Hovedstyret', 'Komitéledere', 'Onlines Fond', 'Pangsjonistkomiteen'].includes(groups[i].name_long)) ||
+          groups[i].name_short == 'Appkom'
         ) {
           CommitteeList.push(groups[i]);
         }
