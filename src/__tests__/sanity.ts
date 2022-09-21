@@ -3,6 +3,7 @@ describe('The Human Condition', () => {
     expect(true === true);
     expect(!false);
     expect(true);
+    expect(1 + 1 === 2);
     for (let i = 0; i < 100; i++) {
       expect(i === i);
     }
