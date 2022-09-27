@@ -31,6 +31,9 @@ class Header extends Component<{}, IState> {
           <MenuButton isOpen={isOpen} onClick={this.toggleMenu} />
           <HeaderLogo onClick={this.closeMenu} />
           <div className={classnames(style.links, { [style.dropdownMode]: isOpen })} onClick={this.closeMenu}>
+            <Link {...appUrls.getCompanyNew()}>
+              <a>For bedrifter</a>
+            </Link>
             <Link {...appUrls.getEventsUrl()}>
               <a>Arrangementer</a>
             </Link>
