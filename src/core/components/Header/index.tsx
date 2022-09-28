@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 
 import { DOMAIN } from 'common/constants/endpoints';
 import * as appUrls from 'core/appUrls';
