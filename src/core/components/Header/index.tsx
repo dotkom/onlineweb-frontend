@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 
 import { DOMAIN } from 'common/constants/endpoints';
 import * as appUrls from 'core/appUrls';
@@ -9,31 +9,29 @@ import style from './header.less';
 import HeaderLogo from './HeaderLogo';
 import HeaderLogin from './Login';
 import MenuButton from './MenuButton';
+import { selectIsLoggedIn } from 'authentication/selectors/authentication';
+import { useSelector } from 'react-redux';
+
 
 export interface IState {
   isOpen: boolean;
 }
+const Header = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn());
+  const [isOpen, setIsOpen] = useState(false)
+  
+  const toggleMenu = () => setIsOpen( !isOpen );
 
-class Header extends Component<{}, IState> {
-  public state: IState = {
-    isOpen: false,
-  };
+  const closeMenu = () => setIsOpen( false);
 
-  public toggleMenu = () => this.setState(({ isOpen }) => ({ isOpen: !isOpen }));
-
-  public closeMenu = () => this.setState({ isOpen: false });
-
-  public render() {
-    const { isOpen } = this.state;
-    return (
-      <header className={style.header}>
+  
+  return (
+    <header className={style.header}>
         <div className={style.grid}>
-          <MenuButton isOpen={isOpen} onClick={this.toggleMenu} />
-          <HeaderLogo onClick={this.closeMenu} />
-          <div className={classnames(style.links, { [style.dropdownMode]: isOpen })} onClick={this.closeMenu}>
-            <Link {...appUrls.getCompanyNew()}>
-              <a>For bedrifter</a>
-            </Link>
+          <MenuButton isOpen={isOpen} onClick={toggleMenu} />
+          <HeaderLogo onClick={closeMenu} />
+          {isLoggedIn ? (
+            <div className={classnames(style.links, { [style.dropdownMode]: isOpen })} onClick={closeMenu}>
             <Link {...appUrls.getEventsUrl()}>
               <a>Arrangementer</a>
             </Link>
@@ -44,19 +42,35 @@ class Header extends Component<{}, IState> {
               <a>Ressurser</a>
             </Link>
             <Link {...appUrls.getContributionsUrl()}>
-              <a>Bidra</a>
+            <a>Bidra</a>
             </Link>
             <Link {...appUrls.getHobbyGroupsUrl()}>
               <a>Interessegrupper</a>
             </Link>
             <a href={`${DOMAIN}/wiki/`}>Wiki</a>
             <a href={`${DOMAIN}/webshop/`}>Webshop</a>
+            </div>
+          ) : (
+            <div className={classnames(style.links, { [style.dropdownMode]: isOpen })} onClick={closeMenu}>
+              <Link {...appUrls.getCompanyNewUrl()}>
+                <a>For bedrifter</a>
+              </Link>
+              <Link {...appUrls.getEventsUrl()}>
+                <a>Arrangementer</a>
+              </Link>
+              <Link {...appUrls.getCareerOpportunitiesUrl()}>
+                <a>Karriere</a>
+              </Link>
+              <Link {...appUrls.getHobbyGroupsUrl()}>
+                <a>Interessegrupper</a>
+              </Link>
+              <a href={`${DOMAIN}/wiki/`}>Wiki</a>  
+            </div>
+            )}
+            <HeaderLogin menuIsOpen={isOpen} closeMenu={closeMenu} />
           </div>
-          <HeaderLogin menuIsOpen={isOpen} closeMenu={this.closeMenu} />
-        </div>
       </header>
-    );
-  }
-}
-
+  )
+} 
+    
 export default Header;
