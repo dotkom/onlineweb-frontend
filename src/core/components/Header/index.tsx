@@ -42,7 +42,7 @@ const Header = () => {
               <a>Ressurser</a>
             </Link>
             <Link {...appUrls.getContributionsUrl()}>
-            <a>Bidra</a>
+              <a>Bidra</a>
             </Link>
             <Link {...appUrls.getHobbyGroupsUrl()}>
               <a>Interessegrupper</a>
