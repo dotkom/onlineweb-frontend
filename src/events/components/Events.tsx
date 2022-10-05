@@ -7,11 +7,9 @@ import { SearchResults } from './SearchModule/SearchResults';
 import { Stats } from './SearchModule/Stats';
 import { NextPageObserver } from './SearchModule/NextPageObserver';
 
-import style from './less/eventsContainer.less';
-
 const Events: FC = () => {
   return (
-    <section className={style.section}>
+    <section>
       <Heading title="Arrangementer" />
       <SearchModule />
       <Stats />
