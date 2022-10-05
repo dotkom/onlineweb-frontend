@@ -9,7 +9,7 @@ export interface IOrderLine {
 export interface IOrder {
   price: number;
   quantity: number;
-  content_object: IStoreItem;
+  content_object: IStoreItem | undefined;
 }
 
 export interface IStoreItem {

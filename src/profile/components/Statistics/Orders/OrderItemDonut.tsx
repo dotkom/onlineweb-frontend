@@ -15,6 +15,9 @@ const OrderItemDonut = ({ orderLines }: IProps) => {
   /** TODO: Allow flatMap */
   const orders: IOrder[] = orderLines.reduce<IOrder[]>((prev, curr) => [...prev, ...curr.orders], []);
   const categories = orders.reduce<{ [name: string]: number }>((prev, curr) => {
+    if (!curr.content_object) {
+      return prev
+    }
     const { name } = curr.content_object.category;
     const prevValues = prev.hasOwnProperty(name) ? prev[name] + curr.quantity : 1;
     return { ...prev, [name]: prevValues };
