@@ -101,7 +101,7 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
       {isEligibleForSignup && (isEligibleForSignup.status) && (
         <div className={`${style.agreeRules} ${style.fullBlock}`}>
           <p>Ved å melde deg på godtar du</p>
-          <a href="https://old.online.ntnu.no/wiki/online/info/innsikt-og-interface/prikkeregler/">Onlines prikkregler</a>
+          <a href="https://old.online.ntnu.no/wiki/online/info/innsikt-og-interface/prikkeregler/">Onlines prikkeregler</a>
         </div>
       )}
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
