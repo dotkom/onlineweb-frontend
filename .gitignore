@@ -9,3 +9,4 @@ dist
 .next
 .DS_Store
 .dccache
+.env.local

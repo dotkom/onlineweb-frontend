@@ -4,6 +4,7 @@ import { shallowEqual, useDispatch } from 'react-redux';
 
 import { useSelector } from 'core/redux/hooks';
 import { State } from 'core/redux/Store';
+import { useToast } from 'core/utils/toast/useToast';
 import { ISignupEligibility } from 'events/models/Event';
 import { attendanceEventSelectors } from 'events/slices/attendanceEvents';
 
@@ -25,6 +26,11 @@ interface IProps {
   eventTitle: string;
 }
 
+interface IExtraOption {
+  value: number;
+  label: string;
+}
+
 const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
   const dispatch = useDispatch();
   const attendanceEvent = useSelector((state) => attendanceEventSelectors.selectById(state, eventId));
@@ -36,6 +42,8 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
     dispatch(fetchAttendeeByEventId(eventId));
   }, [eventId]);
 
+  const [addToast] = useToast({ type: 'success', duration: 5000 });
+
   const isEligibleForSignup = useSelector(selectIsEligibleForSignup(eventId), shallowEqual);
 
   if (!attendanceEvent) {
@@ -46,6 +54,11 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
   const registrationEnd = DateTime.fromISO(attendanceEvent.registration_end);
   const cancellationDeadline = DateTime.fromISO(attendanceEvent.unattend_deadline);
   const showPayment = !attendanceEvent.is_on_waitlist && attendanceEvent.is_attendee && attendanceEvent.payment;
+
+  const options: IExtraOption[] = attendanceEvent.extras.map((extra: IExtra) => ({
+    value: extra.id,
+    label: extra.choice,
+  }));
 
   return (
     <div className={style.blockGrid}>
@@ -73,30 +86,16 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
         <p>{attendanceEvent.waitlist ? attendanceEvent.number_on_waitlist : '-'}</p>
       </Block>
       {attendanceEvent.has_extras && attendanceEvent.is_attendee && attendee && (
-        <Block title="Ekstras">
-          <Select>
-            <option
-              key={-1}
-              value={-1}
-              onClick={(e: React.MouseEvent<HTMLOptionElement, MouseEvent>) =>
-                dispatch(patchAttendee({ attendeeId: attendee.id, extras: Number(e.currentTarget.value) }))
-              }
-            >
-              Velg ekstra
-            </option>
-            {attendanceEvent.extras.map((extra: IExtra) => (
-              <option
-                key={extra.id}
-                value={extra.id}
-                selected={extra.id == attendee.extras}
-                onClick={(e: React.MouseEvent<HTMLOptionElement, MouseEvent>) =>
-                  dispatch(patchAttendee({ attendeeId: attendee.id, extras: Number(e.currentTarget.value) }))
-                }
-              >
-                {extra.id == attendee.extras && 'Valgt ekstra:'} {extra.choice}
-              </option>
-            ))}
-          </Select>
+        <Block title="Ekstras" className={style.fullBlock}>
+          <Select
+            placeholder="Velg ekstra"
+            value={options.find((option) => option.value == attendee.extras)}
+            options={options}
+            onChange={(props: IExtraOption) => {
+              dispatch(patchAttendee({ attendeeId: attendee.id, extras: props.value }));
+              addToast('Ekstra valgt');
+            }}
+          />
         </Block>
       )}
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>

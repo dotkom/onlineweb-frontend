@@ -42,6 +42,7 @@ export const setAttendeeByEventId = createAsyncThunk(
     );
     if (ret) {
       dispatch(fetchAttendanceEventById(eventId));
+      dispatch(attendeesSlice.actions.addAttendee(ret));
     }
   }
 );
@@ -51,6 +52,7 @@ export const removeAttendeeByEventId = createAsyncThunk(
   async (eventId: number, { dispatch }) => {
     await userUnattendEvent(eventId);
     dispatch(fetchAttendanceEventById(eventId));
+    dispatch(attendeesSlice.actions.clearAllAttendees());
   }
 );
 
@@ -69,7 +71,10 @@ const INITIAL_STATE: IState = {
 export const attendeesSlice = createSlice({
   name: 'attendees',
   initialState: attendeesAdapter.getInitialState(INITIAL_STATE),
-  reducers: {},
+  reducers: {
+    addAttendee: attendeesAdapter.addOne,
+    clearAllAttendees: attendeesAdapter.removeAll,
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAttendeeByEventId.pending, (state) => {
       state.loading = 'pending';

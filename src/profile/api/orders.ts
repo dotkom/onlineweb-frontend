@@ -16,7 +16,7 @@ export const transformOrderData = (orderLines: IOrderLine[]): IOrderData[] => {
         date: DateTime.fromISO(orderLine.datetime),
         paid: orderLine.paid,
         price: data.price,
-        product: data.content_object?.name || "Fjernet vare",
+        product: data.content_object?.name || 'Fjernet vare',
       });
     }
   }
