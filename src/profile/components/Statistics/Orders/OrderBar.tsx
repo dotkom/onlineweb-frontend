@@ -21,7 +21,7 @@ const OrderBar = ({ orderLines }: IProps) => {
   const orders: IOrder[] = orderLines.reduce<IOrder[]>((prev, curr) => [...prev, ...curr.orders], []);
   const items = orders.reduce<{ [name: string]: number }>((prev, curr) => {
     if (!curr.content_object) {
-      return prev
+      return prev;
     }
     const name = curr.content_object.name.replace('[Discontinued] ', '');
     const prevValues = prev.hasOwnProperty(name) ? prev[name] + curr.quantity : 1;

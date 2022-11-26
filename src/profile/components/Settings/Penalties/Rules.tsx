@@ -6,6 +6,7 @@ import { md } from 'common/components/Markdown';
 
 import style from './penalties.less';
 
+// prettier-ignore
 const RULES = md`
   # Prikkeregler
 
