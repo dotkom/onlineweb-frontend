@@ -55,12 +55,12 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
   const cancellationDeadline = DateTime.fromISO(attendanceEvent.unattend_deadline);
   const showPayment = !attendanceEvent.is_on_waitlist && attendanceEvent.is_attendee && attendanceEvent.payment;
 
-  let options: IExtraOption[] = [
+  const options: IExtraOption[] = [
     { value: -1, label: 'Velg ekstra' },
-    ...attendanceEvent.extras.map((extra: IExtra) => ({ 
+    ...attendanceEvent.extras.map((extra: IExtra) => ({
       value: extra.id,
       label: extra.choice,
-    }))
+    })),
   ];
 
   return (
@@ -94,8 +94,8 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
             defaultValue={options.find((option) => option.value == attendee.extras) ?? options[0]}
             options={options}
             onChange={(props: IExtraOption) => {
-              dispatch(patchAttendee({ attendeeId: attendee.id, extras: props.value }))
-              addToast('Ekstra valgt')
+              dispatch(patchAttendee({ attendeeId: attendee.id, extras: props.value }));
+              addToast('Ekstra valgt');
             }}
           />
         </Block>
