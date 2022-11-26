@@ -42,6 +42,7 @@ export const setAttendeeByEventId = createAsyncThunk(
     );
     if (ret) {
       dispatch(fetchAttendanceEventById(eventId));
+      dispatch(attendeesSlice.actions.addAttendee(ret));
     }
   }
 );
@@ -69,7 +70,9 @@ const INITIAL_STATE: IState = {
 export const attendeesSlice = createSlice({
   name: 'attendees',
   initialState: attendeesAdapter.getInitialState(INITIAL_STATE),
-  reducers: {},
+  reducers: {
+    addAttendee: attendeesAdapter.addOne,
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAttendeeByEventId.pending, (state) => {
       state.loading = 'pending';
