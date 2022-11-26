@@ -55,13 +55,10 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
   const cancellationDeadline = DateTime.fromISO(attendanceEvent.unattend_deadline);
   const showPayment = !attendanceEvent.is_on_waitlist && attendanceEvent.is_attendee && attendanceEvent.payment;
 
-  const options: IExtraOption[] = [
-    { value: -1, label: 'Velg ekstra' },
-    ...attendanceEvent.extras.map((extra: IExtra) => ({
-      value: extra.id,
-      label: extra.choice,
-    })),
-  ];
+  const options: IExtraOption[] = attendanceEvent.extras.map((extra: IExtra) => ({
+    value: extra.id,
+    label: extra.choice,
+  }));
 
   return (
     <div className={style.blockGrid}>
@@ -91,7 +88,8 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
       {attendanceEvent.has_extras && attendanceEvent.is_attendee && attendee && (
         <Block title="Ekstras" className={style.fullBlock}>
           <Select
-            defaultValue={options.find((option) => option.value == attendee.extras) ?? options[0]}
+            placeholder="Velg ekstra"
+            value={options.find((option) => option.value == attendee.extras)}
             options={options}
             onChange={(props: IExtraOption) => {
               dispatch(patchAttendee({ attendeeId: attendee.id, extras: props.value }));
