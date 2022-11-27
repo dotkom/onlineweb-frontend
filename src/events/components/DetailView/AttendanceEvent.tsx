@@ -98,6 +98,14 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
           />
         </Block>
       )}
+      {isEligibleForSignup && isEligibleForSignup.status && (
+        <div className={`${style.agreeRules} ${style.fullBlock}`}>
+          <p>Ved å melde deg på godtar du</p>
+          <a href="https://old.online.ntnu.no/wiki/online/info/innsikt-og-interface/prikkeregler/">
+            Onlines prikkeregler
+          </a>
+        </div>
+      )}
       <div className={`${style.attendanceContainer} ${style.fullBlock}`}>
         <Attendance canAttend={isEligibleForSignup} event={attendanceEvent} unattendDeadline={cancellationDeadline} />
         <PublicAttendeesWrapper isAttending={attendanceEvent.is_attendee} canAttend={isEligibleForSignup}>
