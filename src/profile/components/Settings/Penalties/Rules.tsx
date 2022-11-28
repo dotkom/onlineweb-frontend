@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import { useCollapse } from 'common/hooks/collapsible';
 
@@ -67,14 +68,24 @@ const RULES = md`
 `;
 
 export const Info = () => {
-  const [collapsed, toggleCollapse] = useCollapse();
+  const rulesId = 'rules';
+
+  const { asPath } = useRouter();
+  const hash = asPath.split('#')[1];
+
+  const [collapsed, toggleCollapse] = useCollapse(hash !== rulesId);
+
   return (
     <>
       <h2>Regler</h2>
       <button className={style.toggleRules} onClick={toggleCollapse}>
         {collapsed ? 'Vis regler' : 'Skjul regler'}
       </button>
-      {!collapsed && <div className={style.rules}>{RULES}</div>}
+      {!collapsed && (
+        <div id={rulesId} className={style.rules}>
+          {RULES}
+        </div>
+      )}
     </>
   );
 };
