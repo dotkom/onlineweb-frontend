@@ -2,7 +2,7 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-import { getMyProfileUrl, getProfileSearchUrl, getProfileSettingsUrl, getProfileStatisticsUrl } from 'core/appUrls';
+import { getMyProfileUrl, getProfileSettingsUrl, getProfileStatisticsUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 import style from './mainMenu.less';
 
@@ -10,7 +10,6 @@ const MainMenu = () => {
   return (
     <div className={style.menuGrid}>
       <MenuElement text="Min Profil" {...getMyProfileUrl()} />
-      <MenuElement text="Brukersøk" {...getProfileSearchUrl()} />
       <MenuElement text="Innstillinger" containsSubpages {...getProfileSettingsUrl()} />
       <MenuElement text="Statistikk" containsSubpages {...getProfileStatisticsUrl()} />
     </div>
