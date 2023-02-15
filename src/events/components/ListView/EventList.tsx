@@ -26,7 +26,7 @@ const EventListComponent: FC<IProps> = ({ eventIds, sortOrder = 'ASC' }) => {
 
   const isOutdatedEvent = (ev: IEvent) => {
     return DateTime.fromJSDate(new Date()) > DateTime.fromISO(ev.end_date);
-  }
+  };
 
   return (
     <div className={style.grid}>
@@ -34,11 +34,11 @@ const EventListComponent: FC<IProps> = ({ eventIds, sortOrder = 'ASC' }) => {
         const isOutdated = isOutdatedEvent(event);
         return (
           <Link {...getEventUrl(event.id)} key={event.id}>
-            <a className={classNames({[style.outdatedLink]: isOutdated})}>
-              <ListEvent event={event} isOutdated={isOutdated}/>
+            <a className={classNames({ [style.outdatedLink]: isOutdated })}>
+              <ListEvent event={event} isOutdated={isOutdated} />
             </a>
           </Link>
-          )
+        );
       })}
     </div>
   );

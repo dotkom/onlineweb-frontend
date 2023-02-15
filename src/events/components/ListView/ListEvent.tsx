@@ -25,7 +25,7 @@ const ListEvent: FC<IProps> = ({ event, isOutdated }) => {
     number_of_seats_taken,
     max_capacity,
     waitlist,
-    attendee_info
+    attendee_info,
   } = event;
 
   const { is_attendee, is_on_waitlist, is_eligible_for_signup } = attendee_info ?? {};
@@ -33,11 +33,11 @@ const ListEvent: FC<IProps> = ({ event, isOutdated }) => {
   const capacity = useSelector(selectEventCapacity(event.id));
   const eventDateTime = DateTime.fromISO(start_date);
 
-  let eventColor = getEventColor(event_type);
+  const eventColor = getEventColor(event_type);
 
   let pingColor;
   let tooltipText;
-  let animationActive = false;
+  const animationActive = false; // Don't ask
 
   if (is_on_waitlist) {
     pingColor = '#FFA500';
@@ -59,14 +59,21 @@ const ListEvent: FC<IProps> = ({ event, isOutdated }) => {
 
   let registrationStatusElement;
   if (pingColor && !is_attendee) {
-    registrationStatusElement = (<div className={style.eventRegistrationStatus} title={tooltipText}>
-      <span className={classNames({[style.animationPing]: animationActive})} style={{ backgroundColor: pingColor }}></span>
-      <span style={{ backgroundColor: pingColor }}></span>
-    </div>)
+    registrationStatusElement = (
+      <div className={style.eventRegistrationStatus} title={tooltipText}>
+        <span
+          className={classNames({ [style.animationPing]: animationActive })}
+          style={{ backgroundColor: pingColor }}
+        ></span>
+        <span style={{ backgroundColor: pingColor }}></span>
+      </div>
+    );
   } else if (is_attendee) {
-    registrationStatusElement = (<div className={style.isRegistered} title={tooltipText}>
-      <FontAwesomeIcon icon={faCheck} style={{ color: pingColor }} fixedWidth />
-    </div>)
+    registrationStatusElement = (
+      <div className={style.isRegistered} title={tooltipText}>
+        <FontAwesomeIcon icon={faCheck} style={{ color: pingColor }} fixedWidth />
+      </div>
+    );
   }
 
   const eventDate =
@@ -75,12 +82,10 @@ const ListEvent: FC<IProps> = ({ event, isOutdated }) => {
       : eventDateTime.toFormat('dd.MM');
 
   return (
-    <div className={classNames(style.gridRow, {[style.grayedOutGridRow]: isOutdated})}>
+    <div className={classNames(style.gridRow, { [style.grayedOutGridRow]: isOutdated })}>
       <div className={style.eventTypeDiv}>
         <span style={{ background: eventColor }} />
-        <p className={style.eventType}>
-          {event_type_display}
-        </p>
+        <p className={style.eventType}>{event_type_display}</p>
       </div>
       <p className={style.eventTitle}>{title}</p>
       <div className={style.icon}>
