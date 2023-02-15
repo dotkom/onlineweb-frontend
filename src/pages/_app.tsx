@@ -6,6 +6,7 @@ import withRedux, { ReduxWrapperAppProps } from 'next-redux-wrapper';
 import DefaultApp, { AppProps } from 'next/app';
 import React from 'react';
 import { Provider } from 'react-redux';
+import PlausibleProvider from 'next-plausible';
 
 import 'react-day-picker/lib/style.css';
 
@@ -36,7 +37,7 @@ type Props = AppProps & ReduxWrapperAppProps<State>;
 const CustomApp = (appProps: Props): JSX.Element => {
   const { Component, pageProps, store } = appProps;
   return (
-    <>
+    <PlausibleProvider domain="online.ntnu.no" trackOutboundLinks>
       <GlobalStyle />
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,7 +51,7 @@ const CustomApp = (appProps: Props): JSX.Element => {
           </UserProfileProvider>
         </ContextWrapper>
       </Provider>
-    </>
+    </PlausibleProvider>
   );
 };
 
