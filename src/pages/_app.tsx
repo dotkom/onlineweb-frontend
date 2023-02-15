@@ -18,6 +18,7 @@ import UserProfileProvider from 'profile/providers/UserProfile';
 import { registerServiceWorker } from 'serviceworker/browser';
 
 import { GlobalStyle } from '@dotkomonline/design-system';
+import PlausibleProvider from 'next-plausible';
 import Head from 'next/head';
 
 /** Luxon locale setting has to be the same as in the front-end */
@@ -36,7 +37,7 @@ type Props = AppProps & ReduxWrapperAppProps<State>;
 const CustomApp = (appProps: Props): JSX.Element => {
   const { Component, pageProps, store } = appProps;
   return (
-    <>
+    <PlausibleProvider domain="online.ntnu.no" trackOutboundLinks>
       <GlobalStyle />
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -50,7 +51,7 @@ const CustomApp = (appProps: Props): JSX.Element => {
           </UserProfileProvider>
         </ContextWrapper>
       </Provider>
-    </>
+    </PlausibleProvider>
   );
 };
 
