@@ -46,12 +46,17 @@
   }
 }
 
+.eventType {
+  font-weight: 600;
+  align-self: center;
+}
+
 .outdatedLink {
   .gridRow {
     color: #919191;
   }
 
-  .gridRow .eventTypeDiv > span {
+  .gridRow .eventTypeDiv > span, .gridRow .eventType {
     filter: grayscale(100%);
   }
 
@@ -62,7 +67,7 @@
       color: @darkGray;
     }
 
-    .gridRow .eventTypeDiv > span {
+    .gridRow .eventTypeDiv > span, .gridRow .eventType {
       filter: grayscale(0%);
     }
   }
@@ -142,11 +147,6 @@
   display: grid;
   grid-template-columns: @listBarWidth 1fr;
   grid-gap: 0.5rem;
-}
-
-.eventType {
-  font-weight: 600;
-  align-self: center;
 }
 
 .eventTitle {

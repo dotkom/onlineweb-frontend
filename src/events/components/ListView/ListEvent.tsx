@@ -85,7 +85,9 @@ const ListEvent: FC<IProps> = ({ event, isOutdated }) => {
     <div className={classNames(style.gridRow, { [style.grayedOutGridRow]: isOutdated })}>
       <div className={style.eventTypeDiv}>
         <span style={{ background: eventColor }} />
-        <p className={style.eventType}>{event_type_display}</p>
+        <p className={style.eventType} style={{ color: eventColor }}>
+          {event_type_display}
+        </p>
       </div>
       <p className={style.eventTitle}>{title}</p>
       <div className={style.icon}>
