@@ -14,8 +14,9 @@ export const SearchResults: FC = () => {
 
 const selectSearchResultEventIds = () => (state: State) => {
   const resultIds = state.events.search.ids;
-  return eventSelectors
+  const eventIds = eventSelectors
     .selectIds(state)
-    .map(Number)
-    .filter((eventId) => resultIds.some((resultId) => resultId === eventId));
+    .map(Number);
+  
+  return resultIds.filter((id) => eventIds.includes(id))
 };

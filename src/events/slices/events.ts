@@ -120,7 +120,7 @@ export const filterEvents = createAsyncThunk('events/fitler', async (filters: Ev
       is_attendee: attendanceFilter === 'IS_ATTENDING' ? 'True' : undefined,
       page,
       page_size: pageSize,
-      ordering: '-event_start',
+      // ordering: 'closest_active',
     })
   );
   return {
