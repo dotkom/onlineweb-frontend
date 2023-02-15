@@ -91,6 +91,7 @@
     "isomorphic-fetch": "^2.2.1",
     "markdown-to-jsx": "^6.11.1",
     "next": "^10.0.0",
+    "next-plausible": "^2.1.4",
     "next-redux-wrapper": "^5.0.0",
     "postcss-focus-visible": "^4.0.0",
     "react-day-picker": "^7.3.0",
@@ -113,5 +114,8 @@
     "> 1% in NO",
     "not ie 11",
     "not op_mini all"
-  ]
+  ],
+  "volta": {
+    "node": "16.19.0"
+  }
 }
