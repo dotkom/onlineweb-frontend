@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PaymentRequestEvent, ReactStripeElements } from 'react-stripe-elements';
+import { PaymentRequestEvent, ReactStripeElements } from '@stripe/react-stripe-js';
 
 import { IGenericReturn } from 'payments/api/paymentTransaction';
 

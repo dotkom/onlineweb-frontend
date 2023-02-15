@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { PaymentRequestButtonElement, ReactStripeElements } from 'react-stripe-elements';
+import { PaymentRequestButtonElement, ReactStripeElements } from '@stripe/react-stripe-js';
 
 import { IGenericReturn } from 'payments/api/paymentTransaction';
 import { usePaymentRequest } from 'payments/hooks/usePaymentRequest';

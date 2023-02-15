@@ -1,4 +1,4 @@
-import { ReactStripeElements } from 'react-stripe-elements';
+import { ReactStripeElements } from '@stripe/react-stripe-js';
 
 import { getUser } from 'authentication/api';
 import { getAllPages, patch, post } from 'common/utils/api';

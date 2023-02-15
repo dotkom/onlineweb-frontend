@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useContext, useState } from 'react';
-import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
+import { injectStripe, ReactStripeElements } from '@stripe/react-stripe-js';
 
 import { md } from 'common/components/Markdown';
 import { StatusMessage } from 'common/components/StatusMessage';

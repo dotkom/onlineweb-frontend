@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 
-import { Elements, StripeProvider } from 'react-stripe-elements';
+import { Elements } from '@stripe/react-stripe-js';
 
-import { useStripeInit } from 'payments/hooks/useStripeInit';
+import { loadStripe } from '@stripe/stripe-js';
 import { IPaymentPrice } from 'payments/models/Payment';
 import { StripeForm } from './StripeForm';
 
@@ -16,13 +16,11 @@ interface IProps {
 export const CreatePaymentRelation: FC<IProps> = (props) => {
   const { stripeKey, ...rest } = props;
 
-  const stripe = useStripeInit(stripeKey);
+  const stripePromise = loadStripe(stripeKey);
 
   return (
-    <StripeProvider stripe={stripe}>
-      <Elements>
-        <StripeForm {...rest} />
-      </Elements>
-    </StripeProvider>
+    <Elements stripe={stripePromise}>
+      <StripeForm {...rest} />
+    </Elements>
   );
 };

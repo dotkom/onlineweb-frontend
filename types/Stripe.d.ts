@@ -1,10 +1,10 @@
-import { ReactStripeElements as Base } from 'react-stripe-elements';
+import { ReactStripeElements as Base } from '@stripe/react-stripe-js';
 
 /**
  * Extend Stripe type definitions because they are not up to date with what we need.
  */
 
-declare module 'react-stripe-elements' {
+declare module '@stripe/react-stripe-js' {
   export namespace ReactStripeElements {
     interface StripeProps {
       paymentRequest: stripe.Stripe['paymentRequest'];

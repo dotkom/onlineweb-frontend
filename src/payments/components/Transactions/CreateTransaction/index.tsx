@@ -1,5 +1,5 @@
 import React from 'react';
-import { Elements, StripeProvider } from 'react-stripe-elements';
+import { Elements, StripeProvider } from '@stripe/react-stripe-js';
 
 import { STRIPE_KEY_TRIKOM } from 'common/constants/stripe';
 import { useStripeInit } from 'payments/hooks/useStripeInit';

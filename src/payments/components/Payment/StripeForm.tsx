@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 
-import { injectStripe, ReactStripeElements } from 'react-stripe-elements';
+import { injectStripe, ReactStripeElements } from '@stripe/react-stripe-js';
 
 import { useToast } from 'core/utils/toast/useToast';
 

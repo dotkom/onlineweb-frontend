@@ -1,5 +1,5 @@
 import React, { FC, FormEvent } from 'react';
-import { CardElement } from 'react-stripe-elements';
+import { CardElement } from '@stripe/react-stripe-js';
 
 import { PaymentMethodDescription } from '../PaymentMethodDescription';
 import style from './card.less';
