@@ -4,6 +4,70 @@
 @polygonMobileSize: 16px;
 @listBarWidth: 8px;
 
+.eventTypeDiv > span {
+  width: @listBarWidth;
+  margin: @listBarWidth 0;
+}
+
+.eventRegistrationStatus {
+  width: 10px;
+  height: 10px;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+
+  & > span:first-child {
+    position: absolute;
+    display: inline-flex;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    opacity: 0.75;
+  }
+
+  & > span:last-child {
+    position: relative;
+    display: inline-flex;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+  }
+}
+
+.gridRow {
+  display: grid;
+  grid-template-columns: 16rem 2fr 2rem 6rem 2rem 4rem 1rem;
+  position: relative;
+  margin: auto;
+  color: @darkGray;
+
+  > p {
+    align-self: center;
+  }
+}
+
+.outdatedLink {
+  .gridRow {
+    color: #919191;
+  }
+
+  .gridRow .eventTypeDiv > span {
+    filter: grayscale(100%);
+  }
+
+  &:hover {
+    color: @darkGray;
+
+    .gridRow {
+      color: @darkGray;
+    }
+
+    .gridRow .eventTypeDiv > span {
+      filter: grayscale(0%);
+    }
+  }
+}
+
 .grid {
   margin: auto;
   display: flex;
@@ -11,6 +75,7 @@
   margin-top: 40px; // More spacing before the cards
 
   & > a {
+    cursor: pointer;
     color: initial;
     padding: 0.25rem;
     border: 1px solid transparent;
@@ -20,9 +85,48 @@
       border-top: 1px solid @lightGray;
     }
 
+    &:first-child {
+      border-top: 1px solid @lightGray;
+    }
+
+    &:first-child:not(.outdatedLink)::before {
+      content: 'Kommende arrangementer';
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transform: translateY(-2.5rem);
+      margin-bottom: -1.8rem;
+    }
+
     &:hover {
       text-decoration: none;
       border-color: @blue;
+    }
+  }
+
+  & > .outdatedLink {
+    margin-top: 4rem;
+
+    &::before {
+      content: 'Tidligere arrangementer';
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transform: translateY(-2.5rem);
+      margin-bottom: -1.8rem;
+    }
+
+    &:hover {
+      border-color: @blue;
+    }
+  }
+
+  & > .outdatedLink ~ .outdatedLink {
+    margin-top: 0;
+
+    &::before {
+      content: none;
+      margin-bottom: none;
     }
   }
 }
@@ -33,28 +137,11 @@
   margin-right: 0.25rem;
 }
 
-.gridRow {
-  display: grid;
-  grid-template-columns: 16rem 2fr 2rem 6rem 2rem 6rem;
-  position: relative;
-  margin: auto;
-  color: @darkGray;
-
-  > p {
-    align-self: center;
-  }
-}
-
 .eventTypeDiv {
   height: 100%;
   display: grid;
   grid-template-columns: @listBarWidth 1fr;
   grid-gap: 0.5rem;
-}
-
-.eventTypeDiv > span {
-  width: @listBarWidth;
-  margin: @listBarWidth 0;
 }
 
 .eventType {
@@ -66,16 +153,31 @@
   text-align: left;
 }
 
+.animationPing {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.isRegistered {
+  font-size: 0.9rem;
+  justify-self: center;
+  align-self: center;
+}
+
 /* Mobile CSS */
 
 @media (max-width: @owMobileBreakpoint) {
   .gridRow {
-    grid-template-columns: 3fr 0.5fr 1fr;
+    grid-template-columns: 3fr 0.5fr 0.7fr 0.3fr;
     grid-template-rows: 1fr auto;
 
     & > p:first-of-type {
       grid-row: 1 / span 2;
     }
+  }
+  .eventRegistrationStatus,
+  .isRegistered {
+    grid-column-start: 4;
+    grid-row: 1 / span 2;
   }
   .icon {
     grid-column-start: 2;
@@ -105,3 +207,11 @@
 }
 
 /* End of Mobile CSS */
+
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

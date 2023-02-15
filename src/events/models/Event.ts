@@ -93,6 +93,18 @@ export enum EventView {
   CALENDAR,
 }
 
+export interface ISignupEligibility {
+  status: boolean;
+  message: string;
+  status_code: number;
+}
+
+export interface AttendeeInfo {
+  is_attendee: boolean;
+  is_on_waitlist: boolean;
+  is_eligible_for_signup: ISignupEligibility;
+}
+
 export interface IEvent {
   id: number;
   title: string;
@@ -111,13 +123,9 @@ export interface IEvent {
   companies: number[];
   is_attendance_event: boolean;
   max_capacity: number | null;
+  waitlist: boolean;
+  attendee_info: AttendeeInfo | null;
   number_of_seats_taken: number | null;
-}
-
-export interface ISignupEligibility {
-  status: boolean;
-  message: string;
-  status_code: number;
 }
 
 export interface IAttendanceEvent {

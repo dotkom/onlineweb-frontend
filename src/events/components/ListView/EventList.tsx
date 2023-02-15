@@ -9,6 +9,9 @@ import style from './list.less';
 import ListEvent from './ListEvent';
 import { State } from 'core/redux/Store';
 import { shallowEqual } from 'react-redux';
+import { DateTime } from 'luxon';
+import { IEvent } from 'events/models/Event';
+import classNames from 'classnames';
 
 interface IProps {
   eventIds: number[];
@@ -20,21 +23,29 @@ const EventListComponent: FC<IProps> = ({ eventIds, sortOrder = 'ASC' }) => {
   if (sortOrder == 'DESC') {
     events.reverse();
   }
+
+  const isOutdatedEvent = (ev: IEvent) => {
+    return DateTime.fromJSDate(new Date()) > DateTime.fromISO(ev.end_date);
+  };
+
   return (
     <div className={style.grid}>
-      {events.map((event) => (
-        <Link {...getEventUrl(event.id)} key={event.id}>
-          <a>
-            <ListEvent event={event} />
-          </a>
-        </Link>
-      ))}
+      {events.map((event) => {
+        const isOutdated = isOutdatedEvent(event);
+        return (
+          <Link {...getEventUrl(event.id)} key={event.id}>
+            <a className={classNames({ [style.outdatedLink]: isOutdated })}>
+              <ListEvent event={event} isOutdated={isOutdated} />
+            </a>
+          </Link>
+        );
+      })}
     </div>
   );
 };
 
 const selectEventsByIds = (eventIds: number[]) => (state: State) => {
-  return eventSelectors.selectAll(state).filter((event) => eventIds.some((eventId) => event.id === eventId));
+  return eventIds.map((id) => eventSelectors.selectById(state, id)).filter((event) => event !== undefined) as IEvent[];
 };
 
 const isEventListEqual = (prevProps: IProps, nextProps: IProps) => shallowEqual(prevProps.eventIds, nextProps.eventIds);
