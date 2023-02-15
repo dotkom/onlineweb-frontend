@@ -4,73 +4,34 @@
 @polygonMobileSize: 16px;
 @listBarWidth: 8px;
 
-.grid {
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  margin-top: 40px; // More spacing before the cards
-
-  & > a {
-    cursor: pointer;
-    color: initial;
-    padding: 0.25rem;
-    border: 1px solid transparent;
-    transition: border-color 0.1s;
-
-    &:not(:first-child) {
-      border-top: 1px solid @lightGray;
-    }
-
-    &:first-child {
-      border-top: 1px solid @lightGray;
-    }
-
-    &:first-child:not(.outdatedLink):before {
-      content: 'Kommende arrangementer';
-      display: block;
-      font-size: 1.2rem;
-      font-weight: 600;
-      transform: translateY(-2.5rem);
-      margin-bottom: -1.8rem;
-    }
-
-    &:hover {
-      text-decoration: none;
-      border-color: @blue;
-    }
-  }
-
-  & > .outdatedLink {
-    margin-top: 4rem;
-
-    &:before {
-      content: 'Utgåtte arrangementer';
-      display: block;
-      font-size: 1.2rem;
-      font-weight: 600;
-      transform: translateY(-2.5rem);
-      margin-bottom: -1.8rem;
-    }
-
-    &:hover {
-      border-color: @blue;
-    }
-  }
-
-  & > .outdatedLink ~ .outdatedLink {
-    margin-top: 0;
-
-    &:before {
-      content: none;
-      margin-bottom: none;
-    }
-  }
+.eventTypeDiv > span {
+  width: @listBarWidth;
+  margin: @listBarWidth 0;
 }
 
-.icon {
+.eventRegistrationStatus {
+  width: 10px;
+  height: 10px;
   align-self: center;
-  text-align: right;
-  margin-right: 0.25rem;
+  justify-self: center;
+  display: flex;
+
+  & > span:first-child {
+    position: absolute;
+    display: inline-flex;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    opacity: 0.75;
+  }
+
+  & > span:last-child {
+    position: relative;
+    display: inline-flex;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px;
+  }
 }
 
 .gridRow {
@@ -107,16 +68,80 @@
   }
 }
 
+.grid {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px; // More spacing before the cards
+
+  & > a {
+    cursor: pointer;
+    color: initial;
+    padding: 0.25rem;
+    border: 1px solid transparent;
+    transition: border-color 0.1s;
+
+    &:not(:first-child) {
+      border-top: 1px solid @lightGray;
+    }
+
+    &:first-child {
+      border-top: 1px solid @lightGray;
+    }
+
+    &:first-child:not(.outdatedLink)::before {
+      content: 'Kommende arrangementer';
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transform: translateY(-2.5rem);
+      margin-bottom: -1.8rem;
+    }
+
+    &:hover {
+      text-decoration: none;
+      border-color: @blue;
+    }
+  }
+
+  & > .outdatedLink {
+    margin-top: 4rem;
+
+    &::before {
+      content: 'Utgåtte arrangementer';
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transform: translateY(-2.5rem);
+      margin-bottom: -1.8rem;
+    }
+
+    &:hover {
+      border-color: @blue;
+    }
+  }
+
+  & > .outdatedLink ~ .outdatedLink {
+    margin-top: 0;
+
+    &::before {
+      content: none;
+      margin-bottom: none;
+    }
+  }
+}
+
+.icon {
+  align-self: center;
+  text-align: right;
+  margin-right: 0.25rem;
+}
+
 .eventTypeDiv {
   height: 100%;
   display: grid;
   grid-template-columns: @listBarWidth 1fr;
   grid-gap: 0.5rem;
-}
-
-.eventTypeDiv > span {
-  width: @listBarWidth;
-  margin: @listBarWidth 0;
 }
 
 .eventType {
@@ -130,31 +155,6 @@
 
 .animationPing {
   animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-.eventRegistrationStatus {
-  width: 10px;
-  height: 10px;
-  align-self: center;
-  justify-self: center;
-  display: flex;
-
-  & > span:first-child {
-    position: absolute;
-    display: inline-flex;
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    opacity: 0.75;
-  }
-
-  & > span:last-child {
-    position: relative;
-    display: inline-flex;
-    border-radius: 50%;
-    height: 10px;
-    width: 10px;
-  }
 }
 
 .isRegistered {
