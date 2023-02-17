@@ -34,6 +34,12 @@
   }
 }
 
+.isRegistered {
+  font-size: 0.9rem;
+  justify-self: center;
+  align-self: center;
+}
+
 .gridRow {
   display: grid;
   grid-template-columns: 16rem 2fr 2rem 6rem 2rem 4rem 1rem;
@@ -56,7 +62,10 @@
     color: #919191;
   }
 
-  .gridRow .eventTypeDiv > span, .gridRow .eventType {
+  .eventTypeDiv > span,
+  .eventType,
+  .eventRegistrationStatus,
+  .isRegistered {
     filter: grayscale(100%);
   }
 
@@ -67,7 +76,10 @@
       color: @darkGray;
     }
 
-    .gridRow .eventTypeDiv > span, .gridRow .eventType {
+    .eventTypeDiv > span,
+    .eventType,
+    .eventRegistrationStatus,
+    .isRegistered {
       filter: grayscale(0%);
     }
   }
@@ -157,12 +169,6 @@
   animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-.isRegistered {
-  font-size: 0.9rem;
-  justify-self: center;
-  align-self: center;
-}
-
 /* Mobile CSS */
 
 @media (max-width: @owMobileBreakpoint) {
@@ -197,6 +203,9 @@
   .eventTitle {
     margin-top: 1.5rem;
     margin-left: 1rem;
+  }
+  .grid {
+    margin-top: 50px;
   }
 }
 

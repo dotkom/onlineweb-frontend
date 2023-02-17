@@ -38,13 +38,14 @@ const ListEvent: FC<IProps> = ({ event, isOutdated }) => {
   let pingColor;
   let tooltipText;
   const animationActive = false; // Don't ask
+  const ex = isOutdated ? 'var' : 'er';
 
   if (is_on_waitlist) {
     pingColor = '#FFA500';
-    tooltipText = 'Du er på ventelisten';
+    tooltipText = `Du ${ex} på ventelisten`;
   } else if (is_attendee) {
     pingColor = '#17c717';
-    tooltipText = 'Du er påmeldt';
+    tooltipText = `Du ${ex} påmeldt`;
   } else if (is_eligible_for_signup?.status || is_attendee) {
     if ((number_of_seats_taken ?? -1) < (max_capacity ?? -2)) {
       pingColor = '#17c717';
