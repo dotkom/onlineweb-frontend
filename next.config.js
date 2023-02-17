@@ -43,8 +43,8 @@ const redirects = async () => {
   ];
 };
 
-module.exports = withPlausibleProxy(
-  withBundleAnalyzer(
+module.exports = withBundleAnalyzer(
+  withPlausibleProxy()(
     withCss(
       withLess({
         cssModules: true,
