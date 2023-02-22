@@ -22,6 +22,8 @@ git clone <repo>
 
 npm install --legacy-peer-deps
 
+npm i sharp --legacy-peer-deps
+
 export OW4_SSO_CLIENT_ID=181001
 
 npm run dev
