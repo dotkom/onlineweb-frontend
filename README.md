@@ -10,9 +10,19 @@ Other tasks, such as administration of website content, and general information 
 
 ```bash
 
+brew install volta
+
+volta install node@16
+
+volta pin node@16
+
+Close and reopen terminal
+
 git clone <repo>
 
-npm install
+npm install --legacy-peer-deps
+
+export OW4_SSO_CLIENT_ID=181001
 
 npm run dev
 ```
