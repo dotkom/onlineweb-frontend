@@ -24,7 +24,7 @@ npm install --legacy-peer-deps
 
 npm i sharp --legacy-peer-deps
 
-export OW4_SSO_CLIENT_ID=181001
+export OW4_SSO_CLIENT_ID=<your-client-id> // Spør Anhkha for koden
 
 npm run dev
 ```
