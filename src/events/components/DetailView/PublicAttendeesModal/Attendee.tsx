@@ -39,7 +39,12 @@ export const Attendee: FC<IProps> = ({ attendee, count }) => {
               verticalAlign: 'middle',
             }}
           >
-            <img src={Twitter_Verified_Badge} alt="Verified Badge" className={style.image} />
+            <img
+              src={Twitter_Verified_Badge}
+              alt="Verified Badge"
+              className={style.image}
+              title="Kjøpt under veldedighetsfest 2023"
+            />
           </div>
         ) : null}
       </p>
