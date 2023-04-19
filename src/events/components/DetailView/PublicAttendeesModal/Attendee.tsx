@@ -14,12 +14,12 @@ interface IProps {
 }
 
 export const Attendee: FC<IProps> = ({ attendee, count }) => {
-  const specialList = [59520]; //Mattis Hembre = 59520
+  const specialList = ['Mattis Hembre'];
   return (
     <div
       className={style.container}
       style={
-        specialList.includes(attendee.id)
+        specialList.includes(attendee.full_name)
           ? {
               background: 'linear-gradient(45deg, gold, white)',
             }
@@ -29,7 +29,7 @@ export const Attendee: FC<IProps> = ({ attendee, count }) => {
       <p className={style.count}>{count}</p>
       <p className={style.name}>
         {attendee.full_name}
-        {specialList.includes(attendee.id) ? (
+        {specialList.includes(attendee.full_name) ? (
           <div
             style={{
               display: 'inline-block',
