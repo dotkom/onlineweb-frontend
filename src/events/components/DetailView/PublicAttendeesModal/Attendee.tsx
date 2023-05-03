@@ -1,11 +1,10 @@
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons/faUserSecret';
-import { faUserFriends } from '@fortawesome/free-solid-svg-icons/faUserFriends';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { FC } from 'react';
-import Twitter_Verified_Badge from 'events/components/Images/Twitter_Verified_Badge.svg';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IPublicAttendee } from 'events/models/Attendee';
-
+import Twitter_Verified_Badge from 'events/components/Images/Twitter_Verified_Badge.svg';
+import { faUserFriends } from '@fortawesome/free-solid-svg-icons/faUserFriends';
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons/faUserSecret';
 import style from './Attendee.less';
 
 interface IProps {
@@ -19,7 +18,7 @@ export const Attendee: FC<IProps> = ({ attendee, count }) => {
     <div
       className={style.container}
       style={
-        specialList.includes(attendee.full_name)
+        specialList.includes(attendee.full_name.toLowerCase())
           ? {
               background: 'linear-gradient(45deg, gold, white)',
             }
@@ -30,13 +29,12 @@ export const Attendee: FC<IProps> = ({ attendee, count }) => {
       <p className={style.name}>
         {attendee.full_name}
         {specialList.includes(attendee.full_name.toLowerCase()) ? (
-          <div
+          <span
             style={{
-              display: 'inline-block',
-              marginLeft: '0.5rem',
               width: '1.5rem',
-              height: '1.5rem',
-              verticalAlign: 'middle',
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: '0.1rem',
             }}
           >
             <img
@@ -45,7 +43,7 @@ export const Attendee: FC<IProps> = ({ attendee, count }) => {
               className={style.image}
               title="Kjøpt under veldedighetsfest 2023"
             />
-          </div>
+          </span>
         ) : null}
       </p>
       <p>{`${attendee.year_of_study}. klasse`}</p>
