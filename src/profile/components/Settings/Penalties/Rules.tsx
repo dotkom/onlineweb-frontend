@@ -58,7 +58,7 @@ const RULES = md`
 
   - Ved bedriftsarrangementer åpner dørene i henhold til starttid på arrangementet. Ti minutter etter at dørene åpner slippes oppmøte på ventelisten inn dersom det er plass. 15 minutter etter at dørene åpner stenger innslippet.
   - Det kreves at en deltaker svarer på den elektroniske tilbakemeldingen etter bedriftsarrangementer. Det vil komme e-post etter arrangementet med lenke til tilbakemeldingsskjema som må besvares innen denoppgitte fristen. Dersom en deltager ikke svarer innen fristen vil dette gi en prikk.
-
+  - Deltagere på bedriftsarrangementer skal delta på alle obligatoriske deler av arrangementet. For bedriftspresentasjon og kurs vil dette henholdsvis innebære selve presentasjonen og kursopplegget. De første 45 minuttene med påfølgende mingling regnes også som obligatorisk . Dersom en deltaker forlater den obligatoriske delen uten gyldig grunn vil dette medføre prikk.
 
   ## Hvorfor har jeg fått prikk?
 
