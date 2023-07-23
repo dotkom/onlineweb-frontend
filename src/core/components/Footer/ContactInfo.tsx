@@ -2,7 +2,10 @@ import { faBriefcase, faEnvelope, faFile, faMobileAlt } from '@fortawesome/free-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-const ContactInfo = () => (
+const ContactInfo = () => {
+  //Update phone number whenever a new leader of Online is elected
+  const contactTlf = '454 61 372';
+  return (
   <>
     <address>
       <p>Besøksadresse: </p>
@@ -25,9 +28,9 @@ const ContactInfo = () => (
           <FontAwesomeIcon icon={faFile} fixedWidth /> okonomi@online.ntnu.no <br />
         </p>
       </a>
-      <a href="tel:+4741164609">
+      <a href={"tel:+47"+contactTlf.replace(/\s+/g, '')}>
         <p>
-          <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> 454 61 372
+          <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> {contactTlf}
         </p>
       </a>
     </div>
@@ -38,6 +41,7 @@ const ContactInfo = () => (
       <p>7491 Trondheim</p>
     </div>
   </>
-);
+  );
+};
 
 export default ContactInfo;
