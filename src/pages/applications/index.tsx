@@ -7,6 +7,7 @@ import style from '../../applications/committee.less';
 
 const Committees: React.FC = () => {
   const [committees, setCommittees] = useState<IOnlineGroup[]>([]);
+  const applicationFormUrl = 'https://forms.gle/m9ya7JPxjiJHE9NG9' // updated for August 2023
 
   useEffect(() => {
     console.log('Running');
@@ -30,7 +31,7 @@ const Committees: React.FC = () => {
       <div className={style.intro}>
         Komitémedlemmene våre får Online til å gå rundt, og arbeider for at alle informatikkstudenter skal ha en flott
         studiehverdag.
-        <br /> <a href="https://forms.gle/anRH21N3LYPtqCDUA">Her</a> kan du søke om å bli en av oss!
+        <br /> <a href={applicationFormUrl}>Her</a> kan du søke om å bli en av oss!
       </div>
       {committees.map((com) => {
         return (
@@ -42,7 +43,7 @@ const Committees: React.FC = () => {
         );
       })}
       <div className={style.applyButton}>
-        <a className={style.apply} href="https://forms.gle/anRH21N3LYPtqCDUA">
+        <a className={style.apply} href={applicationFormUrl}>
           Trykk her for å sende inn en søknad!
         </a>
       </div>
