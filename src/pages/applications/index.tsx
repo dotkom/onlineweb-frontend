@@ -7,7 +7,7 @@ import style from '../../applications/committee.less';
 
 const Committees: React.FC = () => {
   const [committees, setCommittees] = useState<IOnlineGroup[]>([]);
-  const applicationFormUrl = 'https://forms.gle/m9ya7JPxjiJHE9NG9' // updated for August 2023
+  const applicationFormUrl = 'https://forms.gle/BpQfh42FXfC85tNd6' // updated for August 2023
 
   useEffect(() => {
     console.log('Running');
