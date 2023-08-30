@@ -16,7 +16,7 @@ import Attendance from '../Attendance';
 import { attendeeSelectors, fetchAttendeeByEventId, patchAttendee } from 'events/slices/attendees';
 import EventPaymentBlock from '../EventPayment/EventPaymentBlock';
 import EventPrice from '../EventPayment/EventPrice';
-import { Select } from '@dotkomonline/design-system';
+import { Button, Select } from '@dotkomonline/design-system';
 import { IExtra } from '../../models/Extras';
 import PublicAttendeesWrapper from './PublicAttendeesModal/PublicAttendeesWrapper';
 import ParticipantsButton from './PublicAttendeesModal/ParticipantsButton';
@@ -109,6 +109,9 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
         <PublicAttendeesWrapper isAttending={attendanceEvent.is_attendee} canAttend={isEligibleForSignup}>
           <ParticipantsButton eventTitle={eventTitle} eventId={eventId} />
         </PublicAttendeesWrapper>
+        <a href={`https://old.online.ntnu.no/events/${eventId}.ics`} className={style.calendarButton}>
+          <Button variant="outline">Legg til i kalender</Button>
+        </a>
       </div>
       {attendanceEvent.payment && (
         <Block title="Pris" className={`${style.fullBlock} ${style.priceBlock}`}>
