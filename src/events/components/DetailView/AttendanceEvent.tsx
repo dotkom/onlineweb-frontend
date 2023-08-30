@@ -109,9 +109,11 @@ const AttendanceEvent: FC<IProps> = ({ eventId, eventTitle }) => {
         <PublicAttendeesWrapper isAttending={attendanceEvent.is_attendee} canAttend={isEligibleForSignup}>
           <ParticipantsButton eventTitle={eventTitle} eventId={eventId} />
         </PublicAttendeesWrapper>
-        <a href={`https://old.online.ntnu.no/events/${eventId}.ics`} className={style.calendarButton}>
-          <Button variant="outline">Legg til i kalender</Button>
-        </a>
+        {attendanceEvent.is_attendee && (
+          <a href={`https://old.online.ntnu.no/events/${eventId}.ics`} className={style.calendarButton}>
+            <Button variant="outline">Legg til i kalender</Button>
+          </a>
+        )}
       </div>
       {attendanceEvent.payment && (
         <Block title="Pris" className={`${style.fullBlock} ${style.priceBlock}`}>
