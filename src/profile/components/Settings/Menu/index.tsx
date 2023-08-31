@@ -17,6 +17,7 @@ const Menu = () => (
     <Tab text="Varsler" {...appUrls.getProfileSettingsNotificationsUrl()} />
     <Tab text="Apptilkoblinger" {...appUrls.getProfileAppConnectionsUrl()} />
     <Tab text="Din data" {...appUrls.getProfileUserDataUrl()} />
+    <Tab text="Kalender" {...appUrls.getProfileCalendarUrl()} />
   </div>
 );
 

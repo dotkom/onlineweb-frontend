@@ -1,0 +1,42 @@
+@import '~common/less/mixins.less';
+
+.mailCard {
+  transition: transform 0.1s, box-shadow 0.1s;
+  margin-top: 16px;
+  width: 100%;
+  display: flex !important;
+  // space between
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mailCard:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gcal {
+  margin-top: 1rem;
+}
+
+.gcal > a {
+  // normal link styles
+  color: #4285f4;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-bottom: 1px solid @lightGray;
+}
+
+.gcal > a:hover {
+  // normal link styles
+  color: #0f67f4;
+}
+
+.error {
+  color: #ed8484;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
