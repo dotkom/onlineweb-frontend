@@ -19,7 +19,7 @@ Scan qr koden i kiosken eller på kjøleskapet, velg produkter og betal med Vipp
 
 **Men jeg har fortsatt penger på studentkortet mitt** 😱
 
-Frykt ikke! Vi vil ha en overgangsperiode på 2 måneder, så dere har god tid på å bruke opp saldoen deres!
+Frykt ikke! Vi vil ha en overgangsperiode på 2 måneder frem til **1. november**, så dere har god tid på å bruke opp saldoen deres! Send melding om dette ikke går så skal vi finne en løsning.
 
 Send melding til Johanna Wilmers på slack hvis det er noen spørsmål/problemer
 
