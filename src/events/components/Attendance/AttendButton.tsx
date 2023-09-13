@@ -6,6 +6,7 @@ import { Button } from '@dotkomonline/design-system';
 import { useToast } from 'core/utils/toast/useToast';
 import { unwrapResult } from '@reduxjs/toolkit';
 import style from './attendance.less';
+import { useCalendarNotification } from '../DetailView/NewFunctionalityNotification';
 
 interface IAttendButtonProps {
   eventId: number;
@@ -17,6 +18,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const { eventId, isEventFull } = props;
   const [showModal, setShowModal] = useState<boolean>(false);
   const [addToast] = useToast({ type: 'success', duration: 5000 });
+  const { openNotification } = useCalendarNotification();
 
   const signUp = async (token: string | null) => {
     if (token) {
@@ -24,6 +26,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
       try {
         unwrapResult(action);
         addToast('Du har blitt meldt på arrangementet');
+        openNotification({ oncePersistant: true });
       } catch (err) {
         addToast(`Noe gikk galt under påmeldelse av arrangement, ERROR: ${err.message}`, { type: 'error' });
       }

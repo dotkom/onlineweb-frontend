@@ -14,6 +14,7 @@ import InfoBox from './InfoBox';
 import PictureCard from './PictureCard';
 import Registration from './Registation';
 import { selectIsLoggedIn } from 'authentication/selectors/authentication';
+import { CalendarNotificationProvider } from './NewFunctionalityNotification';
 
 interface IProps {
   eventId: number;
@@ -50,14 +51,16 @@ export const DetailView = ({ eventId }: IProps) => {
         <meta property="og:article:tag" content={event.event_type_display} />
         <meta property="og:article:tag" content={event.location} />
       </Head>
-      <div>
-        <PictureCard event={event} />
-        <InfoBox event={event} />
-      </div>
-      <div>
-        <Registration event={event} />
-        <Contact event={event} />
-      </div>
+      <CalendarNotificationProvider>
+        <div>
+          <PictureCard event={event} />
+          <InfoBox event={event} />
+        </div>
+        <div>
+          <Registration event={event} />
+          <Contact event={event} />
+        </div>
+      </CalendarNotificationProvider>
     </div>
   );
 };
