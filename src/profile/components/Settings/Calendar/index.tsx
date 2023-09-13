@@ -50,7 +50,7 @@ const Calendar: FC = () => {
         ) : (
           <div>
             <Card className={style.mailCard} onClick={copyToClipboard}>
-              <span>{calendarLink}</span>
+              Kopier kalender-link
               <Icon name="copy" />
             </Card>
             <div className={style.gcal}>
