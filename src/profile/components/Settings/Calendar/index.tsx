@@ -24,7 +24,7 @@ const Calendar: FC = () => {
 
   const copyToClipboard = useCallback(() => {
     navigator.clipboard.writeText(calendarLink);
-    displayMessage('Copied to clipboard');
+    displayMessage('Kopierte kalender-link til utklippstavlen');
   }, [calendarLink]);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Calendar: FC = () => {
         ) : (
           <div>
             <Card className={style.mailCard} onClick={copyToClipboard}>
-              <span>{calendarLink}</span>
+              Kopier kalender-link
               <Icon name="copy" />
             </Card>
             <div className={style.gcal}>
