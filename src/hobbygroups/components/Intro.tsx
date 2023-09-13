@@ -8,6 +8,10 @@ const introText = `
   alle mulige slags interesser. Har du og en kompis eller to en sær/stilig/fantastisk interesse? Opprett en
   interessegruppe!
 
+  ## Hvordan oprette en interessegruppe?
+
+  For å opprette en ny interessegruppe, eller ta over en inaktiv en, send en mail til <backlog@online.ntnu.no>
+
   ## Hvordan søke om støtte til din interessegruppe?
 
   Du kan søke om økonomisk støtte til din interessegruppe ved å sende en mail til <backlog@online.ntnu.no>
