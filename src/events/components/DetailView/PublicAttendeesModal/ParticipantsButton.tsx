@@ -29,11 +29,16 @@ export const ParticipantsButton: FC<IProps> = ({ eventId, eventTitle }) => {
   const attendees = useSelector(selectPublicAttendeesForEventId(eventId));
   const [showModal, setShowModal] = useState(false);
 
-  const toggleModal = () => setShowModal(!showModal);
-
-  useEffect(() => {
-    dispatch(fetchPublicAttendeesByEventId(eventId));
-  }, [eventId]);
+  const toggleModal = () => {
+    if (!showModal) {
+      if (attendees.length === 0) {
+        dispatch(fetchPublicAttendeesByEventId(eventId));
+      }
+      setShowModal(true);
+    } else {
+      setShowModal(false);
+    }
+  };
 
   // disables background scrolling when the modal is open
   useEffect(() => {
