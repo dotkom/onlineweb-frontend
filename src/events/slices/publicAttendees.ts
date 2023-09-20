@@ -2,7 +2,7 @@ import { createAsyncThunk, createEntityAdapter, createSlice, SerializedError } f
 
 import { State } from 'core/redux/Store';
 import { IPublicAttendee } from 'events/models/Attendee';
-import { getPublicAttendeesForEvent } from 'events/api/publicAttendee';
+import { getPublicAttendeesForEvent, getPublicUsersOnWaitlistForEvent } from 'events/api/publicAttendee';
 
 const publicAttendeesAdapter = createEntityAdapter<IPublicAttendee>({
   sortComparer: (attendeeA, attendeeB) => {
@@ -16,7 +16,12 @@ export const fetchPublicAttendeesByEventId = createAsyncThunk(
   'publicAttendees/fetchByEventId',
   async (eventId: number) => {
     const attendees = await getPublicAttendeesForEvent(eventId);
-    return attendees;
+    const onWaitlist = await getPublicUsersOnWaitlistForEvent(eventId);
+
+    // merge the two arrays, using waitlist true or false
+    const mergedAttendees = attendees.map((attendee) => ({ ...attendee, waitlist: false }));
+    const mergedOnWaitlist = onWaitlist.map((attendee) => ({ ...attendee, waitlist: true }));
+    return [...mergedAttendees, ...mergedOnWaitlist];
   }
 );
 
