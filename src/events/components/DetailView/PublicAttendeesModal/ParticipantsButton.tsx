@@ -18,9 +18,20 @@ interface IAttendeeListProps {
 
 const AttendeeList: FC<IAttendeeListProps> = ({ attendees }) => (
   <div className={style.grid}>
-    {attendees.map((attendee, index) => (
-      <Attendee key={attendee.id} attendee={attendee} count={index + 1} />
-    ))}
+    <hr />
+    Påmeldt
+    {attendees
+      .filter((att) => !att.waitlist)
+      .map((attendee, index) => (
+        <Attendee key={attendee.id} attendee={attendee} count={index + 1} />
+      ))}
+    <hr />
+    På venteliste
+    {attendees
+      .filter((att) => att.waitlist)
+      .map((attendee, index) => (
+        <Attendee key={attendee.id} attendee={attendee} count={index + 1} />
+      ))}
   </div>
 );
 
