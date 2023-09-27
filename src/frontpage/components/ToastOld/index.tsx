@@ -19,7 +19,7 @@ const Message: React.FC = () => {
         Du kan fortsatt finne den gamle på <a href="https://old.online.ntnu.no">old.online.ntnu.no</a>
       </p>
       <p>
-        Oppdager du noen feil, mangler, eller ønsker, send mail til dotkom@online.ntnu.no eller lag et issue på{' '}
+        Oppdager du noen feil, mangler, eller ønsker, send mail til hjelp@online.ntnu.no eller lag et issue på{' '}
         <a href="https://github.com/dotkom/onlineweb-frontend">Github</a>
       </p>
       <Checkbox onChange={(checked) => saveDoNotShow(checked)} label="Ikke vis denne meldingen igjen" />

@@ -14,7 +14,7 @@ const MAIN_INFO_TEXT = `
 
 const ERROR_TEXT = `
   ### Error
-  Kunne ikke hente kalender-link. Ta kontakt dotkom@online.ntnu.no
+  Kunne ikke hente kalender-link. Ta kontakt hjelp@online.ntnu.no
 `;
 
 const Calendar: FC = () => {
