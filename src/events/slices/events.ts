@@ -1,6 +1,7 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, SerializedError, unwrapResult } from '@reduxjs/toolkit';
 import { State } from 'core/redux/Store';
 import { getEvent, IEventAPIParameters, listEvents } from 'events/api/events';
+import { getEventLSKey, ObjectInLocalStorage } from 'events/components/DetailView';
 import { EventTypeEnum, IEvent } from 'events/models/Event';
 import { DateTime, Interval } from 'luxon';
 
@@ -24,6 +25,18 @@ export const fetchEvents = createAsyncThunk('events/fetchMultiple', async (optio
 export const fetchEventById = createAsyncThunk('events/fetchById', async (eventId: number) => {
   const event = await getEvent(eventId);
 
+  // write to local storage
+  if (event) {
+    const key = getEventLSKey(event.id);
+
+    const toStore: ObjectInLocalStorage<IEvent> = {
+      data: event,
+      // valid for 1 hour
+      validTo: Date.now() + 60 * 60 * 1000,
+    };
+
+    localStorage.setItem(key, JSON.stringify(toStore));
+  }
   return event;
 });
 
@@ -165,6 +178,9 @@ export const eventsSlice = createSlice({
   name: 'events',
   initialState: eventsAdapter.getInitialState(INITIAL_STATE),
   reducers: {
+    setEventFromLocalStorage(state, action) {
+      eventsAdapter.upsertOne(state, action.payload);
+    },
     nextEventPage(state) {
       state.search.page++;
     },
@@ -221,6 +237,6 @@ export const eventsSlice = createSlice({
   },
 });
 
-export const { nextEventPage, resetEventPage } = eventsSlice.actions;
+export const { nextEventPage, resetEventPage, setEventFromLocalStorage } = eventsSlice.actions;
 
 export const eventsReducer = eventsSlice.reducer;

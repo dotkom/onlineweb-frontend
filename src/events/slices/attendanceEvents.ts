@@ -4,6 +4,7 @@ import { State } from 'core/redux/Store';
 
 import { getAttendanceEvent } from '../api/events';
 import { IAttendanceEvent } from '../models/Event';
+import { getAttendanceEventLSKey, ObjectInLocalStorage } from 'events/components/DetailView';
 
 const attendanceEventsAdapter = createEntityAdapter<IAttendanceEvent>({
   sortComparer: (attendanceEventA, attendanceEventB) => {
@@ -14,8 +15,20 @@ const attendanceEventsAdapter = createEntityAdapter<IAttendanceEvent>({
 export const attendanceEventSelectors = attendanceEventsAdapter.getSelectors<State>((state) => state.attendanceEvents);
 
 export const fetchAttendanceEventById = createAsyncThunk('attendanceEvents/fetchById', async (eventId: number) => {
-  const events = await getAttendanceEvent(eventId);
-  return events;
+  const event = await getAttendanceEvent(eventId);
+  // write to local storage
+  if (event) {
+    const key = getAttendanceEventLSKey(event.id);
+
+    const toStore: ObjectInLocalStorage<IAttendanceEvent> = {
+      data: event,
+      // valid for 1 hour
+      validTo: Date.now() + 60 * 60 * 1000,
+    };
+
+    localStorage.setItem(key, JSON.stringify(toStore));
+  }
+  return event;
 });
 
 interface IState {
@@ -33,7 +46,11 @@ const INITIAL_STATE: IState = {
 export const attendanceEventsSlice = createSlice({
   name: 'events',
   initialState: attendanceEventsAdapter.getInitialState(INITIAL_STATE),
-  reducers: {},
+  reducers: {
+    setAttendanceEventFromLocalStorage(state, action) {
+      attendanceEventsAdapter.upsertOne(state, action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAttendanceEventById.pending, (state) => {
       state.loading = 'pending';
@@ -50,3 +67,5 @@ export const attendanceEventsSlice = createSlice({
 });
 
 export const attendanceEventsReducer = attendanceEventsSlice.reducer;
+
+export const { setAttendanceEventFromLocalStorage } = attendanceEventsSlice.actions;
