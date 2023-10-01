@@ -13,7 +13,6 @@ import style from './detail.less';
 import InfoBox from './InfoBox';
 import PictureCard from './PictureCard';
 import Registration from './Registation';
-import { selectIsLoggedIn } from 'authentication/selectors/authentication';
 
 interface IProps {
   eventId: number;
@@ -23,13 +22,12 @@ export const DetailView = ({ eventId }: IProps) => {
   const dispatch = useDispatch();
   const event = useSelector((state) => eventSelectors.selectById(state, eventId));
   const isPending = useSelector((state) => state.events.loading === 'pending');
-  const isLoggedIn = useSelector(selectIsLoggedIn());
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(fetchEventById(eventId));
     dispatch(fetchAttendanceEventById(eventId));
-  }, [eventId, dispatch, isLoggedIn]);
+  }, [eventId, dispatch]);
 
   if (isPending && !event) {
     return <Spinner />;
