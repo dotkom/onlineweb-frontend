@@ -9,6 +9,8 @@ import style from './penalties.less';
 
 // prettier-ignore
 const RULES = md`
+  ## English below
+
   # Prikkeregler
 
   ## Hva er en prikk?
@@ -66,6 +68,55 @@ const RULES = md`
   Under “Instillinger” og “Prikker og suspensjoner” (https://online.ntnu.no/profile/settings/penalties) vil du kunne se prikkene dine, og eventuelle begrunnelser.
 
   Dersom du mener noe feil har skjedd, vennligst ta kontakt med arrangøren som står oppført på arrangementet. Kontaktinfo for arrangerende komité vises på arrangementssiden.
+
+  # Mark Rules
+  
+  ## What is a mark?
+  
+  Having active marks means that you will have to wait 24 hours after the regular registration start to sign up for an event. Each mark lasts for 20 days; if you get a new mark and you already have an active one, the new 20 days will be added at the end of the active period of the existing mark(s). The duration of marks is frozen during holidays. These are defined from December 1 to January 15 and June 1 to August 15. This means that if a mark is given on May 15, this mark will expire on August 20. The reason we distribute marks is to ensure that members follow the rules.
+  
+  ## What causes a mark?
+  
+  This is a brief bullet list. Exceptions and further explanations can be found below.
+  
+  - Unregistering after the deregistration deadline.
+  - Not showing up for an event you have a spot at.
+  - Arriving after the start of the event or after admission is over.
+  - Not responding to the feedback form within the deadline.
+  - Not adhering to the payment deadline. This also results in suspension from all Online's events until payment is completed.
+  
+  The responsible committee can also make a discretionary assessment that benefits the participant.
+  
+  ## Cancellation
+  
+  - In case of illness or other extraordinary events, you will not receive a mark if you unregister 5 hours before the start of the event.
+  - All committees wish that you unregister from events even if you know this will result in a mark. This is so that someone else can become aware of their spot as early as possible.
+  
+  ## Waiting List
+  
+  - If you are on the waiting list, you can unregister right up to the start of the event.
+  - When you're on the waiting list, you understand that you can get a spot in the event at any time and are thus bound by the event rules just like other registered participants.
+  
+  ## Payment
+  
+  - In case of non-payment, you are suspended from all Online's events until the payment is completed.
+  - For paid events, but no show-up, you will not be refunded if deregistration happens after the deadline. If the next person on the waiting list is available, exceptions can be made.
+  
+  ## Behavior
+  
+  - If inappropriate behavior occurs during one of Online's events, you will be financially responsible for any damages and might risk being banned from all of Online's events.
+  
+  ## Corporate Events
+  
+  - For corporate events, the doors open according to the start time of the event. Ten minutes after the doors open, attendees on the waiting list are admitted if there is space. Admission closes 15 minutes after the doors open.
+  - Participants at corporate events are required to respond to the electronic feedback after the events. An email will be sent after the event with a link to the feedback form that must be answered within the given deadline. If a participant does not respond within the deadline, this will result in a mark.
+  - Participants at corporate events must attend all mandatory parts of the event. For company presentations and courses, this means the presentation itself and the course setup. The first 45 minutes followed by mingling are also considered mandatory. If a participant leaves the mandatory part without a valid reason, this will result in a mark.
+  
+  ## Why did I receive a mark?
+  
+  Under "Settings" and "Marks and Suspensions" (https://online.ntnu.no/profile/settings/penalties) you can view your marks and any reasons.
+  
+  If you believe there has been a mistake, please contact the organizer listed for the event. Contact information for the organizing committee is displayed on the event page.
 `;
 
 export const Info = () => {
