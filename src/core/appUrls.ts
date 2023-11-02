@@ -8,7 +8,6 @@ export const getCareerOpportinityUrl = (opportunityId: number) => url`/career/${
 export const getCareerOpportunitiesUrl = () => url`/career`;
 export const getCompaniesUrl = () => url`/companies`;
 export const getCompanyUrl = (companyId: number) => url`/companies/${{ companyId }}`;
-export const getContributionsUrl = () => url`/contribution`;
 export const getEventUrl = (eventId: number) => url`/events/${{ eventId }}`;
 export const getEventsUrl = () => url`/events`;
 export const getHobbyGroupsUrl = () => url`/hobbygroups`;
