@@ -6,16 +6,19 @@ import { Button } from '@dotkomonline/design-system';
 import { useToast } from 'core/utils/toast/useToast';
 import { unwrapResult } from '@reduxjs/toolkit';
 import style from './attendance.less';
+import { ConfirmModal } from 'common/components/Modal';
 
 interface IAttendButtonProps {
   eventId: number;
   isEventFull: boolean;
+  isAfterUnattendDeadline: boolean;
 }
 
 const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const dispatch = useDispatch();
-  const { eventId, isEventFull } = props;
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const { eventId, isEventFull, isAfterUnattendDeadline } = props;
+  const [showCaptchaModal, setShowCaptchaModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [addToast] = useToast({ type: 'success', duration: 5000 });
 
   const signUp = async (token: string | null) => {
@@ -29,12 +32,34 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
       }
     }
   };
-  const toggleModal = () => setShowModal(!showModal);
-  const modal = <CaptchaModal showModal={showModal} toggleModal={toggleModal} setRecaptcha={signUp} />;
+  const toggleCaptchaModal = () => setShowCaptchaModal((prevState) => !prevState);
+  const modal = <CaptchaModal showModal={showCaptchaModal} toggleModal={toggleCaptchaModal} setRecaptcha={signUp} />;
+
+  const onConfirmModalClose = (retValue: boolean) => {
+    setShowConfirmModal(false);
+
+    if (retValue) {
+      toggleCaptchaModal();
+    }
+  };
+
+  const onButtonClick = () => {
+    if (!isAfterUnattendDeadline) {
+      toggleCaptchaModal();
+    } else {
+      setShowConfirmModal(true);
+    }
+  };
 
   return (
     <>
-      <Button color={isEventFull ? 'secondary' : 'success'} onClick={toggleModal} className={style.button}>
+      <ConfirmModal
+        title="Avmeldingsfrist utløpt"
+        message="Er du sikker på at du vil melde deg på dette arrangementet? Du vil ikke kunne melde deg av."
+        open={showConfirmModal}
+        onClose={onConfirmModalClose}
+      />
+      <Button color={isEventFull ? 'secondary' : 'success'} onClick={onButtonClick} className={style.button}>
         Meld meg på {isEventFull ? 'venteliste' : null}
       </Button>
       {modal}
