@@ -2,13 +2,14 @@
 
 .container {
   display: flex;
-  margin-top: 5em;
+  margin-top: 5rem;
   flex-direction: column;
 }
 
 .content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  // grid-template-columns: 1fr 1fr;
+  flex-direction: column;
   gap: 2em;
   @media screen and (max-width: @owTabletBreakpoint) {
     display: flex;

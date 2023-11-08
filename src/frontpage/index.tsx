@@ -1,10 +1,13 @@
-import EventsContainer from 'events/components/EventsContainer';
 import React, { FC } from 'react';
+
 import Articles from './components/Articles';
+import { CommitteeStatus } from './components/Committee';
+import EventsContainer from 'events/components/EventsContainer';
 import ForCompanies from './components/ForCompanies';
+import { IOfflineIssue } from './models/Offline';
 import Offline from './components/Offline';
 import ToastOld from './components/ToastOld';
-import { IOfflineIssue } from './models/Offline';
+import style from './frontpage.less';
 
 interface FrontpageProps {
   offlines: IOfflineIssue[];
@@ -16,7 +19,10 @@ const Frontpage: FC<FrontpageProps> = ({ offlines }) => (
     <EventsContainer />
     <Articles />
     <Offline issues={offlines} />
-    <ForCompanies />
+    <div className={style.splitPage}>
+      <ForCompanies />
+      <CommitteeStatus />
+    </div>
   </>
 );
 

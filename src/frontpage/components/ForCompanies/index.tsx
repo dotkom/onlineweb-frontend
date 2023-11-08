@@ -1,13 +1,13 @@
 import React, { FC } from 'react';
-import Markdown from 'common/components/Markdown';
+
 import Heading from 'common/components/Heading';
-import styles from './companies.less';
+import Markdown from 'common/components/Markdown';
 import SalesBox from './sale-box';
+import styles from './companies.less';
 
-const COMPANY_TEXT = `
-# Er du en bedrift som er på jakt etter skarpe IT-studenter? Da vil vi gjerne høre fra deg! Les videre for å finne ut hva vi kan tilby.
+const COMPANY_HEADER_TEXT = `# Er du en bedrift som er på jakt etter skarpe IT-studenter? Da vil vi gjerne høre fra deg! Les videre for å finne ut hva vi kan tilby.`
 
-Online er en linjeforening for Informatikkstudentene ved NTNU Gløshaugen.
+const COMPANY_TEXT = `Online er en linjeforening for Informatikkstudentene ved NTNU Gløshaugen.
 Informatikkstudiet hører til Institutt for datateknologi og informatikk (IDI).
 Dette innebærer blant annet å lære om utvikling, forbedring, evaluering og bruk av datasystemer.
 For mer informasjon om studiet, se NTNU sine offisielle nettsider for [bachelor](https://www.ntnu.no/studier/bit) og [master](https://www.ntnu.no/studier/msit).
@@ -32,11 +32,12 @@ const ForCompanies: FC = () => {
     <div className={styles.container}>
       <Heading title="Bedrifter" />
       <div className={styles.content}>
-        <Markdown source={COMPANY_TEXT} />
+        <Markdown source={COMPANY_HEADER_TEXT} />
         <div className={styles.boxes}>
           <SalesBox title="Profilering" salePoints={PROFILING} />
           <SalesBox title="Faglig" salePoints={ACADEMIC} />
         </div>
+        <Markdown source={COMPANY_TEXT} />
       </div>
     </div>
   );
