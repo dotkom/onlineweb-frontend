@@ -38,7 +38,13 @@ const Attendance: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   if (!canAttend.status) return <p>{canAttend.message}</p>;
 
   // Base-case: The user is logged in and can attend!
-  return <AttendButton eventId={id} isEventFull={max_capacity <= number_of_seats_taken} />;
+  return (
+    <AttendButton
+      eventId={id}
+      isEventFull={max_capacity <= number_of_seats_taken}
+      cannotUnattend={unattendDeadline < currentTime}
+    />
+  );
 };
 
 export default Attendance;
