@@ -1,5 +1,5 @@
 import { Modal, Button } from '@dotkomonline/design-system';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import style from './modal.less';
 
 interface ConfirmModalProps {
