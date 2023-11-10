@@ -53,7 +53,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
       <Button
         color={isEventFull ? 'secondary' : 'success'}
         onClick={() => {
-          if (props.cannotUnattend || true) {
+          if (props.cannotUnattend) {
             setShowConfirmModal(true);
           } else {
             toggleModal();
