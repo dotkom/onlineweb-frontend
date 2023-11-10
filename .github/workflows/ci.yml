@@ -14,7 +14,6 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
-          NODE_OPTIONS: --openssl-legacy-provider
         with:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
