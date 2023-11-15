@@ -21,4 +21,5 @@ export interface IPublicAttendee {
   full_name: string;
   year_of_study: number;
   field_of_study: string;
+  waitlist: boolean;
 }

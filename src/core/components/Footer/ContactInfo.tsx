@@ -6,41 +6,41 @@ const ContactInfo = () => {
   //Update phone number whenever a new leader of Online is elected
   const contactTlf = '454 61 372';
   return (
-  <>
-    <address>
-      <p>Besøksadresse: </p>
-      <p>A-blokka, A4-137</p>
-      <p>Høgskoleringen 5 </p>
-      <p>NTNU Gløshaugen</p>
-    </address>
-    <div>
-      <p>Kontaktinformasjon:</p>
-      <p>
-        <FontAwesomeIcon icon={faBriefcase} fixedWidth /> 992 548 045 (OrgNr)
-      </p>
-      <a href="mailto:kontakt@online.ntnu.no">
+    <>
+      <address>
+        <p>Besøksadresse: </p>
+        <p>A-blokka, A4-137</p>
+        <p>Høgskoleringen 5 </p>
+        <p>NTNU Gløshaugen</p>
+      </address>
+      <div>
+        <p>Kontaktinformasjon:</p>
         <p>
-          <FontAwesomeIcon icon={faEnvelope} fixedWidth /> kontakt@online.ntnu.no
+          <FontAwesomeIcon icon={faBriefcase} fixedWidth /> 992 548 045 (OrgNr)
         </p>
-      </a>
-      <a href="mailto:okonomi@online.ntnu.no">
-        <p>
-          <FontAwesomeIcon icon={faFile} fixedWidth /> okonomi@online.ntnu.no <br />
-        </p>
-      </a>
-      <a href={"tel:+47"+contactTlf.replace(/\s+/g, '')}>
-        <p>
-          <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> {contactTlf}
-        </p>
-      </a>
-    </div>
-    <div>
-      <p>Post og faktura: </p>
-      <p>Online Linjeforening </p>
-      <p>Sem Sælands vei 9 </p>
-      <p>7491 Trondheim</p>
-    </div>
-  </>
+        <a href="mailto:kontakt@online.ntnu.no">
+          <p>
+            <FontAwesomeIcon icon={faEnvelope} fixedWidth /> kontakt@online.ntnu.no
+          </p>
+        </a>
+        <a href="mailto:okonomi@online.ntnu.no">
+          <p>
+            <FontAwesomeIcon icon={faFile} fixedWidth /> okonomi@online.ntnu.no <br />
+          </p>
+        </a>
+        <a href={'tel:+47' + contactTlf.replace(/\s+/g, '')}>
+          <p>
+            <FontAwesomeIcon icon={faMobileAlt} fixedWidth /> {contactTlf}
+          </p>
+        </a>
+      </div>
+      <div>
+        <p>Post og faktura: </p>
+        <p>Online Linjeforening </p>
+        <p>Sem Sælands vei 9 </p>
+        <p>7491 Trondheim</p>
+      </div>
+    </>
   );
 };
 
