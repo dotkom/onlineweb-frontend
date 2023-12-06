@@ -90,7 +90,7 @@
     "focus-visible": "^4.1.5",
     "isomorphic-fetch": "^2.2.1",
     "markdown-to-jsx": "^6.11.1",
-    "next": "^10.0.0",
+    "next": "^10.0.7",
     "next-plausible": "^2.1.4",
     "next-redux-wrapper": "^5.0.0",
     "postcss-focus-visible": "^4.0.0",
