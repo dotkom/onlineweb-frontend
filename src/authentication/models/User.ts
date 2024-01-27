@@ -1,4 +1,4 @@
-import { Profile, User } from 'oidc-client';
+import { IdTokenClaims, User } from 'oidc-client-ts';
 
 export interface IAuthUser extends User {
   profile: IAuthProfile;
@@ -16,7 +16,7 @@ interface IOnlinewebScope {
  * Profile informastion returned from authenticating with
  * OpenID Connect to Onlineweb4.
  */
-export type IAuthProfile = NonNullable<Profile> & IOnlinewebScope;
+export type IAuthProfile = NonNullable<IdTokenClaims> & IOnlinewebScope;
 
 export const isOnlineUser = (user: User | IAuthUser): user is IAuthUser => user.hasOwnProperty('preferred_username');
 
