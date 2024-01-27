@@ -1,5 +1,5 @@
 import { __CLIENT__ } from 'common/constants/environment';
-import { UserManager } from 'oidc-client';
+import { UserManager } from 'oidc-client-ts';
 import settings from './settings';
 import { IAuthUser } from 'authentication/models/User';
 
@@ -12,7 +12,7 @@ export const USER_MANAGER = __CLIENT__ ? new UserManager(settings) : null;
 
 export const logIn = async () => {
   if (USER_MANAGER) {
-    const user = await USER_MANAGER.signinRedirect({ data: window.location.pathname });
+    const user = await USER_MANAGER.signinRedirect();
     return user;
   }
   return null;
@@ -35,6 +35,6 @@ export const getUser = async (): Promise<IAuthUser | undefined> => {
 
 export const logOut = async () => {
   if (USER_MANAGER) {
-    await USER_MANAGER.signoutRedirect();
+    await USER_MANAGER.signoutRedirect({ extraQueryParams: { "client_id": USER_MANAGER.settings.client_id, logout_uri: "https://old.online.ntnu.no/auth/login/" } });
   }
 };

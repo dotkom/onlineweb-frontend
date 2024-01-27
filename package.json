@@ -49,7 +49,7 @@
     "less": "^3.9.0",
     "luxon": "^1.11.1",
     "multirange": "^2.0.0",
-    "oidc-client": "^1.6.1",
+    "oidc-client-ts": "^2.4.0",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.16.4",
     "query-string": "^6.2.0",
@@ -103,6 +103,7 @@
     "react-stripe-elements": "^5.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "sharp": "^0.33.2",
     "styled-components": "^5.1.0",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
     "url-loader": "^4.0.0"

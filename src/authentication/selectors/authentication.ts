@@ -13,7 +13,7 @@ export const selectUserImage = () => (state: State): string => {
 };
 
 export const selectUserName = () => (state: State): string => {
-  return state.authentication.user?.preferred_username || 'anonymous';
+  return state.authentication.user?.email || 'anonymous';
 };
 
 export const selectIsStaff = () => (state: State): boolean => {

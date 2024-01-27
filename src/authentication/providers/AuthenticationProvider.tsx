@@ -3,7 +3,7 @@ import React, { FC, useCallback, useEffect } from 'react';
 import { useDispatch } from 'core/redux/hooks';
 import { authenticationActions } from 'authentication/slices/authentication';
 import { USER_MANAGER } from 'authentication/api';
-import { User } from 'oidc-client';
+import { User } from 'oidc-client-ts';
 import { IAuthUser } from 'authentication/models/User';
 
 type JSON<T> = string & { __JSON__: T };
