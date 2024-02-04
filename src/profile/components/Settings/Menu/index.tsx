@@ -9,7 +9,6 @@ const Menu = () => (
   <div className={style.menu}>
     <Tab text="Informasjon" {...appUrls.getProfileSettingsUrl()} />
     <Tab text="E-Post" {...appUrls.getProfileSettingsMailUrl()} />
-    <Tab text="Passord" {...appUrls.getProfileSettingsPasswordUrl()} />
     <Tab text="Prikker og suspensjoner" {...appUrls.getProfileSettingsPenaltiesUrl()} />
     <Tab text="Personvern" {...appUrls.getProfileSettingsPrivacyUrl()} />
     <Tab text="Medlemskap" {...appUrls.getProfileMembershipUrl()} />

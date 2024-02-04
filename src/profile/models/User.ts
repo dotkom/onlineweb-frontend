@@ -49,6 +49,7 @@ type IProfile = IBaseProfile & IProfilePrivate;
  */
 export interface IUserProfile extends IProfile {
   allergies: string;
+  email: string;
   gender: Gender;
   readonly has_expiring_membership: boolean;
   infomail: boolean;
