@@ -18,12 +18,6 @@ const LoginView = (props: ILoginViewProps) => (
 export const LoginSection: React.FC<{ className?: string }> = ({ className }) => (
   <div className={className}>
     <Button onClick={logIn}>Logg inn</Button>
-    <Button as="a" href="/auth/register/">
-      Registrer
-    </Button>
-    <Button as="a" href="/auth/recover/">
-      Glemt passord
-    </Button>
   </div>
 );
 
