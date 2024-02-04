@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react';
 import { TextField, Button } from '@dotkomonline/design-system';
 import style from './form.less';
-import { IMail } from 'profile/models/Mail';
+
 interface IProps {
-  onSubmit: (mail: Partial<IMail>) => Promise<void>;
+  onSubmit: (email: string) => Promise<void>;
 }
 
 const AddMailField: FC<IProps> = ({ onSubmit }) => {
@@ -14,20 +14,20 @@ const AddMailField: FC<IProps> = ({ onSubmit }) => {
   };
 
   const handleClick = async () => {
-    await onSubmit({ email: input, primary: false, verified: false });
+    await onSubmit(input);
   };
   return (
     <>
       <div className={style.inputContainer}>
         <TextField
-          label="Legg til ny e-post"
+          label="Bytt e-post"
           className={style.textField}
           placeholder="E-postadresse"
           onChange={handleChange}
           value={input}
         />
         <Button variant="outline" onClick={handleClick}>
-          Legg til
+          Bytt
         </Button>
       </div>
     </>

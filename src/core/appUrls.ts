@@ -22,7 +22,6 @@ export const getProfileSettingsUrl = () => url`/profile/settings`;
 export const getProfileSettingsAccessCardUrl = () => url`/profile/settings/access-card`;
 export const getProfileSettingsMailUrl = () => url`/profile/settings/mail`;
 export const getProfileSettingsNotificationsUrl = () => url`/profile/settings/notifications`;
-export const getProfileSettingsPasswordUrl = () => url`/profile/settings/password`;
 export const getProfileSettingsPenaltiesUrl = () => url`/profile/settings/penalties`;
 export const getProfileSettingsPrivacyUrl = () => url`/profile/settings/privacy`;
 export const getProfileAppConnectionsUrl = () => url`/profile/settings/apps`;
