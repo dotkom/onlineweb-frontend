@@ -35,6 +35,6 @@ export const getUser = async (): Promise<IAuthUser | undefined> => {
 
 export const logOut = async () => {
   if (USER_MANAGER) {
-    await USER_MANAGER.signoutRedirect({ extraQueryParams: { "client_id": USER_MANAGER.settings.client_id, logout_uri: "https://old.online.ntnu.no/auth/login/" } });
+    await USER_MANAGER.signoutRedirect();
   }
 };

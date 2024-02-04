@@ -21,9 +21,6 @@ export const NotAuthenticated = () => {
         <Lock />
       </div>
       <div className={style.buttons}>
-        <Button inverse onClick={logIn} title="Registrer">
-          Registrer
-        </Button>
         <Button onClick={logIn} title="Logg inn">
           Logg inn
         </Button>
