@@ -11,7 +11,10 @@ const AuthenticationCallbackComponent: FC = ({ children }) => {
       const frontPageUrl = getFrontPageUrl().href;
       try {
         const user = await USER_MANAGER.signinCallback();
-        router.push(user.state || frontPageUrl);
+        // eslint-disable-next-line
+        // @ts-ignore
+        const url: string = user?.state ?? frontPageUrl;
+        router.push(url);
       } catch (err) {
         router.push(frontPageUrl);
       }
