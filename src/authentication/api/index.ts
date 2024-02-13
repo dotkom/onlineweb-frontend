@@ -12,7 +12,7 @@ export const USER_MANAGER = __CLIENT__ ? new UserManager(settings) : null;
 
 export const logIn = async () => {
   if (USER_MANAGER) {
-    const user = await USER_MANAGER.signinRedirect();
+    const user = await USER_MANAGER.signinRedirect({ state: window.location.pathname });
     return user;
   }
   return null;
