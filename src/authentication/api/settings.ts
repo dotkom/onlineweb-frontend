@@ -1,11 +1,10 @@
-import { HOST } from 'common/constants/endpoints';
 import { UserManagerSettings } from 'oidc-client-ts';
 
 const settings: UserManagerSettings = {
   authority: process.env.AUTH0_ISSUER || '',
   client_id: process.env.AUTH0_CLIENT_ID || '',
-  redirect_uri: process.env.OW4_SSO_CALLBACK || '',
-  post_logout_redirect_uri: HOST,
+  redirect_uri: `${process.env.HOSTNAME}/authentication/callback`,
+  post_logout_redirect_uri: `${process.env.HOSTNAME}`,
   scope: 'openid profile email',
   automaticSilentRenew: true,
   filterProtocolClaims: true,
