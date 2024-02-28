@@ -67,7 +67,7 @@ module.exports = withBundleAnalyzer(
           return config;
         },
         env: {
-          HOSTNAME: process.env.OWF_HOSTNAME ?? process.env.NEXT_PUBLIC_URL ?? process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : "https://localhost:8080",
+          HOSTNAME: process.env.OWF_HOSTNAME ?? (process.env.NEXT_PUBLIC_URL ?? (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : "https://localhost:8080")),
           OW4_ADDRESS: process.env.OW4_ADDRESS || 'https://old.online.ntnu.no',
           AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID || '',
           OWF_SENTRY_DSN: process.env.OWF_SENTRY_DSN || '',
