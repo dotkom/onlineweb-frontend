@@ -11,7 +11,6 @@ export interface IAPIData {
  */
 export const getCalendarLink = async () => {
   const user = await getUser();
-  const id = user?.profile.sub;
-  const data = await get<IAPIData>(`/api/v1${API_URL}/${id}/personalized_calendar_link/`, undefined, { user });
+  const data = await get<IAPIData>(`/api/v1${API_URL}/personalized_calendar_link/`, undefined, { user });
   return data.link;
 };
