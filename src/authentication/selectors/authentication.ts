@@ -16,7 +16,8 @@ export const selectUserName = () => (state: State): string => {
   return state.authentication.user?.email || 'anonymous';
 };
 
-export const selectIsStaff = () => (state: State): boolean => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const selectIsStaff = () => (_state: State): boolean => {
   // This is temporary until we have a proper way to check if a user is staff
   // return state.authentication.user?.staff || false;
   return true;
