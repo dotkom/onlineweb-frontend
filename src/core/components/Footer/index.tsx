@@ -22,7 +22,7 @@ const Footer = () => (
       <p>
         Har du funnet en feil på nettsiden?
         <br />
-        Ta kontakt med <a href="mailto:dotkom@online.ntnu.no">Utviklingsteamet</a>
+        Ta kontakt med <a href="mailto:hjelp@online.ntnu.no">Utviklingsteamet</a>
       </p>
       <SocialLinks />
       <ContactInfo />
