@@ -9,7 +9,6 @@ const settings: UserManagerSettings = {
   automaticSilentRenew: true,
   filterProtocolClaims: true,
   loadUserInfo: true,
-  revokeTokensOnSignout: true,
 };
 
 export default settings;
