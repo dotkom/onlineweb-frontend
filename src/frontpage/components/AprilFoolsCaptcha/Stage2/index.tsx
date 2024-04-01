@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import style from './stage2.less';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckSquare, faSpinner, faSquare } from '@fortawesome/free-solid-svg-icons';
@@ -9,14 +9,19 @@ function ImageToClick({
   wrong,
   checked,
   onClick,
+  hint,
 }: {
   src: string;
   wrong: boolean;
   checked: boolean;
   onClick: () => void;
+  hint: boolean;
 }) {
   return (
-    <div className={classNames(style.imageToClick, wrong ? style.imageWrong : null)} onClick={() => onClick()}>
+    <div
+      className={classNames(style.imageToClick, wrong ? style.imageWrong : null, hint ? style.imageClickHelp : null)}
+      onClick={() => onClick()}
+    >
       <img src={src} alt="Interessegruppe" style={{ filter: 'grayscale(100%) brightness(0.8)' }} />
       <div className={style.imageCheck}>
         {checked && <FontAwesomeIcon icon={faCheckSquare} color="#3C8DEF" size={'2x'} />}
@@ -63,6 +68,15 @@ const AprilFoolsStage2 = ({ nextStage }: { nextStage: () => void }) => {
   const [checked, setChecked] = React.useState<boolean[]>(images.map(() => false));
   const [animate, setAnimate] = React.useState(false);
   const [state, setState] = React.useState('1');
+
+  const [needsHelp, setNeedsHelp] = React.useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setNeedsHelp(true);
+    }, 12000);
+  }, []);
+
   return (
     <>
       <h1>Trykk på alle interessegruppene</h1>
@@ -76,6 +90,7 @@ const AprilFoolsStage2 = ({ nextStage }: { nextStage: () => void }) => {
                 src={image.src}
                 checked={checked[index]}
                 wrong={checked[index] !== images[index].shouldCheck && animate}
+                hint={needsHelp && images[index].shouldCheck}
                 onClick={() => {
                   const newChecked = [...checked];
                   newChecked[index] = !newChecked[index];
