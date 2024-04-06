@@ -13,7 +13,6 @@ import { ruleBundlesReducer } from 'events/slices/ruleBundles';
 import { onlineGroupsReducer } from 'groups/slices/onlineGroups';
 import { transactionsReducer } from 'payments/reducers/transactions';
 import { paymentsReducer } from 'payments/slices/payments';
-import { shopReducer } from 'shop/reducers';
 import { publicAttendeesReducer } from 'events/slices/publicAttendees';
 import { notificationMessagesReducer } from 'notifications/slices/notifications';
 import { notificationPermissionsReducer } from 'notifications/slices/permissions';
@@ -42,7 +41,6 @@ export const initStore = (initialState: {} = {}) => {
       payments: paymentsReducer,
       publicAttendees: publicAttendeesReducer,
       ruleBundles: ruleBundlesReducer,
-      shop: shopReducer,
       transactions: transactionsReducer,
     },
     /* eslint sort-keys: "off" */

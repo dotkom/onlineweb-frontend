@@ -2,7 +2,7 @@ import React from 'react';
 
 import Markdown from 'common/components/Markdown';
 import { FourSplitPane, Page, Pane, SplitPane } from 'common/components/Panes';
-import { getProfileStatisticsEventsUrl, getProfileStatisticsOrdersUrl } from 'core/appUrls';
+import { getProfileStatisticsEventsUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 
 import StringStat from './Events/StringStat';
@@ -23,13 +23,6 @@ const Main = () => {
       </Pane>
       <SplitPane>
         <FourSplitPane>
-          <Link {...getProfileStatisticsOrdersUrl()}>
-            <a>
-              <Pane>
-                <StringStat name="" value="Kiosk" />
-              </Pane>
-            </a>
-          </Link>
           <Link {...getProfileStatisticsEventsUrl()}>
             <a>
               <Pane>

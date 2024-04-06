@@ -4,7 +4,7 @@ import { getAllEvents } from 'events/api/events';
 import { IEvent } from 'events/models/Event';
 import { DateTime } from 'luxon';
 import React, { Component } from 'react';
-import NumberStat from '../Orders/NumberStat';
+import NumberStat from '../NumberStat';
 import CompanyDonut, { countCompanies } from './CompanyDonut';
 import EventTypeDonut from './EventTypeDonut';
 import StringStat from './StringStat';

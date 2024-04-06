@@ -1,0 +1,20 @@
+@import '~common/less/colors.less';
+@import '~common/less/constants.less';
+
+.numberStat {
+  text-align: center;
+  & > h2 {
+    color: @gray;
+    margin-bottom: 1rem;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  & > p {
+    color: @bedpres;
+    font-size: 56px;
+    font-weight: bolder;
+  }
+}
