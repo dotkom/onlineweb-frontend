@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { logOut } from 'authentication/api';
 import LoginView from 'authentication/components/Login';
-import { getMyProfileUrl, getPaymentWalletUrl } from 'core/appUrls';
+import { getMyProfileUrl } from 'core/appUrls';
 import { Link } from 'core/components/Router';
 
 import style from './header.less';
@@ -79,9 +79,6 @@ const HeaderUser = (props: IHeaderUserProps) => {
               </Link>
             </>
           )}
-          <Link {...getPaymentWalletUrl()}>
-            <a>Saldo</a>
-          </Link>
           <Link href="/contact">
             <a>Kontakt oss</a>
           </Link>

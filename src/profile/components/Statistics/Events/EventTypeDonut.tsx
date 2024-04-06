@@ -1,7 +1,7 @@
 import { Pie, PieDatum } from '@nivo/pie';
 import { getEventColor, getEventType, IEvent } from 'events/models/Event';
 import React from 'react';
-import style from '../Orders/orders.less';
+import style from './events.less';
 
 export interface IProps {
   events: IEvent[];

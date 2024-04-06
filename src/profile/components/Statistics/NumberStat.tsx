@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './orders.less';
+import style from './numberStat.less';
 
 export interface IProps {
   name: string;
