@@ -40,7 +40,7 @@ export const userAttendEvent = async (
         show_as_attending_event: options?.showAsAttending,
         allow_pictures: options?.allowPictures,
         extras: options?.extras,
-        recaptcha: captcha,
+        turnstile: captcha,
       },
       undefined,
       { user }
