@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Modal } from '@dotkomonline/design-system';
 import { OW4_DJANGO_TURNSTILE_PUBLIC_KEY } from 'common/constants/turnstile';
-import Turnstile from "react-turnstile";
+import Turnstile from 'react-turnstile';
 
 interface ICaptchaModalProps {
   showModal: boolean;
