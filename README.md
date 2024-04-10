@@ -12,7 +12,7 @@ Other tasks, such as administration of website content, and general information 
 
 git clone <repo>
 
-npm install
+npm ci --legacy-peer-deps
 
 npm run dev
 ```
