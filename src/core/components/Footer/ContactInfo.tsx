@@ -4,7 +4,7 @@ import React from 'react';
 
 const ContactInfo = () => {
   //Update phone number whenever a new leader of Online is elected
-  const contactTlf = '454 61 372';
+  const contactTlf = '473 58 919';
   return (
     <>
       <address>
