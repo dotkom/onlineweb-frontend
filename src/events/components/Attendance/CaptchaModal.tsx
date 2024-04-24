@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Modal } from '@dotkomonline/design-system';
-import { OW4_DJANGO_TURNSTILE_PUBLIC_KEY } from 'common/constants/turnstile';
+import { OW4_TURNSTILE_PUBLIC_KEY } from 'common/constants/turnstile';
 import Turnstile from 'react-turnstile';
 
 interface ICaptchaModalProps {
@@ -28,7 +28,7 @@ const CaptchaModal: FC<ICaptchaModalProps> = (props: ICaptchaModalProps) => {
     <Modal open={showModal} onClose={toggleModal}>
       <h1>{header}</h1>
       <p>{text}</p>
-      <Turnstile sitekey={OW4_DJANGO_TURNSTILE_PUBLIC_KEY} onVerify={validCaptcha} />
+      <Turnstile sitekey={OW4_TURNSTILE_PUBLIC_KEY} onVerify={validCaptcha} />
     </Modal>
   );
 };

@@ -1,1 +1,1 @@
-export const OW4_DJANGO_TURNSTILE_PUBLIC_KEY = process.env.OW4_DJANGO_TURNSTILE_PUBLIC_KEY || '';
+export const OW4_TURNSTILE_PUBLIC_KEY = process.env.OW4_TURNSTILE_PUBLIC_KEY || '';
