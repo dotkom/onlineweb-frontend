@@ -33,7 +33,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
     }
   };
   const toggleModal = () => setShowModal(!showModal);
-  const modal = <CaptchaModal showModal={showModal} toggleModal={toggleModal} setRecaptcha={signUp} />;
+  const modal = <CaptchaModal showModal={showModal} toggleModal={toggleModal} setCaptcha={signUp} />;
   const onConfirmModalClose = (retValue: boolean) => {
     setShowConfirmModal(false);
 

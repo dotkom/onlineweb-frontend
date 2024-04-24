@@ -78,7 +78,7 @@ module.exports = withBundleAnalyzer(
           STRIPE_PUBLIC_KEY_FAGKOM: process.env.STRIPE_PUBLIC_KEY_FAGKOM || null,
           STRIPE_PUBLIC_KEY_PROKOM: process.env.STRIPE_PUBLIC_KEY_PROKOM || null,
           STRIPE_PUBLIC_KEY_TRIKOM: process.env.STRIPE_PUBLIC_KEY_TRIKOM || null,
-          RECAPTCHA_PUBLIC_KEY: process.env.RECAPTCHA_PUBLIC_KEY || '',
+          OW4_TURNSTILE_PUBLIC_KEY: process.env.OW4_TURNSTILE_PUBLIC_KEY || '',
         },
         redirects,
         images: {
