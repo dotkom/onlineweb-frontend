@@ -1,0 +1,44 @@
+@import '~common/less/constants.less';
+@import '~common/less/colors.less';
+@import '~common/less/mixins.less';
+
+@padding: 10px;
+
+.productCard {
+  .owCard();
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: @padding;
+  transition: border-color 0.25s;
+
+  &:hover {
+    border-color: @blue;
+  }
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 100%;
+  }
+}
+
+.title {
+  padding: 15px 0;
+  text-align: center;
+  border-bottom: 1px solid @lightGray;
+  margin-bottom: 15px;
+}
+
+.detailsContainer {
+  margin-top: auto;
+  text-align: right;
+}
+
+.price {
+  display: inline-block;
+  margin-top: 15px;
+}
