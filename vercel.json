@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "glowing-fortnight.vercel.app"
+        }
+      ],
+      "destination": "/splash/:path*"
+    }
+  ]
+}
