@@ -6,6 +6,7 @@ export const getArticlesUrl = () => url`/articles`;
 export const getAuthCallbackUrl = () => url`/auth/callback`;
 export const getCareerOpportinityUrl = (opportunityId: number) => url`/career/${{ opportunityId }}`;
 export const getCareerOpportunitiesUrl = () => url`/career`;
+export const getCompanyNewUrl = () => url`https://new.online.ntnu.no/company`;
 export const getCompaniesUrl = () => url`/companies`;
 export const getCompanyUrl = (companyId: number) => url`/companies/${{ companyId }}`;
 export const getEventUrl = (eventId: number) => url`/events/${{ eventId }}`;
