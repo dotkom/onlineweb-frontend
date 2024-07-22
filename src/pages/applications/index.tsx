@@ -4,6 +4,7 @@ import { IOnlineGroup } from 'groups/models/onlinegroup';
 import React, { useEffect, useState } from 'react';
 
 import style from '../../applications/committee.less';
+import crypto from 'crypto';
 
 const Committees: React.FC = () => {
   const [committees, setCommittees] = useState<IOnlineGroup[]>([]);
@@ -22,6 +23,17 @@ const Committees: React.FC = () => {
           CommitteeList.push(groups[i]);
         }
       }
+
+      const getKey = (key: string) => {
+        const hash = crypto.createHash('sha256');
+        const hour = Math.floor((+new Date()) / 3600000);
+        hash.update(key + hour.toString());
+        return hash.digest('hex');
+      }
+
+      CommitteeList.sort((a, b) => {
+        return getKey(a.name_short) > getKey(b.name_short) ? 1 : -1;
+      });
       setCommittees(CommitteeList);
     });
   }, []);
@@ -31,7 +43,7 @@ const Committees: React.FC = () => {
       <div className={style.intro}>
         Komitémedlemmene våre får Online til å gå rundt, og arbeider for at alle informatikkstudenter skal ha en flott
         studiehverdag.
-        <br /> <a href={applicationFormUrl}>Her</a> kan du søke om å bli en av oss!
+        {/* <br /> <a href={applicationFormUrl}>Her</a> kan du søke om å bli en av oss! */ }
       </div>
       {committees.map((com) => {
         return (
@@ -42,11 +54,13 @@ const Committees: React.FC = () => {
           </div>
         );
       })}
+      {/*
       <div className={style.applyButton}>
         <a className={style.apply} href={applicationFormUrl}>
           Trykk her for å sende inn en søknad!
         </a>
       </div>
+      */}
     </div>
   );
 };
