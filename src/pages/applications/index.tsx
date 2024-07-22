@@ -6,6 +6,13 @@ import React, { useEffect, useState } from 'react';
 import style from '../../applications/committee.less';
 import crypto from 'crypto';
 
+const getHourlyUpdatedSortKey = (key: string) => {
+    const hash = crypto.createHash('sha256');
+    const hour = Math.floor((+new Date()) / 3600000);
+    hash.update(key + hour.toString());
+    return hash.digest('hex');
+}
+
 const Committees: React.FC = () => {
   const [committees, setCommittees] = useState<IOnlineGroup[]>([]);
   const applicationFormUrl = 'https://forms.gle/BpQfh42FXfC85tNd6'; // updated for August 2023
@@ -22,17 +29,10 @@ const Committees: React.FC = () => {
         ) {
           CommitteeList.push(groups[i]);
         }
-      }
-
-      const getKey = (key: string) => {
-        const hash = crypto.createHash('sha256');
-        const hour = Math.floor((+new Date()) / 3600000);
-        hash.update(key + hour.toString());
-        return hash.digest('hex');
-      }
+      } 
 
       CommitteeList.sort((a, b) => {
-        return getKey(a.name_short) > getKey(b.name_short) ? 1 : -1;
+        return getHourlyUpdatedSortKey(a.name_short) > getHourlyUpdatedSortKey(b.name_short) ? 1 : -1;
       });
       setCommittees(CommitteeList);
     });
