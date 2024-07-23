@@ -13,8 +13,6 @@ const getHourlyUpdatedSortKey = (key: string) => {
     return hash.digest('hex');
 }
 
-// test
-
 const Committees: React.FC = () => {
   const [committees, setCommittees] = useState<IOnlineGroup[]>([]);
   const applicationFormUrl = 'https://forms.gle/BpQfh42FXfC85tNd6'; // updated for August 2023
