@@ -7,15 +7,17 @@ import './less/core.less';
 import { ToastMessages } from './utils/toast/ToastMessages';
 import { AuthenticationProvider } from 'authentication/providers/AuthenticationProvider';
 import { SilentRenew } from 'authentication/components/SilentRenew';
+import { useRouter } from 'next/router';
 
 const Core: FC = ({ children }) => {
+  const router = useRouter();
   useEffect(() => {
     const splash = localStorage.getItem('splash');
     const isLandingPage = window.location.pathname === '/';
     const shouldRedirect = !splash || new Date().getTime() - new Date(splash).getTime() > 1000 * 60 * 10;
     if (shouldRedirect && isLandingPage) {
       localStorage.setItem('splash', `${new Date()}`);
-      window.location.assign('https://splash.online.ntnu.no');
+      router.push('https://splash.online.ntnu.no');
     }
   }, []);
 
