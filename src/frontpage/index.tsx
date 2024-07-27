@@ -13,16 +13,44 @@ interface FrontpageProps {
 const Frontpage: FC<FrontpageProps> = ({ offlines }) => (
 	<>
 		<AprilFoolsCaptcha />
-		<div style="background-color: #f0f0f0; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-			<h3 style="font-size: 2rem; margin-bottom: 10px; color: #333;">
+		<div
+			style={{
+				backgroundColor: "#f0f0f0",
+				padding: "20px",
+				borderRadius: "8px",
+				textAlign: "center",
+				boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+			}}
+		>
+			<h3
+				style={{
+					fontSize: "2rem",
+					marginBottom: "10px",
+					color: "#333",
+				}}
+			>
 				Fadderukene!
 			</h3>
-			<p style="font-size: 1.1rem; margin-bottom: 15px;">
+			<p
+				style={{
+					fontSize: "1.1rem",
+					marginBottom: "15px",
+				}}
+			>
 				Nytt semester betyr nye fadderuker!
 				<br />
 				<a
 					href="https://splash.online.ntnu.no/"
-					style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s; margin-top: 10px;"
+					style={{
+						display: "inline-block",
+						padding: "10px 20px",
+						backgroundColor: "#007bff",
+						color: "white",
+						textDecoration: "none",
+						borderRadius: "5px",
+						transition: "background-color 0.3s",
+						marginTop: "10px",
+					}}
 				>
 					Gå til programmet
 				</a>
