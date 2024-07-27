@@ -24,7 +24,7 @@ export const EventContainer = () => {
   const View = getView(eventView);
 
   return (
-    <section>
+		<section style={{ width: '100%' }}>
       <EventsHeader changeView={setEventView} view={eventView} />
       <View />
     </section>
