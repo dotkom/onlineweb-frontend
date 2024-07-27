@@ -15,45 +15,21 @@ const Frontpage: FC<FrontpageProps> = ({ offlines }) => (
 		<AprilFoolsCaptcha />
 		<div
 			style={{
-				backgroundColor: "#f0f0f0",
 				padding: "20px",
 				borderRadius: "8px",
 				textAlign: "center",
 				boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+				marginBottom: "20px",
 			}}
 		>
-			<h3
-				style={{
-					fontSize: "2rem",
-					marginBottom: "10px",
-					color: "#333",
-				}}
-			>
-				Fadderukene!
-			</h3>
 			<p
 				style={{
 					fontSize: "1.1rem",
-					marginBottom: "15px",
 				}}
 			>
-				Nytt semester betyr nye fadderuker!
+				Ser du etter informasjon om fadderukene?
 				<br />
-				<a
-					href="https://splash.online.ntnu.no/"
-					style={{
-						display: "inline-block",
-						padding: "10px 20px",
-						backgroundColor: "#007bff",
-						color: "white",
-						textDecoration: "none",
-						borderRadius: "5px",
-						transition: "background-color 0.3s",
-						marginTop: "10px",
-					}}
-				>
-					Gå til programmet
-				</a>
+				<a href="https://splash.online.ntnu.no/">Gå til programmet</a>
 			</p>
 		</div>
 		<EventsContainer />
