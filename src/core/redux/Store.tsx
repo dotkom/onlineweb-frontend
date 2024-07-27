@@ -18,6 +18,9 @@ import { notificationMessagesReducer } from 'notifications/slices/notifications'
 import { notificationPermissionsReducer } from 'notifications/slices/permissions';
 import { notificationSubscriptionsReducer } from 'notifications/slices/subscriptions';
 import { notificationUserPermissionsReducer } from 'notifications/slices/userPermissions';
+import { webshopProductsReducer } from 'webshop/slices/products';
+import { webshopProductSizesReducer } from 'webshop/slices/productSize';
+import { webshopProductCategoriesReducer } from 'webshop/slices/productCategory';
 
 export const initStore = (initialState: {} = {}) => {
   return configureStore({
@@ -42,6 +45,9 @@ export const initStore = (initialState: {} = {}) => {
       publicAttendees: publicAttendeesReducer,
       ruleBundles: ruleBundlesReducer,
       transactions: transactionsReducer,
+      webshopProductCategories: webshopProductCategoriesReducer,
+      webshopProducts: webshopProductsReducer,
+      webshopProductSizes: webshopProductSizesReducer,
     },
     /* eslint sort-keys: "off" */
   });
