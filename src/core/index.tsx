@@ -10,11 +10,11 @@ import { SilentRenew } from 'authentication/components/SilentRenew';
 
 const Core: FC = ({ children }) => {
   useEffect(() => {
-    const splash = sessionStorage.getItem('splash');
+    const splash = localStorage.getItem('splash');
     const isLandingPage = window.location.pathname === '/';
     const shouldRedirect = !splash || new Date().getTime() - new Date(splash).getTime() > 1000 * 60 * 10;
     if (shouldRedirect && isLandingPage) {
-      sessionStorage.setItem('splash', `${new Date()}`);
+      localStorage.setItem('splash', `${new Date()}`);
       window.location.assign('https://splash.online.ntnu.no');
     }
   }, []);
