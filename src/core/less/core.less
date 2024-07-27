@@ -27,81 +27,85 @@ body {
   font-family: 'Lato', sans-serif;
 
   // Very specific for a specific case https://github.com/IdentityModel/oidc-client-js/pull/1204
-  > iframe[src^='https://online.ntnu.no/openid/authorize'] {
+  >iframe[src^='https://online.ntnu.no/openid/authorize'] {
     display: block !important;
   }
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 30px 20px 50px;
-  box-sizing: border-box;
-  margin: 0 auto;
-  width: 100%;
-  max-width: @owDesktopMaxWidth;
-}
-
-a,
-button,
-input {
-  .owOutline();
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-p a,
-li a {
-  color: @blue;
-  position: relative;
-  transition: color 0.1s;
-
-  &::after {
-    content: '';
-    position: absolute;
+body {
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px 50px;
+    box-sizing: border-box;
+    margin: 0 auto;
     width: 100%;
-    height: 1px;
-    background: @blue;
-    bottom: 0;
-    left: 0;
-    transition: transform 0.1s, color 0.1s;
-    transform: scaleX(0);
+    max-width: @owDesktopMaxWidth;
   }
 
-  &:hover,
-  &:focus {
-    outline: none;
-    color: darken(@blue, 20%);
+  a,
+  button,
+  input {
+    .owOutline();
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  p a,
+  li a {
+    color: @blue;
+    position: relative;
+    transition: color 0.1s;
 
     &::after {
-      transform: scaleX(1);
-      background: darken(@blue, 20%);
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      background: @blue;
+      bottom: 0;
+      left: 0;
+      transition: transform 0.1s, color 0.1s;
+      transform: scaleX(0);
+    }
+
+    &:hover,
+    &:focus {
+      outline: none;
+      color: darken(@blue, 20%);
+
+      &::after {
+        transform: scaleX(1);
+        background: darken(@blue, 20%);
+      }
     }
   }
-}
 
-h1 {
-  font-size: @owFontXL;
-}
+  h1 {
+    font-size: 28px;
+  }
 
-h2 {
-  font-size: @owFontL;
-}
+  h2 {
+    font-size: @owFontL;
+  }
 
-h3 {
-  font-size: @owFontM;
-}
+  h3 {
+    font-size: @owFontM;
+  }
 
-p,
-blockquote,
-li {
-  line-height: 1.5;
-}
+  p,
+  blockquote,
+  li {
+    line-height: 1.5;
+  }
 
-input[type='search'] {
-  appearance: textfield;
+  input[type='search'] {
+    appearance: textfield;
+  }
+
+
 }
