@@ -30,4 +30,3 @@ export const getProfileMembershipUrl = () => url`/profile/settings/membership`;
 export const getProfileStatisticsUrl = () => url`/profile/statistics`;
 export const getProfileStatisticsEventsUrl = () => url`/profile/statistics/events`;
 export const getProfileSearchUrl = () => url`/profile/search`;
-export const getResourcesUrl = () => url`/resources`;

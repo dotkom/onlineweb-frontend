@@ -37,9 +37,6 @@ class Header extends Component<{}, IState> {
             <Link {...appUrls.getCareerOpportunitiesUrl()}>
               <a>Karriere</a>
             </Link>
-            <Link {...appUrls.getResourcesUrl()}>
-              <a>Ressurser</a>
-            </Link>
             <Link {...appUrls.getHobbyGroupsUrl()}>
               <a>Interessegrupper</a>
             </Link>

@@ -29,6 +29,11 @@ const SOCIAL: ISocialLink[] = [
     link: 'https://onlinentnu.slack.com/',
     icon: '/img/social/slack.svg',
   },
+  {
+    name: 'discord',
+    link: 'https://discordapp.com/invite/2XB9egU',
+    icon: '/img/social/discord.svg',
+  },
 ];
 
 const SocialLink = ({ name, link, icon }: ISocialLink) => (
@@ -38,7 +43,7 @@ const SocialLink = ({ name, link, icon }: ISocialLink) => (
 );
 
 const SocialLinks = () => (
-  <div>
+  <div className={style.socialContainer}>
     {SOCIAL.map((platform) => (
       <SocialLink key={platform.name} {...platform} />
     ))}
