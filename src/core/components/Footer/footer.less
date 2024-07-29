@@ -12,6 +12,13 @@
   max-width: @owDesktopMaxWidth - @paddingHorizontal * 2;
 }
 
+.mailinglists {
+  grid-column: span 3; 
+  display: grid;
+  justify-content: center;
+  margin: 0;
+}
+
 .footerContent {
   display: grid;
 
@@ -76,6 +83,21 @@
   display: inline-block;
 }
 
+.socialContainer {
+  display: grid;
+  grid-template-columns: 48px 48px 48px;
+  grid-row: 48px;
+  align-items: center;
+  gap: 1em;
+  height: fit-content;
+  align-self: center;
+
+  img {
+    height: 48px;
+    width: 48px;
+  }
+}
+
 .social,
 .sponsor {
   filter: brightness(0.4);
@@ -84,12 +106,4 @@
   &:hover {
     filter: brightness(0.2);
   }
-
-  img {
-    height: 32px;
-  }
-}
-
-.social:not(:last-child) {
-  margin-right: 5px;
 }

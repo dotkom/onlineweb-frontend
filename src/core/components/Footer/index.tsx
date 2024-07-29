@@ -26,6 +26,9 @@ const Footer = () => (
       </p>
       <SocialLinks />
       <ContactInfo />
+      <p className={style.mailinglists}>
+        <a href="https://online.ntnu.no/resourcecenter/mailinglists/">E-postlister for linjeforeninger</a>
+      </p>
     </div>
   </footer>
 );
