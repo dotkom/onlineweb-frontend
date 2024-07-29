@@ -24,7 +24,7 @@
 
   /* 3 columns are calculated by (maxWidth - padding - margin) / 3). */
   grid-template-columns: 1fr 1.3fr 1fr;
-  grid-row-gap: 35px;
+  grid-row-gap: 1em;
   color: @darkGray;
   width: calc(70% - @paddingHorizontal * 2);
   margin: 10px auto 0;
@@ -106,4 +106,12 @@
   &:hover {
     filter: brightness(0.2);
   }
+}
+
+.infoSites {
+  grid-column: span 3; 
+  display: flex;
+  justify-content: space-around;
+  margin: 0; 
+  height: auto;
 }
