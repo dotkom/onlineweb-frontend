@@ -29,6 +29,11 @@ const Footer = () => (
       <p className={style.mailinglists}>
         <a href="https://online.ntnu.no/resourcecenter/mailinglists/">E-postlister for linjeforeninger</a>
       </p>
+      <p className={style.infoSites}>
+        <a href="https://gloshaugen.info">gloshaugen.info</a>
+        <a href="https://dragvoll.info">dragvoll.info</a>
+        <a href="https://karrieredager.info">karrieredager.info</a>
+      </p>
     </div>
   </footer>
 );
