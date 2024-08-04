@@ -23,7 +23,7 @@ Send oss en forespørsel for å komme i kontakt. Vi gleder oss til å samarbeide
 
 `;
 
-const PROFILING = ['Bedriftspresentasjon', 'Annonse i Offline', 'Stillingsutlysning'];
+const PROFILING = ['Bedriftspresentasjon', 'Stillingsutlysning', 'Instagram takeover'];
 
 const ACADEMIC = ['Kurs', 'Workshop'];
 
