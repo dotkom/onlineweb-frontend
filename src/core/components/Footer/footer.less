@@ -17,6 +17,9 @@
   display: grid;
   justify-content: center;
   margin: 0;
+  @media (max-width: @owMobileBreakpoint) {
+    grid-column: unset;
+  }
 }
 
 .footerContent {
@@ -114,4 +117,8 @@
   justify-content: space-around;
   margin: 0;
   height: auto;
+
+  @media (max-width: @owMobileBreakpoint) {
+    grid-column: unset;
+  }
 }
