@@ -14,7 +14,7 @@ const Core: FC = ({ children }) => {
   useEffect(() => {
     const splash = localStorage.getItem('splash');
     const isLandingPage = window.location.pathname === '/';
-    const shouldRedirect = !splash || new Date().getTime() - new Date(splash).getTime() > 1000 * 60 * 10;
+    const shouldRedirect = false;
     if (shouldRedirect && isLandingPage) {
       localStorage.setItem('splash', `${new Date()}`);
       router.push('https://splash.online.ntnu.no');
