@@ -7,20 +7,8 @@ import './less/core.less';
 import { ToastMessages } from './utils/toast/ToastMessages';
 import { AuthenticationProvider } from 'authentication/providers/AuthenticationProvider';
 import { SilentRenew } from 'authentication/components/SilentRenew';
-import { useRouter } from 'next/router';
 
 const Core: FC = ({ children }) => {
-  const router = useRouter();
-  useEffect(() => {
-    const splash = localStorage.getItem('splash');
-    const isLandingPage = window.location.pathname === '/';
-    const shouldRedirect = false;
-    if (shouldRedirect && isLandingPage) {
-      localStorage.setItem('splash', `${new Date()}`);
-      router.push('https://splash.online.ntnu.no');
-    }
-  }, []);
-
   return (
     <>
       <Head>
