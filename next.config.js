@@ -36,8 +36,18 @@ const redirects = async () => {
       permanent: true,
     },
     {
-      source: '/wiki/:path*',
-      destination: 'https://old.online.ntnu.no/wiki/:path*',
+      source: '/wiki/',
+      destination: 'https://wiki.online.ntnu.no/',
+      permanent: true,
+    },
+    {
+      source: '/wiki/online/:path*',
+      destination: 'https://wiki.online.ntnu.no/:path*',
+      permanent: true,
+    },
+    {
+      source: '/wiki/komiteer/:path*',
+      destination: 'https://old.online.ntnu.no/wiki/komiteer/:path*',
       permanent: true,
     },
   ];

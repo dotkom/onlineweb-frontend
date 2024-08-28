@@ -26,7 +26,7 @@ const AprilFoolsStage1 = ({ nextStage }: { nextStage: () => void }) => {
           />
         )}
         <p>Jeg er ikke en robot</p>
-        <img src="https://old.online.ntnu.no/wiki/70/plugin/attachments/download/680/" alt="Online linjeforening" />
+        <img src="https://wiki.online.ntnu.no/attachments/680-Online_bla_o.png" alt="Online linjeforening" />
       </div>
     </>
   );

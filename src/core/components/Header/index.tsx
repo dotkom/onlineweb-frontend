@@ -40,7 +40,7 @@ class Header extends Component<{}, IState> {
             <Link {...appUrls.getHobbyGroupsUrl()}>
               <a>Interessegrupper</a>
             </Link>
-            <a href={`${DOMAIN}/wiki/`}>Wiki</a>
+            <a href={'https://wiki.online.ntnu.no'}>Wiki</a>
             <a href={`${DOMAIN}/webshop/`}>Webshop</a>
           </div>
           <HeaderLogin menuIsOpen={isOpen} closeMenu={this.closeMenu} />

@@ -17,7 +17,7 @@ const introText = `
   Du kan søke om økonomisk støtte til din interessegruppe ved å sende en mail til <backlog@online.ntnu.no>
 
   Mer informasjon om hvordan dette gjøres finnes
-  [her](https://online.ntnu.no/wiki/online/info/innsikt-og-interface/interessegrupper/).
+  [her](https://wiki.online.ntnu.no/info/innsikt-og-interface/interessegrupper/).
 `;
 
 const Intro = () => (
