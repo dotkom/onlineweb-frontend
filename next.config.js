@@ -30,6 +30,11 @@ const redirects = async () => {
       permanent: true,
     },
     {
+      source: '/resourcecenter/mailinglists',
+      destination: 'https://wiki.online.ntnu.no/linjeforening/e-postlister/',
+      permanent: true,
+    },
+    {
       source:
         '/:prefix(wiki|dashboard|sso|feedback|auth|api/v1|admin|openid|redwine|resourcecenter|webshop|gallery|jsreverse|shop|dataporten|profile/api_plain_user_search|splash|contact)/:path*',
       destination: 'https://old.online.ntnu.no/:prefix/:path*',

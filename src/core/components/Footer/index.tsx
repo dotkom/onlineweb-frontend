@@ -27,7 +27,7 @@ const Footer = () => (
       <SocialLinks />
       <ContactInfo />
       <p className={style.mailinglists}>
-        <a href="https://online.ntnu.no/resourcecenter/mailinglists/">E-postlister for linjeforeninger</a>
+        <a href="https://wiki.online.ntnu.no/linjeforening/e-postlister/">E-postlister for linjeforeninger</a>
       </p>
       <p className={style.infoSites}>
         <a href="https://gloshaugen.info">gloshaugen.info</a>
