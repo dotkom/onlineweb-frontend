@@ -12,7 +12,6 @@ import { Link } from 'core/components/Router';
 import { getEventColor } from 'events/models/Event';
 
 import style from './styles.less';
-import mitt from 'next/dist/next-server/lib/mitt';
 
 interface IProps {
   event: IEvent;
