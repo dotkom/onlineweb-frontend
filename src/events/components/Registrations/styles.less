@@ -13,12 +13,29 @@
   }
 }
 
+.small > span {
+  margin-right: @colorIndicatorSize / 2;
+}
+
 @media (max-width: @owTabletBreakpoint) {
   .registrationContainer {
     flex-direction: column;
   }
 }
 
+.eventColumn {
+  display: flex;
+  flex-direction: column;
+
+  > a {
+    &:not(:last-child) {
+      border-bottom: 1px solid @lightGray;
+    }
+    &:hover {
+      outline: 1px solid @blue;
+    }
+  }
+}
 
 .small {
   display: grid;
