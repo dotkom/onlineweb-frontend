@@ -108,6 +108,8 @@ export interface AttendeeInfo {
 export interface IEvent {
   id: number;
   title: string;
+  registration_start: string;
+  registration_end: string;
   slug: string;
   ingress: string;
   ingress_short: string;

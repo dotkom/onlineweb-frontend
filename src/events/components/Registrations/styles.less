@@ -1,0 +1,164 @@
+@import '~common/less/constants.less';
+@import '~common/less/mixins.less';
+
+@edge-height: 20px;
+@colorIndicatorSize: 0.5rem;
+
+.imageContainer {
+  min-height: 220px;
+}
+
+.eventGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0 -0.5rem;
+}
+
+@media (min-width: @owTabletBreakpoint + 1) {
+  .eventGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+
+    & > .eventColumn {
+      padding: 0 0.5rem;
+
+      &:not(:last-child) {
+        border-right: 1px solid @lightGray;
+      }
+    }
+  }
+}
+
+.eventColumn {
+  display: flex;
+  flex-direction: column;
+
+  > a {
+    &:not(:last-child) {
+      border-bottom: 1px solid @lightGray;
+    }
+    &:hover {
+      outline: 1px solid @blue;
+    }
+  }
+}
+
+.large {
+  display: flex;
+  flex-direction: column;
+
+  > img {
+    width: 100%;
+  }
+}
+
+.imageLargeType {
+  position: relative;
+  padding: 0.5rem 0;
+  color: #fff;
+  text-align: center;
+  font-weight: 200;
+  letter-spacing: 1px;
+  font-size: 20px;
+}
+
+.largeContent > span,
+.small > span {
+  margin-right: @colorIndicatorSize / 2;
+}
+
+.largeContentEmpty {
+  display: block;
+  padding: 10px 15px;
+  margin-top: -25px;
+  font-size: @owFontM;
+  text-align: center;
+  color: @gray;
+  min-height: 4rem;
+}
+
+.largeContent,
+.small {
+  display: grid;
+  grid-template-columns: @colorIndicatorSize * 3 / 2 1fr 1.5rem 2.5rem 1.5rem 3.5rem;
+  min-height: 4rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  grid-gap: 0.25rem;
+
+  > p {
+    align-self: center;
+    text-align: left;
+    color: initial;
+  }
+}
+
+.icon {
+  align-self: center;
+  text-align: right;
+}
+
+.suppText {
+  width: 40px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+
+  svg {
+    opacity: 0.3;
+  }
+}
+
+/* Mobile CSS */
+
+@media (max-width: @owTabletBreakpoint) {
+  .small,
+  .largeContent {
+    min-height: 3rem;
+    grid-template-columns: @colorIndicatorSize * 3 / 2 1fr 1.5rem 2.5rem 1.5rem 3.5rem;
+  }
+  .eventColumn {
+    border: 1px solid @lightGray;
+
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+  }
+  // Change size so that the cards aren't too big
+  .eventGrid {
+    width: 70%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  // Change text sizes
+  .small > p,
+  .largeContent > p {
+    font-size: 16px;
+  }
+  .icon {
+    font-size: 17px;
+  }
+  .suppText {
+    max-width: 35px;
+  }
+  .eventGrid {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .small,
+  .largeContent {
+    max-width: 17rem;
+  }
+  .largeContent {
+    padding-right: 0;
+  }
+}
+
+/* End of Mobile CSS */

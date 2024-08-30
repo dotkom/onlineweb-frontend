@@ -1,4 +1,5 @@
 import EventsContainer from 'events/components/EventsContainer';
+import Registrations from 'events/components/Registrations/registration';
 import React, { FC } from 'react';
 import Articles from './components/Articles';
 import ForCompanies from './components/ForCompanies';
@@ -14,6 +15,7 @@ const Frontpage: FC<FrontpageProps> = ({ offlines }) => (
   <>
     <AprilFoolsCaptcha />
     <EventsContainer />
+    <Registrations />
     <Articles />
     <Offline issues={offlines} />
     <ForCompanies />
