@@ -86,9 +86,8 @@ export const Registrations: FC = () => {
         ordering: 'attendance_event__registration_end',
         page_size: 10,
         registration_end__gte: DateTime.local().toISODate(),
-        // starts within 1 week
         registration_start__lte: DateTime.local()
-          .plus({ days: 4 })
+          .plus({ days: 8 })
           .toISODate(),
       });
       if (response.status === 'success') {
@@ -120,31 +119,34 @@ export const Registrations: FC = () => {
 
   return (
     <section style={{ width: '100%', marginTop: '2rem' }}>
-      <div>
-        {eventsWithOpenRegistration(events).length > 0 ? (
-          <div>
-            <h3>Åpne påmeldinger</h3>
+      <h3>Påmeldinger</h3>
+      <div className={style.registrationContainer}>
+        <div>
+          {eventsWithOpenRegistration(events).length > 0 ? (
+            <div>
+              <h4 style={{ marginBottom: '0.5rem' }}>Åpne</h4>
+              <div className={style.eventColumn}>
+                {eventsWithOpenRegistration(events).map((event) => (
+                  <Registration event={event} key={event.id} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div>Ingen åpne påmeldinger</div>
+          )}
+        </div>
+        <div>
+          {eventsWithRegistrationNotStarted(events).length > 0 ? (
             <div className={style.eventColumn}>
-              {eventsWithOpenRegistration(events).map((event) => (
+              <h4 style={{ marginBottom: '0.5rem' }}>Åpner snart</h4>
+              {eventsWithRegistrationNotStarted(events).map((event) => (
                 <Registration event={event} key={event.id} />
               ))}
             </div>
-          </div>
-        ) : (
-          <div>Ingen åpne påmeldinger</div>
-        )}
-      </div>
-      <div style={{ marginTop: '2rem' }}>
-        {eventsWithRegistrationNotStarted(events).length > 0 ? (
-          <div className={style.eventColumn}>
-            <h3>Kommende påmeldinger neste 7 dager</h3>
-            {eventsWithRegistrationNotStarted(events).map((event) => (
-              <Registration event={event} key={event.id} />
-            ))}
-          </div>
-        ) : (
-          <div>Ingen kommende påmeldinger neste uke</div>
-        )}
+          ) : (
+            <div>Ingen kommende påmeldinger neste uke</div>
+          )}
+        </div>
       </div>
     </section>
   );
