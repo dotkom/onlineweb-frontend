@@ -12,6 +12,16 @@ interface IProps {
   attendee: IPublicAttendee;
 }
 
+export const memberDisplay = (attendee: IPublicAttendee): string => {
+  if (attendee.field_of_study === 'Gjest') {
+    return 'Gjest';
+  } else if (attendee.field_of_study === 'Sosialt medlem') {
+    return 'Sosialt medlem';
+  } else {
+    return `${attendee.year_of_study}. klasse`;
+  }
+};
+
 export const Attendee: FC<IProps> = ({ attendee, count }) => {
   const specialList = ['mads hermansen'];
   return (
@@ -46,7 +56,7 @@ export const Attendee: FC<IProps> = ({ attendee, count }) => {
           </span>
         ) : null}
       </p>
-      <p>{`${attendee.year_of_study}. klasse`}</p>
+      <p>{memberDisplay(attendee)}</p>
       <div className={style.icon}>
         <FontAwesomeIcon icon={attendee.is_visible ? faUserFriends : faUserSecret} fixedWidth />
       </div>
