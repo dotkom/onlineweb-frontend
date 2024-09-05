@@ -14,10 +14,11 @@ interface IAttendButtonProps {
   cannotUnattend?: boolean;
 }
 
-const FAILED_CAPTCHA_ERROR_TEXT = `Det skjedde i prosessen med å sjekke at du ikke er en robot. 
+const FAILED_CAPTCHA_ERROR_TEXT = `Kunne ikke verifisere at du ikke er en bot. 
+
 Dette kan du prøve:
-1. Prøv en annen nettleser.
-2. Prøv å laste siden på nytt.
+1. Prøv å laste siden på nytt.
+2. Prøv en annen nettleser.
 3. Hvis du fortsatt får feil, så send en e-post til dotkom@online.ntnu.no så vi melder deg på manuelt. Vi setter pris på om du kan oppgi hvilken nettleser og operativsystem du bruker for å kunne skjønne bedre hva som går galt.`;
 
 const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
