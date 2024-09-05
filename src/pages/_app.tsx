@@ -30,6 +30,7 @@ if (__CLIENT__ && __PROD__) {
 
 Sentry.init({
   dsn: OWF_SENTRY_DSN,
+  environment: process.env.NODE_ENV,
 });
 
 type Props = AppProps & ReduxWrapperAppProps<State>;

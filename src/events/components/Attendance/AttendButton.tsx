@@ -7,6 +7,8 @@ import { useToast } from 'core/utils/toast/useToast';
 import { unwrapResult } from '@reduxjs/toolkit';
 import style from './attendance.less';
 import { ConfirmModal } from '../../../common/components/Modal';
+import * as Sentry from '@sentry/browser';
+import { getUser } from '../../../authentication/api';
 
 interface IAttendButtonProps {
   eventId: number;
@@ -23,10 +25,7 @@ const FAILED_CAPTCHA_ERROR_TEXT = (
     <ul>
       <li>Last inn siden på nytt og prøv igjen.</li>
       <li>Prøv en annen nettleser. Vi vet at det har vært problemer med Firefox.</li>
-      <li>
-        Hvis du fortsatt får feil, så send en e-post til dotkom@online.ntnu.no så vi melder deg på manuelt. Vi setter pris på om du
-        kan oppgi eventuell feilmelding og hvilken nettleser og operativsystem du bruker for å kunne skjønne bedre hva som går galt.
-      </li>
+      <li>Hvis du fortsatt får feil, så send en e-post til dotkom@online.ntnu.no så vi melder deg på manuelt.</li>
     </ul>
   </>
 );
@@ -44,7 +43,8 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
         unwrapResult(action);
         addToast('Du har blitt meldt på arrangementet');
       } catch (err) {
-        addToast(`Noe gikk galt under påmeldelse av arrangement, ERROR: ${err.message}`, { type: 'error' });
+        const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+        addToast(`Noe gikk galt under påmeldelse av arrangement, ERROR: ${errorMessage}`, { type: 'error' });
       }
     }
   };
@@ -55,6 +55,20 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
       toggleModal={toggleModal}
       setCaptcha={signUp}
       errorText={FAILED_CAPTCHA_ERROR_TEXT}
+      onError={async (error) => {
+        const user = await getUser();
+        Sentry.captureEvent({
+          message: 'User failed turnstile challenge when signing up for event.',
+          level: Sentry.Severity.Fatal,
+          extra: {
+            event_id: eventId,
+            error: error,
+          },
+          user: {
+            email: user?.profile.email,
+          },
+        });
+      }}
     />
   );
   const onConfirmModalClose = (retValue: boolean) => {
