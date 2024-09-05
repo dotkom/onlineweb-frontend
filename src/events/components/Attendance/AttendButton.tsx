@@ -17,14 +17,16 @@ interface IAttendButtonProps {
 const FAILED_CAPTCHA_ERROR_TEXT = (
   <>
     Kunne ikke verifisere at du ikke er en bot.
-    <br /><br />
+    <br />
+    <br />
     Dette kan du prøve:
     <ul>
-      <li>Prøv å laste siden på nytt.</li>
-      <li>Prøv en annen nettleser.</li>
+      <li>Last inn siden på nytt og prøv igjen.</li>
+      <li>Prøv en annen nettleser. Vi vet at det har vært problemer med Firefox.</li>
       <li>
-        Hvis du fortsatt får feil, så send en e-post til dotkom@online.ntnu.no så vi melder deg på manuelt. 
-        Vi setter pris på om du kan oppgi hvilken nettleser og operativsystem du bruker for å kunne skjønne bedre hva som går galt.
+        Hvis du fortsatt får feil, så send en e-post til dotkom@online.ntnu.no så vi melder deg på manuelt. Vi setter
+        pris på om du kan oppgi hvilken nettleser og operativsystem du bruker for å kunne skjønne bedre hva som går
+        galt.
       </li>
     </ul>
   </>
