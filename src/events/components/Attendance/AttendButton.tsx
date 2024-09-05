@@ -14,6 +14,22 @@ interface IAttendButtonProps {
   cannotUnattend?: boolean;
 }
 
+const FAILED_CAPTCHA_ERROR_TEXT = (
+  <>
+    Kunne ikke verifisere at du ikke er en bot.
+    <br />
+    <br />
+    Dette kan du prøve:
+    <ul>
+      <li>Last inn siden på nytt og prøv igjen.</li>
+      <li>Prøv en annen nettleser. Vi vet at det har vært problemer med Firefox.</li>
+      <li>
+        Hvis du fortsatt får feil, så send en e-post til dotkom@online.ntnu.no så vi melder deg på manuelt. Vi setter pris på om du
+        kan oppgi eventuell feilmelding og hvilken nettleser og operativsystem du bruker for å kunne skjønne bedre hva som går galt.
+      </li>
+    </ul>
+  </>
+);
 const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
   const dispatch = useDispatch();
   const { eventId, isEventFull } = props;
@@ -33,7 +49,14 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
     }
   };
   const toggleModal = () => setShowModal(!showModal);
-  const modal = <CaptchaModal showModal={showModal} toggleModal={toggleModal} setCaptcha={signUp} />;
+  const modal = (
+    <CaptchaModal
+      showModal={showModal}
+      toggleModal={toggleModal}
+      setCaptcha={signUp}
+      errorText={FAILED_CAPTCHA_ERROR_TEXT}
+    />
+  );
   const onConfirmModalClose = (retValue: boolean) => {
     setShowConfirmModal(false);
 
