@@ -28,7 +28,7 @@ const CaptchaModal: FC<ICaptchaModalProps> = (props: ICaptchaModalProps) => {
   const onError = (error: Error) => {
     console.log('Error from captcha failure:', error);
     setShowErrorText(true);
-    setTurnstileError(error.message);
+    setTurnstileError(error.message || 'Ingen feilmelding');
   };
 
   if (!showModal) return null;
