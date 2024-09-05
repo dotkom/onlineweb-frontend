@@ -9,12 +9,12 @@ interface ICaptchaModalProps {
   text?: string;
   toggleModal: () => void;
   setCaptcha: (token: string | null) => void;
-  errorText?: string;
+  errorText?: React.ReactNode | string;
 }
 
 const CaptchaModal: FC<ICaptchaModalProps> = (props: ICaptchaModalProps) => {
   const { showModal, toggleModal, setCaptcha, header, text, errorText } = props;
-  const [showErrorText, setShowErrorText] = useState(false);
+  const [showErrorText, setShowErrorText] = useState(true);
 
   const validCaptcha = (token: string | null) => {
     if (token) {
