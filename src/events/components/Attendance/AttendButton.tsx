@@ -64,7 +64,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
             error: error,
           },
           user: {
-            id: user?.profile.sub
+            id: user?.profile.sub,
           },
         });
       }}
