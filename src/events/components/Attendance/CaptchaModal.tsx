@@ -15,6 +15,7 @@ interface ICaptchaModalProps {
 const CaptchaModal: FC<ICaptchaModalProps> = (props: ICaptchaModalProps) => {
   const { showModal, toggleModal, setCaptcha, header, text, errorText } = props;
   const [showErrorText, setShowErrorText] = useState(true);
+  const [turnstileError, setTurnstileError] = useState<string | null>(null);
 
   const validCaptcha = (token: string | null) => {
     if (token) {
@@ -27,6 +28,7 @@ const CaptchaModal: FC<ICaptchaModalProps> = (props: ICaptchaModalProps) => {
   const onError = (error: Error) => {
     console.log('Error from captcha failure:', error);
     setShowErrorText(true);
+    setTurnstileError(error.message);
   };
 
   if (!showModal) return null;
@@ -36,6 +38,7 @@ const CaptchaModal: FC<ICaptchaModalProps> = (props: ICaptchaModalProps) => {
       <h1>{header}</h1>
       <p>{text}</p>
       {showErrorText && <p>{errorText}</p>}
+      {turnstileError && <p>Error message: {turnstileError}</p>}
       <Turnstile sitekey={OW4_TURNSTILE_PUBLIC_KEY} onVerify={validCaptcha} onError={onError} />
     </Modal>
   );
