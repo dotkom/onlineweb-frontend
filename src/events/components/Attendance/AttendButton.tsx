@@ -43,7 +43,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
         unwrapResult(action);
         addToast('Du har blitt meldt på arrangementet');
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+        const errorMessage = err instanceof Error ? err.message : 'Ukjent feil';
         addToast(`Noe gikk galt under påmeldelse av arrangement, ERROR: ${errorMessage}`, { type: 'error' });
       }
     }
@@ -59,13 +59,12 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
         const user = await getUser();
         Sentry.captureEvent({
           message: 'User failed turnstile challenge when signing up for event.',
-          level: Sentry.Severity.Fatal,
+          level: Sentry.Severity.Error,
           extra: {
-            event_id: eventId,
             error: error,
           },
           user: {
-            email: user?.profile.email,
+            id: user?.profile.sub
           },
         });
       }}
