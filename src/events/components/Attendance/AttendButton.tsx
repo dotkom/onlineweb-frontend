@@ -59,7 +59,7 @@ const AttendButton: FC<IAttendButtonProps> = (props: IAttendButtonProps) => {
         const user = await getUser();
         Sentry.captureEvent({
           message: 'User failed turnstile challenge when signing up for event.',
-          level: Sentry.Severity.Error,
+          level: Sentry.Severity.Warning,
           extra: {
             error: error,
           },
