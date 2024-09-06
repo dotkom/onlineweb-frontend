@@ -15,7 +15,7 @@ interface ICaptchaModalProps {
 
 const CaptchaModal: FC<ICaptchaModalProps> = (props: ICaptchaModalProps) => {
   const { showModal, toggleModal, setCaptcha, header, text, errorText, onError } = props;
-  const [showErrorText, setShowErrorText] = useState(true);
+  const [showErrorText, setShowErrorText] = useState(false);
   const [turnstileError, setTurnstileError] = useState<string | null>(null);
 
   const validCaptcha = (token: string | null) => {
