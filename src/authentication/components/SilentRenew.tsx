@@ -22,7 +22,7 @@ export const SilentRenewComponent: FC = () => {
       if (user) dispatch(authenticationActions.userSignIn(JSON.stringify(user as IAuthUser)));
       else
         try {
-          USER_MANAGER.signinSilent();
+          await USER_MANAGER.signinSilent();
         } catch {
           /*
          User Manager throws "frame window timed out" or "Authorization Server requires End-User Interaction".
