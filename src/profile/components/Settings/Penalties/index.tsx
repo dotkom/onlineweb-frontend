@@ -46,7 +46,7 @@ class Marks extends Component<{}, IState> {
           ifNone="Du har ingen prikker"
           loaded={loaded}
           penalties={marks}
-          render={(mark) => <Mark markUser={mark as IMark} key={mark.expiration_date} />}
+          render={(mark) => <Mark mark={mark as IMark} key={mark.expiration_date} />}
         />
         <PenaltyPane
           name="Suspensjoner"

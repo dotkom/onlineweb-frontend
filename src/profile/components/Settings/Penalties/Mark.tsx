@@ -17,13 +17,13 @@ const penaltyContent = (description: string, expiration: string, category: strin
 `;
 
 export interface IProps {
-  markUser: IMark;
+  mark: IMark;
 }
 
-export const Mark = ({ markUser: { mark, expiration_date } }: IProps) => {
-  const expiration = DateTime.fromISO(expiration_date).toFormat('d MMMM y');
+export const Mark = ({ mark }: IProps) => {
+  const expiration = DateTime.fromISO(mark.expiration_date).toFormat('d MMMM y');
   const added = DateTime.fromISO(mark.added_date);
-  const completion = getPenaltyCompletion(expiration_date);
+  const completion = getPenaltyCompletion(mark.expiration_date);
   const category = getMarkCategory(mark.category);
   const active = completion < 100;
 

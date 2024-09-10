@@ -43,18 +43,15 @@ export const getMarkCategory = (category: MarkCategory): MarkCategoryStrings => 
 };
 
 export interface IMark {
-  /** Max length of 155 characters */
   expiration_date: IsoDateTime;
-  mark: {
-    title: string;
-    added_date: IsoDate;
-    given_by: null; // Requires changes in OW4 API.
-    last_changed_date: IsoDateTime;
-    last_changed_by: null; // Requires changes in OW4 API.
-    category: MarkCategory;
-    /** Max length of 255 characters */
-    description: string;
-  };
+  title: string;
+  added_date: IsoDate;
+  given_by: null; // Requires changes in OW4 API.
+  last_changed_date: IsoDateTime;
+  last_changed_by: null; // Requires changes in OW4 API.
+  category: MarkCategory;
+  /** Max length of 255 characters */
+  description: string;
 }
 
 export interface ISuspension {
