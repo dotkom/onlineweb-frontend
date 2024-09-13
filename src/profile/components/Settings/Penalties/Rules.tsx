@@ -22,16 +22,18 @@ const getLatestRuleSet = (rules: IMarkRule[]): IMarkRule | null => {
   }
 
   if (rules.length === 1) {
-    return rules[0];
+    return inFuture(rules[0].valid_from_date) ? null : rules[0];
   }
 
-  return rules.reduce((latest, rule) => {
+  const ruleset = rules.reduce((latest, rule) => {
     if (inFuture(rule.valid_from_date)) {
       return latest;
     }
 
     return rule.valid_from_date > latest.valid_from_date ? rule : latest;
   }, rules[0]);
+
+  return inFuture(ruleset.valid_from_date) ? null : ruleset;
 };
 
 export const Info = ({ rules }: IProps) => {
