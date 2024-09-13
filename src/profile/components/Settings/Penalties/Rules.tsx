@@ -21,16 +21,19 @@ const getLatestRuleSet = (rules: IMarkRule[]): IMarkRule | null => {
     return null;
   }
 
-  if (rules.length === 1) {
-    return inFuture(rules[0].valid_from_date) ? null : rules[0];
-  }
-
   const ruleset = rules.reduce((latest, rule) => {
-    if (inFuture(rule.valid_from_date)) {
+    const isLatestInFuture = inFuture(latest.valid_from_date);
+    const isRuleInFuture = inFuture(rule.valid_from_date);
+
+    if (isRuleInFuture) {
       return latest;
     }
 
-    return rule.valid_from_date > latest.valid_from_date ? rule : latest;
+    if (isLatestInFuture || rule.valid_from_date > latest.valid_from_date) {
+      return rule;
+    }
+
+    return latest;
   }, rules[0]);
 
   return inFuture(ruleset.valid_from_date) ? null : ruleset;
