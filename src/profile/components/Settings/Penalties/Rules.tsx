@@ -15,11 +15,13 @@ interface IProps {
 const inFuture = (date: string) => new Date(date) > new Date();
 
 const getLatestRuleSet = (rules: IMarkRule[]): IMarkRule => {
-  return rules.reduce(
-    (latest, rule) =>
-      !inFuture(rule.valid_from_date) && rule.valid_from_date > latest.valid_from_date ? rule : latest,
-    rules[0]
-  );
+  return rules.reduce((latest, rule) => {
+    if (inFuture(rule.valid_from_date)) {
+      return latest;
+    }
+
+    return rule.valid_from_date > latest.valid_from_date ? rule : latest;
+  }, rules[0]);
 };
 
 export const Info = ({ rules }: IProps) => {
