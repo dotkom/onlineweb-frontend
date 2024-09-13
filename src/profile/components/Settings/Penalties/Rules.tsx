@@ -12,6 +12,16 @@ interface IProps {
   rules: IMarkRule[];
 }
 
+const inFuture = (date: string) => new Date(date) > new Date();
+
+const getLatestRuleSet = (rules: IMarkRule[]): IMarkRule => {
+  return rules.reduce(
+    (latest, rule) =>
+      !inFuture(rule.valid_from_date) && rule.valid_from_date > latest.valid_from_date ? rule : latest,
+    rules[0]
+  );
+};
+
 export const Info = ({ rules }: IProps) => {
   const rulesId = 'rules';
 
@@ -20,9 +30,9 @@ export const Info = ({ rules }: IProps) => {
 
   const [collapsed, toggleCollapse] = useCollapse(hash !== rulesId);
 
-  const ruleset = rules.length
-    ? rules[0].content
-    : 'Det er ingen prikkeregler enda. Kontakt styret for mer informasjon.';
+  const { content: ruleset } = rules.length
+    ? getLatestRuleSet(rules)
+    : { content: 'Det er ingen prikkeregler enda. Kontakt styret for mer informasjon.' };
 
   return (
     <>
