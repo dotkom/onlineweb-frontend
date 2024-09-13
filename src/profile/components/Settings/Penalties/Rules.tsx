@@ -14,16 +14,16 @@ interface IProps {
 
 const NO_RULES = 'Det er ingen prikkeregler enda. Kontakt styret for mer informasjon.';
 
-const inFuture = (date: string) => new Date(date) > new Date();
-
 const getLatestRuleSet = (rules: IMarkRule[]): IMarkRule | null => {
   if (rules.length === 0) {
     return null;
   }
 
+  const now = new Date();
+
   const ruleset = rules.reduce((latest, rule) => {
-    const isLatestInFuture = inFuture(latest.valid_from_date);
-    const isRuleInFuture = inFuture(rule.valid_from_date);
+    const isLatestInFuture = new Date(latest.valid_from_date) > now;
+    const isRuleInFuture = new Date(rule.valid_from_date) > now;
 
     if (isRuleInFuture) {
       return latest;
@@ -36,7 +36,7 @@ const getLatestRuleSet = (rules: IMarkRule[]): IMarkRule | null => {
     return latest;
   }, rules[0]);
 
-  return inFuture(ruleset.valid_from_date) ? null : ruleset;
+  return new Date(ruleset.valid_from_date) > now ? null : ruleset;
 };
 
 export const Info = ({ rules }: IProps) => {
