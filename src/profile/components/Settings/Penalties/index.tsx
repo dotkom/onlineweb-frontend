@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
 import { Pane } from 'common/components/Panes';
-import { getMarks, getSuspensions } from 'profile/api/penalties';
-import { IMark, ISuspension } from 'profile/models/Penalty';
+import { getMarkRules, getMarks, getSuspensions } from 'profile/api/penalties';
+import { IMark, IMarkRule, ISuspension } from 'profile/models/Penalty';
 
 import Mark from './Mark';
 import { PenaltyPane } from './Penalty';
@@ -11,6 +11,7 @@ import Suspension from './Suspension';
 
 export interface IState {
   marks: IMark[];
+  markRules: IMarkRule[];
   suspensions: ISuspension[];
   loaded: boolean;
 }
@@ -24,6 +25,7 @@ class Marks extends Component<{}, IState> {
   public state: IState = {
     loaded: false,
     marks: [],
+    markRules: [],
     suspensions: [],
   };
 
@@ -33,12 +35,13 @@ class Marks extends Component<{}, IState> {
 
   public init = async () => {
     const marks = await getMarks();
+    const markRules = await getMarkRules();
     const suspensions = await getSuspensions();
-    this.setState({ marks, suspensions, loaded: true });
+    this.setState({ marks, markRules, suspensions, loaded: true });
   };
 
   public render() {
-    const { marks, suspensions, loaded } = this.state;
+    const { marks, markRules, suspensions, loaded } = this.state;
     return (
       <>
         <PenaltyPane
@@ -58,7 +61,7 @@ class Marks extends Component<{}, IState> {
           )}
         />
         <Pane>
-          <Rules />
+          <Rules rules={markRules} />
         </Pane>
       </>
     );
