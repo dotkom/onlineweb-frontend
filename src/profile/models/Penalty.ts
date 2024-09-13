@@ -54,6 +54,13 @@ export interface IMark {
   description: string;
 }
 
+export interface IMarkRule {
+  created_date: IsoDateTime;
+  valid_from_date: IsoDateTime;
+  content: string;
+  version: string;
+}
+
 export interface ISuspension {
   user: null; // Requires changes in OW4 API.
   /** Max length of 64 characters */
