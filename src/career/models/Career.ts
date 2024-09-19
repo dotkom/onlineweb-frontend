@@ -11,6 +11,7 @@ export interface ICareerOpportunity {
   featured: boolean;
   deadline: string;
   deadline_asap: boolean;
+  rolling_admission: boolean;
   employment: IEmployment;
   location: ILocation[];
   application_link: string;
