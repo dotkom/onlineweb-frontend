@@ -71,7 +71,7 @@ const JobDetails: FC<IProps> = ({ opportunity }) => (
             <h3>Nøkkelinformasjon</h3>
             <p>Type: {opportunity.employment.name}</p>
             <p>Sted: {formatLocations(opportunity.location.map((loc) => loc.name))}</p>
-            {opportunity.deadline && <p>Frist: {formatDeadline(opportunity.deadline)}</p>}
+            <p>Frist: {opportunity.deadline ? formatDeadline(opportunity.deadline) : 'snarest'}</p>
             {opportunity.rolling_admission && (
               <p>
                 <strong>Søknader vurderes fortløpende</strong>
