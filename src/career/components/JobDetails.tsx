@@ -17,13 +17,13 @@ import ApplyButton from './ApplyButton';
 
 /**
  * @summary formats the deadline from ISO format to Date Month Year
- * @return the formated deadline as a string or the string "Ikke spesifisert" if deadline is null
+ * @return the formated deadline as a string or the string "Snarest" if deadline is null
  */
-export const formatDeadline = (deadline: string): string => {
+export const formatDeadline = (deadline?: string): string => {
   if (deadline) {
     return DateTime.fromISO(deadline).toFormat('d MMM y');
   }
-  return 'Ikke spesifisert';
+  return 'Snarest';
 };
 
 interface IProps {
@@ -71,7 +71,7 @@ const JobDetails: FC<IProps> = ({ opportunity }) => (
             <h3>Nøkkelinformasjon</h3>
             <p>Type: {opportunity.employment.name}</p>
             <p>Sted: {formatLocations(opportunity.location.map((loc) => loc.name))}</p>
-            <p>Frist: {opportunity.deadline ? formatDeadline(opportunity.deadline) : 'snarest'}</p>
+            <p>Frist: {formatDeadline(opportunity.deadline)}</p>
             {opportunity.rolling_admission && (
               <p>
                 <strong>Søknader vurderes fortløpende</strong>
