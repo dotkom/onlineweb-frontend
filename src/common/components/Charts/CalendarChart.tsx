@@ -40,8 +40,8 @@ interface IFrequncyCount {
 }
 
 const CalendarChart = ({ frequency, header }: IProps) => {
-  const last = frequency[frequency.length - 1];
-  const first = last.minus({ years: 1 });
+  const last = frequency[0];
+  const first = frequency[frequency.length - 1];
   const dateStrings = frequency.map((date) => date.toISODate());
   const inter: IFrequncyCount[] = dateStrings.map((date) => ({ [date]: 1 }));
   const inter2: IFrequncyCount = inter.reduce((prev, curr) => {
