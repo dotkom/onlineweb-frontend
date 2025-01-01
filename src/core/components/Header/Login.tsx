@@ -7,6 +7,7 @@ import { Link } from 'core/components/Router';
 import style from './header.less';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectIsStaff, selectUserName } from 'authentication/selectors/authentication';
+import { HSP } from 'common/constants/hsp';
 
 interface IProps {
   menuIsOpen?: boolean;
@@ -41,11 +42,14 @@ const Login: React.FC<IProps> = (props) => {
       ) : (
         <LoginView onClick={toggleDropdown} isOpen={isOpen} />
       )}
-      <Link href={'https://www.bekk.no/'}>
-        <a className={style.bekk}>
-          <img className={style.bekkLogo} src="/img/bekk.svg" alt="Online" />
-        </a>
-      </Link>
+      {
+        HSP &&
+        <Link href={HSP.website}>
+          <a className={style.hsp}>
+            <img className={style.hspLogo} src={HSP.logo} alt={HSP.description} />
+          </a>
+        </Link>
+      }
     </div>
   );
 };
