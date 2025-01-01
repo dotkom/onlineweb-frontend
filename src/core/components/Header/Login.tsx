@@ -42,14 +42,13 @@ const Login: React.FC<IProps> = (props) => {
       ) : (
         <LoginView onClick={toggleDropdown} isOpen={isOpen} />
       )}
-      {
-        HSP &&
+      {HSP && (
         <Link href={HSP.website}>
           <a className={style.hsp}>
             <img className={style.hspLogo} src={HSP.logo} alt={HSP.description} />
           </a>
         </Link>
-      }
+      )}
     </div>
   );
 };

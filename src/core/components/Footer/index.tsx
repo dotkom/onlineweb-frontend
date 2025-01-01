@@ -8,16 +8,16 @@ import { HSP } from 'common/constants/hsp';
 const Footer = () => (
   <footer className={style.footer}>
     <div className={style.footerContent}>
-      {
-        HSP ?
+      {HSP ? (
         <div className={style.mainSponsor}>
           <a href={HSP.website} className={style.sponsor}>
             <img src={HSP.logo} alt={HSP.description} />
           </a>
           <span className={style.hsp}>Hovedsamarbeidspartner</span>
         </div>
-        : <div />
-      }
+      ) : (
+        <div />
+      )}
       <p>
         Har du funnet en feil på nettsiden?
         <br />
