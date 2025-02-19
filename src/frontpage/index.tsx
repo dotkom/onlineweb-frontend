@@ -13,10 +13,10 @@ interface FrontpageProps {
 
 const Frontpage: FC<FrontpageProps> = ({ offlines }) => (
   <>
-    <Alert validUntil={new Date('2025-01-27')}>
+    <Alert validUntil={new Date('2025-02-22')}>
       <p>
-        Opptak til Velkom, Backlog, Ekskom, Jubkom og Karrieredagene har nå åpnet! Les mer på{' '}
-        <a href="https://opptak.online.ntnu.no/">opptakssiden</a>
+      Onlinefondet har fått seg nettside! Les mer om fondet og hvordan penger deles ut på{' '}
+        <a href="https://onlinefondet.no">onlinefondet.no</a>
       </p>
     </Alert>
     <EventsContainer />
