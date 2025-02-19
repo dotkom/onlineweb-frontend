@@ -21,11 +21,11 @@ export const ListView: FC = () => {
 
 const selectFutureEventIds = () => (state: State) => {
   const now = DateTime.local();
-  const events = eventSelectors.selectAll(state);
-  return events
-    .filter((event) => DateTime.fromISO(event.start_date) > now)
-    .slice(0, 20)
-    .map((event) => event.id);
+  const events = eventSelectors.selectAll(state)
+  .filter((event) => DateTime.fromISO(event.start_date) > now)
+  .sort((a, b) => DateTime.fromISO(a.start_date).diff(DateTime.fromISO(b.start_date)).milliseconds); 
+  const firstN = events.slice(0,30).reverse(); // 30 next events
+  return firstN.map((event) => event.id);
 };
 
 export default ListView;

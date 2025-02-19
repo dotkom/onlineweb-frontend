@@ -25,7 +25,7 @@ const EventListComponent: FC<IProps> = ({ eventIds, sortOrder = 'ASC' }) => {
   }
 
   const isOutdatedEvent = (ev: IEvent) => {
-    return DateTime.fromJSDate(new Date()) > DateTime.fromISO(ev.end_date);
+    return DateTime.fromJSDate(new Date()) >   DateTime.fromISO(ev.end_date);
   };
 
   return (
