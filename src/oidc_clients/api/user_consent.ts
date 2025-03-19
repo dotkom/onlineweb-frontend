@@ -28,7 +28,7 @@ export const getUserConsent = async () => {
 export const revokeuserConsent = async (id: number) => {
   try {
     const user = await getUser();
-    return await deleteR(`${API_BASE}consent/${id}`, undefined, { user });
+    return await deleteR(`${API_BASE}consent/${id}`, undefined, undefined, { user });
   } catch (response) {
     throw new Error(`Kunne ikke trekke tilbake apptilgang: ${response.statusText}`);
   }

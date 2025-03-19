@@ -145,6 +145,7 @@ export const post = async <T>(
  */
 export const deleteR = async <T>(
   query: string,
+  data: T | {},
   parameters: IQueryObject = {},
   options: IRequestOptions = {}
 ): Promise<T> => {
@@ -152,7 +153,8 @@ export const deleteR = async <T>(
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
-  const opts = { ...options, method: 'DELETE', headers };
+  const body = JSON.stringify(data);
+  const opts = { ...options, method: 'DELETE', body, headers };
   return performRequest(query, parameters, opts);
 };
 

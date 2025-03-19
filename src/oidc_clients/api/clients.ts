@@ -72,7 +72,7 @@ export const getMyClients = async (): Promise<IOidcClient[]> => {
 export const deleteClient = async (id: number): Promise<unknown> => {
   try {
     const user = await getUser();
-    return await deleteR(`${API_BASE}clients/${id}`, undefined, { user });
+    return await deleteR(`${API_BASE}clients/${id}`, undefined, undefined, { user });
   } catch (response) {
     throw new Error(`Kunne ikke slette app: ${response.statusText}`);
   }
