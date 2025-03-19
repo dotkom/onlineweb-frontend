@@ -51,13 +51,13 @@ export const userAttendEvent = async (
   }
 };
 
-export const userUnattendEvent = async (eventId: number, user?: IAuthUser): Promise<unknown> => {
+export const userUnattendEvent = async (eventId: number, data?: unknown, user?: IAuthUser): Promise<unknown> => {
   if (!user) {
     user = await getUser();
   }
 
   try {
-    const ret = await deleteR(getUserUnAttendUrl(eventId), undefined, { user });
+    const ret = await deleteR(getUserUnAttendUrl(eventId), data, undefined, { user });
     return ret;
   } catch (response) {
     throw new Error('Kunne ikke melde brukeren av dette arrangementet!');

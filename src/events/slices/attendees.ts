@@ -49,8 +49,9 @@ export const setAttendeeByEventId = createAsyncThunk(
 
 export const removeAttendeeByEventId = createAsyncThunk(
   'attendees/removeByEventId',
-  async (eventId: number, { dispatch }) => {
-    await userUnattendEvent(eventId);
+  async (props: { eventId: number; data: unknown }, { dispatch }) => {
+    const { eventId, data } = props;
+    await userUnattendEvent(eventId, data);
     dispatch(fetchAttendanceEventById(eventId));
     dispatch(attendeesSlice.actions.clearAllAttendees());
   }
