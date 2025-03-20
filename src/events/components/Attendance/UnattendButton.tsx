@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import { useDispatch } from 'core/redux/hooks';
 import { removeAttendeeByEventId } from 'events/slices/attendees';
 import { Button } from '@dotkomonline/design-system';
@@ -16,6 +16,7 @@ const UnattendanceCauses = {
   sick: 'Sykdom',
   economic: 'Økonomiske årsaker',
   time: 'Tidsklemma',
+  school: 'Skolearbeid',
   no_familiar_faces: 'Kjenner ingen som skal',
   other: 'Andre årsaker (spesifiser under)',
 };
@@ -23,10 +24,10 @@ const UnattendanceCauses = {
 const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitListNumber }) => {
   const dispatch = useDispatch();
   const [addToast] = useToast({ type: 'success', duration: 5000 });
-  const [showModal, setShowModal] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const onButtonClick = () => {
-    setShowModal(true);
+    dialogRef.current?.showModal();
   };
 
   const handleDeregisterSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,12 +45,16 @@ const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitLis
 
   return (
     <>
-      <dialog open={showModal}>
-        <form method="dialog" onSubmit={handleDeregisterSubmit} className={style.deregisterModal}>
+      <dialog
+        ref={dialogRef}
+        className={style.deregisterModal}
+        onClick={(e) => e.target === dialogRef?.current && dialogRef.current?.close()}
+      >
+        <form method="dialog" onSubmit={handleDeregisterSubmit}>
           <h1 className={style.title}>Hvorfor vil du melde deg av?</h1>
           <p className={style.message}>
-            Vi i Online vil gjerne vite hvorfor du melder deg av dette arrangementet. Gjerne utdyp i fritekst slik at vi
-            kan lage enda bedre arrangementer for deg i fremtiden!
+            Vi vil gjerne vite hvorfor du melder deg av dette arrangementet. Gjerne utdyp slik at vi kan lage enda bedre
+            arrangementer for deg i fremtiden!
           </p>
 
           <fieldset>
@@ -63,11 +68,11 @@ const UnattendButton: FC<IAttendButtonProps> = ({ eventId, isOnWaitList, waitLis
           </fieldset>
 
           <label>
-            Fritekst
-            <textarea name="text" id="deregisterFeedbackText" />
+            Utdyp årsak:
+            <textarea name="text" />
           </label>
           <div>
-            <Button type="button" onClick={() => setShowModal(false)}>
+            <Button type="button" onClick={() => dialogRef?.current?.close()}>
               Avbryt
             </Button>
             <Button type="submit" variant="outline">
