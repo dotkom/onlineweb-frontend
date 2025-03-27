@@ -13,10 +13,10 @@ interface FrontpageProps {
 
 const Frontpage: FC<FrontpageProps> = ({ offlines }) => (
   <>
-    <Alert validUntil={new Date('2025-02-22')}>
+    <Alert validUntil={new Date('2025-03-30')}>
       <p>
-      Onlinefondet har fått seg nettside! Les mer om fondet og hvordan penger deles ut på{' '}
-        <a href="https://onlinefondet.no">onlinefondet.no</a>
+        Veldedighetsuken er i gang! Se og by på auksjoner på{' '}
+        <a href="https://onlove.no/">onlove.no</a>
       </p>
     </Alert>
     <EventsContainer />
