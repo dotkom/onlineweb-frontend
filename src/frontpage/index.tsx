@@ -13,11 +13,13 @@ interface FrontpageProps {
 
 const Frontpage: FC<FrontpageProps> = ({ offlines }) => (
   <>
-    <Alert validUntil={new Date('2025-03-30')}>
-      <p>
-        Veldedighetsuken er i gang! Se og by på auksjoner på{' '}
-        <a href="https://onlove.no/">onlove.no</a>
-      </p>
+    <Alert validUntil={new Date('2025-04-09')}>
+      <div style={{ textAlign: 'center', display: 'block' }}>
+        <p>Vil du bli fadder i høst? Meld deg på her:</p>
+        <a href="https://forms.gle/2D4Uq9i7PgFHdkWHA">Bachelor</a>
+        <span style={{ margin: '0 1ch' }}>•</span>
+        <a href="https://forms.gle/XrXZ1P8GmexX88JR9">Master</a>
+      </div>
     </Alert>
     <EventsContainer />
     <Registrations />
