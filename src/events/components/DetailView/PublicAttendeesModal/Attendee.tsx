@@ -23,7 +23,7 @@ export const memberDisplay = (attendee: IPublicAttendee): string => {
 };
 
 export const Attendee: FC<IProps> = ({ attendee, count }) => {
-  const specialList = ['mads hermansen'];
+  const specialList = ['mads hermansen', 'amund dahlmo berge'];
   return (
     <div
       className={style.container}
