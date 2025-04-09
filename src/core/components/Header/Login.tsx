@@ -82,9 +82,6 @@ const HeaderUser = (props: IHeaderUserProps) => {
               </Link>
             </>
           )}
-          <Link href="/contact">
-            <a>Kontakt oss</a>
-          </Link>
           <Link {...getMyProfileUrl()}>
             <a>Finn brukere</a>
           </Link>
