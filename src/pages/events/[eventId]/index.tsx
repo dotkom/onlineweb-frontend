@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Store } from 'core/redux/Store';
 import DetailView from 'events/components/DetailView';
@@ -14,6 +14,11 @@ interface IProps {
 }
 
 const EventDetailPage: NextPage<IProps> = ({ eventId }) => {
+  useEffect(() => {
+    if (eventId === 1234) {
+      window.location.href = 'https://web.online.ntnu.no/events/5049b3ef-d898-41f7-8646-d15c34c6e1bd';
+    }
+  }, [eventId]);
   return <DetailView eventId={eventId} />;
 };
 
