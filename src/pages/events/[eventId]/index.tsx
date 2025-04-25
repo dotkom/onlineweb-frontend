@@ -15,7 +15,7 @@ interface IProps {
 
 const EventDetailPage: NextPage<IProps> = ({ eventId }) => {
   useEffect(() => {
-    if (eventId === 1234) {
+    if (eventId === 2516) {
       window.location.href = 'https://web.online.ntnu.no/events/5049b3ef-d898-41f7-8646-d15c34c6e1bd';
     }
   }, [eventId]);
