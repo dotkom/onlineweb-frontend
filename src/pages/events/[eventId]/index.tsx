@@ -16,7 +16,7 @@ interface IProps {
 const EventDetailPage: NextPage<IProps> = ({ eventId }) => {
   useEffect(() => {
     if (eventId === 2516) {
-      window.location.href = 'https://web.online.ntnu.no/events/17._mai_frokost/b317ec9b-d073-4f0d-9f9d-2b39d2759a27';
+      window.location.href = 'https://web.online.ntnu.no/events/17._mai_frokost/5049b3ef-d898-41f7-8646-d15c34c6e1bd';
     }
   }, [eventId]);
   return <DetailView eventId={eventId} />;
