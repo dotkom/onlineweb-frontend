@@ -13,12 +13,14 @@ interface FrontpageProps {
 
 const Frontpage: FC<FrontpageProps> = ({ offlines }) => (
   <>
-    <Alert validUntil={new Date('2025-04-09')}>
+    <Alert validUntil={new Date('2025-05-05')}>
       <div style={{ textAlign: 'center', display: 'block' }}>
-        <p>Vil du bli fadder i høst? Meld deg på her:</p>
-        <a href="https://forms.gle/2D4Uq9i7PgFHdkWHA">Bachelor</a>
-        <span style={{ margin: '0 1ch' }}>•</span>
-        <a href="https://forms.gle/XrXZ1P8GmexX88JR9">Master</a>
+        <p style={{ fontSize: '1.25em' }}>Meldte du deg på 17. mai frokost?</p>
+        <p style={{ fontSize: '0.8em' }}>Vi vil gjerne ha din tilbakemelding til påmeldingen!</p>
+        <a href="https://forms.gle/cwnNamQontpTYhg48" target="_blank" rel="noopener noreferrer">
+          Tilbakemeldingsskjema
+        </a>
+        <p style={{ fontSize: '0.8em' }}>Tusen takk, og lykke til med eksamen - Dotkom</p>
       </div>
     </Alert>
     <EventsContainer />
