@@ -16,7 +16,7 @@ const Frontpage: FC<FrontpageProps> = ({ offlines }) => (
     <Alert validUntil={new Date('2025-05-05')}>
       <div style={{ textAlign: 'center', display: 'block' }}>
         <p style={{ fontSize: '1.25em' }}>Meldte du deg på 17. mai frokost?</p>
-        <p style={{ fontSize: '0.8em' }}>Vi tester nye nettsider, og vil gjerne ha din tilbakemelding!</p>
+        <p style={{ fontSize: '0.8em' }}>Vi tester ny nettside, og vil gjerne ha din tilbakemelding!</p>
         <a href="https://forms.gle/cwnNamQontpTYhg48" target="_blank" rel="noopener noreferrer">
           Tilbakemeldingsskjema
         </a>
