@@ -6,8 +6,8 @@ import { Button } from '@dotkomonline/design-system';
 const introText = `
   På denne siden finner du informasjon om alle de forskjellige interessegruppene i online. Ser du noe som ser
   interessant ut? Ta kontakt og møt noen med samme interesser som deg. Interessegruppene i Online er grupper for
-  alle mulige slags interesser. Har du og en kompis eller to en sær/stilig/fantastisk interesse? Opprett en
-  interessegruppe!
+  alle mulige slags interesser. Har du og en kompis eller to en sær/stilig/fantastisk interesse? Opprett en ny 
+  interessegruppe eller gjenoppstart en inaktiv interessegruppe!
 
   Mer informasjon om hvordan dette gjøres finnes
   [her](https://wiki.online.ntnu.no/info/innsikt-og-interface/interessegrupper/).
